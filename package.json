@@ -1,6 +1,6 @@
 {
-  "name": "scms-modules",
-  "version": "0.0.8",
+  "name": "scmsmodules",
+  "version": "0.0.9",
   "description": "scmsmodules",
   "repository": "https://github.com/EHDFE/scms-modules.git",
   "main": "index.js",
@@ -13,8 +13,9 @@
   "keywords": [
     "scmsmodules",
     "angular",
-    "angular ui",
+    "angular ui"
   ],
+  "homepage": "https://managementtest.ehuodi.com/view",
   "author": "tianyanrong",
   "license": "MIT",
   "dependencies": {
