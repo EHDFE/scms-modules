@@ -1,16 +1,15 @@
-<form name="myForm" novalidate="novalidate" ng-submit="" class="form-horizontal" role="form">
-
+<form name="myForm" novalidate="novalidate" ng-submit="" class="form-label-10 form-horizontal w500" role="form">
     <div class="form-group">
-        <label class="control-label col-md-2">Input<span class="required">*</span></label>
-        <div class="form-content col-md-3">
+        <label class="control-label">Input<span class="required">*</span></label>
+        <div class="form-content">
             <input class="form-control" type="text" ng-model="inputValue" >            
             <div class="error-msg"></div>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Input Unit</label>
-        <div class="form-content col-md-3">
+        <label class="control-label">Input Unit</label>
+        <div class="form-content">
             <div class="input-group input-bar">
                 <input class="form-control" type="text" ng-model="inputUnitValue" >
                 <span class="input-group-addon">元</span>
@@ -20,16 +19,16 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Select</label>
-        <div class="form-content col-md-3">
+        <label class="control-label">Select</label>
+        <div class="form-content">
             <select class="form-control"><option>选项</option></select>
             <div class="error-msg"></div>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Checkbox</label>
-        <div class="form-content col-md-8">
+        <label class="control-label">Checkbox</label>
+        <div class="form-content">
             <label class="checkbox-inline" ng-click="demoFormCheckboxStatusA = !demoFormCheckboxStatusA" ng-class="{'checkbox-inline-checked':demoFormCheckboxStatusA}">
                 小面
             </label>
@@ -41,8 +40,8 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Radio</label>
-        <div class="form-content col-md-8">
+        <label class="control-label">Radio</label>
+        <div class="form-content">
             <label class="radio-inline" ng-click="demoFormradioStatus = true" ng-class="{'radio-inline-checked':demoFormradioStatus}">
                 是
             </label>
@@ -54,33 +53,38 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Switch</label>
-        <div class="form-content col-md-8">
+        <label class="control-label">Switch</label>
+        <div class="form-content">
             <label class="switch" ng-class="{'switch-open': demoFormSwitchStatus}" ng-click="demoFormSwitchStatus=!demoFormSwitchStatus"></label>
             <div class="error-msg"></div>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Textarea</label>
-        <div class="form-content col-md-3">
+        <label class="control-label">Textarea</label>
+        <div class="form-content">
             <textarea class="form-control" ng-model="" maxlength="400"></textarea>
             <div class="error-msg"></div>
         </div>
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">后面带连接</label>
-        <div class="form-content form-inline col-md-8">
-            <input class="form-control w350" type="text" ng-model="" required="" autocomplete="off" placeholder="请输入客户编码" maxlength="17">
-            <a href="#">查看编码规则</a>
+        <label class="control-label">input addon</label>
+        <div class="form-content">
+            <div class="input-group">
+                    <input class="form-control" type="text" >
+                    <span class="input-group-addon">
+                        <a href="#">查看编码规则</a>
+                    </span>
+            </div>
             <div class="error-msg"></div>
         </div>
     </div>
 
-    <div class="form-group pb50">
-        <div class="col-lg-8 col-md-offset-2">
+    <div class="form-group">
+        <label class="control-label"></label>
+        <div class="form-content">
             <button type="submit" class="btn btn-success btn-lg"  >保存</button> 
         </div>
-    </div>        
+    </div>
 </form>

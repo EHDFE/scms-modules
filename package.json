@@ -1,13 +1,19 @@
 {
-  "name": "scmsmodules",
+  "name": "scms-modules",
   "version": "0.0.8",
   "description": "scmsmodules",
+  "repository": "https://github.com/scms-modules/scms-modules.git",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    
+  },
+  "bugs": {
+    "url": "http://github.com/scms-modules/scms-modules/issues"
   },
   "keywords": [
-    "scmsmodules"
+    "scmsmodules",
+    "angular",
+    "angular ui",
   ],
   "author": "tianyanrong",
   "license": "MIT",

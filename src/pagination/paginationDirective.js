@@ -15,6 +15,7 @@ define(['angular', './pagination.html', '../angularUi/less/pagination.less'], fu
   return function(app, elem, attrs, scope) {
     app.directive('paginationDirective', [
       function() {
+        
         return {
           template: html,
           restrict: 'EA',
@@ -29,6 +30,7 @@ define(['angular', './pagination.html', '../angularUi/less/pagination.less'], fu
           link: function postLink($scope, $element, $attrs) {},
 
           controller: function($scope, $element, $attrs, $cookies, $timeout) {
+            console.log('paginationDirective',2)
             $scope.pages = [];
             $scope.hidePageSizeChange = $scope.hidePageSize || false;
             $scope.$watch('hidePageSize', function(newValue) {

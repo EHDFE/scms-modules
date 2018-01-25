@@ -3,6 +3,9 @@ let demoData = [];
 import base from "./base/index.js";
 demoData.push(base);
 
+import grid from "./grid/index.js";
+demoData.push(grid);
+
 import fontAwesome from "./fontAwesome/index.js";
 demoData.push(fontAwesome);
 
@@ -30,6 +33,9 @@ demoData.push(table);
 
 import pagination from "./pagination/index.js";
 demoData.push(pagination);
+
+import crumb from "./crumb/index.js";
+demoData.push(crumb);
 
 
 
