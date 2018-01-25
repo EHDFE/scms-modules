@@ -2,13 +2,13 @@
   "name": "scms-modules",
   "version": "0.0.8",
   "description": "scmsmodules",
-  "repository": "https://github.com/scms-modules/scms-modules.git",
+  "repository": "https://github.com/EHDFE/scms-modules.git",
   "main": "index.js",
   "scripts": {
     
   },
   "bugs": {
-    "url": "http://github.com/scms-modules/scms-modules/issues"
+    "url": "http://github.com/EHDFE/scms-modules/issues"
   },
   "keywords": [
     "scmsmodules",
