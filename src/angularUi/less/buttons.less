@@ -1,0 +1,250 @@
+/*btn*/
+.btn{
+    padding:5px 12px;
+    vertical-align: middle;
+}
+.btn-sm{
+    padding: 3px 10px;
+    font-size: 12px !important;
+}
+.btn-lg{
+    padding:8px 25px;
+    font-size:16px !important;
+}
+
+.btn:disabled,
+.btn:disabled:hover,
+.btn:disabled:active{
+    background: #F3F4F7;
+    border: 1px solid #E4E7EF;
+    color:#9BA0AA;
+}
+
+.btn-link:disabled,
+.btn-link:disabled:hover,
+.btn-link:disabled:active{
+    background: none;
+    border: none;
+    color:#9BA0AA;
+}
+
+.btn-success,
+.btn-success:focus,
+.btn-success:active{
+    background: #51a1fd;
+    border-color: #51a1fd;
+    color:#fff;
+}
+.btn-success:hover,
+.btn-success:hover:focus{
+    background: #2c87ef;
+    border-color: #2c87ef;
+}
+.btn-success .fa{
+    color: #fff !important;
+}
+
+.btn-export,
+.btn-export:focus,
+.btn-export:active{
+    background: #51a1fd;
+    border-color: #51a1fd;
+    color:#fff;
+}
+.btn-export::before{
+    content: "\f019";
+    width:18px;
+    height:12px;
+    display:inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    text-align:left;
+}
+.btn-export:hover,
+.btn-export:hover:focus{
+    background: #2c87ef;
+    border-color: #2c87ef;
+    color:#fff;
+}
+.btn-export .fa{
+    color: #fff !important;
+}
+
+.btn-primary,
+.btn-primary:focus,
+.btn-primary:active{
+    background: #51a1fd;
+    border-color: #51a1fd;
+    color:#fff;
+}
+.btn-primary:hover,
+.btn-primary:hover:focus{
+    background: #2c87ef;
+    border-color: #2c87ef;
+}
+.btn-primary .fa{
+    color: #fff !important;
+}
+
+.btn-info,
+.btn-info:focus,
+.btn-info:active{
+    background: #fff;
+    border-color: #51A1FD;
+    color:#51A1FD;
+}
+.btn-info:hover,
+.btn-info:hover:focus{
+    background: #fff;
+    border-color: #4B92E3;
+    color:#51A1FD;
+}
+
+.btn-danger,
+.btn-danger:focus,
+.btn-danger:active{
+    background: #f15a4b;
+    border-color: #f15a4b;
+    color:#fff;
+}
+.btn-danger:hover,
+.btn-danger:hover:focus{
+    background: #fe3824;
+    border-color: #fe3824;
+    color:#fff;
+}
+.btn-danger .fa{
+    color: #fff !important;
+}
+
+.btn-warning,
+.btn-warning:focus,
+.btn-warning:active{
+    background: #fff;
+    border-color: #f0ad4e;
+    color:#e99a2a;
+}
+.btn-warning:hover,
+.btn-warning:hover:focus{
+    background: #fff;
+    border-color: #e99a2a;
+    color: #e99a2a;
+}
+
+.btn-dashed,
+.btn-dashed:focus,
+.btn-dashed:active{
+    background: #fff;
+    border-color: #74B5FF;
+    border-style: dashed;
+    color: #51A1FD;
+}
+.btn-dashed:hover,
+.btn-dashed:hover:focus{
+    background: #fff;
+    border-color: #2C87EF;
+    border-style: dashed;
+    color: #2C87EF;
+}
+
+/*虚线按钮，次按钮*/
+
+.btn-secondary{
+    color:#333;
+    background-color: #fff;
+    border:1px dashed #ccc;
+    box-shadow: none;
+    text-shadow: none;
+    transition: none;
+    touch-action: none;
+} 
+.btn-secondary:hover{
+    color: #66afe9;
+    border: 1px dashed #66afe9;
+}
+
+/*按钮组*/
+.btn-group{
+    border: 1px solid #DADDE4;
+    border-radius: 3px;
+    padding:1px;
+}
+.btn-group .btn,
+.btn-group .btn:focus,
+.btn-group .btn:active{
+    border: none;
+    background: #fff;
+    border: none;
+    padding-top:5px;
+    padding-bottom: 5px;
+    color:#6E7382;
+    padding-left:20px;
+    padding-right:20px;
+}
+.btn-group .btn:hover{
+    color: #51A1FD;
+}
+.btn-group .active,
+.btn-group .active:hover,
+.btn-group .active:focus,
+.btn-group .active:active{
+    background: #F1F3F4;
+    box-shadow:none;
+    color: #1E283C;
+}
+
+/**/
+button{
+    outline: none !important;
+}
+
+@keyframes buttonEffect{
+    to{
+        opacity:0;
+        top:-6px;
+        left:-6px;
+        bottom:-6px;
+        right:-6px;
+        border-width:6px
+    }
+}
+.ant-btn-clicked:after{
+    content:"";
+    position:absolute;
+    top:-1px;
+    left:-1px;
+    bottom:-1px;
+    right:-1px;
+    border-radius:inherit;
+    border:0 solid #999;
+    opacity:.5;
+    animation:buttonEffect .4s;
+    display:block
+}
+.ant-btn-clicked{
+    position: relative;
+}
+
+/*loading*/
+@keyframes loadingCircle{
+    0%{
+        transform-origin:50% 50%;
+        transform:rotate(0deg)}
+    to{
+        transform-origin:50% 50%;
+        transform:rotate(1turn)
+    }
+}
+.btn-loading:before{
+    content: "\f110";
+    text-align:center;
+    width:18px;
+    height:13px;
+    font-size:13px;
+    font: normal normal normal 14px/1 FontAwesome;
+    animation: loadingCircle 1s infinite linear;
+    display:inline-block
+}
+.btn-loading .fa{
+    display:none;
+}
+

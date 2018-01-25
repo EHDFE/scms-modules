@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>tf_menu_open</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="1.93623468e-19 1.60902115e-15 1.93623468e-19 10 10 10 10 0"></polygon>
+    </defs>
+    <g id="风豹控件梳理20171218" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01车队开票管理展开" transform="translate(-46.000000, -53.000000)">
+            <g id="tf_menu_open" transform="translate(46.000000, 53.000000)">
+                <path d="M0,0 L20,0 L20,0 C22.209139,-4.05812251e-16 24,1.790861 24,4 L24,20 L24,20 C24,22.209139 22.209139,24 20,24 L0,24 L0,0 Z" id="Rectangle-23" fill="#276AD6" opacity="0.9"></path>
+                <g id="收起" transform="translate(7.000000, 7.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-2"></g>
+                    <path d="M4.4408921e-16,10 L10,10 L10,8.73046695 L4.4408921e-16,8.73046695 L4.4408921e-16,10 Z M7.01427174,7.53983744 L9.51426826,5.00002123 L7.01427174,2.46014841 L7.01427174,7.53983744 Z M-0.349279647,7.05073462 L6,7.05073462 L6,5.78115911 L-0.349279647,5.78115911 L-0.349279647,7.05073462 Z M4.4408921e-16,1.26957551 L10,1.26957551 L10,0 L4.4408921e-16,0 L4.4408921e-16,1.26957551 Z M-0.349279647,4.14929256 L6,4.14929256 L6,2.87971705 L-0.349279647,2.87971705 L-0.349279647,4.14929256 Z" id="Fill-1" fill="#FFFFFF" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

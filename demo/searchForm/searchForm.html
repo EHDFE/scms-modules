@@ -1,0 +1,44 @@
+<div class="search-form form-inline">
+    <div class="input-group">
+        <span class="input-group-addon">切换城市</span>
+        <select class="form-control">
+            <option value="">全国</option>
+        </select>
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon">完成时间</span>
+        <span class="input-date-range">
+            <input type="text" class="form-control input-date" ng-model="listDates.datestart" data-date="12-02-2012" data-init-date="-30" date-picker-directive>
+            <span class="input-group-addon input-group-addon-no">-</span>
+            <input type="text" class="form-control input-date" ng-model="listDates.dateend" data-init-date="0" date-picker-directive >
+        </span>
+    </div>
+
+    <div class="input-group">
+        <span class="input-group-addon">分值区间</span>
+        <input type="text" class="form-control w100">
+        <span class="input-group-addon">-</span>          
+        <input type="text" class="form-control w100">
+    </div>
+
+    <div class="input-group">
+        <label class="checkbox-inline checkbox-inline-checked">
+            线上支付
+         </label> 
+        <label class="checkbox-inline">
+            线下支付
+        </label>
+    </div>
+
+    <div class="input-group input-bar">
+        <input type="text" placeholder="请输入姓名/手机号/订单号"  class="form-control">
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-success">搜索</button>
+        </span>
+    </div>
+    
+    <div class="fr">
+        <button type="button" class="btn btn-export">详情导出</button>
+    </div>
+</div>

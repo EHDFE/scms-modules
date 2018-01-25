@@ -1,0 +1,28 @@
+.version-upgrade-log-dialog{
+    color: #333;
+    line-height: 1.42857143;
+}
+.version-upgrade-log-dialog .modal-body{
+    padding-top: 0;
+    padding-left: 30px;
+    max-height: 600px;
+}
+.version-upgrade-log-dialog .content-block{
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+.version-upgrade-log-dialog .header{
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+.version-upgrade-log-dialog .version{
+    font-size: 14px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.version-upgrade-log-dialog .description{
+    max-height: 150px;
+    overflow-y: auto;
+}

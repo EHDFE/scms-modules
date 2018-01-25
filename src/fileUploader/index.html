@@ -1,0 +1,7 @@
+<div class="file-uploader-directive">
+  <div ng-show="errorMsg" class="alert alert-danger" role="alert">{{errorMsg}}</div>
+  <label for="upload-trigger">
+    <div ng-transclude></div>
+    <input class="file-uploader-hidden-input" name="upload-trigger" type="file" id="upload-trigger" accept="{{accept}}">
+  </label>
+</div>

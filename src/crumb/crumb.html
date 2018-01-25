@@ -1,0 +1,13 @@
+
+<ol class="breadcrumb" ng-controller="crumbCtrl">
+	<li class="bcfirst"><i class="glyphicon glyphicon-map-marker"></i> 当前位置：</li>
+	<li ng-repeat="crumb in crumbs" ng-class="{active: $last}">
+		<span ng-if="!$last">
+			<a ng-if="(crumb.hrefParams || crumb.href) && crumb.href.indexOf('javascript:void') < 0" href="{{crumb.hrefParams || crumb.href}}">{{crumb.name}}</a>
+			<span ng-if="(!crumb.hrefParams && !crumb.href) || (crumb.href && crumb.href.indexOf('javascript:void') >= 0)">{{ crumb.name}} </span>
+		</span>
+		<span ng-if="$last">
+			<span>{{ crumb.name }}</span>
+		</span>
+	</li>
+</ol>

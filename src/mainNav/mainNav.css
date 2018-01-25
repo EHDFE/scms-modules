@@ -1,0 +1,192 @@
+@charset "utf-8";
+/*mainNav*/
+.navbar{
+	background: #1c2b36;
+	font-size: 12px;
+	border-radius: 0px;
+	height: 100%;
+	width: 210px;
+	overflow-y:auto;
+	position: relative;
+	z-index: 1;
+}
+.navbar .navbar-content{
+	width: 180px;
+	padding-bottom:70px;
+}
+.navbar,
+.navbar a{
+	color: #869fb1;
+}
+.navbar span{
+	
+}
+.navbar .titleA span{
+	display: block;
+	font-size: 12px;
+	padding:10px 15px 5px 15px;
+	color: #85a5bd;
+	background: #233441;
+}
+
+.navbar li a{
+	font-weight: 600;
+	padding:14px 20px 14px 15px;
+}
+.navbar li a i{
+	margin-right: 5px;
+}
+.navbar li a:link,
+.navbar li a:active{
+	background: none;
+	color: #869fb1;
+}
+
+.navbar .line{
+	background: #131e26;
+	height: 2px;
+	margin:0;
+}
+.navbar li.active{
+	background: #131e26;
+}
+.navbar li.active ul{
+	padding-bottom: 10px;
+}
+.hover .navbar li.active li a,
+.navbar li.active li a,
+.navbar li li a{
+	padding:10px 20px 10px 35px;
+}
+.navbar li a:hover{
+	background: #16232c;
+	color: #fff;
+}
+.navbar li.activeB > a{
+	color: #fff;
+}
+.navbar li.activeC > a{
+	color: #fff;
+}
+.navbar li li a:hover,
+.navbar li li.active a:hover,
+.navbar li li.active > a{
+	color: #fff;
+	background: none;
+}
+
+.navbar .arrow{
+	float: right;
+	margin-top: 2px;
+}
+.navbar .arrow:before{
+	content: "\f104";
+}
+.navbar .active .arrow:before {
+    content: "\f107";    
+}
+.navbar .chevron{
+	float: right;
+	margin-top: 2px;
+}
+.navbar .chevron:before {
+    content: "\f107";    
+}
+.navbar .chevron.chevron-left:before{
+	content: "\f104";
+}
+.navbar ul:last-child .line{
+	display: none;
+}
+.navbar .nav-third-level .J_menuItem{
+	padding-left: 55px;
+}
+.hover .navbar li.active .nav-third-level li a{
+	padding-left: 55px;
+}
+.navbar li.active ul.nav-third-level{
+	padding-bottom: 0;
+}
+.navbar .header-lock{
+	display: none;
+}
+.navbar .menu-side-lock{
+	display: none;
+}
+@media (max-width:1279px) {
+	.navbar li.active li a,
+	.navbar li li a,
+	.navbar li a{
+		color: #869fb1;
+		padding:10px 10px 10px 10px;
+	}
+	.navbar li a span{
+		display: none;
+	}
+	.navbar .titleA span{
+		display: none;
+	}
+	.navbar .collapse.in{
+		display: none;
+	}
+	.hover .navbar li a span{
+		display: inline-block;
+	}
+	.hover .navbar .titleA span{
+		display: block;
+	}	
+	.hover .collapse.in{
+		display: block;
+	}
+	.hover .navbar li.active li a,
+	.hover .navbar li li a{
+		color: #869fb1;
+		padding:10px 20px 10px 35px;
+	}
+	.hover .navbar li li a:hover, 
+	.hover .navbar li li.active a:hover, 
+	.hover .navbar li li.active a{
+		color: #fff;
+	}
+	.hover .navbar li a{
+		padding:14px 20px 14px 15px;
+	}
+	.hover .navbar-hover{
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		margin-left: 200px;
+	}
+
+	.navbar .menu-side-lock{
+		display: none;
+		position: fixed;
+		width: 32px;
+		height: 60px;
+		top: 45%;
+		background-color: rgba(28, 43, 55, 0.8);
+		color: #c8ccce;
+		left: 180px;
+		padding-left: 5px;
+		padding-top: 17px;
+		font-size: 18px;
+		border-radius: 0 30px 30px 0;
+		cursor: pointer;
+	}
+	.navbar .display-me{
+		display: block;
+	}
+	.navbar .content-padding-lock{
+		padding-top: 18px;
+	}
+	.navbar .header-lock{
+		display: block;
+		position: fixed;
+		text-align: center;
+		height: 18px;
+		width: 179px;
+		color: #fff;
+		background-color: #121e27;
+		z-index: 1;
+	}
+}

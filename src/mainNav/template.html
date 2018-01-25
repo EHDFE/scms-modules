@@ -1,0 +1,32 @@
+<div class="mainNavBar">
+    <div id="mainNav" class="leftNavTab">
+        <div class="navbar" role="navigation">
+            <div class="navbar-hover" ng-click="hideHover();"></div>
+            <div class="navbar-content">
+                <ul class="nav" ng-repeat="item in navs">
+                    <li class="titleA">
+                        <span ng-bind="item.name"></span>
+                    </li>
+                    <li ng-repeat="itemA in item.children">
+                        <a ng-href="{{itemA.href}}" ng-click="checked($event, itemA.children);callback(itemA);">
+                            <i class="fa {{itemA.icon || 'fa-flask'}}" ></i>
+                            <span class="nav-label" ng-bind="itemA.name"></span>
+                            <span class="fa arrow" ng-if="itemA.children && itemA.children.length"></span>
+                        </a>
+                        <ul class="nav nav-second-level collapse" id="navItemA_{{$parent.$index}}_{{$index}}" ng-if="itemA.children && itemA.children.length">
+                            <li ng-repeat="itemB in itemA.children">
+                                <a class="J_menuItem" ng-href="{{itemB.href}}" ng-click="checked($event, itemB.children);;callback(itemB);">
+                                    <span ng-bind="itemB.name"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="line"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="menu-side-lock" ng-click="toggleLock()" ng-class="{'menu-side-lock-close': !isOpen}">
+        
+    </div>
+</div>

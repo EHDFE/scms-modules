@@ -1,0 +1,140 @@
+/*mainNav*/
+.mainNavBar{
+
+}
+.mainNavBar .menu-side-lock{
+    position: fixed;
+    width: 24px;
+    height: 24px;
+    top: 53px;    
+    cursor: pointer;
+    z-index: 9999;
+    transition: left 0.5s;
+    background: url(./img/menu_close.svg);
+    left: 180px;
+    display: none;
+}
+.mainNavBar .menu-side-lock-close{
+    
+}
+.mainNavBar:hover .menu-side-lock-close,
+.mainNavBar:hover .menu-side-lock{
+    display: block;
+}
+.navbar{
+    background: #00162A;
+    border-radius: 0px;
+    height: 100%;
+    width: 210px;
+    overflow-y:auto;
+    position: relative;
+    z-index: 1;
+}
+.navbar .navbar-content{
+    width: 180px;
+    padding-bottom:70px;
+}
+.navbar .titleA span{
+    display: block;
+    font-size: 12px;
+    padding:10px 15px 5px 15px;
+    color: #85a5bd;
+    font-weight: bold;
+}
+
+.navbar li a{
+    font-weight: 600;
+    padding:12px 20px 12px 15px;
+}
+.navbar li a i{
+    margin-right: 5px;
+}
+
+.navbar .line{
+    background: #131e26;
+    height: 2px;
+    margin:0;
+}
+
+.navbar li.active ul{
+    padding-bottom: 0;
+}
+.hover .navbar li.active li a,
+.navbar li.active li a,
+.navbar li li a{
+    padding:10px 20px 10px 35px;
+}
+
+.navbar li a,
+.navbar li a:link,
+.navbar li a:active{
+    background: none;
+    color: #cedbe5;
+}
+.navbar li.active{
+    background: #000c17;
+    padding-bottom: 10px;
+}
+
+.navbar li.activeB > a,
+.navbar li.activeB > a:hover{
+    color: #fff;
+    background: #1f74e9;
+}
+
+.navbar li li a:hover,
+.navbar li a:hover{
+    background: none;
+    color: #579eff;
+}
+.navbar li.activeC > a{
+    color: #fff;
+}
+
+.navbar .arrow{
+    float: right;
+    margin-top: 2px;
+}
+.navbar .arrow:before{
+    content: "\f105";
+}
+.navbar .active .arrow:before {
+    content: "\f107";    
+}
+
+
+.shrink #mainNav{
+    width:45px;
+}
+.shrink #mainNav li a span{
+    display: none;
+}
+.shrink #mainNav li li a{
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    padding-left:15px;
+}
+.shrink #mainNav li li a::before{
+    content: "\f10c";
+    width:15px;
+    height: 15px;
+    display: block;
+}
+.shrink #mainNav .navbar .titleA span{
+    width:20px;
+    white-space: nowrap;
+    overflow: hidden;
+    letter-spacing: 50px;
+}
+.shrink .menu-side-lock{
+    background: url(./img/menu_open.svg);
+    left:45px;
+    display: none;
+}
+
+.contentShrink{
+    margin-left: 45px !important;
+}

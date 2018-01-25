@@ -1,0 +1,9 @@
+<div class="form-radio">
+    <div class="form-group has-feedback cell">
+        <div ng-repeat="item in radioList track by $index" class="radio-list" ng-click="addChecked(item)">
+            <label class="radio-inline" ng-class="{'radio-inline-checked': item.checked}">
+                {{item.label}}
+            </label>
+        </div>
+    </div>
+</div>

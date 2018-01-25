@@ -1,0 +1,86 @@
+<form name="myForm" novalidate="novalidate" ng-submit="" class="form-horizontal" role="form">
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Input<span class="required">*</span></label>
+        <div class="form-content col-md-3">
+            <input class="form-control" type="text" ng-model="inputValue" >            
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Input Unit</label>
+        <div class="form-content col-md-3">
+            <div class="input-group input-bar">
+                <input class="form-control" type="text" ng-model="inputUnitValue" >
+                <span class="input-group-addon">元</span>
+            </div>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Select</label>
+        <div class="form-content col-md-3">
+            <select class="form-control"><option>选项</option></select>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Checkbox</label>
+        <div class="form-content col-md-8">
+            <label class="checkbox-inline" ng-click="demoFormCheckboxStatusA = !demoFormCheckboxStatusA" ng-class="{'checkbox-inline-checked':demoFormCheckboxStatusA}">
+                小面
+            </label>
+            <label class="checkbox-inline" ng-click="demoFormCheckboxStatusB = !demoFormCheckboxStatusB" ng-class="{'checkbox-inline-checked':demoFormCheckboxStatusB}">
+                中面
+            </label>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Radio</label>
+        <div class="form-content col-md-8">
+            <label class="radio-inline" ng-click="demoFormradioStatus = true" ng-class="{'radio-inline-checked':demoFormradioStatus}">
+                是
+            </label>
+            <label class="radio-inline" ng-click="demoFormradioStatus = false" ng-class="{'radio-inline-checked':!demoFormradioStatus}">
+                否
+            </label>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Switch</label>
+        <div class="form-content col-md-8">
+            <label class="switch" ng-class="{'switch-open': demoFormSwitchStatus}" ng-click="demoFormSwitchStatus=!demoFormSwitchStatus"></label>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Textarea</label>
+        <div class="form-content col-md-3">
+            <textarea class="form-control" ng-model="" maxlength="400"></textarea>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">后面带连接</label>
+        <div class="form-content form-inline col-md-8">
+            <input class="form-control w350" type="text" ng-model="" required="" autocomplete="off" placeholder="请输入客户编码" maxlength="17">
+            <a href="#">查看编码规则</a>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group pb50">
+        <div class="col-lg-8 col-md-offset-2">
+            <button type="submit" class="btn btn-success btn-lg"  >保存</button> 
+        </div>
+    </div>        
+</form>

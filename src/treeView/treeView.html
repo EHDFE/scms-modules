@@ -1,0 +1,17 @@
+<div class="tree-view">
+  <ul>
+     <li ng-repeat="item in treeData" ng-include="'/treeItem.html'" ></li>
+  </ul>
+  <script type="text/ng-template" id="/treeItem.html">
+    <div class="node" ng-click="itemExpended(item, $event);">
+      <span class='text-field' ng-click="warpCallback('itemClicked', item, $event);" ng-class="{true: 'active'}[item.active]">
+        {{item[textField]}}
+      </span>
+      <i class="{{getItemIcon(item)}}"></i>
+    </div>
+    <ul class="pl15" ng-if="!isLeaf(item)" ng-show="item.$$isExpend">
+      <li ng-repeat="item in item.children" ng-include="'/treeItem.html'">
+      </li>
+    </ul>
+  </script>
+</div>

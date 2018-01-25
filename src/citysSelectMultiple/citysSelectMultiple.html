@@ -1,0 +1,32 @@
+<div class="citysSelectMultipleDirective form-horizontal">
+	<h4>
+		<span class="label label-default" ng-repeat="item in checkedItems">{{item.name}}</span>
+		<span  ng-if="isCanChange" class="label label-default link" data-toggle="modal" data-target="#citysSelectmultipleDialog">+选择地区</span>
+	</h4>
+
+    <div class="modal fade" id="citysSelectmultipleDialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+				<span type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></span>
+				<h4 class="modal-title" id="myModalLabel">选择地区</h4>
+				</div>
+				<div class="modal-body">
+					<div class="list" ng-show="chooseAll">
+							<div ng-click="checkAll();" class="ml15"><div class="checkbox-inline" ng-class="{'checkbox-inline-checked':all}">全选</div></div>
+					</div>
+					<ul class="list">
+				        <li ng-repeat="item in list">
+				            <div ng-click="checked(item);" ng-hide="item.disable"><div  class="checkbox-inline" ng-class="{'checkbox-inline-checked': item.isChecked}">{{item.isChonsen}}{{item.name}}</div></div>
+				            <div ng-show="item.disable"><div class="checkbox-disable">{{item.name}}</div></div>
+				        </li>
+				    </ul>
+				</div>
+				<div class="modal-footer">
+				<a class="btn btn-default" data-dismiss="modal" ng-click="cancel();" >取消</a>
+				<a class="btn btn-success" ng-click="getCheckedItmes();">确定</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

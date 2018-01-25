@@ -1,0 +1,27 @@
+<div class="modal fade version-upgrade-log-dialog" id="versionUpgradeLog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-header-bgcolor">
+                <a type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></a>
+                <h4 class="modal-title pl15" id="myModalLabel">风豹更新</h3>
+            </div>
+            <div class="modal-body">
+                <div class="validation-code-dialog">
+                    <div ng-repeat="item in versionUpgradeLog" class="content-block">
+                        <div class="header">{{item.program}}</div>
+                        <div class=""><span>{{item.opereateusername}}</span>，<span>{{item.updatedate}}</span>，
+                            <a href="#/systemUpgradeMgmt/systemUpgradeMgmt?program={{item.program}}" ng-click="closeDialog()">查看详情</a>
+                            <a href="{{item.navigations}}" class="pl5" ng-click="closeDialog()">快速跳转</a>
+                        </div>
+                        <div class="version">{{item.versioncode}}</div>
+                        <div class="description" ng-bind-html="item.description"></div>
+                    </div>
+                </div>
+                <div pagination-directive current-page="currentPage" total-count="totalCount" page-size="pageSize" onchanged="fetch" hide-page-size=true></div>
+            </div>
+            <div class="modal-footer">
+                <button data-dismiss="modal" class="btn btn-defalut">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>

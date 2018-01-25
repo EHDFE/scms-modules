@@ -1,0 +1,17 @@
+{
+  "name": "scmsmodules",
+  "version": "0.0.8",
+  "description": "scmsmodules",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "scmsmodules"
+  ],
+  "author": "tianyanrong",
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

@@ -1,0 +1,73 @@
+.multiselectDirective{
+    position: relative;
+}
+.multiselectDirective .form-control{
+    padding-top:0;
+    padding-bottom: 0;
+    height: auto;
+    position: relative;
+    min-height: 30px;
+    padding-right: 30px;
+}
+.multiselectDirective .form-control input{
+    width: 10px;
+    border: 1px solid #fff;
+    background: #fff;
+}
+.multiselectDirective .placeholder{
+    color: #aaa;
+    font-size: 12px;
+    line-height: 30px;
+}
+.multiselectDirective .form-control > i{
+    position: absolute;
+    top: 7px;
+    right: 10px;
+}
+.multiselectDirective .form-control span{
+    cursor: default;
+}
+.multiselectDirective .form-control span i{
+    height: 22px;
+    line-height: 22px;
+    padding-left:5px;
+    cursor: pointer;
+    color: #aaa;
+}
+.multiselectDirective .form-control span i:hover{
+    color: #666;
+}
+.multiselectDirective .form-control .label{
+    background: #eee;
+    color: #555;
+    font-weight: normal;
+    margin:3px 10px 3px 0;
+    display: inline-block;
+    padding:0 5px;
+    line-height: 12px;
+    font-size: 12px;
+}
+.multiselectDirective .dropdown-menu{
+    width: 100%;
+}
+.multiselectDirective .dropdown-menu i{
+    font-size: 18px;
+    color: #ddd;
+    vertical-align: middle;
+    margin-right: 10px;
+    float: left;
+    margin-top: 1px;
+}
+.multiselectDirective .dropdown-menu i.fa-check-square-o{
+    color: #66c7b0;
+    margin-right: 7px;
+}
+.multiselectDirective .dropdown-menu a{
+    padding-left:10px;
+    padding-right:10px;
+    font-size: 12px;
+    line-height: 18px;
+}
+.multiselectDirective.open .form-control > i{
+    transform:rotate(180deg);
+}

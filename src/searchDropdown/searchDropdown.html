@@ -1,0 +1,21 @@
+<div class="search-dropdown">
+    <div class="dropdown open" ng-class="{'dropdown-inline': isErrorInline}">
+        <input class="dropdown-toggle form-control form-select" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-click="toggleDropdown($event)" ng-model="itemSelected[displayText]" ng-readonly="isReadonly" ng-required="!isOptional" maxlength="{{maxlen}}">
+        <span class="caret"></span>
+        <ul class="dropdown-menu">
+            <li>
+                <span class="fa fa-search"></span>
+                <input class="search-form-input" ng-model="searchItem">
+            </li>
+            <li>
+                 <ul class="item-list" ng-if="!searchFromApi">
+                    <li ng-repeat="item in list | filter:searchItem track by $index" ng-click="onItemClick(item)" class="menu-item"><a href="javascript:void(0)">{{item[displayText]}}</a></li>
+                </ul>
+                <ul class="item-list" ng-if="!!searchFromApi">
+                    <li ng-repeat="item in list track by $index" ng-click="onItemClick(item)" class="menu-item"><a href="javascript:void(0)">{{item[displayText]}}</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="error-msg" ng-class="{'error-inline': isErrorInline}"></div>
+</div>

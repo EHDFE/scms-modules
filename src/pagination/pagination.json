@@ -1,0 +1,65 @@
+{
+    "result": "success",
+    "count": 0,
+    "data": {
+        "nodename": "全国",
+        "level": "0",
+        "nodechild":[{
+            "nodename": "杭州",
+            "level": "2",
+            "nodechild": [{
+                "nodename": "滨江区",
+                "level": "3",
+                "nodechild": [{
+                    "nodename": "要砂中市场",
+                    "level": "4"
+                },
+                {
+                    "nodename": "城西地市场",
+                    "level": "4"
+                }]
+            },
+            {
+                "nodename": "上城区",
+                "level": "3",
+                "nodechild": [{
+                    "nodename": "需要地市场",
+                    "level": "4"
+                },
+                {
+                    "nodename": "厅地市场",
+                    "level": "4"
+                }]
+            }]
+        },
+        {
+            "nodename": "长沙",
+            "level": "2",
+            "nodechild": [{
+                "nodename": "右中区",
+                "level": "3",
+                "nodechild": [{
+                    "nodename": "霜地市场",
+                    "level": "4"
+                },
+                {
+                    "nodename": "早地奇才市场",
+                    "level": "4"
+                }]
+            },
+            {
+                "nodename": "有机区",
+                "level": "3",
+                "nodechild": [{
+                    "nodename": "凸显市场",
+                    "level": "4"
+                },
+                {
+                    "nodename": "牧的凸显市场",
+                    "level": "4"
+                }]
+            }]
+        }]
+    },
+    "msg": "获取成功"
+}

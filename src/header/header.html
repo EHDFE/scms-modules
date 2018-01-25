@@ -1,0 +1,76 @@
+<div ng-controller="headerCtrl">
+    <div class="container header-ctrl">
+        <div class="logo fl visible-large">
+            <img src="./img/logo_icon.svg">
+            <span class="feng-bao">风豹</span>
+            <span class="city-mind">城配智慧大脑</span>
+        </div>
+        <a href="javascript:void(0)" class="fl menu-bar visible-small" ng-click="showAllNavFn();"><i class="fa fa-navicon"></i></a>
+        <ul class="nav-menu fl visible-large">
+            <li ng-repeat="item in navData" ng-class="{'visible-large': item.visibleLg}" ng-init="domReady($last)">
+                <a href="{{item.href}}" ng-class="{active: item.isChecked}" ng-click="removeHeight(item)">{{item.name}}<span class="caret"></span></a>
+            </li>
+        </ul>
+        <div class="angle-double-right">
+            <a class="dropdown-toggle" ng-show="hideMenu.length" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="fa fa-angle-double-right"></a>
+            <ul class="dropdown-menu">
+                <li ng-repeat="item in hideMenu">
+                    <a href="{{item.href}}" class="hide-menue" ng-class="{active: item.isChecked}" ng-click="setActive(item)">{{item.name}}</a>
+                </li>
+            </ul>
+        </div>
+
+        <ul class="login-status">
+            <li role="presentation" class="dropdown navbar-right">
+                <a class="dropdown-toggle toggle-block" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" ng-click="toggleNav()">
+                    <img class="title-user-icon" src="./img/nav_user.svg"></img>{{userInfo.username}}<span class="fa fa-caret-down ml5"></span>
+                </a>
+                <div class="dropdown-menu header-right" ng-class="{'flex-menu': showUserCenter}" ng-blur="closeNav()" tabindex="1">
+                    <div class="dropdown-block">
+                        <div class="block-title">
+                            <img class="title-icon" src="./img/mine_icon.svg">
+                            <span>我的</span>
+                        </div>
+                        <ul class="block-list">
+                            <li><a ng-click="gotoPmTool()" class="text-danger">项目管理工具</a></li>
+                            <li><a class="text-danger" data-toggle="modal" data-target="#changePwdDialog">修改密码</a></li>
+                            <li><a class="text-danger" ng-click="loginOut();">退出</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown-block">
+                        <div class="block-title">
+                            <img class="title-icon" src="./img/group_icon.svg">
+                            <span>所属组织</span>
+                        </div>
+                        <ul class="block-list">
+                            <li ng-repeat="org in userOrgGroup">
+                                <a class="current-org" ng-click="setCurrent(org,$index);" ng-class="{'active': currentOrg===org.name}">{{org.name}}</a>
+                                <div class="current-professtion">
+                                    <div ng-if="currentOrg===org.name" ng-repeat="profession in org.professionList" ng-click="changeProfession(profession);" >
+                                        <div ng-if="$first" class="org-hyphen active"> - </div>
+                                        <div ng-if="!$first" class="org-hyphen"></div>
+                                        <span class="profession-span" ng-class="{'active': currentProfession===profession.professionname}">{{profession.professionname}}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown-block">
+                        <div class="block-title">
+                            <img class="title-icon" src="./img/help_icon.svg">
+                            <span>帮助中心</span>
+                        </div>
+                        <ul class="block-list">
+                            <li><a ng-click="innerJump('siteMap.siteMap')" class="text-danger">站点地图</a></li>
+                            <li><a ng-click="innerJump('systemUpgradeMgmt.systemUpgradeMgmt')" class="text-danger">更新管理</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div all-nav-directive in-show="showAllNav"></div>
+    <div change-pwd-dialog-directive></div>
+    <div version-upgrade-log-directive></div>
+</div>

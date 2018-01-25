@@ -1,0 +1,51 @@
+.scms-progress-outer{
+    display: inline-block;
+    width: 100%;
+    margin-right: 0;
+    padding-right: 0;
+}
+.scms-progress-outer .scms-progress-inner{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    background-color: #ddd;
+    border-radius: 100px;
+    vertical-align: middle;
+}
+.scms-progress-outer .scms-progress-bg{
+    border-radius: 100px;
+    background-color: #00a854;
+    position: relative;
+}
+.scms-progress-outer .scms-progress-bg-loading{
+    transition: all 10s cubic-bezier(.08,.82,.17,1) 0s;
+}
+.scms-progress-outer .scms-progress-bg-success{
+    transition: all .4 cubic-bezier(0.88, 0.04, 1, 0.32) 0s;
+}
+.scms-progress-outer .scms-progress-bg-fail{
+    background-color: #f04134;
+}
+.scms-progress-outer .progress-icon{
+    position: absolute;
+    right: -15px;
+    top: -2px;
+}
+.scms-progress-outer .progress-icon-loading{
+    position: absolute;
+    right: -15px;
+    top: -2px;
+    color: #ddd;
+}
+.scms-progress-outer .progress-icon-success{
+    position: absolute;
+    right: -15px;
+    top: -2px;
+    color: #00a854;
+}
+.scms-progress-outer .progress-icon-fail{
+    position: absolute;
+    right: -15px;
+    top: -2px;
+    color: #f04134;
+}

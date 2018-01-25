@@ -1,0 +1,16 @@
+<ul class="nav nav-tabs nav-bar" ng-init="demoNavTabsStatus = 1">
+    <li ng-click="demoNavTabsStatus = 1" ng-class="{'active': demoNavTabsStatus === 1}">
+        <a href="javascript:void(0);">全部</a>
+    </li>
+    <li ng-click="demoNavTabsStatus = 2" ng-class="{'active': demoNavTabsStatus === 2}">
+        <a href="javascript:void(0);">已授信</a>
+    </li>
+    <li ng-click="demoNavTabsStatus = 3" ng-class="{'active': demoNavTabsStatus === 3}">
+        <a href="javascript:void(0);">已冻结</a>
+    </li>
+</ul>
+<div class="box content-padding">
+	<span ng-if="demoNavTabsStatus === 1">全部内容</span>
+	<span ng-if="demoNavTabsStatus === 2">已授信内容</span>
+	<span ng-if="demoNavTabsStatus === 3">已冻结内容</span>
+</div>

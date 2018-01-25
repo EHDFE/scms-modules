@@ -1,0 +1,20 @@
+.tree-view {
+    height: auto;
+    padding: 10px;
+    bottom: 10px;
+    position: relative;
+    top: 0;
+    color:#999;
+}
+.tree-view span:hover {
+	color: #666;
+}
+.tree-view span.active {
+	color: #5BB1EE;
+}
+.tree-view .node{
+	cursor: pointer;
+}
+.tree-view li{
+	padding-top: 9px;
+}

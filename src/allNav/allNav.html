@@ -1,0 +1,26 @@
+<div class="all-nav-directive" ng-class="{show: inShow}">
+    <a class="javascript:void(0)" ng-click="inShow = false"><i class="fa fa-reply-all mr10"></i>返回</a>
+    <div class="directive-centent">
+        <ul>
+            <li ng-repeat="itemA in navs">
+                <a href="javascript:void(0)">{{itemA.name}}<i class="fa fa-angle-down ml5"></i></a>
+                <ul>
+                    <li ng-repeat="itemB in itemA.children track by $index">
+                        <a href="javascript:void(0)" ng-href="{{itemB.href}}" ng-click="hide(itemC.href)">{{itemB.name}}</a>
+                        <ul>
+                            <li ng-repeat="itemC in itemB.children track by $index">
+                                <a href="javascript:void(0)" ng-href="{{itemC.href}}" ng-click="hide(itemC.href)">{{itemC.name}}</a>
+                                <ul>
+                                    <li ng-repeat="itemD in itemC.children" ng-hide="itemD.resourcetype == 1">
+                                        <a href="javascript:void(0)" href="javascript:void(0)" ng-href="{{itemD.href}}" ng-click="hide(itemD.href)">{{itemD.name}}</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="line"></div>
+            </li>
+        </ul>
+    </div>
+</div>

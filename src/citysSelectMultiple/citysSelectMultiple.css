@@ -1,0 +1,59 @@
+.citysSelectMultipleDirective{
+
+}
+.citysSelectMultipleDirective h4{
+	margin-top: 0;
+	overflow: hidden;
+	margin-bottom: 0px;
+}
+.citysSelectMultipleDirective .label-default{
+	background: #eee;
+	margin-right: 10px;
+	color: #333;
+	font-weight: normal;
+	float: left;
+	margin-bottom: 0;
+	margin-top:2px;
+	font-size: 14px;
+	line-height: 22px;
+}
+.citysSelectMultipleDirective .link{
+	font-weight: normal;
+	color: #1b82b8;
+	cursor: pointer;
+}
+#citysSelectmultipleDialog ul{
+	overflow: hidden;
+}
+#citysSelectmultipleDialog ul li{
+	float: left;
+	width: 50%;
+}
+#citysSelectmultipleDialog ul li > div{
+	border:1px solid #ddd;
+	color: #333;
+	text-align:left;
+	border-radius:5px;
+	margin:5px;
+	display: block;
+	padding:5px 10px 10px 10px;
+	cursor: pointer;
+}
+#citysSelectmultipleDialog ul li > div:hover{
+	background-color: #f5f5f5;
+}
+#citysSelectmultipleDialog .checkbox-inline{
+	background: url(./img/formIcon.png) -7px -2px no-repeat;
+	padding-left:30px;
+}
+#citysSelectmultipleDialog .checkbox-inline input[type="checkbox"]{
+	display: none;
+}
+#citysSelectmultipleDialog .checkbox-inline-checked{
+	background: url(./img/formIcon.png) -7px -38px no-repeat;
+}
+#citysSelectmultipleDialog .checkbox-disable{
+	background: url(./img/disable.png) 2px 7px no-repeat;
+	padding-left: 30px;
+	line-height: 34px;
+}

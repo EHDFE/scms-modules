@@ -1,0 +1,7 @@
+<div>
+    <img ng-if="!customCss" ng-src="{{ imgUrl }}" class="minImg" ng-click="imgClick($event,imgUrl)" alt="{{altText}}" ng-show="!textOnly">
+    <div ng-if="customCss && miniImg" class="minImgDiv" style="background: url({{miniImgUrl}}) no-repeat 0 0;background-size:cover;" ng-click="imgClick($event,imgUrl)"></div>
+    <div ng-if="customCss && !miniImg" class="minImgDiv" style="background: url({{imgUrl}}) no-repeat 0 0;background-size:cover;" ng-click="imgClick($event,imgUrl)"></div>
+    <a ng-click="imgClick($event,imgUrl)" ng-show="textOnly">{{altText}}</a>
+    <img ng-src="{{ imgUrl }}" style="display: none;">
+</div>
