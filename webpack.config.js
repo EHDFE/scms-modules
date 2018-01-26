@@ -23,12 +23,12 @@ module.exports = {
         //bootstrapCss: "./node_modules/bootstrap/less/bootstrap.less"
     },//已多次提及的唯一入口文件
     output: {
-      path: __dirname + "/runnerPublic",//打包后的文件存放的地方
+      path: __dirname + "/docs",//打包后的文件存放的地方
       filename: "[name].bundle.js",
       chunkFilename: "[name]_[id].chunk.js"
     },
     devServer: {
-        contentBase: "./node_modules/scmsmodules-runner/runnerPublic",//本地服务器所加载的页面所在的目录
+        contentBase: "./node_modules/scmsmodules-runner/public",//本地服务器所加载的页面所在的目录
         historyApiFallback: true,//不跳转
         inline: true//实时刷新
     },
