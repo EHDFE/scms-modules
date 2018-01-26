@@ -1,6 +1,6 @@
 {
   "name": "scmsmodules",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "scmsmodules",
   "repository": "https://github.com/EHDFE/scms-modules.git",
   "main": "index.js",
@@ -47,6 +47,6 @@
     "webpack-dev-server": "^2.9.7",
     "webpack-manifest-plugin": "^1.3.2",
     "webpack-merge": "^4.1.1",
-    "scmsmodules-runner": "0.0.4"
+    "scmsmodules-runner": "latest"
   }
 }
