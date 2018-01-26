@@ -2805,56 +2805,12 @@
 	}
 }
 @charset "utf-8";
-.css-ctrl-list{
-	position: fixed;
-	left: 0px;
-	top:100px;
-	
+.error-msg-a{
+	background: url(699a8d719d282f8c35a725f5899ffa2c.png) center 0 no-repeat;
+	padding-top:170px;
+	font-size: 30px;
+	text-align: center;
+	margin-top:150px;
+	color:#888;
 }
-.css-ctrl-list a{
-	color: #666;
-	display: block;
-	padding:10px 25px;
-}
-.css-ctrl-list a i{
-	margin-right: 15px;
-}
-.css-ctrl-list a:hover{
-	text-decoration: none;
-}
-.code{
-	padding:10px;
-}
-@media (max-width: 767px) {
-	.css-ctrl-list{
-		display: none;
-	}
-}
-@charset "utf-8";
-.css-ctrl-list{
-	position: fixed;
-	left: 0px;
-	top:100px;
-	
-}
-.css-ctrl-list a{
-	color: #666;
-	display: block;
-	padding:10px 25px;
-}
-.css-ctrl-list a i{
-	margin-right: 15px;
-}
-.css-ctrl-list a:hover{
-	text-decoration: none;
-}
-.code{
-	padding:10px;
-}
-@media (max-width: 767px) {
-	.css-ctrl-list{
-		display: none;
-	}
-}
-
 /*# sourceMappingURL=app_app_0.css.map*/

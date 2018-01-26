@@ -20294,13 +20294,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.css":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.html":
 /***/ (function(module, exports) {
 
@@ -20320,7 +20313,7 @@ var _demo2 = _interopRequireDefault(_demo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPageCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPageCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/standard/standard.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
   return function (app, elem, attrs, scope) {
     ctrl(app, elem, attrs, scope, _demo2.default);
     elem.append(html);
