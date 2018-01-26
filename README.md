@@ -46,7 +46,7 @@ import scmsModules from 'scmsmodules';
 
 还有一种是在依赖时，创建指令。
 
-### 如何进行开发
+### 如何进行开发及预览
 
 下载源码：
 [https://github.com/EHDFE/scms-modules.git](https://github.com/EHDFE/scms-modules.git)
@@ -65,6 +65,11 @@ import scmsModules from 'scmsmodules';
 ```sh
     npm run build
 ```
+
+
+### 开发过程
+
+![](image/http://image.tf56.com/dfs/group1/M00/48/41/CiFBClpqtzKAJqR-AACiwIoXqZw080.png)
 
 
 
