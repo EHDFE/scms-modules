@@ -49,7 +49,9 @@ import scmsModules from 'scmsmodules';
 ### 如何进行开发及预览
 
 下载源码：
-[https://github.com/EHDFE/scms-modules.git](https://github.com/EHDFE/scms-modules.git)
+```sh
+    git clone https://github.com/EHDFE/scms-modules.git
+```
 
 安装依赖：
 ```sh
