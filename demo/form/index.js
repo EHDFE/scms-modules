@@ -2,15 +2,15 @@ import form from "./form.html";
 import formY from "./formY.html";
 import input from "./input.html";
 import formX from "./formX.html";
+import switchA from "./switch.html";
 
 export default [{
-	title: "Input",
+	title: "Switch",
 	parentTitle: "Forms",
 	author: "tianyanrong",
-	html: [input],
+	html: [switchA],
 	isCode: true
-},
-{
+},{
 	title: "Form",
 	parentTitle: "Forms",
 	author: "tianyanrong",

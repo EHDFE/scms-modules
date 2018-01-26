@@ -24,6 +24,9 @@ define([
                     var html = $scope.htmlData;
                     $element.html(html);
                     $compile($element.contents())($scope);
+                    if(!scope.$$phase) {
+                          scope.$apply();
+                        }
                 },
 
                 controller: function($scope,$element,$attrs,$transclude,$log,$http,G){

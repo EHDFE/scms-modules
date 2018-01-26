@@ -1,0 +1,62 @@
+/*layerout*/
+#container {
+  height: ~"calc(100vh - 55px)";
+  min-height: 200px;
+  overflow-y:auto;
+  position: relative;
+}
+
+#content{
+  margin-left:180px;
+  transition: margin-left 0.5s;
+}
+#mainNav{
+  width: 180px;
+  position: absolute;
+  height: 100%;
+  overflow: hidden;
+  left: 0;
+  top:50px;
+  transition:width 0.5s;
+  z-index: 9;
+}
+.contentX{
+  margin:0 10px;
+}
+.contentT{
+  margin-top:10px;
+}
+.row{
+  margin: 10px;
+}
+.visible-small{
+  display: none !important;
+  transition:margin-left 0.5s;
+}
+.col-sm-2a{
+  width: 20%;
+  float: left;
+  padding:0px 10px;
+}
+.contentPadding{
+  padding:15px;
+}
+.content-padding{
+  padding:15px;
+}
+.pl0{
+  padding-left:0;
+}
+.pr0{
+  padding-right:0;
+}
+.pt0{
+  padding-top:0;
+}
+.pb0{
+  padding-bottom:0;
+}
+.container{
+  width: auto;
+  padding:0;
+}

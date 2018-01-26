@@ -9,6 +9,9 @@ demoData.push(grid);
 import fontAwesome from "./fontAwesome/index.js";
 demoData.push(fontAwesome);
 
+import title from "./title/index.js";
+demoData.push(title);
+
 import buttons from "./buttons/index.js";
 demoData = demoData.concat(buttons);
 

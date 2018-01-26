@@ -5,7 +5,8 @@
   "repository": "https://github.com/EHDFE/scms-modules.git",
   "main": "index.js",
   "scripts": {
-    
+    "build": "webpack",
+    "server": "webpack-dev-server"
   },
   "bugs": {
     "url": "http://github.com/EHDFE/scms-modules/issues"
@@ -19,6 +20,33 @@
   "author": "tianyanrong",
   "license": "MIT",
   "dependencies": {
+    "angular": "1.2.32",
     "bootstrap": "^3.3.7"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.2.3",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "postcss-loader": "^2.0.9",
+    "posthtml-expressions": "^1.1.0",
+    "posthtml-loader": "^0.11.0",
+    "style-loader": "^0.19.1",
+    "url": "^0.11.0",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7",
+    "webpack-manifest-plugin": "^1.3.2",
+    "webpack-merge": "^4.1.1",
+    "scmsmodules-runner": "0.0.2"
   }
 }

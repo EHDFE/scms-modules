@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="9px" viewBox="0 0 8 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.1 (33804) - http://www.bohemiancoding.com/sketch -->
+    <title>null</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Mobile-Portrait" transform="translate(-284.000000, -276.000000)" fill="#999999">
+            <g id="null" transform="translate(284.000000, 276.000000)">
+                <path d="M3.78814916,8.92056642 C3.90505071,9.0368454 4.09436749,9.03706232 4.21148711,8.92056642 L7.9413754,5.21054173 C8.05827694,5.09426274 8.00887033,5 7.85741333,5 L0.142222944,5 C-0.0210495717,5 -0.058858744,5.09404583 0.0582608764,5.21054173 L3.78814916,8.92056642 Z" id="Combined-Shape"></path>
+                <path d="M3.78814916,3.92056642 C3.90505071,4.0368454 4.09436749,4.03706232 4.21148711,3.92056642 L7.9413754,0.210541726 C8.05827694,0.0942627417 8.00887033,-1.95399252e-13 7.85741333,-1.95399252e-13 L0.142222944,-1.95399252e-13 C-0.0210495717,-1.95399252e-13 -0.058858744,0.0940458288 0.0582608764,0.210541726 L3.78814916,3.92056642 Z" id="Combined-Shape" transform="translate(4.000000, 2.000000) scale(1, -1) translate(-4.000000, -2.000000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,60 @@
+/*search-from*/
+.search-form{
+    display: table;
+    width: 100%;
+}
+.search-form .input-group,
+.search-form .form-group{
+    display: inline-table;
+    vertical-align: middle;
+    margin:0 15px 15px 0;
+}
+.search-form .input-group .input-group-addon,
+.search-form .form-group .input-group-addon{
+    background:#fff;
+    border:none;
+}
+.search-form .input-group .input-group-addon:first-child,
+.search-form .form-group .input-group-addon:first-child{
+    padding-right:10px;
+    padding-left:0;
+}
+.search-form .input-group .input-group-addon:first-child + .form-control,
+.search-form .form-group .input-group-addon:first-child + .form-control{
+    border-top-left-radius: @input-border-radius;
+    border-bottom-left-radius: @input-border-radius;
+}
+.search-form .input-group .form-control:first-child:last-child{
+    border-radius: @input-border-radius;
+}
+.search-form .input-group-addon,
+.search-form .form-control{
+    width: auto;
+}
+
+.search-form .cell{
+    display: table-cell;
+}
+
+.search-form .text-bottom{
+    vertical-align: bottom;
+}
+
+.search-form .cell > .btn,
+.search-form .cell > .checkbox-inline,
+.search-form .cell > .redio-inline,
+.search-form .cell > .form-control,
+.search-form .fr > .btn,
+.search-form .fr > .checkbox-inline,
+.search-form .fr > .redio-inline,
+.search-form .fr > .form-control,
+.search-form .fl > .btn,
+.search-form .fl > .checkbox-inline,
+.search-form .fl > .redio-inline,
+.search-form .fl > .form-control,
+.search-form > .btn,
+.search-form > .form-control,
+.search-form > .checkbox-inline,
+.search-form > .redio-inline{
+    margin-bottom:15px;
+}

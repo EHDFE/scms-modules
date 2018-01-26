@@ -1,0 +1,82 @@
+/*input group*/
+.input-group .input-group-addon{
+    border-color: @input-border-default;
+    background:#F7FAFC;
+    color:#6E7382;
+}
+.input-bar .input-group-btn{
+	border:1px solid @input-border-default;
+	border-left:none;
+    border-radius: 0 @input-border-radius @input-border-radius 0;
+    padding-left:1px;
+}
+.input-bar .input-group-btn::before{
+    content: "";
+    width:1px;
+    height: 16px;
+    display: inline-block;
+    background: #E4E7EF;
+    position: absolute;
+    top:6px;
+}
+.input-bar .input-group-btn .btn{
+    background: #fff;
+    border:none;
+	color:#51A1FD;
+	border-left:none;
+	vertical-align: middle;
+    position: relative;
+    margin-left: 1px;
+}
+
+.input-bar .input-group-btn .btn:hover,
+.input-bar .input-group-btn .btn:active{
+    background: #fff;
+    color:#1f87ff;
+}
+.input-bar .form-control:not(:last-child){
+	border-right:none;
+}
+.input-bar .form-control:not(:last-child):focus,
+.input-bar .form-control:not(:last-child):active{
+	border:1px solid @input-border-focus;
+
+}
+.input-bar .input-group-addon{
+	background: #fff;
+	border-left:none;
+	padding:0px 12px;
+}
+.input-bar  :disabled + .input-group-addon{
+	background: @input-disabled-bg;
+	color: @input-disabled-color;
+}
+.input-bar .input-group-addon:first-child{
+	border:none;
+	padding-left:0;
+}
+
+/*历史样式*/
+.input-group-unit .input-group-addon{
+	background: none;
+	padding-right: 5px;
+}
+.input-group-unit input.form-control{
+	border-right: none;
+}
+
+.input-group .input-group-label{
+	display: table-cell;
+}
+.input-group .input-group-label .form-control{
+	border-right: 0px;
+	border-top-left-radius:4px;
+	border-bottom-left-radius:4px;
+}
+
+.input-group-addon-no{
+	background: none;
+	border:none;
+	padding-left: 3px;
+	padding-right: 3px;
+}

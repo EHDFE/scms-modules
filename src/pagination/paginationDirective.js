@@ -7,7 +7,7 @@
  * @lastBy
  * @html <div pagination-directive current-page="currentPage" total-count="totalCount" page-size="pageSize" onchanged="onchanged" hide-page-size="hidePageSize"></div>
  */
-define(['angular', './pagination.html', '../angularUi/less/pagination.less'], function(
+define(['angular', './pagination.html'], function(
   angular,
   html,
   css

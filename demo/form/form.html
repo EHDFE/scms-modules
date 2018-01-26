@@ -19,9 +19,102 @@
     </div>
 
     <div class="form-group">
+        <label class="control-label">Input Addon2</label>
+        <div class="form-content">
+            <div class="input-group input-bar">
+                <span class="input-group-addon">
+                    选择车型
+                </span>
+                <input class="form-control" type="text" >
+                <span class="input-group-addon">
+                    元
+                </span>
+            </div>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Input Addon3</label>
+        <div class="form-content form-inline">
+            <label class="checkbox-inline" ng-click="demoFormCheckboxStatusC = !demoFormCheckboxStatusC" ng-class="{'checkbox-inline-checked':demoFormCheckboxStatusC}">面包车
+             </label>
+            <div class="input-group input-bar ml10">
+                <input class="form-control w50" type="text" ng-disabled="!demoFormCheckboxStatusC">
+                <span class="input-group-addon">
+                    元
+                </span>
+            </div>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Input Addon4</label>
+        <div class="form-content">
+            <div class="input-group">
+                    <input class="form-control" type="text" >
+                    <span class="input-group-addon">
+                        <a href="#">查看编码规则</a>
+                    </span>
+            </div>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Input Btn</label>
+        <div class="form-content">
+            <div class="input-group">
+                <input class="form-control" type="text" >
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-success">按钮</button>
+                </span>
+            </div>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Input Btn disabled</label>
+        <div class="form-content">
+            <div class="input-group">
+                <input class="form-control" type="text" disabled="disabled">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-success" disabled="disabled">按钮</button>
+                </span>
+            </div>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Input Search</label>
+        <div class="form-content">
+            <div class="input-group input-bar">
+                <input type="text" placeholder="请输入姓名/手机号/订单号" class="form-control">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-success">搜索</button>
+                </span>
+            </div>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    
+
+    <div class="form-group">
         <label class="control-label">Select</label>
         <div class="form-content">
             <select class="form-control"><option>选项</option></select>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Select disabled</label>
+        <div class="form-content">
+            <select class="form-control" disabled="disabled"><option>选项</option></select>
             <div class="error-msg"></div>
         </div>
     </div>
@@ -55,7 +148,15 @@
     <div class="form-group">
         <label class="control-label">Switch</label>
         <div class="form-content">
-            <label class="switch" ng-class="{'switch-open': demoFormSwitchStatus}" ng-click="demoFormSwitchStatus=!demoFormSwitchStatus"></label>
+            <switch-directive is-checked="demoFormSwitchStatus" is-disabled="demoSwitch2"></switch-directive>
+            <div class="error-msg"></div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Switch disabled</label>
+        <div class="form-content">
+            <switch-directive is-checked="demoSwitch2" is-disabled="!demoFormSwitchStatus"></switch-directive>
             <div class="error-msg"></div>
         </div>
     </div>
@@ -63,20 +164,7 @@
     <div class="form-group">
         <label class="control-label">Textarea</label>
         <div class="form-content">
-            <textarea class="form-control" ng-model="" maxlength="400"></textarea>
-            <div class="error-msg"></div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label">input addon</label>
-        <div class="form-content">
-            <div class="input-group">
-                    <input class="form-control" type="text" >
-                    <span class="input-group-addon">
-                        <a href="#">查看编码规则</a>
-                    </span>
-            </div>
+            <textarea class="form-control" maxlength="400"></textarea>
             <div class="error-msg"></div>
         </div>
     </div>

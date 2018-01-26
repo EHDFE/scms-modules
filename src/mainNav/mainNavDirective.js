@@ -8,8 +8,7 @@
  */
 define([
     'angular',
-    './template.html',
-    '../angularUi/less/mainNav.less'
+    './template.html'
 ], function(
     angular,
     html,

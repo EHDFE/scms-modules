@@ -5,29 +5,31 @@ import './libs/base.less';
 import './libs/font-awesome/css/font-awesome.css';
 
 
-import angularUi from "./src/angularUi/less/angularUi.less";
+import scmsUi from "./scmsUi/less/scmsUi.less";
+import scmsUiJs from "./scmsUi/js/scmsUi.js";
 import ngHtmlContainer from "./src/ngHtmlContainer/ngHtmlContainer";
+import switchDirective from "./src/switch/switchDirective";
 
-import allNavDirective from "./src/allNav/allNavDirective";
+import paginationDirective from "./src/pagination/paginationDirective";
+import crumbDirective from "./src/crumb/crumbDirective";
+
+import ngCodeDirective from "./src/ngCode/ngCodeDirective";
 import cantonSelectDirective from "./src/cantonSelect/cantonSelectDirective";
 import changePwdDialogDirective from "./src/changePwdDialog/changePwdDialogDirective";
 import chartDirective from "./src/chart/chartDirective";
 import citysSelectDirective from "./src/citysSelect/citysSelectDirective";
 import citysSelectMultipleDirective from "./src/citysSelectMultiple/citysSelectMultipleDirective";
-import crumbDirective from "./src/crumb/crumbDirective";
 import datePickerDirective from "./src/datePicker/datePickerDirective";
 import errorNoDataDirective from "./src/errorNoData/errorNoDataDirective";
 import exportDirective from "./src/export/exportDirective";
-//import fileUploaderDirective from "./src/fileUploader/index";
+import fileUploaderDirective from "./src/fileUploader/index";
 import formRadioDirective from "./src/formRadio/formRadio";
-import headerDirective from "./src/header/header";
 import imageShowDirective from "./src/imageShow/imageShow";
 import kaImageUploadDirective from "./src/kaImageUpload/kaImageUploadDirective";
 import loadingDirective from "./src/loading/loadingDirective";
 import mainNavDirective from "./src/mainNav/mainNavDirective";
 import multiselectDirective from "./src/multiselect/multiselect";
 //import noPermissionDirective from "./src/noPermission/noPermission";
-import paginationDirective from "./src/pagination/paginationDirective";
 import qrcodeDirective from "./src/qrcode/qrcode";
 import searchDropdownDirective from "./src/searchDropdown/searchDropdown";
 import starRatingDirective from "./src/starRating/starRating";
@@ -38,6 +40,9 @@ import tooltipDirective from "./src/tooltip/tooltip";
 import treeViewDirective from "./src/treeView/treeView";
 
 export default {
+  'ngCode/ngCodeDirective': ngCodeDirective,
+  'switch/switchDirective': switchDirective,
+
   'ngHtmlContainer/ngHtmlContainer': ngHtmlContainer,
   //'allNav/allNavDirective': allNavDirective,
   'cantonSelect/cantonSelectDirective': cantonSelectDirective,
@@ -49,7 +54,7 @@ export default {
   'datePicker/datePickerDirective': datePickerDirective,
   'errorNoData/errorNoDataDirective': errorNoDataDirective,
   'export/exportDirective': exportDirective,
-  //'fileUploader': fileUploaderDirective,  
+  'fileUploader': fileUploaderDirective,  
   'formRadio/formRadioDirective': formRadioDirective,
   'imageShow/imageShowDirective': imageShowDirective,
   'kaImageUpload/kaImageUploadDirective': kaImageUploadDirective,
