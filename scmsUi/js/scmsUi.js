@@ -1,2 +1,2 @@
 
-//import './disabledClick.js';
+import './alert.js';
