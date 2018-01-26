@@ -19557,7 +19557,6 @@ angular.module('components', []).config(['$compileProvider', '$controllerProvide
 				try {
 					//var componentFn = require(componentUrl);
 					var componentFn = _index2.default[componentUrl];
-					console.log(666, componentFn, componentUrl);
 					if (componentFn) {
 						componentExec(componentFn);
 					} else {
@@ -19744,20 +19743,20 @@ var __WEBPACK_AMD_DEFINE_RESULT__;
 !(__WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
 	return function (app, elem, attrs, scope) {
 		app.constant('allRouterData', [{
-			'name': 'Base Css',
-			'state': 'css.css',
+			'name': 'Scms UI',
+			'state': 'scmsUi.scmsUi',
 			'moduleName': 'viewModules'
 		}, {
-			'name': 'Base Csss',
-			'state': 'cssbase.cssbase',
+			'name': 'Directive',
+			'state': 'scmsDirective.scmsDirective',
 			'moduleName': 'viewModules'
 		}, {
-			'name': '管理系统指令',
-			'state': 'directiveModule.directiveModule',
+			'name': 'Scms Page',
+			'state': 'scmsPage.scmsPage',
 			'moduleName': 'viewModules'
 		}, {
-			'name': '管理系统指令',
-			'state': 'compile.compile',
+			'name': 'Design Standard',
+			'state': 'standard.standard',
 			'moduleName': 'viewModules'
 		}]);
 	};
@@ -19823,11 +19822,6 @@ var _scmsmodules2 = _interopRequireDefault(_scmsmodules);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import './bootstrap/less/bootstrap.less';
-//import './font-awesome/css/font-awesome.css';
-//import 'bootstrap/dist/css/bootstrap.min.css'
-//import 'bootstrap/dist/js/bootstrap.min.js'
-
 //import 'angular';
 var appName = 'App'; //main.js 
 
@@ -19845,422 +19839,6 @@ angular.bootstrap(document, [appName]);
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/css/css.css":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/css/css.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div ng-controller=\"cssCtrl\">\n    <div class=\"box contentPadding\" ng-repeat=\"item in data\" name=\"{{item.title}}\" style=\"{{item.style}}\" id=\"{{item.boxId || ''}}\">\n        <div class=\"box-title\">{{item.title}}</div>\n        <p>{{item.depict}}</p>\n        <div ng-repeat=\"itemH in item.html\">\n            <div class=\"mt10\" data-ng-bind-html=\"itemH\"></div>\n            <pre class=\"code\" ng-if=\"item.isCode !== false\">{{itemH}}</pre>          \n        </div>\n        <div ng-if=\"item.buttons\" class=\"pt20\">\n            <div ng-repeat=\"itemBtn in item.buttons\">\n                <button class=\"btn btn-default\" ng-bind=\"itemBtn.value\" ng-click=\"eval(itemBtn.callback)\"></button>\n                <pre class=\"code\" ng-if=\"item.isCode !== false\">{{itemBtn.callback}}</pre>  \n            </div>\n        </div>\n    </div>\n    \n\n    <!--<ul class=\"css-ctrl-list\">\n        <li ng-repeat=\"item in data\" ng-click=\"open(item.title)\"><a href=\"javascript:void(0);\"><i class=\"fa fa-circle-o\"></i>{{item.title}}</a></li>\n    </ul>-->\n</div>";
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/css/css.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
-
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/css/cssCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/css/cssService.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/css/css.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/css/css.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, service, css, html) {
-  return function (app, elem, attrs, scope) {
-    ctrl(app, elem, attrs, scope);
-    service(app, elem, attrs, scope);
-    elem.append(html);
-  };
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/css/cssCtrl.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
-    return function (app, elem, attrs, scope) {
-        app.controller('cssCtrl', ['$scope', '$cookies', '$location', '$state', 'cssService', 'G', '$timeout', '$rootScope', '$sce', '$http', function ($scope, $cookies, $location, $state, service, G, $timeout, $rootScope, $sce, $http) {
-            $scope.data = [];
-            var scrollTops = {};
-            service.get().then(function (data) {
-                data = data.data.data;
-                angular.forEach(data, function (item) {
-                    var htmlH = [];
-                    if (item.htmlUrl) {
-                        item.html = [];
-                        $http({
-                            url: item.htmlUrl,
-                            method: 'get'
-                        }).then(function (data) {
-                            var html = data.data;
-                            $timeout(function () {
-                                item.html.push($sce.trustAsHtml(html));
-                                $timeout(function () {
-                                    $('.box[name]').each(function () {
-                                        scrollTops[$(this).attr('name')] = $(this).offset().top - 70;
-                                    });
-                                }, 0);
-                            }, 0);
-                        });
-                    } else {
-                        if (_typeof(item.html) === 'object' && item.html.length) {
-                            angular.forEach(item.html, function (html) {
-                                htmlH.push($sce.trustAsHtml(html));
-                            });
-                            item.html = htmlH;
-                        } else {
-                            item.html = $sce.trustAsHtml(item.html);
-                        }
-                    }
-                });
-
-                $scope.data = data;
-                $scope.navs = [];
-                angular.forEach(data, function (item) {
-                    $scope.navs.push({
-                        icon: 'fa fa-caret-right',
-                        name: item.title,
-                        item: item,
-                        href: ''
-                    });
-                });
-                $rootScope.navs = [{
-                    name: 'ELayout',
-                    children: $scope.navs
-                }];
-
-                $rootScope.$watch('currNavItem', function (newValue) {
-                    if (newValue) {
-                        $('#container').scrollTop(scrollTops[newValue.title]);
-                    }
-                });
-
-                $scope.eval = function (callback) {
-                    eval(callback);
-                };
-            });
-        }]);
-    };
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/css/cssService.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
-
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
-	return function (app, elem, attrs, scope) {
-		app.factory('cssService', ['$rootScope', '$http', 'G', function ($rootScope, $http, G) {
-			return {
-				get: function get(options) {
-					return $http({
-						url: '/cssData/css.json',
-						method: 'get',
-						data: options,
-						test: '/cssData/css.json' //假数据api
-					});
-				}
-			};
-		}]);
-	};
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/componentDirective.css":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/componentDirective.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"derective-module\">\n        \n        <div id=\"contentSidebar\">\n            <h2>指令名称：{{item.name}} </h2>\n            <h4>{{item.date}} <i>作者-{{item.author}}</i><i ng-if=\"item.lastBy\">；修改-{{item.lastBy}}</i></h4>\n            <h3 ng-show=\"item.description\"><span>功能描述：</span>{{item.description}}</h3>\n            <h3><span>外部JS依赖：</span>{{item.deps[0]}}</h3>\n            <h3><span>外部HTML插入：</span><pre class=\"code\" ng-bind=\"item.htmlCode\"></pre></h3>\n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.scope && item.scope.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>继承</th>\n                        <th>值类型</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.scope\">\n                        <td><span style=\"white-space:nowrap\">{{scope.key}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.scopeType || '='}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.type}}</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n            <h3 ng-show=\"item.attrs && item.attrs.length\"><span>attrs属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.attrs && item.attrs.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>值类型</th>\n                        <th>默认值</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.attrs\">\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.key\"></span></td>\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.type\"></span></td>\n                        <td>{{scope.defaultValue}}<span ng-if=\"!scope.defaultValue\">-</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n    \n            <h3 ng-show=\"item.api && item.api.length\"><span>JS内部api依赖：</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.api && item.api.length\">\n                <tbody>\n                    <tr ng-repeat=\"scope in item.api\">\n                        <td>{{scope}}</td>\n                    </tr><tr>\n                </tr></tbody>\n            </table>\n    \n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope连动视图：</span></h3>\n            <table class=\"table table-bordered\">\n                <tbody class=\"tbodyContent\" data-ng-bind-html=\"item.view\">\n                </tbody>\n            </table>\n        </div>\n        <div class=\"contentHtml\" data-ng-bind-html=\"item.html\"></div>\n    </div>";
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/componentDirective.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
-
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./index.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/componentDirective.html"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/componentDirective.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, scmsmodules, html, css) {
-    return function (app, elem, attrs, scope) {
-        var directiveObj = scmsmodules.default || scmsmodules;
-        var objKey;
-        for (objKey in directiveObj) {
-            directiveObj[objKey](app, elem, attrs, scope);
-        }
-        app.directive('componentViewDirective', [function () {
-            return {
-                template: html,
-                restrict: 'EA',
-                replace: true,
-                scope: {
-                    currItem: '=' //@scope currentItme
-                },
-                link: function link($scope, $element, $attrs) {},
-
-                controller: function controller($scope, $element, $attrs, $cookies, $timeout, $sce, $compile) {
-                    ///////
-                    $scope.data = [];
-                    var preScope;
-
-                    var parseData = function parseData() {
-                        var item = Object.assign({}, $scope.currItem);
-                        item.icon = '';
-                        item.htmlCode = item.html;
-                        item.html = $sce.trustAsHtml(item.html);
-                        item.view = '';
-                        angular.forEach(item.scope, function (scope) {
-                            item.view += '<tr><td><span style="white-space:nowrap">' + scope.key + '</span></td><td object-to-view-directive key-model="' + scope.key + '" data-scope-type="' + scope.scopeType + '" data-type="' + scope.type + '" data-key="' + scope.key + '" data-example-value="' + (scope.exampleValue || scope.parentScopeValue || '') + '" data-disabled="' + (scope.isDisabled || '') + '"></td></tr>';
-                        });
-                        item.view = $sce.trustAsHtml(item.view);
-                        $scope.item = item;
-
-                        $scope.$watch('item', function (newValue, oldValue) {
-                            if (newValue) {
-                                if (oldValue) {
-                                    angular.forEach(oldValue.scope, function (item) {
-                                        if ($scope[item.key]) {
-                                            delete $scope[item.key];
-                                        }
-                                    });
-                                }
-                                preScope = newValue.scope;
-                                angular.forEach(newValue.scope, function (item) {
-                                    item.exampleValue = item.exampleValue || item.parentScopeValue || '';
-                                    if (item.exampleValue || item.hasOwnProperty('exampleValue')) {
-                                        if (item.type === 'callback') {
-                                            $scope[item.key] = function () {
-                                                eval(item.exampleValue);
-                                            };
-                                        }
-                                        if (item.type === 'function' && item.parentScopeValue) {
-                                            $scope[item.key] = function () {
-
-                                                var value = item.exampleValue.replace(/^\s*function\(\)\s*{/, '');
-                                                value = value.replace(/\}\s*\;*$/, '');
-                                                eval(value);
-                                            };
-                                        } else {
-                                            $scope[item.key] = item.exampleValue;
-                                        }
-                                    }
-                                });
-
-                                $compile($('.tbodyContent').contents())($scope);
-                                $compile($('.contentHtml').contents())($scope);
-                            }
-                        });
-                    };
-
-                    $scope.$watch('currItem', function (newValue, oldValue) {
-                        if (newValue) {
-                            angular.forEach(preScope, function (item) {
-                                delete $scope[item.key];
-                            });
-                            $('.contentHtml').html('');
-                            $compile($('.contentHtml').contents())($scope);
-                            parseData();
-                        }
-                    });
-                }
-            };
-        }]);
-    };
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssBaseDirective.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"box contentPadding\" name=\"{{currItem.title}}\" style=\"{{currItem.style}}\" id=\"{{currItem.boxId || ''}}\">\n    <div class=\"title-square\">{{currItem.title}}</div>\n    <p>{{currItem.depict}}</p>\n    <div class=\"mt20\" ng-repeat=\"itemH in currItem.html\">\n        <div class=\"mt10\" ng-html-container=\"\" html-data=\"{{itemH}}\"></div>\n        <pre class=\"code mt15\" ng-if=\"currItem.isCode !== false\">{{itemH}}</pre>          \n    </div>\n    <div ng-if=\"currItem.buttons\" class=\"pt20\">\n        <div ng-repeat=\"itemBtn in currItem.buttons\">\n            <button class=\"btn btn-default\" ng-bind=\"itemBtn.value\" ng-click=\"eval(itemBtn.callback)\"></button>\n            <pre class=\"code\" ng-if=\"item.isCode !== false\">{{itemBtn.callback}}</pre>  \n        </div>\n    </div>\n</div>";
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssbase.css":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssbase.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div ng-controller=\"cssCtrl\">\n    <div css-base-directive=\"\" curr-item=\"currItem\" ng-if=\"currItem.type !== 'directive'\"></div>\n    <div component-view-directive=\"\" curr-item=\"currItem\" ng-if=\"currItem.type === 'directive'\"></div>\n</div>";
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssbase.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
-
-var _demo = __webpack_require__("./demo/index.js");
-
-var _demo2 = _interopRequireDefault(_demo);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/ngHtmlContainer/ngHtmlContainer.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssbaseDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/componentDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssbaseCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssbaseService.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssbase.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssbase.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ngHtmlContainer, cssbaseDirective, componentDirective, objectToViewDirective, ctrl, service, css, html) {
-  return function (app, elem, attrs, scope) {
-    ngHtmlContainer(app, elem, attrs, scope);
-    cssbaseDirective(app, elem, attrs, scope);
-    componentDirective(app, elem, attrs, scope);
-    objectToViewDirective(app, elem, attrs, scope);
-    ctrl(app, elem, attrs, scope, _demo2.default);
-    service(app, elem, attrs, scope);
-    elem.append(html);
-  };
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssbaseCtrl.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
-
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
-    return function (app, elem, attrs, scope, demoJson) {
-        app.controller('cssCtrl', ['$scope', '$cookies', '$location', '$state', 'cssService', 'G', '$timeout', '$rootScope', '$sce', '$http', '$compile', function ($scope, $cookies, $location, $state, service, G, $timeout, $rootScope, $sce, $http, $compile) {
-            $scope.currItem = demoJson[0];
-
-            //get navs
-            $scope.navs = [];
-            var parentNav = {};
-            angular.forEach(demoJson, function (item, index) {
-                if (item.parentTitle) {
-                    parentNav[item.parentTitle] = parentNav[item.parentTitle] || {};
-                    parentNav[item.parentTitle].children = parentNav[item.parentTitle].children || [];
-                    parentNav[item.parentTitle].children.push({
-                        name: item.title,
-                        item: item,
-                        href: 'javascript:void(0);'
-                    });
-
-                    parentNav[item.parentTitle].data = {
-                        icon: 'fa fa-cog',
-                        name: item.parentTitle,
-                        item: '',
-                        href: '',
-                        children: parentNav[item.parentTitle].children
-                    };
-                    parentNav[item.parentTitle].index = parentNav[item.parentTitle].index || index;
-                } else {
-                    $scope.navs.push({
-                        icon: 'fa fa-cog',
-                        name: item.title,
-                        item: item,
-                        href: 'javascript:void(0);'
-                    });
-                }
-            });
-
-            var key;
-            for (key in parentNav) {
-                var index = parentNav[key].index;
-                $scope.navs.splice(index, 0, parentNav[key].data);
-            }
-            $rootScope.navs = [{
-                name: 'Base Css',
-                children: $scope.navs
-            }];
-
-            $rootScope.$watch('currNavItem', function (newValue) {
-                if (newValue) {
-                    if (newValue.type === 'directive') {
-                        $scope.currItem = {};
-                        $timeout(function () {
-                            $scope.currItem = newValue;
-                        });
-                    } else {
-                        $scope.currItem = newValue;
-                    }
-                }
-            });
-        }]);
-    };
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssbaseDirective.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
-
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssBaseDirective.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html) {
-    return function (app, elem, attrs, scope) {
-        app.directive('cssBaseDirective', [function () {
-            return {
-                template: html,
-                restrict: 'EA',
-                replace: true,
-                scope: {
-                    currItem: '=' //@scope currentItme
-                },
-                link: function postLink($scope, $element, $attrs) {},
-
-                controller: function controller($scope, $element, $attrs, $cookies, $timeout) {}
-            };
-        }]);
-    };
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-/***/ }),
-
-/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssbaseService.js":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
-
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
-	return function (app, elem, attrs, scope) {
-		app.factory('cssService', ['$rootScope', '$http', 'G', function ($rootScope, $http, G) {
-			return {
-				get: function get(options) {
-					return $http({
-						url: '/cssData/css.json',
-						method: 'get',
-						data: options,
-						test: '/cssData/css.json' //假数据api
-					});
-				}
-			};
-		}]);
-	};
-}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-
-/***/ }),
-
 /***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/header/header.css":
 /***/ (function(module, exports) {
 
@@ -20271,7 +19849,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 /***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/header/header.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div ng-controller=\"headerCtrl\">\n    <div class=\"container header-ctrl\">\n        <div class=\"logo fl visible-large\">\n            <a href=\"/\">\n                ScmsModules\n            </a>\n        </div>\n        <ul class=\"nav-menu fl\">\n            <li>\n                <a href=\"#/cssbase/cssbase\" ng-class=\"{active: currentState === 'cssbase.cssbase'}\">\n                    Component\n                    <span class=\"caret\"></span>\n                </a>\n            </li>\n            <li>\n                <a href=\"#/cssbase/cssbase\">EAdmin Page</a>\n            </li>\n            <li>\n                <a href=\"#/cssbase/cssbase\">Design Standard</a>\n            </li>\n        </ul>\n\n        <ul class=\"login-status\">\n            <li ng-show=\"userInfo.username\" role=\"presentation\" class=\"dropdown  navbar-right\">\n                \n            </li>\n            \n        </ul>\n    </div>\n</div>";
+module.exports = "<div ng-controller=\"headerCtrl\">\n    <div class=\"container header-ctrl\">\n        <div class=\"logo fl visible-large\">\n            <a href=\"/\">\n                ScmsModules\n            </a>\n        </div>\n        <ul class=\"nav-menu fl\">\n            <li>\n                <a href=\"#/scmsUi/scmsUi\" ng-class=\"{active: currentState === 'scmsUi.scmsUi'}\">\n                    Scms Modules\n                    <span class=\"caret\"></span>\n                </a>\n            </li>\n            <li>\n                <a href=\"#/scmsPage/scmsPage\" ng-class=\"{active: currentState === 'scmsPage.scmsPage'}\">\n                    Scms Pages\n                    <span class=\"caret\"></span>\n                </a>\n            </li>\n            <li>\n                <a href=\"#/standard/standard\" ng-class=\"{active: currentState === 'standard.standard'}\">\n                    Design Standard\n                    <span class=\"caret\"></span>\n                </a>\n            </li>\n        </ul>\n\n        <ul class=\"login-status\">\n            <li ng-show=\"userInfo.username\" role=\"presentation\" class=\"dropdown  navbar-right\">\n                \n            </li>\n            \n        </ul>\n    </div>\n</div>";
 
 /***/ }),
 
@@ -20303,12 +19881,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
             $scope.currentState = '';
 
             if (!$state.current.name) {
-                $location.path('/cssbase/cssbase');
+                $location.path('/scmsUi/scmsUi');
             }
 
             //监听路由发生改变时，按钮选中切换
             $scope.$on('$stateChangeSuccess', function (e, toState, toParams, fromState, fromParams) {
-
                 $scope.currentState = toState.name;
             });
         }]);
@@ -20328,25 +19905,36 @@ var _header = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scm
 
 var _header2 = _interopRequireDefault(_header);
 
-var _css = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/css/css.js");
-
-var _css2 = _interopRequireDefault(_css);
-
 var _mainNav = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/mainNav/mainNav.js");
 
 var _mainNav2 = _interopRequireDefault(_mainNav);
 
-var _cssbase = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/cssbase/cssbase.js");
+var _scmsUi = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.js");
 
-var _cssbase2 = _interopRequireDefault(_cssbase);
+var _scmsUi2 = _interopRequireDefault(_scmsUi);
+
+var _scmsDirective = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.js");
+
+var _scmsDirective2 = _interopRequireDefault(_scmsDirective);
+
+var _scmsPage = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.js");
+
+var _scmsPage2 = _interopRequireDefault(_scmsPage);
+
+var _standard = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/standard/standard.js");
+
+var _standard2 = _interopRequireDefault(_standard);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = {
     'viewModules/header/header': _header2.default,
-    'viewModules/css/css': _css2.default,
-    'viewModules/cssbase/cssbase': _cssbase2.default,
-    'viewModules/mainNav/mainNav': _mainNav2.default
+    'viewModules/mainNav/mainNav': _mainNav2.default,
+    'viewModules/scmsUi/scmsUi': _scmsUi2.default,
+    'viewModules/scmsDirective/scmsDirective': _scmsDirective2.default,
+    'viewModules/scmsPage/scmsPage': _scmsPage2.default,
+    'viewModules/standard/standard': _standard2.default
+
 };
 
 /***/ }),
@@ -20484,13 +20072,800 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.css":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"derective-module\">\n        \n        <div id=\"contentSidebar\">\n            <h2>指令名称：{{item.name}} </h2>\n            <h4>{{item.date}} <i>作者-{{item.author}}</i><i ng-if=\"item.lastBy\">；修改-{{item.lastBy}}</i></h4>\n            <h3 ng-show=\"item.description\"><span>功能描述：</span>{{item.description}}</h3>\n            <h3><span>外部JS依赖：</span>{{item.deps[0]}}</h3>\n            <h3><span>外部HTML插入：</span><pre class=\"code\" ng-bind=\"item.htmlCode\"></pre></h3>\n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.scope && item.scope.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>继承</th>\n                        <th>值类型</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.scope\">\n                        <td><span style=\"white-space:nowrap\">{{scope.key}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.scopeType || '='}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.type}}</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n            <h3 ng-show=\"item.attrs && item.attrs.length\"><span>attrs属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.attrs && item.attrs.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>值类型</th>\n                        <th>默认值</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.attrs\">\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.key\"></span></td>\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.type\"></span></td>\n                        <td>{{scope.defaultValue}}<span ng-if=\"!scope.defaultValue\">-</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n    \n            <h3 ng-show=\"item.api && item.api.length\"><span>JS内部api依赖：</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.api && item.api.length\">\n                <tbody>\n                    <tr ng-repeat=\"scope in item.api\">\n                        <td>{{scope}}</td>\n                    </tr><tr>\n                </tr></tbody>\n            </table>\n    \n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope连动视图：</span></h3>\n            <table class=\"table table-bordered\">\n                <tbody class=\"tbodyContent\" data-ng-bind-html=\"item.view\">\n                </tbody>\n            </table>\n        </div>\n        <div class=\"contentHtml\" data-ng-bind-html=\"item.html\"></div>\n    </div>";
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./index.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.html"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, scmsmodules, html, css) {
+    return function (app, elem, attrs, scope) {
+        var directiveObj = scmsmodules.default || scmsmodules;
+        var objKey;
+        for (objKey in directiveObj) {
+            directiveObj[objKey](app, elem, attrs, scope);
+        }
+        app.directive('componentViewDirective', [function () {
+            return {
+                template: html,
+                restrict: 'EA',
+                replace: true,
+                scope: {
+                    currItem: '=' //@scope currentItme
+                },
+                link: function link($scope, $element, $attrs) {},
+
+                controller: function controller($scope, $element, $attrs, $cookies, $timeout, $sce, $compile) {
+                    ///////
+                    $scope.data = [];
+                    var preScope;
+
+                    var parseData = function parseData() {
+                        var item = Object.assign({}, $scope.currItem);
+                        item.icon = '';
+                        item.htmlCode = item.html;
+                        item.html = $sce.trustAsHtml(item.html);
+                        item.view = '';
+                        angular.forEach(item.scope, function (scope) {
+                            item.view += '<tr><td><span style="white-space:nowrap">' + scope.key + '</span></td><td object-to-view-directive key-model="' + scope.key + '" data-scope-type="' + scope.scopeType + '" data-type="' + scope.type + '" data-key="' + scope.key + '" data-example-value="' + (scope.exampleValue || scope.parentScopeValue || '') + '" data-disabled="' + (scope.isDisabled || '') + '"></td></tr>';
+                        });
+                        item.view = $sce.trustAsHtml(item.view);
+                        $scope.item = item;
+
+                        $scope.$watch('item', function (newValue, oldValue) {
+                            if (newValue) {
+                                if (oldValue) {
+                                    angular.forEach(oldValue.scope, function (item) {
+                                        if ($scope[item.key]) {
+                                            delete $scope[item.key];
+                                        }
+                                    });
+                                }
+                                preScope = newValue.scope;
+                                angular.forEach(newValue.scope, function (item) {
+                                    item.exampleValue = item.exampleValue || item.parentScopeValue || '';
+                                    if (item.exampleValue || item.hasOwnProperty('exampleValue')) {
+                                        if (item.type === 'callback') {
+                                            $scope[item.key] = function () {
+                                                eval(item.exampleValue);
+                                            };
+                                        }
+                                        if (item.type === 'function' && item.parentScopeValue) {
+                                            $scope[item.key] = function () {
+
+                                                var value = item.exampleValue.replace(/^\s*function\(\)\s*{/, '');
+                                                value = value.replace(/\}\s*\;*$/, '');
+                                                eval(value);
+                                            };
+                                        } else {
+                                            $scope[item.key] = item.exampleValue;
+                                        }
+                                    }
+                                });
+
+                                $compile($('.tbodyContent').contents())($scope);
+                                $compile($('.contentHtml').contents())($scope);
+                            }
+                        });
+                    };
+
+                    $scope.$watch('currItem', function (newValue, oldValue) {
+                        if (newValue) {
+                            angular.forEach(preScope, function (item) {
+                                delete $scope[item.key];
+                            });
+                            $('.contentHtml').html('');
+                            $compile($('.contentHtml').contents())($scope);
+                            parseData();
+                        }
+                    });
+                }
+            };
+        }]);
+    };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.css":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div ng-controller=\"scmsDirectiveCtrl\">\n    <div component-view-directive=\"\" curr-item=\"currItem\" ng-if=\"currItem.type === 'directive'\"></div>\n</div>";
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+var _demo = __webpack_require__("./demo/index.js");
+
+var _demo2 = _interopRequireDefault(_demo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/ngHtmlContainer/ngHtmlContainer.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirectiveCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ngHtmlContainer, componentDirective, objectToViewDirective, ctrl, css, html) {
+  return function (app, elem, attrs, scope) {
+    ngHtmlContainer(app, elem, attrs, scope);
+    componentDirective(app, elem, attrs, scope);
+    objectToViewDirective(app, elem, attrs, scope);
+    ctrl(app, elem, attrs, scope, _demo2.default);
+    elem.append(html);
+  };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirectiveCtrl.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+    return function (app, elem, attrs, scope, demoJson) {
+        app.controller('scmsDirectiveCtrl', ['$scope', '$cookies', '$location', '$state', 'G', '$timeout', '$rootScope', '$sce', '$http', '$compile', function ($scope, $cookies, $location, $state, G, $timeout, $rootScope, $sce, $http, $compile) {
+            //get navs
+            $scope.navs = [];
+            var parentNav = {};
+            angular.forEach(demoJson, function (item, index) {
+                if (item.type !== 'directive') {
+                    return;
+                }
+                $scope.currItem = $scope.currItem || item;
+                if (item.parentTitle) {
+                    parentNav[item.parentTitle] = parentNav[item.parentTitle] || {};
+                    parentNav[item.parentTitle].children = parentNav[item.parentTitle].children || [];
+                    parentNav[item.parentTitle].children.push({
+                        name: item.title,
+                        item: item,
+                        href: 'javascript:void(0);'
+                    });
+
+                    parentNav[item.parentTitle].data = {
+                        icon: 'fa fa-cog',
+                        name: item.parentTitle,
+                        item: '',
+                        href: '',
+                        children: parentNav[item.parentTitle].children
+                    };
+                    parentNav[item.parentTitle].index = parentNav[item.parentTitle].index || index;
+                } else {
+                    $scope.navs.push({
+                        icon: 'fa fa-cog',
+                        name: item.title,
+                        item: item,
+                        href: 'javascript:void(0);'
+                    });
+                }
+            });
+
+            var key;
+            for (key in parentNav) {
+                var index = parentNav[key].index;
+                $scope.navs.splice(index, 0, parentNav[key].data);
+            }
+            $rootScope.navs = [{
+                name: 'Scms Directives',
+                children: $scope.navs
+            }];
+
+            $rootScope.$watch('currNavItem', function (newValue) {
+                if (newValue) {
+                    if (newValue.type === 'directive') {
+                        $scope.currItem = {};
+                        $timeout(function () {
+                            $scope.currItem = newValue;
+                        });
+                    } else {
+                        $scope.currItem = newValue;
+                    }
+                }
+            });
+        }]);
+    };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.css":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div ng-controller=\"scmsPageCtrl\">\n    <div class=\"error-msg-a\">正在构建中...敬请期待</div>\n</div>";
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+var _demo = __webpack_require__("./demo/index.js");
+
+var _demo2 = _interopRequireDefault(_demo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPageCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
+  return function (app, elem, attrs, scope) {
+    ctrl(app, elem, attrs, scope, _demo2.default);
+    elem.append(html);
+  };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsPage/scmsPageCtrl.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+    return function (app, elem, attrs, scope, demoJson) {
+        app.controller('scmsPageCtrl', ['$scope', '$cookies', '$location', '$state', 'G', '$timeout', '$rootScope', '$sce', '$http', '$compile', function ($scope, $cookies, $location, $state, G, $timeout, $rootScope, $sce, $http, $compile) {
+            $rootScope.navs = [{
+                name: 'Scms Pages',
+                children: []
+            }];
+        }]);
+    };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.css":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"derective-module\">\n        \n        <div id=\"contentSidebar\">\n            <h2>指令名称：{{item.name}} </h2>\n            <h4>{{item.date}} <i>作者-{{item.author}}</i><i ng-if=\"item.lastBy\">；修改-{{item.lastBy}}</i></h4>\n            <h3 ng-show=\"item.description\"><span>功能描述：</span>{{item.description}}</h3>\n            <h3><span>外部JS依赖：</span>{{item.deps[0]}}</h3>\n            <h3><span>外部HTML插入：</span><pre class=\"code\" ng-bind=\"item.htmlCode\"></pre></h3>\n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.scope && item.scope.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>继承</th>\n                        <th>值类型</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.scope\">\n                        <td><span style=\"white-space:nowrap\">{{scope.key}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.scopeType || '='}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.type}}</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n            <h3 ng-show=\"item.attrs && item.attrs.length\"><span>attrs属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.attrs && item.attrs.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>值类型</th>\n                        <th>默认值</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.attrs\">\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.key\"></span></td>\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.type\"></span></td>\n                        <td>{{scope.defaultValue}}<span ng-if=\"!scope.defaultValue\">-</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n    \n            <h3 ng-show=\"item.api && item.api.length\"><span>JS内部api依赖：</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.api && item.api.length\">\n                <tbody>\n                    <tr ng-repeat=\"scope in item.api\">\n                        <td>{{scope}}</td>\n                    </tr><tr>\n                </tr></tbody>\n            </table>\n    \n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope连动视图：</span></h3>\n            <table class=\"table table-bordered\">\n                <tbody class=\"tbodyContent\" data-ng-bind-html=\"item.view\">\n                </tbody>\n            </table>\n        </div>\n        <div class=\"contentHtml\" data-ng-bind-html=\"item.html\"></div>\n    </div>";
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./index.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.html"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, scmsmodules, html, css) {
+    return function (app, elem, attrs, scope) {
+        var directiveObj = scmsmodules.default || scmsmodules;
+        var objKey;
+        for (objKey in directiveObj) {
+            directiveObj[objKey](app, elem, attrs, scope);
+        }
+        app.directive('componentViewDirective', [function () {
+            return {
+                template: html,
+                restrict: 'EA',
+                replace: true,
+                scope: {
+                    currItem: '=' //@scope currentItme
+                },
+                link: function link($scope, $element, $attrs) {},
+
+                controller: function controller($scope, $element, $attrs, $cookies, $timeout, $sce, $compile) {
+                    ///////
+                    $scope.data = [];
+                    var preScope;
+
+                    var parseData = function parseData() {
+                        var item = Object.assign({}, $scope.currItem);
+                        item.icon = '';
+                        item.htmlCode = item.html;
+                        item.html = $sce.trustAsHtml(item.html);
+                        item.view = '';
+                        angular.forEach(item.scope, function (scope) {
+                            item.view += '<tr><td><span style="white-space:nowrap">' + scope.key + '</span></td><td object-to-view-directive key-model="' + scope.key + '" data-scope-type="' + scope.scopeType + '" data-type="' + scope.type + '" data-key="' + scope.key + '" data-example-value="' + (scope.exampleValue || scope.parentScopeValue || '') + '" data-disabled="' + (scope.isDisabled || '') + '"></td></tr>';
+                        });
+                        item.view = $sce.trustAsHtml(item.view);
+                        $scope.item = item;
+
+                        $scope.$watch('item', function (newValue, oldValue) {
+                            if (newValue) {
+                                if (oldValue) {
+                                    angular.forEach(oldValue.scope, function (item) {
+                                        if ($scope[item.key]) {
+                                            delete $scope[item.key];
+                                        }
+                                    });
+                                }
+                                preScope = newValue.scope;
+                                angular.forEach(newValue.scope, function (item) {
+                                    item.exampleValue = item.exampleValue || item.parentScopeValue || '';
+                                    if (item.exampleValue || item.hasOwnProperty('exampleValue')) {
+                                        if (item.type === 'callback') {
+                                            $scope[item.key] = function () {
+                                                eval(item.exampleValue);
+                                            };
+                                        }
+                                        if (item.type === 'function' && item.parentScopeValue) {
+                                            $scope[item.key] = function () {
+
+                                                var value = item.exampleValue.replace(/^\s*function\(\)\s*{/, '');
+                                                value = value.replace(/\}\s*\;*$/, '');
+                                                eval(value);
+                                            };
+                                        } else {
+                                            $scope[item.key] = item.exampleValue;
+                                        }
+                                    }
+                                });
+
+                                $compile($('.tbodyContent').contents())($scope);
+                                $compile($('.contentHtml').contents())($scope);
+                            }
+                        });
+                    };
+
+                    $scope.$watch('currItem', function (newValue, oldValue) {
+                        if (newValue) {
+                            angular.forEach(preScope, function (item) {
+                                delete $scope[item.key];
+                            });
+                            $('.contentHtml').html('');
+                            $compile($('.contentHtml').contents())($scope);
+                            parseData();
+                        }
+                    });
+                }
+            };
+        }]);
+    };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.css":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div ng-controller=\"scmsUiCtrl\">\n    <div scms-ui-directive=\"\" curr-item=\"currItem\" ng-if=\"currItem.type !== 'directive'\"></div>\n    <div component-view-directive=\"\" curr-item=\"currItem\" ng-if=\"currItem.type === 'directive'\"></div>\n</div>";
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+var _demo = __webpack_require__("./demo/index.js");
+
+var _demo2 = _interopRequireDefault(_demo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/ngHtmlContainer/ngHtmlContainer.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/scmsUiCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ngHtmlContainer, scmsUiDirective, componentDirective, objectToViewDirective, ctrl, css, html) {
+  return function (app, elem, attrs, scope) {
+    ngHtmlContainer(app, elem, attrs, scope);
+    scmsUiDirective(app, elem, attrs, scope);
+    componentDirective(app, elem, attrs, scope);
+    objectToViewDirective(app, elem, attrs, scope);
+    ctrl(app, elem, attrs, scope, _demo2.default);
+    elem.append(html);
+  };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/scmsUiCtrl.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+    return function (app, elem, attrs, scope, demoJson) {
+        app.controller('scmsUiCtrl', ['$scope', '$cookies', '$location', '$state', 'G', '$timeout', '$rootScope', '$sce', '$http', '$compile', function ($scope, $cookies, $location, $state, G, $timeout, $rootScope, $sce, $http, $compile) {
+
+            //get navs
+            $scope.navs = [];
+            var parentNav = {};
+            angular.forEach(demoJson, function (item, index) {
+
+                $scope.currItem = $scope.currItem || item;
+                if (item.parentTitle) {
+                    parentNav[item.parentTitle] = parentNav[item.parentTitle] || {};
+                    parentNav[item.parentTitle].children = parentNav[item.parentTitle].children || [];
+                    parentNav[item.parentTitle].children.push({
+                        name: item.title,
+                        item: item,
+                        href: 'javascript:void(0);'
+                    });
+
+                    parentNav[item.parentTitle].data = {
+                        icon: item.type === 'directive' ? 'fa fa-cog' : 'fa fa-cog',
+                        name: item.parentTitle,
+                        item: '',
+                        href: '',
+                        children: parentNav[item.parentTitle].children
+                    };
+                    parentNav[item.parentTitle].index = parentNav[item.parentTitle].index || index;
+                } else {
+                    $scope.navs.push({
+                        icon: item.type === 'directive' ? 'fa fa-cog' : 'fa fa-cog',
+                        name: item.title,
+                        item: item,
+                        href: 'javascript:void(0);'
+                    });
+                }
+            });
+
+            var key;
+            for (key in parentNav) {
+                var index = parentNav[key].index;
+                $scope.navs.splice(index, 0, parentNav[key].data);
+            }
+            $rootScope.navs = [{
+                name: 'Scms Modules',
+                children: $scope.navs
+            }];
+
+            $rootScope.$watch('currNavItem', function (newValue) {
+                if (newValue) {
+                    if (newValue.type === 'directive') {
+                        $scope.currItem = {};
+                        $timeout(function () {
+                            $scope.currItem = newValue;
+                        });
+                    } else {
+                        $scope.currItem = newValue;
+                    }
+                }
+            });
+        }]);
+    };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"box contentPadding\" name=\"{{currItem.title}}\" style=\"{{currItem.style}}\" id=\"{{currItem.boxId || ''}}\">\n    <div class=\"title-square\">{{currItem.title}}</div>\n    <p>{{currItem.depict}}</p>\n    <div class=\"mt20\" ng-repeat=\"itemH in currItem.html\">\n        <div class=\"mt10\" ng-html-container=\"\" html-data=\"{{itemH}}\"></div>\n        <pre class=\"code mt15\" ng-if=\"currItem.isCode !== false\">{{itemH}}</pre>          \n    </div>\n    <div ng-if=\"currItem.buttons\" class=\"pt20\">\n        <div ng-repeat=\"itemBtn in currItem.buttons\">\n            <button class=\"btn btn-default\" ng-bind=\"itemBtn.value\" ng-click=\"eval(itemBtn.callback)\"></button>\n            <pre class=\"code\" ng-if=\"item.isCode !== false\">{{itemBtn.callback}}</pre>  \n        </div>\n    </div>\n</div>";
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html) {
+    return function (app, elem, attrs, scope) {
+        app.directive('scmsUiDirective', [function () {
+            return {
+                template: html,
+                restrict: 'EA',
+                replace: true,
+                scope: {
+                    currItem: '=' //@scope currentItme
+                },
+                link: function postLink($scope, $element, $attrs) {},
+
+                controller: function controller($scope, $element, $attrs, $cookies, $timeout) {}
+            };
+        }]);
+    };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/standard/standard.css":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/standard/standard.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div ng-controller=\"standardCtrl\">\n    <div class=\"error-msg-a\">正在构建中...敬请期待</div>\n</div>";
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/standard/standard.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+var _demo = __webpack_require__("./demo/index.js");
+
+var _demo2 = _interopRequireDefault(_demo);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/standard/standardCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/standard/standard.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/standard/standard.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
+  return function (app, elem, attrs, scope) {
+    ctrl(app, elem, attrs, scope, _demo2.default);
+    elem.append(html);
+  };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ "./node_modules/._scmsmodules-runner@0.0.2@scmsmodules-runner/app/viewModules/standard/standardCtrl.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+    return function (app, elem, attrs, scope, demoJson) {
+        app.controller('standardCtrl', ['$scope', '$cookies', '$location', '$state', 'G', '$timeout', '$rootScope', '$sce', '$http', '$compile', function ($scope, $cookies, $location, $state, G, $timeout, $rootScope, $sce, $http, $compile) {
+            $rootScope.navs = [{
+                name: 'Design Standard',
+                children: []
+            }];
+        }]);
+    };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ "./scmsUi/js/alert.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/*alert*/
+var alertTimeValue, alertHideTimeValue;
+$.alert = function (msg, options) {
+	options = options || {};
+	var $body = options.$container || $('body');
+	if (options.$container) {
+		options.$container.css({
+			position: 'relative'
+		});
+	}
+	options.type = options.type || 'error';
+	options.isOver = options.type === 'confirm' ? true : options.isOver || false;
+	var $el = $body.children('.elayerout-alert'),
+	    $title,
+	    $content,
+	    $msg,
+	    $button,
+	    $over,
+	    $errMsg;
+	var timestamp = options.timestamp || 3000;
+	if (!$el.length) {
+		$el = $('<div class="elayerout-alert" style="display:none;"></div>');
+
+		$title = $('<div class="tx_title elayerout-alert-title" style="display:none;"><span></span><a href="javascript:void(0);" class="tx_cansel"></a></div>');
+		$content = $('<div class="tx_content elayerout-alert-content"><i class="fa"></i></div>');
+		$msg = $('<div class="tx_msg elayerout-alert-msg">提示语内容</div>');
+		$errMsg = $('<div class="tx_err_msg elayerout-alert-err-msg">出错提示内容</div>');
+		$button = $('<div class="modal-footer "><a href="javascript:void(0);" class="btn btn-default tx_cansel">取消</a><a href="javascript:void(0);" class="btn btn-success tx_submit">确认</a></div>');
+		$over = $('<div class="elayerout-alert-over" style="display:none;"></div>');
+		$el.append($title);
+		$el.append($content);
+		$content.append($msg);
+		$content.append($errMsg);
+		$el.append($button);
+		$body.append($over);
+		$body.append($el);
+	} else {
+		$title = $el.find('.tx_title');
+		$content = $el.find('.tx_content');
+		$msg = $el.find('.tx_msg');
+		$errMsg = $el.find('.tx_err_msg');
+		$over = $body.children('.elayerout-alert-over');
+		$over.css('display', 'none');
+	}
+	$errMsg.hide();
+	$el.unbind();
+	$el.delegate('.tx_cansel', 'click', function () {
+		$el.removeClass('elayerout-alert-show');
+		$over.removeClass('elayerout-alert-over-show');
+		alertHideTimeValue = setTimeout(function () {
+			$el.css('display', 'none');
+			$over.css('display', 'none');
+		}, 500);
+	});
+
+	function close() {
+		$el.removeClass('elayerout-alert-show');
+		$over.removeClass('elayerout-alert-over-show');
+		alertHideTimeValue = setTimeout(function () {
+			$el.css('display', 'none');
+			$over.css('display', 'none');
+		}, 500);
+	}
+
+	$el.delegate('.tx_submit', 'click', function () {
+		if (options.callbackManual && typeof options.callbackManual === 'function') {
+			options.callbackManual({
+				msgFun: function msgFun(msg) {
+					if (msg) {
+						$errMsg.html(msg).show();
+					}
+				},
+				closeFun: function closeFun() {
+					close();
+				}
+			});
+		} else {
+			if (options.callback && typeof options.callback === 'function') {
+				options.callback();
+			}
+			close();
+		}
+	});
+
+	$el.removeClass('success');
+	$el.removeClass('error');
+	$el.removeClass('confirm');
+	$el.addClass(options.type);
+	$msg.html(msg);
+	$title.css('display', 'none');
+	if (options.title) {
+		$title.find('span').text(options.title);
+		$title.css('display', '');
+	}
+
+	$el.css('display', '');
+	if (options.isOver) {
+		$over.css('display', '');
+	}
+	setTimeout(function () {
+		$el.addClass('elayerout-alert-show');
+		if (options.isOver) {
+			$over.addClass('elayerout-alert-over-show');
+		}
+	}, 0);
+
+	if (alertTimeValue) {
+		clearTimeout(alertTimeValue);
+		alertTimeValue = null;
+	}
+	if (alertHideTimeValue) {
+		clearTimeout(alertHideTimeValue);
+		alertHideTimeValue = null;
+	}
+	if (options.type === 'success' || options.type === 'error') {
+		alertTimeValue = setTimeout(function () {
+			$el.removeClass('elayerout-alert-show');
+			$over.removeClass('elayerout-alert-over-show');
+		}, timestamp);
+		alertHideTimeValue = setTimeout(function () {
+			$el.css('display', 'none');
+			$over.css('display', 'none');
+		}, timestamp + 500);
+	}
+};
+
+/*loading*/
+var loadingTimeoutValue = {};
+$.loading = function (isShow, options) {
+	options = options || {};
+	var $container = options.$container || $('.elayout-loading-container');
+	if ($container && $container.length) {
+		$container.css({
+			position: 'relative'
+		});
+	}
+
+	$container = $container && $container.length ? $container : $('body');
+	var $el = $container.children('.elayout-loading');
+	var $over = $container.children('.elayout-loading-over');
+	$container = $container.length ? $container : $('body');
+	if (!$el.length) {
+		$over = $('<div class="elayout-loading-over" style="display:none;"></div>');
+		var $el = $('<div class="elayout-loading" style="display:none;">\
+		        <span class="icon">\
+		            <i></i><i></i><i></i><i></i>\
+		        </span>\
+		        <div class="text">Loading...</div>\
+		    </div>');
+		$container.append($over);
+		$container.append($el);
+	}
+
+	var name = $container.attr('id') + '_' + $container.attr('class');
+
+	if (loadingTimeoutValue[name]) {
+		clearTimeout(loadingTimeoutValue[name]);
+		loadingTimeoutValue[name] = null;
+	}
+
+	if (isShow) {
+
+		loadingTimeoutValue[name] = setTimeout(function () {
+			clearTimeout(loadingTimeoutValue[name]);
+			loadingTimeoutValue[name] = null;
+			$el.css({
+				'display': '',
+				'margin-top': $container.scrollTop() + 'px'
+			});
+			$over.css({
+				'display': '',
+				'height': ($container[0].scrollHeight || $container.height()) + 'px'
+			});
+		}, 200);
+	} else {
+		$el.css('display', 'none');
+		$over.css('display', 'none');
+	}
+
+	if (options.isClear) {
+		if (loadingTimeoutValue[name]) {
+			clearTimeout(loadingTimeoutValue[name]);
+			loadingTimeoutValue[name] = null;
+		}
+		$('elayout-loading').css('display', 'none');
+		$('elayout-loading-over').css('display', 'none');
+	}
+};
+
+/***/ }),
+
 /***/ "./scmsUi/js/scmsUi.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-//import './disabledClick.js';
 
+__webpack_require__("./scmsUi/js/alert.js");
 
 /***/ }),
 

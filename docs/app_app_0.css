@@ -9,6 +9,7 @@
 	position: fixed;
 	left: 0px;
 	top:100px;
+	
 }
 .css-ctrl-list a{
 	color: #666;
@@ -20,6 +21,9 @@
 }
 .css-ctrl-list a:hover{
 	text-decoration: none;
+}
+.code{
+	padding:10px;
 }
 @media (max-width: 767px) {
 	.css-ctrl-list{
@@ -2684,6 +2688,147 @@
 .derective-module #toolsPannel .error{
     border:1px solid #ff0000;
     color:#ff0000;
+}
+@charset "utf-8";
+.derective-module{
+    height: 100%;
+    background: #fff;
+    position: absolute;
+    width: 100%;
+}
+.derective-module #sideBar{
+    float: left;
+    height:100%;
+    background: #f1f1f1;
+    width: 200px;
+    border-right:1px solid #ddd;
+    position: fixed;
+    left: 0;
+}
+.derective-module #sideBar li a{
+    color:#666 ;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.derective-module #sideBar ul{
+    padding:10px 0 0 0;
+}
+.derective-module #sideBar ul, #sideBar li{
+    display: block;
+}
+.derective-module #sideBar li a:hover{
+    background: #ddd;
+}
+.derective-module #sideBar li a.active{
+    background: #ddd;
+    color:#d54326;
+}
+.derective-module .contentHtml, #contentSidebar{
+    margin-left:500px;
+    padding:15px;
+}
+.derective-module #contentSidebar{
+    width:500px;
+    float: left;
+    margin-left:0;
+    height:100%;
+    min-height: auto;
+    border-right:1px solid #ddd;
+    position: absolute;
+    left: 0;
+    overflow: auto;
+    padding-bottom: 50px;
+}
+.derective-module #contentSidebar h2{
+    font-size: 14px;
+    font-weight: bold;
+}
+.derective-module #contentSidebar h4{
+    font-size: 12px;
+    color:#777;
+}
+.derective-module #contentSidebar h4 i{
+    float: right;
+    font-weight: normal;
+    font-size: 12px;
+}
+.derective-module #contentSidebar h3{
+    font-size: 14px;
+    border-top:1px dotted #ddd;
+    padding:5px 0;
+    line-height: 22px;
+    margin: 0;
+}
+.derective-module #contentSidebar h3 span,
+.derective-module #contentSidebar h4 span{
+    color:#1a446f;
+}
+.derective-module #contentSidebar table tbody tr th{
+    background: #f1f1f1;
+}
+.derective-module #toolsPannel{
+    background: #f1f1f1;
+    border-bottom: 1px solid #ddd;
+    padding:15px 15px 0 15px;
+    margin: -15px -15px 15px -15px;
+
+}
+.derective-module #toolsPannel .error{
+    border:1px solid #ff0000;
+    color:#ff0000;
+}
+@charset "utf-8";
+.css-ctrl-list{
+	position: fixed;
+	left: 0px;
+	top:100px;
+	
+}
+.css-ctrl-list a{
+	color: #666;
+	display: block;
+	padding:10px 25px;
+}
+.css-ctrl-list a i{
+	margin-right: 15px;
+}
+.css-ctrl-list a:hover{
+	text-decoration: none;
+}
+.code{
+	padding:10px;
+}
+@media (max-width: 767px) {
+	.css-ctrl-list{
+		display: none;
+	}
+}
+@charset "utf-8";
+.css-ctrl-list{
+	position: fixed;
+	left: 0px;
+	top:100px;
+	
+}
+.css-ctrl-list a{
+	color: #666;
+	display: block;
+	padding:10px 25px;
+}
+.css-ctrl-list a i{
+	margin-right: 15px;
+}
+.css-ctrl-list a:hover{
+	text-decoration: none;
+}
+.code{
+	padding:10px;
+}
+@media (max-width: 767px) {
+	.css-ctrl-list{
+		display: none;
+	}
 }
 @charset "utf-8";
 .css-ctrl-list{
