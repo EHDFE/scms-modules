@@ -32,47 +32,42 @@ define([
                     //切换路由时，更新菜单
                     $scope.navs = $scope.navs || [];
 
+                    var removeChecked = function(data) {
+                        angular.forEach(data, function(item) {
+                            if(!item.children) {
+                                item.isChecked = false;
+                            }
+                            else {
+                                removeChecked(item.children);
+                            }
+                        });
+                    }
+
                     var $preActiveEl;
                     $scope.checked = function($event, item) {
-                        item.isChecked = !item.isChecked;
-                        /*
+                        if(!item.children) {
+                            removeChecked($scope.navs);
+                        }
+                        item.isChecked = true;
+                    };
+
+                    //下级目录收展
+                    $scope.collapse = function($event, item) {
+                        if(!item.children) {
+                            return;
+                        }
                         var $el = $($event.currentTarget);
                         var $parent = $el.parent();
-                        var className;
-                        if(children && children.length) {
-                            var className = 'active';
-                        }
-                        else {
-                            className = 'activeB';
-                            if($preActiveEl) {
-                                $preActiveEl.removeClass(className);
-                            }
-                            $preActiveEl = $parent;
-                        }
-                        if($parent.hasClass(className)) {
-                            $parent.removeClass(className);
-                        }
-                        else {
-                            $parent.addClass(className);
-                        }
-
-                        var $preEl = $el.find('[aria-expanded="true"]');
-                        if($preEl && $preEl.length) {
-                            $preEl.collapse('hide');
-                            $preEl.parent().removeClass('active');
-                        }
-                        
                         $el.next().collapse('toggle');
-                        if($el.next().attr('aria-expanded') === 'true') {
-                            $el.parent().addClass('active');
+                        if($parent.hasClass('active')) {
+                            $parent.removeClass('active')
                         }
                         else {
-                            $el.parent().removeClass('active');
-                        }*/
-                    }
+                            $parent.addClass('active')
+                        }
+                    }                    
                     
-                    
-
+                    //目录收展
                     $scope.toggleLock = function() {
                         var isShrink = $element.hasClass('shrink');
                         var $content = $('#content');
