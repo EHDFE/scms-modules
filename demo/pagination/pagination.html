@@ -1,5 +1,38 @@
-<div class="btn-group">
-    <button type="button" class="btn btn-default" ng-click="demoButtonGroup=0;" ng-class="{active:!demoButtonGroup}">全部</button>
-    <button type="button" class="btn btn-default" ng-click="demoButtonGroup=1" ng-class="{active:demoButtonGroup == 1}">已授信</button>
-    <button type="button" class="btn btn-default" ng-click="demoButtonGroup=2" ng-class="{active:demoButtonGroup == 2}">已冻结</button>
-</div>
+<!--<div class="pagination-box ng-hide form-inline" ng-show="pages && pages.length">
+    <div class="fr">
+        <div class="fl">
+            <label>共{{totalCount}}条</label>
+        </div>
+        <ul class="pagination fl">
+            <li ng-class="{disabled: currentPage == 1}" ng-click="goPage(currentPage - 1);">
+                <a href="javascript:void(0)"><i>«</i></a>
+            </li>
+            <li ng-show="isShowBeEllipsis">
+                <a href="javascript:void(0);" ng-click="goPage(1);">1</a>
+            </li>
+            <li ng-show="isShowBeEllipsis" class="defaultA"><a href="javascript:void(0);">...</a></li>
+            <li ng-repeat="item in pages" ng-class="{active: item == currentPage}" >
+                <a href="javascript:void(0)" ng-bind="item" ng-click="goPage(item);"></a>
+            </li>
+            <li ng-show="isShowAfEllipsis" class="defaultA"><a href="javascript:void(0);">...</a></li>
+            <li ng-show="isShowAfEllipsis">
+                    <a href="javascript:void(0);" ng-click="goPage(maxPage);">{{maxPage}}</a>
+                </li>
+            <li ng-class="{disabled: currentPage == maxPage}" ng-click="goPage(currentPage + 1);">
+                <a href="javascript:void(0)"><i>»</i></a>
+            </li>
+        </ul>
+        
+        <div class="fr form-inline ml15">
+            <select class="form-control" ng-show="!hidePageSizeChange" ng-model="pageSize" ng-change="change()" ng-options="pageSizeListName[item] for item in pageSizeList">
+                </select>
+            <label>跳到</label>
+            <div class="input-group input-bar">
+                <input type="text" class="form-control" ng-model="number"> 
+                <span class="input-group-btn">
+                    <button class="btn" ng-click="goPage(number);">GO</button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>-->
