@@ -11,6 +11,7 @@ import ngHtmlContainer from "./src/ngHtmlContainer/ngHtmlContainer";
 import switchDirective from "./src/switch/switchDirective";
 
 import paginationDirective from "./src/pagination/paginationDirective";
+import paginationMiniDirective from "./src/paginationMini/paginationMiniDirective";
 import crumbDirective from "./src/crumb/crumbDirective";
 
 import ngCodeDirective from "./src/ngCode/ngCodeDirective";
@@ -62,6 +63,7 @@ export default {
   'multiselect/multiselectDirective': multiselectDirective,
   //'noPermission/noPermissionDirective': noPermissionDirective,
   'pagination/paginationDirective': paginationDirective,
+  'paginationMini/paginationMiniDirective': paginationMiniDirective,
   'qrcode/qrcodeDirective': qrcodeDirective,
   'searchDropdown/searchDropdownDirective': searchDropdownDirective,
   'starRating/starRatingDirective': starRatingDirective,

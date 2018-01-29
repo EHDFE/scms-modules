@@ -1,0 +1,26 @@
+<div class=" ng-hide paginationMini" ng-show="maxPage>1">
+    <ul class="fl">
+        <li class="arrow" ng-class="{disabled: currentPage == 1}" ng-click="goPage(currentPage - 1);">
+            <a href="javascript:void(0)"><i>«</i></a>
+        </li>
+        <li ng-class="{active: currentPage == 1}" ng-click="goPage(1);">
+            <a href="javascript:void(0)" >1</a>
+        </li>
+        <li ng-show="isShowPage2" style="display:none;"><a href="javascript:void(0)" class="tx_gotoPage">2</a></li>
+        <li ng-show="isShowBeEllipsis" class="">...</li>
+        <li ng-repeat="item in pages" ng-class="{active: item == currentPage}" >
+            <a href="javascript:void(0)" ng-bind="item" ng-click="goPage(item);"></a>
+        </li>
+        <li ng-show="isShowAfEllipsis" class="">...</li>
+        <li ng-class="{active: currentPage == maxPage}" ng-click="goPage(maxPage);">
+            <a href="javascript:void(0)">{{maxPage}}</a>
+        </li>
+        <li class="arrow" ng-class="{disabled: currentPage == maxPage}" ng-click="goPage(currentPage + 1);">
+            <a href="javascript:void(0)"><i>»</i></a>
+        </li>
+    </ul>
+    <div class="fastPageTurning tx_fastPageTurning fl" ng-show="maxPage > 5">
+        <input type="text" class="EUi-input" ng-model="number">
+        <a class="numberSubmit" href="javascript:void(0)" ng-click="goPage(number);">GO</a>
+    </div>
+</div>

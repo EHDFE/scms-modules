@@ -1,8 +1,7 @@
+
 <div class="pagination-box ng-hide form-inline" ng-show="pages && pages.length">
     <div class="fr">
-        <div class="fl">
-            <label>共{{totalCount}}条</label>
-        </div>
+        <span class="fl mr10 visible-large" style="padding-top:8px;">共{{totalCount}}条</span>
         <ul class="pagination fl">
             <li ng-class="{disabled: currentPage == 1}" ng-click="goPage(currentPage - 1);">
                 <a href="javascript:void(0)"><i>«</i></a>
@@ -22,16 +21,13 @@
                 <a href="javascript:void(0)"><i>»</i></a>
             </li>
         </ul>
-        
-        <div class="fr form-inline ml15">
-            <select class="form-control" ng-show="!hidePageSizeChange" ng-model="pageSize" ng-change="change()" ng-options="pageSizeListName[item] for item in pageSizeList">
+        <select class="fl" ng-show="!hidePageSizeChange" ng-model="pageSize" ng-change="change()" ng-options="pageSizeListName[item] for item in pageSizeList">
                 </select>
-            <label>跳到</label>
-            <div class="input-group input-bar">
-                <input type="text" class="form-control" ng-model="number"> 
-                <span class="input-group-btn">
-                    <button class="btn" ng-click="goPage(number);">GO</button>
-                </span>
+        <div class="fl ml15">
+            <div class="pagination-skip">
+                <span>跳至</span>
+                <input type="text" class="EUi-input" ng-model="number"> 
+                <button class="btn" ng-click="goPage(number);">前往</button>
             </div>
         </div>
     </div>

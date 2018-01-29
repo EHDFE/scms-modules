@@ -37,9 +37,13 @@ demoData.push(table);
 import pagination from "./pagination/index.js";
 demoData.push(pagination);
 
+import paginationMini from "./paginationMini/index.js";
+demoData.push(paginationMini);
+
 import crumb from "./crumb/index.js";
 demoData.push(crumb);
 
-
+import card from "./card/index.js";
+demoData.push(card);
 
 export default demoData

@@ -1,0 +1,39 @@
+.card-box{
+    width:100%;
+    background: #fff;
+    font-size: 14px;
+    color: #6E7382;
+}
+.card-box::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.card-box .card {
+    float: left;
+    position: relative;
+    padding: 15px 20px 15px 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+.card-box .card::after {
+    content: '';
+    display: block;
+    height: 14px;
+    width: 1px;
+    border: 1px solid #DADDE4;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -7px;
+}
+.card-box .card:last-child::after {
+    width: 0;
+    border: 0;
+}
+.card-box .color-text-normal{
+    color: #1E283C;
+}
+.card-box .font-weight-600{
+    font-weight: 600;
+}
