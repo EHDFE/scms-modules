@@ -1,12 +1,12 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
-
+import 'bootstrap/dist/css/bootstrap.css';
 import './libs/base.less';
 import './libs/font-awesome/css/font-awesome.css';
-
-
 import scmsUi from "./scmsUi/less/scmsUi.less";
+
+import 'bootstrap/dist/js/bootstrap.js';
+import angular from './libs/angular/angular.js';
 import scmsUiJs from "./scmsUi/js/scmsUi.js";
+
 import ngHtmlContainer from "./src/ngHtmlContainer/ngHtmlContainer";
 import switchDirective from "./src/switch/switchDirective";
 
@@ -22,7 +22,6 @@ import citysSelectMultipleDirective from "./src/citysSelectMultiple/citysSelectM
 import datePickerDirective from "./src/datePicker/datePickerDirective";
 import errorNoDataDirective from "./src/errorNoData/errorNoDataDirective";
 import exportDirective from "./src/export/exportDirective";
-import fileUploaderDirective from "./src/fileUploader/index";
 import formRadioDirective from "./src/formRadio/formRadio";
 import imageShowDirective from "./src/imageShow/imageShow";
 import kaImageUploadDirective from "./src/kaImageUpload/kaImageUploadDirective";
@@ -38,13 +37,13 @@ import tableDirective from "./src/table/table";
 import timePickerDirective from "./src/timePicker/timePickerDirective";
 import tooltipDirective from "./src/tooltip/tooltip";
 import treeViewDirective from "./src/treeView/treeView";
+import fileUploaderDirective from "./src/fileUploader/index";
 
 export default {
   'ngCode/ngCodeDirective': ngCodeDirective,
   'switch/switchDirective': switchDirective,
 
   'ngHtmlContainer/ngHtmlContainer': ngHtmlContainer,
-  //'allNav/allNavDirective': allNavDirective,
   'cantonSelect/cantonSelectDirective': cantonSelectDirective,
   'changePwdDialog/changePwdDialogDirective': changePwdDialogDirective,
   'chart/chartDirective': chartDirective,

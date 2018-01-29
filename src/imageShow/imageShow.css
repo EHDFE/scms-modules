@@ -9,11 +9,13 @@
     text-align: center;
     display: none;
     transition: .2s;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
 }
-/*.imgUrlBox img{
-    position: absolute;
-}*/
-.imgUrlBox .imgShowClosBtn{
+
+.imgShowClosBtn{
     display: block;
     width:28px;
     height:28px;
@@ -21,6 +23,12 @@
     position: fixed;
     top:30px;
     right:30px;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+    z-index: 99999;
+    display: none;
 }
 .minImg{
     width:100%;
@@ -32,7 +40,51 @@
 .minImgDiv,
 .minImg {
     cursor:pointer;
+    position: relative;
 }
 #imgUrlBoxBG{
     transition: opacity .2s;
+}
+.minImgDiv div{
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: rgba(255,255,255,.8);
+    font-size: 2em;
+    text-align: center;
+    display: none;
+}
+.minImgDiv div span{
+    display: block;
+    width: 40px;
+    height: 26px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left:-20px;
+    margin-top:-13px;
+}
+.minImgDiv:hover div{
+    display: block;
+}
+.imgUrlControl{
+    position: fixed;
+    bottom: 20px;
+    width: 300px;
+    left: 50%;
+    margin-left: -150px;
+    padding: 20px 0;
+    z-index: 99999;
+    text-align: center;
+    display: none;
+    -webkit-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+.imgUrlControl span{
+    cursor:pointer;
 }
