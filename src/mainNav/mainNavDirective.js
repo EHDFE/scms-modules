@@ -33,7 +33,9 @@ define([
                     $scope.navs = $scope.navs || [];
 
                     var $preActiveEl;
-                    $scope.checked = function($event, children) {
+                    $scope.checked = function($event, item) {
+                        item.isChecked = !item.isChecked;
+                        /*
                         var $el = $($event.currentTarget);
                         var $parent = $el.parent();
                         var className;
@@ -66,7 +68,7 @@ define([
                         }
                         else {
                             $el.parent().removeClass('active');
-                        }
+                        }*/
                     }
                     
                     
