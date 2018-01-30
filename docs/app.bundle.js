@@ -35910,44 +35910,40 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
                     //切换路由时，更新菜单
                     $scope.navs = $scope.navs || [];
 
-                    var $preActiveEl;
-                    $scope.checked = function ($event, item) {
-                        item.isChecked = !item.isChecked;
-                        /*
-                        var $el = $($event.currentTarget);
-                        var $parent = $el.parent();
-                        var className;
-                        if(children && children.length) {
-                            var className = 'active';
-                        }
-                        else {
-                            className = 'activeB';
-                            if($preActiveEl) {
-                                $preActiveEl.removeClass(className);
+                    var removeChecked = function removeChecked(data) {
+                        angular.forEach(data, function (item) {
+                            if (!item.children) {
+                                item.isChecked = false;
+                            } else {
+                                removeChecked(item.children);
                             }
-                            $preActiveEl = $parent;
-                        }
-                        if($parent.hasClass(className)) {
-                            $parent.removeClass(className);
-                        }
-                        else {
-                            $parent.addClass(className);
-                        }
-                          var $preEl = $el.find('[aria-expanded="true"]');
-                        if($preEl && $preEl.length) {
-                            $preEl.collapse('hide');
-                            $preEl.parent().removeClass('active');
-                        }
-                        
-                        $el.next().collapse('toggle');
-                        if($el.next().attr('aria-expanded') === 'true') {
-                            $el.parent().addClass('active');
-                        }
-                        else {
-                            $el.parent().removeClass('active');
-                        }*/
+                        });
                     };
 
+                    var $preActiveEl;
+                    $scope.checked = function ($event, item) {
+                        if (!item.children) {
+                            removeChecked($scope.navs);
+                        }
+                        item.isChecked = true;
+                    };
+
+                    //下级目录收展
+                    $scope.collapse = function ($event, item) {
+                        if (!item.children) {
+                            return;
+                        }
+                        var $el = $($event.currentTarget);
+                        var $parent = $el.parent();
+                        $el.next().collapse('toggle');
+                        if ($parent.hasClass('active')) {
+                            $parent.removeClass('active');
+                        } else {
+                            $parent.addClass('active');
+                        }
+                    };
+
+                    //目录收展
                     $scope.toggleLock = function () {
                         var isShrink = $element.hasClass('shrink');
                         var $content = $('#content');
@@ -35971,7 +35967,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 /***/ "./src/mainNav/template.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mainNavBar\">\n    <div id=\"mainNav\" class=\"leftNavTab\">\n        <div class=\"navbar\" role=\"navigation\">\n            <div class=\"navbar-hover\" ng-click=\"hideHover();\"></div>\n            <div class=\"navbar-content\">\n                <ul class=\"nav\" ng-repeat=\"item in navs\">\n                    <li class=\"titleA\">\n                        <span ng-bind=\"item.name\"></span>\n                    </li>\n                    <li ng-repeat=\"itemA in item.children\" ng-class=\"{activeB: (!itemA.children &&  itemA.isChecked), active: (itemA.children &&  itemA.isChecked)}\">\n                        <a ng-href=\"{{itemA.href}}\" ng-click=\"checked($event, itemA);callback(itemA);\">\n                            <i class=\"fa {{itemA.icon || 'fa-flask'}}\"></i>\n                            <span class=\"nav-label\" ng-bind=\"itemA.name\"></span>\n                            <span class=\"fa arrow\" ng-if=\"itemA.children && itemA.children.length\"></span>\n                        </a>\n                        <ul class=\"nav nav-second-level collapse\" id=\"navItemA_{{$parent.$index}}_{{$index}}\" ng-class=\"{in: itemA.isChecked}\" ng-if=\"itemA.children && itemA.children.length\">\n                            <li ng-repeat=\"itemB in itemA.children\" ng-class=\"{activeB: itemB.isChecked}\">\n                                <a class=\"J_menuItem\" ng-href=\"{{itemB.href}}\" ng-click=\"checked($event, itemB);;callback(itemB);\">\n                                    <span ng-bind=\"itemB.name\"></span>\n                                </a>\n                            </li>\n                        </ul>\n                    </li>\n                    <li class=\"line\"></li>\n                </ul>\n            </div>\n        </div>\n    </div>\n    <div class=\"menu-side-lock\" ng-click=\"toggleLock()\" ng-class=\"{'menu-side-lock-close': !isOpen}\">\n        \n    </div>\n</div>";
+module.exports = "<div class=\"mainNavBar\">\n    <div id=\"mainNav\" class=\"leftNavTab\">\n        <div class=\"navbar\" role=\"navigation\">\n            <div class=\"navbar-hover\" ng-click=\"hideHover();\"></div>\n            <div class=\"navbar-content\">\n                <ul class=\"nav\" ng-repeat=\"item in navs\">\n                    <li class=\"titleA\">\n                        <span ng-bind=\"item.name\"></span>\n                    </li>\n                    <li ng-repeat=\"itemA in item.children\" ng-class=\"{activeB: (!itemA.children &&  itemA.isChecked), active: (itemA.children &&  itemA.isChecked)}\">\n                        <a ng-href=\"{{itemA.href}}\" ng-click=\"checked($event, itemA, item.children);collapse($event, itemA);callback(itemA);\">\n                            <i class=\"fa {{itemA.icon || 'fa-flask'}}\"></i>\n                            <span class=\"nav-label\" ng-bind=\"itemA.name\"></span>\n                            <span class=\"fa arrow\" ng-if=\"itemA.children && itemA.children.length\"></span>\n                        </a>\n                        <ul class=\"nav nav-second-level collapse\" ng-class=\"{in: itemA.isChecked}\" id=\"navItemA_{{$parent.$index}}_{{$index}}\" ng-if=\"itemA.children && itemA.children.length\">\n                            <li ng-repeat=\"itemB in itemA.children\" ng-class=\"{activeB: itemB.isChecked}\">\n                                <a class=\"J_menuItem\" ng-href=\"{{itemB.href}}\" ng-click=\"checked($event, itemB, itemA.children);;callback(itemB);\">\n                                    <span ng-bind=\"itemB.name\"></span>\n                                </a>\n                            </li>\n                        </ul>\n                    </li>\n                    <li class=\"line\"></li>\n                </ul>\n            </div>\n        </div>\n    </div>\n    <div class=\"menu-side-lock\" ng-click=\"toggleLock()\" ng-class=\"{'menu-side-lock-close': !isOpen}\">\n        \n    </div>\n</div>";
 
 /***/ }),
 

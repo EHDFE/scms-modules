@@ -1,7 +1,6 @@
 let webpack = require('webpack');
 let path = require('path');
 let ManifestPlugin = require('webpack-manifest-plugin');
-console.log(1111111, path.join(__dirname, '../aa.js'))
 
 //
 let HtmlWebpackPlugin = require('html-webpack-plugin');
