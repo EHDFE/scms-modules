@@ -987,6 +987,251 @@ input::-webkit-input-placeholder {
 .form-label-10 .form-content {
   margin-left: 10em;
 }
+.EUi-input {
+  width: 190px;
+  height: 34px;
+  border: 1px solid #DADDE4;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #1E283C;
+}
+.EUi-input:focus {
+  border-color: #51A1FD;
+}
+.EUi-input[disabled] {
+  cursor: no-drop;
+}
+.EUi-input-btn-box {
+  position: relative;
+  width: 190px;
+}
+.EUi-input-btn-box input {
+  width: 190px;
+  height: 34px;
+  border: 1px solid #DADDE4;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #1E283C;
+  padding-right: 60px;
+}
+.EUi-input-btn-box input:focus {
+  border-color: #51A1FD;
+}
+.EUi-input-btn-box input[disabled] {
+  cursor: no-drop;
+}
+.EUi-input-btn-box button {
+  width: 60px;
+  height: 34px;
+  border: 0;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  font-size: 14px;
+  background: #51A1FD;
+  color: #fff;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+.EUi-input-text-box {
+  position: relative;
+  width: 190px;
+}
+.EUi-input-text-box input {
+  width: 190px;
+  height: 34px;
+  border: 1px solid #DADDE4;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #1E283C;
+  padding-right: 60px;
+}
+.EUi-input-text-box input:focus {
+  border-color: #51A1FD;
+}
+.EUi-input-text-box input[disabled] {
+  cursor: no-drop;
+}
+.EUi-input-text-box button {
+  width: 60px;
+  height: 34px;
+  border: 0;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  font-size: 14px;
+  background: #51A1FD;
+  color: #fff;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+.EUi-input-text-box input {
+  padding-right: 34px;
+}
+.EUi-input-text-box .EUi-input-text {
+  display: block;
+  width: 34px;
+  line-height: 34px;
+  text-align: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.EUi-select-box {
+  position: relative;
+  width: 190px;
+  display: inline-block;
+}
+.EUi-select-box input {
+  width: 190px;
+  height: 34px;
+  border: 1px solid #DADDE4;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #1E283C;
+  padding-right: 60px;
+}
+.EUi-select-box input:focus {
+  border-color: #51A1FD;
+}
+.EUi-select-box input[disabled] {
+  cursor: no-drop;
+}
+.EUi-select-box button {
+  width: 60px;
+  height: 34px;
+  border: 0;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  font-size: 14px;
+  background: #51A1FD;
+  color: #fff;
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+.EUi-select-box input {
+  padding-right: 34px;
+}
+.EUi-select-box .EUi-input-text {
+  display: block;
+  width: 34px;
+  line-height: 34px;
+  text-align: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.EUi-select-box.EUi-select-edit input {
+  cursor: none;
+  -webkit-user-select: text;
+     -moz-user-select: text;
+      -ms-user-select: text;
+          user-select: text;
+}
+.EUi-select-box input {
+  position: relative;
+  background: transparent;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.EUi-select-box input[disabled] {
+  cursor: pointer;
+}
+.EUi-select-box .EUi-select-icon {
+  display: block;
+  width: 34px;
+  line-height: 34px;
+  text-align: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-family: 'Glyphicons Halflings';
+  font-weight: 100;
+  font-style: normal;
+  cursor: pointer;
+  color: #6E7382;
+}
+.EUi-select-box .EUi-select-icon::after {
+  content: "\E259";
+}
+.EUi-select-box input:focus + .EUi-select-icon::after {
+  content: "\E260";
+}
+.EUi-select-box .EUi-select-icon.hover::after {
+  content: "\E014";
+}
+.EUi-select-box .EUi-select-icon.hover:hover::after {
+  color: #51A1FD;
+}
+.EUi-select-box .EUi-select-content {
+  width: 100%;
+  max-height: 210px;
+  border: 1px solid #DADDE4;
+  margin-top: 4px;
+  border-radius: 3px;
+  display: none;
+  position: absolute;
+  background: #fff;
+  z-index: 9999;
+  padding-top: 2px;
+  overflow: hidden;
+}
+.EUi-select-box .EUi-select-content > dl {
+  max-height: 210px;
+  overflow: auto;
+  font-family: 'Microsoft YaHei';
+}
+.EUi-select-box .EUi-select-content dt {
+  font-size: 14px;
+  color: #9BA0AA;
+  font-weight: 100;
+  padding: 0 10px;
+  padding-top: 10px;
+}
+.EUi-select-box .EUi-select-content dt dl {
+  margin-top: 10px;
+}
+.EUi-select-box .EUi-select-content dd {
+  line-height: 34px;
+  font-size: 14px;
+  color: #1E283C;
+  padding: 0 10px;
+  cursor: pointer;
+  font-weight: 100;
+}
+.EUi-select-box .EUi-select-content dd:hover {
+  background: #F6F8FC;
+}
+.EUi-select-box .EUi-select-content dd.active {
+  background: #51A1FD;
+  color: #fff;
+}
+.EUi-select-box .EUi-select-content .EUi-select-this {
+  color: #fff;
+  background: #51A1FD;
+}
+.EUi-select-box .EUi-select-content .EUi-select-this:hover {
+  background: #51A1FD;
+}
+.EUi-select-box .EUi-select-content .EUi-select-none {
+  line-height: 34px;
+  font-size: 14px;
+  padding: 0 10px;
+  color: #B9BEC3;
+}
+.EUi-select-disabled input[disabled] {
+  background: #F5F5F5;
+  z-index: 0;
+  cursor: no-drop;
+}
+.EUi-select-disabled input[disabled] + .EUi-select-icon {
+  color: #6E7382;
+  cursor: no-drop;
+}
 /*input group*/
 .input-group .input-group-addon {
   border-color: #DADDE4;
@@ -1724,10 +1969,12 @@ button {
 .paginationMini ul > .active a:hover {
   color: #fff;
 }
-.paginationMini .fastPageTurning {
+.paginationMini .fastPageTurning,
+.paginationMini .input-group {
   display: inline;
 }
-.paginationMini .fastPageTurning input {
+.paginationMini .fastPageTurning input,
+.paginationMini .input-group input {
   width: 45px;
   height: 26px;
   border: 1px solid #DADDE4;
@@ -1736,11 +1983,22 @@ button {
   color: #1E283C;
   margin-left: 10px;
 }
-.paginationMini .fastPageTurning input:focus {
+.paginationMini .fastPageTurning input:focus,
+.paginationMini .input-group input:focus {
   border-color: #51A1FD;
 }
-.paginationMini .fastPageTurning input[disabled] {
+.paginationMini .fastPageTurning input[disabled],
+.paginationMini .input-group input[disabled] {
   cursor: no-drop;
+}
+.paginationMini .fastPageTurning .btn,
+.paginationMini .input-group .btn {
+  height: 24px;
+  padding: 0 6px;
+}
+.paginationMini .fastPageTurning .btn::before,
+.paginationMini .input-group .btn::before {
+  height: 13px;
 }
 /*nav-tabs*/
 .nav-tabs > li > a,
@@ -2635,11 +2893,12 @@ h2.box-title {
   margin-left: 45px !important;
 }
 .card-box {
-  width: 100%;
   background: #fff;
   font-size: 14px;
   color: #6E7382;
   padding-left: 5px;
+  border-radius: 3px;
+  margin: 10px;
 }
 .card-box::after {
   content: '';

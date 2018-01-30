@@ -19,8 +19,10 @@
             <a href="javascript:void(0)"><i>»</i></a>
         </li>
     </ul>
-    <div class="fastPageTurning tx_fastPageTurning fl" ng-show="maxPage > 5">
-        <input type="text" class="EUi-input" ng-model="number">
-        <a class="numberSubmit" href="javascript:void(0)" ng-click="goPage(number);">GO</a>
+    <div class="input-group input-bar" ng-show="maxPage > 5">
+        <input type="text" class="form-control" ng-model="number"> 
+        <span class="input-group-btn">
+            <button class="btn" ng-click="goPage(number);">GO</button>
+        </span>
     </div>
 </div>

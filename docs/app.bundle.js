@@ -538,6 +538,10 @@ var _index29 = __webpack_require__("./demo/card/index.js");
 
 var _index30 = _interopRequireDefault(_index29);
 
+var _index31 = __webpack_require__("./demo/selector/index.js");
+
+var _index32 = _interopRequireDefault(_index31);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var demoData = [];
@@ -571,6 +575,8 @@ demoData.push(_index26.default);
 demoData.push(_index28.default);
 
 demoData.push(_index30.default);
+
+demoData.push(_index32.default);
 
 exports.default = demoData;
 
@@ -793,6 +799,51 @@ module.exports = "<div class=\"search-form form-inline\">\n    <div class=\"inpu
 
 /***/ }),
 
+/***/ "./demo/selector/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	title: "Selector",
+	author: "程乐",
+	type: "directive",
+	"keyName": "selectorDirective",
+	"name": "Selector 匹配选择框",
+	"lastBy": "",
+	"description": "",
+	"date": "2018-01-30",
+	"scope": [{
+		"type": "string",
+		"exampleValue": '城市1',
+		"defaultValue": '城市1',
+		"key": "text",
+		"description": "默认展示参数"
+	}, {
+		"type": "object",
+		"exampleValue": [{ text: '城市1', value: 1 }, { text: '城市2', value: 2 }, { text: '城市3', value: 3 }, { text: '城市4', value: 4 }],
+		"key": "items",
+		"description": "数据组"
+	}, {
+		"type": "number",
+		"exampleValue": '',
+		"defaultValue": '',
+		"key": "value",
+		"description": "选中数据"
+	}],
+	"attrs": [],
+	"deps": ["scmsModules/selector/selectorDirective"],
+	"html": "<div selector-directive class=\"EUi-select-box\" items=\"items\" value=\"value\" text=\"text\"><input type=\"text\" placeholder=\"请选择城市\" ng-model=\"text\" ><i class=\"EUi-select-icon\"></i><div class=\"EUi-select-content\"><dl><dd ng-repeat=\"item in items\" data-value=\"{{ item.value }}\">{{ item.text }}</dd></dl></div></div>",
+	"api": "",
+	"htmlUrl": ""
+};
+
+/***/ }),
+
 /***/ "./demo/table/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1004,8 +1055,13 @@ var _index = __webpack_require__("./src/fileUploader/index.js");
 
 var _index2 = _interopRequireDefault(_index);
 
+var _selectorDirective = __webpack_require__("./src/selector/selectorDirective.js");
+
+var _selectorDirective2 = _interopRequireDefault(_selectorDirective);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import noPermissionDirective from "./src/noPermission/noPermission";
 exports.default = {
   'ngCode/ngCodeDirective': _ngCodeDirective2.default,
   'switch/switchDirective': _switchDirective2.default,
@@ -1037,9 +1093,9 @@ exports.default = {
   'table/tableDirective': _table2.default,
   'timePicker/timePickerDirective': _timePickerDirective2.default,
   'tooltip/tooltipDirective': _tooltip2.default,
-  'treeView/treeViewDirective': _treeView2.default
+  'treeView/treeViewDirective': _treeView2.default,
+  'selector/selectorDirective': _selectorDirective2.default
 };
-//import noPermissionDirective from "./src/noPermission/noPermission";
 
 /***/ }),
 
@@ -36336,7 +36392,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 /***/ "./src/paginationMini/paginationMini.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\" ng-hide paginationMini\" ng-show=\"maxPage>1\">\n    <ul class=\"fl\">\n        <li class=\"arrow\" ng-class=\"{disabled: currentPage == 1}\" ng-click=\"goPage(currentPage - 1);\">\n            <a href=\"javascript:void(0)\"><i>«</i></a>\n        </li>\n        <li ng-class=\"{active: currentPage == 1}\" ng-click=\"goPage(1);\">\n            <a href=\"javascript:void(0)\">1</a>\n        </li>\n        <li ng-show=\"isShowPage2\" style=\"display:none;\"><a href=\"javascript:void(0)\" class=\"tx_gotoPage\">2</a></li>\n        <li ng-show=\"isShowBeEllipsis\" class=\"\">...</li>\n        <li ng-repeat=\"item in pages\" ng-class=\"{active: item == currentPage}\">\n            <a href=\"javascript:void(0)\" ng-bind=\"item\" ng-click=\"goPage(item);\"></a>\n        </li>\n        <li ng-show=\"isShowAfEllipsis\" class=\"\">...</li>\n        <li ng-class=\"{active: currentPage == maxPage}\" ng-click=\"goPage(maxPage);\">\n            <a href=\"javascript:void(0)\">{{maxPage}}</a>\n        </li>\n        <li class=\"arrow\" ng-class=\"{disabled: currentPage == maxPage}\" ng-click=\"goPage(currentPage + 1);\">\n            <a href=\"javascript:void(0)\"><i>»</i></a>\n        </li>\n    </ul>\n    <div class=\"fastPageTurning tx_fastPageTurning fl\" ng-show=\"maxPage > 5\">\n        <input type=\"text\" ng-model=\"number\">\n        <a class=\"numberSubmit\" href=\"javascript:void(0)\" ng-click=\"goPage(number);\">GO</a>\n    </div>\n</div>";
+module.exports = "<div class=\" ng-hide paginationMini\" ng-show=\"maxPage>1\">\n    <ul class=\"fl\">\n        <li class=\"arrow\" ng-class=\"{disabled: currentPage == 1}\" ng-click=\"goPage(currentPage - 1);\">\n            <a href=\"javascript:void(0)\"><i>«</i></a>\n        </li>\n        <li ng-class=\"{active: currentPage == 1}\" ng-click=\"goPage(1);\">\n            <a href=\"javascript:void(0)\">1</a>\n        </li>\n        <li ng-show=\"isShowPage2\" style=\"display:none;\"><a href=\"javascript:void(0)\" class=\"tx_gotoPage\">2</a></li>\n        <li ng-show=\"isShowBeEllipsis\" class=\"\">...</li>\n        <li ng-repeat=\"item in pages\" ng-class=\"{active: item == currentPage}\">\n            <a href=\"javascript:void(0)\" ng-bind=\"item\" ng-click=\"goPage(item);\"></a>\n        </li>\n        <li ng-show=\"isShowAfEllipsis\" class=\"\">...</li>\n        <li ng-class=\"{active: currentPage == maxPage}\" ng-click=\"goPage(maxPage);\">\n            <a href=\"javascript:void(0)\">{{maxPage}}</a>\n        </li>\n        <li class=\"arrow\" ng-class=\"{disabled: currentPage == maxPage}\" ng-click=\"goPage(currentPage + 1);\">\n            <a href=\"javascript:void(0)\"><i>»</i></a>\n        </li>\n    </ul>    \n    <div class=\"input-group input-bar\" ng-show=\"maxPage > 5\">\n        <input type=\"text\" class=\"form-control\" ng-model=\"number\"> \n        <span class=\"input-group-btn\">\n            <button class=\"btn\" ng-click=\"goPage(number);\">GO</button>\n        </span>\n    </div>\n</div>";
 
 /***/ }),
 
@@ -36549,6 +36605,132 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
                         }
                     });
                 }
+            };
+        }]);
+    };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ "./src/selector/selectorDirective.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+/**
+ * <directive>
+ * @name selector 选择器
+ * @description 选择器
+ * @date 2018-1-19
+ * @author 程乐
+ * @lastBy 
+ * @html 
+ */
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+    return function (app, elem, attrs, scope) {
+        app.directive('selectorDirective', ['$timeout', function ($timeout) {
+            return {
+                // template: '<input type="text" placeholder="请选择城市" ng-model="text" ><i class="EUi-select-icon"></i><div class="EUi-select-content"><dl><dd ng-repeat="item in items" data-value="{{ item.value }}">{{ item.text }}</dd></dl></div>',
+                restrict: 'A',
+                replace: true,
+                scope: {
+                    value: '=',
+                    text: '=',
+                    items: '='
+                    // query: '='
+                },
+                link: function link($scope, $element, $attrs) {
+                    $timeout(function () {
+                        if ($scope.text) {
+                            $('.EUi-select-content dd', $element).each(function () {
+                                if ($(this).text() == $scope.text) {
+                                    $(this).addClass('active');
+                                    return false;
+                                }
+                            });
+                        }
+                        $(document).on('click', function () {
+                            $(".EUi-select-content").hide();
+                            $scope.text = $('.EUi-select-content .active', $element).text();
+                            $scope.value = $('.EUi-select-content .active', $element).attr('data-value');
+                            $scope.$apply();
+                        });
+
+                        $($element).on('click', function () {
+                            if (!$element.hasClass('EUi-select-disabled')) {
+                                $('.EUi-select-content dd', $element).show();
+                                $(".EUi-select-content", $element).show();
+                            }
+                            return false;
+                        });
+
+                        $scope.$watch('text', function (newValue, oldValue) {
+                            // if($scope.query){
+                            if (newValue != oldValue) {
+                                $('.EUi-select-content dd', $element).each(function () {
+                                    if ($(this).text().indexOf($scope.text) == -1) {
+                                        $(this).hide();
+                                    } else {
+                                        $(this).show();
+                                    }
+                                });
+                                var type = false;
+                                $('.EUi-select-content dd', $element).each(function () {
+                                    if ($(this).css('display') == 'none') {
+                                        type = true;
+                                    } else {
+                                        type = false;
+                                        return false;
+                                    }
+                                });
+                                if (type) {
+                                    if (!$('.EUi-select-none', $element)[0]) {
+                                        $('.EUi-select-content', $element).append('<p class="EUi-select-none">无匹配选项</p>');
+                                    }
+                                } else {
+                                    $('.EUi-select-none', $element).remove();
+                                }
+                            }
+                            if (!newValue) {
+                                $('.EUi-select-content dd', $element).show();
+                            }
+                            // }
+                        });
+
+                        $('input, .EUi-select-icon', $element).hover(function () {
+                            if ($scope.text && !$element.hasClass('EUi-select-disabled')) {
+                                $('.EUi-select-icon', $element).addClass('hover');
+                            }
+                        }, function () {
+                            $('.EUi-select-icon', $element).removeClass('hover');
+                        });
+
+                        $($element).on('click', 'i.hover', function () {
+                            $scope.text = '';
+                            $scope.value = '';
+                            $(this).removeClass('hover');
+                            $('.EUi-select-content dd', $element).removeClass('active');
+                            $scope.$apply();
+                        });
+
+                        $('.EUi-select-content', $element).on('click', 'dd', function () {
+                            $('.EUi-select-content dd', $element).removeClass('active');
+                            $(this).addClass('active');
+                            var val = $(this).attr('data-value');
+                            var text = $(this).text();
+                            $scope.text = text;
+                            $scope.value = val;
+                            $scope.$apply();
+                            $(".EUi-select-content", $element).hide();
+                            $('.EUi-select-content dd', $element).show();
+                            return false;
+                        });
+                    }, 100);
+                },
+
+                controller: function controller($scope, $element, $attrs) {}
             };
         }]);
     };

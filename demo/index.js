@@ -46,4 +46,7 @@ demoData.push(crumb);
 import card from "./card/index.js";
 demoData.push(card);
 
+import selector from "./selector/index.js";
+demoData.push(selector);
+
 export default demoData

@@ -39,6 +39,7 @@ import timePickerDirective from "./src/timePicker/timePickerDirective";
 import tooltipDirective from "./src/tooltip/tooltip";
 import treeViewDirective from "./src/treeView/treeView";
 import fileUploaderDirective from "./src/fileUploader/index";
+import selectorDirective from "./src/selector/selectorDirective";
 
 export default {
   'ngCode/ngCodeDirective': ngCodeDirective,
@@ -72,4 +73,5 @@ export default {
   'timePicker/timePickerDirective': timePickerDirective,
   'tooltip/tooltipDirective': tooltipDirective,
   'treeView/treeViewDirective': treeViewDirective,
+  'selector/selectorDirective': selectorDirective,
 };
