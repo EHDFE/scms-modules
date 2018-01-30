@@ -1,237 +1,83 @@
-// @charset "utf-8";
-// .pagination-box{
-//     margin:15px 0;
-//     overflow: hidden;
-// }
-// .pagination-box .total{
-
-// }
-// .pagination-box .pagination{
-//     float: left;
-// }
-// .pagination-box .pagination li{
-//     float: left;
-//     padding:0 2px;
-// }
-// .pagination-box .pagination li,
-// .pagination-box .pagination li a{
-//     height: 31px;
-//     overflow: hidden;
-//     padding-top:0;
-//     padding-bottom:0;
-//     line-height: 31px;
-//     text-align: center;
-//     color: #6E7382;
-// }
-// .pagination-box .pagination li.active a{
-//     background: #51A1FD;
-//     border:1px solid #51A1FD;
-//     color:#fff;
-// }
-// .pagination-box .pagination i{
-//     font-style: normal;
-//     font-size: 20px;
-//     line-height: normal;
-// }
-// .pagination-box .pagination{
-//     margin:0;
-// }
-// .pagination-box .pagination .defaultA a{
-//     cursor: default;
-//     color: #6E7382;
-//     line-height: 24px;
-// }
-// .pagination-box .pagination .defaultA:hover{
-//     background: none;
-// }
-// .pagination-box .pagination .defaultA:hover a{
-//     color: #6E7382;
-//     background: none;
-// }
-// .pagination-box .pagination>li>a, .pagination>li>span{
-//     float: none;
-//     display: block;
-// }
-// .pagination-box .pagination>.disabled>a, 
-// .pagination-box .pagination>.disabled>a:focus, 
-// .pagination-box .pagination>.disabled>a:hover, 
-// .pagination-box .pagination>.disabled>span, 
-// .pagination-box .pagination>.disabled>span:focus, 
-// .pagination-box .pagination>.disabled>span:hover{
-//     color:#aaa;
-// }
-// .pagination-box .input-group{
-//     width:70px;
-// }
-// .pagination-box .input-bar .btn{
-//     padding-left:5px;
-//     padding-right:5px;
-//     font-size: 12px;
-// }
-// .pagination-box label{
-//     font-weight: normal;
-//     vertical-align: middle;
-//     margin: 0;
-//     padding: 0 5px 0 15px;
-//     color: #6E7382;
-//     height: 31px;
-//     line-height: 31px;
-//     display: inline-block;
-// }
-.pagination-box {
-    color: #6E7382;
+@charset "utf-8";
+.pagination-box{
     margin:15px 0;
-    font-size: 14px;
-    &::after {
-        content:'';
-        display: block;
-        clear: both;
-    }
-    .pagination {
-        margin: 0;
-
-        &::after {
-            content:'';
-            display: block;
-            clear: both;
-        }
-        .defaultA a:hover {
-            border-color: #DADDE4;
-            background: #fff;
-        }
-        .defaultA a:focus{
-            background: #fff;
-        }
-        li{
-            float: left;
-            margin-right: 2px;
-        }
-        li:first-child,
-        li:first-child a,
-        li:last-child,
-        li:last-child a,
-        {
-            color: #9BA0AA;
-        }
-
-        li > a,
-        li > span {
-            color: #51A1FD;
-            margin-left: 0;
-            border: 1px solid #DADDE4;
-        }
-
-        li > a > i{
-            font-style: normal;
-        }
-        li a:hover {
-            border-color: #51A1FD;
-            color: #51A1FD;
-            background: #fff;
-        }
-        .active > a,
-        .active > span,
-        .active > a:hover,
-        .active > span:hover,
-        .active > a:focus,
-        .active > span:focus,
-        .active > a:visited,
-        .active > span:visited {
-            background: #51A1FD;
-            border-color: #51A1FD;
-            color: #fff;
-        }
+    overflow: hidden;
+    .form-control{
+        line-height: 1.2;
     }
 }
+.pagination-box .total{
 
-.pagination-box select{
-    height:34px;
-    border:1px solid #DADDE4;
-    border-radius: 3px;
-    font-size: 14px !important;
+}
+.pagination-box .pagination{
+    float: left;
+}
+.pagination-box .pagination li{
+    float: left;
+    padding:0 2px;
+}
+.pagination-box .pagination li,
+.pagination-box .pagination li a{
+    height: 31px;
+    overflow: hidden;
+    padding-top:0;
+    padding-bottom:0;
+    line-height: 30px;
+    text-align: center;
     color: #6E7382;
-    margin-left:15px;
-    padding-left: 10px !important;
 }
-.pagination-skip{
-    input {
-        // width: 190px;
-        height:34px;
-        border: 1px solid #DADDE4;
-        border-radius: 3px;
-        font-size: 14px;
-        color: #1E283C;
-        &:focus {
-            border-color: #51A1FD;
-        }
-        &[disabled]{
-            cursor: no-drop;
-        }
-        margin-left:10px;
-        width: 60px;
-    }
-    .btn{
-        font-size: 14px !important;;
-        background: #fff;
-        position: relative;
-        top: -2px;
-        padding-left: 10px;
-        &:hover {
-            color: #51A1FD;
-        }
-        &:active,
-        &:focus {
-            box-shadow: 0 0 0 0;
-        }
-    }
+.pagination-box .pagination li.active a{
+    background: #51A1FD;
+    border-color:#51A1FD;
+    color:#fff;
 }
-
-.paginationMini {
-    background: #fff;
-    margin: 0 auto;
-    display: table;
-    ul{
-        margin-top: 3px;
-    }
-    ul::after,
-    &::after {
-        content: '';
-        display: block;
-        clear: both;
-    }
-    ul > li{
-        float: left;
-        text-align: center;
-        margin-right: 2px;
-        line-height: 20px;
-        a{
-            display: block;
-            padding: 0 6px;
-            color: #6E7382;
-            font-size: 14px;
-            border-radius: 2px;
-            &:hover {
-                color: #51A1FD;
-            }
-            i {
-                font-style: normal;
-            }
-        }
-    }
-    ul > .active{
-        a {
-            background: #51A1FD;
-            color: #fff;
-            &:hover {
-                color: #fff;
-            }
-        }
-    }
-    .fastPageTurning{
-        display: inline;
-        .EUi-input{
-            width: 45px;
-            height: 26px;
-        }
-    }
+.pagination-box .pagination i{
+    font-style: normal;
+    font-size: 20px;
+    line-height: normal;
+}
+.pagination-box .pagination{
+    margin:0;
+}
+.pagination-box .pagination .defaultA a{
+    cursor: default;
+    color: #6E7382;
+    // line-height: 24px;
+}
+.pagination-box .pagination .defaultA:hover{
+    background: none;
+}
+.pagination-box .pagination .defaultA:hover a{
+    color: #6E7382;
+    background: none;
+}
+.pagination-box .pagination>li>a, .pagination>li>span{
+    float: none;
+    display: block;
+}
+.pagination-box .pagination>.disabled>a, 
+.pagination-box .pagination>.disabled>a:focus, 
+.pagination-box .pagination>.disabled>a:hover, 
+.pagination-box .pagination>.disabled>span, 
+.pagination-box .pagination>.disabled>span:focus, 
+.pagination-box .pagination>.disabled>span:hover{
+    color:#aaa;
+}
+.pagination-box .input-group{
+    width:70px;
+}
+.pagination-box .input-bar .btn{
+    padding-left:5px;
+    padding-right:5px;
+    font-size: 12px;
+}
+.pagination-box label{
+    font-weight: normal;
+    vertical-align: middle;
+    margin: 0;
+    padding: 0 5px 0 15px;
+    color: #6E7382;
+    height: 31px;
+    line-height: 31px;
+    display: inline-block;
 }

@@ -1606,151 +1606,83 @@ button {
   cursor: not-allowed;
 }
 .pagination-box {
-  color: #6E7382;
   margin: 15px 0;
-  font-size: 14px;
+  overflow: hidden;
 }
-.pagination-box::after {
-  content: '';
-  display: block;
-  clear: both;
+.pagination-box .form-control {
+  line-height: 1.2;
+}
+.pagination-box .pagination {
+  float: left;
+}
+.pagination-box .pagination li {
+  float: left;
+  padding: 0 2px;
+}
+.pagination-box .pagination li,
+.pagination-box .pagination li a {
+  height: 31px;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  line-height: 30px;
+  text-align: center;
+  color: #6E7382;
+}
+.pagination-box .pagination li.active a {
+  background: #51A1FD;
+  border-color: #51A1FD;
+  color: #fff;
+}
+.pagination-box .pagination i {
+  font-style: normal;
+  font-size: 20px;
+  line-height: normal;
 }
 .pagination-box .pagination {
   margin: 0;
 }
-.pagination-box .pagination::after {
-  content: '';
-  display: block;
-  clear: both;
-}
-.pagination-box .pagination .defaultA a:hover {
-  border-color: #DADDE4;
-  background: #fff;
-}
-.pagination-box .pagination .defaultA a:focus {
-  background: #fff;
-}
-.pagination-box .pagination li {
-  float: left;
-  margin-right: 2px;
-}
-.pagination-box .pagination li:first-child,
-.pagination-box .pagination li:first-child a,
-.pagination-box .pagination li:last-child,
-.pagination-box .pagination li:last-child a {
-  color: #9BA0AA;
-}
-.pagination-box .pagination li > a,
-.pagination-box .pagination li > span {
-  color: #51A1FD;
-  margin-left: 0;
-  border: 1px solid #DADDE4;
-}
-.pagination-box .pagination li > a > i {
-  font-style: normal;
-}
-.pagination-box .pagination li a:hover {
-  border-color: #51A1FD;
-  color: #51A1FD;
-  background: #fff;
-}
-.pagination-box .pagination .active > a,
-.pagination-box .pagination .active > span,
-.pagination-box .pagination .active > a:hover,
-.pagination-box .pagination .active > span:hover,
-.pagination-box .pagination .active > a:focus,
-.pagination-box .pagination .active > span:focus,
-.pagination-box .pagination .active > a:visited,
-.pagination-box .pagination .active > span:visited {
-  background: #51A1FD;
-  border-color: #51A1FD;
-  color: #fff;
-}
-.pagination-box select {
-  height: 34px;
-  border: 1px solid #DADDE4;
-  border-radius: 3px;
-  font-size: 14px !important;
+.pagination-box .pagination .defaultA a {
+  cursor: default;
   color: #6E7382;
-  margin-left: 15px;
-  padding-left: 10px !important;
 }
-.pagination-skip input {
-  height: 34px;
-  border: 1px solid #DADDE4;
-  border-radius: 3px;
-  font-size: 14px;
-  color: #1E283C;
-  margin-left: 10px;
-  width: 60px;
+.pagination-box .pagination .defaultA:hover {
+  background: none;
 }
-.pagination-skip input:focus {
-  border-color: #51A1FD;
-}
-.pagination-skip input[disabled] {
-  cursor: no-drop;
-}
-.pagination-skip .btn {
-  font-size: 14px !important;
-  background: #fff;
-  position: relative;
-  top: -2px;
-  padding-left: 10px;
-}
-.pagination-skip .btn:hover {
-  color: #51A1FD;
-}
-.pagination-skip .btn:active,
-.pagination-skip .btn:focus {
-  -webkit-box-shadow: 0 0 0 0;
-          box-shadow: 0 0 0 0;
-}
-.paginationMini {
-  background: #fff;
-  margin: 0 auto;
-  display: table;
-}
-.paginationMini ul {
-  margin-top: 3px;
-}
-.paginationMini ul::after,
-.paginationMini::after {
-  content: '';
-  display: block;
-  clear: both;
-}
-.paginationMini ul > li {
-  float: left;
-  text-align: center;
-  margin-right: 2px;
-  line-height: 20px;
-}
-.paginationMini ul > li a {
-  display: block;
-  padding: 0 6px;
+.pagination-box .pagination .defaultA:hover a {
   color: #6E7382;
-  font-size: 14px;
-  border-radius: 2px;
+  background: none;
 }
-.paginationMini ul > li a:hover {
-  color: #51A1FD;
+.pagination-box .pagination > li > a,
+.pagination > li > span {
+  float: none;
+  display: block;
 }
-.paginationMini ul > li a i {
-  font-style: normal;
+.pagination-box .pagination > .disabled > a,
+.pagination-box .pagination > .disabled > a:focus,
+.pagination-box .pagination > .disabled > a:hover,
+.pagination-box .pagination > .disabled > span,
+.pagination-box .pagination > .disabled > span:focus,
+.pagination-box .pagination > .disabled > span:hover {
+  color: #aaa;
 }
-.paginationMini ul > .active a {
-  background: #51A1FD;
-  color: #fff;
+.pagination-box .input-group {
+  width: 70px;
 }
-.paginationMini ul > .active a:hover {
-  color: #fff;
+.pagination-box .input-bar .btn {
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 12px;
 }
-.paginationMini .fastPageTurning {
-  display: inline;
-}
-.paginationMini .fastPageTurning .EUi-input {
-  width: 45px;
-  height: 26px;
+.pagination-box label {
+  font-weight: normal;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0 5px 0 15px;
+  color: #6E7382;
+  height: 31px;
+  line-height: 31px;
+  display: inline-block;
 }
 .paginationMini {
   background: #fff;
@@ -2707,6 +2639,7 @@ h2.box-title {
   background: #fff;
   font-size: 14px;
   color: #6E7382;
+  padding-left: 5px;
 }
 .card-box::after {
   content: '';
