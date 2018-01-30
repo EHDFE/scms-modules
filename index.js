@@ -1,7 +1,9 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/less/bootstrap.less';
 import './libs/base.less';
 import './libs/font-awesome/css/font-awesome.css';
 import scmsUi from "./scmsUi/less/scmsUi.less";
+
+
 
 import 'bootstrap/dist/js/bootstrap.js';
 import angular from './libs/angular/angular.js';
@@ -39,6 +41,7 @@ import timePickerDirective from "./src/timePicker/timePickerDirective";
 import tooltipDirective from "./src/tooltip/tooltip";
 import treeViewDirective from "./src/treeView/treeView";
 import fileUploaderDirective from "./src/fileUploader/index";
+import buttonDropdown from "./src/buttonDropdown/buttonDropdown";
 
 export default {
   'ngCode/ngCodeDirective': ngCodeDirective,
@@ -72,4 +75,5 @@ export default {
   'timePicker/timePickerDirective': timePickerDirective,
   'tooltip/tooltipDirective': tooltipDirective,
   'treeView/treeViewDirective': treeViewDirective,
+  'buttonDropdown': buttonDropdown
 };

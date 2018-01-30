@@ -1,0 +1,20 @@
+<div table-directive api-url="apiUrl" items="items" page-size="pageSize" curr-page="currPage" fetch="fetch" fetch-param="fetchParam" format-data="formatData" method="get">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>手机号</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items">
+                <td>{{ $index + 1 + (currPage - 1) * pageSize }}</td>
+                <td>{{ item.mobilenumber }}</td>
+                <td class="handle">
+                    <a href="javascript:void(0);">操作按钮</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

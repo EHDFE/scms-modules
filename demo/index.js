@@ -32,7 +32,7 @@ demoData = demoData.concat(form);
 
 
 import table from "./table/index.js";
-demoData.push(table);
+demoData = demoData.concat(table);
 
 import pagination from "./pagination/index.js";
 demoData.push(pagination);
