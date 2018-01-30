@@ -11,7 +11,7 @@
         "scope": [
             {
                 "type": "string",
-                "exampleValue": "/apidata/tableDirectiveData.json",
+                "exampleValue": "apidata/tableDirectiveData.json",
                 "key": "apiUrl",
                 "description": "依赖后端api接口地址"
             },
