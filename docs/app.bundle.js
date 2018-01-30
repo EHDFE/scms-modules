@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./node_modules/scmsmodules-runner/app/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -538,6 +538,10 @@ var _index29 = __webpack_require__("./demo/card/index.js");
 
 var _index30 = _interopRequireDefault(_index29);
 
+var _index31 = __webpack_require__("./demo/selector/index.js");
+
+var _index32 = _interopRequireDefault(_index31);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var demoData = [];
@@ -571,6 +575,8 @@ demoData.push(_index26.default);
 demoData.push(_index28.default);
 
 demoData.push(_index30.default);
+
+demoData.push(_index32.default);
 
 exports.default = demoData;
 
@@ -793,6 +799,57 @@ module.exports = "<div class=\"search-form form-inline\">\n    <div class=\"inpu
 
 /***/ }),
 
+/***/ "./demo/selector/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	title: "Selector",
+	author: "程乐",
+	type: "directive",
+	"keyName": "selectorDirective",
+	"name": "Selector 匹配选择框",
+	"lastBy": "",
+	"description": "",
+	"date": "2018-01-30",
+	"scope": [{
+		"type": "string",
+		"exampleValue": '城市1',
+		"defaultValue": '城市1',
+		"key": "text",
+		"description": "默认展示参数"
+	}, {
+		"type": "object",
+		"exampleValue": [{ text: '城市1', value: 1 }, { text: '城市2', value: 2 }, { text: '城市3', value: 3 }, { text: '城市4', value: 4 }],
+		"key": "items",
+		"description": "数据组"
+	}, {
+		"type": "number",
+		"exampleValue": '',
+		"defaultValue": '',
+		"key": "value",
+		"description": "选中数据"
+	}, {
+		"type": "boolean",
+		"exampleValue": false,
+		"defaultValue": false,
+		"key": "disabled",
+		"description": "是否禁用"
+	}],
+	"attrs": [],
+	"deps": ["scmsModules/selector/selectorDirective"],
+	"html": "<div selector-directive class=\"EUi-select-box\" ng-class=\"{' EUi-select-disabled' : disabled}\" items=\"items\" value=\"value\" text=\"text\"><input type=\"text\" placeholder=\"请选择城市\" ng-model=\"text\" ng-disabled=\"disabled\"><i class=\"EUi-select-icon\"></i><div class=\"EUi-select-content\"><dl><dd ng-repeat=\"item in items\" data-value=\"{{ item.value }}\">{{ item.text }}</dd></dl></div></div>",
+	"api": "",
+	"htmlUrl": ""
+};
+
+/***/ }),
+
 /***/ "./demo/table/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -868,7 +925,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-__webpack_require__("./node_modules/._bootstrap@3.3.7@bootstrap/dist/css/bootstrap.css");
+__webpack_require__("./node_modules/bootstrap/dist/css/bootstrap.css");
 
 __webpack_require__("./libs/base.less");
 
@@ -878,7 +935,7 @@ var _scmsUi = __webpack_require__("./scmsUi/less/scmsUi.less");
 
 var _scmsUi2 = _interopRequireDefault(_scmsUi);
 
-__webpack_require__("./node_modules/._bootstrap@3.3.7@bootstrap/dist/js/bootstrap.js");
+__webpack_require__("./node_modules/bootstrap/dist/js/bootstrap.js");
 
 var _angular = __webpack_require__("./libs/angular/angular.js");
 
@@ -1004,8 +1061,13 @@ var _index = __webpack_require__("./src/fileUploader/index.js");
 
 var _index2 = _interopRequireDefault(_index);
 
+var _selectorDirective = __webpack_require__("./src/selector/selectorDirective.js");
+
+var _selectorDirective2 = _interopRequireDefault(_selectorDirective);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import noPermissionDirective from "./src/noPermission/noPermission";
 exports.default = {
   'ngCode/ngCodeDirective': _ngCodeDirective2.default,
   'switch/switchDirective': _switchDirective2.default,
@@ -1037,9 +1099,9 @@ exports.default = {
   'table/tableDirective': _table2.default,
   'timePicker/timePickerDirective': _timePickerDirective2.default,
   'tooltip/tooltipDirective': _tooltip2.default,
-  'treeView/treeViewDirective': _treeView2.default
+  'treeView/treeViewDirective': _treeView2.default,
+  'selector/selectorDirective': _selectorDirective2.default
 };
-//import noPermissionDirective from "./src/noPermission/noPermission";
 
 /***/ }),
 
@@ -12577,7 +12639,7 @@ bindJQuery();publishExternalAPI(angular);jqLite(document).ready(function(){angul
 
 /***/ }),
 
-/***/ "./node_modules/._angular-auto-validate@1.19.0@angular-auto-validate/dist/jcs-auto-validate.min.js":
+/***/ "./node_modules/angular-auto-validate/dist/jcs-auto-validate.min.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12947,7 +13009,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ "./node_modules/._angular-cookies@1.2.27@angular-cookies/angular-cookies.js":
+/***/ "./node_modules/angular-cookies/angular-cookies.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13155,7 +13217,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ "./node_modules/._angular-file-upload@1.1.6@angular-file-upload/angular-file-upload.min.js":
+/***/ "./node_modules/angular-file-upload/angular-file-upload.min.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13167,7 +13229,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 */
 
 !function (a, b) {
-  return  true ? void !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (a) {
+  return  true ? void !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (a) {
     return b(a);
   }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : b(a);
@@ -13454,7 +13516,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._angular-sanitize@1.2.27@angular-sanitize/angular-sanitize.js":
+/***/ "./node_modules/angular-sanitize/angular-sanitize.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14082,7 +14144,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._angular-ui-router@0.2.13@angular-ui-router/release/angular-ui-router.js":
+/***/ "./node_modules/angular-ui-router/release/angular-ui-router.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18436,7 +18498,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
 
 /***/ }),
 
-/***/ "./node_modules/._angular@1.2.32@angular/angular.js":
+/***/ "./node_modules/angular/angular.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30003,25 +30065,25 @@ bindJQuery();publishExternalAPI(angular);jqLite(document).ready(function(){angul
 
 /***/ }),
 
-/***/ "./node_modules/._angular@1.2.32@angular/index.js":
+/***/ "./node_modules/angular/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__("./node_modules/._angular@1.2.32@angular/angular.js");
+__webpack_require__("./node_modules/angular/angular.js");
 module.exports = angular;
 
 /***/ }),
 
-/***/ "./node_modules/._bootstrap@3.3.7@bootstrap/dist/css/bootstrap.css":
+/***/ "./node_modules/bootstrap/dist/css/bootstrap.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/._bootstrap@3.3.7@bootstrap/dist/js/bootstrap.js":
+/***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32202,7 +32264,7 @@ if (typeof jQuery === 'undefined') {
 
 /***/ }),
 
-/***/ "./node_modules/._loadjs@3.5.2@loadjs/dist/loadjs.umd.js":
+/***/ "./node_modules/loadjs/dist/loadjs.umd.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32491,7 +32553,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ "./node_modules/._ng-sortable@1.2.2@ng-sortable/dist/ng-sortable.min.js":
+/***/ "./node_modules/ng-sortable/dist/ng-sortable.min.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32676,7 +32738,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/configs/G.js":
+/***/ "./node_modules/scmsmodules-runner/app/configs/G.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32693,17 +32755,17 @@ module.exports = function (app) {
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/configs/components.js":
+/***/ "./node_modules/scmsmodules-runner/app/configs/components.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _loadjs = __webpack_require__("./node_modules/._loadjs@3.5.2@loadjs/dist/loadjs.umd.js");
+var _loadjs = __webpack_require__("./node_modules/loadjs/dist/loadjs.umd.js");
 
 var _loadjs2 = _interopRequireDefault(_loadjs);
 
-var _index = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/index.js");
+var _index = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/index.js");
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -32807,7 +32869,7 @@ angular.module('components', []).config(['$compileProvider', '$controllerProvide
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/configs/reqInterceptor.js":
+/***/ "./node_modules/scmsmodules-runner/app/configs/reqInterceptor.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32883,7 +32945,7 @@ module.exports = function (app) {
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/configs/routerConfigs.js":
+/***/ "./node_modules/scmsmodules-runner/app/configs/routerConfigs.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32942,7 +33004,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/configs/routerData.js":
+/***/ "./node_modules/scmsmodules-runner/app/configs/routerData.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32973,66 +33035,65 @@ var __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/main.css":
+/***/ "./node_modules/scmsmodules-runner/app/main.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/main.js":
+/***/ "./node_modules/scmsmodules-runner/app/main.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/main.css");
+__webpack_require__("./node_modules/scmsmodules-runner/app/main.css");
+
+__webpack_require__("./node_modules/angular-ui-router/release/angular-ui-router.js");
+
+var _angularCookies = __webpack_require__("./node_modules/angular-cookies/angular-cookies.js");
+
+var _angularCookies2 = _interopRequireDefault(_angularCookies);
+
+var _angularSanitize = __webpack_require__("./node_modules/angular-sanitize/angular-sanitize.js");
+
+var _angularSanitize2 = _interopRequireDefault(_angularSanitize);
+
+var _angularFileUpload = __webpack_require__("./node_modules/angular-file-upload/angular-file-upload.min.js");
+
+var _angularFileUpload2 = _interopRequireDefault(_angularFileUpload);
+
+__webpack_require__("./node_modules/angular-auto-validate/dist/jcs-auto-validate.min.js");
+
+__webpack_require__("./node_modules/ng-sortable/dist/ng-sortable.min.js");
+
+__webpack_require__("./node_modules/scmsmodules-runner/app/configs/components.js");
+
+var _routerConfigs = __webpack_require__("./node_modules/scmsmodules-runner/app/configs/routerConfigs.js");
+
+var _routerConfigs2 = _interopRequireDefault(_routerConfigs);
+
+var _reqInterceptor = __webpack_require__("./node_modules/scmsmodules-runner/app/configs/reqInterceptor.js");
+
+var _reqInterceptor2 = _interopRequireDefault(_reqInterceptor);
+
+var _G = __webpack_require__("./node_modules/scmsmodules-runner/app/configs/G.js");
+
+var _G2 = _interopRequireDefault(_G);
+
+var _routerData = __webpack_require__("./node_modules/scmsmodules-runner/app/configs/routerData.js");
+
+var _routerData2 = _interopRequireDefault(_routerData);
 
 var _scmsmodules = __webpack_require__("./index.js");
 
 var _scmsmodules2 = _interopRequireDefault(_scmsmodules);
 
-__webpack_require__("./node_modules/._angular-ui-router@0.2.13@angular-ui-router/release/angular-ui-router.js");
-
-var _angularCookies = __webpack_require__("./node_modules/._angular-cookies@1.2.27@angular-cookies/angular-cookies.js");
-
-var _angularCookies2 = _interopRequireDefault(_angularCookies);
-
-var _angularSanitize = __webpack_require__("./node_modules/._angular-sanitize@1.2.27@angular-sanitize/angular-sanitize.js");
-
-var _angularSanitize2 = _interopRequireDefault(_angularSanitize);
-
-var _angularFileUpload = __webpack_require__("./node_modules/._angular-file-upload@1.1.6@angular-file-upload/angular-file-upload.min.js");
-
-var _angularFileUpload2 = _interopRequireDefault(_angularFileUpload);
-
-__webpack_require__("./node_modules/._angular-auto-validate@1.19.0@angular-auto-validate/dist/jcs-auto-validate.min.js");
-
-__webpack_require__("./node_modules/._ng-sortable@1.2.2@ng-sortable/dist/ng-sortable.min.js");
-
-__webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/configs/components.js");
-
-var _routerConfigs = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/configs/routerConfigs.js");
-
-var _routerConfigs2 = _interopRequireDefault(_routerConfigs);
-
-var _reqInterceptor = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/configs/reqInterceptor.js");
-
-var _reqInterceptor2 = _interopRequireDefault(_reqInterceptor);
-
-var _G = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/configs/G.js");
-
-var _G2 = _interopRequireDefault(_G);
-
-var _routerData = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/configs/routerData.js");
-
-var _routerData2 = _interopRequireDefault(_routerData);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var appName = 'App';
 //import 'angular';
-//main.js 
+var appName = 'App'; //main.js 
 
 var _module = angular.module(appName, ['ui.router', 'components', 'ngSanitize', 'ngCookies', 'angularFileUpload', 'ui.sortable', 'jcs-autoValidate']).config(['$compileProvider', function ($compileProvider) {
     $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|tel|file|javascript):/);
@@ -33048,27 +33109,27 @@ angular.bootstrap(document, [appName]);
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/header/header.css":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/header/header.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/header/header.html":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/header/header.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div ng-controller=\"headerCtrl\">\n    <div class=\"container header-ctrl\">\n        <div class=\"logo fl visible-large\">\n            <a href=\"/\">\n                ScmsModules\n            </a>\n        </div>\n        <ul class=\"nav-menu fl\">\n            <li>\n                <a href=\"#/scmsUi/scmsUi\" ng-class=\"{active: currentState === 'scmsUi.scmsUi'}\">\n                    Scms Modules\n                    <span class=\"caret\"></span>\n                </a>\n            </li>\n            <li>\n                <a href=\"#/scmsPage/scmsPage\" ng-class=\"{active: currentState === 'scmsPage.scmsPage'}\">\n                    Scms Pages\n                    <span class=\"caret\"></span>\n                </a>\n            </li>\n            <li>\n                <a href=\"#/standard/standard\" ng-class=\"{active: currentState === 'standard.standard'}\">\n                    Design Standard\n                    <span class=\"caret\"></span>\n                </a>\n            </li>\n        </ul>\n\n        <ul class=\"login-status\">\n            <li ng-show=\"userInfo.username\" role=\"presentation\" class=\"dropdown  navbar-right\">\n                \n            </li>\n            \n        </ul>\n    </div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/header/header.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/header/header.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/header/headerCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/header/header.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/header/header.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/header/headerCtrl.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/header/header.css"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/header/header.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
   return function (app, elem, attrs, scope) {
     ctrl(app, elem, attrs, scope);
     elem.append(html);
@@ -33078,13 +33139,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/header/headerCtrl.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/header/headerCtrl.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.controller('headerCtrl', ['$scope', '$state', '$location', function ($scope, $state, $location) {
             $scope.currentState = '';
@@ -33104,33 +33165,33 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/index.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _header = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/header/header.js");
+var _header = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/header/header.js");
 
 var _header2 = _interopRequireDefault(_header);
 
-var _mainNav = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/mainNav/mainNav.js");
+var _mainNav = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/mainNav/mainNav.js");
 
 var _mainNav2 = _interopRequireDefault(_mainNav);
 
-var _scmsUi = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.js");
+var _scmsUi = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUi.js");
 
 var _scmsUi2 = _interopRequireDefault(_scmsUi);
 
-var _scmsDirective = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.js");
+var _scmsDirective = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.js");
 
 var _scmsDirective2 = _interopRequireDefault(_scmsDirective);
 
-var _scmsPage = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.js");
+var _scmsPage = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsPage/scmsPage.js");
 
 var _scmsPage2 = _interopRequireDefault(_scmsPage);
 
-var _standard = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/standard/standard.js");
+var _standard = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/standard/standard.js");
 
 var _standard2 = _interopRequireDefault(_standard);
 
@@ -33148,20 +33209,20 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/mainNav/mainNav.html":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/mainNav/mainNav.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div ng-controller=\"mainNavCtrl\" style=\"display:inline;\">\n    <div main-nav-directive=\"\" navs=\"navs\" callback=\"callback\"></div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/mainNav/mainNav.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/mainNav/mainNav.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/mainNav/mainNavCtrl.js"), __webpack_require__("./src/mainNav/mainNavDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/mainNav/mainNav.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, mainNavDirective, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/mainNav/mainNavCtrl.js"), __webpack_require__("./src/mainNav/mainNavDirective.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/mainNav/mainNav.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, mainNavDirective, html) {
   return function (app, elem, attrs, scope) {
     ctrl(app, elem, attrs, scope);
     mainNavDirective(app, elem, attrs, scope);
@@ -33172,13 +33233,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/mainNav/mainNavCtrl.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/mainNav/mainNavCtrl.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.controller('mainNavCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
             var preCheckedNav = '';
@@ -33202,13 +33263,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('objectToViewDirective', ['$compile', '$timeout', function ($compile, $timeout) {
             return {
@@ -33281,27 +33342,27 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.css":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.html":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"derective-module\">\n        \n        <div id=\"contentSidebar\">\n            <h2>指令名称：{{item.name}} </h2>\n            <h4>{{item.date}} <i>作者-{{item.author}}</i><i ng-if=\"item.lastBy\">；修改-{{item.lastBy}}</i></h4>\n            <h3 ng-show=\"item.description\"><span>功能描述：</span>{{item.description}}</h3>\n            <h3><span>外部JS依赖：</span>{{item.deps[0]}}</h3>\n            <h3><span>外部HTML插入：</span><pre class=\"code\" ng-bind=\"item.htmlCode\"></pre></h3>\n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.scope && item.scope.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>继承</th>\n                        <th>值类型</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.scope\">\n                        <td><span style=\"white-space:nowrap\">{{scope.key}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.scopeType || '='}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.type}}</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n            <h3 ng-show=\"item.attrs && item.attrs.length\"><span>attrs属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.attrs && item.attrs.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>值类型</th>\n                        <th>默认值</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.attrs\">\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.key\"></span></td>\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.type\"></span></td>\n                        <td>{{scope.defaultValue}}<span ng-if=\"!scope.defaultValue\">-</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n    \n            <h3 ng-show=\"item.api && item.api.length\"><span>JS内部api依赖：</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.api && item.api.length\">\n                <tbody>\n                    <tr ng-repeat=\"scope in item.api\">\n                        <td>{{scope}}</td>\n                    </tr><tr>\n                </tr></tbody>\n            </table>\n    \n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope连动视图：</span></h3>\n            <table class=\"table table-bordered\">\n                <tbody class=\"tbodyContent\" data-ng-bind-html=\"item.view\">\n                </tbody>\n            </table>\n        </div>\n        <div class=\"contentHtml\" data-ng-bind-html=\"item.html\"></div>\n    </div>";
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./index.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.html"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, scmsmodules, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./index.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.html"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, scmsmodules, html, css) {
     return function (app, elem, attrs, scope) {
         var directiveObj = scmsmodules.default || scmsmodules;
         var objKey;
@@ -33391,21 +33452,21 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.css":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.html":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div ng-controller=\"scmsDirectiveCtrl\">\n    <div component-view-directive=\"\" curr-item=\"currItem\" ng-if=\"currItem.type === 'directive'\"></div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33417,7 +33478,7 @@ var _demo2 = _interopRequireDefault(_demo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/ngHtmlContainer/ngHtmlContainer.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirectiveCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ngHtmlContainer, componentDirective, objectToViewDirective, ctrl, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/ngHtmlContainer/ngHtmlContainer.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirectiveCtrl.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.css"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ngHtmlContainer, componentDirective, objectToViewDirective, ctrl, css, html) {
   return function (app, elem, attrs, scope) {
     ngHtmlContainer(app, elem, attrs, scope);
     componentDirective(app, elem, attrs, scope);
@@ -33430,13 +33491,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirectiveCtrl.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirectiveCtrl.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope, demoJson) {
         app.controller('scmsDirectiveCtrl', ['$scope', '$cookies', '$location', '$state', 'G', '$timeout', '$rootScope', '$sce', '$http', '$compile', function ($scope, $cookies, $location, $state, G, $timeout, $rootScope, $sce, $http, $compile) {
             //get navs
@@ -33503,14 +33564,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.html":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsPage/scmsPage.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div ng-controller=\"scmsPageCtrl\">\n    <div class=\"error-msg-a\">正在构建中...敬请期待</div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsPage/scmsPage.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33522,7 +33583,7 @@ var _demo2 = _interopRequireDefault(_demo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsPage/scmsPageCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/standard/standard.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsPage/scmsPageCtrl.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/standard/standard.css"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsPage/scmsPage.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
   return function (app, elem, attrs, scope) {
     ctrl(app, elem, attrs, scope, _demo2.default);
     elem.append(html);
@@ -33532,13 +33593,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsPage/scmsPageCtrl.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsPage/scmsPageCtrl.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope, demoJson) {
         app.controller('scmsPageCtrl', ['$scope', '$cookies', '$location', '$state', 'G', '$timeout', '$rootScope', '$sce', '$http', '$compile', function ($scope, $cookies, $location, $state, G, $timeout, $rootScope, $sce, $http, $compile) {
             $rootScope.navs = [{
@@ -33552,27 +33613,27 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.css":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/componentDirective.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.html":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/componentDirective.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"derective-module\">\n        \n        <div id=\"contentSidebar\">\n            <h2>指令名称：{{item.name}} </h2>\n            <h4>{{item.date}} <i>作者-{{item.author}}</i><i ng-if=\"item.lastBy\">；修改-{{item.lastBy}}</i></h4>\n            <h3 ng-show=\"item.description\"><span>功能描述：</span>{{item.description}}</h3>\n            <h3><span>外部JS依赖：</span>{{item.deps[0]}}</h3>\n            <h3><span>外部HTML插入：</span><pre class=\"code\" ng-bind=\"item.htmlCode\"></pre></h3>\n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.scope && item.scope.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>继承</th>\n                        <th>值类型</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.scope\">\n                        <td><span style=\"white-space:nowrap\">{{scope.key}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.scopeType || '='}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.type}}</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n            <h3 ng-show=\"item.attrs && item.attrs.length\"><span>attrs属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.attrs && item.attrs.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>值类型</th>\n                        <th>默认值</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.attrs\">\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.key\"></span></td>\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.type\"></span></td>\n                        <td>{{scope.defaultValue}}<span ng-if=\"!scope.defaultValue\">-</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n    \n            <h3 ng-show=\"item.api && item.api.length\"><span>JS内部api依赖：</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.api && item.api.length\">\n                <tbody>\n                    <tr ng-repeat=\"scope in item.api\">\n                        <td>{{scope}}</td>\n                    </tr><tr>\n                </tr></tbody>\n            </table>\n    \n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope连动视图：</span></h3>\n            <table class=\"table table-bordered\">\n                <tbody class=\"tbodyContent\" data-ng-bind-html=\"item.view\">\n                </tbody>\n            </table>\n        </div>\n        <div class=\"contentHtml\" data-ng-bind-html=\"item.html\"></div>\n    </div>";
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/componentDirective.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./index.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.html"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, scmsmodules, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./index.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/componentDirective.html"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/componentDirective.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, scmsmodules, html, css) {
     return function (app, elem, attrs, scope) {
         var directiveObj = scmsmodules.default || scmsmodules;
         var objKey;
@@ -33662,21 +33723,21 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.css":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUi.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.html":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUi.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div ng-controller=\"scmsUiCtrl\">\n    <div scms-ui-directive=\"\" curr-item=\"currItem\" ng-if=\"currItem.type !== 'directive'\"></div>\n    <div component-view-directive=\"\" curr-item=\"currItem\" ng-if=\"currItem.type === 'directive'\"></div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUi.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33688,7 +33749,7 @@ var _demo2 = _interopRequireDefault(_demo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/ngHtmlContainer/ngHtmlContainer.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/scmsUiCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ngHtmlContainer, scmsUiDirective, componentDirective, objectToViewDirective, ctrl, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/ngHtmlContainer/ngHtmlContainer.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/componentDirective.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUiCtrl.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUi.css"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUi.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ngHtmlContainer, scmsUiDirective, componentDirective, objectToViewDirective, ctrl, css, html) {
   return function (app, elem, attrs, scope) {
     ngHtmlContainer(app, elem, attrs, scope);
     scmsUiDirective(app, elem, attrs, scope);
@@ -33702,13 +33763,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/scmsUiCtrl.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUiCtrl.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope, demoJson) {
         app.controller('scmsUiCtrl', ['$scope', '$cookies', '$location', '$state', 'G', '$timeout', '$rootScope', '$sce', '$http', '$compile', function ($scope, $cookies, $location, $state, G, $timeout, $rootScope, $sce, $http, $compile) {
 
@@ -33774,20 +33835,20 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.html":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"box contentPadding\" name=\"{{currItem.title}}\" style=\"{{currItem.style}}\" id=\"{{currItem.boxId || ''}}\">\n    <div class=\"title-square\">{{currItem.title}}</div>\n    <p>{{currItem.depict}}</p>\n    <div class=\"mt20\" ng-repeat=\"itemH in currItem.html\">\n        <div class=\"mt10\" ng-html-container=\"\" html-data=\"{{itemH}}\"></div>\n        <pre class=\"code mt15\" ng-if=\"currItem.isCode !== false\">{{itemH}}</pre>          \n    </div>\n    <div ng-if=\"currItem.buttons\" class=\"pt20\">\n        <div ng-repeat=\"itemBtn in currItem.buttons\">\n            <button class=\"btn btn-default\" ng-bind=\"itemBtn.value\" ng-click=\"eval(itemBtn.callback)\"></button>\n            <pre class=\"code\" ng-if=\"item.isCode !== false\">{{itemBtn.callback}}</pre>  \n        </div>\n    </div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html) {
     return function (app, elem, attrs, scope) {
         app.directive('scmsUiDirective', [function () {
             return {
@@ -33808,21 +33869,21 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/standard/standard.css":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/standard/standard.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/standard/standard.html":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/standard/standard.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div ng-controller=\"standardCtrl\">\n    <div class=\"error-msg-a\">正在构建中...敬请期待</div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/standard/standard.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/standard/standard.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33834,7 +33895,7 @@ var _demo2 = _interopRequireDefault(_demo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/standard/standardCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/standard/standard.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/standard/standard.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/standard/standardCtrl.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/standard/standard.css"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/standard/standard.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
   return function (app, elem, attrs, scope) {
     ctrl(app, elem, attrs, scope, _demo2.default);
     elem.append(html);
@@ -33844,13 +33905,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ "./node_modules/._scmsmodules-runner@0.0.11@scmsmodules-runner/app/viewModules/standard/standardCtrl.js":
+/***/ "./node_modules/scmsmodules-runner/app/viewModules/standard/standardCtrl.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope, demoJson) {
         app.controller('standardCtrl', ['$scope', '$cookies', '$location', '$state', 'G', '$timeout', '$rootScope', '$sce', '$http', '$compile', function ($scope, $cookies, $location, $state, G, $timeout, $rootScope, $sce, $http, $compile) {
             $rootScope.navs = [{
@@ -34166,7 +34227,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @html <select canton-select-directive ng-model="ngModel" d-item="dItem" class="form-control" data-is-all="1"></select>
  * @api 获取已开通城市接口:/goodstaxiAdmin/opencitycs/selectOpenCityList
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     'use strict';
 
     return function (app, elem, attrs, scope) {
@@ -34245,7 +34306,7 @@ module.exports = "<div class=\"modal fade change-pwd-dialog\" id=\"changePwdDial
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/changePwdDialog/changePwdDialogService.js"), __webpack_require__("./src/changePwdDialog/changePwdDialog.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, changePwdDialogService, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/changePwdDialog/changePwdDialogService.js"), __webpack_require__("./src/changePwdDialog/changePwdDialog.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, changePwdDialogService, html) {
     return function (app, elem, attrs, scope) {
         changePwdDialogService(app, elem, attrs, scope);
         app.directive('changePwdDialogDirective', ['G', 'changePwdDialogService', '$interval', '$cookies', '$window', function (G, service, $interval, $cookies, $window) {
@@ -34386,7 +34447,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/changePwdDialog/changePwdDialog.css"), __webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/changePwdDialog/changePwdDialog.css"), __webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.factory('changePwdDialogService', ['$rootScope', '$http', 'G', function ($rootScope, $http, G) {
             return {
@@ -34439,7 +34500,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * <div chart-directive data-height="250" chart-data="usersActiveChartData"></div>
  */
 // TODO: Echart exclude
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular)
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular)
 // echarts
 {
 	return function (app, elem, attrs, scope) {
@@ -34573,7 +34634,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @html <select citys-select-directive ng-model="ngModel" d-item="dItem" class="form-control"></select>
  * @api 获取已开通城市接口:/goodstaxiAdmin/ehuodiactivitycs/selectCitylist
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     'use strict';
 
     return function (app, elem, attrs, scope) {
@@ -34663,7 +34724,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @html <div citys-select-multiple-directive ng-model="ngModel" d-value="dValue" selected-city="selectedCity"></div>
  * @api 获取已开通城市接口:/goodstaxiAdmin/ehuodiactivitycs/selectCitylist
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/citysSelectMultiple/citysSelectMultiple.css"), __webpack_require__("./src/citysSelectMultiple/citysSelectMultiple.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/citysSelectMultiple/citysSelectMultiple.css"), __webpack_require__("./src/citysSelectMultiple/citysSelectMultiple.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, css, html) {
   'use strict';
 
   return function (app, elem, attrs, scope) {
@@ -34878,7 +34939,7 @@ module.exports = "<ol class=\"breadcrumb\">\n    <li class=\"bcfirst\"><i class=
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/crumb/crumb.html"), __webpack_require__("./src/crumb/crumb.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/crumb/crumb.html"), __webpack_require__("./src/crumb/crumb.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
     return function (app, elem, attrs, scope) {
         app.directive('crumbDirective', [function () {
             return {
@@ -34918,7 +34979,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy
  * @html <input class="form-control input-date" date-picker-directive ng-model='ngModel' min-date="minDate" max-date="maxDate" max-date-value="maxDateValue" min-date-value="minDateValue">
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
   return function (app, elem, attrs, scope) {
     app.directive('datePickerDirective', ['G', '$rootScope', function (G, $rootScope) {
       return {
@@ -35028,7 +35089,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <div error-no-data-directive data-content="暂无待审核的数据" show-by="showBy"></div>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('errorNoDataDirective', ['$document', '$timeout', function ($document, $timeout) {
             return {
@@ -35075,7 +35136,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy
  * @html <span export-directive api-url="'/goodstaxiAdmin/goodsseascs/downGoodsSeasListFile'" fetch-param="a" total-count="list.totalCount" max-number="5000" class="btn btn-export fr">导出</span>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('exportDirective', ['G', function (G) {
             return {
@@ -35272,7 +35333,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @html <form-radio-directive radio-list="radioList" radio-model="radioModel" link-model="linkModel"></form-radio-directive>
  * @htmlUrl scmsModules/formRadio/formRadio.html
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/formRadio/formRadio.css"), __webpack_require__("./src/formRadio/formRadio.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/formRadio/formRadio.css"), __webpack_require__("./src/formRadio/formRadio.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, css, html) {
     return function (app, elem, attrs, scope) {
         app.directive('formRadioDirective', ['$state', 'G', function ($state, G) {
             return {
@@ -35374,7 +35435,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <img image-show img-url="item.imageurl" alt-text="'卸货凭证'" text-only="显示文字" bg-click="false" mini-img="false">
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/imageShow/imageShow.html"), __webpack_require__("./src/imageShow/imageShow.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/imageShow/imageShow.html"), __webpack_require__("./src/imageShow/imageShow.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
     return function (app, elem, attrs, scope) {
         app.directive('imageShow', ['$timeout', '$document', '$compile', function ($timeout, $document, $compile) {
             return {
@@ -35612,7 +35673,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @param canEdit, 可编辑的状态有删除按钮
  * @param source,调用插件的来源,不同来源接口回调内容不同,['ka']
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/imageShow/imageShow.js"), __webpack_require__("./src/kaImageUpload/kaImageUpload.css"), __webpack_require__("./src/kaImageUpload/kaImageUpload.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, imageShow, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/imageShow/imageShow.js"), __webpack_require__("./src/kaImageUpload/kaImageUpload.css"), __webpack_require__("./src/kaImageUpload/kaImageUpload.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, imageShow, css, html) {
   return function (app, elem, attrs, scope) {
     imageShow(app, elem, attrs, scope);
     app.directive('kaImageUploadDirective', ['G', '$http', '$timeout', '$location', function (G, $http, $timeout, $location) {
@@ -35858,7 +35919,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('loadingDirective', ['G', function (G) {
             return {
@@ -35893,7 +35954,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html 
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/mainNav/template.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/mainNav/template.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
     return function (app, elem, attrs, scope) {
         app.directive('mainNavDirective', ['$rootScope', function ($rootScope) {
             return {
@@ -35995,7 +36056,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @lastBy 
  * @html <div multiselect-directive check-items="checkItems" items="items" placeholder="请选择您绑定的城市"></div>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/multiselect/multiselect.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/multiselect/multiselect.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('multiselectDirective', ['$timeout', function ($timeout) {
             var _ref;
@@ -36103,7 +36164,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('ngCodeDirective', ['$compile', function ($compile) {
             return {
@@ -36138,7 +36199,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <div ng-html-container html-data="{{htmlData}}"></div>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('ngHtmlContainer', ['$compile', function ($compile) {
             return {
@@ -36169,7 +36230,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 /***/ "./src/pagination/pagination.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n<div class=\"pagination-box ng-hide form-inline\" ng-show=\"pages && pages.length\">\n    <div class=\"fr\">\n        <span class=\"fl mr10 visible-large\" style=\"padding-top:8px;\">共{{totalCount}}条</span>\n        <ul class=\"pagination fl\">\n            <li ng-class=\"{disabled: currentPage == 1}\" ng-click=\"goPage(currentPage - 1);\">\n                <a href=\"javascript:void(0)\"><i>«</i></a>\n            </li>\n            <li ng-show=\"isShowBeEllipsis\">\n                <a href=\"javascript:void(0);\" ng-click=\"goPage(1);\">1</a>\n            </li>\n            <li ng-show=\"isShowBeEllipsis\" class=\"defaultA\"><a href=\"javascript:void(0);\">...</a></li>\n            <li ng-repeat=\"item in pages\" ng-class=\"{active: item == currentPage}\">\n                <a href=\"javascript:void(0)\" ng-bind=\"item\" ng-click=\"goPage(item);\"></a>\n            </li>\n            <li ng-show=\"isShowAfEllipsis\" class=\"defaultA\"><a href=\"javascript:void(0);\">...</a></li>\n            <li ng-show=\"isShowAfEllipsis\">\n                    <a href=\"javascript:void(0);\" ng-click=\"goPage(maxPage);\">{{maxPage}}</a>\n                </li>\n            <li ng-class=\"{disabled: currentPage == maxPage}\" ng-click=\"goPage(currentPage + 1);\">\n                <a href=\"javascript:void(0)\"><i>»</i></a>\n            </li>\n        </ul>\n        <select class=\"fl\" ng-show=\"!hidePageSizeChange\" ng-model=\"pageSize\" ng-change=\"change()\" ng-options=\"pageSizeListName[item] for item in pageSizeList\">\n                </select>\n        <div class=\"fl ml15\">\n            <div class=\"pagination-skip\">\n                <span>跳至</span>\n                <input type=\"text\" class=\"EUi-input\" ng-model=\"number\"> \n                <button class=\"btn\" ng-click=\"goPage(number);\">前往</button>\n            </div>\n        </div>\n    </div>\n</div>";
+module.exports = "<div class=\"pagination-box ng-hide form-inline\" ng-show=\"pages && pages.length\">\n    <div class=\"fr\">\n        <div class=\"fl\">\n            <label>共{{totalCount}}条</label>\n        </div>\n        <ul class=\"pagination fl\">\n            <li ng-class=\"{disabled: currentPage == 1}\" ng-click=\"goPage(currentPage - 1);\">\n                <a href=\"javascript:void(0)\"><i>«</i></a>\n            </li>\n            <li ng-show=\"isShowBeEllipsis\">\n                <a href=\"javascript:void(0);\" ng-click=\"goPage(1);\">1</a>\n            </li>\n            <li ng-show=\"isShowBeEllipsis\" class=\"defaultA\"><a href=\"javascript:void(0);\">...</a></li>\n            <li ng-repeat=\"item in pages\" ng-class=\"{active: item == currentPage}\">\n                <a href=\"javascript:void(0)\" ng-bind=\"item\" ng-click=\"goPage(item);\"></a>\n            </li>\n            <li ng-show=\"isShowAfEllipsis\" class=\"defaultA\"><a href=\"javascript:void(0);\">...</a></li>\n            <li ng-show=\"isShowAfEllipsis\">\n                    <a href=\"javascript:void(0);\" ng-click=\"goPage(maxPage);\">{{maxPage}}</a>\n                </li>\n            <li ng-class=\"{disabled: currentPage == maxPage}\" ng-click=\"goPage(currentPage + 1);\">\n                <a href=\"javascript:void(0)\"><i>»</i></a>\n            </li>\n        </ul>\n        \n        <div class=\"fr form-inline ml15\">\n            <select class=\"form-control\" ng-show=\"!hidePageSizeChange\" ng-model=\"pageSize\" ng-change=\"change()\" ng-options=\"pageSizeListName[item] for item in pageSizeList\">\n                </select>\n            <label>跳到</label>\n            <div class=\"input-group input-bar\">\n                <input type=\"text\" class=\"form-control\" ng-model=\"number\"> \n                <span class=\"input-group-btn\">\n                    <button class=\"btn\" ng-click=\"goPage(number);\">GO</button>\n                </span>\n            </div>\n        </div>\n    </div>\n</div>";
 
 /***/ }),
 
@@ -36188,7 +36249,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy
  * @html <div pagination-directive current-page="currentPage" total-count="totalCount" page-size="pageSize" onchanged="onchanged" hide-page-size="hidePageSize"></div>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/pagination/pagination.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/pagination/pagination.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
   return function (app, elem, attrs, scope) {
     app.directive('paginationDirective', [function () {
 
@@ -36337,7 +36398,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 /***/ "./src/paginationMini/paginationMini.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\" ng-hide paginationMini\" ng-show=\"maxPage>1\">\n    <ul class=\"fl\">\n        <li class=\"arrow\" ng-class=\"{disabled: currentPage == 1}\" ng-click=\"goPage(currentPage - 1);\">\n            <a href=\"javascript:void(0)\"><i>«</i></a>\n        </li>\n        <li ng-class=\"{active: currentPage == 1}\" ng-click=\"goPage(1);\">\n            <a href=\"javascript:void(0)\">1</a>\n        </li>\n        <li ng-show=\"isShowPage2\" style=\"display:none;\"><a href=\"javascript:void(0)\" class=\"tx_gotoPage\">2</a></li>\n        <li ng-show=\"isShowBeEllipsis\" class=\"\">...</li>\n        <li ng-repeat=\"item in pages\" ng-class=\"{active: item == currentPage}\">\n            <a href=\"javascript:void(0)\" ng-bind=\"item\" ng-click=\"goPage(item);\"></a>\n        </li>\n        <li ng-show=\"isShowAfEllipsis\" class=\"\">...</li>\n        <li ng-class=\"{active: currentPage == maxPage}\" ng-click=\"goPage(maxPage);\">\n            <a href=\"javascript:void(0)\">{{maxPage}}</a>\n        </li>\n        <li class=\"arrow\" ng-class=\"{disabled: currentPage == maxPage}\" ng-click=\"goPage(currentPage + 1);\">\n            <a href=\"javascript:void(0)\"><i>»</i></a>\n        </li>\n    </ul>\n    <div class=\"fastPageTurning tx_fastPageTurning fl\" ng-show=\"maxPage > 5\">\n        <input type=\"text\" ng-model=\"number\">\n        <a class=\"numberSubmit\" href=\"javascript:void(0)\" ng-click=\"goPage(number);\">GO</a>\n    </div>\n</div>";
+module.exports = "<div class=\" ng-hide paginationMini\" ng-show=\"maxPage>1\">\n    <ul class=\"fl\">\n        <li class=\"arrow\" ng-class=\"{disabled: currentPage == 1}\" ng-click=\"goPage(currentPage - 1);\">\n            <a href=\"javascript:void(0)\"><i>«</i></a>\n        </li>\n        <li ng-class=\"{active: currentPage == 1}\" ng-click=\"goPage(1);\">\n            <a href=\"javascript:void(0)\">1</a>\n        </li>\n        <li ng-show=\"isShowPage2\" style=\"display:none;\"><a href=\"javascript:void(0)\" class=\"tx_gotoPage\">2</a></li>\n        <li ng-show=\"isShowBeEllipsis\" class=\"\">...</li>\n        <li ng-repeat=\"item in pages\" ng-class=\"{active: item == currentPage}\">\n            <a href=\"javascript:void(0)\" ng-bind=\"item\" ng-click=\"goPage(item);\"></a>\n        </li>\n        <li ng-show=\"isShowAfEllipsis\" class=\"\">...</li>\n        <li ng-class=\"{active: currentPage == maxPage}\" ng-click=\"goPage(maxPage);\">\n            <a href=\"javascript:void(0)\">{{maxPage}}</a>\n        </li>\n        <li class=\"arrow\" ng-class=\"{disabled: currentPage == maxPage}\" ng-click=\"goPage(currentPage + 1);\">\n            <a href=\"javascript:void(0)\"><i>»</i></a>\n        </li>\n    </ul>    \n    <div class=\"input-group input-bar\" ng-show=\"maxPage > 5\">\n        <input type=\"text\" class=\"form-control\" ng-model=\"number\"> \n        <span class=\"input-group-btn\">\n            <button class=\"btn\" ng-click=\"goPage(number);\">GO</button>\n        </span>\n    </div>\n</div>";
 
 /***/ }),
 
@@ -36347,7 +36408,7 @@ module.exports = "<div class=\" ng-hide paginationMini\" ng-show=\"maxPage>1\">\
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/paginationMini/paginationMini.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/paginationMini/paginationMini.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html) {
 	return function (app, elem, attrs, scope) {
 		app.directive('paginationMiniDirective', [function () {
 			return {
@@ -36448,7 +36509,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <qrcode-directive url-address="urlAddress" ></qrcode-directive>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     'use strict';
 
     return function (app, elem, attrs, scope) {
@@ -36505,7 +36566,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @html <search-dropdown display-text="displayText" is-error-inline="isErrorInline" item-selected="itemSelected" list="list"></search-dropdown>
  * @htmlUrl scmsModules/searchDropdown/searchDropdown.html
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/searchDropdown/searchDropdown.css"), __webpack_require__("./src/searchDropdown/searchDropdown.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/searchDropdown/searchDropdown.css"), __webpack_require__("./src/searchDropdown/searchDropdown.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, css, html) {
     return function (app, elem, attrs, scope) {
         app.directive('searchDropdown', ['$timeout', function ($timeout) {
             return {
@@ -36558,6 +36619,132 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
+/***/ "./src/selector/selectorDirective.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+/**
+ * <directive>
+ * @name selector 选择器
+ * @description 选择器
+ * @date 2018-1-19
+ * @author 程乐
+ * @lastBy 
+ * @html 
+ */
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+    return function (app, elem, attrs, scope) {
+        app.directive('selectorDirective', ['$timeout', function ($timeout) {
+            return {
+                // template: '<input type="text" placeholder="请选择城市" ng-model="text" ><i class="EUi-select-icon"></i><div class="EUi-select-content"><dl><dd ng-repeat="item in items" data-value="{{ item.value }}">{{ item.text }}</dd></dl></div>',
+                restrict: 'A',
+                replace: true,
+                scope: {
+                    value: '=',
+                    text: '=',
+                    items: '='
+                    // query: '='
+                },
+                link: function link($scope, $element, $attrs) {
+                    $timeout(function () {
+                        if ($scope.text) {
+                            $('.EUi-select-content dd', $element).each(function () {
+                                if ($(this).text() == $scope.text) {
+                                    $(this).addClass('active');
+                                    return false;
+                                }
+                            });
+                        }
+                        $(document).on('click', function () {
+                            $(".EUi-select-content").hide();
+                            $scope.text = $('.EUi-select-content .active', $element).text();
+                            $scope.value = $('.EUi-select-content .active', $element).attr('data-value');
+                            $scope.$apply();
+                        });
+
+                        $($element).on('click', function () {
+                            if (!$element.hasClass('EUi-select-disabled')) {
+                                $('.EUi-select-content dd', $element).show();
+                                $(".EUi-select-content", $element).show();
+                            }
+                            return false;
+                        });
+
+                        $scope.$watch('text', function (newValue, oldValue) {
+                            // if($scope.query){
+                            if (newValue != oldValue) {
+                                $('.EUi-select-content dd', $element).each(function () {
+                                    if ($(this).text().indexOf($scope.text) == -1) {
+                                        $(this).hide();
+                                    } else {
+                                        $(this).show();
+                                    }
+                                });
+                                var type = false;
+                                $('.EUi-select-content dd', $element).each(function () {
+                                    if ($(this).css('display') == 'none') {
+                                        type = true;
+                                    } else {
+                                        type = false;
+                                        return false;
+                                    }
+                                });
+                                if (type) {
+                                    if (!$('.EUi-select-none', $element)[0]) {
+                                        $('.EUi-select-content', $element).append('<p class="EUi-select-none">无匹配选项</p>');
+                                    }
+                                } else {
+                                    $('.EUi-select-none', $element).remove();
+                                }
+                            }
+                            if (!newValue) {
+                                $('.EUi-select-content dd', $element).show();
+                            }
+                            // }
+                        });
+
+                        $('input, .EUi-select-icon', $element).hover(function () {
+                            if ($scope.text && !$element.hasClass('EUi-select-disabled')) {
+                                $('.EUi-select-icon', $element).addClass('hover');
+                            }
+                        }, function () {
+                            $('.EUi-select-icon', $element).removeClass('hover');
+                        });
+
+                        $($element).on('click', 'i.hover', function () {
+                            $scope.text = '';
+                            $scope.value = '';
+                            $(this).removeClass('hover');
+                            $('.EUi-select-content dd', $element).removeClass('active');
+                            $scope.$apply();
+                        });
+
+                        $('.EUi-select-content', $element).on('click', 'dd', function () {
+                            $('.EUi-select-content dd', $element).removeClass('active');
+                            $(this).addClass('active');
+                            var val = $(this).attr('data-value');
+                            var text = $(this).text();
+                            $scope.text = text;
+                            $scope.value = val;
+                            $scope.$apply();
+                            $(".EUi-select-content", $element).hide();
+                            $('.EUi-select-content dd', $element).show();
+                            return false;
+                        });
+                    }, 100);
+                },
+
+                controller: function controller($scope, $element, $attrs) {}
+            };
+        }]);
+    };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
 /***/ "./src/starRating/starRating.css":
 /***/ (function(module, exports) {
 
@@ -36586,7 +36773,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <span star-rating num="datanum"></span>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/starRating/starRating.html"), __webpack_require__("./src/starRating/starRating.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/starRating/starRating.html"), __webpack_require__("./src/starRating/starRating.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
     return function (app, elem, attrs, scope) {
         app.directive('starRating', ['$timeout', '$document', '$compile', function ($timeout, $document, $compile) {
             return {
@@ -36666,7 +36853,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <steps current-index="currentIndex" status-data="statusData" data-direction="y"></steps>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/steps/steps.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/steps/steps.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('steps', ['$timeout', function ($timeout) {
             return {
@@ -36704,7 +36891,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html 
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('switchDirective', ['$rootScope', function ($rootScope) {
             return {
@@ -36748,7 +36935,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy
  * @htmlUrl scmsModules/table/tableHtml.html
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/pagination/paginationDirective.js"), __webpack_require__("./src/errorNoData/errorNoDataDirective.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, paginationDirective, errorNoDataDirective) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/pagination/paginationDirective.js"), __webpack_require__("./src/errorNoData/errorNoDataDirective.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, paginationDirective, errorNoDataDirective) {
   return function (app, elem, attrs, scope) {
     paginationDirective(app);
     errorNoDataDirective(app);
@@ -36926,7 +37113,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy
  * @html <input class="form-control input-time" time-picker-directive ng-model='ngModel' now-time="true">
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('timePickerDirective', ['G', '$rootScope', function (G, $rootScope) {
             return {
@@ -37009,7 +37196,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @lastBy 
  * @html <i class="fa fa-question-circle" tooltip="tooltip" tooltip-position="tooltipPosition"></i>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/tooltip/tooltip.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/tooltip/tooltip.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
   return function (app, elem, attrs, scope) {
     app.directive('tooltip', ['$document', '$compile', function ($document, $compile) {
       var _ref;
@@ -37147,7 +37334,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <div tree-view tree-data="treeData" text-field="textField" item-clicked="itemClicked" default-item="defaultItem" link-key="linkKey">
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/treeView/treeView.html"), __webpack_require__("./src/treeView/treeView.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/treeView/treeView.html"), __webpack_require__("./src/treeView/treeView.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
     return function (app, elem, attrs, scope) {
         app.directive('treeView', ['$timeout', function ($timeout) {
             return {

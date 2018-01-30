@@ -28,21 +28,7 @@ export default {
 			"isDisabled":1,
 			"key":"pageSize",
 			"description":"一页显示行数"
-		},
-		// {
-		// 	"type":"function",
-		// 	"parentScopeValue":"$.alert('已执行回调函数,返回参数有:pageSize、currentPage', {type:'success'})",
-		// 	"key":"onchanged",
-		// 	"description":"回调函数"
-		// },
-		// {
-		// 	"type":"boolean",
-		// 	"exampleValue":false,
-		// 	"defaultValue":false,
-		// 	"key":"hidePageSize",
-		// 	"description":"pageSize是否显示"
-		// }
-		],
+		}],
 	"attrs":[],
 	"deps":["scmsModules/paginationMini/paginationMiniDirective"],
 	"html":"<div pagination-mini-directive current-page=\"currentPage\" page-size=\"pageSize\" total-count=\"totalCount\"></div>",
