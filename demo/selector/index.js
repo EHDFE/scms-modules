@@ -27,10 +27,17 @@ export default {
 			"defaultValue":'',
 			"key":"value",
 			"description":"选中数据"
+		},
+		{
+			"type":"boolean",
+			"exampleValue":false,
+			"defaultValue":false,
+			"key":"disabled",
+			"description":"是否禁用"
 		}],
 	"attrs":[],
 	"deps":["scmsModules/selector/selectorDirective"],
-	"html":"<div selector-directive class=\"EUi-select-box\" items=\"items\" value=\"value\" text=\"text\"><input type=\"text\" placeholder=\"请选择城市\" ng-model=\"text\" ><i class=\"EUi-select-icon\"></i><div class=\"EUi-select-content\"><dl><dd ng-repeat=\"item in items\" data-value=\"{{ item.value }}\">{{ item.text }}</dd></dl></div></div>",
+	"html":"<div selector-directive class=\"EUi-select-box\" ng-class=\"{' EUi-select-disabled' : disabled}\" items=\"items\" value=\"value\" text=\"text\"><input type=\"text\" placeholder=\"请选择城市\" ng-model=\"text\" ng-disabled=\"disabled\"><i class=\"EUi-select-icon\"></i><div class=\"EUi-select-content\"><dl><dd ng-repeat=\"item in items\" data-value=\"{{ item.value }}\">{{ item.text }}</dd></dl></div></div>",
 	"api":"",
 	"htmlUrl":""
 }
