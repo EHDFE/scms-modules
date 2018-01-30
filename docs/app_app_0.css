@@ -2080,29 +2080,7 @@
 .fa-percent:before {
   content: "\F295";
 }
-@charset "utf-8";
-#crumbs{
-	overflow: hidden;
-}
-.breadcrumb{
-	border-bottom: 1px solid #eee;
-	height: 35px;
-	line-height: 35px;
-	padding:0 20px;
-	background: none;
-	background: #e1e6e8;
-	margin: 0;
-}
-.breadcrumb i{
-	color: #999;
-}
-.breadcrumb>li{
-	padding-right: 10px;
-	color: #777;
-}
-.breadcrumb>li:first-child{
-	padding-right: 0;
-}.change-pwd-dialog{
+.change-pwd-dialog{
     color: #333;
     line-height: 1.42857143;
 }

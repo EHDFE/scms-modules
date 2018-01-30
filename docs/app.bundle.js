@@ -35018,13 +35018,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./src/crumb/crumb.css":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ "./src/crumb/crumb.html":
 /***/ (function(module, exports) {
 
@@ -35038,7 +35031,7 @@ module.exports = "<ol class=\"breadcrumb\">\n    <li class=\"bcfirst\"><i class=
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/crumb/crumb.html"), __webpack_require__("./src/crumb/crumb.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/crumb/crumb.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
     return function (app, elem, attrs, scope) {
         app.directive('crumbDirective', [function () {
             return {
