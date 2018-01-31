@@ -523,6 +523,10 @@ var _index13 = __webpack_require__("./demo/nav/index.js");
 
 var _index14 = _interopRequireDefault(_index13);
 
+var _tooltip = __webpack_require__("./demo/tooltip/tooltip.json");
+
+var _tooltip2 = _interopRequireDefault(_tooltip);
+
 var _index15 = __webpack_require__("./demo/searchForm/index.js");
 
 var _index16 = _interopRequireDefault(_index15);
@@ -576,6 +580,8 @@ demoData = demoData.concat(_index10.default);
 demoData.push(_index12.default);
 
 demoData = demoData.concat(_index14.default);
+
+demoData = demoData.concat(_tooltip2.default);
 
 demoData.push(_index16.default);
 
@@ -652,14 +658,14 @@ var _navPills2 = _interopRequireDefault(_navPills);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = [{
-	title: "navTab",
-	parentTitle: "navTabs",
+	title: "NavTab",
+	parentTitle: "NavTabs",
 	author: "tianyanrong",
 	html: [_navTab2.default],
 	isCode: true
 }, {
-	title: "navTab Sub",
-	parentTitle: "navTabs",
+	title: "NavTab Sub",
+	parentTitle: "NavTabs",
 	author: "tianyanrong",
 	html: [_navPills2.default],
 	isCode: true
@@ -801,7 +807,7 @@ var _searchForm2 = _interopRequireDefault(_searchForm);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-	title: "searchForm",
+	title: "SearchForm",
 	author: "tianyanrong",
 	html: [_searchForm2.default],
 	isCode: true
@@ -830,12 +836,16 @@ var _selectDropdown = __webpack_require__("./demo/selectDropdown/selectDropdown.
 
 var _selectDropdown2 = _interopRequireDefault(_selectDropdown);
 
+var _selectDropdownGroup = __webpack_require__("./demo/selectDropdown/selectDropdownGroup.html");
+
+var _selectDropdownGroup2 = _interopRequireDefault(_selectDropdownGroup);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
 	title: "Select Dropdown",
 	author: "程乐",
-	html: [_selectDropdown2.default],
+	html: [_selectDropdown2.default, _selectDropdownGroup2.default],
 	isCode: true
 };
 
@@ -845,6 +855,13 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports = "<select-dropdown drop-data=\"[{name:'城市1',value:1},{name:'城市2',value:2},{name:'城市3',value:3},{name:'城市4',value:4}]\" checked-item=\"checkedItem\"></select-dropdown>\n\n<select-dropdown disabled=\"true\" drop-data=\"[{name:'城市1',value:1},{name:'城市2',value:2},{name:'城市3',value:3},{name:'城市4',value:4}]\" checked-item=\"checkedItem\"></select-dropdown>";
+
+/***/ }),
+
+/***/ "./demo/selectDropdown/selectDropdownGroup.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h2 class=\"codeTitle\">分组:</h2>\n<select-dropdown mode=\"'group'\" drop-data=\"[{name:'浙江',values:[{name:'杭州',value:1},{name:'嘉兴',value:2}]},{name:'山东',values:[{name:'青岛',value:3},{name:'枣庄',value:4}]},{name:'山东',values:[{name:'青岛',value:3},{name:'枣庄',value:4}]}]\" checked-item=\"checkedItem1\"></select-dropdown>\n";
 
 /***/ }),
 
@@ -933,6 +950,13 @@ exports.default = {
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"title-square\">标题样式</div>\n\n<div class=\"title-point\">标题样式</div>\n\n<label class=\"control-label control-label-line\">\n    <span>添加原因</span>\n    <i></i>\n</label>\n";
+
+/***/ }),
+
+/***/ "./demo/tooltip/tooltip.json":
+/***/ (function(module, exports) {
+
+module.exports = [{"keyName":"Tooltip","name":"Tooltip","title":"Tooltip","author":"黄思飞","lastBy":"","description":"信息提示","date":"2016-12-01","scope":[{"type":"string","exampleValue":"这是一个小tip","key":"tooltip","description":"提示的文本内容"},{"type":"string","exampleValue":"left","defaultValue":"down","key":"tooltipPosition","description":"提示弹框的位置"}],"attrs":[],"deps":["scmsModules/tooltip/tooltip/"],"html":"<i class=\"fa fa-question-circle\" tooltip=\"tooltip\" tooltip-position=\"tooltipPosition\"></i>","api":"","htmlUrl":"","type":"directive"}]
 
 /***/ }),
 
@@ -1122,7 +1146,7 @@ exports.default = {
   'steps/stepsDirective': _steps2.default,
   'table/tableDirective': _table2.default,
   'timePicker/timePickerDirective': _timePickerDirective2.default,
-  'tooltip/tooltipDirective': _tooltip2.default,
+  'tooltip/tooltip': _tooltip2.default,
   'treeView/treeViewDirective': _treeView2.default,
   'buttonDropdown': _buttonDropdown2.default,
   'selectDropdown': _selectDropdown2.default
@@ -36694,7 +36718,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 /***/ "./src/selectDropdown/selectDropdown.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group form-content\">\n    <input type=\"text\" ng-model=\"checkedItem.name\" ng-disabled=\"disabled\" class=\"dropdown-toggle form-control\" ng-transclude=\"\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n    <span class=\"glyphicon glyphicon-menu-down form-control-feedback\" aria-hidden=\"true\"></span>\n    <ul class=\"dropdown-menu\">\n        <li ng-repeat=\"item in dropData\" ng-click=\"checked(item,$index);\" ng-class=\"{'active' : $index == itemIndex }\"><a>{{ item.name }}</a></li>\n    </ul>\n</div>";
+module.exports = "<div class=\"btn-group form-content\">\n    <input type=\"text\" ng-model=\"checkedItem.name\" ng-disabled=\"disabled\" class=\"dropdown-toggle form-control\" ng-transclude=\"\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n    <span class=\"glyphicon glyphicon-menu-down form-control-feedback\" aria-hidden=\"true\"></span>\n    <div class=\"dropdown-menu\">\n        <ul>\n            <dt class=\"dropdown-header\" ng-if=\"mode==='group'\" ng-repeat=\"item in dropData\">\n                {{ item.name }}\n                <ul>\n                    <li ng-repeat=\"item1 in item.values\" ng-click=\"checked(item1,$index);\" ng-class=\"{'active' : $index == itemIndex }\"><a>{{ item1.name }}</a></li>\n                </ul>\n            </dt>\n            <li ng-repeat=\"item in dropData\" ng-if=\"!mode\" ng-click=\"checked(item,$index);\" ng-class=\"{'active' : $index == itemIndex }\"><a>{{ item.name }}</a></li>\n        </ul>\n    </div>\n</div>";
 
 /***/ }),
 
@@ -36719,7 +36743,8 @@ exports.default = function (app, elem, attrs, scope) {
                 dropData: '=', //dropData 
                 checkedItem: '=',
                 onChange: '@',
-                disabled: '='
+                disabled: '=',
+                mode: '='
             },
             link: function link($scope, $element, $attrs) {
                 console.log($scope.dropData);
@@ -36736,29 +36761,31 @@ exports.default = function (app, elem, attrs, scope) {
                 };
                 $scope.$watch('checkedItem.name', function (newValue, oldValue) {
                     if (newValue != oldValue) {
-                        $('li', $element).each(function () {
-                            if ($(this).text().indexOf(newValue) == -1) {
-                                $(this).hide();
+                        $timeout(function () {
+                            $('li', $element).each(function () {
+                                if ($(this).text().indexOf(newValue) == -1) {
+                                    $(this).hide();
+                                } else {
+                                    $(this).show();
+                                }
+                            });
+                            var type = false;
+                            $('li', $element).each(function () {
+                                if ($(this).css('display') == 'none') {
+                                    type = true;
+                                } else {
+                                    type = false;
+                                    return false;
+                                }
+                            });
+                            if (type) {
+                                if (!$('.EUi-select-none', $element)[0]) {
+                                    $('.dropdown-menu', $element).append('<p class="EUi-select-none">无匹配选项</p>');
+                                }
                             } else {
-                                $(this).show();
+                                $('.EUi-select-none', $element).remove();
                             }
-                        });
-                        var type = false;
-                        $('li', $element).each(function () {
-                            if ($(this).css('display') == 'none') {
-                                type = true;
-                            } else {
-                                type = false;
-                                return false;
-                            }
-                        });
-                        if (type) {
-                            if (!$('.EUi-select-none', $element)[0]) {
-                                $('.dropdown-menu', $element).append('<p class="EUi-select-none">无匹配选项</p>');
-                            }
-                        } else {
-                            $('.EUi-select-none', $element).remove();
-                        }
+                        }, 50);
                     }
                     if (!newValue) {
                         $('li', $element).show();
@@ -37216,13 +37243,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./src/tooltip/tooltip.css":
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ "./src/tooltip/tooltip.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -37239,7 +37259,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @lastBy 
  * @html <i class="fa fa-question-circle" tooltip="tooltip" tooltip-position="tooltipPosition"></i>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/tooltip/tooltip.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
   return function (app, elem, attrs, scope) {
     app.directive('tooltip', ['$document', '$compile', function ($document, $compile) {
       var _ref;
@@ -37251,6 +37271,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         tooltip: '@', //@scope tooltip 提示的文本内容 {type: "string", "exampleValue": "这是一个小tip"}
         tooltipPosition: '=' //@scope tooltipPosition 提示弹框的位置 {type: "string", "exampleValue": "left", defaultValue: "down"}
       }), _defineProperty(_ref, 'link', function postLink($scope, $element, $attrs) {
+        console.log(4444444, $scope.tooltip);
         var tip = $compile('<div ng-class="tipClass"><div ng-bind-html="text"></div><div class="tooltip-arrow"></div></div>')($scope),
             tipClassName = 'tooltip',
             tipActiveClassName = 'tooltip-show',

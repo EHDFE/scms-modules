@@ -7706,11 +7706,13 @@ input::-webkit-input-placeholder {
   padding: 0 10px;
   cursor: pointer;
   font-weight: 100;
+  font-weight: inherit;
 }
 .dropdown-menu li a {
-  font-size: 14px;
+  font-size: 14px!important;
   padding: 0;
   line-height: inherit;
+  color: #1E283C;
 }
 .dropdown-menu li:hover {
   background: #F6F8FC;
@@ -7719,10 +7721,18 @@ input::-webkit-input-placeholder {
   background: #51A1FD;
   color: #fff;
 }
-.dropdown-menu > .active > a,
-.dropdown-menu > .active > a:hover,
-.dropdown-menu > .active > a:focus {
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover,
+.dropdown-menu .active > a:focus {
   background-color: #51A1FD;
+  color: #fff;
+}
+.dropdown-menu .dropdown-header {
+  font-size: 14px;
+  color: #9BA0AA;
+  font-weight: 100;
+  padding: 0 10px;
+  padding-top: 10px;
 }
 .dropdown-menu .EUi-select-none {
   line-height: 34px;
@@ -7738,6 +7748,20 @@ input::-webkit-input-placeholder {
   height: 30px;
   line-height: 30px;
   width: 25px;
+}
+.form-content.btn-group div {
+  width: 100%;
+  max-height: 210px;
+  margin-top: 4px;
+  border-radius: 3px;
+  background: #fff;
+  padding-top: 2px;
+  overflow: hidden;
+}
+.form-content.btn-group div > ul {
+  max-height: 210px;
+  overflow: auto;
+  padding-bottom: 7px;
 }
 .btn-group li.active,
 .btn-group li.active:hover,
@@ -9389,6 +9413,78 @@ h2.box-title {
 }
 .open .dropdown-toggle::after {
   content: "\F106";
+}
+#crumbs {
+  overflow: hidden;
+}
+.breadcrumb {
+  border-bottom: 1px solid #eee;
+  height: 35px;
+  line-height: 35px;
+  padding: 0 20px;
+  background: none;
+  background: #e1e6e8;
+  margin: 0;
+}
+.breadcrumb i {
+  color: #999;
+}
+.breadcrumb > li {
+  padding-right: 10px;
+  color: #777;
+}
+.breadcrumb > li:first-child {
+  padding-right: 0;
+}
+.tooltip {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.84);
+  padding: 7px 10px;
+  max-width: 250px;
+  color: #fff;
+  border-radius: 3px;
+  opacity: 1;
+}
+.tooltip-show {
+  display: inherit;
+}
+.tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.tooltip-down .tooltip-arrow {
+  top: -6px;
+  left: 50%;
+  margin-left: -3px;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.84);
+}
+.tooltip-up .tooltip-arrow {
+  bottom: -6px;
+  left: 50%;
+  margin-left: -3px;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 3px solid rgba(0, 0, 0, 0.84);
+}
+.tooltip-right .tooltip-arrow {
+  left: -6px;
+  top: 50%;
+  margin-top: -3px;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-right: 3px solid rgba(0, 0, 0, 0.84);
+}
+.tooltip-left .tooltip-arrow {
+  right: -6px;
+  top: 50%;
+  margin-top: -3px;
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+  border-left: 3px solid rgba(0, 0, 0, 0.84);
 }
 .file-uploader-directive .file-uploader-hidden-input {
   display: none;
