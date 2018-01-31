@@ -49,7 +49,7 @@ demoData.push(crumb);
 import card from "./card/index.js";
 demoData.push(card);
 
-import selector from "./selector/index.js";
-demoData.push(selector);
+import selectDropdown from "./selectDropdown/index.js";
+demoData.push(selectDropdown);
 
 export default demoData
