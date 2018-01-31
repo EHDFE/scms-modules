@@ -75,7 +75,7 @@ export default {
   'steps/stepsDirective': stepsDirective,
   'table/tableDirective': tableDirective,
   'timePicker/timePickerDirective': timePickerDirective,
-  'tooltip/tooltipDirective': tooltipDirective,
+  'tooltip/tooltip': tooltipDirective,
   'treeView/treeViewDirective': treeViewDirective,
   'buttonDropdown': buttonDropdown,
   'selector/selectorDirective': selectorDirective,

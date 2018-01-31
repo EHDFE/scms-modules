@@ -2,15 +2,15 @@ import navTab from "./navTab.html";
 import navPills from "./navPills.html";
 
 export default [{
-	title: "navTab",
-	parentTitle:"navTabs",
+	title: "NavTab",
+	parentTitle:"NavTabs",
 	author: "tianyanrong",
 	html: [navTab],
 	isCode: true
 },
 {
-	title: "navTab Sub",
-	parentTitle:"navTabs",
+	title: "NavTab Sub",
+	parentTitle:"NavTabs",
 	author: "tianyanrong",
 	html: [navPills],
 	isCode: true

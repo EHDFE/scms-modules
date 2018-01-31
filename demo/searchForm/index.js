@@ -1,7 +1,7 @@
 import searchForm from "./searchForm.html";
 
 export default {
-	title: "searchForm",
+	title: "SearchForm",
 	author: "tianyanrong",
 	html: [searchForm],
 	isCode: true

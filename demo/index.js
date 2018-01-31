@@ -21,6 +21,9 @@ demoData.push(inputDate);
 import nav from "./nav/index.js";
 demoData = demoData.concat(nav);
 
+import tooltip from "./tooltip/tooltip.json";
+demoData = demoData.concat(tooltip);
+
 import searchForm from "./searchForm/index.js";
 demoData.push(searchForm);
 

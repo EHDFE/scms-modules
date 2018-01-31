@@ -7,8 +7,7 @@
  * @html <i class="fa fa-question-circle" tooltip="tooltip" tooltip-position="tooltipPosition"></i>
  */
 define([
-    'angular',
-    './tooltip.css'
+    'angular'
 ], function(
     angular
     ) {
@@ -23,6 +22,7 @@ define([
                     tooltipPosition: '=',    //@scope tooltipPosition 提示弹框的位置 {type: "string", "exampleValue": "left", defaultValue: "down"}
                 },
                 link: function postLink($scope,$element,$attrs) {
+                    console.log(4444444, $scope.tooltip)
                     var tip = $compile('<div ng-class="tipClass"><div ng-bind-html="text"></div><div class="tooltip-arrow"></div></div>')($scope),
                         tipClassName = 'tooltip',
                         tipActiveClassName = 'tooltip-show',
