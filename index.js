@@ -42,7 +42,7 @@ import tooltipDirective from "./src/tooltip/tooltip";
 import treeViewDirective from "./src/treeView/treeView";
 import fileUploaderDirective from "./src/fileUploader/index";
 import buttonDropdown from "./src/buttonDropdown/buttonDropdown";
-import selectorDirective from "./src/selector/selectorDirective";
+import selectDropdown from "./src/selectDropdown/selectDropdown";
 
 
 export default {
@@ -78,5 +78,5 @@ export default {
   'tooltip/tooltipDirective': tooltipDirective,
   'treeView/treeViewDirective': treeViewDirective,
   'buttonDropdown': buttonDropdown,
-  'selector/selectorDirective': selectorDirective,
+  'selectDropdown': selectDropdown,
 };
