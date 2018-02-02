@@ -7749,7 +7749,7 @@ input::-webkit-input-placeholder {
   line-height: 30px;
   width: 25px;
 }
-.form-content.btn-group div {
+.form-content.btn-group .dropdown-menu {
   width: 100%;
   max-height: 210px;
   margin-top: 4px;
@@ -7758,7 +7758,7 @@ input::-webkit-input-placeholder {
   padding-top: 2px;
   overflow: hidden;
 }
-.form-content.btn-group div > ul {
+.form-content.btn-group .dropdown-menu > ul {
   max-height: 210px;
   overflow: auto;
   padding-bottom: 7px;
