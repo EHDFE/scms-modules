@@ -211,7 +211,7 @@ exports.default = [{
 /***/ "./demo/card/card.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"card-box\">\n    <div class=\"card\">\n        <sapn>\n            线上代收总金额（123456人）\n            <span class=\"color-text-normal font-weight-600\">\n                2145,456,654\n            </span>\n            元\n        </sapn>\n    </div>\n    <div class=\"card\">\n        <sapn>\n            线上代收总金额（123456人）\n            <span class=\"color-text-normal font-weight-600\">\n                2145,456,654\n            </span>\n            元\n        </sapn>\n    </div>\n</div>\n<div class=\"card-box\">\n    <div class=\"card\">\n        <sapn>\n            <span class=\"color-text-normal font-weight-600\">\n                2145,456,654\n            </span>\n            元\n            <br>\n            线上代收总金额（123456人）\n        </sapn>\n    </div>\n    <div class=\"card\">\n        <sapn>\n            <span class=\"color-text-normal font-weight-600\">\n                2145,456,654\n            </span>\n            元\n            <br>\n            线上代收总金额（123456人）\n        </sapn>\n    </div>\n    <div class=\"card\">\n        <sapn>\n            <span class=\"color-text-normal font-weight-600\">\n                2145,456,654\n            </span>\n            元\n            <br>\n            线上代收总金额（123456人）\n        </sapn>\n    </div>\n</div>";
+module.exports = "<div class=\"card-box\">\n    <div class=\"card\">\n        <span>\n            线上代收总金额（123456人）\n            <span class=\"color-text-normal font-weight-600\">\n                2145,456,654\n            </span>\n            元\n        </span>\n    </div>\n    <div class=\"card\">\n        <span>\n            线上代收总金额（123456人）\n            <span class=\"color-text-normal font-weight-600\">\n                2145,456,654\n            </span>\n            元\n        </span>\n    </div>\n</div>\n<div class=\"card-box\">\n    <div class=\"card\">\n        <span>\n            <span class=\"color-text-normal font-weight-600\">\n                2145,456,654\n            </span>\n            元\n            <br>\n            线上代收总金额（123456人）\n        </span>\n    </div>\n    <div class=\"card\">\n        <span>\n            <span class=\"color-text-normal font-weight-600\">\n                2145,456,654\n            </span>\n            元\n            <br>\n            线上代收总金额（123456人）\n        </span>\n    </div>\n    <div class=\"card\">\n        <span>\n            <span class=\"color-text-normal font-weight-600\">\n                2145,456,654\n            </span>\n            元\n            <br>\n            线上代收总金额（123456人）\n        </span>\n    </div>\n</div>";
 
 /***/ }),
 
@@ -485,6 +485,34 @@ exports.default = {
 
 /***/ }),
 
+/***/ "./demo/imageUpload/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	title: "imageUpload",
+	author: "程乐",
+	type: "directive",
+	"keyName": "imageUpload",
+	"name": "imageUpload 图片上传",
+	"lastBy": "",
+	"description": "",
+	"date": "2018-02-02",
+	"scope": [],
+	"attrs": [],
+	"deps": ["scmsModules/imageUpload/imageUpload"],
+	"html": "<div image-upload></div>",
+	"api": "",
+	"htmlUrl": ""
+};
+
+/***/ }),
+
 /***/ "./demo/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -567,6 +595,10 @@ var _index33 = __webpack_require__("./demo/starRating/index.js");
 
 var _index34 = _interopRequireDefault(_index33);
 
+var _index35 = __webpack_require__("./demo/imageUpload/index.js");
+
+var _index36 = _interopRequireDefault(_index35);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var demoData = [];
@@ -606,6 +638,8 @@ demoData.push(_index30.default);
 demoData.push(_index32.default);
 
 demoData.push(_index34.default);
+
+demoData.push(_index36.default);
 
 exports.default = demoData;
 
@@ -1154,8 +1188,13 @@ var _selectDropdown = __webpack_require__("./src/selectDropdown/selectDropdown.j
 
 var _selectDropdown2 = _interopRequireDefault(_selectDropdown);
 
+var _imageUpload = __webpack_require__("./src/imageUpload/imageUpload.js");
+
+var _imageUpload2 = _interopRequireDefault(_imageUpload);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import noPermissionDirective from "./src/noPermission/noPermission";
 exports.default = {
   'ngCode/ngCodeDirective': _ngCodeDirective2.default,
   'switch/switchDirective': _switchDirective2.default,
@@ -1189,9 +1228,9 @@ exports.default = {
   'tooltip/tooltip': _tooltip2.default,
   'treeView/treeViewDirective': _treeView2.default,
   'buttonDropdown': _buttonDropdown2.default,
-  'selectDropdown': _selectDropdown2.default
+  'selectDropdown': _selectDropdown2.default,
+  'imageUpload/imageUpload': _imageUpload2.default
 };
-//import noPermissionDirective from "./src/noPermission/noPermission";
 
 /***/ }),
 
@@ -35740,6 +35779,45 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
                         $document.find('.imgUrlBox,.imgUrlControl,.imgShowClosBtn').remove();
                     });
                 }
+            };
+        }]);
+    };
+}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+/***/ }),
+
+/***/ "./src/imageUpload/imageUpload.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"imageUpload\">\n    <div class=\"thumb\">\n        <ul>\n            <li>\n                <div class=\"upload-box\" style=\"display: none;\">\n                    <label>\n                        <span>\n                            <i class=\"fa fa-plus\"></i>\n                        </span>\n                        <input type=\"file\" ng-model=\"file\" value=\"上传文件\" style=\"display: none;\">\n                        上传\n                    </label>\n                </div>\n                <div class=\"images-box\">\n\n                </div>\n                <div class=\"loading-box\">\n                    <p>\n                        上传中 ···\n                    </p>\n                    <div>\n                        <span class=\"succeed\"></span>\n                        <span class=\"error\"></span>\n                        <span class=\"loading\"></span>\n                    </div>\n                </div>\n            </li>\n        </ul>\n    </div>\n    <div class=\"noThumb\">\n        <label>\n            <i class=\"fa fa-upload mr5\"></i>\n            <input type=\"file\" ng-model=\"file\" value=\"上传文件\" style=\"display: none;\">\n            上传文件\n        </label>\n        <ul>\n            <li>\n                <span>\n                    <i class=\"fa fa-chain-broken\"></i>\n                </span>\n                <div>\n                    <a href=\"javascript:;\" class=\"succeed\">图片1.jpg</a>\n                    <a href=\"javascript:;\" class=\"remove\">\n                        <i class=\"fa fa-close\"></i>\n                    </a>\n                    <div>\n                        <span></span>\n                    </div>\n                </div>\n            </li>\n            <li>\n                <span>\n                    <i class=\"fa fa-chain-broken\"></i>\n                </span>\n                <div>\n                    <a href=\"javascript:;\" class=\"error\">图片2.jpg</a>\n                    <a href=\"javascript:;\" class=\"remove\">\n                        <i class=\"fa fa-close\"></i>\n                    </a>\n                    <div>\n                        <span></span>\n                    </div>\n                </div>\n            </li>\n            <li>\n                <span>\n                    <i class=\"fa fa-chain-broken\"></i>\n                </span>\n                <div>\n                    <a href=\"javascript:;\" class=\"loading\">图片3.jpg</a>\n                    <a href=\"javascript:;\" class=\"remove\">\n                        <i class=\"fa fa-close\"></i>\n                    </a>\n                    <div>\n                        <span></span>\n                    </div>\n                </div>\n            </li>\n        </ul>\n    </div>\n</div>";
+
+/***/ }),
+
+/***/ "./src/imageUpload/imageUpload.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
+
+/**
+ * <directive>
+ * @description 图片上传
+ * @date 2018-02-02
+ * @author 程乐
+ * @lastBy 
+ * @html 
+ */
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/imageUpload/imageUpload.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+    return function (app, elem, attrs, scope) {
+        app.directive('imageUpload', ['$timeout', '$document', '$compile', function ($timeout, $document, $compile) {
+            return {
+                template: html,
+                restrict: 'EA',
+                replace: true,
+                scope: {},
+                link: function postLink() {},
+                controller: function controller($scope, $element, $attrs, $transclude, $log, $http, G) {}
             };
         }]);
     };

@@ -55,4 +55,7 @@ demoData.push(selectDropdown);
 import starRating from "./starRating/index.js";
 demoData.push(starRating);
 
+import imageUpload from "./imageUpload/index.js";
+demoData.push(imageUpload);
+
 export default demoData
