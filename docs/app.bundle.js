@@ -563,6 +563,10 @@ var _index31 = __webpack_require__("./demo/selectDropdown/index.js");
 
 var _index32 = _interopRequireDefault(_index31);
 
+var _index33 = __webpack_require__("./demo/starRating/index.js");
+
+var _index34 = _interopRequireDefault(_index33);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var demoData = [];
@@ -600,6 +604,8 @@ demoData.push(_index28.default);
 demoData.push(_index30.default);
 
 demoData.push(_index32.default);
+
+demoData.push(_index34.default);
 
 exports.default = demoData;
 
@@ -862,6 +868,40 @@ module.exports = "<select-dropdown drop-data=\"[{name:'城市1',value:1},{name:'
 /***/ (function(module, exports) {
 
 module.exports = "<h2 class=\"codeTitle\">分组:</h2>\n<select-dropdown mode=\"'group'\" drop-data=\"[{name:'浙江',values:[{name:'杭州',value:1},{name:'嘉兴',value:2}]},{name:'山东',values:[{name:'青岛',value:3},{name:'枣庄',value:4}]},{name:'山东',values:[{name:'青岛',value:3},{name:'枣庄',value:4}]}]\" checked-item=\"checkedItem1\"></select-dropdown>\n";
+
+/***/ }),
+
+/***/ "./demo/starRating/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.default = {
+	title: "starRating",
+	author: "程乐",
+	type: "directive",
+	"keyName": "starRating",
+	"name": "starRating 星星评价",
+	"lastBy": "",
+	"description": "",
+	"date": "2017-10-16",
+	"scope": [{
+		"type": "number",
+		"exampleValue": 75,
+		"defaultValue": 75,
+		"key": "num",
+		"description": "分数"
+	}],
+	"attrs": [],
+	"deps": ["scmsModules/starRating/starRating"],
+	"html": "<span star-rating num=\"num\"></span>",
+	"api": "",
+	"htmlUrl": ""
+};
 
 /***/ }),
 
@@ -36892,9 +36932,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
                     }
 
                     $scope.$watch('num', function (newVal, oldVal) {
-                        if (newVal != oldVal) {
-                            dispose(newVal);
-                        }
+                        // if(newVal != oldVal){
+                        dispose(newVal);
+                        // }
                     });
                 }
             };

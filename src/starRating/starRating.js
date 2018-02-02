@@ -62,9 +62,9 @@ define([
                             }
                             
                             $scope.$watch('num',function(newVal, oldVal){
-                                if(newVal != oldVal){
+                                // if(newVal != oldVal){
                                     dispose(newVal);
-                                }
+                                // }
                             });
 
                         }

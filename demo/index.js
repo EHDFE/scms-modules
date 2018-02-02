@@ -52,4 +52,7 @@ demoData.push(card);
 import selectDropdown from "./selectDropdown/index.js";
 demoData.push(selectDropdown);
 
+import starRating from "./starRating/index.js";
+demoData.push(starRating);
+
 export default demoData
