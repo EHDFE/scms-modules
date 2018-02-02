@@ -24,6 +24,12 @@ demoData = demoData.concat(nav);
 import tooltip from "./tooltip/tooltip.json";
 demoData = demoData.concat(tooltip);
 
+import alert from "./alert/alert.js";
+demoData = demoData.concat(alert);
+
+//import imageShow from "./imageShow/index.js";
+//demoData.push(imageShow);
+
 import searchForm from "./searchForm/index.js";
 demoData.push(searchForm);
 
