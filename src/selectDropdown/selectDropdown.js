@@ -25,19 +25,27 @@ export default function(app, elem, attrs, scope) {
                 mode: '='
             },
             link: function($scope, $element, $attrs) {
-                console.log($scope.dropData)
+                // console.log($scope.dropData)
             },
 
             controller: function($scope,$element,$attrs){
                 if(!$scope.checkedItem) {
-                    $scope.checkedItem = $scope.dropData[0];
-                    $scope.itemIndex = 0;
+                    if(!$scope.mode){
+                        $scope.checkedItem = $scope.dropData[0];
+                    }else{
+                        $scope.checkedItem = $scope.dropData[0].values[0];
+                    }
+                    $timeout(()=>{
+                        $scope.itemId = $scope.checkedItem.$$hashKey;
+                    },50);
+                    $scope.inputVlue = $scope.checkedItem.name;
                 }
                 $scope.checked = function(item,index) {
                     $scope.checkedItem = item;
-                    $scope.itemIndex = index;
+                    $scope.inputVlue = $scope.checkedItem.name;
+                    $scope.itemId = item.$$hashKey;
                 }
-                $scope.$watch('checkedItem.name',function(newValue, oldValue){
+                $scope.$watch('inputVlue',function(newValue, oldValue){
                     if(newValue != oldValue) {
                         $timeout(()=>{
                             $('li',$element).each(function(){

@@ -36718,7 +36718,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 /***/ "./src/selectDropdown/selectDropdown.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"btn-group form-content\">\n    <input type=\"text\" ng-model=\"checkedItem.name\" ng-disabled=\"disabled\" class=\"dropdown-toggle form-control\" ng-transclude=\"\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n    <span class=\"glyphicon glyphicon-menu-down form-control-feedback\" aria-hidden=\"true\"></span>\n    <div class=\"dropdown-menu\">\n        <ul>\n            <dt class=\"dropdown-header\" ng-if=\"mode==='group'\" ng-repeat=\"item in dropData\">\n                {{ item.name }}\n                <ul>\n                    <li ng-repeat=\"item1 in item.values\" ng-click=\"checked(item1,$index);\" ng-class=\"{'active' : $index == itemIndex }\"><a>{{ item1.name }}</a></li>\n                </ul>\n            </dt>\n            <li ng-repeat=\"item in dropData\" ng-if=\"!mode\" ng-click=\"checked(item,$index);\" ng-class=\"{'active' : $index == itemIndex }\"><a>{{ item.name }}</a></li>\n        </ul>\n    </div>\n</div>";
+module.exports = "<div class=\"btn-group form-content\">\n    <input type=\"text\" ng-model=\"inputVlue\" ng-disabled=\"disabled\" class=\"dropdown-toggle form-control\" ng-transclude=\"\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\n    <span class=\"glyphicon glyphicon-menu-down form-control-feedback\" aria-hidden=\"true\"></span>\n    <div class=\"dropdown-menu\">\n        <ul>\n            <dt class=\"dropdown-header\" ng-if=\"mode==='group'\" ng-repeat=\"item in dropData\">\n                {{ item.name }}\n                <ul>\n                    <li ng-repeat=\"item1 in item.values\" ng-click=\"checked(item1,$index);\" ng-class=\"{'active' : item1.$$hashKey == itemId }\"><a>{{ item1.name }}</a></li>\n                </ul>\n            </dt>\n            <li ng-repeat=\"item in dropData\" ng-if=\"!mode\" ng-click=\"checked(item,$index);\" ng-class=\"{'active' : item.$$hashKey == itemId }\"><a>{{ item.name }}</a></li>\n        </ul>\n    </div>\n</div>";
 
 /***/ }),
 
@@ -36747,19 +36747,27 @@ exports.default = function (app, elem, attrs, scope) {
                 mode: '='
             },
             link: function link($scope, $element, $attrs) {
-                console.log($scope.dropData);
+                // console.log($scope.dropData)
             },
 
             controller: function controller($scope, $element, $attrs) {
                 if (!$scope.checkedItem) {
-                    $scope.checkedItem = $scope.dropData[0];
-                    $scope.itemIndex = 0;
+                    if (!$scope.mode) {
+                        $scope.checkedItem = $scope.dropData[0];
+                    } else {
+                        $scope.checkedItem = $scope.dropData[0].values[0];
+                    }
+                    $timeout(function () {
+                        $scope.itemId = $scope.checkedItem.$$hashKey;
+                    }, 50);
+                    $scope.inputVlue = $scope.checkedItem.name;
                 }
                 $scope.checked = function (item, index) {
                     $scope.checkedItem = item;
-                    $scope.itemIndex = index;
+                    $scope.inputVlue = $scope.checkedItem.name;
+                    $scope.itemId = item.$$hashKey;
                 };
-                $scope.$watch('checkedItem.name', function (newValue, oldValue) {
+                $scope.$watch('inputVlue', function (newValue, oldValue) {
                     if (newValue != oldValue) {
                         $timeout(function () {
                             $('li', $element).each(function () {
