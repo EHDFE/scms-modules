@@ -34196,7 +34196,7 @@ Confirm.prototype = {
 		_this.$el.removeClass('elayerout-confirm-show');
 		_this.$over.removeClass('elayerout-alert-over-show');
 		this.hideTimeout = setTimeout(function () {
-			_this.$el.css('diaplay', 'none');
+			_this.$el.css('display', 'none');
 			_this.$over.css('display', 'none');
 		}, 500);
 	},
