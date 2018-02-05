@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import './libs/base.less';
 import './libs/font-awesome/css/font-awesome.css';
+import './libs/font-scms/less/style.less';
 import scmsUi from "./scmsUi/less/scmsUi.less";
 
 import 'bootstrap/dist/js/bootstrap.js';
