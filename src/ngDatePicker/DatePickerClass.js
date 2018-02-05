@@ -517,7 +517,6 @@ class DatePicker {
       this.setDateView(prevMonth);
     }
   }
-  setPrev
   setNextMonth() {
     if (this.dateView.nextMonth) {
       var nextMonth;
