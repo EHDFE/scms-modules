@@ -93,32 +93,58 @@ table .list-comments-scroll{
 	border-left: none;
 }
 
-.table>.table-thead-boder>tr>th,
-.table>.table-thead-boder>tr>td{
-	border-left: 1px solid #DADDE4;
-}
-.table>.table-thead-boder>tr>th:first-child,
-.table>.table-thead-boder>tr>td:first-child{
-	border-left: none;
-}
 
-.table>.table-tbody-boder>tr>td{
-	border-left: 1px solid #e4e7ef;
-}
-.table>.table-tbody-boder>tr>td:first-child{
-	border-left: #e4e7ef;
-}
+
+
+/*圆角*/
+
+
+
 
 /*历史CSS*/
-.no-stripe-table.table.no-stripe-table.table>tbody td{
-	border-left: 1px solid #e4e7ef;
+.table-collapse{
+	border:1px solid #E4E7EF;
+	border-radius: 3px;
 }
-.no-stripe-table.table.no-stripe-table.table>tbody td:first-child{
-	border-left: none;
+.table-collapse table{
+	border-collapse: collapse;
+	position: relative;
+	overflow: hidden;
+}
+.table-collapse thead::before{
+	width: 10px;
+	height: 10px;
+	content: "";
+	position: absolute;
+	top:0px;
+	left:0px;
+	background: #fff;
+}
+.table-collapse thead th:first-child::before{
+	width: 10px;
+	height: 10px;
+	content: "";
+	position: absolute;
+	top:0px;
+	left:0px;
+	background: #E9EFF4;
+	border:1px solid #E4E7EF;
+	border-right:none;
+	border-bottom: none;
+	border-radius: 3px 0 0 0;
+}calc(100vh - 55px)
+.no-stripe-table{
+	border-collapse: collapse;
+}
+.no-stripe-table.table.no-stripe-table.table>tbody td{
+	border: 1px solid #e4e7ef  !important;
+}
+table.no-stripe-table>tbody>tr:hover{
+	background: #fff;
+}
+table.no-stripe-table>tbody>tr:hover:nth-of-type(even){
+	background: #F7FAFC;
 }
 .table>.compose-header>tr>th{
-	border-left: 1px solid #DADDE4;
-}
-.table>.compose-header>tr>th:first-child{
-	border-left: none;
+	border: 1px solid #DADDE4 !important;
 }
