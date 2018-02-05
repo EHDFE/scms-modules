@@ -10,7 +10,7 @@
   transform: translate(-50%);
   overflow: hidden;
   z-index: 99999999;
-  width:720px;
+  min-width:260px;
   border-radius: 3px;
   background: #FFFFFF;
   border: 1px solid #E4E7EF;
@@ -18,12 +18,19 @@
   transition: top 0.5s, opacity 0.5s, transform 0.5s;
 }
 .elayerout-alert .elayerout-alert-content{
-  padding:10px 20px 10px 20px;
+  padding:10px 40px 10px 20px;
 }
 .elayerout-alert .elayerout-alert-msg{
   display: inline-block;
   font-size: 14px;
   color: #1E283C;
+}
+.elayerout-alert .elayerout-alert-msg::before{
+  font-family: 'iconscms';
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 16px;
+  vertical-align: -2px;
 }
 .elayerout-alert .elayerout-alert-err-msg{
   display: block;
@@ -48,6 +55,10 @@
 .elayerout-alert.success .elayerout-alert-msg{
   color: #5BA508;
 }
+.elayerout-alert.success .elayerout-alert-msg::before{
+  content: "\E912";
+  color:#6AC00B;
+}
 
 .elayerout-alert.info{
   background: rgba(232,246,255,0.98);
@@ -57,6 +68,10 @@
 }
 .elayerout-alert.info .elayerout-alert-msg{
   color: #51A1FD;
+}
+.elayerout-alert.info .elayerout-alert-msg::before{
+  content: "\E90F";
+  color:#64AFE8;
 }
 
 .elayerout-alert.warning{
@@ -68,6 +83,10 @@
 .elayerout-alert.warning .elayerout-alert-msg{
   color: #EAA600;
 }
+.elayerout-alert.warning .elayerout-alert-msg::before{
+  content: "\E910";
+  color:#FFC71B;
+}
 
 .elayerout-alert.error{
   background: rgba(254,234,232,0.98);
@@ -77,6 +96,10 @@
 }
 .elayerout-alert.error .elayerout-alert-msg{
   color: #FE3824;
+}
+.elayerout-alert.error .elayerout-alert-msg::before{
+  content: "\E90E";
+  color:#FE3824;
 }
 
 .elayerout-alert.error .elayerout-alert-btnclose,

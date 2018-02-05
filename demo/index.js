@@ -9,6 +9,9 @@ demoData.push(grid);
 import fontAwesome from "./fontAwesome/index.js";
 demoData.push(fontAwesome);
 
+import fontIcon from "./fontIcon/index.js";
+demoData.push(fontIcon);
+
 import title from "./title/index.js";
 demoData.push(title);
 
