@@ -1,4 +1,4 @@
-define(['angular', './crumb.html', './crumb.css'], function(
+define(['angular', './crumb.html'], function(
     angular,
     html,
     css

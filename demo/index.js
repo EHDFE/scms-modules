@@ -21,18 +21,30 @@ demoData.push(inputDate);
 import nav from "./nav/index.js";
 demoData = demoData.concat(nav);
 
+import tooltip from "./tooltip/tooltip.json";
+demoData = demoData.concat(tooltip);
+
+import alert from "./alert/alert.js";
+demoData = demoData.concat(alert);
+
+//import imageShow from "./imageShow/index.js";
+//demoData.push(imageShow);
+
 import searchForm from "./searchForm/index.js";
 demoData.push(searchForm);
 
 import dialog from "./dialog/index.js";
 demoData.push(dialog);
 
+import selectDropdown from "./selectDropdown/index.js";
+demoData.push(selectDropdown);
+
 import form from "./form/index.js";
 demoData = demoData.concat(form);
 
 
 import table from "./table/index.js";
-demoData.push(table);
+demoData = demoData.concat(table);
 
 import pagination from "./pagination/index.js";
 demoData.push(pagination);
@@ -46,7 +58,12 @@ demoData.push(crumb);
 import card from "./card/index.js";
 demoData.push(card);
 
-import selector from "./selector/index.js";
-demoData.push(selector);
+
+
+import starRating from "./starRating/index.js";
+demoData.push(starRating);
+
+import imageUpload from "./imageUpload/index.js";
+demoData.push(imageUpload);
 
 export default demoData

@@ -52,6 +52,7 @@ define(
             restrict: 'EA',
             transclude: true,
             link: function postLink($scope, $element, $attrs) {
+              G = $;
               //@attrs method http类型 {type: "string", defaultValue: "post"}
               $element.css({
                 position: 'relative',
@@ -94,9 +95,11 @@ define(
                 G.loading(true, {
                   $container: $element,
                 });
+                
                 options = options || {};
                 $scope.currPage = options.currPage || $scope.currPage;
-                $scope.params = G.clone($scope.fetchParam);
+                $scope.params = Object.assign({}, $scope.fetchParam);
+                
                 if ($scope.formatParam) {
                   $scope.formatParam($scope.params);
                 }
@@ -110,6 +113,7 @@ define(
                     }
                   }
                 }
+
                 const pageParams = $scope.hasPagination ? {
                     pageSize: $scope.pageSize,
                     skipCount: ($scope.currPage - 1) * $scope.pageSize,

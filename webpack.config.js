@@ -1,7 +1,6 @@
 let webpack = require('webpack');
 let path = require('path');
 let ManifestPlugin = require('webpack-manifest-plugin');
-
 //
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -13,13 +12,14 @@ let autoprefixer = require('autoprefixer');
 //css分文件
 let appCss = new ExtractTextPlugin('app_[name]_[id].css');
 let lessCss = new ExtractTextPlugin('less_[name]_[id].css');
+let runnerPath = '/node_modules/scmsmodules-runner/';
 module.exports = {
     //devtool: 'inline-source-map',
     devtool: 'source-map',
     entry:  {
         
         //scmsModules: "scmsmodules",
-        app: __dirname + '/node_modules/scmsmodules-runner/app/main.js',
+        app: __dirname + runnerPath + 'app/main.js',
         //bootstrapCss: "./node_modules/bootstrap/less/bootstrap.less"
     },//已多次提及的唯一入口文件
     output: {
@@ -28,7 +28,7 @@ module.exports = {
       chunkFilename: "[name]_[id].chunk.js"
     },
     devServer: {
-        contentBase: "./node_modules/scmsmodules-runner/public",//本地服务器所加载的页面所在的目录
+        contentBase: __dirname + "/docs",//本地服务器所加载的页面所在的目录
         historyApiFallback: true,//不跳转
         inline: true//实时刷新
     },
@@ -138,7 +138,7 @@ module.exports = {
                                 options: {
                                     ignoreCustomFragments: [/\{\{.*?}}/],
                                     interpolate: true,
-                                    root: './node_modules/scmsmodules-runner/',
+                                    root: '.' + runnerPath,
                                 }
                             },
                             {
@@ -158,7 +158,7 @@ module.exports = {
         new webpack.NamedModulesPlugin(),
         new ManifestPlugin(),
         new HtmlWebpackPlugin({
-            template: './node_modules/scmsmodules-runner/app/index.html'
+            template: '.' + runnerPath + 'app/index.html'
         })
     ]
 }
