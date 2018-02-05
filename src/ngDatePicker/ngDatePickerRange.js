@@ -6,19 +6,14 @@
  * @lastBy
  * @html <input class="form-control input-date" date-picker-directive ng-model='ngModel' min-date="minDate" max-date="maxDate" max-date-value="maxDateValue" min-date-value="minDateValue">
  */
-define([
-  "angular", 
-  // "moment", 
-  "./datePanel", 
-  "./ngDatePickerRange.html",
-  "./ngDatePickerRange.css"    
-], function(
-angular,
-// moment,
-datePanel,
-html,
-) {
-return function(app, elem, attrs, scope) {
+import angular from 'angular';
+import moment from 'moment';
+import datePanel from './datePanel';
+import tpl from './ngDatePickerRangeTpl.html';
+import html from './ngDatePickerRange.html';
+import './ngDatePickerRange.css';
+
+export default (app, elem, attrs, scope) => {
   datePanel(app, elem, attrs, scope);
   app.directive("ngDatePickerRange", [
     "G",
@@ -28,6 +23,8 @@ return function(app, elem, attrs, scope) {
     function(G, $rootScope, $document, $compile) {
       return {
         require: "?ngModel",
+        template: tpl,
+        replace: true,
         scope: {
           ngModel: "=", //@scope ngModel 选择的日期 {type:"string", exampleValue:"2016-12-01",isDisabled:1}
           minDate: "=", //@scope minDate 最小可选日期 {type:"string", exampleValue:"2016-06-07"}
@@ -199,4 +196,4 @@ return function(app, elem, attrs, scope) {
     },
   ]);
 };
-});
+

@@ -1,8 +1,10 @@
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/less/bootstrap.less';
 import './libs/base.less';
 import './libs/font-awesome/css/font-awesome.css';
 import './libs/font-scms/less/style.less';
 import scmsUi from "./scmsUi/less/scmsUi.less";
+
+
 
 import 'bootstrap/dist/js/bootstrap.js';
 import angular from './libs/angular/angular.js';
@@ -40,7 +42,11 @@ import timePickerDirective from "./src/timePicker/timePickerDirective";
 import tooltipDirective from "./src/tooltip/tooltip";
 import treeViewDirective from "./src/treeView/treeView";
 import fileUploaderDirective from "./src/fileUploader/index";
-import selectorDirective from "./src/selector/selectorDirective";
+import datePicker from './src/ngDatePicker/datePicker';
+import buttonDropdown from "./src/buttonDropdown/buttonDropdown";
+import selectDropdown from "./src/selectDropdown/selectDropdown";
+import imageUpload from "./src/imageUpload/imageUpload";
+
 
 export default {
   'ngCode/ngCodeDirective': ngCodeDirective,
@@ -72,7 +78,10 @@ export default {
   'steps/stepsDirective': stepsDirective,
   'table/tableDirective': tableDirective,
   'timePicker/timePickerDirective': timePickerDirective,
-  'tooltip/tooltipDirective': tooltipDirective,
+  'tooltip/tooltip': tooltipDirective,
   'treeView/treeViewDirective': treeViewDirective,
-  'selector/selectorDirective': selectorDirective,
+  'ngDatePicker/datePicker': datePicker,
+  'buttonDropdown': buttonDropdown,
+  'selectDropdown': selectDropdown,
+  'imageUpload/imageUpload': imageUpload
 };

@@ -1,7 +1,7 @@
 # scms-modules
 
-[![npm](https://img.shields.io/npm/v/scms-modules.svg)](https://www.npmjs.com/package/scms-modules)
-[![npm](https://img.shields.io/npm/dt/scms-modules.svg)]()
+[![npm](https://img.shields.io/npm/v/scmsmodules.svg)](https://www.npmjs.com/package/scms-modules)
+[![npm](https://img.shields.io/npm/dt/scmsmodules.svg)]()
 
 
 Homepage: [https://ehdfe.github.io/scms-modules/](https://ehdfe.github.io/scms-modules/)

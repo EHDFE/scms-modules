@@ -1,0 +1,34 @@
+[
+    {
+        "keyName": "Tooltip",
+        "name": "Tooltip",
+        "title": "Tooltip",
+        "author": "黄思飞",
+        "lastBy": "",
+        "description": "信息提示",
+        "date": "2016-12-01",
+        "scope": [
+            {
+                "type": "string",
+                "exampleValue": "这是一个小tip",
+                "key": "tooltip",
+                "description": "提示的文本内容"
+            },
+            {
+                "type": "string",
+                "exampleValue": "left",
+                "defaultValue": "down",
+                "key": "tooltipPosition",
+                "description": "提示弹框的位置"
+            }
+        ],
+        "attrs": [],
+        "deps": [
+            "scmsModules/tooltip/tooltip/"
+        ],
+        "html": "<i class=\"fa fa-question-circle\" tooltip=\"tooltip\" tooltip-position=\"tooltipPosition\"></i>",
+        "api": "",
+        "htmlUrl": "",
+        "type": "directive"
+    }
+]
