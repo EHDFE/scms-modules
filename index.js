@@ -41,6 +41,7 @@ import timePickerDirective from "./src/timePicker/timePickerDirective";
 import tooltipDirective from "./src/tooltip/tooltip";
 import treeViewDirective from "./src/treeView/treeView";
 import fileUploaderDirective from "./src/fileUploader/index";
+import datePicker from './src/ngDatePicker/datePicker';
 import buttonDropdown from "./src/buttonDropdown/buttonDropdown";
 import selectDropdown from "./src/selectDropdown/selectDropdown";
 import imageUpload from "./src/imageUpload/imageUpload";
@@ -78,6 +79,7 @@ export default {
   'timePicker/timePickerDirective': timePickerDirective,
   'tooltip/tooltip': tooltipDirective,
   'treeView/treeViewDirective': treeViewDirective,
+  'ngDatePicker/datePicker': datePicker,
   'buttonDropdown': buttonDropdown,
   'selectDropdown': selectDropdown,
   'imageUpload/imageUpload': imageUpload

@@ -1,18 +1,18 @@
 <div class="dropdown-menu bottom date-panel-datetimepicker">
   <div style="display: flex;">
     <div class="datepicker">
-      <div class="datepicker-days" ng-show="showPanel==='day'">
+      <div class="datepicker-days" ng-show="datePicker.showPanel==='day'">
         <table class="table-condensed">
           <thead>
             <tr>
-              <th class="prev prevYear" ng-click="setPreYear('day')" ng-hide="hideYearLeft" ng-class="{disabled: !dateView.prevYear}"></th>
+              <th class="prev prevYear" ng-click="datePicker.setPreYear('day')" ng-hide="hideYearLeft" ng-class="{disabled: !datePicker.dateView.prevYear}"></th>
               <th ng-show="hideYearLeft"></th>
-              <th class="prev prevMonth" ng-class="{disabled: !dateView.prevMonth}" ng-hide="hideMonthLeft" ng-click="setPreMonth()"></th>
+              <th class="prev prevMonth" ng-class="{disabled: !datePicker.dateView.prevMonth}" ng-hide="hideMonthLeft" ng-click="datePicker.setPrevMonth()"></th>
               <th ng-show="hideMonthLeft"></th>
-              <th colspan="3" class="picker-switch" ng-click="showPanel='month'">{{dateData.year}}年{{dateData.month}}月 </th>
-              <th class="next nextMonth" ng-class="{disabled: !dateView.nextMonth}" ng-hide="hideMonthRight" ng-click="setNextMonth()"></th>
+              <th colspan="3" class="picker-switch" ng-click="datePicker.showPanel='month'">{{datePicker.dateData.year}}年{{datePicker.dateData.month}}月 </th>
+              <th class="next nextMonth" ng-class="{disabled: !datePicker.dateView.nextMonth}" ng-hide="hideMonthRight" ng-click="datePicker.setNextMonth()"></th>
               <th ng-show="hideMonthRight"></th>
-              <th class="next nextYear" ng-click="setNextYear('day')" ng-hide="hideYearRight" ng-class="{disabled: !dateView.nextYear}"></th>
+              <th class="next nextYear" ng-click="datePicker.setNextYear('day')" ng-hide="hideYearRight" ng-class="{disabled: !datePicker.dateView.nextYear}"></th>
               <th ng-show="hideYearRight"></th>
             </tr>
             <tr>
@@ -26,33 +26,33 @@
             </tr>
           </thead>
           <tbody ng-mouseleave="mouseleave()">
-            <tr ng-repeat="rows in dateView" >
+            <tr ng-repeat="rows in datePicker.dateView" >
               <td class="day" ng-class="{old: col.tag==='old', new: col.tag==='new', today: col.tag==='today', active: col.tag==='active', disabled: col.disabled, range: col.range, hover: col.tag === 'hover'}"
-                ng-click="setDate(col)" ng-repeat="col in rows"><span class="date-item" ng-mousemove="hover(col)">{{col.value}}</span></td>
+                ng-click="datePicker.setDate(col)" ng-repeat="col in rows"><span class="date-item" ng-mousemove="hover(col)">{{col.value}}</span></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="datepicker-months" ng-show="showPanel==='month'">
+      <div class="datepicker-months" ng-show="datePicker.showPanel==='month'">
         <table class="table-condensed">
           <thead>
             <tr>
-              <th class="prev prevYear" ng-click="setPreYear()" ng-class="{disabled: !monthView.prevYear}"></th>
-              <th colspan="5" class="picker-switch" ng-click="showPanel='year'">{{dateData.year}}</th>
-              <th class="next nextYear" ng-click="setNextYear()" ng-class="{disabled: !monthView.nextYear}"></th>
+              <th class="prev prevYear" ng-click="datePicker.setPreYear()" ng-class="{disabled: !datePicker.monthView.prevYear}"></th>
+              <th colspan="5" class="picker-switch" ng-click="datePicker.showPanel='year'">{{datePicker.dateData.year}}</th>
+              <th class="next nextYear" ng-click="datePicker.setNextYear()" ng-class="{disabled: !datePicker.monthView.nextYear}"></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td colspan="7" style="font-size:0; padding: 0;" >
-                <span class="month" ng-class="{today: currmonth.today, active: currmonth.checked, disabled: currmonth.disabled}" ng-repeat="currmonth in monthView"
-                  ng-click="setMonth(currmonth)">{{currmonth.dataView}}月</span>
+                <span class="month" ng-class="{today: currmonth.today, active: currmonth.checked, disabled: currmonth.disabled}" ng-repeat="currmonth in datePicker.monthView"
+                  ng-click="datePicker.setMonth(currmonth)">{{currmonth.dataView}}月</span>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="datepicker-years" ng-show="showPanel==='year'">
+      <div class="datepicker-years" ng-show="datePicker.showPanel==='year'">
         <table class="table-condensed">
           <thead>
             <tr>
@@ -61,9 +61,9 @@
               <th class="next nextMonth" ng-click="setNextDecade()" ng-class="{disabled: yearView[11].disabled}"></th> -->
               <th colspan="7">
                 <span class="picker-switch">
-                    <span class="prev prevYear" ng-click="setPreDecade()" style="width: 35px;height: 20px;" ng-class="{disabled: yearView[0].disabled}"></span>
-                    <span colspan="5" class="picker-switch">{{yearView[1].data}}-{{yearView[10].data}}</span>
-                    <span class="next nextYear" ng-click="setNextDecade()" style="width: 35px;height: 20px;" ng-class="{disabled: yearView[11].disabled}"></span>
+                    <span class="prev prevYear" ng-click="datePicker.setPreDecade()" style="width: 35px;height: 20px;" ng-class="{disabled: datePicker.yearView[0].disabled}"></span>
+                    <span colspan="5" class="picker-switch">{{datePicker.yearView[1].data}}-{{datePicker.yearView[10].data}}</span>
+                    <span class="next nextYear" ng-click="datePicker.setNextDecade()" style="width: 35px;height: 20px;" ng-class="{disabled: datePicker.yearView[11].disabled}"></span>
                 </span>
               </th>
             </tr>
@@ -71,8 +71,8 @@
           <tbody>
             <tr>
               <td colspan="7" style="font-size:0; padding: 0;">
-                <span class="year" ng-class="{old: $first||$last, active: curryear.checked, disabled: curryear.disabled}" ng-repeat="curryear in yearView"
-                  ng-click="setYear(curryear)">{{curryear.data}}</span>
+                <span class="year" ng-class="{old: $first||$last, active: curryear.checked, disabled: curryear.disabled}" ng-repeat="curryear in datePicker.yearView"
+                  ng-click="datePicker.setYear(curryear)">{{curryear.data}}</span>
               </td>
             </tr>
           </tbody>
@@ -95,17 +95,17 @@
         <div class="time-picker-content">
           <div class="time-area">
             <ul class="time-zone">
-              <li ng-class="{active: currhour.active, disabled: currhour.disabled }" ng-click="setHour(currhour)" ng-repeat="currhour in hourView">{{currhour.value}}</li>
+              <li ng-class="{active: currhour.active, disabled: currhour.disabled }" ng-click="datePicker.setHour(currhour)" ng-repeat="currhour in datePicker.hourView">{{currhour.value}}</li>
             </ul>
           </div>
           <div class="time-area"> 
             <ul class="time-zone">
-              <li ng-class="{active: currmin.active, disabled: currmin.disabled }" ng-click="setMinute(currmin)" ng-repeat="currmin in minView">{{currmin.value}}</li>
+              <li ng-class="{active: currmin.active, disabled: currmin.disabled }" ng-click="datePicker.setMinute(currmin)" ng-repeat="currmin in datePicker.minView">{{currmin.value}}</li>
             </ul>
           </div>
           <div ng-show="useSeconds" class="time-area">
             <ul class="time-zone">
-              <li ng-class="{active: currsecond.active, disabled: currsecond.disabled }" ng-click="setSecond(currsecond)" ng-repeat="currsecond in secondView">{{currsecond.value}}</li>
+              <li ng-class="{active: currsecond.active, disabled: currsecond.disabled }" ng-click="datePicker.setSecond(currsecond)" ng-repeat="currsecond in datePicker.secondView">{{currsecond.value}}</li>
             </ul>
           </div>
         </div>
