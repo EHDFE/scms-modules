@@ -183,7 +183,7 @@ export default (app, elem, attrs, scope) => {
 
           $scope.$on("refreshDate", (e, data) => {
             datePicker.tmpDate = data;
-            datePicker.setDateView(getResult());
+            datePicker.setDateView(datePicker.getResult());
           });
 
           function showArrow() {
@@ -245,7 +245,7 @@ export default (app, elem, attrs, scope) => {
           });
           $scope.$watch("dateData", newVal => {
               if ($scope.dateRange) {
-                $scope.date = getResult();
+                $scope.date = datePicker.getResult();
                 showArrow();
               }
             }, true);
