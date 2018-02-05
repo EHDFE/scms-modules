@@ -9,13 +9,13 @@
 import angular from 'angular';
 import moment from 'moment';
 import datePanel from './datePanel';
-import tpl from './ngDatePickerRangeTpl.html';
-import html from './ngDatePickerRange.html';
-import './ngDatePickerRange.css';
+import tpl from './datePickerRangeTpl.html';
+import html from './datePickerRange.html';
+import './datePickerRange.css';
 
 export default (app, elem, attrs, scope) => {
   datePanel(app, elem, attrs, scope);
-  app.directive("ngDatePickerRange", [
+  app.directive("datePickerRange", [
     "G",
     "$rootScope",
     '$document', 
@@ -47,11 +47,13 @@ export default (app, elem, attrs, scope) => {
               $scope.pickTime = !!$attrs.pickTime;
               $scope.formatDate = $attrs.formatDate||'YYYY-MM-DD';
 
+
               $timeout(()=> {
                 $scope.dateRangeResult = {
                   start: ($scope.initStartDate&&($scope.initStartDate!== 'null')||$scope.initStartDate === 0)? $scope.startDate: '',
                   end: ($scope.initEndDate&&($scope.initEndDate!== 'null')||$scope.initEndDate === 0)? $scope.endDate: '',
                 }
+                console.log($scope.dateRangeResult, 2322222222)
               });
 
               $document.find('body').append(panel);
@@ -78,8 +80,10 @@ export default (app, elem, attrs, scope) => {
               
               
               $element.delegate('input', 'focus', function(e) {
+                  console.log(e, 222222222222)
+                  $element.focus();
                   e.stopPropagation();
-                  var pos = e.target.getBoundingClientRect(),
+                  var pos = e.target.parentNode.getBoundingClientRect(),
                       offset = panel.offset(),
                       tipHeight = panel.outerHeight(),
                       tipWidth = panel.outerWidth(),
@@ -98,8 +102,9 @@ export default (app, elem, attrs, scope) => {
                       end: $scope.dateRangeResult&&$scope.dateRangeResult.end? moment($scope.dateRangeResult.end): null,
                     }
                     
+
                     $scope.startDate = $scope.dateRangeResult&&$scope.dateRangeResult.start;
-                    if ($scope.dateRangeResult.start&&$scope.dateRangeResult.end) {
+                    if ($scope.dateRangeResult&&$scope.dateRangeResult.start&&$scope.dateRangeResult.end) {
                       if (moment( $scope.dateRangeResult.start).year() === moment($scope.dateRangeResult.end).year()
                       &&(moment( $scope.dateRangeResult.start).month() === moment($scope.dateRangeResult.end).month())) {
                         $scope.endDate = moment($scope.dateRangeResult.start).add(1, 'month').format($scope.formatDate);
