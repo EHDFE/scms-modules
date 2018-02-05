@@ -41,15 +41,11 @@ import timePickerDirective from "./src/timePicker/timePickerDirective";
 import tooltipDirective from "./src/tooltip/tooltip";
 import treeViewDirective from "./src/treeView/treeView";
 import fileUploaderDirective from "./src/fileUploader/index";
-<<<<<<< HEAD
-import selectorDirective from "./src/selector/selectorDirective";
 import datePicker from './src/ngDatePicker/datePicker';
-=======
 import buttonDropdown from "./src/buttonDropdown/buttonDropdown";
 import selectDropdown from "./src/selectDropdown/selectDropdown";
 import imageUpload from "./src/imageUpload/imageUpload";
 
->>>>>>> f443ca258917320da2b6f8136698e4cae36b15cc
 
 export default {
   'ngCode/ngCodeDirective': ngCodeDirective,
