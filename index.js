@@ -43,6 +43,7 @@ import treeViewDirective from "./src/treeView/treeView";
 import fileUploaderDirective from "./src/fileUploader/index";
 import buttonDropdown from "./src/buttonDropdown/buttonDropdown";
 import selectDropdown from "./src/selectDropdown/selectDropdown";
+import imageUpload from "./src/imageUpload/imageUpload";
 
 
 export default {
@@ -79,4 +80,5 @@ export default {
   'treeView/treeViewDirective': treeViewDirective,
   'buttonDropdown': buttonDropdown,
   'selectDropdown': selectDropdown,
+  'imageUpload/imageUpload': imageUpload
 };

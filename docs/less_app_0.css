@@ -9519,6 +9519,158 @@ h2.box-title {
   border-bottom: 3px solid transparent;
   border-left: 3px solid rgba(0, 0, 0, 0.84);
 }
+.imageUpload .thumb ul::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.imageUpload .thumb ul li {
+  float: left;
+  width: 110px;
+  height: 110px;
+  border-radius: 2px;
+  background: #F3F4F7;
+  font-size: 13px;
+}
+.imageUpload .thumb ul li .upload-box {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border: 1px dashed #DADDE4;
+}
+.imageUpload .thumb ul li .upload-box label {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-weight: 100;
+  margin-bottom: 0;
+}
+.imageUpload .thumb ul li .upload-box label span {
+  display: block;
+  font-size: 30px;
+  padding-top: 20px;
+  margin-bottom: 5px;
+}
+.imageUpload .thumb ul li .upload-box:hover {
+  border-color: #50A0FC;
+  color: #50A0FC;
+}
+.imageUpload .thumb ul li .upload-box:active {
+  border-color: #2C87EF;
+  color: #2C87EF;
+}
+.imageUpload .thumb ul li .loading-box {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  border: 1px dashed #DADDE4;
+}
+.imageUpload .thumb ul li .loading-box p {
+  padding: 45px 0;
+}
+.imageUpload .thumb ul li .loading-box div {
+  width: 80px;
+  height: 1px;
+  background: #DDDDDD;
+  margin: 0 auto;
+  margin-top: -15px;
+}
+.imageUpload .thumb ul li .loading-box div span {
+  display: block;
+  width: 50%;
+  height: 100%;
+}
+.imageUpload .thumb ul li .loading-box div span.succeed {
+  background: #6AC10A;
+}
+.imageUpload .thumb ul li .loading-box div span.error {
+  background: #FE3824;
+}
+.imageUpload .thumb ul li .loading-box div span.loading {
+  background: #3B98E0;
+}
+.imageUpload .noThumb label {
+  cursor: pointer;
+  border: 1px solid #DADDE4;
+  border-radius: 3px;
+  font-size: 13px;
+  color: #4B5564;
+  line-height: 30px;
+  width: 105px;
+  text-align: center;
+  font-weight: 100;
+}
+.imageUpload .noThumb label:hover {
+  border-color: #74B5FF;
+  color: #74B5FF;
+}
+.imageUpload .noThumb label:active {
+  border-color: #2C87EF;
+  color: #2C87EF;
+}
+.imageUpload .noThumb ul {
+  width: 270px;
+}
+.imageUpload .noThumb ul li {
+  line-height: 30px;
+  padding-left: 5px;
+}
+.imageUpload .noThumb ul li::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.imageUpload .noThumb ul li > span,
+.imageUpload .noThumb ul li > div {
+  float: left;
+}
+.imageUpload .noThumb ul li > div {
+  margin-left: 10px;
+  width: 240px;
+}
+.imageUpload .noThumb ul li > div a.succeed {
+  color: #51A1FD;
+}
+.imageUpload .noThumb ul li > div a.succeed:hover {
+  text-decoration: underline;
+}
+.imageUpload .noThumb ul li > div a.error {
+  color: #FE3824;
+}
+.imageUpload .noThumb ul li > div a.error:hover {
+  text-decoration: underline;
+}
+.imageUpload .noThumb ul li > div a.loading {
+  color: #6E7382;
+}
+.imageUpload .noThumb ul li > div a.loading:hover {
+  text-decoration: underline;
+}
+.imageUpload .noThumb ul li > div div {
+  height: 1px;
+  width: 100%;
+  background: #E4E7EF;
+}
+.imageUpload .noThumb ul li > div div span {
+  display: block;
+  width: 20%;
+  height: 100%;
+  background: #3B98E0;
+}
+.imageUpload .noThumb ul li .remove {
+  float: right;
+  color: #9BA0AA;
+  font-size: 13px;
+  margin-right: 5px;
+  display: none;
+}
+.imageUpload .noThumb ul li:hover {
+  background: #F6F8FC;
+}
+.imageUpload .noThumb ul li:hover .remove {
+  display: block;
+}
 .file-uploader-directive .file-uploader-hidden-input {
   display: none;
 }

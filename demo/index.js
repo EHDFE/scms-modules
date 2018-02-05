@@ -36,6 +36,9 @@ demoData.push(searchForm);
 import dialog from "./dialog/index.js";
 demoData.push(dialog);
 
+import selectDropdown from "./selectDropdown/index.js";
+demoData.push(selectDropdown);
+
 import form from "./form/index.js";
 demoData = demoData.concat(form);
 
@@ -55,10 +58,12 @@ demoData.push(crumb);
 import card from "./card/index.js";
 demoData.push(card);
 
-import selectDropdown from "./selectDropdown/index.js";
-demoData.push(selectDropdown);
+
 
 import starRating from "./starRating/index.js";
 demoData.push(starRating);
+
+import imageUpload from "./imageUpload/index.js";
+demoData.push(imageUpload);
 
 export default demoData
