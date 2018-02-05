@@ -40,6 +40,7 @@ import tooltipDirective from "./src/tooltip/tooltip";
 import treeViewDirective from "./src/treeView/treeView";
 import fileUploaderDirective from "./src/fileUploader/index";
 import selectorDirective from "./src/selector/selectorDirective";
+import datePicker from './src/ngDatePicker/datePicker';
 
 export default {
   'ngCode/ngCodeDirective': ngCodeDirective,
@@ -74,4 +75,5 @@ export default {
   'tooltip/tooltipDirective': tooltipDirective,
   'treeView/treeViewDirective': treeViewDirective,
   'selector/selectorDirective': selectorDirective,
+  'ngDatePicker/datePicker': datePicker,
 };
