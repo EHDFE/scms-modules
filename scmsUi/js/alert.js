@@ -96,6 +96,7 @@ Confirm.prototype = {
 		if(options.title) {
 			this.$el.find('.tx_title').html(options.title);
 		}
+		this.$el.unbind();
 		
 		this.$el.css('display', '');
 		this.$over.css('display', '');
