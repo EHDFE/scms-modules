@@ -734,7 +734,7 @@ exports.default = demoData;
 /***/ "./demo/inputDate/formInputDate.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h2>日期选择{{aa}}</h2>\n<div ng-code-directive=\"\">\n    <input placeholder=\"结束时间\" type=\"text\" date-picker=\"\" class=\"form-control input-date\" ng-model=\"aa\">\n</div>\n\n<h2>日期时间选择</h2>\n<input placeholder=\"结束时间\" type=\"text\" class=\"form-control input-date-time\">\n\n<h2>范围--日期选择</h2>\n<div class=\"input-date-range\">\n    <input placeholder=\"开始时间\" type=\"text\" class=\"form-control input-date\">\n    <span class=\"input-group-addon input-group-addon-no\">-</span>\n    <input placeholder=\"结束时间\" type=\"text\" class=\"form-control input-date\">\n</div>\n\n<h2>范围--日期时间选择</h2>\n<div class=\"input-date-range\">\n    <input placeholder=\"开始时间\" type=\"text\" class=\"form-control input-date-time\">\n    <span class=\"input-group-addon input-group-addon-no\">-</span>\n    <input placeholder=\"结束时间\" type=\"text\" class=\"form-control input-date-time\">\n</div>\n\n\n";
+module.exports = "<h2>日期选择{{aa}}</h2>\n<div ng-code-directive=\"\">\n    <input placeholder=\"结束时间\" type=\"text\" date-picker=\"\" class=\"form-control input-date\" ng-model=\"aa\">\n</div>\n\n<h2>日期时间选择</h2>\n<input placeholder=\"结束时间\" type=\"text\" class=\"form-control input-date-time\">\n\n<h2>范围--日期选择</h2>\n<!-- <div class=\"input-date-range\">\n    <input placeholder=\"开始时间\" type=\"text\" class=\"form-control input-date\">\n    <span class=\"input-group-addon input-group-addon-no\">-</span>\n    <input placeholder=\"结束时间\" type=\"text\" class=\"form-control input-date\">\n</div> -->\n<div date-picker-range=\"\" ng-model=\"fff\" dateRangeResult=\"dateRangeResult\"></div>\n\n<h2>范围--日期时间选择</h2>\n<div class=\"input-date-range\">\n    <input placeholder=\"开始时间\" type=\"text\" class=\"form-control input-date-time\">\n    <span class=\"input-group-addon input-group-addon-no\">-</span>\n    <input placeholder=\"结束时间\" type=\"text\" class=\"form-control input-date-time\">\n</div>\n\n\n";
 
 /***/ }),
 
@@ -1295,6 +1295,10 @@ var _datePicker = __webpack_require__("./src/ngDatePicker/datePicker.js");
 
 var _datePicker2 = _interopRequireDefault(_datePicker);
 
+var _datePickerRange = __webpack_require__("./src/ngDatePicker/datePickerRange.js");
+
+var _datePickerRange2 = _interopRequireDefault(_datePickerRange);
+
 var _buttonDropdown = __webpack_require__("./src/buttonDropdown/buttonDropdown.js");
 
 var _buttonDropdown2 = _interopRequireDefault(_buttonDropdown);
@@ -1309,6 +1313,7 @@ var _imageUpload2 = _interopRequireDefault(_imageUpload);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import noPermissionDirective from "./src/noPermission/noPermission";
 exports.default = {
   'ngCode/ngCodeDirective': _ngCodeDirective2.default,
   'switch/switchDirective': _switchDirective2.default,
@@ -1342,11 +1347,11 @@ exports.default = {
   'tooltip/tooltip': _tooltip2.default,
   'treeView/treeViewDirective': _treeView2.default,
   'ngDatePicker/datePicker': _datePicker2.default,
+  'ngDatePicker/datePickerRange': _datePickerRange2.default,
   'buttonDropdown': _buttonDropdown2.default,
   'selectDropdown': _selectDropdown2.default,
   'imageUpload/imageUpload': _imageUpload2.default
 };
-//import noPermissionDirective from "./src/noPermission/noPermission";
 
 /***/ }),
 
@@ -54097,7 +54102,7 @@ exports.default = function (app, elem, attrs, scope) {
 
         $scope.$on("refreshDate", function (e, data) {
           datePicker.tmpDate = data;
-          datePicker.setDateView(getResult());
+          datePicker.setDateView(datePicker.getResult());
         });
 
         function showArrow() {
@@ -54134,7 +54139,7 @@ exports.default = function (app, elem, attrs, scope) {
         });
         $scope.$watch("dateData", function (newVal) {
           if ($scope.dateRange) {
-            $scope.date = getResult();
+            $scope.date = datePicker.getResult();
             showArrow();
           }
         }, true);
@@ -54318,6 +54323,241 @@ exports.default = function (app, elem, attrs, scope) {
     * @lastBy
     * @html <input class="form-control input-date" date-picker-directive ng-model='ngModel' min-date="minDate" max-date="maxDate" max-date-value="maxDateValue" min-date-value="minDateValue">
     */
+
+/***/ }),
+
+/***/ "./src/ngDatePicker/datePickerRange.css":
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./src/ngDatePicker/datePickerRange.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"date-picker-range\">\n  <div class=\"date-panel\">\n    <div date-panel=\"\" init-date=\"initStartDate\" part=\"left\" date-range=\"true\" max-date-value=\"maxDateValue\" min-date-value=\"minDateValue\" max-date=\"maxDate\" min-date=\"maxDate\" date=\"startDate\" use-seconds=\"useSeconds\" name=\"part1\" watch-date=\"endDate\" tmp-date=\"tmpDate\" date-range-data=\"dateRangeData\" min-view-mode=\"minViewMode\" pick-time=\"pickTime\" format-date=\"formatDate\"></div>\n    <div date-panel=\"\" init-date=\"initDateEnd\" date-range=\"true\" max-date-value=\"maxDateValue\" min-date-value=\"minDateValue\" max-date=\"maxDate\" min-date=\"maxDate\" date=\"endDate\" use-seconds=\"useSeconds\" part=\"right\" name=\"part2\" watch-date=\"startDate\" tmp-date=\"tmpDate\" date-range-data=\"dateRangeData\" min-view-mode=\"minViewMode\" pick-time=\"pickTime\" format-date=\"formatDate\"></div>\n  </div>\n</div>";
+
+/***/ }),
+
+/***/ "./src/ngDatePicker/datePickerRange.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _angular = __webpack_require__("./node_modules/._angular@1.2.32@angular/index.js");
+
+var _angular2 = _interopRequireDefault(_angular);
+
+var _moment = __webpack_require__("./node_modules/._moment@2.20.1@moment/moment.js");
+
+var _moment2 = _interopRequireDefault(_moment);
+
+var _datePanel = __webpack_require__("./src/ngDatePicker/datePanel.js");
+
+var _datePanel2 = _interopRequireDefault(_datePanel);
+
+var _datePickerRangeTpl = __webpack_require__("./src/ngDatePicker/datePickerRangeTpl.html");
+
+var _datePickerRangeTpl2 = _interopRequireDefault(_datePickerRangeTpl);
+
+var _datePickerRange = __webpack_require__("./src/ngDatePicker/datePickerRange.html");
+
+var _datePickerRange2 = _interopRequireDefault(_datePickerRange);
+
+__webpack_require__("./src/ngDatePicker/datePickerRange.css");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/**
+ * <directive>
+ * @description 日期插件
+ * @date 2017-12-06
+ * @author 黄国标
+ * @lastBy
+ * @html <input class="form-control input-date" date-picker-directive ng-model='ngModel' min-date="minDate" max-date="maxDate" max-date-value="maxDateValue" min-date-value="minDateValue">
+ */
+exports.default = function (app, elem, attrs, scope) {
+  (0, _datePanel2.default)(app, elem, attrs, scope);
+  app.directive("datePickerRange", ["G", "$rootScope", '$document', '$compile', function (G, $rootScope, $document, $compile) {
+    return {
+      require: "?ngModel",
+      template: _datePickerRangeTpl2.default,
+      replace: true,
+      scope: {
+        ngModel: "=", //@scope ngModel 选择的日期 {type:"string", exampleValue:"2016-12-01",isDisabled:1}
+        minDate: "=", //@scope minDate 最小可选日期 {type:"string", exampleValue:"2016-06-07"}
+        maxDate: "=", //@scope maxDate 最大可选日期 {type:"string", exampleValue:"2017-06-29"}
+        minDateValue: "=", //@scope minDateValue 最小可选日期,距今天天数 {type:"number"}
+        maxDateValue: "=", //@scope maxDateValue 最大可选日期,距今天天数 {type:"number"}
+        initStartDate: "=", //@scope initDateStart 初始日期,它的值为距今天的天数 {type:"number"}
+        initEndDate: "=", //@scope initDateEnd 初始日期,它的值为距今天的天数 {type:"number"}
+        dateRangeResult: "="
+      },
+      controller: ["$scope", "$element", "$attrs", "$timeout", function ($scope, $element, $attrs, $timeout) {
+        var panel = $compile(_datePickerRange2.default)($scope);
+        $scope.useSeconds = !!$attrs.useSeconds;
+        $scope.minViewMode = $attrs.minViewMode;
+        $scope.pickTime = !!$attrs.pickTime;
+        $scope.formatDate = $attrs.formatDate || 'YYYY-MM-DD';
+
+        $timeout(function () {
+          $scope.dateRangeResult = {
+            start: $scope.initStartDate && $scope.initStartDate !== 'null' || $scope.initStartDate === 0 ? $scope.startDate : '',
+            end: $scope.initEndDate && $scope.initEndDate !== 'null' || $scope.initEndDate === 0 ? $scope.endDate : ''
+          };
+          console.log($scope.dateRangeResult, 2322222222);
+        });
+
+        $document.find('body').append(panel);
+        var clickTimes = 0;
+        $scope.pick = function (data) {
+          $timeout(function () {
+            if ($scope.dateRangeData && $scope.dateRangeData.start && $scope.dateRangeData.end) {
+              $scope.ngModel = $scope.dateRangeData.start.format($scope.formatDate) + '  ~  ' + $scope.dateRangeData.end.format($scope.formatDate);
+              $scope.startDate = $scope.dateRangeData.start.format($scope.formatDate);
+              $scope.endDate = $scope.dateRangeData.end.format($scope.formatDate);
+              $scope.dateRangeResult = {
+                start: $scope.startDate,
+                end: $scope.endDate
+              };
+            }
+            $element.trigger('blur');
+            $scope.dateRangeData = {};
+            $timeout(function () {
+              $scope.$broadcast('refreshDate');
+            });
+          }, 300);
+        };
+
+        $element.delegate('input', 'focus', function (e) {
+          console.log(e, 222222222222);
+          $element.focus();
+          e.stopPropagation();
+          var pos = e.target.parentNode.getBoundingClientRect(),
+              offset = panel.offset(),
+              tipHeight = panel.outerHeight(),
+              tipWidth = panel.outerWidth(),
+              elWidth = pos.width || pos.right - pos.left,
+              elHeight = pos.height || pos.bottom - pos.top,
+              tipOffset = 0,
+              scrollWidth = $('body')[0].scrollWidth;
+          offset.top = pos.top + elHeight + tipOffset;
+          offset.left = pos.left;
+          panel.css('display', 'inline-block');
+          panel.offset(offset);
+
+          $timeout(function () {
+            $scope.dateRangeData = {
+              start: $scope.dateRangeResult && $scope.dateRangeResult.start ? (0, _moment2.default)($scope.dateRangeResult.start) : null,
+              end: $scope.dateRangeResult && $scope.dateRangeResult.end ? (0, _moment2.default)($scope.dateRangeResult.end) : null
+            };
+
+            $scope.startDate = $scope.dateRangeResult && $scope.dateRangeResult.start;
+            if ($scope.dateRangeResult && $scope.dateRangeResult.start && $scope.dateRangeResult.end) {
+              if ((0, _moment2.default)($scope.dateRangeResult.start).year() === (0, _moment2.default)($scope.dateRangeResult.end).year() && (0, _moment2.default)($scope.dateRangeResult.start).month() === (0, _moment2.default)($scope.dateRangeResult.end).month()) {
+                $scope.endDate = (0, _moment2.default)($scope.dateRangeResult.start).add(1, 'month').format($scope.formatDate);
+              }
+            } else {
+              $scope.endDate = $scope.dateRangeResult && $scope.dateRangeResult.end;
+            }
+            $timeout(function () {
+              $scope.$broadcast('init');
+            });
+          });
+        });
+
+        preventBlur($element, function (target) {
+          if ($element[0] === target || $.contains(panel[0], target)) {
+            if (!($(target).parent().hasClass('day') || $(target).hasClass('day'))) {
+              return true;
+            } else {
+              clickTimes += 1;
+              if (clickTimes !== 2) {
+                return true;
+              } else {
+                $scope.pick();
+                return false;
+              }
+            }
+          }
+          return false;
+        });
+        function preventBlur(elem, func) {
+          var _fnDocumentMousedown;
+          _angular2.default.element(elem).bind("focus", function () {
+            $document.bind("mousedown", _fnDocumentMousedown = function fnDocumentMousedown(event) {
+              if (func(event.target)) {
+                event.target.setAttribute("unselectable", "on");
+                event.preventDefault();
+              } else if (event.target != elem) {
+                $document.unbind("mousedown", _fnDocumentMousedown);
+              }
+            });
+          });
+          _angular2.default.element(elem).bind("blur", function () {
+            $document.unbind("mousedown", _fnDocumentMousedown);
+          });
+        }
+        $scope.$on('refresh', function (e, data) {
+          $scope.$broadcast('refreshDate', data);
+        });
+        $element.bind('blur', function () {
+          $timeout(function () {
+            clickTimes = 0;
+            panel.css('display', 'none');
+          }, 250);
+        });
+
+        $scope.$on('$destroy', function () {
+          $document.find('.date-picker-range').remove();
+        });
+
+        $timeout(function () {
+          if (!($scope.initStartDate === 'null' || !$scope.initStartDate) && $scope.startDate && $scope.endDate) {
+            $scope.ngModel = $scope.startDate + '  ~  ' + $scope.endDate;
+          }
+        });
+
+        $scope.$watch('startDate', function (newVal) {
+          if (newVal) {
+            if ((0, _moment2.default)(newVal).year() === (0, _moment2.default)($scope.endDate).year() && (0, _moment2.default)(newVal).month() === (0, _moment2.default)($scope.endDate).month()) {
+              $scope.endDate = (0, _moment2.default)(newVal).add(1, 'month').format($scope.formatDate);
+              $scope.$broadcast('init');
+            }
+          }
+        });
+
+        $scope.$watch('endDate', function (newVal) {
+          if (newVal) {
+            if ((0, _moment2.default)(newVal).year() === (0, _moment2.default)($scope.startDate).year() && (0, _moment2.default)(newVal).month() === (0, _moment2.default)($scope.startDate).month()) {
+              $scope.startDate = (0, _moment2.default)(newVal).add(-1, 'month').format($scope.formatDate);
+              $scope.$broadcast('init');
+            }
+          }
+        });
+
+        $scope.$watch('dateRangeData', function (newVal) {
+          // console.log(newVal, '-------------------------------')
+        }, true);
+      }],
+      link: function link($scope, $element, $attrs, ngModel) {}
+      //
+    };
+  }]);
+};
+
+/***/ }),
+
+/***/ "./src/ngDatePicker/datePickerRangeTpl.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"input-date-range\" tabindex=\"-1\">\n    <input placeholder=\"开始时间\" type=\"text\" class=\"form-control input-date\">\n    <span class=\"input-group-addon input-group-addon-no\">-</span>\n    <input placeholder=\"结束时间\" type=\"text\" class=\"form-control input-date\">\n</div>";
 
 /***/ }),
 
