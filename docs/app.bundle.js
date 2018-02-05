@@ -605,31 +605,31 @@ var _index17 = __webpack_require__("./demo/dialog/index.js");
 
 var _index18 = _interopRequireDefault(_index17);
 
-var _index19 = __webpack_require__("./demo/form/index.js");
+var _index19 = __webpack_require__("./demo/selectDropdown/index.js");
 
 var _index20 = _interopRequireDefault(_index19);
 
-var _index21 = __webpack_require__("./demo/table/index.js");
+var _index21 = __webpack_require__("./demo/form/index.js");
 
 var _index22 = _interopRequireDefault(_index21);
 
-var _index23 = __webpack_require__("./demo/pagination/index.js");
+var _index23 = __webpack_require__("./demo/table/index.js");
 
 var _index24 = _interopRequireDefault(_index23);
 
-var _index25 = __webpack_require__("./demo/paginationMini/index.js");
+var _index25 = __webpack_require__("./demo/pagination/index.js");
 
 var _index26 = _interopRequireDefault(_index25);
 
-var _index27 = __webpack_require__("./demo/crumb/index.js");
+var _index27 = __webpack_require__("./demo/paginationMini/index.js");
 
 var _index28 = _interopRequireDefault(_index27);
 
-var _index29 = __webpack_require__("./demo/card/index.js");
+var _index29 = __webpack_require__("./demo/crumb/index.js");
 
 var _index30 = _interopRequireDefault(_index29);
 
-var _index31 = __webpack_require__("./demo/selectDropdown/index.js");
+var _index31 = __webpack_require__("./demo/card/index.js");
 
 var _index32 = _interopRequireDefault(_index31);
 
@@ -670,11 +670,11 @@ demoData.push(_index16.default);
 
 demoData.push(_index18.default);
 
-demoData = demoData.concat(_index20.default);
+demoData.push(_index20.default);
 
 demoData = demoData.concat(_index22.default);
 
-demoData.push(_index24.default);
+demoData = demoData.concat(_index24.default);
 
 demoData.push(_index26.default);
 
@@ -931,6 +931,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = {
 	title: "Select Dropdown",
+	parentTitle: 'Forms',
 	author: "程乐",
 	html: [_selectDropdown2.default, _selectDropdownGroup2.default],
 	isCode: true
