@@ -7528,7 +7528,7 @@ table .list-comments-scroll {
   border-bottom: none;
   border-radius: 3px 0 0 0;
 }
-calc(100vh - 55px) .no-stripe-table {
+.no-stripe-table {
   border-collapse: collapse;
 }
 .no-stripe-table.table.no-stripe-table.table > tbody td {
