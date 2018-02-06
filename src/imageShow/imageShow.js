@@ -101,53 +101,45 @@ define([
                                 $('.imgUrlBox').append("<img src="+url+">");//添加大图
                                 $('.imgUrlBox').show();
 
-                                var data = imgData(true);
-                                $('.imgUrlBox img').css({width:'100%'});
-                                if(data.imgHeight === 'auto'){
-                                    // $('.imgUrlBox').animate({left:data.w,top:data.h,width:data.imgWidth,height:'100%'},200,function(){
-                                    //         console.log($(this).css('height'))
-                                    //     $('#imgUrlBoxBG').show().css({opacity: .8});
-                                    //     $('.imgShowClosBtn,.imgUrlControl').show();
-                                    // });
-
-                                    $('.imgUrlBox').css({left:data.w,top:data.h,width:data.imgWidth,height:'100%',transition:0.2});
-                                    $('#imgUrlBoxBG').show().css({opacity: .8,transition:0.2});
-                                    $timeout(()=>{
-                                        $('.imgShowClosBtn,.imgUrlControl').show();
-                                    },150);
-                                }else if(data.imgWidth === 'auto'){
-                                    // $('.imgUrlBox').animate({left:data.w,top:data.h,width:'100%',height:data.imgHeight},200,function(){
-                                    //     $('#imgUrlBoxBG').show().css({opacity: .8});
-                                    //     $('.imgShowClosBtn,.imgUrlControl').show();
-                                    // });
-
-                                    $('.imgUrlBox').css({left:data.w,top:data.h,width:'100%',height:data.imgHeight,transition:0.2});
-                                    $('#imgUrlBoxBG').show().css({opacity: .8,transition:0.2});
-                                    $timeout(()=>{
-                                        $('.imgShowClosBtn,.imgUrlControl').show();
-                                    },150);
-                                }else{
-                                    // $('.imgUrlBox').animate({left:data.w,top:data.h,width:data.imgWidth,height:data.imgHeight},200,function(){
-                                    //         console.log($(this).css('height'))
-                                    //     $('#imgUrlBoxBG').show().css({opacity: .8});
-                                    //     $('.imgShowClosBtn,.imgUrlControl').show();
-                                    // });
-                                    $('.imgUrlBox').css({left:data.w,top:data.h,width:data.imgWidth,height:data.imgHeight,transition:0.2});
-                                    $('#imgUrlBoxBG').show().css({opacity: .8,transition:0.2});
-                                    $timeout(()=>{
-                                        $('.imgShowClosBtn,.imgUrlControl').show();
-                                    },150);
+                                var img = new Image();
+                                img.src = $('.imgUrlBox img').attr("src");
+                                img.onload = function(){
+                                    var data = imgData(true,{
+                                        width:img.width,
+                                        height:img.height
+                                    });
+                                    
+                                    $('.imgUrlBox img').css({width:'100%'});
+                                    if(data.imgHeight === 'auto'){
+                                        $('.imgUrlBox').css({left:data.w,top:data.h,width:data.imgWidth,height:'100%',transition:0.2});
+                                        $('#imgUrlBoxBG').show().css({opacity: .8,transition:0.2});
+                                        $timeout(()=>{
+                                            $('.imgShowClosBtn,.imgUrlControl').show();
+                                        },150);
+                                    }else if(data.imgWidth === 'auto'){
+                                        $('.imgUrlBox').css({left:data.w,top:data.h,width:'100%',height:data.imgHeight,transition:0.2});
+                                        $('#imgUrlBoxBG').show().css({opacity: .8,transition:0.2});
+                                        $timeout(()=>{
+                                            $('.imgShowClosBtn,.imgUrlControl').show();
+                                        },150);
+                                    }else{
+                                        $('.imgUrlBox').css({left:data.w,top:data.h,width:data.imgWidth,height:data.imgHeight,transition:0.2});
+                                        $('#imgUrlBoxBG').show().css({opacity: .8,transition:0.2});
+                                        $timeout(()=>{
+                                            $('.imgShowClosBtn,.imgUrlControl').show();
+                                        },150);
+                                    }
                                 }
                             }
                             
-                            function imgData(type){
+                            function imgData(type,obj){
                                 var data = {};
                                 var windowW = $(window).width();
                                 var windowH = $(window).height();
-
+                                
                                 if(type){
-                                    var realWidth = $('.imgUrlBox img').width();
-                                    var realHeight = $('.imgUrlBox img').height();
+                                    var realWidth = obj.width;
+                                    var realHeight = obj.height;
                                 }
                                 var imgWidth, imgHeight;  
                                 var scale = 0.9;
@@ -207,8 +199,16 @@ define([
                                 
                                 data.w = (windowW-imgWidth)/2;
                                 data.h = (windowH-imgHeight)/2-50;
-                                data.imgWidth = imgWidth <= 1 ? 'auto' : imgWidth;
-                                data.imgHeight = imgHeight <= 1 ? 'auto' : imgHeight;
+                                if(imgWidth <= 1){
+                                    data.imgWidth = 'auto';
+                                }else{
+                                    data.imgWidth = imgWidth;
+                                }
+                                if(imgHeight <= 1){
+                                    data.imgHeight = 'auto';
+                                }else{
+                                    data.imgHeight = imgHeight;
+                                }
                                 return data;
                             }
 
