@@ -52404,13 +52404,13 @@ module.exports = "<div class=\"file-uploader-directive\">\n  <div ng-show=\"erro
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 __webpack_require__("./src/fileUploader/index.less");
+
+var _mimeMatch = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"mime-match\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+var _mimeMatch2 = _interopRequireDefault(_mimeMatch);
 
 var _index = __webpack_require__("./src/fileUploader/index.html");
 
@@ -52418,7 +52418,7 @@ var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-exports.default = function (app, elem, attrs, scope) {
+module.exports = function (app, elem, attrs, scope) {
   app.directive('fileUploader', [function () {
     return {
       template: _index2.default,
@@ -52441,14 +52441,7 @@ exports.default = function (app, elem, attrs, scope) {
         });
       },
       controller: function controller($scope) {
-        console.log('fileUploader', $scope);
         $scope.errorMsg = null;
-
-        this.reset = function () {
-          console.log('reset');
-        };
-
-        $scope.$watch('');
 
         if (typeof FormData !== 'function') {
           $scope.errorMsg = '当前浏览器不支持H5上传，请更换现代浏览器或选择极速模式！';
@@ -52464,6 +52457,26 @@ exports.default = function (app, elem, attrs, scope) {
           return;
         }
 
+        var validator = {
+          accept: function accept(file, _accept) {
+            if (!_accept) return false;
+            var acceptList = _accept.split(',');
+            var fileType = file.type;
+            var fileExt = file.name.split('.').pop();
+            var matched = acceptList.some(function (rule) {
+              if (rule.includes('/')) {
+                // match mime type
+                return (0, _mimeMatch2.default)(rule, fileType);
+              } else {
+                // match extname
+                return fileExt === rule;
+              }
+            });
+            if (matched) return false;
+            return '\u4E0D\u63A5\u53D7\u9009\u62E9\u7684\u6587\u4EF6\u7C7B\u578B\uFF01';
+          }
+        };
+
         var input = document.getElementById('upload-trigger');
         var handleUpload = function handleUpload() {
           var files = input.files;
@@ -52478,6 +52491,13 @@ exports.default = function (app, elem, attrs, scope) {
           }
         };
         var upload = function upload(file) {
+          var acceptValidateResult = validator.accept(file, $scope.accept);
+          if (acceptValidateResult) {
+            $scope.$apply(function () {
+              $scope.errorMsg = acceptValidateResult;
+            });
+            return;
+          }
           var formData = new FormData();
           formData.append($scope.name || 'file', file);
           if ($scope.data) {
@@ -52485,13 +52505,29 @@ exports.default = function (app, elem, attrs, scope) {
               formData.append(key, $scope.data[key]);
             });
           }
-          fetch($scope.action, {
-            method: 'post',
+
+          $.ajax({
+            url: $scope.action,
+            type: 'POST',
             data: formData,
-            credentials: 'include'
-          }).then(function (res) {
-            return res.json();
-          }).then($scope.onChange).catch(function (err) {
+            processData: false, // 不处理数据
+            contentType: false // 不设置内容类型
+          }).done(function (data) {
+            var res = JSON.parse(data);
+            if (res.status === 500 || res.result === 'error') {
+              console.warn('[FILEUPLAODER failed]');
+              console.warn(res);
+              $scope.onChange(res);
+              $scope.$apply(function () {
+                $scope.errorMsg = res.msg;
+              });
+            } else {
+              $scope.onChange(res);
+              $scope.$apply(function () {
+                $scope.errorMsg = null;
+              });
+            }
+          }).fail(function (err) {
             $scope.$apply(function () {
               if ((typeof err === 'undefined' ? 'undefined' : _typeof(err)) === 'object') {
                 $scope.errorMsg = err.toString();
@@ -52500,6 +52536,35 @@ exports.default = function (app, elem, attrs, scope) {
               }
             });
           });
+
+          // fetch($scope.action, {
+          //   method: 'POST',
+          //   body: formData,
+          //   credentials: 'include',
+          // })
+          //   .then(res => res.json())
+          //   .then(res => {
+          //     if (res.status === 500 || res.result === 'error') {
+          //       console.warn('[FILEUPLAODER failed]')
+          //       console.warn(res);
+          //       $scope.onChange(res);
+          //       throw new Error(res.msg);
+          //     } else {
+          //       $scope.onChange(res);
+          //       $scope.$apply(() => {
+          //         $scope.errorMsg = null;
+          //       });
+          //     }
+          //   })
+          //   .catch(err => {
+          //     $scope.$apply(() => {
+          //       if (typeof err === 'object') {
+          //         $scope.errorMsg = err.toString();
+          //       } else {
+          //         $scope.errorMsg = err;
+          //       }
+          //     });
+          //   });
         };
 
         $(input).on('change', handleUpload);

@@ -7497,7 +7497,11 @@ table .list-comments-scroll {
 }
 /*圆角*/
 /*历史CSS*/
-.table-collapse {
+.tablebox.table-collapse {
+  border: 1px solid #E4E7EF;
+  border-radius: 3px;
+}
+.table-collapse .tablebox {
   border: 1px solid #E4E7EF;
   border-radius: 3px;
 }
@@ -8405,6 +8409,7 @@ button {
 }
 .modal-footer {
   border: none;
+  clear: both;
 }
 /*switch*/
 .switch {
