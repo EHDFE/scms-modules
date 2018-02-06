@@ -1,6 +1,6 @@
 {
   "name": "scmsmodules",
-  "version": "0.1.6",
+  "version": "0.1.10",
   "description": "scmsmodules",
   "repository": "https://github.com/EHDFE/scms-modules.git",
   "main": "index.js",
@@ -23,6 +23,7 @@
     "angular": "1.2.32",
     "angular-file-upload": "^2.5.0",
     "bootstrap": "^3.3.7",
+    "mime-match": "^1.0.2",
     "moment": "^2.20.1"
   },
   "devDependencies": {
