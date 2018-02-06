@@ -1,8 +1,8 @@
 <div class="imageUpload">
-    <div class="thumb">
+    <div class="thumb" ng-if="moduleType === 'thumb'">
         <ul>
             <li>
-                <div class="upload-box" style="display: none;">
+                <div class="upload-box" ng-show="type == 1">
                     <label>
                         <span>
                             <i class="fa fa-plus"></i>
@@ -11,10 +11,7 @@
                         上传
                     </label>
                 </div>
-                <div class="images-box">
-
-                </div>
-                <div class="loading-box">
+                <div class="loading-box" style="display: none;" ng-show="type == 2">
                     <p>
                         上传中 ···
                     </p>
@@ -24,54 +21,41 @@
                         <span class="loading"></span>
                     </div>
                 </div>
+                <div class="images-box" ng-show="type == 3" ng-class="{error: cententError}">
+                    <div class="img" style="background: url(http://taobao.90sheji.com/58pic/12/64/86/29m58PIC57t.jpg!/fwfh/490x658/quality/90/unsharp/true/compress/true/format/webp) no-repeat center center;background-size: contain;"></div>
+                    <div class="barrier">
+                        <a href="javascript:;" ng-click="">
+                            <i class="glyphicon glyphicon-eye-open"></i>
+                        </a>
+                        <a href="javascript:;" ng-click="">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                        <a href="javascript:;" ng-click="">
+                            <i class="fa fa-download"></i>
+                        </a>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
-    <div class="noThumb">
+    <div class="noThumb" ng-if="moduleType === 'noThumb'">
         <label>
             <i class="fa fa-upload mr5"></i>
-            <input type="file" ng-model="file" value="上传文件" style="display: none;">
+            <!--<input type="file" ng-model="file" style="display: none;" nv-file-select uploader="uploader">-->
+            <input type="file" ng-model="file" style="display: none;">
             上传文件
         </label>
         <ul>
-            <li>
+            <li ng-repeat="item in imageArray">
                 <span>
                     <i class="fa fa-chain-broken"></i>
                 </span>
                 <div>
-                    <a href="javascript:;" class="succeed">图片1.jpg</a>
-                    <a href="javascript:;" class="remove">
+                    <a href="javascript:;" class="succeed" ng-class="{succeed:item.uploadType.succeed,error:item.uploadType.error,loading:item.uploadType.loading}">{{ item.imgName }}</a>
+                    <a href="javascript:;" class="remove" ng-click="remove(item,$index)">
                         <i class="fa fa-close"></i>
                     </a>
-                    <div>
-                        <span></span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <span>
-                    <i class="fa fa-chain-broken"></i>
-                </span>
-                <div>
-                    <a href="javascript:;" class="error">图片2.jpg</a>
-                    <a href="javascript:;" class="remove">
-                        <i class="fa fa-close"></i>
-                    </a>
-                    <div>
-                        <span></span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <span>
-                    <i class="fa fa-chain-broken"></i>
-                </span>
-                <div>
-                    <a href="javascript:;" class="loading">图片3.jpg</a>
-                    <a href="javascript:;" class="remove">
-                        <i class="fa fa-close"></i>
-                    </a>
-                    <div>
+                    <div ng-show="item.uploadType.loading">
                         <span></span>
                     </div>
                 </div>

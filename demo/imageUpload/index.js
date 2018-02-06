@@ -10,7 +10,7 @@ export default {
 	"scope":[],
 	"attrs":[],
 	"deps":["scmsModules/imageUpload/imageUpload"],
-	"html":"<div image-upload></div>",
+	"html":"<div image-upload module-type=\"'noThumb'\" api-url=\"'http://image.tf56.com/fastdfsWeb/upload'\"></div>",
 	"api":"",
 	"htmlUrl":""
 }

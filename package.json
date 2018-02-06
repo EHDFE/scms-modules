@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "angular": "1.2.32",
+    "angular-file-upload": "^2.5.0",
     "bootstrap": "^3.3.7",
     "moment": "^2.20.1"
   },
