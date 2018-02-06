@@ -2,7 +2,7 @@ import './index.less';
 import match from 'mime-match';
 import html from './index.html';
 
-module.exports = (app, elem, attrs, scope) => {
+export default (app, elem, attrs, scope) => {
   app.directive('fileUploader', [function(){
     return {
       template: html,

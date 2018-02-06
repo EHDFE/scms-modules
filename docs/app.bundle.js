@@ -32810,6 +32810,39 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
+/***/ "./node_modules/._mime-match@1.0.2@mime-match/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var wildcard = __webpack_require__("./node_modules/._wildcard@1.1.2@wildcard/index.js");
+var reMimePartSplit = /[\/\+\.]/;
+
+/**
+  # mime-match
+
+  A simple function to checker whether a target mime type matches a mime-type
+  pattern (e.g. image/jpeg matches image/jpeg OR image/*).
+
+  ## Example Usage
+
+  <<< example.js
+
+**/
+module.exports = function (target, pattern) {
+  function test(pattern) {
+    var result = wildcard(pattern, target, reMimePartSplit);
+
+    // ensure that we have a valid mime type (should have two parts)
+    return result && result.length >= 2;
+  }
+
+  return pattern ? test(pattern.split(';')[0]) : test;
+};
+
+/***/ }),
+
 /***/ "./node_modules/._moment@2.20.1@moment/locale recursive ^\\.\\/.*$":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -51062,6 +51095,106 @@ module.exports = function (module) {
 
 /***/ }),
 
+/***/ "./node_modules/._wildcard@1.1.2@wildcard/index.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* jshint node: true */
+
+
+/**
+  # wildcard
+
+  Very simple wildcard matching, which is designed to provide the same
+  functionality that is found in the
+  [eve](https://github.com/adobe-webplatform/eve) eventing library.
+
+  ## Usage
+
+  It works with strings:
+
+  <<< examples/strings.js
+
+  Arrays:
+
+  <<< examples/arrays.js
+
+  Objects (matching against keys):
+
+  <<< examples/objects.js
+
+  While the library works in Node, if you are are looking for file-based
+  wildcard matching then you should have a look at:
+
+  <https://github.com/isaacs/node-glob>
+**/
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+function WildcardMatcher(text, separator) {
+  this.text = text = text || '';
+  this.hasWild = ~text.indexOf('*');
+  this.separator = separator;
+  this.parts = text.split(separator);
+}
+
+WildcardMatcher.prototype.match = function (input) {
+  var matches = true;
+  var parts = this.parts;
+  var ii;
+  var partsCount = parts.length;
+  var testParts;
+
+  if (typeof input == 'string' || input instanceof String) {
+    if (!this.hasWild && this.text != input) {
+      matches = false;
+    } else {
+      testParts = (input || '').split(this.separator);
+      for (ii = 0; matches && ii < partsCount; ii++) {
+        if (parts[ii] === '*') {
+          continue;
+        } else if (ii < testParts.length) {
+          matches = parts[ii] === testParts[ii];
+        } else {
+          matches = false;
+        }
+      }
+
+      // If matches, then return the component parts
+      matches = matches && testParts;
+    }
+  } else if (typeof input.splice == 'function') {
+    matches = [];
+
+    for (ii = input.length; ii--;) {
+      if (this.match(input[ii])) {
+        matches[matches.length] = input[ii];
+      }
+    }
+  } else if ((typeof input === 'undefined' ? 'undefined' : _typeof(input)) == 'object') {
+    matches = {};
+
+    for (var key in input) {
+      if (this.match(key)) {
+        matches[key] = input[key];
+      }
+    }
+  }
+
+  return matches;
+};
+
+module.exports = function (text, test, separator) {
+  var matcher = new WildcardMatcher(text, separator || /[\/\.]/);
+  if (typeof test != 'undefined') {
+    return matcher.match(test);
+  }
+
+  return matcher;
+};
+
+/***/ }),
+
 /***/ "./scmsUi/js/alert.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -52404,11 +52537,15 @@ module.exports = "<div class=\"file-uploader-directive\">\n  <div ng-show=\"erro
 "use strict";
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 __webpack_require__("./src/fileUploader/index.less");
 
-var _mimeMatch = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"mime-match\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _mimeMatch = __webpack_require__("./node_modules/._mime-match@1.0.2@mime-match/index.js");
 
 var _mimeMatch2 = _interopRequireDefault(_mimeMatch);
 
@@ -52418,7 +52555,7 @@ var _index2 = _interopRequireDefault(_index);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-module.exports = function (app, elem, attrs, scope) {
+exports.default = function (app, elem, attrs, scope) {
   app.directive('fileUploader', [function () {
     return {
       template: _index2.default,
