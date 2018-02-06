@@ -17,14 +17,14 @@ export default (app, elem, attrs, scope) => {
         name: '@', // 发到后台的文件参数名 默认 ‘file’,
       },
       transclude: true,
-      link(scope, element) {
+      link: function(scope, element) {
         const input = document.getElementById('upload-trigger');
         element.on('click', scope.triggerId, e => {
           input.value = null;
           input.click();
         });
       },
-      controller($scope) {
+      controller: function($scope) {
         $scope.errorMsg = null;
 
         if (typeof FormData !== 'function') {
