@@ -147,7 +147,6 @@ class DatePicker {
     }
   }
   setMonth(month) {
-    console.log(111)
     if (!month.disabled) {
       this.dateData.month = month.data;
       this.setMonthView();
@@ -170,9 +169,10 @@ class DatePicker {
       .date(1)
       .weekday(0);
     var month = moment(date).month();
+    console.log(this.minDateArr, this.maxDateArr, this.$attrs.part)
     if (
-      (this.minDateArr.year,
-      this.minDateArr.month,
+      (this.minDateArr.year&&
+      this.minDateArr.month&&
       this.minDateArr.date)
     ) {
       dateView.prevMonth =
@@ -283,7 +283,8 @@ class DatePicker {
           .minute(0)
           .second(0)
           .millisecond(0)
-          .valueOf()
+          .valueOf()&&
+          (tag !== 'new'&&tag !== 'old')
       ) {
         tag = "today";
       }
@@ -383,7 +384,7 @@ class DatePicker {
           range = true;
         }
       }
-
+      // console.log(range, nowDate.format('YYYY-MM-DD'), this.$attrs.part, 'shit', Math.random())
       if (nowDate.day() === 0) {
         dateView.push([
           {
@@ -425,7 +426,6 @@ class DatePicker {
       }
     }
     this.dateView = dateView;
-
     return dateView;
   }
   setDate(momentDate) {
@@ -440,9 +440,8 @@ class DatePicker {
         ) {
           this.dateRangeData.start = momentDate.data;
           this.dateRangeData.end = null;
-          this.$emit("refresh");
-        }
-        if (this.dateRangeData.start && !this.dateRangeData.end) {
+          this.refresh = new Date().getTime();
+        } else if (this.dateRangeData.start && !this.dateRangeData.end) {
           if (
             this.dateRangeData.start &&
             this.dateRangeData.start.valueOf() >

@@ -37,6 +37,7 @@ export default (app, elem, attrs, scope) => {
           rightRange: "=",
           dateRangeData: "=",
           watchDate: "=",
+          tmpDate: "=",
         },
         controller: [
           "$scope",
@@ -59,13 +60,18 @@ export default (app, elem, attrs, scope) => {
             newDate = $scope.date;
           }
 
-          // $scope.useSeconds = !!$attrs.useSeconds;
-          // $scope.minViewMode = $attrs.minViewMode;
-          // $scope.pickTime = !!$attrs.pickTime;
+          // // $scope.useSeconds = !!$attrs.useSeconds;
+          // // $scope.minViewMode = $attrs.minViewMode;
+          // // $scope.pickTime = !!$attrs.pickTime;
           const datePicker = new DatePicker({
             dateRange: $scope.dateRange,
+            dateRangeData: $scope.dateRangeData || {},
+            $attrs: $attrs,
           });
           $scope.datePicker = datePicker;
+          if ($attrs.dateRange) {
+            $scope.dateRangeData = $scope.datePicker.dateRangeData;
+          }
 
           $scope.datePicker.minViewMode = $attrs.minViewMode;
           $scope.$watch("minViewMode", (newVal, oldVal) => {
@@ -74,34 +80,12 @@ export default (app, elem, attrs, scope) => {
             }
           });
 
-          function setCanChooseYear() {
-            if ($scope.minDateArr.year && $scope.minDateArr.month) {
-              $scope.canChoosePrevYear =
-                moment([
-                  $scope.minDateArr.year,
-                  $scope.minDateArr.month - 1,
-                ]).valueOf() < moment([$scope.dateData.year, 0]).valueOf();
-            } else {
-              $scope.canChoosePrevYear = true;
-            }
-            if ($scope.maxDateArr.year && $scope.maxDateArr.month) {
-              $scope.canChooseNextYear =
-                moment([
-                  $scope.maxDateArr.year,
-                  $scope.maxDateArr.month - 1,
-                ]).valueOf() > moment([$scope.dateData.year, 11]).valueOf();
-            } else {
-              $scope.canChooseNextYear = true;
-            }
-          }
-
-
-
 
           $scope.$watch("minDate", function(newValue, oldValue) {
             if (!newValue) {
               return;
             }
+            console.log(newValue, 222222222)
             var initTime = "00:00:00";
             if (newValue.length > 11) {
               newValue = newValue + initTime.slice(newValue.length - 11);
@@ -163,6 +147,7 @@ export default (app, elem, attrs, scope) => {
               $scope.$emit("refresh", datePicker.tmpDate);
             }
           };
+            
           $scope.mouseleave = () => {
             if ($scope.dateRange) {
               $timeout(() => {
@@ -243,17 +228,46 @@ export default (app, elem, attrs, scope) => {
               showArrow();
             }
           });
-          $scope.$watch("dateData", newVal => {
+          $scope.$watch("datePicker.dateData", newVal => {
               if ($scope.dateRange) {
                 $scope.date = datePicker.getResult();
                 showArrow();
               }
-            }, true);
+          }, true);
 
-          // $scope.$watch("date", newVal => {
-          //   // console.log(newVal, $attrs.name, '@#$%^&*')
-          // });
-
+          $scope.$watch('datePicker.dateRangeData', (newVal) => {    
+            if (newVal) {
+              if($scope.dateRange) {
+                if ($scope.dateRangeData.start&&$scope.dateRangeData.start.valueOf() === 
+                $scope.datePicker.dateRangeData&&$scope.datePicker.dateRangeData.start.valueOf()&&
+                $scope.dateRangeData.end&&$scope.dateRangeData.end.valueOf() === 
+                $scope.datePicker.dateRangeData.end&&$scope.datePicker.dateRangeData.end.valueOf()
+                ){
+                  return;
+                }
+                $scope.dateRangeData = newVal;
+              }
+            }
+          }, true);
+          
+          $scope.$watch('dateRangeData', (newVal) => {
+            if (newVal&&$scope.dateRange) {
+              if ($scope.dateRangeData.start&&$scope.dateRangeData.start.valueOf() === 
+              $scope.datePicker.dateRangeData&&$scope.datePicker.dateRangeData.start.valueOf()&&
+              $scope.dateRangeData.end&&$scope.dateRangeData.end.valueOf() === 
+              $scope.datePicker.dateRangeData.end&&$scope.datePicker.dateRangeData.end.valueOf()
+              ){
+                return;
+              }
+              datePicker.dateRangeData = newVal;
+            }
+          });
+          
+          $scope.$watch('datePicker.refresh', (newVal, oldVal) => {
+            if(newVal&&(newVal!== oldVal)) {
+              $scope.$emit('refresh');
+            }
+          }) 
           $scope.$on("init", function() {
             $timeout(() => {
               var newDate;
