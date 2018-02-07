@@ -55011,7 +55011,7 @@ exports.default = function (app, elem, attrs, scope) {
                                 loading: false
                             }
                         });
-                        $scope.imageUrls = $scope.imageArray;
+                        $scope.imageUrls = [];
                     }
                 }
 
@@ -55170,7 +55170,7 @@ exports.default = function (app, elem, attrs, scope) {
                                     loading: false
                                 };
                                 var d = JSON.parse(xhr.responseText);
-                                if (d && d.result === '"success"') {
+                                if (d && d.result === 'success') {
                                     $scope.imageArray[index].data = d.data;
                                 }
                                 $scope.selectImg();
