@@ -1,6 +1,6 @@
 {
   "name": "scmsmodules",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "scmsmodules",
   "repository": "https://github.com/EHDFE/scms-modules.git",
   "main": "index.js",

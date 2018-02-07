@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./node_modules/scmsmodules-runner/app/main.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/main.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1153,7 +1153,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-__webpack_require__("./node_modules/bootstrap/less/bootstrap.less");
+__webpack_require__("./node_modules/._bootstrap@3.3.7@bootstrap/less/bootstrap.less");
 
 __webpack_require__("./libs/base.less");
 
@@ -1165,7 +1165,7 @@ var _scmsUi = __webpack_require__("./scmsUi/less/scmsUi.less");
 
 var _scmsUi2 = _interopRequireDefault(_scmsUi);
 
-__webpack_require__("./node_modules/bootstrap/dist/js/bootstrap.js");
+__webpack_require__("./node_modules/._bootstrap@3.3.7@bootstrap/dist/js/bootstrap.js");
 
 var _angular = __webpack_require__("./libs/angular/angular.js");
 
@@ -12896,7 +12896,7 @@ bindJQuery();publishExternalAPI(angular);jqLite(document).ready(function(){angul
 
 /***/ }),
 
-/***/ "./node_modules/angular-auto-validate/dist/jcs-auto-validate.min.js":
+/***/ "./node_modules/._angular-auto-validate@1.19.0@angular-auto-validate/dist/jcs-auto-validate.min.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13266,7 +13266,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ "./node_modules/angular-cookies/angular-cookies.js":
+/***/ "./node_modules/._angular-cookies@1.2.27@angular-cookies/angular-cookies.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13474,2139 +13474,306 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ "./node_modules/angular-file-upload/dist/angular-file-upload.js":
+/***/ "./node_modules/._angular-file-upload@1.1.6@angular-file-upload/angular-file-upload.min.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /*
- angular-file-upload v2.5.0
+ angular-file-upload v1.1.6
  https://github.com/nervgh/angular-file-upload
 */
 
-(function webpackUniversalModuleDefinition(root, factory) {
-	if (( false ? 'undefined' : _typeof(exports)) === 'object' && ( false ? 'undefined' : _typeof(module)) === 'object') module.exports = factory();else if (true) !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if ((typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object') exports["angular-file-upload"] = factory();else root["angular-file-upload"] = factory();
-})(undefined, function () {
-	return (/******/function (modules) {
-			// webpackBootstrap
-			/******/ // The module cache
-			/******/var installedModules = {};
-			/******/
-			/******/ // The require function
-			/******/function __webpack_require__(moduleId) {
-				/******/
-				/******/ // Check if module is in cache
-				/******/if (installedModules[moduleId])
-					/******/return installedModules[moduleId].exports;
-				/******/
-				/******/ // Create a new module (and put it into the cache)
-				/******/var module = installedModules[moduleId] = {
-					/******/exports: {},
-					/******/id: moduleId,
-					/******/loaded: false
-					/******/ };
-				/******/
-				/******/ // Execute the module function
-				/******/modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-				/******/
-				/******/ // Flag the module as loaded
-				/******/module.loaded = true;
-				/******/
-				/******/ // Return the exports of the module
-				/******/return module.exports;
-				/******/
-			}
-			/******/
-			/******/
-			/******/ // expose the modules object (__webpack_modules__)
-			/******/__webpack_require__.m = modules;
-			/******/
-			/******/ // expose the module cache
-			/******/__webpack_require__.c = installedModules;
-			/******/
-			/******/ // __webpack_public_path__
-			/******/__webpack_require__.p = "";
-			/******/
-			/******/ // Load entry module and return exports
-			/******/return __webpack_require__(0);
-			/******/
-		}(
-		/************************************************************************/
-		/******/[
-		/* 0 */
-		/***/function (module, exports, __webpack_require__) {
-
-			'use strict';
-
-			var _config = __webpack_require__(1);
-
-			var _config2 = _interopRequireDefault(_config);
-
-			var _options = __webpack_require__(2);
-
-			var _options2 = _interopRequireDefault(_options);
-
-			var _FileUploader = __webpack_require__(3);
-
-			var _FileUploader2 = _interopRequireDefault(_FileUploader);
-
-			var _FileLikeObject = __webpack_require__(4);
-
-			var _FileLikeObject2 = _interopRequireDefault(_FileLikeObject);
-
-			var _FileItem = __webpack_require__(5);
-
-			var _FileItem2 = _interopRequireDefault(_FileItem);
-
-			var _FileDirective = __webpack_require__(6);
-
-			var _FileDirective2 = _interopRequireDefault(_FileDirective);
-
-			var _FileSelect = __webpack_require__(7);
-
-			var _FileSelect2 = _interopRequireDefault(_FileSelect);
-
-			var _Pipeline = __webpack_require__(8);
-
-			var _Pipeline2 = _interopRequireDefault(_Pipeline);
-
-			var _FileDrop = __webpack_require__(9);
-
-			var _FileDrop2 = _interopRequireDefault(_FileDrop);
-
-			var _FileOver = __webpack_require__(10);
-
-			var _FileOver2 = _interopRequireDefault(_FileOver);
-
-			var _FileSelect3 = __webpack_require__(11);
-
-			var _FileSelect4 = _interopRequireDefault(_FileSelect3);
-
-			var _FileDrop3 = __webpack_require__(12);
-
-			var _FileDrop4 = _interopRequireDefault(_FileDrop3);
-
-			var _FileOver3 = __webpack_require__(13);
-
-			var _FileOver4 = _interopRequireDefault(_FileOver3);
-
-			function _interopRequireDefault(obj) {
-				return obj && obj.__esModule ? obj : { default: obj };
-			}
-
-			angular.module(_config2.default.name, []).value('fileUploaderOptions', _options2.default).factory('FileUploader', _FileUploader2.default).factory('FileLikeObject', _FileLikeObject2.default).factory('FileItem', _FileItem2.default).factory('FileDirective', _FileDirective2.default).factory('FileSelect', _FileSelect2.default).factory('FileDrop', _FileDrop2.default).factory('FileOver', _FileOver2.default).factory('Pipeline', _Pipeline2.default).directive('nvFileSelect', _FileSelect4.default).directive('nvFileDrop', _FileDrop4.default).directive('nvFileOver', _FileOver4.default).run(['FileUploader', 'FileLikeObject', 'FileItem', 'FileDirective', 'FileSelect', 'FileDrop', 'FileOver', 'Pipeline', function (FileUploader, FileLikeObject, FileItem, FileDirective, FileSelect, FileDrop, FileOver, Pipeline) {
-				// only for compatibility
-				FileUploader.FileLikeObject = FileLikeObject;
-				FileUploader.FileItem = FileItem;
-				FileUploader.FileDirective = FileDirective;
-				FileUploader.FileSelect = FileSelect;
-				FileUploader.FileDrop = FileDrop;
-				FileUploader.FileOver = FileOver;
-				FileUploader.Pipeline = Pipeline;
-			}]);
-
-			/***/
-		},
-		/* 1 */
-		/***/function (module, exports) {
-
-			module.exports = {
-				"name": "angularFileUpload"
-			};
-
-			/***/
-		},
-		/* 2 */
-		/***/function (module, exports) {
-
-			'use strict';
-
-			Object.defineProperty(exports, "__esModule", {
-				value: true
-			});
-			exports.default = {
-				url: '/',
-				alias: 'file',
-				headers: {},
-				queue: [],
-				progress: 0,
-				autoUpload: false,
-				removeAfterUpload: false,
-				method: 'POST',
-				filters: [],
-				formData: [],
-				queueLimit: Number.MAX_VALUE,
-				withCredentials: false,
-				disableMultipart: false
-			};
-
-			/***/
-		},
-		/* 3 */
-		/***/function (module, exports, __webpack_require__) {
-
-			'use strict';
-
-			Object.defineProperty(exports, "__esModule", {
-				value: true
-			});
-
-			var _slicedToArray = function () {
-				function sliceIterator(arr, i) {
-					var _arr = [];var _n = true;var _d = false;var _e = undefined;try {
-						for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
-							_arr.push(_s.value);if (i && _arr.length === i) break;
-						}
-					} catch (err) {
-						_d = true;_e = err;
-					} finally {
-						try {
-							if (!_n && _i["return"]) _i["return"]();
-						} finally {
-							if (_d) throw _e;
-						}
-					}return _arr;
-				}return function (arr, i) {
-					if (Array.isArray(arr)) {
-						return arr;
-					} else if (Symbol.iterator in Object(arr)) {
-						return sliceIterator(arr, i);
-					} else {
-						throw new TypeError("Invalid attempt to destructure non-iterable instance");
-					}
-				};
-			}();
-
-			exports.default = __identity;
-
-			var _config = __webpack_require__(1);
-
-			var _config2 = _interopRequireDefault(_config);
-
-			function _interopRequireDefault(obj) {
-				return obj && obj.__esModule ? obj : { default: obj };
-			}
-
-			function _classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) {
-					throw new TypeError("Cannot call a class as a function");
-				}
-			}
-
-			var _angular = angular;
-			var bind = _angular.bind;
-			var copy = _angular.copy;
-			var extend = _angular.extend;
-			var forEach = _angular.forEach;
-			var isObject = _angular.isObject;
-			var isNumber = _angular.isNumber;
-			var isDefined = _angular.isDefined;
-			var isArray = _angular.isArray;
-			var isUndefined = _angular.isUndefined;
-			var element = _angular.element;
-			function __identity(fileUploaderOptions, $rootScope, $http, $window, $timeout, FileLikeObject, FileItem, Pipeline) {
-				var File = $window.File;
-				var FormData = $window.FormData;
-
-				var FileUploader = function () {
-					/**********************
-      * PUBLIC
-      **********************/
-					/**
-      * Creates an instance of FileUploader
-      * @param {Object} [options]
-      * @constructor
-      */
-
-					function FileUploader(options) {
-						_classCallCheck(this, FileUploader);
-
-						var settings = copy(fileUploaderOptions);
-
-						extend(this, settings, options, {
-							isUploading: false,
-							_nextIndex: 0,
-							_directives: { select: [], drop: [], over: [] }
-						});
-
-						// add default filters
-						this.filters.unshift({ name: 'queueLimit', fn: this._queueLimitFilter });
-						this.filters.unshift({ name: 'folder', fn: this._folderFilter });
-					}
-					/**
-      * Adds items to the queue
-      * @param {File|HTMLInputElement|Object|FileList|Array<Object>} files
-      * @param {Object} [options]
-      * @param {Array<Function>|String} filters
-      */
-
-					FileUploader.prototype.addToQueue = function addToQueue(files, options, filters) {
-						var _this = this;
-
-						var incomingQueue = this.isArrayLikeObject(files) ? Array.prototype.slice.call(files) : [files];
-						var arrayOfFilters = this._getFilters(filters);
-						var count = this.queue.length;
-						var addedFileItems = [];
-
-						var next = function next() {
-							var something = incomingQueue.shift();
-
-							if (isUndefined(something)) {
-								return done();
-							}
-
-							var fileLikeObject = _this.isFile(something) ? something : new FileLikeObject(something);
-							var pipes = _this._convertFiltersToPipes(arrayOfFilters);
-							var pipeline = new Pipeline(pipes);
-							var onThrown = function onThrown(err) {
-								var originalFilter = err.pipe.originalFilter;
-
-								var _err$args = _slicedToArray(err.args, 2);
-
-								var fileLikeObject = _err$args[0];
-								var options = _err$args[1];
-
-								_this._onWhenAddingFileFailed(fileLikeObject, originalFilter, options);
-								next();
-							};
-							var onSuccessful = function onSuccessful(fileLikeObject, options) {
-								var fileItem = new FileItem(_this, fileLikeObject, options);
-								addedFileItems.push(fileItem);
-								_this.queue.push(fileItem);
-								_this._onAfterAddingFile(fileItem);
-								next();
-							};
-							pipeline.onThrown = onThrown;
-							pipeline.onSuccessful = onSuccessful;
-							pipeline.exec(fileLikeObject, options);
-						};
-
-						var done = function done() {
-							if (_this.queue.length !== count) {
-								_this._onAfterAddingAll(addedFileItems);
-								_this.progress = _this._getTotalProgress();
-							}
-
-							_this._render();
-							if (_this.autoUpload) _this.uploadAll();
-						};
-
-						next();
-					};
-					/**
-      * Remove items from the queue. Remove last: index = -1
-      * @param {FileItem|Number} value
-      */
-
-					FileUploader.prototype.removeFromQueue = function removeFromQueue(value) {
-						var index = this.getIndexOfItem(value);
-						var item = this.queue[index];
-						if (item.isUploading) item.cancel();
-						this.queue.splice(index, 1);
-						item._destroy();
-						this.progress = this._getTotalProgress();
-					};
-					/**
-      * Clears the queue
-      */
-
-					FileUploader.prototype.clearQueue = function clearQueue() {
-						while (this.queue.length) {
-							this.queue[0].remove();
-						}
-						this.progress = 0;
-					};
-					/**
-      * Uploads a item from the queue
-      * @param {FileItem|Number} value
-      */
-
-					FileUploader.prototype.uploadItem = function uploadItem(value) {
-						var index = this.getIndexOfItem(value);
-						var item = this.queue[index];
-						var transport = this.isHTML5 ? '_xhrTransport' : '_iframeTransport';
-
-						item._prepareToUploading();
-						if (this.isUploading) return;
-
-						this._onBeforeUploadItem(item);
-						if (item.isCancel) return;
-
-						item.isUploading = true;
-						this.isUploading = true;
-						this[transport](item);
-						this._render();
-					};
-					/**
-      * Cancels uploading of item from the queue
-      * @param {FileItem|Number} value
-      */
-
-					FileUploader.prototype.cancelItem = function cancelItem(value) {
-						var _this2 = this;
-
-						var index = this.getIndexOfItem(value);
-						var item = this.queue[index];
-						var prop = this.isHTML5 ? '_xhr' : '_form';
-						if (!item) return;
-						item.isCancel = true;
-						if (item.isUploading) {
-							// It will call this._onCancelItem() & this._onCompleteItem() asynchronously
-							item[prop].abort();
-						} else {
-							(function () {
-								var dummy = [undefined, 0, {}];
-								var onNextTick = function onNextTick() {
-									_this2._onCancelItem.apply(_this2, [item].concat(dummy));
-									_this2._onCompleteItem.apply(_this2, [item].concat(dummy));
-								};
-								$timeout(onNextTick); // Trigger callbacks asynchronously (setImmediate emulation)
-							})();
-						}
-					};
-					/**
-      * Uploads all not uploaded items of queue
-      */
-
-					FileUploader.prototype.uploadAll = function uploadAll() {
-						var items = this.getNotUploadedItems().filter(function (item) {
-							return !item.isUploading;
-						});
-						if (!items.length) return;
-
-						forEach(items, function (item) {
-							return item._prepareToUploading();
-						});
-						items[0].upload();
-					};
-					/**
-      * Cancels all uploads
-      */
-
-					FileUploader.prototype.cancelAll = function cancelAll() {
-						var items = this.getNotUploadedItems();
-						forEach(items, function (item) {
-							return item.cancel();
-						});
-					};
-					/**
-      * Returns "true" if value an instance of File
-      * @param {*} value
-      * @returns {Boolean}
-      * @private
-      */
-
-					FileUploader.prototype.isFile = function isFile(value) {
-						return this.constructor.isFile(value);
-					};
-					/**
-      * Returns "true" if value an instance of FileLikeObject
-      * @param {*} value
-      * @returns {Boolean}
-      * @private
-      */
-
-					FileUploader.prototype.isFileLikeObject = function isFileLikeObject(value) {
-						return this.constructor.isFileLikeObject(value);
-					};
-					/**
-      * Returns "true" if value is array like object
-      * @param {*} value
-      * @returns {Boolean}
-      */
-
-					FileUploader.prototype.isArrayLikeObject = function isArrayLikeObject(value) {
-						return this.constructor.isArrayLikeObject(value);
-					};
-					/**
-      * Returns a index of item from the queue
-      * @param {Item|Number} value
-      * @returns {Number}
-      */
-
-					FileUploader.prototype.getIndexOfItem = function getIndexOfItem(value) {
-						return isNumber(value) ? value : this.queue.indexOf(value);
-					};
-					/**
-      * Returns not uploaded items
-      * @returns {Array}
-      */
-
-					FileUploader.prototype.getNotUploadedItems = function getNotUploadedItems() {
-						return this.queue.filter(function (item) {
-							return !item.isUploaded;
-						});
-					};
-					/**
-      * Returns items ready for upload
-      * @returns {Array}
-      */
-
-					FileUploader.prototype.getReadyItems = function getReadyItems() {
-						return this.queue.filter(function (item) {
-							return item.isReady && !item.isUploading;
-						}).sort(function (item1, item2) {
-							return item1.index - item2.index;
-						});
-					};
-					/**
-      * Destroys instance of FileUploader
-      */
-
-					FileUploader.prototype.destroy = function destroy() {
-						var _this3 = this;
-
-						forEach(this._directives, function (key) {
-							forEach(_this3._directives[key], function (object) {
-								object.destroy();
-							});
-						});
-					};
-					/**
-      * Callback
-      * @param {Array} fileItems
-      */
-
-					FileUploader.prototype.onAfterAddingAll = function onAfterAddingAll(fileItems) {};
-					/**
-      * Callback
-      * @param {FileItem} fileItem
-      */
-
-					FileUploader.prototype.onAfterAddingFile = function onAfterAddingFile(fileItem) {};
-					/**
-      * Callback
-      * @param {File|Object} item
-      * @param {Object} filter
-      * @param {Object} options
-      */
-
-					FileUploader.prototype.onWhenAddingFileFailed = function onWhenAddingFileFailed(item, filter, options) {};
-					/**
-      * Callback
-      * @param {FileItem} fileItem
-      */
-
-					FileUploader.prototype.onBeforeUploadItem = function onBeforeUploadItem(fileItem) {};
-					/**
-      * Callback
-      * @param {FileItem} fileItem
-      * @param {Number} progress
-      */
-
-					FileUploader.prototype.onProgressItem = function onProgressItem(fileItem, progress) {};
-					/**
-      * Callback
-      * @param {Number} progress
-      */
-
-					FileUploader.prototype.onProgressAll = function onProgressAll(progress) {};
-					/**
-      * Callback
-      * @param {FileItem} item
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      */
-
-					FileUploader.prototype.onSuccessItem = function onSuccessItem(item, response, status, headers) {};
-					/**
-      * Callback
-      * @param {FileItem} item
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      */
-
-					FileUploader.prototype.onErrorItem = function onErrorItem(item, response, status, headers) {};
-					/**
-      * Callback
-      * @param {FileItem} item
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      */
-
-					FileUploader.prototype.onCancelItem = function onCancelItem(item, response, status, headers) {};
-					/**
-      * Callback
-      * @param {FileItem} item
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      */
-
-					FileUploader.prototype.onCompleteItem = function onCompleteItem(item, response, status, headers) {};
-					/**
-      * Callback
-      */
-
-					FileUploader.prototype.onCompleteAll = function onCompleteAll() {};
-					/**********************
-      * PRIVATE
-      **********************/
-					/**
-      * Returns the total progress
-      * @param {Number} [value]
-      * @returns {Number}
-      * @private
-      */
-
-					FileUploader.prototype._getTotalProgress = function _getTotalProgress(value) {
-						if (this.removeAfterUpload) return value || 0;
-
-						var notUploaded = this.getNotUploadedItems().length;
-						var uploaded = notUploaded ? this.queue.length - notUploaded : this.queue.length;
-						var ratio = 100 / this.queue.length;
-						var current = (value || 0) * ratio / 100;
-
-						return Math.round(uploaded * ratio + current);
-					};
-					/**
-      * Returns array of filters
-      * @param {Array<Function>|String} filters
-      * @returns {Array<Function>}
-      * @private
-      */
-
-					FileUploader.prototype._getFilters = function _getFilters(filters) {
-						if (!filters) return this.filters;
-						if (isArray(filters)) return filters;
-						var names = filters.match(/[^\s,]+/g);
-						return this.filters.filter(function (filter) {
-							return names.indexOf(filter.name) !== -1;
-						});
-					};
-					/**
-     * @param {Array<Function>} filters
-     * @returns {Array<Function>}
-     * @private
-     */
-
-					FileUploader.prototype._convertFiltersToPipes = function _convertFiltersToPipes(filters) {
-						var _this4 = this;
-
-						return filters.map(function (filter) {
-							var fn = bind(_this4, filter.fn);
-							fn.isAsync = filter.fn.length === 3;
-							fn.originalFilter = filter;
-							return fn;
-						});
-					};
-					/**
-      * Updates html
-      * @private
-      */
-
-					FileUploader.prototype._render = function _render() {
-						if (!$rootScope.$$phase) $rootScope.$apply();
-					};
-					/**
-      * Returns "true" if item is a file (not folder)
-      * @param {File|FileLikeObject} item
-      * @returns {Boolean}
-      * @private
-      */
-
-					FileUploader.prototype._folderFilter = function _folderFilter(item) {
-						return !!(item.size || item.type);
-					};
-					/**
-      * Returns "true" if the limit has not been reached
-      * @returns {Boolean}
-      * @private
-      */
-
-					FileUploader.prototype._queueLimitFilter = function _queueLimitFilter() {
-						return this.queue.length < this.queueLimit;
-					};
-					/**
-      * Checks whether upload successful
-      * @param {Number} status
-      * @returns {Boolean}
-      * @private
-      */
-
-					FileUploader.prototype._isSuccessCode = function _isSuccessCode(status) {
-						return status >= 200 && status < 300 || status === 304;
-					};
-					/**
-      * Transforms the server response
-      * @param {*} response
-      * @param {Object} headers
-      * @returns {*}
-      * @private
-      */
-
-					FileUploader.prototype._transformResponse = function _transformResponse(response, headers) {
-						var headersGetter = this._headersGetter(headers);
-						forEach($http.defaults.transformResponse, function (transformFn) {
-							response = transformFn(response, headersGetter);
-						});
-						return response;
-					};
-					/**
-      * Parsed response headers
-      * @param headers
-      * @returns {Object}
-      * @see https://github.com/angular/angular.js/blob/master/src/ng/http.js
-      * @private
-      */
-
-					FileUploader.prototype._parseHeaders = function _parseHeaders(headers) {
-						var parsed = {},
-						    key,
-						    val,
-						    i;
-
-						if (!headers) return parsed;
-
-						forEach(headers.split('\n'), function (line) {
-							i = line.indexOf(':');
-							key = line.slice(0, i).trim().toLowerCase();
-							val = line.slice(i + 1).trim();
-
-							if (key) {
-								parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
-							}
-						});
-
-						return parsed;
-					};
-					/**
-      * Returns function that returns headers
-      * @param {Object} parsedHeaders
-      * @returns {Function}
-      * @private
-      */
-
-					FileUploader.prototype._headersGetter = function _headersGetter(parsedHeaders) {
-						return function (name) {
-							if (name) {
-								return parsedHeaders[name.toLowerCase()] || null;
-							}
-							return parsedHeaders;
-						};
-					};
-					/**
-      * The XMLHttpRequest transport
-      * @param {FileItem} item
-      * @private
-      */
-
-					FileUploader.prototype._xhrTransport = function _xhrTransport(item) {
-						var _this5 = this;
-
-						var xhr = item._xhr = new XMLHttpRequest();
-						var sendable;
-
-						if (!item.disableMultipart) {
-							sendable = new FormData();
-							forEach(item.formData, function (obj) {
-								forEach(obj, function (value, key) {
-									sendable.append(key, value);
-								});
-							});
-
-							sendable.append(item.alias, item._file, item.file.name);
-						} else {
-							sendable = item._file;
-						}
-
-						if (typeof item._file.size != 'number') {
-							throw new TypeError('The file specified is no longer valid');
-						}
-
-						xhr.upload.onprogress = function (event) {
-							var progress = Math.round(event.lengthComputable ? event.loaded * 100 / event.total : 0);
-							_this5._onProgressItem(item, progress);
-						};
-
-						xhr.onload = function () {
-							var headers = _this5._parseHeaders(xhr.getAllResponseHeaders());
-							var response = _this5._transformResponse(xhr.response, headers);
-							var gist = _this5._isSuccessCode(xhr.status) ? 'Success' : 'Error';
-							var method = '_on' + gist + 'Item';
-							_this5[method](item, response, xhr.status, headers);
-							_this5._onCompleteItem(item, response, xhr.status, headers);
-						};
-
-						xhr.onerror = function () {
-							var headers = _this5._parseHeaders(xhr.getAllResponseHeaders());
-							var response = _this5._transformResponse(xhr.response, headers);
-							_this5._onErrorItem(item, response, xhr.status, headers);
-							_this5._onCompleteItem(item, response, xhr.status, headers);
-						};
-
-						xhr.onabort = function () {
-							var headers = _this5._parseHeaders(xhr.getAllResponseHeaders());
-							var response = _this5._transformResponse(xhr.response, headers);
-							_this5._onCancelItem(item, response, xhr.status, headers);
-							_this5._onCompleteItem(item, response, xhr.status, headers);
-						};
-
-						xhr.open(item.method, item.url, true);
-
-						xhr.withCredentials = item.withCredentials;
-
-						forEach(item.headers, function (value, name) {
-							xhr.setRequestHeader(name, value);
-						});
-
-						xhr.send(sendable);
-					};
-					/**
-      * The IFrame transport
-      * @param {FileItem} item
-      * @private
-      */
-
-					FileUploader.prototype._iframeTransport = function _iframeTransport(item) {
-						var _this6 = this;
-
-						var form = element('<form style="display: none;" />');
-						var iframe = element('<iframe name="iframeTransport' + Date.now() + '">');
-						var input = item._input;
-
-						if (item._form) item._form.replaceWith(input); // remove old form
-						item._form = form; // save link to new form
-
-						input.prop('name', item.alias);
-
-						forEach(item.formData, function (obj) {
-							forEach(obj, function (value, key) {
-								var element_ = element('<input type="hidden" name="' + key + '" />');
-								element_.val(value);
-								form.append(element_);
-							});
-						});
-
-						form.prop({
-							action: item.url,
-							method: 'POST',
-							target: iframe.prop('name'),
-							enctype: 'multipart/form-data',
-							encoding: 'multipart/form-data' // old IE
-						});
-
-						iframe.bind('load', function () {
-							var html = '';
-							var status = 200;
-
-							try {
-								// Fix for legacy IE browsers that loads internal error page
-								// when failed WS response received. In consequence iframe
-								// content access denied error is thrown becouse trying to
-								// access cross domain page. When such thing occurs notifying
-								// with empty response object. See more info at:
-								// http://stackoverflow.com/questions/151362/access-is-denied-error-on-accessing-iframe-document-object
-								// Note that if non standard 4xx or 5xx error code returned
-								// from WS then response content can be accessed without error
-								// but 'XHR' status becomes 200. In order to avoid confusion
-								// returning response via same 'success' event handler.
-
-								// fixed angular.contents() for iframes
-								html = iframe[0].contentDocument.body.innerHTML;
-							} catch (e) {
-								// in case we run into the access-is-denied error or we have another error on the server side
-								// (intentional 500,40... errors), we at least say 'something went wrong' -> 500
-								status = 500;
-							}
-
-							var xhr = { response: html, status: status, dummy: true };
-							var headers = {};
-							var response = _this6._transformResponse(xhr.response, headers);
-
-							_this6._onSuccessItem(item, response, xhr.status, headers);
-							_this6._onCompleteItem(item, response, xhr.status, headers);
-						});
-
-						form.abort = function () {
-							var xhr = { status: 0, dummy: true };
-							var headers = {};
-							var response;
-
-							iframe.unbind('load').prop('src', 'javascript:false;');
-							form.replaceWith(input);
-
-							_this6._onCancelItem(item, response, xhr.status, headers);
-							_this6._onCompleteItem(item, response, xhr.status, headers);
-						};
-
-						input.after(form);
-						form.append(input).append(iframe);
-
-						form[0].submit();
-					};
-					/**
-      * Inner callback
-      * @param {File|Object} item
-      * @param {Object} filter
-      * @param {Object} options
-      * @private
-      */
-
-					FileUploader.prototype._onWhenAddingFileFailed = function _onWhenAddingFileFailed(item, filter, options) {
-						this.onWhenAddingFileFailed(item, filter, options);
-					};
-					/**
-      * Inner callback
-      * @param {FileItem} item
-      */
-
-					FileUploader.prototype._onAfterAddingFile = function _onAfterAddingFile(item) {
-						this.onAfterAddingFile(item);
-					};
-					/**
-      * Inner callback
-      * @param {Array<FileItem>} items
-      */
-
-					FileUploader.prototype._onAfterAddingAll = function _onAfterAddingAll(items) {
-						this.onAfterAddingAll(items);
-					};
-					/**
-      *  Inner callback
-      * @param {FileItem} item
-      * @private
-      */
-
-					FileUploader.prototype._onBeforeUploadItem = function _onBeforeUploadItem(item) {
-						item._onBeforeUpload();
-						this.onBeforeUploadItem(item);
-					};
-					/**
-      * Inner callback
-      * @param {FileItem} item
-      * @param {Number} progress
-      * @private
-      */
-
-					FileUploader.prototype._onProgressItem = function _onProgressItem(item, progress) {
-						var total = this._getTotalProgress(progress);
-						this.progress = total;
-						item._onProgress(progress);
-						this.onProgressItem(item, progress);
-						this.onProgressAll(total);
-						this._render();
-					};
-					/**
-      * Inner callback
-      * @param {FileItem} item
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      * @private
-      */
-
-					FileUploader.prototype._onSuccessItem = function _onSuccessItem(item, response, status, headers) {
-						item._onSuccess(response, status, headers);
-						this.onSuccessItem(item, response, status, headers);
-					};
-					/**
-      * Inner callback
-      * @param {FileItem} item
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      * @private
-      */
-
-					FileUploader.prototype._onErrorItem = function _onErrorItem(item, response, status, headers) {
-						item._onError(response, status, headers);
-						this.onErrorItem(item, response, status, headers);
-					};
-					/**
-      * Inner callback
-      * @param {FileItem} item
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      * @private
-      */
-
-					FileUploader.prototype._onCancelItem = function _onCancelItem(item, response, status, headers) {
-						item._onCancel(response, status, headers);
-						this.onCancelItem(item, response, status, headers);
-					};
-					/**
-      * Inner callback
-      * @param {FileItem} item
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      * @private
-      */
-
-					FileUploader.prototype._onCompleteItem = function _onCompleteItem(item, response, status, headers) {
-						item._onComplete(response, status, headers);
-						this.onCompleteItem(item, response, status, headers);
-
-						var nextItem = this.getReadyItems()[0];
-						this.isUploading = false;
-
-						if (isDefined(nextItem)) {
-							nextItem.upload();
-							return;
-						}
-
-						this.onCompleteAll();
-						this.progress = this._getTotalProgress();
-						this._render();
-					};
-					/**********************
-      * STATIC
-      **********************/
-					/**
-      * Returns "true" if value an instance of File
-      * @param {*} value
-      * @returns {Boolean}
-      * @private
-      */
-
-					FileUploader.isFile = function isFile(value) {
-						return File && value instanceof File;
-					};
-					/**
-      * Returns "true" if value an instance of FileLikeObject
-      * @param {*} value
-      * @returns {Boolean}
-      * @private
-      */
-
-					FileUploader.isFileLikeObject = function isFileLikeObject(value) {
-						return value instanceof FileLikeObject;
-					};
-					/**
-      * Returns "true" if value is array like object
-      * @param {*} value
-      * @returns {Boolean}
-      */
-
-					FileUploader.isArrayLikeObject = function isArrayLikeObject(value) {
-						return isObject(value) && 'length' in value;
-					};
-					/**
-      * Inherits a target (Class_1) by a source (Class_2)
-      * @param {Function} target
-      * @param {Function} source
-      */
-
-					FileUploader.inherit = function inherit(target, source) {
-						target.prototype = Object.create(source.prototype);
-						target.prototype.constructor = target;
-						target.super_ = source;
-					};
-
-					return FileUploader;
-				}();
-
-				/**********************
-     * PUBLIC
-     **********************/
-				/**
-     * Checks a support the html5 uploader
-     * @returns {Boolean}
-     * @readonly
-     */
-
-				FileUploader.prototype.isHTML5 = !!(File && FormData);
-				/**********************
-     * STATIC
-     **********************/
-				/**
-     * @borrows FileUploader.prototype.isHTML5
-     */
-				FileUploader.isHTML5 = FileUploader.prototype.isHTML5;
-
-				return FileUploader;
-			}
-
-			__identity.$inject = ['fileUploaderOptions', '$rootScope', '$http', '$window', '$timeout', 'FileLikeObject', 'FileItem', 'Pipeline'];
-
-			/***/
-		},
-		/* 4 */
-		/***/function (module, exports, __webpack_require__) {
-
-			'use strict';
-
-			Object.defineProperty(exports, "__esModule", {
-				value: true
-			});
-			exports.default = __identity;
-
-			var _config = __webpack_require__(1);
-
-			var _config2 = _interopRequireDefault(_config);
-
-			function _interopRequireDefault(obj) {
-				return obj && obj.__esModule ? obj : { default: obj };
-			}
-
-			function _classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) {
-					throw new TypeError("Cannot call a class as a function");
-				}
-			}
-
-			var _angular = angular;
-			var copy = _angular.copy;
-			var isElement = _angular.isElement;
-			var isString = _angular.isString;
-			function __identity() {
-
-				return function () {
-					/**
-      * Creates an instance of FileLikeObject
-      * @param {File|HTMLInputElement|Object} fileOrInput
-      * @constructor
-      */
-
-					function FileLikeObject(fileOrInput) {
-						_classCallCheck(this, FileLikeObject);
-
-						var isInput = isElement(fileOrInput);
-						var fakePathOrObject = isInput ? fileOrInput.value : fileOrInput;
-						var postfix = isString(fakePathOrObject) ? 'FakePath' : 'Object';
-						var method = '_createFrom' + postfix;
-						this[method](fakePathOrObject);
-					}
-					/**
-      * Creates file like object from fake path string
-      * @param {String} path
-      * @private
-      */
-
-					FileLikeObject.prototype._createFromFakePath = function _createFromFakePath(path) {
-						this.lastModifiedDate = null;
-						this.size = null;
-						this.type = 'like/' + path.slice(path.lastIndexOf('.') + 1).toLowerCase();
-						this.name = path.slice(path.lastIndexOf('/') + path.lastIndexOf('\\') + 2);
-					};
-					/**
-      * Creates file like object from object
-      * @param {File|FileLikeObject} object
-      * @private
-      */
-
-					FileLikeObject.prototype._createFromObject = function _createFromObject(object) {
-						this.lastModifiedDate = copy(object.lastModifiedDate);
-						this.size = object.size;
-						this.type = object.type;
-						this.name = object.name;
-					};
-
-					return FileLikeObject;
-				}();
-			}
-
-			/***/
-		},
-		/* 5 */
-		/***/function (module, exports, __webpack_require__) {
-
-			'use strict';
-
-			Object.defineProperty(exports, "__esModule", {
-				value: true
-			});
-			exports.default = __identity;
-
-			var _config = __webpack_require__(1);
-
-			var _config2 = _interopRequireDefault(_config);
-
-			function _interopRequireDefault(obj) {
-				return obj && obj.__esModule ? obj : { default: obj };
-			}
-
-			function _classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) {
-					throw new TypeError("Cannot call a class as a function");
-				}
-			}
-
-			var _angular = angular;
-			var copy = _angular.copy;
-			var extend = _angular.extend;
-			var element = _angular.element;
-			var isElement = _angular.isElement;
-			function __identity($compile, FileLikeObject) {
-
-				return function () {
-					/**
-      * Creates an instance of FileItem
-      * @param {FileUploader} uploader
-      * @param {File|HTMLInputElement|Object} some
-      * @param {Object} options
-      * @constructor
-      */
-
-					function FileItem(uploader, some, options) {
-						_classCallCheck(this, FileItem);
-
-						var isInput = isElement(some);
-						var input = isInput ? element(some) : null;
-						var file = !isInput ? some : null;
-
-						extend(this, {
-							url: uploader.url,
-							alias: uploader.alias,
-							headers: copy(uploader.headers),
-							formData: copy(uploader.formData),
-							removeAfterUpload: uploader.removeAfterUpload,
-							withCredentials: uploader.withCredentials,
-							disableMultipart: uploader.disableMultipart,
-							method: uploader.method
-						}, options, {
-							uploader: uploader,
-							file: new FileLikeObject(some),
-							isReady: false,
-							isUploading: false,
-							isUploaded: false,
-							isSuccess: false,
-							isCancel: false,
-							isError: false,
-							progress: 0,
-							index: null,
-							_file: file,
-							_input: input
-						});
-
-						if (input) this._replaceNode(input);
-					}
-					/**********************
-      * PUBLIC
-      **********************/
-					/**
-      * Uploads a FileItem
-      */
-
-					FileItem.prototype.upload = function upload() {
-						try {
-							this.uploader.uploadItem(this);
-						} catch (e) {
-							var message = e.name + ':' + e.message;
-							this.uploader._onCompleteItem(this, message, e.code, []);
-							this.uploader._onErrorItem(this, message, e.code, []);
-						}
-					};
-					/**
-      * Cancels uploading of FileItem
-      */
-
-					FileItem.prototype.cancel = function cancel() {
-						this.uploader.cancelItem(this);
-					};
-					/**
-      * Removes a FileItem
-      */
-
-					FileItem.prototype.remove = function remove() {
-						this.uploader.removeFromQueue(this);
-					};
-					/**
-      * Callback
-      * @private
-      */
-
-					FileItem.prototype.onBeforeUpload = function onBeforeUpload() {};
-					/**
-      * Callback
-      * @param {Number} progress
-      * @private
-      */
-
-					FileItem.prototype.onProgress = function onProgress(progress) {};
-					/**
-      * Callback
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      */
-
-					FileItem.prototype.onSuccess = function onSuccess(response, status, headers) {};
-					/**
-      * Callback
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      */
-
-					FileItem.prototype.onError = function onError(response, status, headers) {};
-					/**
-      * Callback
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      */
-
-					FileItem.prototype.onCancel = function onCancel(response, status, headers) {};
-					/**
-      * Callback
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      */
-
-					FileItem.prototype.onComplete = function onComplete(response, status, headers) {};
-					/**********************
-      * PRIVATE
-      **********************/
-					/**
-      * Inner callback
-      */
-
-					FileItem.prototype._onBeforeUpload = function _onBeforeUpload() {
-						this.isReady = true;
-						this.isUploading = false;
-						this.isUploaded = false;
-						this.isSuccess = false;
-						this.isCancel = false;
-						this.isError = false;
-						this.progress = 0;
-						this.onBeforeUpload();
-					};
-					/**
-      * Inner callback
-      * @param {Number} progress
-      * @private
-      */
-
-					FileItem.prototype._onProgress = function _onProgress(progress) {
-						this.progress = progress;
-						this.onProgress(progress);
-					};
-					/**
-      * Inner callback
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      * @private
-      */
-
-					FileItem.prototype._onSuccess = function _onSuccess(response, status, headers) {
-						this.isReady = false;
-						this.isUploading = false;
-						this.isUploaded = true;
-						this.isSuccess = true;
-						this.isCancel = false;
-						this.isError = false;
-						this.progress = 100;
-						this.index = null;
-						this.onSuccess(response, status, headers);
-					};
-					/**
-      * Inner callback
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      * @private
-      */
-
-					FileItem.prototype._onError = function _onError(response, status, headers) {
-						this.isReady = false;
-						this.isUploading = false;
-						this.isUploaded = true;
-						this.isSuccess = false;
-						this.isCancel = false;
-						this.isError = true;
-						this.progress = 0;
-						this.index = null;
-						this.onError(response, status, headers);
-					};
-					/**
-      * Inner callback
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      * @private
-      */
-
-					FileItem.prototype._onCancel = function _onCancel(response, status, headers) {
-						this.isReady = false;
-						this.isUploading = false;
-						this.isUploaded = false;
-						this.isSuccess = false;
-						this.isCancel = true;
-						this.isError = false;
-						this.progress = 0;
-						this.index = null;
-						this.onCancel(response, status, headers);
-					};
-					/**
-      * Inner callback
-      * @param {*} response
-      * @param {Number} status
-      * @param {Object} headers
-      * @private
-      */
-
-					FileItem.prototype._onComplete = function _onComplete(response, status, headers) {
-						this.onComplete(response, status, headers);
-						if (this.removeAfterUpload) this.remove();
-					};
-					/**
-      * Destroys a FileItem
-      */
-
-					FileItem.prototype._destroy = function _destroy() {
-						if (this._input) this._input.remove();
-						if (this._form) this._form.remove();
-						delete this._form;
-						delete this._input;
-					};
-					/**
-      * Prepares to uploading
-      * @private
-      */
-
-					FileItem.prototype._prepareToUploading = function _prepareToUploading() {
-						this.index = this.index || ++this.uploader._nextIndex;
-						this.isReady = true;
-					};
-					/**
-      * Replaces input element on his clone
-      * @param {JQLite|jQuery} input
-      * @private
-      */
-
-					FileItem.prototype._replaceNode = function _replaceNode(input) {
-						var clone = $compile(input.clone())(input.scope());
-						clone.prop('value', null); // FF fix
-						input.css('display', 'none');
-						input.after(clone); // remove jquery dependency
-					};
-
-					return FileItem;
-				}();
-			}
-
-			__identity.$inject = ['$compile', 'FileLikeObject'];
-
-			/***/
-		},
-		/* 6 */
-		/***/function (module, exports, __webpack_require__) {
-
-			'use strict';
-
-			Object.defineProperty(exports, "__esModule", {
-				value: true
-			});
-			exports.default = __identity;
-
-			var _config = __webpack_require__(1);
-
-			var _config2 = _interopRequireDefault(_config);
-
-			function _interopRequireDefault(obj) {
-				return obj && obj.__esModule ? obj : { default: obj };
-			}
-
-			function _classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) {
-					throw new TypeError("Cannot call a class as a function");
-				}
-			}
-
-			var _angular = angular;
-			var extend = _angular.extend;
-			function __identity() {
-				var FileDirective = function () {
-					/**
-      * Creates instance of {FileDirective} object
-      * @param {Object} options
-      * @param {Object} options.uploader
-      * @param {HTMLElement} options.element
-      * @param {Object} options.events
-      * @param {String} options.prop
-      * @constructor
-      */
-
-					function FileDirective(options) {
-						_classCallCheck(this, FileDirective);
-
-						extend(this, options);
-						this.uploader._directives[this.prop].push(this);
-						this._saveLinks();
-						this.bind();
-					}
-					/**
-      * Binds events handles
-      */
-
-					FileDirective.prototype.bind = function bind() {
-						for (var key in this.events) {
-							var prop = this.events[key];
-							this.element.bind(key, this[prop]);
-						}
-					};
-					/**
-      * Unbinds events handles
-      */
-
-					FileDirective.prototype.unbind = function unbind() {
-						for (var key in this.events) {
-							this.element.unbind(key, this.events[key]);
-						}
-					};
-					/**
-      * Destroys directive
-      */
-
-					FileDirective.prototype.destroy = function destroy() {
-						var index = this.uploader._directives[this.prop].indexOf(this);
-						this.uploader._directives[this.prop].splice(index, 1);
-						this.unbind();
-						// this.element = null;
-					};
-					/**
-      * Saves links to functions
-      * @private
-      */
-
-					FileDirective.prototype._saveLinks = function _saveLinks() {
-						for (var key in this.events) {
-							var prop = this.events[key];
-							this[prop] = this[prop].bind(this);
-						}
-					};
-
-					return FileDirective;
-				}();
-
-				/**
-     * Map of events
-     * @type {Object}
-     */
-
-				FileDirective.prototype.events = {};
-
-				return FileDirective;
-			}
-
-			/***/
-		},
-		/* 7 */
-		/***/function (module, exports, __webpack_require__) {
-
-			'use strict';
-
-			Object.defineProperty(exports, "__esModule", {
-				value: true
-			});
-			exports.default = __identity;
-
-			var _config = __webpack_require__(1);
-
-			var _config2 = _interopRequireDefault(_config);
-
-			function _interopRequireDefault(obj) {
-				return obj && obj.__esModule ? obj : { default: obj };
-			}
-
-			function _classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) {
-					throw new TypeError("Cannot call a class as a function");
-				}
-			}
-
-			function _possibleConstructorReturn(self, call) {
-				if (!self) {
-					throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-				}return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
-			}
-
-			function _inherits(subClass, superClass) {
-				if (typeof superClass !== "function" && superClass !== null) {
-					throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
-				}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-			}
-
-			var _angular = angular;
-			var extend = _angular.extend;
-			function __identity($compile, FileDirective) {
-
-				return function (_FileDirective) {
-					_inherits(FileSelect, _FileDirective);
-
-					/**
-      * Creates instance of {FileSelect} object
-      * @param {Object} options
-      * @constructor
-      */
-
-					function FileSelect(options) {
-						_classCallCheck(this, FileSelect);
-
-						var extendedOptions = extend(options, {
-							// Map of events
-							events: {
-								$destroy: 'destroy',
-								change: 'onChange'
-							},
-							// Name of property inside uploader._directive object
-							prop: 'select'
-						});
-
-						var _this = _possibleConstructorReturn(this, _FileDirective.call(this, extendedOptions));
-
-						if (!_this.uploader.isHTML5) {
-							_this.element.removeAttr('multiple');
-						}
-						_this.element.prop('value', null); // FF fix
-						return _this;
-					}
-					/**
-      * Returns options
-      * @return {Object|undefined}
-      */
-
-					FileSelect.prototype.getOptions = function getOptions() {};
-					/**
-      * Returns filters
-      * @return {Array<Function>|String|undefined}
-      */
-
-					FileSelect.prototype.getFilters = function getFilters() {};
-					/**
-      * If returns "true" then HTMLInputElement will be cleared
-      * @returns {Boolean}
-      */
-
-					FileSelect.prototype.isEmptyAfterSelection = function isEmptyAfterSelection() {
-						return !!this.element.attr('multiple');
-					};
-					/**
-      * Event handler
-      */
-
-					FileSelect.prototype.onChange = function onChange() {
-						var files = this.uploader.isHTML5 ? this.element[0].files : this.element[0];
-						var options = this.getOptions();
-						var filters = this.getFilters();
-
-						if (!this.uploader.isHTML5) this.destroy();
-						this.uploader.addToQueue(files, options, filters);
-						if (this.isEmptyAfterSelection()) {
-							this.element.prop('value', null);
-							this.element.replaceWith($compile(this.element.clone())(this.scope)); // IE fix
-						}
-					};
-
-					return FileSelect;
-				}(FileDirective);
-			}
-
-			__identity.$inject = ['$compile', 'FileDirective'];
-
-			/***/
-		},
-		/* 8 */
-		/***/function (module, exports) {
-
-			'use strict';
-
-			Object.defineProperty(exports, "__esModule", {
-				value: true
-			});
-			exports.default = __identity;
-
-			function _toConsumableArray(arr) {
-				if (Array.isArray(arr)) {
-					for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
-						arr2[i] = arr[i];
-					}return arr2;
-				} else {
-					return Array.from(arr);
-				}
-			}
-
-			function _classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) {
-					throw new TypeError("Cannot call a class as a function");
-				}
-			}
-
-			var _angular = angular;
-			var bind = _angular.bind;
-			var isUndefined = _angular.isUndefined;
-			function __identity($q) {
-
-				return function () {
-					/**
-      * @param {Array<Function>} pipes
-      */
-
-					function Pipeline() {
-						var pipes = arguments.length <= 0 || arguments[0] === undefined ? [] : arguments[0];
-
-						_classCallCheck(this, Pipeline);
-
-						this.pipes = pipes;
-					}
-
-					Pipeline.prototype.next = function next(args) {
-						var pipe = this.pipes.shift();
-						if (isUndefined(pipe)) {
-							this.onSuccessful.apply(this, _toConsumableArray(args));
-							return;
-						}
-						var err = new Error('The filter has not passed');
-						err.pipe = pipe;
-						err.args = args;
-						if (pipe.isAsync) {
-							var deferred = $q.defer();
-							var onFulfilled = bind(this, this.next, args);
-							var onRejected = bind(this, this.onThrown, err);
-							deferred.promise.then(onFulfilled, onRejected);
-							pipe.apply(undefined, _toConsumableArray(args).concat([deferred]));
-						} else {
-							var isDone = Boolean(pipe.apply(undefined, _toConsumableArray(args)));
-							if (isDone) {
-								this.next(args);
-							} else {
-								this.onThrown(err);
-							}
-						}
-					};
-
-					Pipeline.prototype.exec = function exec() {
-						for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-							args[_key] = arguments[_key];
-						}
-
-						this.next(args);
-					};
-
-					Pipeline.prototype.onThrown = function onThrown(err) {};
-
-					Pipeline.prototype.onSuccessful = function onSuccessful() {};
-
-					return Pipeline;
-				}();
-			}
-
-			__identity.$inject = ['$q'];
-
-			/***/
-		},
-		/* 9 */
-		/***/function (module, exports, __webpack_require__) {
-
-			'use strict';
-
-			Object.defineProperty(exports, "__esModule", {
-				value: true
-			});
-			exports.default = __identity;
-
-			var _config = __webpack_require__(1);
-
-			var _config2 = _interopRequireDefault(_config);
-
-			function _interopRequireDefault(obj) {
-				return obj && obj.__esModule ? obj : { default: obj };
-			}
-
-			function _classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) {
-					throw new TypeError("Cannot call a class as a function");
-				}
-			}
-
-			function _possibleConstructorReturn(self, call) {
-				if (!self) {
-					throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-				}return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
-			}
-
-			function _inherits(subClass, superClass) {
-				if (typeof superClass !== "function" && superClass !== null) {
-					throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
-				}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-			}
-
-			var _angular = angular;
-			var extend = _angular.extend;
-			var forEach = _angular.forEach;
-			function __identity(FileDirective) {
-
-				return function (_FileDirective) {
-					_inherits(FileDrop, _FileDirective);
-
-					/**
-      * Creates instance of {FileDrop} object
-      * @param {Object} options
-      * @constructor
-      */
-
-					function FileDrop(options) {
-						_classCallCheck(this, FileDrop);
-
-						var extendedOptions = extend(options, {
-							// Map of events
-							events: {
-								$destroy: 'destroy',
-								drop: 'onDrop',
-								dragover: 'onDragOver',
-								dragleave: 'onDragLeave'
-							},
-							// Name of property inside uploader._directive object
-							prop: 'drop'
-						});
-
-						return _possibleConstructorReturn(this, _FileDirective.call(this, extendedOptions));
-					}
-					/**
-      * Returns options
-      * @return {Object|undefined}
-      */
-
-					FileDrop.prototype.getOptions = function getOptions() {};
-					/**
-      * Returns filters
-      * @return {Array<Function>|String|undefined}
-      */
-
-					FileDrop.prototype.getFilters = function getFilters() {};
-					/**
-      * Event handler
-      */
-
-					FileDrop.prototype.onDrop = function onDrop(event) {
-						var transfer = this._getTransfer(event);
-						if (!transfer) return;
-						var options = this.getOptions();
-						var filters = this.getFilters();
-						this._preventAndStop(event);
-						forEach(this.uploader._directives.over, this._removeOverClass, this);
-						this.uploader.addToQueue(transfer.files, options, filters);
-					};
-					/**
-      * Event handler
-      */
-
-					FileDrop.prototype.onDragOver = function onDragOver(event) {
-						var transfer = this._getTransfer(event);
-						if (!this._haveFiles(transfer.types)) return;
-						transfer.dropEffect = 'copy';
-						this._preventAndStop(event);
-						forEach(this.uploader._directives.over, this._addOverClass, this);
-					};
-					/**
-      * Event handler
-      */
-
-					FileDrop.prototype.onDragLeave = function onDragLeave(event) {
-						if (event.currentTarget === this.element[0]) return;
-						this._preventAndStop(event);
-						forEach(this.uploader._directives.over, this._removeOverClass, this);
-					};
-					/**
-      * Helper
-      */
-
-					FileDrop.prototype._getTransfer = function _getTransfer(event) {
-						return event.dataTransfer ? event.dataTransfer : event.originalEvent.dataTransfer; // jQuery fix;
-					};
-					/**
-      * Helper
-      */
-
-					FileDrop.prototype._preventAndStop = function _preventAndStop(event) {
-						event.preventDefault();
-						event.stopPropagation();
-					};
-					/**
-      * Returns "true" if types contains files
-      * @param {Object} types
-      */
-
-					FileDrop.prototype._haveFiles = function _haveFiles(types) {
-						if (!types) return false;
-						if (types.indexOf) {
-							return types.indexOf('Files') !== -1;
-						} else if (types.contains) {
-							return types.contains('Files');
-						} else {
-							return false;
-						}
-					};
-					/**
-      * Callback
-      */
-
-					FileDrop.prototype._addOverClass = function _addOverClass(item) {
-						item.addOverClass();
-					};
-					/**
-      * Callback
-      */
-
-					FileDrop.prototype._removeOverClass = function _removeOverClass(item) {
-						item.removeOverClass();
-					};
-
-					return FileDrop;
-				}(FileDirective);
-			}
-
-			__identity.$inject = ['FileDirective'];
-
-			/***/
-		},
-		/* 10 */
-		/***/function (module, exports, __webpack_require__) {
-
-			'use strict';
-
-			Object.defineProperty(exports, "__esModule", {
-				value: true
-			});
-			exports.default = __identity;
-
-			var _config = __webpack_require__(1);
-
-			var _config2 = _interopRequireDefault(_config);
-
-			function _interopRequireDefault(obj) {
-				return obj && obj.__esModule ? obj : { default: obj };
-			}
-
-			function _classCallCheck(instance, Constructor) {
-				if (!(instance instanceof Constructor)) {
-					throw new TypeError("Cannot call a class as a function");
-				}
-			}
-
-			function _possibleConstructorReturn(self, call) {
-				if (!self) {
-					throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-				}return call && ((typeof call === 'undefined' ? 'undefined' : _typeof(call)) === "object" || typeof call === "function") ? call : self;
-			}
-
-			function _inherits(subClass, superClass) {
-				if (typeof superClass !== "function" && superClass !== null) {
-					throw new TypeError("Super expression must either be null or a function, not " + (typeof superClass === 'undefined' ? 'undefined' : _typeof(superClass)));
-				}subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } });if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
-			}
-
-			var _angular = angular;
-			var extend = _angular.extend;
-			function __identity(FileDirective) {
-
-				return function (_FileDirective) {
-					_inherits(FileOver, _FileDirective);
-
-					/**
-      * Creates instance of {FileDrop} object
-      * @param {Object} options
-      * @constructor
-      */
-
-					function FileOver(options) {
-						_classCallCheck(this, FileOver);
-
-						var extendedOptions = extend(options, {
-							// Map of events
-							events: {
-								$destroy: 'destroy'
-							},
-							// Name of property inside uploader._directive object
-							prop: 'over',
-							// Over class
-							overClass: 'nv-file-over'
-						});
-
-						return _possibleConstructorReturn(this, _FileDirective.call(this, extendedOptions));
-					}
-					/**
-      * Adds over class
-      */
-
-					FileOver.prototype.addOverClass = function addOverClass() {
-						this.element.addClass(this.getOverClass());
-					};
-					/**
-      * Removes over class
-      */
-
-					FileOver.prototype.removeOverClass = function removeOverClass() {
-						this.element.removeClass(this.getOverClass());
-					};
-					/**
-      * Returns over class
-      * @returns {String}
-      */
-
-					FileOver.prototype.getOverClass = function getOverClass() {
-						return this.overClass;
-					};
-
-					return FileOver;
-				}(FileDirective);
-			}
-
-			__identity.$inject = ['FileDirective'];
-
-			/***/
-		},
-		/* 11 */
-		/***/function (module, exports, __webpack_require__) {
-
-			'use strict';
-
-			Object.defineProperty(exports, "__esModule", {
-				value: true
-			});
-			exports.default = __identity;
-
-			var _config = __webpack_require__(1);
-
-			var _config2 = _interopRequireDefault(_config);
-
-			function _interopRequireDefault(obj) {
-				return obj && obj.__esModule ? obj : { default: obj };
-			}
-
-			function __identity($parse, FileUploader, FileSelect) {
-
-				return {
-					link: function link(scope, element, attributes) {
-						var uploader = scope.$eval(attributes.uploader);
-
-						if (!(uploader instanceof FileUploader)) {
-							throw new TypeError('"Uploader" must be an instance of FileUploader');
-						}
-
-						var object = new FileSelect({
-							uploader: uploader,
-							element: element,
-							scope: scope
-						});
-
-						object.getOptions = $parse(attributes.options).bind(object, scope);
-						object.getFilters = function () {
-							return attributes.filters;
-						};
-					}
-				};
-			}
-
-			__identity.$inject = ['$parse', 'FileUploader', 'FileSelect'];
-
-			/***/
-		},
-		/* 12 */
-		/***/function (module, exports, __webpack_require__) {
-
-			'use strict';
-
-			Object.defineProperty(exports, "__esModule", {
-				value: true
-			});
-			exports.default = __identity;
-
-			var _config = __webpack_require__(1);
-
-			var _config2 = _interopRequireDefault(_config);
-
-			function _interopRequireDefault(obj) {
-				return obj && obj.__esModule ? obj : { default: obj };
-			}
-
-			function __identity($parse, FileUploader, FileDrop) {
-
-				return {
-					link: function link(scope, element, attributes) {
-						var uploader = scope.$eval(attributes.uploader);
-
-						if (!(uploader instanceof FileUploader)) {
-							throw new TypeError('"Uploader" must be an instance of FileUploader');
-						}
-
-						if (!uploader.isHTML5) return;
-
-						var object = new FileDrop({
-							uploader: uploader,
-							element: element
-						});
-
-						object.getOptions = $parse(attributes.options).bind(object, scope);
-						object.getFilters = function () {
-							return attributes.filters;
-						};
-					}
-				};
-			}
-
-			__identity.$inject = ['$parse', 'FileUploader', 'FileDrop'];
-
-			/***/
-		},
-		/* 13 */
-		/***/function (module, exports, __webpack_require__) {
-
-			'use strict';
-
-			Object.defineProperty(exports, "__esModule", {
-				value: true
-			});
-			exports.default = __identity;
-
-			var _config = __webpack_require__(1);
-
-			var _config2 = _interopRequireDefault(_config);
-
-			function _interopRequireDefault(obj) {
-				return obj && obj.__esModule ? obj : { default: obj };
-			}
-
-			function __identity(FileUploader, FileOver) {
-
-				return {
-					link: function link(scope, element, attributes) {
-						var uploader = scope.$eval(attributes.uploader);
-
-						if (!(uploader instanceof FileUploader)) {
-							throw new TypeError('"Uploader" must be an instance of FileUploader');
-						}
-
-						var object = new FileOver({
-							uploader: uploader,
-							element: element
-						});
-
-						object.getOverClass = function () {
-							return attributes.overClass || object.overClass;
-						};
-					}
-				};
-			}
-
-			__identity.$inject = ['FileUploader', 'FileOver'];
-
-			/***/
-		}
-		/******/])
-	);
+!function (a, b) {
+  return  true ? void !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (a) {
+    return b(a);
+  }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)) : b(a);
+}("undefined" == typeof angular ? null : angular, function (a) {
+  var b = a.module("angularFileUpload", []);return b.value("fileUploaderOptions", { url: "/", alias: "file", headers: {}, queue: [], progress: 0, autoUpload: !1, removeAfterUpload: !1, method: "POST", filters: [], formData: [], queueLimit: Number.MAX_VALUE, withCredentials: !1 }).factory("FileUploader", ["fileUploaderOptions", "$rootScope", "$http", "$window", "$compile", function (b, c, d, e, f) {
+    function g(c) {
+      var d = a.copy(b);a.extend(this, d, c, { isUploading: !1, _nextIndex: 0, _failFilterIndex: -1, _directives: { select: [], drop: [], over: [] } }), this.filters.unshift({ name: "queueLimit", fn: this._queueLimitFilter }), this.filters.unshift({ name: "folder", fn: this._folderFilter });
+    }function h(b) {
+      var c = a.isElement(b),
+          d = c ? b.value : b,
+          e = a.isString(d) ? "FakePath" : "Object",
+          f = "_createFrom" + e;this[f](d);
+    }function i(b, c, d) {
+      var e = a.isElement(c),
+          f = e ? a.element(c) : null,
+          h = e ? null : c;a.extend(this, { url: b.url, alias: b.alias, headers: a.copy(b.headers), formData: a.copy(b.formData), removeAfterUpload: b.removeAfterUpload, withCredentials: b.withCredentials, method: b.method }, d, { uploader: b, file: new g.FileLikeObject(c), isReady: !1, isUploading: !1, isUploaded: !1, isSuccess: !1, isCancel: !1, isError: !1, progress: 0, index: null, _file: h, _input: f }), f && this._replaceNode(f);
+    }function j(b) {
+      a.extend(this, b), this.uploader._directives[this.prop].push(this), this._saveLinks(), this.bind();
+    }function k(a) {
+      k.super_.apply(this, arguments), this.uploader.isHTML5 || this.element.removeAttr("multiple"), this.element.prop("value", null);
+    }function l(a) {
+      l.super_.apply(this, arguments);
+    }function m(a) {
+      m.super_.apply(this, arguments);
+    }return g.prototype.isHTML5 = !(!e.File || !e.FormData), g.prototype.addToQueue = function (b, c, d) {
+      var e = this.isArrayLikeObject(b) ? b : [b],
+          f = this._getFilters(d),
+          h = this.queue.length,
+          i = [];a.forEach(e, function (a) {
+        var b = new g.FileLikeObject(a);if (this._isValidFile(b, f, c)) {
+          var d = new g.FileItem(this, a, c);i.push(d), this.queue.push(d), this._onAfterAddingFile(d);
+        } else {
+          var e = f[this._failFilterIndex];this._onWhenAddingFileFailed(b, e, c);
+        }
+      }, this), this.queue.length !== h && (this._onAfterAddingAll(i), this.progress = this._getTotalProgress()), this._render(), this.autoUpload && this.uploadAll();
+    }, g.prototype.removeFromQueue = function (a) {
+      var b = this.getIndexOfItem(a),
+          c = this.queue[b];c.isUploading && c.cancel(), this.queue.splice(b, 1), c._destroy(), this.progress = this._getTotalProgress();
+    }, g.prototype.clearQueue = function () {
+      for (; this.queue.length;) {
+        this.queue[0].remove();
+      }this.progress = 0;
+    }, g.prototype.uploadItem = function (a) {
+      var b = this.getIndexOfItem(a),
+          c = this.queue[b],
+          d = this.isHTML5 ? "_xhrTransport" : "_iframeTransport";c._prepareToUploading(), this.isUploading || (this.isUploading = !0, this[d](c));
+    }, g.prototype.cancelItem = function (a) {
+      var b = this.getIndexOfItem(a),
+          c = this.queue[b],
+          d = this.isHTML5 ? "_xhr" : "_form";c && c.isUploading && c[d].abort();
+    }, g.prototype.uploadAll = function () {
+      var b = this.getNotUploadedItems().filter(function (a) {
+        return !a.isUploading;
+      });b.length && (a.forEach(b, function (a) {
+        a._prepareToUploading();
+      }), b[0].upload());
+    }, g.prototype.cancelAll = function () {
+      var b = this.getNotUploadedItems();a.forEach(b, function (a) {
+        a.cancel();
+      });
+    }, g.prototype.isFile = function (a) {
+      var b = e.File;return b && a instanceof b;
+    }, g.prototype.isFileLikeObject = function (a) {
+      return a instanceof g.FileLikeObject;
+    }, g.prototype.isArrayLikeObject = function (b) {
+      return a.isObject(b) && "length" in b;
+    }, g.prototype.getIndexOfItem = function (b) {
+      return a.isNumber(b) ? b : this.queue.indexOf(b);
+    }, g.prototype.getNotUploadedItems = function () {
+      return this.queue.filter(function (a) {
+        return !a.isUploaded;
+      });
+    }, g.prototype.getReadyItems = function () {
+      return this.queue.filter(function (a) {
+        return a.isReady && !a.isUploading;
+      }).sort(function (a, b) {
+        return a.index - b.index;
+      });
+    }, g.prototype.destroy = function () {
+      a.forEach(this._directives, function (b) {
+        a.forEach(this._directives[b], function (a) {
+          a.destroy();
+        }, this);
+      }, this);
+    }, g.prototype.onAfterAddingAll = function (a) {}, g.prototype.onAfterAddingFile = function (a) {}, g.prototype.onWhenAddingFileFailed = function (a, b, c) {}, g.prototype.onBeforeUploadItem = function (a) {}, g.prototype.onProgressItem = function (a, b) {}, g.prototype.onProgressAll = function (a) {}, g.prototype.onSuccessItem = function (a, b, c, d) {}, g.prototype.onErrorItem = function (a, b, c, d) {}, g.prototype.onCancelItem = function (a, b, c, d) {}, g.prototype.onCompleteItem = function (a, b, c, d) {}, g.prototype.onCompleteAll = function () {}, g.prototype._getTotalProgress = function (a) {
+      if (this.removeAfterUpload) return a || 0;var b = this.getNotUploadedItems().length,
+          c = b ? this.queue.length - b : this.queue.length,
+          d = 100 / this.queue.length,
+          e = (a || 0) * d / 100;return Math.round(c * d + e);
+    }, g.prototype._getFilters = function (b) {
+      if (a.isUndefined(b)) return this.filters;if (a.isArray(b)) return b;var c = b.match(/[^\s,]+/g);return this.filters.filter(function (a) {
+        return -1 !== c.indexOf(a.name);
+      }, this);
+    }, g.prototype._render = function () {
+      c.$$phase || c.$apply();
+    }, g.prototype._folderFilter = function (a) {
+      return !(!a.size && !a.type);
+    }, g.prototype._queueLimitFilter = function () {
+      return this.queue.length < this.queueLimit;
+    }, g.prototype._isValidFile = function (a, b, c) {
+      return this._failFilterIndex = -1, b.length ? b.every(function (b) {
+        return this._failFilterIndex++, b.fn.call(this, a, c);
+      }, this) : !0;
+    }, g.prototype._isSuccessCode = function (a) {
+      return a >= 200 && 300 > a || 304 === a;
+    }, g.prototype._transformResponse = function (b, c) {
+      var e = this._headersGetter(c);return a.forEach(d.defaults.transformResponse, function (a) {
+        b = a(b, e);
+      }), b;
+    }, g.prototype._parseHeaders = function (b) {
+      var c,
+          d,
+          e,
+          f = {};return b ? (a.forEach(b.split("\n"), function (a) {
+        e = a.indexOf(":"), c = a.slice(0, e).trim().toLowerCase(), d = a.slice(e + 1).trim(), c && (f[c] = f[c] ? f[c] + ", " + d : d);
+      }), f) : f;
+    }, g.prototype._headersGetter = function (a) {
+      return function (b) {
+        return b ? a[b.toLowerCase()] || null : a;
+      };
+    }, g.prototype._xhrTransport = function (b) {
+      var c = b._xhr = new XMLHttpRequest(),
+          d = new FormData(),
+          e = this;if (e._onBeforeUploadItem(b), a.forEach(b.formData, function (b) {
+        a.forEach(b, function (a, b) {
+          d.append(b, a);
+        });
+      }), "number" != typeof b._file.size) throw new TypeError("The file specified is no longer valid");d.append(b.alias, b._file, b.file.name), c.upload.onprogress = function (a) {
+        var c = Math.round(a.lengthComputable ? 100 * a.loaded / a.total : 0);e._onProgressItem(b, c);
+      }, c.onload = function () {
+        var a = e._parseHeaders(c.getAllResponseHeaders()),
+            d = e._transformResponse(c.response, a),
+            f = e._isSuccessCode(c.status) ? "Success" : "Error",
+            g = "_on" + f + "Item";e[g](b, d, c.status, a), e._onCompleteItem(b, d, c.status, a);
+      }, c.onerror = function () {
+        var a = e._parseHeaders(c.getAllResponseHeaders()),
+            d = e._transformResponse(c.response, a);e._onErrorItem(b, d, c.status, a), e._onCompleteItem(b, d, c.status, a);
+      }, c.onabort = function () {
+        var a = e._parseHeaders(c.getAllResponseHeaders()),
+            d = e._transformResponse(c.response, a);e._onCancelItem(b, d, c.status, a), e._onCompleteItem(b, d, c.status, a);
+      }, c.open(b.method, b.url, !0), c.withCredentials = b.withCredentials, a.forEach(b.headers, function (a, b) {
+        c.setRequestHeader(b, a);
+      }), c.send(d), this._render();
+    }, g.prototype._iframeTransport = function (b) {
+      var c = a.element('<form style="display: none;" />'),
+          d = a.element('<iframe name="iframeTransport' + Date.now() + '">'),
+          e = b._input,
+          f = this;b._form && b._form.replaceWith(e), b._form = c, f._onBeforeUploadItem(b), e.prop("name", b.alias), a.forEach(b.formData, function (b) {
+        a.forEach(b, function (b, d) {
+          var e = a.element('<input type="hidden" name="' + d + '" />');e.val(b), c.append(e);
+        });
+      }), c.prop({ action: b.url, method: "POST", target: d.prop("name"), enctype: "multipart/form-data", encoding: "multipart/form-data" }), d.bind("load", function () {
+        try {
+          var a = d[0].contentDocument.body.innerHTML;
+        } catch (c) {}var e = { response: a, status: 200, dummy: !0 },
+            g = {},
+            h = f._transformResponse(e.response, g);f._onSuccessItem(b, h, e.status, g), f._onCompleteItem(b, h, e.status, g);
+      }), c.abort = function () {
+        var a,
+            g = { status: 0, dummy: !0 },
+            h = {};d.unbind("load").prop("src", "javascript:false;"), c.replaceWith(e), f._onCancelItem(b, a, g.status, h), f._onCompleteItem(b, a, g.status, h);
+      }, e.after(c), c.append(e).append(d), c[0].submit(), this._render();
+    }, g.prototype._onWhenAddingFileFailed = function (a, b, c) {
+      this.onWhenAddingFileFailed(a, b, c);
+    }, g.prototype._onAfterAddingFile = function (a) {
+      this.onAfterAddingFile(a);
+    }, g.prototype._onAfterAddingAll = function (a) {
+      this.onAfterAddingAll(a);
+    }, g.prototype._onBeforeUploadItem = function (a) {
+      a._onBeforeUpload(), this.onBeforeUploadItem(a);
+    }, g.prototype._onProgressItem = function (a, b) {
+      var c = this._getTotalProgress(b);this.progress = c, a._onProgress(b), this.onProgressItem(a, b), this.onProgressAll(c), this._render();
+    }, g.prototype._onSuccessItem = function (a, b, c, d) {
+      a._onSuccess(b, c, d), this.onSuccessItem(a, b, c, d);
+    }, g.prototype._onErrorItem = function (a, b, c, d) {
+      a._onError(b, c, d), this.onErrorItem(a, b, c, d);
+    }, g.prototype._onCancelItem = function (a, b, c, d) {
+      a._onCancel(b, c, d), this.onCancelItem(a, b, c, d);
+    }, g.prototype._onCompleteItem = function (b, c, d, e) {
+      b._onComplete(c, d, e), this.onCompleteItem(b, c, d, e);var f = this.getReadyItems()[0];return this.isUploading = !1, a.isDefined(f) ? void f.upload() : (this.onCompleteAll(), this.progress = this._getTotalProgress(), void this._render());
+    }, g.isFile = g.prototype.isFile, g.isFileLikeObject = g.prototype.isFileLikeObject, g.isArrayLikeObject = g.prototype.isArrayLikeObject, g.isHTML5 = g.prototype.isHTML5, g.inherit = function (a, b) {
+      a.prototype = Object.create(b.prototype), a.prototype.constructor = a, a.super_ = b;
+    }, g.FileLikeObject = h, g.FileItem = i, g.FileDirective = j, g.FileSelect = k, g.FileDrop = l, g.FileOver = m, h.prototype._createFromFakePath = function (a) {
+      this.lastModifiedDate = null, this.size = null, this.type = "like/" + a.slice(a.lastIndexOf(".") + 1).toLowerCase(), this.name = a.slice(a.lastIndexOf("/") + a.lastIndexOf("\\") + 2);
+    }, h.prototype._createFromObject = function (b) {
+      this.lastModifiedDate = a.copy(b.lastModifiedDate), this.size = b.size, this.type = b.type, this.name = b.name;
+    }, i.prototype.upload = function () {
+      try {
+        this.uploader.uploadItem(this);
+      } catch (a) {
+        this.uploader._onCompleteItem(this, "", 0, []), this.uploader._onErrorItem(this, "", 0, []);
+      }
+    }, i.prototype.cancel = function () {
+      this.uploader.cancelItem(this);
+    }, i.prototype.remove = function () {
+      this.uploader.removeFromQueue(this);
+    }, i.prototype.onBeforeUpload = function () {}, i.prototype.onProgress = function (a) {}, i.prototype.onSuccess = function (a, b, c) {}, i.prototype.onError = function (a, b, c) {}, i.prototype.onCancel = function (a, b, c) {}, i.prototype.onComplete = function (a, b, c) {}, i.prototype._onBeforeUpload = function () {
+      this.isReady = !0, this.isUploading = !0, this.isUploaded = !1, this.isSuccess = !1, this.isCancel = !1, this.isError = !1, this.progress = 0, this.onBeforeUpload();
+    }, i.prototype._onProgress = function (a) {
+      this.progress = a, this.onProgress(a);
+    }, i.prototype._onSuccess = function (a, b, c) {
+      this.isReady = !1, this.isUploading = !1, this.isUploaded = !0, this.isSuccess = !0, this.isCancel = !1, this.isError = !1, this.progress = 100, this.index = null, this.onSuccess(a, b, c);
+    }, i.prototype._onError = function (a, b, c) {
+      this.isReady = !1, this.isUploading = !1, this.isUploaded = !0, this.isSuccess = !1, this.isCancel = !1, this.isError = !0, this.progress = 0, this.index = null, this.onError(a, b, c);
+    }, i.prototype._onCancel = function (a, b, c) {
+      this.isReady = !1, this.isUploading = !1, this.isUploaded = !1, this.isSuccess = !1, this.isCancel = !0, this.isError = !1, this.progress = 0, this.index = null, this.onCancel(a, b, c);
+    }, i.prototype._onComplete = function (a, b, c) {
+      this.onComplete(a, b, c), this.removeAfterUpload && this.remove();
+    }, i.prototype._destroy = function () {
+      this._input && this._input.remove(), this._form && this._form.remove(), delete this._form, delete this._input;
+    }, i.prototype._prepareToUploading = function () {
+      this.index = this.index || ++this.uploader._nextIndex, this.isReady = !0;
+    }, i.prototype._replaceNode = function (a) {
+      var b = f(a.clone())(a.scope());b.prop("value", null), a.css("display", "none"), a.after(b);
+    }, j.prototype.events = {}, j.prototype.bind = function () {
+      for (var a in this.events) {
+        var b = this.events[a];this.element.bind(a, this[b]);
+      }
+    }, j.prototype.unbind = function () {
+      for (var a in this.events) {
+        this.element.unbind(a, this.events[a]);
+      }
+    }, j.prototype.destroy = function () {
+      var a = this.uploader._directives[this.prop].indexOf(this);this.uploader._directives[this.prop].splice(a, 1), this.unbind();
+    }, j.prototype._saveLinks = function () {
+      for (var a in this.events) {
+        var b = this.events[a];this[b] = this[b].bind(this);
+      }
+    }, g.inherit(k, j), k.prototype.events = { $destroy: "destroy", change: "onChange" }, k.prototype.prop = "select", k.prototype.getOptions = function () {}, k.prototype.getFilters = function () {}, k.prototype.isEmptyAfterSelection = function () {
+      return !!this.element.attr("multiple");
+    }, k.prototype.onChange = function () {
+      var a = this.uploader.isHTML5 ? this.element[0].files : this.element[0],
+          b = this.getOptions(),
+          c = this.getFilters();this.uploader.isHTML5 || this.destroy(), this.uploader.addToQueue(a, b, c), this.isEmptyAfterSelection() && this.element.prop("value", null);
+    }, g.inherit(l, j), l.prototype.events = { $destroy: "destroy", drop: "onDrop", dragover: "onDragOver", dragleave: "onDragLeave" }, l.prototype.prop = "drop", l.prototype.getOptions = function () {}, l.prototype.getFilters = function () {}, l.prototype.onDrop = function (b) {
+      var c = this._getTransfer(b);if (c) {
+        var d = this.getOptions(),
+            e = this.getFilters();this._preventAndStop(b), a.forEach(this.uploader._directives.over, this._removeOverClass, this), this.uploader.addToQueue(c.files, d, e);
+      }
+    }, l.prototype.onDragOver = function (b) {
+      var c = this._getTransfer(b);this._haveFiles(c.types) && (c.dropEffect = "copy", this._preventAndStop(b), a.forEach(this.uploader._directives.over, this._addOverClass, this));
+    }, l.prototype.onDragLeave = function (b) {
+      b.currentTarget === this.element[0] && (this._preventAndStop(b), a.forEach(this.uploader._directives.over, this._removeOverClass, this));
+    }, l.prototype._getTransfer = function (a) {
+      return a.dataTransfer ? a.dataTransfer : a.originalEvent.dataTransfer;
+    }, l.prototype._preventAndStop = function (a) {
+      a.preventDefault(), a.stopPropagation();
+    }, l.prototype._haveFiles = function (a) {
+      return a ? a.indexOf ? -1 !== a.indexOf("Files") : a.contains ? a.contains("Files") : !1 : !1;
+    }, l.prototype._addOverClass = function (a) {
+      a.addOverClass();
+    }, l.prototype._removeOverClass = function (a) {
+      a.removeOverClass();
+    }, g.inherit(m, j), m.prototype.events = { $destroy: "destroy" }, m.prototype.prop = "over", m.prototype.overClass = "nv-file-over", m.prototype.addOverClass = function () {
+      this.element.addClass(this.getOverClass());
+    }, m.prototype.removeOverClass = function () {
+      this.element.removeClass(this.getOverClass());
+    }, m.prototype.getOverClass = function () {
+      return this.overClass;
+    }, g;
+  }]).directive("nvFileSelect", ["$parse", "FileUploader", function (a, b) {
+    return { link: function link(c, d, e) {
+        var f = c.$eval(e.uploader);if (!(f instanceof b)) throw new TypeError('"Uploader" must be an instance of FileUploader');var g = new b.FileSelect({ uploader: f, element: d });g.getOptions = a(e.options).bind(g, c), g.getFilters = function () {
+          return e.filters;
+        };
+      } };
+  }]).directive("nvFileDrop", ["$parse", "FileUploader", function (a, b) {
+    return { link: function link(c, d, e) {
+        var f = c.$eval(e.uploader);if (!(f instanceof b)) throw new TypeError('"Uploader" must be an instance of FileUploader');if (f.isHTML5) {
+          var g = new b.FileDrop({ uploader: f, element: d });g.getOptions = a(e.options).bind(g, c), g.getFilters = function () {
+            return e.filters;
+          };
+        }
+      } };
+  }]).directive("nvFileOver", ["FileUploader", function (a) {
+    return { link: function link(b, c, d) {
+        var e = b.$eval(d.uploader);if (!(e instanceof a)) throw new TypeError('"Uploader" must be an instance of FileUploader');var f = new a.FileOver({ uploader: e, element: c });f.getOverClass = function () {
+          return d.overClass || this.overClass;
+        };
+      } };
+  }]), b;
 });
-;
-//# sourceMappingURL=angular-file-upload.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__("./node_modules/webpack/buildin/module.js")(module)))
+//# sourceMappingURL=angular-file-upload.min.map
 
 /***/ }),
 
-/***/ "./node_modules/angular-sanitize/angular-sanitize.js":
+/***/ "./node_modules/._angular-sanitize@1.2.27@angular-sanitize/angular-sanitize.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16234,7 +14401,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ "./node_modules/angular-ui-router/release/angular-ui-router.js":
+/***/ "./node_modules/._angular-ui-router@0.2.13@angular-ui-router/release/angular-ui-router.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20588,7 +18755,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
 
 /***/ }),
 
-/***/ "./node_modules/angular/angular.js":
+/***/ "./node_modules/._angular@1.2.32@angular/angular.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32155,18 +30322,18 @@ bindJQuery();publishExternalAPI(angular);jqLite(document).ready(function(){angul
 
 /***/ }),
 
-/***/ "./node_modules/angular/index.js":
+/***/ "./node_modules/._angular@1.2.32@angular/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__("./node_modules/angular/angular.js");
+__webpack_require__("./node_modules/._angular@1.2.32@angular/angular.js");
 module.exports = angular;
 
 /***/ }),
 
-/***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
+/***/ "./node_modules/._bootstrap@3.3.7@bootstrap/dist/js/bootstrap.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34347,14 +32514,14 @@ if (typeof jQuery === 'undefined') {
 
 /***/ }),
 
-/***/ "./node_modules/bootstrap/less/bootstrap.less":
+/***/ "./node_modules/._bootstrap@3.3.7@bootstrap/less/bootstrap.less":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/loadjs/dist/loadjs.umd.js":
+/***/ "./node_modules/._loadjs@3.5.2@loadjs/dist/loadjs.umd.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -34643,9 +32810,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-<<<<<<< HEAD
-/***/ "./node_modules/ng-sortable/dist/ng-sortable.min.js":
-=======
 /***/ "./node_modules/._mime-match@1.0.2@mime-match/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -51523,7 +49687,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /***/ }),
 
 /***/ "./node_modules/._ng-sortable@1.2.2@ng-sortable/dist/ng-sortable.min.js":
->>>>>>> 92d29c6c3b69f27991746f65d5f18191da1c866f
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51708,7 +49871,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/configs/G.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/configs/G.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51725,17 +49888,17 @@ module.exports = function (app) {
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/configs/components.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/configs/components.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _loadjs = __webpack_require__("./node_modules/loadjs/dist/loadjs.umd.js");
+var _loadjs = __webpack_require__("./node_modules/._loadjs@3.5.2@loadjs/dist/loadjs.umd.js");
 
 var _loadjs2 = _interopRequireDefault(_loadjs);
 
-var _index = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/index.js");
+var _index = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/index.js");
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -51839,7 +50002,7 @@ angular.module('components', []).config(['$compileProvider', '$controllerProvide
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/configs/reqInterceptor.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/configs/reqInterceptor.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51915,7 +50078,7 @@ module.exports = function (app) {
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/configs/routerConfigs.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/configs/routerConfigs.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -51974,7 +50137,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/configs/routerData.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/configs/routerData.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52005,54 +50168,54 @@ var __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/main.css":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/main.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/main.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/main.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__("./node_modules/scmsmodules-runner/app/main.css");
+__webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/main.css");
 
-__webpack_require__("./node_modules/angular-ui-router/release/angular-ui-router.js");
+__webpack_require__("./node_modules/._angular-ui-router@0.2.13@angular-ui-router/release/angular-ui-router.js");
 
-var _angularCookies = __webpack_require__("./node_modules/angular-cookies/angular-cookies.js");
+var _angularCookies = __webpack_require__("./node_modules/._angular-cookies@1.2.27@angular-cookies/angular-cookies.js");
 
 var _angularCookies2 = _interopRequireDefault(_angularCookies);
 
-var _angularSanitize = __webpack_require__("./node_modules/angular-sanitize/angular-sanitize.js");
+var _angularSanitize = __webpack_require__("./node_modules/._angular-sanitize@1.2.27@angular-sanitize/angular-sanitize.js");
 
 var _angularSanitize2 = _interopRequireDefault(_angularSanitize);
 
-var _angularFileUpload = __webpack_require__("./node_modules/angular-file-upload/dist/angular-file-upload.js");
+var _angularFileUpload = __webpack_require__("./node_modules/._angular-file-upload@1.1.6@angular-file-upload/angular-file-upload.min.js");
 
 var _angularFileUpload2 = _interopRequireDefault(_angularFileUpload);
 
-__webpack_require__("./node_modules/angular-auto-validate/dist/jcs-auto-validate.min.js");
+__webpack_require__("./node_modules/._angular-auto-validate@1.19.0@angular-auto-validate/dist/jcs-auto-validate.min.js");
 
-__webpack_require__("./node_modules/ng-sortable/dist/ng-sortable.min.js");
+__webpack_require__("./node_modules/._ng-sortable@1.2.2@ng-sortable/dist/ng-sortable.min.js");
 
-__webpack_require__("./node_modules/scmsmodules-runner/app/configs/components.js");
+__webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/configs/components.js");
 
-var _routerConfigs = __webpack_require__("./node_modules/scmsmodules-runner/app/configs/routerConfigs.js");
+var _routerConfigs = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/configs/routerConfigs.js");
 
 var _routerConfigs2 = _interopRequireDefault(_routerConfigs);
 
-var _reqInterceptor = __webpack_require__("./node_modules/scmsmodules-runner/app/configs/reqInterceptor.js");
+var _reqInterceptor = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/configs/reqInterceptor.js");
 
 var _reqInterceptor2 = _interopRequireDefault(_reqInterceptor);
 
-var _G = __webpack_require__("./node_modules/scmsmodules-runner/app/configs/G.js");
+var _G = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/configs/G.js");
 
 var _G2 = _interopRequireDefault(_G);
 
-var _routerData = __webpack_require__("./node_modules/scmsmodules-runner/app/configs/routerData.js");
+var _routerData = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/configs/routerData.js");
 
 var _routerData2 = _interopRequireDefault(_routerData);
 
@@ -52079,27 +50242,27 @@ angular.bootstrap(document, [appName]);
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/header/header.css":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/header/header.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/header/header.html":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/header/header.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div ng-controller=\"headerCtrl\">\n    <div class=\"container header-ctrl\">\n        <div class=\"logo fl visible-large\">\n            <a href=\"/\">\n                ScmsModules\n            </a>\n        </div>\n        <ul class=\"nav-menu fl\">\n            <li>\n                <a href=\"#/scmsUi/scmsUi\" ng-class=\"{active: currentState === 'scmsUi.scmsUi'}\">\n                    Scms Modules\n                    <span class=\"caret\"></span>\n                </a>\n            </li>\n            <li>\n                <a href=\"#/scmsPage/scmsPage\" ng-class=\"{active: currentState === 'scmsPage.scmsPage'}\">\n                    Scms Pages\n                    <span class=\"caret\"></span>\n                </a>\n            </li>\n            <li>\n                <a href=\"#/standard/standard\" ng-class=\"{active: currentState === 'standard.standard'}\">\n                    Design Standard\n                    <span class=\"caret\"></span>\n                </a>\n            </li>\n        </ul>\n\n        <ul class=\"login-status\">\n            <li ng-show=\"userInfo.username\" role=\"presentation\" class=\"dropdown  navbar-right\">\n                \n            </li>\n            \n        </ul>\n    </div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/header/header.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/header/header.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/header/headerCtrl.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/header/header.css"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/header/header.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/header/headerCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/header/header.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/header/header.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
   return function (app, elem, attrs, scope) {
     ctrl(app, elem, attrs, scope);
     elem.append(html);
@@ -52109,13 +50272,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/header/headerCtrl.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/header/headerCtrl.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.controller('headerCtrl', ['$scope', '$state', '$location', function ($scope, $state, $location) {
             $scope.currentState = '';
@@ -52135,33 +50298,33 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/index.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/index.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _header = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/header/header.js");
+var _header = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/header/header.js");
 
 var _header2 = _interopRequireDefault(_header);
 
-var _mainNav = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/mainNav/mainNav.js");
+var _mainNav = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/mainNav/mainNav.js");
 
 var _mainNav2 = _interopRequireDefault(_mainNav);
 
-var _scmsUi = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUi.js");
+var _scmsUi = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.js");
 
 var _scmsUi2 = _interopRequireDefault(_scmsUi);
 
-var _scmsDirective = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.js");
+var _scmsDirective = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.js");
 
 var _scmsDirective2 = _interopRequireDefault(_scmsDirective);
 
-var _scmsPage = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsPage/scmsPage.js");
+var _scmsPage = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.js");
 
 var _scmsPage2 = _interopRequireDefault(_scmsPage);
 
-var _standard = __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/standard/standard.js");
+var _standard = __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/standard/standard.js");
 
 var _standard2 = _interopRequireDefault(_standard);
 
@@ -52179,20 +50342,20 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/mainNav/mainNav.html":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/mainNav/mainNav.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div ng-controller=\"mainNavCtrl\" style=\"display:inline;\">\n    <div main-nav-directive=\"\" navs=\"navs\" callback=\"callback\"></div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/mainNav/mainNav.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/mainNav/mainNav.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/mainNav/mainNavCtrl.js"), __webpack_require__("./src/mainNav/mainNavDirective.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/mainNav/mainNav.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, mainNavDirective, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/mainNav/mainNavCtrl.js"), __webpack_require__("./src/mainNav/mainNavDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/mainNav/mainNav.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, mainNavDirective, html) {
   return function (app, elem, attrs, scope) {
     ctrl(app, elem, attrs, scope);
     mainNavDirective(app, elem, attrs, scope);
@@ -52203,13 +50366,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/mainNav/mainNavCtrl.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/mainNav/mainNavCtrl.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.controller('mainNavCtrl', ['$scope', '$rootScope', function ($scope, $rootScope) {
             var preCheckedNav = '';
@@ -52233,13 +50396,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('objectToViewDirective', ['$compile', '$timeout', function ($compile, $timeout) {
             return {
@@ -52312,27 +50475,27 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.css":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.html":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"derective-module\">\n        \n        <div id=\"contentSidebar\">\n            <h2>指令名称：{{item.name}} </h2>\n            <h4>{{item.date}} <i>作者-{{item.author}}</i><i ng-if=\"item.lastBy\">；修改-{{item.lastBy}}</i></h4>\n            <h3 ng-show=\"item.description\"><span>功能描述：</span>{{item.description}}</h3>\n            <h3><span>外部JS依赖：</span>{{item.deps[0]}}</h3>\n            <h3><span>外部HTML插入：</span><pre class=\"code\" ng-bind=\"item.htmlCode\"></pre></h3>\n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.scope && item.scope.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>继承</th>\n                        <th>值类型</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.scope\">\n                        <td><span style=\"white-space:nowrap\">{{scope.key}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.scopeType || '='}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.type}}</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n            <h3 ng-show=\"item.attrs && item.attrs.length\"><span>attrs属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.attrs && item.attrs.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>值类型</th>\n                        <th>默认值</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.attrs\">\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.key\"></span></td>\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.type\"></span></td>\n                        <td>{{scope.defaultValue}}<span ng-if=\"!scope.defaultValue\">-</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n    \n            <h3 ng-show=\"item.api && item.api.length\"><span>JS内部api依赖：</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.api && item.api.length\">\n                <tbody>\n                    <tr ng-repeat=\"scope in item.api\">\n                        <td>{{scope}}</td>\n                    </tr><tr>\n                </tr></tbody>\n            </table>\n    \n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope连动视图：</span></h3>\n            <table class=\"table table-bordered\">\n                <tbody class=\"tbodyContent\" data-ng-bind-html=\"item.view\">\n                </tbody>\n            </table>\n        </div>\n        <div class=\"contentHtml\" data-ng-bind-html=\"item.html\"></div>\n    </div>";
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./index.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.html"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, scmsmodules, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./index.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.html"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, scmsmodules, html, css) {
     return function (app, elem, attrs, scope) {
         var directiveObj = scmsmodules.default || scmsmodules;
         var objKey;
@@ -52422,21 +50585,21 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.css":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.html":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div ng-controller=\"scmsDirectiveCtrl\">\n    <div component-view-directive=\"\" curr-item=\"currItem\" ng-if=\"currItem.type === 'directive'\"></div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52448,7 +50611,7 @@ var _demo2 = _interopRequireDefault(_demo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/ngHtmlContainer/ngHtmlContainer.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirectiveCtrl.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.css"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ngHtmlContainer, componentDirective, objectToViewDirective, ctrl, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/ngHtmlContainer/ngHtmlContainer.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/componentDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirectiveCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirective.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ngHtmlContainer, componentDirective, objectToViewDirective, ctrl, css, html) {
   return function (app, elem, attrs, scope) {
     ngHtmlContainer(app, elem, attrs, scope);
     componentDirective(app, elem, attrs, scope);
@@ -52461,13 +50624,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsDirective/scmsDirectiveCtrl.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsDirective/scmsDirectiveCtrl.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope, demoJson) {
         app.controller('scmsDirectiveCtrl', ['$scope', '$cookies', '$location', '$state', 'G', '$timeout', '$rootScope', '$sce', '$http', '$compile', function ($scope, $cookies, $location, $state, G, $timeout, $rootScope, $sce, $http, $compile) {
             //get navs
@@ -52534,14 +50697,14 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsPage/scmsPage.html":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div ng-controller=\"scmsPageCtrl\">\n    <div class=\"error-msg-a\">正在构建中...敬请期待</div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsPage/scmsPage.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52553,7 +50716,7 @@ var _demo2 = _interopRequireDefault(_demo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsPage/scmsPageCtrl.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/standard/standard.css"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsPage/scmsPage.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsPage/scmsPageCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/standard/standard.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsPage/scmsPage.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
   return function (app, elem, attrs, scope) {
     ctrl(app, elem, attrs, scope, _demo2.default);
     elem.append(html);
@@ -52563,13 +50726,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsPage/scmsPageCtrl.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsPage/scmsPageCtrl.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope, demoJson) {
         app.controller('scmsPageCtrl', ['$scope', '$cookies', '$location', '$state', 'G', '$timeout', '$rootScope', '$sce', '$http', '$compile', function ($scope, $cookies, $location, $state, G, $timeout, $rootScope, $sce, $http, $compile) {
             $rootScope.navs = [{
@@ -52583,27 +50746,27 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/componentDirective.css":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/componentDirective.html":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div class=\"derective-module\">\n        \n        <div id=\"contentSidebar\">\n            <h2>指令名称：{{item.name}} </h2>\n            <h4>{{item.date}} <i>作者-{{item.author}}</i><i ng-if=\"item.lastBy\">；修改-{{item.lastBy}}</i></h4>\n            <h3 ng-show=\"item.description\"><span>功能描述：</span>{{item.description}}</h3>\n            <h3><span>外部JS依赖：</span>{{item.deps[0]}}</h3>\n            <h3><span>外部HTML插入：</span><pre class=\"code\" ng-bind=\"item.htmlCode\"></pre></h3>\n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.scope && item.scope.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>继承</th>\n                        <th>值类型</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.scope\">\n                        <td><span style=\"white-space:nowrap\">{{scope.key}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.scopeType || '='}}</span></td>\n                        <td><span style=\"white-space:nowrap\">{{scope.type}}</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n            <h3 ng-show=\"item.attrs && item.attrs.length\"><span>attrs属性:</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.attrs && item.attrs.length\">\n                <tbody>\n                    <tr>\n                        <th>属性名称</th>\n                        <th>值类型</th>\n                        <th>默认值</th>\n                        <th>描述</th>\n                    </tr>\n                    <tr ng-repeat=\"scope in item.attrs\">\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.key\"></span></td>\n                        <td><span style=\"white-space:nowrap\" ng-bind=\"scope.type\"></span></td>\n                        <td>{{scope.defaultValue}}<span ng-if=\"!scope.defaultValue\">-</span></td>\n                        <td>{{scope.description}}</td>\n                    </tr>\n                </tbody>\n            </table>\n    \n            <h3 ng-show=\"item.api && item.api.length\"><span>JS内部api依赖：</span></h3>\n            <table class=\"table table-bordered\" ng-show=\"item.api && item.api.length\">\n                <tbody>\n                    <tr ng-repeat=\"scope in item.api\">\n                        <td>{{scope}}</td>\n                    </tr><tr>\n                </tr></tbody>\n            </table>\n    \n            <h3 ng-show=\"item.scope && item.scope.length\"><span>scope连动视图：</span></h3>\n            <table class=\"table table-bordered\">\n                <tbody class=\"tbodyContent\" data-ng-bind-html=\"item.view\">\n                </tbody>\n            </table>\n        </div>\n        <div class=\"contentHtml\" data-ng-bind-html=\"item.html\"></div>\n    </div>";
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/componentDirective.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./index.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/componentDirective.html"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/componentDirective.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, scmsmodules, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./index.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.html"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, scmsmodules, html, css) {
     return function (app, elem, attrs, scope) {
         var directiveObj = scmsmodules.default || scmsmodules;
         var objKey;
@@ -52693,21 +50856,21 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUi.css":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUi.html":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div ng-controller=\"scmsUiCtrl\">\n    <div scms-ui-directive=\"\" curr-item=\"currItem\" ng-if=\"currItem.type !== 'directive'\"></div>\n    <div component-view-directive=\"\" curr-item=\"currItem\" ng-if=\"currItem.type === 'directive'\"></div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUi.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52719,7 +50882,7 @@ var _demo2 = _interopRequireDefault(_demo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/ngHtmlContainer/ngHtmlContainer.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/componentDirective.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUiCtrl.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUi.css"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUi.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ngHtmlContainer, scmsUiDirective, componentDirective, objectToViewDirective, ctrl, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/ngHtmlContainer/ngHtmlContainer.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/componentDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/objectToView/objectToViewDirective.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/scmsUiCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/scmsUi.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ngHtmlContainer, scmsUiDirective, componentDirective, objectToViewDirective, ctrl, css, html) {
   return function (app, elem, attrs, scope) {
     ngHtmlContainer(app, elem, attrs, scope);
     scmsUiDirective(app, elem, attrs, scope);
@@ -52733,13 +50896,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUiCtrl.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/scmsUiCtrl.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope, demoJson) {
         app.controller('scmsUiCtrl', ['$scope', '$cookies', '$location', '$state', 'G', '$timeout', '$rootScope', '$sce', '$http', '$compile', function ($scope, $cookies, $location, $state, G, $timeout, $rootScope, $sce, $http, $compile) {
 
@@ -52805,20 +50968,20 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.html":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"box contentPadding\" name=\"{{currItem.title}}\" style=\"{{currItem.style}}\" id=\"{{currItem.boxId || ''}}\">\n    <div class=\"title-square\">{{currItem.title}}</div>\n    <p>{{currItem.depict}}</p>\n    <div class=\"mt20\" ng-repeat=\"itemH in currItem.html\">\n        <div class=\"mt10\" ng-html-container=\"\" html-data=\"{{itemH}}\"></div>\n        <pre class=\"code mt15\" ng-if=\"currItem.isCode !== false\">{{itemH}}</pre>          \n    </div>\n    <div ng-if=\"currItem.buttons\" class=\"pt20\">\n        <div ng-repeat=\"itemBtn in currItem.buttons\">\n            <button class=\"btn btn-default\" ng-bind=\"itemBtn.value\" ng-click=\"eval(itemBtn.callback)\"></button>\n            <pre class=\"code\" ng-if=\"item.isCode !== false\">{{itemBtn.callback}}</pre>  \n        </div>\n    </div>\n</div>";
+module.exports = "<div class=\"box contentPadding\" name=\"{{currItem.title}}\" style=\"{{currItem.style}}\" id=\"{{currItem.boxId || ''}}\">\n    <div class=\"title-square\">{{currItem.title}}</div>\n    <p>{{currItem.depict}}</p>\n    <div class=\"mt20\" ng-repeat=\"itemH in currItem.html\">\n        <div class=\"mt10\" ng-html-container=\"\" html-data=\"{{itemH}}\"></div>\n        <pre class=\"code mt15\" ng-if=\"currItem.isCode !== false\">{{itemH}}</pre>          \n    </div>\n    <div ng-if=\"currItem.buttons\" class=\"pt20\">\n        <div ng-repeat=\"itemBtn in currItem.buttons\" class=\"mb15\">\n            <button class=\"btn btn-default mb10\" ng-bind=\"itemBtn.value\" ng-click=\"eval(itemBtn.callback)\"></button>\n            <pre class=\"code\" ng-if=\"item.isCode !== false\">{{itemBtn.callback}}</pre>  \n        </div>\n    </div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/scmsUi/scmsUiDirective.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html) {
     return function (app, elem, attrs, scope) {
         app.directive('scmsUiDirective', [function () {
             return {
@@ -52830,7 +50993,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
                 },
                 link: function postLink($scope, $element, $attrs) {},
 
-                controller: function controller($scope, $element, $attrs, $cookies, $timeout) {}
+                controller: function controller($scope, $element, $attrs, $cookies, $timeout) {
+                    $scope.eval = function (callback) {
+                        try {
+                            eval(callback);
+                        } catch (e) {}
+                    };
+                }
             };
         }]);
     };
@@ -52839,21 +51008,21 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/standard/standard.css":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/standard/standard.css":
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/standard/standard.html":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/standard/standard.html":
 /***/ (function(module, exports) {
 
 module.exports = "<div ng-controller=\"standardCtrl\">\n    <div class=\"error-msg-a\">正在构建中...敬请期待</div>\n</div>";
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/standard/standard.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/standard/standard.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -52865,7 +51034,7 @@ var _demo2 = _interopRequireDefault(_demo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/standard/standardCtrl.js"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/standard/standard.css"), __webpack_require__("./node_modules/scmsmodules-runner/app/viewModules/standard/standard.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/standard/standardCtrl.js"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/standard/standard.css"), __webpack_require__("./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/standard/standard.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (ctrl, css, html) {
   return function (app, elem, attrs, scope) {
     ctrl(app, elem, attrs, scope, _demo2.default);
     elem.append(html);
@@ -52875,13 +51044,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ "./node_modules/scmsmodules-runner/app/viewModules/standard/standardCtrl.js":
+/***/ "./node_modules/._scmsmodules-runner@0.0.12@scmsmodules-runner/app/viewModules/standard/standardCtrl.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope, demoJson) {
         app.controller('standardCtrl', ['$scope', '$cookies', '$location', '$state', 'G', '$timeout', '$rootScope', '$sce', '$http', '$compile', function ($scope, $cookies, $location, $state, G, $timeout, $rootScope, $sce, $http, $compile) {
             $rootScope.navs = [{
@@ -52895,7 +51064,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
 /***/ }),
 
-/***/ "./node_modules/webpack/buildin/module.js":
+/***/ "./node_modules/._webpack@3.10.0@webpack/buildin/module.js":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -53411,7 +51580,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @html <select canton-select-directive ng-model="ngModel" d-item="dItem" class="form-control" data-is-all="1"></select>
  * @api 获取已开通城市接口:/goodstaxiAdmin/opencitycs/selectOpenCityList
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     'use strict';
 
     return function (app, elem, attrs, scope) {
@@ -53490,7 +51659,7 @@ module.exports = "<div class=\"modal fade change-pwd-dialog\" id=\"changePwdDial
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/changePwdDialog/changePwdDialogService.js"), __webpack_require__("./src/changePwdDialog/changePwdDialog.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, changePwdDialogService, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/changePwdDialog/changePwdDialogService.js"), __webpack_require__("./src/changePwdDialog/changePwdDialog.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, changePwdDialogService, html) {
     return function (app, elem, attrs, scope) {
         changePwdDialogService(app, elem, attrs, scope);
         app.directive('changePwdDialogDirective', ['G', 'changePwdDialogService', '$interval', '$cookies', '$window', function (G, service, $interval, $cookies, $window) {
@@ -53631,7 +51800,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/changePwdDialog/changePwdDialog.css"), __webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./src/changePwdDialog/changePwdDialog.css"), __webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.factory('changePwdDialogService', ['$rootScope', '$http', 'G', function ($rootScope, $http, G) {
             return {
@@ -53684,7 +51853,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * <div chart-directive data-height="250" chart-data="usersActiveChartData"></div>
  */
 // TODO: Echart exclude
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular)
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular)
 // echarts
 {
 	return function (app, elem, attrs, scope) {
@@ -53818,7 +51987,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @html <select citys-select-directive ng-model="ngModel" d-item="dItem" class="form-control"></select>
  * @api 获取已开通城市接口:/goodstaxiAdmin/ehuodiactivitycs/selectCitylist
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     'use strict';
 
     return function (app, elem, attrs, scope) {
@@ -53908,7 +52077,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @html <div citys-select-multiple-directive ng-model="ngModel" d-value="dValue" selected-city="selectedCity"></div>
  * @api 获取已开通城市接口:/goodstaxiAdmin/ehuodiactivitycs/selectCitylist
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/citysSelectMultiple/citysSelectMultiple.css"), __webpack_require__("./src/citysSelectMultiple/citysSelectMultiple.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/citysSelectMultiple/citysSelectMultiple.css"), __webpack_require__("./src/citysSelectMultiple/citysSelectMultiple.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, css, html) {
   'use strict';
 
   return function (app, elem, attrs, scope) {
@@ -54116,7 +52285,7 @@ module.exports = "<ol class=\"breadcrumb\">\n    <li class=\"bcfirst\"><i class=
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/crumb/crumb.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/crumb/crumb.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
     return function (app, elem, attrs, scope) {
         app.directive('crumbDirective', [function () {
             return {
@@ -54156,7 +52325,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy
  * @html <input class="form-control input-date" date-picker-directive ng-model='ngModel' min-date="minDate" max-date="maxDate" max-date-value="maxDateValue" min-date-value="minDateValue">
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
   return function (app, elem, attrs, scope) {
     app.directive('datePickerDirective', ['G', '$rootScope', function (G, $rootScope) {
       return {
@@ -54266,7 +52435,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <div error-no-data-directive data-content="暂无待审核的数据" show-by="showBy"></div>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('errorNoDataDirective', ['$document', '$timeout', function ($document, $timeout) {
             return {
@@ -54313,7 +52482,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy
  * @html <span export-directive api-url="'/goodstaxiAdmin/goodsseascs/downGoodsSeasListFile'" fetch-param="a" total-count="list.totalCount" max-number="5000" class="btn btn-export fr">导出</span>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('exportDirective', ['G', function (G) {
             return {
@@ -54579,7 +52748,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @html <form-radio-directive radio-list="radioList" radio-model="radioModel" link-model="linkModel"></form-radio-directive>
  * @htmlUrl scmsModules/formRadio/formRadio.html
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/formRadio/formRadio.css"), __webpack_require__("./src/formRadio/formRadio.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/formRadio/formRadio.css"), __webpack_require__("./src/formRadio/formRadio.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, css, html) {
     return function (app, elem, attrs, scope) {
         app.directive('formRadioDirective', ['$state', 'G', function ($state, G) {
             return {
@@ -54681,7 +52850,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <img image-show img-url="item.imageurl" alt-text="'卸货凭证'" text-only="显示文字" bg-click="false" mini-img="false">
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/imageShow/imageShow.html"), __webpack_require__("./src/imageShow/imageShow.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/imageShow/imageShow.html"), __webpack_require__("./src/imageShow/imageShow.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
     return function (app, elem, attrs, scope) {
         app.directive('imageShow', ['$timeout', '$document', '$compile', function ($timeout, $document, $compile) {
             return {
@@ -54730,37 +52899,45 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
                         $('.imgUrlBox').append("<img src=" + url + ">"); //添加大图
                         $('.imgUrlBox').show();
 
-                        var data = imgData(true);
-                        $('.imgUrlBox img').css({ width: '100%' });
-                        if (data.imgHeight === 'auto') {
-                            $('.imgUrlBox').animate({ left: data.w, top: data.h, width: data.imgWidth, height: '100%' }, 200, function () {
-                                console.log($(this).css('height'));
-                                $('#imgUrlBoxBG').show().css({ opacity: .8 });
-                                $('.imgShowClosBtn,.imgUrlControl').show();
+                        var img = new Image();
+                        img.src = $('.imgUrlBox img').attr("src");
+                        img.onload = function () {
+                            var data = imgData(true, {
+                                width: img.width,
+                                height: img.height
                             });
-                        } else if (data.imgWidth === 'auto') {
-                            $('.imgUrlBox').animate({ left: data.w, top: data.h, width: '100%', height: data.imgHeight }, 200, function () {
-                                console.log($(this).css('height'));
-                                $('#imgUrlBoxBG').show().css({ opacity: .8 });
-                                $('.imgShowClosBtn,.imgUrlControl').show();
-                            });
-                        } else {
-                            $('.imgUrlBox').animate({ left: data.w, top: data.h, width: data.imgWidth, height: data.imgHeight }, 200, function () {
-                                console.log($(this).css('height'));
-                                $('#imgUrlBoxBG').show().css({ opacity: .8 });
-                                $('.imgShowClosBtn,.imgUrlControl').show();
-                            });
-                        }
+
+                            $('.imgUrlBox img').css({ width: '100%' });
+                            if (data.imgHeight === 'auto') {
+                                $('.imgUrlBox').css({ left: data.w, top: data.h, width: data.imgWidth, height: '100%', transition: 0.2 });
+                                $('#imgUrlBoxBG').show().css({ opacity: .8, transition: 0.2 });
+                                $timeout(function () {
+                                    $('.imgShowClosBtn,.imgUrlControl').show();
+                                }, 150);
+                            } else if (data.imgWidth === 'auto') {
+                                $('.imgUrlBox').css({ left: data.w, top: data.h, width: '100%', height: data.imgHeight, transition: 0.2 });
+                                $('#imgUrlBoxBG').show().css({ opacity: .8, transition: 0.2 });
+                                $timeout(function () {
+                                    $('.imgShowClosBtn,.imgUrlControl').show();
+                                }, 150);
+                            } else {
+                                $('.imgUrlBox').css({ left: data.w, top: data.h, width: data.imgWidth, height: data.imgHeight, transition: 0.2 });
+                                $('#imgUrlBoxBG').show().css({ opacity: .8, transition: 0.2 });
+                                $timeout(function () {
+                                    $('.imgShowClosBtn,.imgUrlControl').show();
+                                }, 150);
+                            }
+                        };
                     };
 
-                    function imgData(type) {
+                    function imgData(type, obj) {
                         var data = {};
                         var windowW = $(window).width();
                         var windowH = $(window).height();
 
                         if (type) {
-                            var realWidth = $('.imgUrlBox img').width();
-                            var realHeight = $('.imgUrlBox img').height();
+                            var realWidth = obj.width;
+                            var realHeight = obj.height;
                         }
                         var imgWidth, imgHeight;
                         var scale = 0.9;
@@ -54820,8 +52997,16 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
                         data.w = (windowW - imgWidth) / 2;
                         data.h = (windowH - imgHeight) / 2 - 50;
-                        data.imgWidth = imgWidth <= 1 ? 'auto' : imgWidth;
-                        data.imgHeight = imgHeight <= 1 ? 'auto' : imgHeight;
+                        if (imgWidth <= 1) {
+                            data.imgWidth = 'auto';
+                        } else {
+                            data.imgWidth = imgWidth;
+                        }
+                        if (imgHeight <= 1) {
+                            data.imgHeight = 'auto';
+                        } else {
+                            data.imgHeight = imgHeight;
+                        }
                         return data;
                     }
 
@@ -54888,7 +53073,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _angular = __webpack_require__("./node_modules/angular/index.js");
+var _angular = __webpack_require__("./node_modules/._angular@1.2.32@angular/index.js");
 
 var _angular2 = _interopRequireDefault(_angular);
 
@@ -55410,7 +53595,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @param canEdit, 可编辑的状态有删除按钮
  * @param source,调用插件的来源,不同来源接口回调内容不同,['ka']
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/imageShow/imageShow.js"), __webpack_require__("./src/kaImageUpload/kaImageUpload.css"), __webpack_require__("./src/kaImageUpload/kaImageUpload.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, imageShow, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/imageShow/imageShow.js"), __webpack_require__("./src/kaImageUpload/kaImageUpload.css"), __webpack_require__("./src/kaImageUpload/kaImageUpload.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, imageShow, css, html) {
   return function (app, elem, attrs, scope) {
     imageShow(app, elem, attrs, scope);
     app.directive('kaImageUploadDirective', ['G', '$http', '$timeout', '$location', function (G, $http, $timeout, $location) {
@@ -55656,7 +53841,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('loadingDirective', ['G', function (G) {
             return {
@@ -55691,7 +53876,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html 
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/mainNav/template.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/mainNav/template.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
     return function (app, elem, attrs, scope) {
         app.directive('mainNavDirective', ['$rootScope', function ($rootScope) {
             return {
@@ -55793,7 +53978,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @lastBy 
  * @html <div multiselect-directive check-items="checkItems" items="items" placeholder="请选择您绑定的城市"></div>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/multiselect/multiselect.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/multiselect/multiselect.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('multiselectDirective', ['$timeout', function ($timeout) {
             var _ref;
@@ -55901,7 +54086,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('ngCodeDirective', ['$compile', function ($compile) {
             return {
@@ -55934,7 +54119,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _moment = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"moment\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _moment = __webpack_require__("./node_modules/._moment@2.20.1@moment/moment.js");
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -56426,7 +54611,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _angular = __webpack_require__("./node_modules/angular/index.js");
+var _angular = __webpack_require__("./node_modules/._angular@1.2.32@angular/index.js");
 
 var _angular2 = _interopRequireDefault(_angular);
 
@@ -56436,7 +54621,7 @@ var _datePanel2 = _interopRequireDefault(_datePanel);
 
 __webpack_require__("./src/ngDatePicker/datePanel.css");
 
-var _moment = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"moment\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _moment = __webpack_require__("./node_modules/._moment@2.20.1@moment/moment.js");
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -56689,7 +54874,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _angular = __webpack_require__("./node_modules/angular/index.js");
+var _angular = __webpack_require__("./node_modules/._angular@1.2.32@angular/index.js");
 
 var _angular2 = _interopRequireDefault(_angular);
 
@@ -56703,7 +54888,7 @@ var _datePicker2 = _interopRequireDefault(_datePicker);
 
 __webpack_require__("./src/ngDatePicker/datePicker.css");
 
-var _moment = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"moment\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _moment = __webpack_require__("./node_modules/._moment@2.20.1@moment/moment.js");
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -56835,11 +55020,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _angular = __webpack_require__("./node_modules/angular/index.js");
+var _angular = __webpack_require__("./node_modules/._angular@1.2.32@angular/index.js");
 
 var _angular2 = _interopRequireDefault(_angular);
 
-var _moment = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"moment\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+var _moment = __webpack_require__("./node_modules/._moment@2.20.1@moment/moment.js");
 
 var _moment2 = _interopRequireDefault(_moment);
 
@@ -57060,7 +55245,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <div ng-html-container html-data="{{htmlData}}"></div>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('ngHtmlContainer', ['$compile', function ($compile) {
             return {
@@ -57110,7 +55295,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy
  * @html <div pagination-directive current-page="currentPage" total-count="totalCount" page-size="pageSize" onchanged="onchanged" hide-page-size="hidePageSize"></div>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/pagination/pagination.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/pagination/pagination.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
   return function (app, elem, attrs, scope) {
     app.directive('paginationDirective', [function () {
 
@@ -57269,7 +55454,7 @@ module.exports = "<div class=\" ng-hide paginationMini\" ng-show=\"maxPage>1\">\
 "use strict";
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
 
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/paginationMini/paginationMini.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/paginationMini/paginationMini.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html) {
 	return function (app, elem, attrs, scope) {
 		app.directive('paginationMiniDirective', [function () {
 			return {
@@ -57370,7 +55555,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <qrcode-directive url-address="urlAddress" ></qrcode-directive>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     'use strict';
 
     return function (app, elem, attrs, scope) {
@@ -57427,7 +55612,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @html <search-dropdown display-text="displayText" is-error-inline="isErrorInline" item-selected="itemSelected" list="list"></search-dropdown>
  * @htmlUrl scmsModules/searchDropdown/searchDropdown.html
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/searchDropdown/searchDropdown.css"), __webpack_require__("./src/searchDropdown/searchDropdown.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, css, html) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/searchDropdown/searchDropdown.css"), __webpack_require__("./src/searchDropdown/searchDropdown.html")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, css, html) {
     return function (app, elem, attrs, scope) {
         app.directive('searchDropdown', ['$timeout', function ($timeout) {
             return {
@@ -57612,7 +55797,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <span star-rating num="datanum"></span>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/starRating/starRating.html"), __webpack_require__("./src/starRating/starRating.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/starRating/starRating.html"), __webpack_require__("./src/starRating/starRating.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
     return function (app, elem, attrs, scope) {
         app.directive('starRating', ['$timeout', '$document', '$compile', function ($timeout, $document, $compile) {
             return {
@@ -57692,7 +55877,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <steps current-index="currentIndex" status-data="statusData" data-direction="y"></steps>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/steps/steps.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/steps/steps.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('steps', ['$timeout', function ($timeout) {
             return {
@@ -57730,7 +55915,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html 
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('switchDirective', ['$rootScope', function ($rootScope) {
             return {
@@ -57774,7 +55959,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy
  * @htmlUrl scmsModules/table/tableHtml.html
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/pagination/paginationDirective.js"), __webpack_require__("./src/errorNoData/errorNoDataDirective.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, paginationDirective, errorNoDataDirective) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/pagination/paginationDirective.js"), __webpack_require__("./src/errorNoData/errorNoDataDirective.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, paginationDirective, errorNoDataDirective) {
   return function (app, elem, attrs, scope) {
     paginationDirective(app);
     errorNoDataDirective(app);
@@ -57956,7 +56141,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy
  * @html <input class="form-control input-time" time-picker-directive ng-model='ngModel' now-time="true">
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
     return function (app, elem, attrs, scope) {
         app.directive('timePickerDirective', ['G', '$rootScope', function (G, $rootScope) {
             return {
@@ -58032,7 +56217,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * @lastBy 
  * @html <i class="fa fa-question-circle" tooltip="tooltip" tooltip-position="tooltipPosition"></i>
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular) {
   return function (app, elem, attrs, scope) {
     app.directive('tooltip', ['$document', '$compile', function ($document, $compile) {
       var _ref;
@@ -58170,7 +56355,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
  * @lastBy 
  * @html <div tree-view tree-data="treeData" text-field="textField" item-clicked="itemClicked" default-item="defaultItem" link-key="linkKey">
  */
-!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/angular/index.js"), __webpack_require__("./src/treeView/treeView.html"), __webpack_require__("./src/treeView/treeView.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
+!(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__("./node_modules/._angular@1.2.32@angular/index.js"), __webpack_require__("./src/treeView/treeView.html"), __webpack_require__("./src/treeView/treeView.css")], __WEBPACK_AMD_DEFINE_RESULT__ = (function (angular, html, css) {
     return function (app, elem, attrs, scope) {
         app.directive('treeView', ['$timeout', function ($timeout) {
             return {
