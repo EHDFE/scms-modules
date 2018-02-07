@@ -574,10 +574,51 @@ exports.default = {
 	"lastBy": "",
 	"description": "",
 	"date": "2018-02-02",
-	"scope": [],
+	"scope": [{
+		"type": "string",
+		"exampleValue": 'noThumb',
+		"defaultValue": 'noThumb',
+		"key": "moduleType",
+		"description": "样式类型，有 “noThumb” 和 “thumb” 两种"
+	}, {
+		"type": "string",
+		"exampleValue": '/goodstaxiAdmin/imagecs/uploadImage',
+		"key": "apiUrl",
+		"description": "上传地址"
+	}, {
+		"type": "object",
+		"exampleValue": [{ imgName: '图片1.jpg', dataImg: 'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg', data: [], uploadType: { succeed: true, error: false, loading: false } }, { imgName: '图片2.jpg', dataImg: 'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg', data: [], uploadType: { succeed: false, error: true, loading: false } }, { imgName: '图片3.jpg', dataImg: 'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg', data: [], uploadType: { succeed: false, error: false, loading: true } }],
+		"defaultValue": "[{imgName:'图片1.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',data:[],uploadType:{succeed:true,error:false,loading:false}},{imgName:'图片2.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',data:[],uploadType:{succeed:false,error:true,loading:false}},{imgName:'图片3.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',data:[],uploadType:{succeed:false,error:false,loading:true}}]",
+		"key": "imageUrls",
+		"description": "数据"
+	}, {
+		"type": "number",
+		"exampleValue": 30,
+		"defaultValue": 30,
+		"key": "dWidth",
+		"description": "设定上传图片的宽度"
+	}, {
+		"type": "number",
+		"exampleValue": 30,
+		"defaultValue": 30,
+		"key": "dHeight",
+		"description": "设定上传图片的高度"
+	}, {
+		"type": "number",
+		"exampleValue": 30,
+		"defaultValue": 30,
+		"key": "dSize",
+		"description": "设定上传图片的大小，单位KB"
+	}, {
+		"type": "number",
+		"exampleValue": 5,
+		"defaultValue": 5,
+		"key": "dNum",
+		"description": "设定上传图片的数量，只限 “thumb” 使用"
+	}],
 	"attrs": [],
 	"deps": ["scmsModules/imageUpload/imageUpload"],
-	"html": "<div image-upload module-type=\"'noThumb'\" api-url=\"'http://image.tf56.com/fastdfsWeb/upload'\"></div>",
+	"html": "<div image-upload module-type=\"moduleType\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\"></div><div image-upload module-type=\"'thumb'\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\" d-num=\"dNum\"></div>",
 	"api": "",
 	"htmlUrl": ""
 };
@@ -54923,60 +54964,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  * @author 程乐
  * @lastBy 
  * @html <div image-upload module-type="'noThumb'" api-url="'/goodstaxiAdmin/imagecs/uploadImage'"" image-urls="imageUrls" d-width="30" d-height="30" d-size="30"></div>
- * imageUrls  = [
-                {
-                    imgName: '图片1.jpg',
-                    uploadType: {
-                        succeed: true,
-                        error: false,
-                        loading: false
-                    }
-                },
-                {
-                    imgName: '图片2.jpg',
-                    uploadType: {
-                        succeed: false,
-                        error: true,
-                        loading: false
-                    }
-                },
-                {
-                    imgName: '图片3.jpg',
-                    uploadType: {
-                        succeed: false,
-                        error: false,
-                        loading: true
-                    }
-                }
-            ]
-
  * @html <div image-upload module-type="'thumb'" api-url="'/goodstaxiAdmin/imagecs/uploadImage1'" d-num="3" d-width="30" d-height="30" d-size="30" image-urls="imageUrls"></div>
- * imageUrls  = [
-                {
-                    dataImg: 'xxx',
-                    uploadType: {
-                        succeed: true,
-                        error: false,
-                        loading: false
-                    }
-                },
-                {
-                    dataImg: 'xxx',
-                    uploadType: {
-                        succeed: false,
-                        error: true,
-                        loading: false
-                    }
-                },
-                {
-                    dataImg: 'xxx',
-                    uploadType: {
-                        succeed: false,
-                        error: false,
-                        loading: true
-                    }
-                }
-            ]
  */
 
 exports.default = function (app, elem, attrs, scope) {

@@ -5,60 +5,7 @@
  * @author 程乐
  * @lastBy 
  * @html <div image-upload module-type="'noThumb'" api-url="'/goodstaxiAdmin/imagecs/uploadImage'"" image-urls="imageUrls" d-width="30" d-height="30" d-size="30"></div>
- * imageUrls  = [
-                {
-                    imgName: '图片1.jpg',
-                    uploadType: {
-                        succeed: true,
-                        error: false,
-                        loading: false
-                    }
-                },
-                {
-                    imgName: '图片2.jpg',
-                    uploadType: {
-                        succeed: false,
-                        error: true,
-                        loading: false
-                    }
-                },
-                {
-                    imgName: '图片3.jpg',
-                    uploadType: {
-                        succeed: false,
-                        error: false,
-                        loading: true
-                    }
-                }
-            ]
-
  * @html <div image-upload module-type="'thumb'" api-url="'/goodstaxiAdmin/imagecs/uploadImage1'" d-num="3" d-width="30" d-height="30" d-size="30" image-urls="imageUrls"></div>
- * imageUrls  = [
-                {
-                    dataImg: 'xxx',
-                    uploadType: {
-                        succeed: true,
-                        error: false,
-                        loading: false
-                    }
-                },
-                {
-                    dataImg: 'xxx',
-                    uploadType: {
-                        succeed: false,
-                        error: true,
-                        loading: false
-                    }
-                },
-                {
-                    dataImg: 'xxx',
-                    uploadType: {
-                        succeed: false,
-                        error: false,
-                        loading: true
-                    }
-                }
-            ]
  */
 
 import angular from "angular";
