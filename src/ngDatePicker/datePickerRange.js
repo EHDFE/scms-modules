@@ -26,7 +26,6 @@ export default (app, elem, attrs, scope) => {
         template: tpl,
         replace: true,
         scope: {
-          ngModel: "=", //@scope ngModel 选择的日期 {type:"string", exampleValue:"2016-12-01",isDisabled:1}
           minDate: "=", //@scope minDate 最小可选日期 {type:"string", exampleValue:"2016-06-07"}
           maxDate: "=", //@scope maxDate 最大可选日期 {type:"string", exampleValue:"2017-06-29"}
           minDateValue: "=", //@scope minDateValue 最小可选日期,距今天天数 {type:"number"}
@@ -53,7 +52,6 @@ export default (app, elem, attrs, scope) => {
                   start: ($scope.initStartDate&&($scope.initStartDate!== 'null')||$scope.initStartDate === 0)? $scope.startDate: '',
                   end: ($scope.initEndDate&&($scope.initEndDate!== 'null')||$scope.initEndDate === 0)? $scope.endDate: '',
                 }
-                console.log($scope.dateRangeResult, 2322222222)
               });
 
               $document.find('body').append(panel);
@@ -61,7 +59,6 @@ export default (app, elem, attrs, scope) => {
               $scope.pick = function(data) {
                 $timeout(() => {
                   if ($scope.dateRangeData&&$scope.dateRangeData.start&&$scope.dateRangeData.end) {
-                    $scope.ngModel = `${$scope.dateRangeData.start.format($scope.formatDate)}  ~  ${$scope.dateRangeData.end.format($scope.formatDate)}`;
                     $scope.startDate = $scope.dateRangeData.start.format($scope.formatDate);
                     $scope.endDate = $scope.dateRangeData.end.format($scope.formatDate);
                     $scope.dateRangeResult = {
@@ -80,7 +77,6 @@ export default (app, elem, attrs, scope) => {
               
               
               $element.delegate('input', 'focus', function(e) {
-                  console.log(e, 222222222222)
                   $element.focus();
                   e.stopPropagation();
                   var pos = e.target.parentNode.getBoundingClientRect(),
@@ -102,21 +98,25 @@ export default (app, elem, attrs, scope) => {
                       end: $scope.dateRangeResult&&$scope.dateRangeResult.end? moment($scope.dateRangeResult.end): null,
                     }
                     
-
-                    $scope.startDate = $scope.dateRangeResult&&$scope.dateRangeResult.start;
-                    if ($scope.dateRangeResult&&$scope.dateRangeResult.start&&$scope.dateRangeResult.end) {
-                      if (moment( $scope.dateRangeResult.start).year() === moment($scope.dateRangeResult.end).year()
-                      &&(moment( $scope.dateRangeResult.start).month() === moment($scope.dateRangeResult.end).month())) {
-                        $scope.endDate = moment($scope.dateRangeResult.start).add(1, 'month').format($scope.formatDate);
-                      }
+                    if (!$scope.dateRangeResult.start&&!$scope.dateRangeResult.end) {
+                      $scope.startDate = moment().add(-1, 'month').format($scope.formatDate);
+                      $scope.endDate = moment().format($scope.formatDate);
                     } else {
-                      $scope.endDate = $scope.dateRangeResult&&$scope.dateRangeResult.end;
+                      $scope.startDate = $scope.dateRangeResult&&$scope.dateRangeResult.start;
+                      if ($scope.dateRangeResult&&$scope.dateRangeResult.start&&$scope.dateRangeResult.end) {
+                        if (moment( $scope.dateRangeResult.start).year() === moment($scope.dateRangeResult.end).year()
+                        &&(moment( $scope.dateRangeResult.start).month() === moment($scope.dateRangeResult.end).month())) {
+                          $scope.endDate = moment($scope.dateRangeResult.start).add(1, 'month').format($scope.formatDate);
+                        }
+                      } else {
+                        $scope.endDate = $scope.dateRangeResult&&$scope.dateRangeResult.end;
+                      }
                     }
+                    
                     $timeout(() => {
                       $scope.$broadcast('init');
                     });
                   }); 
-
               });
 
               preventBlur($element, function(target){
@@ -133,6 +133,7 @@ export default (app, elem, attrs, scope) => {
                     }
                   }
                 }
+                $element.blur();
                 return false;
 
               });
@@ -166,11 +167,6 @@ export default (app, elem, attrs, scope) => {
                   $document.find('.date-picker-range').remove();
               });
  
-              $timeout(() => {
-                if (!($scope.initStartDate === 'null'||!$scope.initStartDate)&&$scope.startDate&&$scope.endDate) {
-                  $scope.ngModel = `${$scope.startDate}  ~  ${$scope.endDate}`;
-                }
-              });
 
               $scope.$watch('startDate', (newVal) => {
                 if(newVal) {
@@ -189,10 +185,10 @@ export default (app, elem, attrs, scope) => {
                   }
                 }
               });
-
-              $scope.$watch('dateRangeData', (newVal) => {
-                // console.log(newVal, '-------------------------------')
-              }, true)
+  
+              // $scope.$watch('dateRangeResult', (newVal) => {
+              //   console.log(newVal, '-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+')
+              // }, true)
           },
         ],
         link: function($scope, $element, $attrs, ngModel) {},
