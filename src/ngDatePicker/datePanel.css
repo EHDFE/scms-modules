@@ -13,7 +13,7 @@
 .date-panel-datetimepicker .datepicker {
   /* padding: 15px; */
   /* width: 288px; */
-}  
+}
 .date-panel-datetimepicker table {
   width: 100%;
   margin: 0;
@@ -29,65 +29,68 @@
 .date-panel-datetimepicker thead tr:first-child th.disabled {
   cursor: not-allowed !important;
 }
-.date-panel-datetimepicker  th .picker-switch {
+.date-panel-datetimepicker th .picker-switch {
   /* width: 145px; */
   display: flex;
   justify-content: space-between;
 }
-.date-panel-datetimepicker  th.next, .date-panel-datetimepicker  th.prev {
+.date-panel-datetimepicker th.next,
+.date-panel-datetimepicker th.prev {
   font-size: 21px;
 }
-.date-panel-datetimepicker  .prevYear {
-  background: url('./img/arrow_yearleft_normal.svg') no-repeat center;
+.date-panel-datetimepicker .prevYear {
+  background: url("./img/arrow_yearleft_normal.svg") no-repeat center;
 }
-.date-panel-datetimepicker  .nextYear {
-  background: url('./img/arrow_yearright_normal.svg') no-repeat center;
+.date-panel-datetimepicker .nextYear {
+  background: url("./img/arrow_yearright_normal.svg") no-repeat center;
 }
-.date-panel-datetimepicker  .prevMonth {
-  background: url('./img/arrow_monthleft_normal.svg') no-repeat center;
+.date-panel-datetimepicker .prevMonth {
+  background: url("./img/arrow_monthleft_normal.svg") no-repeat center;
 }
-.date-panel-datetimepicker  .nextMonth {
-  background: url('./img/arrow_monthright_normal.svg') no-repeat center;
-}
-
-.date-panel-datetimepicker  .prevYear:hover {
-  background: url('./img/arrow_yearleft_hover.svg') no-repeat center;
-}
-.date-panel-datetimepicker  .nextYear:hover {
-  background: url('./img/arrow_yearright_hover.svg') no-repeat center;
-}
-.date-panel-datetimepicker  .prevMonth:hover {
-  background: url('./img/arrow_monthleft_hover.svg') no-repeat center;
-}
-.date-panel-datetimepicker  .nextMonth:hover {
-  background: url('./img/arrow_monthright_hover.svg') no-repeat center;
+.date-panel-datetimepicker .nextMonth {
+  background: url("./img/arrow_monthright_normal.svg") no-repeat center;
 }
 
-.date-panel-datetimepicker td, .date-panel-datetimepicker th {
+.date-panel-datetimepicker .prevYear:hover {
+  background: url("./img/arrow_yearleft_hover.svg") no-repeat center;
+}
+.date-panel-datetimepicker .nextYear:hover {
+  background: url("./img/arrow_yearright_hover.svg") no-repeat center;
+}
+.date-panel-datetimepicker .prevMonth:hover {
+  background: url("./img/arrow_monthleft_hover.svg") no-repeat center;
+}
+.date-panel-datetimepicker .nextMonth:hover {
+  background: url("./img/arrow_monthright_hover.svg") no-repeat center;
+}
+
+.date-panel-datetimepicker td,
+.date-panel-datetimepicker th {
   text-align: center;
   border-radius: 4px;
 }
 
-.date-panel-datetimepicker td.old, .date-panel-datetimepicker td.new {
-  color: #B9BEC3;
+.date-panel-datetimepicker td.old,
+.date-panel-datetimepicker td.new {
+  color: #b9bec3;
 }
 .date-panel-datetimepicker td .old {
-  color: #B9BEC3;
+  color: #b9bec3;
 }
 .date-panel-datetimepicker .today {
-  color: #50A0FC;
+  color: #51A1FD;
 }
-.date-panel-datetimepicker .range .date-item{
+.date-panel-datetimepicker .range .date-item {
   color: #333;
-  background: #E9EFF4;
+  background: #e9eff4;
 }
-.date-panel-datetimepicker .hover .date-item{
-  background: #2C87EF;
+.date-panel-datetimepicker .hover .date-item {
+  background: #51A1FD;
   color: #fff;
   cursor: pointer;
 }
 
-.date-panel-datetimepicker  .disabled {
+.date-panel-datetimepicker .disabled {
   /* background-color: #F5F5F5; */
   /* color: #B9BEC3; */
   cursor: not-allowed !important;
@@ -106,42 +109,45 @@
   display: inline-block;
 }
 .date-panel-datetimepicker td.day.disabled .date-item {
-
   height: 28px;
   width: 28px;
-  color: #B9BEC3;
-  background-color: #F5F5F5;
+  color: #b9bec3;
+  background-color: #f5f5f5;
   /* line-height: 28px; */
   border-radius: 50%;
   /* display: inline-block; */
 }
 
-.date-panel-datetimepicker td.day:hover .date-item, .date-panel-datetimepicker td.hour:hover .date-item, .date-panel-datetimepicker td.minute:hover .date-item, .date-panel-datetimepicker td.second:hover .date-item{
-  background: #2C87EF;
+.date-panel-datetimepicker td.day:hover .date-item,
+.date-panel-datetimepicker td.hour:hover .date-item,
+.date-panel-datetimepicker td.minute:hover .date-item,
+.date-panel-datetimepicker td.second:hover .date-item {
+  background: #51A1FD;
   color: #fff;
   cursor: pointer;
 }
-.date-panel-datetimepicker td.day.disabled:hover .date-item, .date-panel-datetimepicker td.hour:hover .date-item, .date-panel-datetimepicker td.minute:hover .date-item, .date-panel-datetimepicker td.second:hover .date-item{
-  background: #F5F5F5  !important;
-  color: #B9BEC3;
+.date-panel-datetimepicker td.day.disabled:hover .date-item,
+.date-panel-datetimepicker td.hour:hover .date-item,
+.date-panel-datetimepicker td.minute:hover .date-item,
+.date-panel-datetimepicker td.second:hover .date-item {
+  background: #f5f5f5 !important;
+  color: #b9bec3;
   cursor: not-allowed !important;
 }
 
-.date-panel-datetimepicker td.active .date-item, .date-panel-datetimepicker td.active:hover .date-item {
-  background-color: #50A0FC;
+.date-panel-datetimepicker td.active .date-item,
+.date-panel-datetimepicker td.active:hover .date-item {
+  background-color: #51A1FD;
   color: #fff;
-  /* background-color: #50A0FC;
+  /* background-color: #51A1FD;
   
   text-shadow: 0 -1px 0 rgba(0,0,0,.25); */
 }
-.date-panel-datetimepicker .time-zone .active, .date-panel-datetimepicker .time-zone .active:hover {
-  background-color: #50A0FC;
-  color: #fff;
-  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
-  /* font-size: 16px;
-  font-weight: bold; */
+.date-panel-datetimepicker .time-zone .active,
+.date-panel-datetimepicker .time-zone .active:hover {
+  color: #303133;
+  font-weight: 700;
 }
-
 
 .date-panel-datetimepicker .datepicker-months {
   width: 296px;
@@ -158,8 +164,8 @@
   border-radius: 12px;
 }
 .date-panel-datetimepicker .datepicker-months td span.disabled {
-  color: #B9BEC3;
-  background-color: #F5F5F5
+  color: #b9bec3;
+  background-color: #f5f5f5;
 }
 .date-panel-datetimepicker .datepicker-years {
   width: 296px;
@@ -184,16 +190,15 @@
   cursor: pointer;
   font-size: 12px;
   border-radius: 12px;
-  color: #B9BEC3;
-  background-color: #F5F5F5;
+  color: #b9bec3;
+  background-color: #f5f5f5;
 }
-
 
 .date-panel-datetimepicker .datepicker-days {
-  padding:  15px;
+  padding: 15px;
 }
 .date-panel-datetimepicker .datepicker-days .dow {
-  color: #9BA0AA;
+  color: #9ba0aa;
 }
 .date-panel-datetimepicker .month {
   font-size: 14px;
@@ -203,63 +208,133 @@
 }
 
 .date-panel-datetimepicker td span.active {
-  background-color: #50A0FC;
+  background-color: #51A1FD;
   color: #fff;
-  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .date-panel-datetimepicker td span:hover {
-  background: #2C87EF;
+  background: #51A1FD;
   color: #fff;
 }
 .date-panel-datetimepicker td span.disabled:hover {
-  color: #B9BEC3;
+  color: #b9bec3;
 }
 
 .date-panel-datetimepicker td span.active {
-  background-color: #50A0FC;
+  background-color: #51A1FD;
   color: #fff;
-  text-shadow: 0 -1px 0 rgba(0,0,0,.25);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .date-panel-time {
-  width: 250px; 
-  padding: 4px;
+  padding-right: 20px;
+}
+.date-panel-time .time-title{
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
 }
 
 .date-panel-time .time-picker {
-  margin-left: 28px;
-  margin-top: 45px;
-  width: 135px;
+  margin-left: 5px;
+  margin-top: 4px;
+  width: 150px;
 }
 .date-panel-time .time-picker-title {
   display: flex;
   justify-content: space-around;
-  color: #9BA0AA;
-  /* align-items: stretch; */
+  color: #9ba0aa;
+  margin-bottom: 15px;
 }
 .date-panel-time .time-picker-content {
   display: flex;
   align-items: stretch;
   margin-top: 5px;
-  border: 1px solid #DADDE4;
+  border: 1px solid #dadde4;
   border-radius: 3px;
-  padding: 20px;
+  height: 220px;
+  width: 150px;
+}
+.date-panel-time .time-picker-content-wrap {
+  position: relative;
+}
+.date-panel-time .time-picker-content-wrap:before,
+.date-panel-time .time-picker-content-wrap:after {
+  content: "";
+  top: 50%;
+  position: absolute;
+  margin-top: -15px;
+  height: 30px;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+  padding-top: 6px;
+  text-align: left;
+  border-top: 1px solid #e4e7ed;
+  border-bottom: 1px solid #e4e7ed;
+  margin-left: 12%;
+  margin-right: 12%;
 }
 
-.date-panel-time .time-picker .time-area{
-  width: 41px;
+.date-panel-time .time-picker .time-area {
   overflow: hidden;
-  /* padding: 10px 0; */
-  /* border: #999 1px solid; */
+  flex-grow: 1;
+  position: relative;
 }
-.date-panel-time .time-picker .time-zone{
-  height: 185px;
-  overflow-y: auto;
-  width: 58px;
+.date-panel-time .time-picker .time-wrap {
+  overflow: scroll;
+  margin-right: -18px;
+  height: 237px;
 }
+.date-panel-time .time-picker .time-zone {
+  text-align: center;
+  cursor: pointer;
+}
+.date-panel-time .time-picker .time-zone:before, 
+.date-panel-time .time-picker .time-zone:after
+{
+  content: "";
+  display: block;
+  width: 100%;
+  height: 95px;
+}
+
 .date-panel-time .time-picker .time-zone li {
-  padding: 2px 10px;
+  line-height: 30px;
+  height: 30px;
+}
+.date-panel-time .time-picker .time-zone li:hover {
+  color: #51A1FD;
+}
+
+.date-panel-time .scroll-bar-vertical {
+  position: absolute;
+  right: 2px;
+  bottom: 2px;
+  z-index: 1;
+  border-radius: 4px;
+  opacity: 1;
+  transition: opacity .12s ease-out;
+  width: 6px;
+  top: 2px;
+}
+
+.date-panel-time  .time-area:hover .scroll-bar-thumb {
+  opacity: 1;
+} 
+
+.date-panel-time .scroll-bar-thumb {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 0;
+  opacity: 0;
+  cursor: pointer;
+  border-radius: inherit;
+  background-color: hsla(220,4%,58%,.3);
+  transition: background-color .3s;
 }
 
 

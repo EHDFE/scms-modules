@@ -1,7 +1,5 @@
 import moment from 'moment';
-function getDecade(year) {
-  return Math.floor(year / 10) * 10;
-}
+
 var initYear = Array.apply(null, Array(12)).map(function(item, i) {
   return i - 1;
 });
@@ -55,14 +53,13 @@ class DatePicker {
     this.setMinView();
     this.setSecondView();
   }
-  setYearView(year) {
-    var year = year || moment().year();
+  setYearView(year = moment().year()) {
     if (!this.dateData.year) {
       this.dateData.year = moment().year();
     }
-    var decade = getDecade(year);
+    let decade = Math.floor(year / 10) * 10;
     this.yearView = initYear.map((data, index) => {
-      var thisYear = data + decade;
+      let thisYear = data + decade;
       return {
         data: thisYear,
         checked: this.dateData && this.dateData.year === thisYear,
@@ -169,7 +166,6 @@ class DatePicker {
       .date(1)
       .weekday(0);
     var month = moment(date).month();
-    console.log(this.minDateArr, this.maxDateArr, this.$attrs.part)
     if (
       (this.minDateArr.year&&
       this.minDateArr.month&&
@@ -384,7 +380,6 @@ class DatePicker {
           range = true;
         }
       }
-      // console.log(range, nowDate.format('YYYY-MM-DD'), this.$attrs.part, 'shit', Math.random())
       if (nowDate.day() === 0) {
         dateView.push([
           {
@@ -668,8 +663,8 @@ class DatePicker {
       };
     });
   }
-  setHour() {
-    if (!hour.disabled) {
+  setHour(hour) {
+    if (!hour.disabled&&(hour.value!= this.dateData.hour)) {
       this.dateData.hour = hour.value;
       this.setHourView();
     }
@@ -688,8 +683,8 @@ class DatePicker {
       };
     });
   }
-  setMinute() {
-    if (!minute.disabled) {
+  setMinute(minute) {
+    if (!minute.disabled&&(minute.value != this.dateData.minute)) {
       this.dateData.minute = minute.value;
       this.setMinView();
     }
@@ -704,9 +699,15 @@ class DatePicker {
           .toFixed(2)
           .toString()
           .slice(2),
-        active: i === Number(this.dateData.second),
+        active: i == Number(this.dateData.second),
       };
     });
+  }
+  setSecond(second) {
+    if (!second.disabled&&(second.value != this.dateData.second)) {
+      this.dateData.second = second.value;
+      this.setSecondView();
+    }
   }
   getResult() {
     return moment()

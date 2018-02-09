@@ -80,6 +80,7 @@
       </div>
     </div>
     <div class="date-panel-time" ng-show="pickTime">
+      <div class="time-title">时间</div>
       <div class="time-picker">
         <div class="time-picker-title">          
           <div class="text-center">
@@ -92,21 +93,38 @@
             时
           </div>
         </div>
-        <div class="time-picker-content">
-          <div class="time-area">
-            <ul class="time-zone">
-              <li ng-class="{active: currhour.active, disabled: currhour.disabled }" ng-click="datePicker.setHour(currhour)" ng-repeat="currhour in datePicker.hourView">{{currhour.value}}</li>
-            </ul>
-          </div>
-          <div class="time-area"> 
-            <ul class="time-zone">
-              <li ng-class="{active: currmin.active, disabled: currmin.disabled }" ng-click="datePicker.setMinute(currmin)" ng-repeat="currmin in datePicker.minView">{{currmin.value}}</li>
-            </ul>
-          </div>
-          <div ng-show="useSeconds" class="time-area">
-            <ul class="time-zone">
-              <li ng-class="{active: currsecond.active, disabled: currsecond.disabled }" ng-click="datePicker.setSecond(currsecond)" ng-repeat="currsecond in datePicker.secondView">{{currsecond.value}}</li>
-            </ul>
+        <div class="time-picker-content-wrap">
+          <div class="time-picker-content">
+            <div class="time-area" >
+              <div class="time-wrap" data-func="setHour">
+                <ul class="time-zone" >
+                  <li ng-class="{active: currhour.active, disabled: currhour.disabled }"  ng-click="setHour(currhour, $index)"  data-value={{currhour.value}} ng-repeat="currhour in datePicker.hourView">{{currhour.value}}</li>
+                </ul>
+              </div>
+              <div class="scroll-bar-vertical">
+                <div class="scroll-bar-thumb" style="height:24.175%;" ></div>
+              </div>
+            </div>
+            <div class="time-area"> 
+              <div class="time-wrap" data-func="setMinute">
+                <ul class="time-zone" >
+                  <li ng-class="{active: currmin.active, disabled: currmin.disabled }" data-value={{currmin.value}} ng-click="setMinute(currmin, $index)" ng-repeat="currmin in datePicker.minView">{{currmin.value}}</li>
+                </ul>
+              </div>
+              <div class="scroll-bar-vertical">
+                <div class="scroll-bar-thumb" style="height:11.055%;" ></div>
+              </div>
+            </div>
+            <div ng-show="useSeconds" class="time-area">
+              <div class="time-wrap" data-func="setSecond">
+                <ul class="time-zone" >
+                  <li ng-class="{active: currsecond.active, disabled: currsecond.disabled }"  data-value={{currsecond.value}} ng-click="setSecond(currsecond, $index)" ng-repeat="currsecond in datePicker.secondView">{{currsecond.value}}</li>
+                </ul>
+              </div>
+              <div class="scroll-bar-vertical">
+                <div class="scroll-bar-thumb" style="height:11.055%;" ></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

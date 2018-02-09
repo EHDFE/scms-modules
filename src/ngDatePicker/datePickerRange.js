@@ -133,10 +133,10 @@ export default (app, elem, attrs, scope) => {
                     }
                   }
                 }
-                $element.blur();
+                $element.trigger('blur');
                 return false;
 
-              });
+              });  
               function preventBlur(elem, func) {
                 var fnDocumentMousedown;
                 angular.element(elem).bind("focus",function(){
