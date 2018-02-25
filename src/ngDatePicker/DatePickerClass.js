@@ -1,7 +1,5 @@
 import moment from 'moment';
-function getDecade(year) {
-  return Math.floor(year / 10) * 10;
-}
+
 var initYear = Array.apply(null, Array(12)).map(function(item, i) {
   return i - 1;
 });
@@ -55,14 +53,13 @@ class DatePicker {
     this.setMinView();
     this.setSecondView();
   }
-  setYearView(year) {
-    var year = year || moment().year();
+  setYearView(year = moment().year()) {
     if (!this.dateData.year) {
       this.dateData.year = moment().year();
     }
-    var decade = getDecade(year);
+    let decade = Math.floor(year / 10) * 10;
     this.yearView = initYear.map((data, index) => {
-      var thisYear = data + decade;
+      let thisYear = data + decade;
       return {
         data: thisYear,
         checked: this.dateData && this.dateData.year === thisYear,
@@ -147,7 +144,6 @@ class DatePicker {
     }
   }
   setMonth(month) {
-    console.log(111)
     if (!month.disabled) {
       this.dateData.month = month.data;
       this.setMonthView();
@@ -171,8 +167,8 @@ class DatePicker {
       .weekday(0);
     var month = moment(date).month();
     if (
-      (this.minDateArr.year,
-      this.minDateArr.month,
+      (this.minDateArr.year&&
+      this.minDateArr.month&&
       this.minDateArr.date)
     ) {
       dateView.prevMonth =
@@ -283,7 +279,8 @@ class DatePicker {
           .minute(0)
           .second(0)
           .millisecond(0)
-          .valueOf()
+          .valueOf()&&
+          (tag !== 'new'&&tag !== 'old')
       ) {
         tag = "today";
       }
@@ -383,7 +380,6 @@ class DatePicker {
           range = true;
         }
       }
-
       if (nowDate.day() === 0) {
         dateView.push([
           {
@@ -425,7 +421,6 @@ class DatePicker {
       }
     }
     this.dateView = dateView;
-
     return dateView;
   }
   setDate(momentDate) {
@@ -440,9 +435,8 @@ class DatePicker {
         ) {
           this.dateRangeData.start = momentDate.data;
           this.dateRangeData.end = null;
-          this.$emit("refresh");
-        }
-        if (this.dateRangeData.start && !this.dateRangeData.end) {
+          this.refresh = new Date().getTime();
+        } else if (this.dateRangeData.start && !this.dateRangeData.end) {
           if (
             this.dateRangeData.start &&
             this.dateRangeData.start.valueOf() >
@@ -669,8 +663,8 @@ class DatePicker {
       };
     });
   }
-  setHour() {
-    if (!hour.disabled) {
+  setHour(hour) {
+    if (!hour.disabled&&(hour.value!= this.dateData.hour)) {
       this.dateData.hour = hour.value;
       this.setHourView();
     }
@@ -689,8 +683,8 @@ class DatePicker {
       };
     });
   }
-  setMinute() {
-    if (!minute.disabled) {
+  setMinute(minute) {
+    if (!minute.disabled&&(minute.value != this.dateData.minute)) {
       this.dateData.minute = minute.value;
       this.setMinView();
     }
@@ -705,9 +699,15 @@ class DatePicker {
           .toFixed(2)
           .toString()
           .slice(2),
-        active: i === Number(this.dateData.second),
+        active: i == Number(this.dateData.second),
       };
     });
+  }
+  setSecond(second) {
+    if (!second.disabled&&(second.value != this.dateData.second)) {
+      this.dateData.second = second.value;
+      this.setSecondView();
+    }
   }
   getResult() {
     return moment()

@@ -66,35 +66,41 @@ export default (app, elem, attrs, scope) => {
             });
 
             preventBlur($element, function(target) {
-              if ($scope.minViewMode === "months") {
-                if (
-                  $element[0] === target ||
-                  ($.contains(panel[0], target) && !$(target).hasClass("month"))
-                ) {
+              if ($scope.pickTime) {
+                if ($element[0] === target || ($.contains(panel[0], target))) {
                   return true;
-                }
-                if ($(target).hasClass("month")) {
-                  $scope.pick();
                 }
               } else {
-                if (
-                  $element[0] === target ||
-                  ($.contains(panel[0], target) &&
-                    !(
-                      $(target)
-                        .parent()
-                        .hasClass("day") || $(target).hasClass("day")
-                    ))
-                ) {
-                  return true;
-                }
-                if (
-                  $(target)
-                    .parent()
-                    .hasClass("day") ||
-                  $(target).hasClass("day")
-                ) {
-                  $scope.pick();
+                if ($scope.minViewMode === "months") {
+                  if (
+                    $element[0] === target ||
+                    ($.contains(panel[0], target) && !$(target).hasClass("month"))
+                  ) {
+                    return true;
+                  }
+                  if ($(target).hasClass("month")) {
+                    $scope.pick();
+                  }
+                } else {
+                  if (
+                    $element[0] === target ||
+                    ($.contains(panel[0], target) &&
+                      !(
+                        $(target)
+                          .parent()
+                          .hasClass("day") || $(target).hasClass("day")
+                      ))
+                  ) {
+                    return true;
+                  }
+                  if (
+                    $(target)
+                      .parent()
+                      .hasClass("day") ||
+                    $(target).hasClass("day")
+                  ) {
+                    $scope.pick();
+                  }
                 }
               }
               return false;

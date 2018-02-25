@@ -1,78 +1,64 @@
 <div class="imageUpload">
-    <div class="thumb">
+    <div class="thumb" ng-if="moduleType === 'thumb'">
         <ul>
-            <li>
-                <div class="upload-box" style="display: none;">
+            <li ng-repeat="item in imageArray">
+                <div class="upload-box" ng-show="!item.uploadType.loading && !item.uploadType.succeed && !item.uploadType.error">
                     <label>
                         <span>
                             <i class="fa fa-plus"></i>
                         </span>
-                        <input type="file" ng-model="file" value="上传文件" style="display: none;">
+                        <input type="file" ng-model="file" style="display: none;">
                         上传
                     </label>
                 </div>
-                <div class="images-box">
-
-                </div>
-                <div class="loading-box">
+                <div class="loading-box" ng-show="item.uploadType.loading || item.uploadType.error">
                     <p>
-                        上传中 ···
+                        <span ng-show="item.uploadType.loading">上传中</span>
+                        <span ng-show="item.uploadType.succeed">上传成功</span>
+                        <span ng-show="item.uploadType.error">上传失败</span>
+                        ···
                     </p>
                     <div>
-                        <span class="succeed"></span>
-                        <span class="error"></span>
-                        <span class="loading"></span>
+                        <span class="succeed" ng-show="item.uploadType.succeed" style="width: {{ item.loadingTempo }}%;"></span>
+                        <span class="error" ng-show="item.uploadType.error" style="width: {{ item.loadingTempo }}%;"></span>
+                        <span class="loading" ng-show="item.uploadType.loading" style="width: {{ item.loadingTempo }}%;"></span>
+                    </div>
+                </div>
+                <div class="images-box" ng-show="item.uploadType.succeed " ng-class="{error: item.uploadType.error}">
+                    <div class="img" style="background: url({{ item.dataImg }}) no-repeat center center;background-size: contain;"></div>
+                    <div class="barrier">
+                        <a href="javascript:;" ng-click="">
+                            <i class="glyphicon glyphicon-eye-open"></i>
+                        </a>
+                        <a href="javascript:;" ng-click="remove(item,$index)">
+                            <i class="glyphicon glyphicon-trash"></i>
+                        </a>
+                        <a href="javascript:;" ng-click="">
+                            <i class="fa fa-download"></i>
+                        </a>
                     </div>
                 </div>
             </li>
         </ul>
     </div>
-    <div class="noThumb">
+    <div class="noThumb" ng-if="moduleType === 'noThumb'">
         <label>
             <i class="fa fa-upload mr5"></i>
-            <input type="file" ng-model="file" value="上传文件" style="display: none;">
+            <input type="file" ng-model="file" style="display: none;">
             上传文件
         </label>
         <ul>
-            <li>
+            <li ng-repeat="item in imageArray">
                 <span>
                     <i class="fa fa-chain-broken"></i>
                 </span>
                 <div>
-                    <a href="javascript:;" class="succeed">图片1.jpg</a>
-                    <a href="javascript:;" class="remove">
-                        <i class="fa fa-close"></i>
+                    <a href="javascript:;" class="succeed" ng-class="{succeed:item.uploadType.succeed,error:item.uploadType.error,loading:item.uploadType.loading}">{{ item.imgName }}</a>
+                    <a href="javascript:;" class="remove" ng-click="remove(item,$index)">
+                        <i class="icon-close"></i>
                     </a>
-                    <div>
-                        <span></span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <span>
-                    <i class="fa fa-chain-broken"></i>
-                </span>
-                <div>
-                    <a href="javascript:;" class="error">图片2.jpg</a>
-                    <a href="javascript:;" class="remove">
-                        <i class="fa fa-close"></i>
-                    </a>
-                    <div>
-                        <span></span>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <span>
-                    <i class="fa fa-chain-broken"></i>
-                </span>
-                <div>
-                    <a href="javascript:;" class="loading">图片3.jpg</a>
-                    <a href="javascript:;" class="remove">
-                        <i class="fa fa-close"></i>
-                    </a>
-                    <div>
-                        <span></span>
+                    <div ng-show="item.uploadType.loading">
+                        <span style="width: {{ item.loadingTempo }}%;"></span>
                     </div>
                 </div>
             </li>

@@ -1,4 +1,5 @@
 import './index.less';
+import match from 'mime-match';
 import html from './index.html';
 
 export default (app, elem, attrs, scope) => {
@@ -16,22 +17,15 @@ export default (app, elem, attrs, scope) => {
         name: '@', // 发到后台的文件参数名 默认 ‘file’,
       },
       transclude: true,
-      link(scope, element) {
+      link: function(scope, element) {
         const input = document.getElementById('upload-trigger');
         element.on('click', scope.triggerId, e => {
           input.value = null;
           input.click();
         });
       },
-      controller($scope) {
-        console.log('fileUploader', $scope);
+      controller: function($scope) {
         $scope.errorMsg = null;
-
-        this.reset = () => {
-          console.log('reset');
-        };
-
-        $scope.$watch('')
 
         if (typeof FormData !== 'function') {
           $scope.errorMsg = '当前浏览器不支持H5上传，请更换现代浏览器或选择极速模式！';
@@ -47,6 +41,26 @@ export default (app, elem, attrs, scope) => {
           return;
         }
 
+        const validator = {
+          accept(file, accept) {
+            if (!accept) return false;
+            const acceptList = accept.split(',');
+            const fileType = file.type;
+            const fileExt = file.name.split('.').pop();
+            const matched = acceptList.some(rule => {
+              if (rule.includes('/')) {
+                // match mime type
+                return match(rule, fileType);
+              } else {
+                // match extname
+                return fileExt === rule;
+              }
+            });
+            if (matched) return false;
+            return `不接受选择的文件类型！`;
+          },
+        };
+
         const input = document.getElementById('upload-trigger');
         const handleUpload = () => {
           const files = input.files;
@@ -61,6 +75,13 @@ export default (app, elem, attrs, scope) => {
           }
         };
         const upload = file => {
+          const acceptValidateResult = validator.accept(file, $scope.accept);
+          if (acceptValidateResult) {
+            $scope.$apply(() => {
+              $scope.errorMsg = acceptValidateResult;
+            });
+            return;
+          }
           const formData = new FormData();
           formData.append($scope.name || 'file', file);
           if ($scope.data) {
@@ -68,22 +89,66 @@ export default (app, elem, attrs, scope) => {
               formData.append(key, $scope.data[key]);
             });
           }
-          fetch($scope.action, {
-            method: 'post',
+
+          $.ajax({
+            url:  $scope.action,
+            type: 'POST',
             data: formData,
-            credentials: 'include',
-          })
-            .then(res => res.json())
-            .then($scope.onChange)
-            .catch(err => {
+            processData: false,  // 不处理数据
+            contentType: false   // 不设置内容类型
+          }).done(data => {
+            const res = JSON.parse(data);
+            if (res.status === 500 || res.result === 'error') {
+              console.warn('[FILEUPLAODER failed]')
+              console.warn(res);
+              $scope.onChange(res);
               $scope.$apply(() => {
-                if (typeof err === 'object') {
-                  $scope.errorMsg = err.toString();
-                } else {
-                  $scope.errorMsg = err;
-                }
+                $scope.errorMsg = res.msg;
               });
+            } else {
+              $scope.onChange(res);
+              $scope.$apply(() => {
+                $scope.errorMsg = null;
+              });
+            }
+          }).fail(err => {
+            $scope.$apply(() => {
+              if (typeof err === 'object') {
+                $scope.errorMsg = err.toString();
+              } else {
+                $scope.errorMsg = err;
+              }
             });
+          });
+          
+          // fetch($scope.action, {
+          //   method: 'POST',
+          //   body: formData,
+          //   credentials: 'include',
+          // })
+          //   .then(res => res.json())
+          //   .then(res => {
+          //     if (res.status === 500 || res.result === 'error') {
+          //       console.warn('[FILEUPLAODER failed]')
+          //       console.warn(res);
+          //       $scope.onChange(res);
+          //       throw new Error(res.msg);
+          //     } else {
+          //       $scope.onChange(res);
+          //       $scope.$apply(() => {
+          //         $scope.errorMsg = null;
+          //       });
+          //     }
+          //   })
+          //   .catch(err => {
+          //     $scope.$apply(() => {
+          //       if (typeof err === 'object') {
+          //         $scope.errorMsg = err.toString();
+          //       } else {
+          //         $scope.errorMsg = err;
+          //       }
+          //     });
+          //   });
         };
 
         $(input).on('change', handleUpload);

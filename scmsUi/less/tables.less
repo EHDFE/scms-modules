@@ -88,3 +88,67 @@ table .list-comments-scroll{
 .table-display .cell:last-child{
 	padding:0 10px 0 10px;
 }
+
+.table>.compose-header>tr>th:first-child{
+	border-left: none;
+}
+
+
+
+
+/*圆角*/
+
+
+
+
+/*历史CSS*/
+.tablebox.table-collapse{
+	border:1px solid #E4E7EF;
+	border-radius: 3px;
+}
+.table-collapse .tablebox{
+	border:1px solid #E4E7EF;
+	border-radius: 3px;
+}
+.table-collapse table{
+	border-collapse: collapse;
+	position: relative;
+	overflow: hidden;
+}
+.table-collapse thead::before{
+	width: 10px;
+	height: 10px;
+	content: "";
+	position: absolute;
+	top:0px;
+	left:0px;
+	background: #fff;
+}
+.table-collapse thead th:first-child::before{
+	width: 10px;
+	height: 10px;
+	content: "";
+	position: absolute;
+	top:0px;
+	left:0px;
+	background: #E9EFF4;
+	border:1px solid #E4E7EF;
+	border-right:none;
+	border-bottom: none;
+	border-radius: 3px 0 0 0;
+}
+.no-stripe-table{
+	border-collapse: collapse;
+}
+.no-stripe-table.table.no-stripe-table.table>tbody td{
+	border: 1px solid #e4e7ef  !important;
+}
+table.no-stripe-table>tbody>tr:hover{
+	background: #fff;
+}
+table.no-stripe-table>tbody>tr:hover:nth-of-type(even){
+	background: #F7FAFC;
+}
+.table>.compose-header>tr>th{
+	border: 1px solid #DADDE4 !important;
+}

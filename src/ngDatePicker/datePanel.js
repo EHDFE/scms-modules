@@ -10,8 +10,7 @@ import angular from "angular";
 import html from "./datePanel.html";
 import "./datePanel.css";
 import moment from "moment";
-import DatePicker from './DatePickerClass';
-
+import DatePicker from "./DatePickerClass";
 
 export default (app, elem, attrs, scope) => {
   app.directive("datePanel", [
@@ -37,6 +36,7 @@ export default (app, elem, attrs, scope) => {
           rightRange: "=",
           dateRangeData: "=",
           watchDate: "=",
+          tmpDate: "=",
         },
         controller: [
           "$scope",
@@ -59,13 +59,22 @@ export default (app, elem, attrs, scope) => {
             newDate = $scope.date;
           }
 
-          // $scope.useSeconds = !!$attrs.useSeconds;
-          // $scope.minViewMode = $attrs.minViewMode;
+          // // $scope.useSeconds = !!$attrs.useSeconds;
+          // // $scope.minViewMode = $attrs.minViewMode;
           // $scope.pickTime = !!$attrs.pickTime;
           const datePicker = new DatePicker({
             dateRange: $scope.dateRange,
+            dateRangeData: $scope.dateRangeData || {},
+            $attrs: $attrs,
           });
           $scope.datePicker = datePicker;
+          $scope.$watch('formatDate', (newVal) =>  {
+            datePicker.formatDate = newVal;            
+          });
+
+          if ($attrs.dateRange) {
+            $scope.dateRangeData = $scope.datePicker.dateRangeData;
+          }
 
           $scope.datePicker.minViewMode = $attrs.minViewMode;
           $scope.$watch("minViewMode", (newVal, oldVal) => {
@@ -73,30 +82,6 @@ export default (app, elem, attrs, scope) => {
               datePicker.showPanel = "month";
             }
           });
-
-          function setCanChooseYear() {
-            if ($scope.minDateArr.year && $scope.minDateArr.month) {
-              $scope.canChoosePrevYear =
-                moment([
-                  $scope.minDateArr.year,
-                  $scope.minDateArr.month - 1,
-                ]).valueOf() < moment([$scope.dateData.year, 0]).valueOf();
-            } else {
-              $scope.canChoosePrevYear = true;
-            }
-            if ($scope.maxDateArr.year && $scope.maxDateArr.month) {
-              $scope.canChooseNextYear =
-                moment([
-                  $scope.maxDateArr.year,
-                  $scope.maxDateArr.month - 1,
-                ]).valueOf() > moment([$scope.dateData.year, 11]).valueOf();
-            } else {
-              $scope.canChooseNextYear = true;
-            }
-          }
-
-
-
 
           $scope.$watch("minDate", function(newValue, oldValue) {
             if (!newValue) {
@@ -146,7 +131,6 @@ export default (app, elem, attrs, scope) => {
             }
           }
 
-
           $scope.hover = col => {
             if (
               $scope.dateRange &&
@@ -163,6 +147,7 @@ export default (app, elem, attrs, scope) => {
               $scope.$emit("refresh", datePicker.tmpDate);
             }
           };
+
           $scope.mouseleave = () => {
             if ($scope.dateRange) {
               $timeout(() => {
@@ -183,7 +168,7 @@ export default (app, elem, attrs, scope) => {
 
           $scope.$on("refreshDate", (e, data) => {
             datePicker.tmpDate = data;
-            datePicker.setDateView(getResult());
+            datePicker.setDateView(datePicker.getResult());
           });
 
           function showArrow() {
@@ -243,17 +228,64 @@ export default (app, elem, attrs, scope) => {
               showArrow();
             }
           });
-          $scope.$watch("dateData", newVal => {
+          $scope.$watch(
+            "datePicker.dateData",
+            newVal => {
               if ($scope.dateRange) {
-                $scope.date = getResult();
+                $scope.date = datePicker.getResult();
                 showArrow();
               }
-            }, true);
+            },
+            true
+          );
 
-          // $scope.$watch("date", newVal => {
-          //   // console.log(newVal, $attrs.name, '@#$%^&*')
-          // });
+          $scope.$watch(
+            "datePicker.dateRangeData",
+            newVal => {
+              if (newVal) {
+                if ($scope.dateRange) {
+                  if (
+                    $scope.dateRangeData.start &&
+                    $scope.dateRangeData.start.valueOf() ===
+                      $scope.datePicker.dateRangeData &&
+                    $scope.datePicker.dateRangeData.start.valueOf() &&
+                    $scope.dateRangeData.end &&
+                    $scope.dateRangeData.end.valueOf() ===
+                      $scope.datePicker.dateRangeData.end &&
+                    $scope.datePicker.dateRangeData.end.valueOf()
+                  ) {
+                    return;
+                  }
+                  $scope.dateRangeData = newVal;
+                }
+              }
+            },
+            true
+          );
 
+          $scope.$watch("dateRangeData", newVal => {
+            if (newVal && $scope.dateRange) {
+              if (
+                $scope.dateRangeData.start &&
+                $scope.dateRangeData.start.valueOf() ===
+                  $scope.datePicker.dateRangeData &&
+                $scope.datePicker.dateRangeData.start.valueOf() &&
+                $scope.dateRangeData.end &&
+                $scope.dateRangeData.end.valueOf() ===
+                  $scope.datePicker.dateRangeData.end &&
+                $scope.datePicker.dateRangeData.end.valueOf()
+              ) {
+                return;
+              }
+              datePicker.dateRangeData = newVal;
+            }
+          });
+
+          $scope.$watch("datePicker.refresh", (newVal, oldVal) => {
+            if (newVal && newVal !== oldVal) {
+              $scope.$emit("refresh");
+            }
+          });
           $scope.$on("init", function() {
             $timeout(() => {
               var newDate;
@@ -265,6 +297,9 @@ export default (app, elem, attrs, scope) => {
                 newDate = new Date(newDate);
               }
               datePicker.init(newDate);
+              $timeout(() => {
+                locateTime();
+              });
             });
           });
           $scope.$on("selectTime", function() {
@@ -272,9 +307,58 @@ export default (app, elem, attrs, scope) => {
               $scope.date = datePicker.getResult();
             }, 500);
           });
+
+          $scope.setHour = (hour, $index) => {
+            datePicker.setHour(hour);
+            $element.find('.time-wrap').eq(0).scrollTop($index*30);
+          }
+
+          $scope.setMinute = (minute, $index) => {
+            datePicker.setMinute(minute);
+            $element.find('.time-wrap').eq(1).scrollTop($index*30);
+          }
+ 
+          $scope.setSecond = (second, $index) => {
+            datePicker.setSecond(second);
+            $element.find('.time-wrap').eq(2).scrollTop($index*30);
+          }
+
+          $element.find(".time-area").bind("mouseleave", e => {
+            $(e.currentTarget)
+              .find(".time-wrap")
+              .scrollTop(
+                Math.round(
+                  $(e.currentTarget)
+                    .find(".time-wrap")
+                    .scrollTop() / 30
+                ) * 30
+              );
+          });
+          $element.find(".time-wrap").bind("scroll", e => {
+            $(e.currentTarget)
+              .parents(".time-area")
+              .find(".scroll-bar-thumb")
+              .css(
+                "transform",
+                `translateY(${e.currentTarget.scrollTop / 220 * 100}%)`
+              );
+            $timeout(() => {
+              let index = Math.floor((e.currentTarget.scrollTop + 15) / 30);
+              datePicker[$(e.currentTarget).data("func")]({
+                value: $(e.currentTarget).find(".time-zone li").eq(index).data("value"),
+              });
+            })
+          });
+          $timeout(() => {
+            locateTime();
+          })
+          function locateTime() {
+            $element.find(".time-wrap").each(function(i, elem){
+              $(this).scrollTop(Number($(this).find('.active').text()*30));
+            });
+          }
         },
       };
     },
   ]);
 };
-

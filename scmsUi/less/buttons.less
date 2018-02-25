@@ -12,6 +12,9 @@
     font-size:16px !important;
 }
 
+.btn[disabled],
+.btn[disabled]:hover,
+.btn[disabled]:active,
 .btn:disabled,
 .btn:disabled:hover,
 .btn:disabled:active{
@@ -20,6 +23,9 @@
     color:#9BA0AA;
 }
 
+.btn-link[disabled],
+.btn-link[disabled]:hover,
+.btn-link[disabled]:active,
 .btn-link:disabled,
 .btn-link:disabled:hover,
 .btn-link:disabled:active{
@@ -30,7 +36,8 @@
 
 .btn-success,
 .btn-success:focus,
-.btn-success:active{
+.btn-success:active,
+.btn-success:active:hover{
     background: #51a1fd;
     border-color: #51a1fd;
     color:#fff;
@@ -71,7 +78,8 @@
 
 .btn-primary,
 .btn-primary:focus,
-.btn-primary:active{
+.btn-primary:active,
+.btn-primary:active:hover{
     background: #51a1fd;
     border-color: #51a1fd;
     color:#fff;
@@ -88,9 +96,11 @@
 .btn-info,
 .btn-info:focus,
 .btn-info:active,
+.btn-info:active:hover,
 .btn-default,
 .btn-default:focus,
-.btn-default:active{
+.btn-default:active,
+.btn-default:active:hover{
     background: #fff;
     border-color: #51A1FD;
     color:#51A1FD;
@@ -106,7 +116,8 @@
 
 .btn-danger,
 .btn-danger:focus,
-.btn-danger:active{
+.btn-danger:active,
+.btn-danger:active:hover{
     background: #f15a4b;
     border-color: #f15a4b;
     color:#fff;
@@ -123,7 +134,8 @@
 
 .btn-warning,
 .btn-warning:focus,
-.btn-warning:active{
+.btn-warning:active,
+.btn-warning:active:hover{
     background: #fff;
     border-color: #f15a4b;
     color:#f15a4b;
@@ -250,7 +262,7 @@ button{
     }
 }
 .btn-loading:before{
-    content: "\f110";
+    content: "\F1CE";
     text-align:center;
     width:18px;
     height:13px;
