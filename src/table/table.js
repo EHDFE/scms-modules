@@ -12,11 +12,13 @@ define(
     'angular',
     '../pagination/paginationDirective',
     '../errorNoData/errorNoDataDirective',
+    './tableFixed'
   ],
-  function(angular, paginationDirective, errorNoDataDirective) {
+  function(angular, paginationDirective, errorNoDataDirective, tableFixedDirective) {
     return function(app, elem, attrs, scope) {
       paginationDirective(app);
       errorNoDataDirective(app);
+      tableFixedDirective(app);
       app.directive('tableDirective', [
         '$cookies',
         '$http',
@@ -36,7 +38,7 @@ define(
         ) {
           return {
             template:
-              '<div class="tablebox" ng-transclude></div><div ng-show="hasPagination"><div pagination-directive current-page="currPage" total-count="totalCount" page-size="pageSize" onchanged="fetch" hide-page-size="hidePageSize"></div></div><div error-no-data-directive show-by="isNoData"></div>',
+              '<div class="tablebox" ng-transclude></div><div ng-show="fixedTable" fixed-col="fixedPosition" table-fixed-directive></div><div ng-show="hasPagination"><div pagination-directive current-page="currPage" total-count="totalCount" page-size="pageSize" onchanged="fetch" hide-page-size="hidePageSize"></div></div><div error-no-data-directive show-by="isNoData"></div>',
             scope: {
               apiUrl: '=', //@scope apiUrl 依赖后端api接口地址 {type: "string",exampleValue: '/scms/scmsmodules/table/data.json'}
               fetch: '=', //@scope fetch 获取数据的函数 {type: "function"}
@@ -48,6 +50,9 @@ define(
               formatData: '=', //@scope formatData 格式化列表数据 {type: "function", parentScopeValue: "console.log('格式化数据:',arguments);"}
               disableStorage: '=', //@scope disableStorage 是否禁止从localStorage中获取搜索条件 {type: "boolean", exampleValue: "false"}
               delEmptyParam: '=', //@scope delEmptyParam 是否删除值为空字符串的请求参数 {type: "boolean", exampleValue: "false"}
+              fixedTable: '=',
+              fixedPosition: '@',
+              domReady: '='
             },
             restrict: 'EA',
             transclude: true,
@@ -217,6 +222,16 @@ define(
                   console.log(e);
                 }
               });
+
+              if($scope.fixedTable){
+                $scope.domReady = function($last){
+                  if($last){
+                    $timeout(function(){
+                      $rootScope.$broadcast('angularDomReady', $element);
+                    });
+                  }
+                };
+              }
             },
 
             controller: function(
