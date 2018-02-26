@@ -11,6 +11,7 @@ import html from "./datePanel.html";
 import "./datePanel.css";
 import moment from "moment";
 import DatePicker from "./DatePickerClass";
+import { throttle } from './tool'; 
 
 export default (app, elem, attrs, scope) => {
   app.directive("datePanel", [
@@ -350,9 +351,18 @@ export default (app, elem, attrs, scope) => {
                 ) * 30
               );
           });
-          $element.find(".time-wrap").bind("scroll", e => {
-            let index = Math.floor((e.currentTarget.scrollTop + 15) / 30);
 
+          $element.find(".time-wrap").bind('scroll', e => {
+            $(e.currentTarget)
+            .parents(".time-area")
+            .find(".scroll-bar-thumb")
+            .css(
+              "transform",
+              `translateY(${e.currentTarget.scrollTop / 220 * 100}%)`
+            );
+          });
+          $element.find(".time-wrap").bind("scroll", throttle(e => {
+            let index = Math.floor((e.currentTarget.scrollTop + 15) / 30);
             if($(e.currentTarget).find(".time-zone li").eq(index).data('disabled')) {
               let scrollTop = $(e.currentTarget).scrollTop(),
                   firstIndex = $(e.currentTarget).find('.first').data('index'),
@@ -364,13 +374,6 @@ export default (app, elem, attrs, scope) => {
               }
               return;
             }
-            $(e.currentTarget)
-              .parents(".time-area")
-              .find(".scroll-bar-thumb")
-              .css(
-                "transform",
-                `translateY(${e.currentTarget.scrollTop / 220 * 100}%)`
-              );
             $timeout(() => {
               let func = $(e.currentTarget).data("func");
               datePicker[func]({
@@ -395,7 +398,7 @@ export default (app, elem, attrs, scope) => {
                 }
               })
             })
-          });
+          }, 250));
           $timeout(() => {
             locateTime();
           })
