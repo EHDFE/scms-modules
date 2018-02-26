@@ -1,10 +1,10 @@
 <h2>日期选择{{aa}}</h2>
 <div ng-code-directive>
-	<input placeholder="结束时间" type="text" date-picker class="form-control input-date" ng-model="aa">
+	<input placeholder="结束时间" type="text" date-picker class="form-control input-date"   init-date="null" ng-model="aa">
 </div>
 
 <h2>日期时间选择</h2>
-<input placeholder="结束时间" type="text" date-picker pick-time="true" use-seconds="true" ng-model="bb"  format-date="YYYY-MM-DD HH:mm:ss"  class="form-control input-date-time">
+<input placeholder="结束时间" type="text" date-picker pick-time="true" use-seconds="true" min-date="'2018-02-23 11:11:11'" max-date="'2018-02-26 17:22:45'" ng-model="bb"  format-date="YYYY-MM-DD HH:mm:ss"  class="form-control input-date-time">
 
 <h2>范围--日期选择</h2>
 <!-- <div class="input-date-range">

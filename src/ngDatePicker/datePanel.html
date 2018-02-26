@@ -56,9 +56,6 @@
         <table class="table-condensed">
           <thead>
             <tr>
-              <!-- <th class="prev prevMonth" ng-click="setPreDecade()" ng-class="{disabled: yearView[0].disabled}"></th>
-              <th colspan="5" class="picker-switch">{{yearView[1].data}}-{{yearView[10].data}}</th>
-              <th class="next nextMonth" ng-click="setNextDecade()" ng-class="{disabled: yearView[11].disabled}"></th> -->
               <th colspan="7">
                 <span class="picker-switch">
                     <span class="prev prevYear" ng-click="datePicker.setPreDecade()" style="width: 35px;height: 20px;" ng-class="{disabled: datePicker.yearView[0].disabled}"></span>
@@ -98,7 +95,7 @@
             <div class="time-area" >
               <div class="time-wrap" data-func="setHour">
                 <ul class="time-zone" >
-                  <li ng-class="{active: currhour.active, disabled: currhour.disabled }"  ng-click="setHour(currhour, $index)"  data-value={{currhour.value}} ng-repeat="currhour in datePicker.hourView">{{currhour.value}}</li>
+                  <li ng-class="{active: currhour.active, disabled: currhour.disabled, first: currhour.first, last: currhour.last }"  ng-click="setHour(currhour, $index)" data-index={{$index}}  data-value={{currhour.value}} data-disabled={{currhour.disabled}} ng-repeat="currhour in datePicker.hourView">{{currhour.value}}</li>
                 </ul>
               </div>
               <div class="scroll-bar-vertical">
@@ -108,7 +105,7 @@
             <div class="time-area"> 
               <div class="time-wrap" data-func="setMinute">
                 <ul class="time-zone" >
-                  <li ng-class="{active: currmin.active, disabled: currmin.disabled }" data-value={{currmin.value}} ng-click="setMinute(currmin, $index)" ng-repeat="currmin in datePicker.minView">{{currmin.value}}</li>
+                  <li ng-class="{active: currmin.active, disabled: currmin.disabled, first: currmin.first, last: currmin.last }" data-value={{currmin.value}} data-index={{$index}} data-disabled={{currmin.disabled}}  ng-click="setMinute(currmin, $index)" ng-repeat="currmin in datePicker.minView">{{currmin.value}}</li>
                 </ul>
               </div>
               <div class="scroll-bar-vertical">
@@ -118,7 +115,7 @@
             <div ng-show="useSeconds" class="time-area">
               <div class="time-wrap" data-func="setSecond">
                 <ul class="time-zone" >
-                  <li ng-class="{active: currsecond.active, disabled: currsecond.disabled }"  data-value={{currsecond.value}} ng-click="setSecond(currsecond, $index)" ng-repeat="currsecond in datePicker.secondView">{{currsecond.value}}</li>
+                  <li ng-class="{active: currsecond.active, disabled: currsecond.disabled, first: currsecond.first, last: currsecond.last  }"  data-value={{currsecond.value}} data-index={{$index}} data-disabled={{currsecond.disabled}} ng-click="setSecond(currsecond, $index)" ng-repeat="currsecond in datePicker.secondView">{{currsecond.value}}</li>
                 </ul>
               </div>
               <div class="scroll-bar-vertical">
@@ -130,7 +127,4 @@
       </div>
     </div>
   </div>
-  <!-- <div class="confirm">
-      <button class="btn btn-primary"  ng-click="confirm()">确定</button>
-    </div> -->
 </div>

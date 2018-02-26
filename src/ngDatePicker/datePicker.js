@@ -71,6 +71,9 @@ export default (app, elem, attrs, scope) => {
                   return true;
                 }
               } else {
+                if ($(target).hasClass('disabled')||$(target).parent().hasClass('disabled')) {
+                  return true;
+                }
                 if ($scope.minViewMode === "months") {
                   if (
                     $element[0] === target ||

@@ -523,7 +523,7 @@ class DatePicker {
           moment([
             this.dateData.year,
             this.dateData.month - 1,
-            scope.dateData.date,
+            this.dateData.date,
           ])
             .add(1, "month")
             .valueOf() <
@@ -602,8 +602,9 @@ class DatePicker {
       moment([this.dateData.year, this.dateData.month - 1, 1])
     );
   }
-  setMinDate() {
+  setMinDate(date) {
     var time = moment(date);
+    this.hasMinDate = true;
     this.minDateArr = {
       year: time.year(),
       month: time.month() + 1,
@@ -613,8 +614,9 @@ class DatePicker {
       second: time.second(),
     };
   }
-  setMaxDate() {
+  setMaxDate(date) {
     var time = moment(date);
+    this.hasMaxDate = true;
     this.maxDateArr = {
       year: time.year(),
       month: time.month() + 1,
@@ -662,17 +664,37 @@ class DatePicker {
             ]).valueOf(),
       };
     });
+    for(let i = 1, len = this.hourView.length; i<len; i++) {
+      if (!this.hourView[i].disabled&&this.hourView[i-1].disabled) {
+        this.hourView[i].first = true;
+      }
+      if (this.hourView[i].disabled&&!this.hourView[i-1].disabled) {
+        this.hourView[i-1].last  = true;
+      } 
+    }
   }
   setHour(hour) {
     if (!hour.disabled&&(hour.value!= this.dateData.hour)) {
       this.dateData.hour = hour.value;
       this.setHourView();
+      if (this.hasMinDate||this.hasMaxDate) {
+        this.setMinView();
+        this.setSecondView();
+      }
     }
   }
   setMinView() {
     if (!this.dateData.minute) {
       this.dateData.minute = moment().minute();
     }
+    let minMomentValue = moment([this.minDateArr.year, this.minDateArr.month - 1, this.minDateArr.date, this.minDateArr.hour,this.minDateArr.minute, ]).valueOf(),
+        maxMomentValue = moment([this.maxDateArr.year, this.maxDateArr.month - 1, this.maxDateArr.date, this.maxDateArr.hour, this.maxDateArr.minute, ]).valueOf(),
+        nowMomentValue = moment([this.dateData.year, this.dateData.month - 1, this.dateData.date, this.dateData.hour, this.dateData.minute,]).valueOf();
+    if ( nowMomentValue<minMomentValue ) {
+      this.dateData.minute = this.minDateArr.minute;
+    } else if ( nowMomentValue > maxMomentValue ) {
+      this.dateData.minute = this.maxDateArr.minute;
+    }  
     this.minView = Array.apply(null, Array(60)).map((item, i) => {
       return {
         value: (i / 100)
@@ -680,19 +702,54 @@ class DatePicker {
           .toString()
           .slice(2),
         active: i === Number(this.dateData.minute),
+        disabled: minMomentValue >
+          moment([
+            this.dateData.year,
+            this.dateData.month - 1,
+            this.dateData.date,
+            this.dateData.hour,
+            i,
+          ]).valueOf() || maxMomentValue <
+          moment([
+            this.dateData.year,
+            this.dateData.month - 1,
+            this.dateData.date,
+            this.dateData.hour,
+            i,
+          ]).valueOf(),
       };
     });
+    for(let i = 1, len = this.minView.length; i<len; i++) {
+      if (!this.minView[i].disabled&&this.minView[i-1].disabled) {
+        this.minView[i].first = true;
+      }
+      if (this.minView[i].disabled&&!this.minView[i-1].disabled) {
+        this.minView[i-1].last  = true;
+      } 
+    }
+
   }
   setMinute(minute) {
     if (!minute.disabled&&(minute.value != this.dateData.minute)) {
       this.dateData.minute = minute.value;
       this.setMinView();
+      if (this.hasMaxDate||this.hasMinDate) {
+        this.setSecondView();
+      }
     }
   }
   setSecondView() {
     if (!this.dateData.second) {
       this.dateData.second = moment().second();
     }
+    let minMomentValue = moment([this.minDateArr.year, this.minDateArr.month - 1, this.minDateArr.date, this.minDateArr.hour,this.minDateArr.minute, this.minDateArr.second]).valueOf(),
+        maxMomentValue = moment([this.maxDateArr.year, this.maxDateArr.month - 1, this.maxDateArr.date, this.maxDateArr.hour, this.maxDateArr.minute, this.maxDateArr.second]).valueOf(),
+        nowMomentValue = moment([this.dateData.year, this.dateData.month - 1, this.dateData.date, this.dateData.hour, this.dateData.minute, this.dateData.second]).valueOf();
+    if ( nowMomentValue<minMomentValue ) {
+      this.dateData.second = this.minDateArr.second;
+    } else if ( nowMomentValue > maxMomentValue ) {
+      this.dateData.second = this.maxDateArr.second;
+    } 
     this.secondView = Array.apply(null, Array(60)).map((item, i) => {
       return {
         value: (i / 100)
@@ -700,8 +757,50 @@ class DatePicker {
           .toString()
           .slice(2),
         active: i == Number(this.dateData.second),
+        disabled:
+        moment([
+          this.minDateArr.year,
+          this.minDateArr.month - 1,
+          this.minDateArr.date,
+          this.minDateArr.hour,
+          this.minDateArr.minute,
+          this.minDateArr.second,
+        ]).valueOf() >
+          moment([
+            this.dateData.year,
+            this.dateData.month - 1,
+            this.dateData.date,
+            this.dateData.hour,
+            this.dateData.minute,
+            i,
+          ]).valueOf() ||
+        moment([
+          this.maxDateArr.year,
+          this.maxDateArr.month - 1,
+          this.maxDateArr.date,
+          this.maxDateArr.hour,
+          this.maxDateArr.minute,
+          this.maxDateArr.second,
+        ]).valueOf() <
+          moment([
+            this.dateData.year,
+            this.dateData.month - 1,
+            this.dateData.date,
+            this.dateData.hour,
+            this.dateData.minute,
+            i,
+          ]).valueOf(),
       };
     });
+    for(let i = 1, len = this.secondView.length; i<len; i++) {
+      if (!this.secondView[i].disabled&&this.secondView[i-1].disabled) {
+        this.secondView[i].first = true;
+      }
+      if (this.secondView[i].disabled&&!this.secondView[i-1].disabled) {
+        this.secondView[i-1].last  = true;
+      } 
+    }
+    
   }
   setSecond(second) {
     if (!second.disabled&&(second.value != this.dateData.second)) {

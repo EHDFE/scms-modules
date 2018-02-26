@@ -92,7 +92,7 @@ export default (app, elem, attrs, scope) => {
               newValue = newValue + initTime.slice(newValue.length - 11);
             }
             datePicker.setMinDate(newValue);
-            datePicker.init(getResult());
+            datePicker.init(datePicker.getResult());
           });
           $scope.$watch("maxDate", function(newValue, oldValue) {
             if (!newValue) {
@@ -103,21 +103,21 @@ export default (app, elem, attrs, scope) => {
               newValue = newValue + initTime.slice(newValue.length - 11);
             }
             datePicker.setMaxDate(newValue);
-            datePicker.init(getResult());
+            datePicker.init(datePicker.getResult());
           });
           $scope.$watch("minDateValue", function(newValue, oldValue) {
             if (!newValue) {
               return;
             }
             datePicker.setMinDate(getDate($scope.minDateValue));
-            datePicker.init(getResult());
+            datePicker.init(datePicker.getResult());
           });
           $scope.$watch("maxDateValue", function(newValue, oldValue) {
             if (!newValue) {
               return;
             }
             datePicker.setMaxDate(getDate($scope.maxDateValue));
-            datePicker.init(getResult());
+            datePicker.init(datePicker.getResult());
           });
 
           function getDate(date) {
@@ -310,17 +310,33 @@ export default (app, elem, attrs, scope) => {
 
           $scope.setHour = (hour, $index) => {
             datePicker.setHour(hour);
-            $element.find('.time-wrap').eq(0).scrollTop($index*30);
+            if (!hour.disabled) {
+              $timeout(() => {
+                locateTime();
+              }, 500);
+            }
           }
 
           $scope.setMinute = (minute, $index) => {
             datePicker.setMinute(minute);
-            $element.find('.time-wrap').eq(1).scrollTop($index*30);
+            if (!minute.disabled) {
+              $timeout(() => {
+                let minElm = $element.find('.time-wrap').eq(1),
+                    secElm = $element.find('.time-wrap').eq(2);
+                minElm.scrollTop(Number(minElm.find('.active').text()*30));
+                secElm.scrollTop(Number(secElm.find('.active').text()*30));
+              });
+            }
           }
  
           $scope.setSecond = (second, $index) => {
             datePicker.setSecond(second);
-            $element.find('.time-wrap').eq(2).scrollTop($index*30);
+            if (!second.disabled) {
+              $timeout(() => {
+                let secElm = $element.find('.time-wrap').eq(2);
+                secElm.scrollTop(Number(secElm.find('.active').text()*30)); 
+              });
+            }
           }
 
           $element.find(".time-area").bind("mouseleave", e => {
@@ -335,6 +351,19 @@ export default (app, elem, attrs, scope) => {
               );
           });
           $element.find(".time-wrap").bind("scroll", e => {
+            let index = Math.floor((e.currentTarget.scrollTop + 15) / 30);
+
+            if($(e.currentTarget).find(".time-zone li").eq(index).data('disabled')) {
+              let scrollTop = $(e.currentTarget).scrollTop(),
+                  firstIndex = $(e.currentTarget).find('.first').data('index'),
+                  lastIndex = $(e.currentTarget).find('.last').data('index');
+              if (firstIndex&&(firstIndex*30>scrollTop)) {
+                $(e.currentTarget).scrollTop(firstIndex*30);
+              } else if (lastIndex&&(lastIndex*30< scrollTop )) {
+                $(e.currentTarget).scrollTop(lastIndex*30);
+              }
+              return;
+            }
             $(e.currentTarget)
               .parents(".time-area")
               .find(".scroll-bar-thumb")
@@ -343,10 +372,28 @@ export default (app, elem, attrs, scope) => {
                 `translateY(${e.currentTarget.scrollTop / 220 * 100}%)`
               );
             $timeout(() => {
-              let index = Math.floor((e.currentTarget.scrollTop + 15) / 30);
-              datePicker[$(e.currentTarget).data("func")]({
+              let func = $(e.currentTarget).data("func");
+              datePicker[func]({
                 value: $(e.currentTarget).find(".time-zone li").eq(index).data("value"),
               });
+              $timeout(() => {                
+                switch(func) {
+                  case 'setHour': {
+                    let minElm = $element.find('.time-wrap').eq(1),
+                      secElm = $element.find('.time-wrap').eq(2);
+                    minElm.scrollTop(Number(minElm.find('.active').text()*30));
+                    secElm.scrollTop(Number(secElm.find('.active').text()*30));
+                    break;
+                  }
+                  case 'setMinute': {
+                    let secElm = $element.find('.time-wrap').eq(2);
+                    secElm.scrollTop(Number(secElm.find('.active').text()*30)); 
+                    break;
+                  }
+                  default: {
+                  }
+                }
+              })
             })
           });
           $timeout(() => {

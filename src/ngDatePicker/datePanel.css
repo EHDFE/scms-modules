@@ -92,7 +92,7 @@
 
 .date-panel-datetimepicker .disabled {
   /* background-color: #F5F5F5; */
-  /* color: #B9BEC3; */
+  color: #B9BEC3;
   cursor: not-allowed !important;
 }
 .date-panel-datetimepicker td.day {
@@ -307,6 +307,9 @@
 }
 .date-panel-time .time-picker .time-zone li:hover {
   color: #51A1FD;
+}
+.date-panel-time .time-picker .time-zone li.disabled:hover {
+  color: #b9bec3;
 }
 
 .date-panel-time .scroll-bar-vertical {
