@@ -48,11 +48,21 @@ export default (app, elem, attrs, scope) => {
               $scope.minViewMode = $attrs.minViewMode;
               $scope.pickTime = !!$attrs.pickTime;
               $scope.formatDate = $attrs.formatDate||'YYYY-MM-DD';
-
+              
               $timeout(()=> {
                 $scope.dateRangeResult = {
-                  start: ($scope.initStartDate&&($scope.initStartDate!== 'null')||$scope.initStartDate === 0)? $scope.startDate: '',
-                  end: ($scope.initEndDate&&($scope.initEndDate!== 'null')||$scope.initEndDate === 0)? $scope.endDate: '',
+                  start: '',
+                  end: '',
+                }
+                if ($scope.startDateRange) {
+                  $scope.dateRangeResult.start = $scope.startDate = $scope.startDateRange;
+                } else if ($scope.initStartDate&&($scope.initStartDate!== 'null')||$scope.initStartDate === 0) {
+                  $scope.dateRangeResult.start = $scope.startDate;
+                }
+                if ($scope.endDateRange) {
+                  $scope.dateRangeResult.end = $scope.endDate = $scope.endDateRange;
+                }else if ($scope.initEndDate&&($scope.initEndDate!== 'null')||$scope.initEndDate === 0) {
+                  $scope.dateRangeResult.end = $scope.endDate;
                 }
               });
 
@@ -200,16 +210,21 @@ export default (app, elem, attrs, scope) => {
                   }
                 }
               });
-  
+
+              var init = true;
               $scope.$watch('dateRangeResult', (newVal) => {
+                // console.log(newVal, '_+_+_+_-=-=-=-=-=-=-=-=-=-=-=')
+                if (init) {
+                  init =false;
+                  return;
+                }
                 if ($attrs.startDateRange) {
                   $scope.startDateRange = newVal&&newVal.start;
-                  console.log($scope.dateRangeStart, 223)
                 }
                 if ($attrs.endDateRange) {
                   $scope.endDateRange = newVal&&newVal.end;
                 }
-              }, true)
+              }, true);
           },
         ],
         link: function($scope, $element, $attrs, ngModel) {},
