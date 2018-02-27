@@ -10,6 +10,7 @@ import angular from 'angular';
 import moment from 'moment';
 import datePanel from './datePanel';
 import tpl from './datePickerRangeTpl.html';
+import './datePickerRangeTpl.css';
 import html from './datePickerRange.html';
 import './datePickerRange.css';
 
@@ -46,7 +47,6 @@ export default (app, elem, attrs, scope) => {
               $scope.pickTime = !!$attrs.pickTime;
               $scope.formatDate = $attrs.formatDate||'YYYY-MM-DD';
 
-
               $timeout(()=> {
                 $scope.dateRangeResult = {
                   start: ($scope.initStartDate&&($scope.initStartDate!== 'null')||$scope.initStartDate === 0)? $scope.startDate: '',
@@ -56,7 +56,7 @@ export default (app, elem, attrs, scope) => {
 
               $document.find('body').append(panel);
               var clickTimes = 0;
-              $scope.pick = function(data) {
+              $scope.pick = (data) => {
                 $timeout(() => {
                   if ($scope.dateRangeData&&$scope.dateRangeData.start&&$scope.dateRangeData.end) {
                     $scope.startDate = $scope.dateRangeData.start.format($scope.formatDate);
@@ -71,56 +71,69 @@ export default (app, elem, attrs, scope) => {
                   $timeout(() => {
                     $scope.$broadcast('refreshDate');
                   });
-                }, 300)
+                }, 300);
               }
 
               
-              
-              $element.delegate('input', 'focus', function(e) {
-                  $element.focus();
-                  e.stopPropagation();
-                  var pos = e.target.parentNode.getBoundingClientRect(),
-                      offset = panel.offset(),
-                      tipHeight = panel.outerHeight(),
-                      tipWidth = panel.outerWidth(),
-                      elWidth = pos.width || pos.right - pos.left,
-                      elHeight = pos.height || pos.bottom - pos.top,
-                      tipOffset = 0,
-                      scrollWidth = $('body')[0].scrollWidth;
-                      offset.top = pos.top + elHeight + tipOffset;
-                      offset.left = pos.left;
-                      panel.css('display', 'inline-block');
-                      panel.offset(offset);
+              function showPanel(e) {
+                e.stopPropagation();
+                var pos = e.target.getBoundingClientRect(),
+                    offset = panel.offset(),
+                    tipHeight = panel.outerHeight(),
+                    tipWidth = panel.outerWidth(),
+                    elWidth = pos.width || pos.right - pos.left,
+                    elHeight = pos.height || pos.bottom - pos.top,
+                    tipOffset = 0,
+                    scrollWidth = $('body')[0].scrollWidth;
+                    offset.top = pos.top + elHeight + tipOffset;
+                    offset.left = pos.left;
+                    panel.css('display', 'inline-block');
+                    panel.offset(offset);
+                
+                $timeout(() => {
+                  $scope.dateRangeData = {
+                    start:  $scope.dateRangeResult&&$scope.dateRangeResult.start? moment($scope.dateRangeResult.start): null,
+                    end: $scope.dateRangeResult&&$scope.dateRangeResult.end? moment($scope.dateRangeResult.end): null,
+                  }
+                  
+                  if (!$scope.dateRangeResult.start&&!$scope.dateRangeResult.end) {
+                    $scope.startDate = moment().add(-1, 'month').format($scope.formatDate);
+                    $scope.endDate = moment().format($scope.formatDate);
+                  } else {
+                    $scope.startDate = $scope.dateRangeResult&&$scope.dateRangeResult.start;
+                    if ($scope.dateRangeResult&&$scope.dateRangeResult.start&&$scope.dateRangeResult.end) {
+                      if (moment( $scope.dateRangeResult.start).year() === moment($scope.dateRangeResult.end).year()
+                      &&(moment( $scope.dateRangeResult.start).month() === moment($scope.dateRangeResult.end).month())) {
+                        $scope.endDate = moment($scope.dateRangeResult.start).add(1, 'month').format($scope.formatDate);
+                      }
+                    } else {
+                      $scope.endDate = $scope.dateRangeResult&&$scope.dateRangeResult.end;
+                    }
+                  }
                   
                   $timeout(() => {
-                    $scope.dateRangeData = {
-                      start:  $scope.dateRangeResult&&$scope.dateRangeResult.start? moment($scope.dateRangeResult.start): null,
-                      end: $scope.dateRangeResult&&$scope.dateRangeResult.end? moment($scope.dateRangeResult.end): null,
-                    }
-                    
-                    if (!$scope.dateRangeResult.start&&!$scope.dateRangeResult.end) {
-                      $scope.startDate = moment().add(-1, 'month').format($scope.formatDate);
-                      $scope.endDate = moment().format($scope.formatDate);
-                    } else {
-                      $scope.startDate = $scope.dateRangeResult&&$scope.dateRangeResult.start;
-                      if ($scope.dateRangeResult&&$scope.dateRangeResult.start&&$scope.dateRangeResult.end) {
-                        if (moment( $scope.dateRangeResult.start).year() === moment($scope.dateRangeResult.end).year()
-                        &&(moment( $scope.dateRangeResult.start).month() === moment($scope.dateRangeResult.end).month())) {
-                          $scope.endDate = moment($scope.dateRangeResult.start).add(1, 'month').format($scope.formatDate);
-                        }
-                      } else {
-                        $scope.endDate = $scope.dateRangeResult&&$scope.dateRangeResult.end;
-                      }
-                    }
-                    
-                    $timeout(() => {
-                      $scope.$broadcast('init');
-                    });
-                  }); 
-              });
+                    $scope.$broadcast('init');
+                  });
+                }); 
+              }
+              
+              $element.find('input').on('focus', (e) => {
+                $element.focus();
+              })
+              $element.on('focus', (e) => {
+                showPanel(e);
+              })
+
 
               preventBlur($element, function(target){
-                if($element[0] === target ||($.contains(panel[0], target))){
+                console.log($element[0], target, $.contains($element[0], target), 7654)
+                if ($.contains($element[0], target)) {
+                  return true;
+                }
+                if($element[0] === target||($.contains(panel[0], target))){
+                  if ($(target).parent().hasClass('disabled')||$(target).hasClass('disabled')) {
+                    return true;
+                  }
                   if (!($(target).parent().hasClass('day')||$(target).hasClass('day'))) {
                     return true;
                   } else {
@@ -157,6 +170,7 @@ export default (app, elem, attrs, scope) => {
                 $scope.$broadcast('refreshDate', data);
               })
               $element.bind('blur', function(){
+                console.log(+new Date())
                 $timeout(() => {
                   clickTimes = 0;
                   panel.css('display', 'none');

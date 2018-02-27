@@ -132,7 +132,8 @@ export default (app, elem, attrs, scope) => {
             }
           }
 
-          $scope.hover = col => {
+          $scope.hover = throttle(col => {
+            console.log(+ new Date())
             if (
               $scope.dateRange &&
               $scope.dateRangeData.start &&
@@ -147,7 +148,9 @@ export default (app, elem, attrs, scope) => {
               datePicker.tmpDate = col.data;
               $scope.$emit("refresh", datePicker.tmpDate);
             }
-          };
+          }, 200);
+
+
 
           $scope.mouseleave = () => {
             if ($scope.dateRange) {
@@ -159,19 +162,25 @@ export default (app, elem, attrs, scope) => {
           };
           datePicker.init(newDate);
 
-          if ((initDate !== "null" && initDate) || initDate === 0) {
+          if ((initDate !== 'null' && initDate) || initDate === 0) {
             $timeout(() => {
               $scope.date = datePicker.getResult();
             });
           } else {
-            $scope.date = "";
+            $scope.date = '';
           }
 
-          $scope.$on("refreshDate", (e, data) => {
+          /**
+           * 在选择时间范围时，重新渲染时间面板
+           */
+          $scope.$on('refreshDate', (e, data) => {
             datePicker.tmpDate = data;
             datePicker.setDateView(datePicker.getResult());
           });
 
+          /** 
+           * 判断是否显示日期面板 上一年下一年上一月下一月的箭头
+          */
           function showArrow() {
             if ($attrs.part === "left" && $scope.watchDate) {
               if (
@@ -223,6 +232,7 @@ export default (app, elem, attrs, scope) => {
               }
             }
           }
+
 
           $scope.$watch("watchDate", newVal => {
             if ($scope.dateRange) {
@@ -309,6 +319,13 @@ export default (app, elem, attrs, scope) => {
             }, 500);
           });
 
+          
+          
+          /**
+           * 时间选择相关 函数
+           */
+          
+          
           $scope.setHour = (hour, $index) => {
             datePicker.setHour(hour);
             if (!hour.disabled) {
@@ -402,6 +419,10 @@ export default (app, elem, attrs, scope) => {
           $timeout(() => {
             locateTime();
           })
+
+          /** 
+           * 调整时间刻盘位置
+          */
           function locateTime() {
             $element.find(".time-wrap").each(function(i, elem){
               $(this).scrollTop(Number($(this).find('.active').text()*30));
