@@ -34,6 +34,8 @@ export default (app, elem, attrs, scope) => {
           initStartDate: "=", //@scope initDateStart 初始日期,它的值为距今天的天数 {type:"number"}
           initEndDate: "=", //@scope initDateEnd 初始日期,它的值为距今天的天数 {type:"number"}
           dateRangeResult: "=",
+          startDateRange: '=', //开始时间
+          endDateRange: '=', //结束时间
         },
         controller: [
           "$scope",
@@ -126,7 +128,6 @@ export default (app, elem, attrs, scope) => {
 
 
               preventBlur($element, function(target){
-                console.log($element[0], target, $.contains($element[0], target), 7654)
                 if ($.contains($element[0], target)) {
                   return true;
                 }
@@ -200,9 +201,15 @@ export default (app, elem, attrs, scope) => {
                 }
               });
   
-              // $scope.$watch('dateRangeResult', (newVal) => {
-              //   console.log(newVal, '-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+')
-              // }, true)
+              $scope.$watch('dateRangeResult', (newVal) => {
+                if ($attrs.startDateRange) {
+                  $scope.startDateRange = newVal&&newVal.start;
+                  console.log($scope.dateRangeStart, 223)
+                }
+                if ($attrs.endDateRange) {
+                  $scope.endDateRange = newVal&&newVal.end;
+                }
+              }, true)
           },
         ],
         link: function($scope, $element, $attrs, ngModel) {},

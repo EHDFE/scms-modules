@@ -7,8 +7,10 @@
 <input placeholder="结束时间" type="text" date-picker pick-time="true" use-seconds="true" init-date="0" ng-model="bb"  format-date="YYYY-MM-DD HH:mm:ss"  class="form-control input-date-time">
 
 <h2>范围--日期选择</h2>
-<div date-picker-range  date-range-result="dateRangeResult" ></div>
-
+<div date-picker-range  date-range-result="dateRangeResult" min-date="'2018-02-11'" start-date-range="dateRangeStart" end-date-range="dateRangeEnd"></div>
+<div>
+ 开始时间:{{dateRangeStart}}  结束时间:{{dateRangeEnd}}
+</div>
 <!-- <h2>范围--日期时间选择</h2>
 <div class="input-date-range">
     <input placeholder="开始时间" type="text" class="form-control input-date-time">

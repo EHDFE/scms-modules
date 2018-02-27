@@ -133,7 +133,6 @@ export default (app, elem, attrs, scope) => {
           }
 
           $scope.hover = throttle(col => {
-            console.log(+ new Date())
             if (
               $scope.dateRange &&
               $scope.dateRangeData.start &&
