@@ -60,6 +60,8 @@ export default (app, elem, attrs, scope) => {
             newDate = $scope.date;
           }
 
+          const timepickTotalHeight = 170;
+          const timepickItemHeight = 30;
           // // $scope.useSeconds = !!$attrs.useSeconds;
           // // $scope.minViewMode = $attrs.minViewMode;
           // $scope.pickTime = !!$attrs.pickTime;
@@ -340,8 +342,8 @@ export default (app, elem, attrs, scope) => {
               $timeout(() => {
                 let minElm = $element.find('.time-wrap').eq(1),
                     secElm = $element.find('.time-wrap').eq(2);
-                minElm.scrollTop(Number(minElm.find('.active').text()*30));
-                secElm.scrollTop(Number(secElm.find('.active').text()*30));
+                minElm.scrollTop(Number(minElm.find('.active').text()*timepickItemHeight));
+                secElm.scrollTop(Number(secElm.find('.active').text()*timepickItemHeight));
               });
             }
           }
@@ -351,7 +353,7 @@ export default (app, elem, attrs, scope) => {
             if (!second.disabled) {
               $timeout(() => {
                 let secElm = $element.find('.time-wrap').eq(2);
-                secElm.scrollTop(Number(secElm.find('.active').text()*30)); 
+                secElm.scrollTop(Number(secElm.find('.active').text()*timepickItemHeight)); 
               });
             }
           }
@@ -363,8 +365,8 @@ export default (app, elem, attrs, scope) => {
                 Math.round(
                   $(e.currentTarget)
                     .find(".time-wrap")
-                    .scrollTop() / 30
-                ) * 30
+                    .scrollTop() / timepickItemHeight
+                ) * timepickItemHeight
               );
           });
 
@@ -374,19 +376,19 @@ export default (app, elem, attrs, scope) => {
             .find(".scroll-bar-thumb")
             .css(
               "transform",
-              `translateY(${e.currentTarget.scrollTop / 220 * 100}%)`
+              `translateY(${e.currentTarget.scrollTop / timepickTotalHeight * 100}%)`
             );
           });
           $element.find(".time-wrap").bind("scroll", throttle(e => {
-            let index = Math.floor((e.currentTarget.scrollTop + 15) / 30);
+            let index = Math.floor((e.currentTarget.scrollTop + 15) / timepickItemHeight);
             if($(e.currentTarget).find(".time-zone li").eq(index).data('disabled')) {
               let scrollTop = $(e.currentTarget).scrollTop(),
                   firstIndex = $(e.currentTarget).find('.first').data('index'),
                   lastIndex = $(e.currentTarget).find('.last').data('index');
-              if (firstIndex&&(firstIndex*30>scrollTop)) {
-                $(e.currentTarget).scrollTop(firstIndex*30);
-              } else if (lastIndex&&(lastIndex*30< scrollTop )) {
-                $(e.currentTarget).scrollTop(lastIndex*30);
+              if (firstIndex&&(firstIndex*timepickItemHeight>scrollTop)) {
+                $(e.currentTarget).scrollTop(firstIndex*timepickItemHeight);
+              } else if (lastIndex&&(lastIndex*timepickItemHeight< scrollTop )) {
+                $(e.currentTarget).scrollTop(lastIndex*timepickItemHeight);
               }
               return;
             }
@@ -400,13 +402,13 @@ export default (app, elem, attrs, scope) => {
                   case 'setHour': {
                     let minElm = $element.find('.time-wrap').eq(1),
                       secElm = $element.find('.time-wrap').eq(2);
-                    minElm.scrollTop(Number(minElm.find('.active').text()*30));
-                    secElm.scrollTop(Number(secElm.find('.active').text()*30));
+                    minElm.scrollTop(Number(minElm.find('.active').text()*timepickItemHeight));
+                    secElm.scrollTop(Number(secElm.find('.active').text()*timepickItemHeight));
                     break;
                   }
                   case 'setMinute': {
                     let secElm = $element.find('.time-wrap').eq(2);
-                    secElm.scrollTop(Number(secElm.find('.active').text()*30)); 
+                    secElm.scrollTop(Number(secElm.find('.active').text()*timepickItemHeight)); 
                     break;
                   }
                   default: {
@@ -424,7 +426,7 @@ export default (app, elem, attrs, scope) => {
           */
           function locateTime() {
             $element.find(".time-wrap").each(function(i, elem){
-              $(this).scrollTop(Number($(this).find('.active').text()*30));
+              $(this).scrollTop(Number($(this).find('.active').text()*timepickItemHeight));
             });
           }
         },
