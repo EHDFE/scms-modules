@@ -238,6 +238,12 @@ class DatePicker {
     } else {
       dateView.nextYear = true;
     }
+
+    let minMomentValue = moment([this.minDateArr.year, this.minDateArr.month - 1, this.minDateArr.date, ]).valueOf(),
+        maxMomentValue =  moment([this.maxDateArr.year,this.maxDateArr.month - 1, this.maxDateArr.date,]).valueOf(),
+        weekPickStartValue = this.weekPickerData.start&&this.weekPickerData.start.valueOf(),
+        weekPickEndValue = this.weekPickerData.end&&this.weekPickerData.end.clone().hour(0).minute(0).second(0).millisecond(0).valueOf();
+
     for (var i = 0; i < 42; i++) {
       var nowDate = startDate
         .clone()
@@ -284,23 +290,7 @@ class DatePicker {
       ) {
         tag = "today";
       }
-      if (!this.dateRange) {
-        if (
-          nowDate.valueOf() ===
-          moment([
-            this.dateData.year,
-            this.dateData.month - 1,
-            this.dateData.date,
-          ])
-            .hour(0)
-            .minute(0)
-            .second(0)
-            .millisecond(0)
-            .valueOf()
-        ) {
-          tag = "active";
-        }
-      } else {
+      if (this.dateRange) {
         if (
           this.dateRangeData &&
           ((this.dateRangeData.start &&
@@ -323,6 +313,25 @@ class DatePicker {
                   .valueOf()))
         ) {
           tag = "hover";
+        }
+       
+      } else if (this.weekPick) {
+
+      }else {
+        if (
+          nowDate.valueOf() ===
+          moment([
+            this.dateData.year,
+            this.dateData.month - 1,
+            this.dateData.date,
+          ])
+            .hour(0)
+            .minute(0)
+            .second(0)
+            .millisecond(0)
+            .valueOf()
+        ) {
+          tag = "active";
         }
       }
       if (
@@ -380,6 +389,16 @@ class DatePicker {
           range = true;
         }
       }
+      let weekStart, weekBetween, weekEnd;
+      if (this.weekPick) {
+        if (nowDate.valueOf() === weekPickStartValue) {
+          weekStart = true;
+        } else if ((nowDate.valueOf() > weekPickStartValue)&&(nowDate.valueOf()<weekPickEndValue)) {
+          weekBetween = true;
+        } else if(nowDate.valueOf() === weekPickEndValue) {
+          weekEnd = true;
+        }
+      }
       if (nowDate.day() === 0) {
         dateView.push([
           {
@@ -387,17 +406,10 @@ class DatePicker {
             value: nowDate.date(),
             data: nowDate,
             range,
-            disabled:
-              moment([
-                this.minDateArr.year,
-                this.minDateArr.month - 1,
-                this.minDateArr.date,
-              ]).valueOf() > nowDate.valueOf() ||
-              moment([
-                this.maxDateArr.year,
-                this.maxDateArr.month - 1,
-                this.maxDateArr.date,
-              ]).valueOf() < nowDate.valueOf(),
+            weekStart,
+            weekBetween,
+            weekEnd,
+            disabled: minMomentValue > nowDate.valueOf() ||maxMomentValue < nowDate.valueOf(),
           },
         ]);
       } else {
@@ -406,17 +418,10 @@ class DatePicker {
           value: nowDate.date(),
           data: nowDate,
           range,
-          disabled:
-            moment([
-              this.minDateArr.year,
-              this.minDateArr.month - 1,
-              this.minDateArr.date,
-            ]).valueOf() > nowDate.valueOf() ||
-            moment([
-              this.maxDateArr.year,
-              this.maxDateArr.month - 1,
-              this.maxDateArr.date,
-            ]).valueOf() < nowDate.valueOf(),
+          weekStart,
+          weekBetween,
+          weekEnd,
+          disabled: minMomentValue > nowDate.valueOf() ||maxMomentValue < nowDate.valueOf(),
         });
       }
     }
@@ -454,6 +459,10 @@ class DatePicker {
             this.dateRangeData.start = momentDate.data;
           }
         }
+      }
+      if (this.weekPick) {
+        this.weekPickerData.start = momentDate.data.clone().startOf('week');  
+        this.weekPickerData.end = momentDate.data.clone().endOf('week');
       }
       this.setDateView(momentDate.data);
       this.setMonthView();

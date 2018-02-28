@@ -35,9 +35,12 @@ export default (app, elem, attrs, scope) => {
           formatDate: "=", //@scope initDate 初始日期,它的值为距今天的天数 {type:"number"}
           leftRange: "=",
           rightRange: "=",
+          useSeconds: '=',
           dateRangeData: "=",
           watchDate: "=",
           tmpDate: "=",
+          weekPickerData: "=",
+          
         },
         controller: [
           "$scope",
@@ -50,6 +53,7 @@ export default (app, elem, attrs, scope) => {
           var formatDate = $scope.formatDate || "YYYY-MM-DD";
           //@attrs initDate 初始日期字段,它的值为距今天的天数;当值为"null"时,input显示空值, {type:"string", defaultValue: 0}
           $scope.dateRange = $attrs.dateRange;
+          $scope.weekPick = $attrs.weekPick;
           var initDate = $scope.initDate;
           var newDate;
           if (initDate && initDate !== "null") {
@@ -59,7 +63,15 @@ export default (app, elem, attrs, scope) => {
           } else if ($scope.date) {
             newDate = $scope.date;
           }
-
+          $scope.$watch('useSeconds', (newVal) => {
+            if (newVal === 'false') {
+              $scope.showSeconds = false;
+              $element.find('.time-picker').width(100);
+            } else {
+              $scope.showSeconds = true;
+              $element.find('.time-picker').width(150);
+            }
+          })
           const timepickTotalHeight = 170;
           const timepickItemHeight = 30;
           // // $scope.useSeconds = !!$attrs.useSeconds;
@@ -69,6 +81,8 @@ export default (app, elem, attrs, scope) => {
             dateRange: $scope.dateRange,
             dateRangeData: $scope.dateRangeData || {},
             $attrs: $attrs,
+            weekPick: $scope.weekPick,
+            weekPickerData: $scope.weekPickerData || {},
           });
           $scope.datePicker = datePicker;
           $scope.$watch('formatDate', (newVal) =>  {
@@ -78,9 +92,12 @@ export default (app, elem, attrs, scope) => {
           if ($attrs.dateRange) {
             $scope.dateRangeData = $scope.datePicker.dateRangeData;
           }
+          if ($attrs.weekPick) {
+            $scope.weekPickerData = $scope.datePicker.weekPickerData;
+          }
 
-          $scope.datePicker.minViewMode = $attrs.minViewMode;
           $scope.$watch("minViewMode", (newVal, oldVal) => {
+            $scope.datePicker.minViewMode = newVal;
             if (newVal === "months") {
               datePicker.showPanel = "month";
             }
@@ -292,6 +309,45 @@ export default (app, elem, attrs, scope) => {
               datePicker.dateRangeData = newVal;
             }
           });
+          $scope.$watch(
+            "datePicker.weekPickerData",
+            newVal => {
+              if (newVal&&$scope.weekPick) {
+                if (
+                  $scope.weekPickerData.start &&
+                  $scope.weekPickerData.start.valueOf() ===
+                    $scope.datePicker.weekPickerData &&
+                  $scope.datePicker.weekPickerData.start.valueOf() &&
+                  $scope.weekPickerData.end &&
+                  $scope.weekPickerData.end.valueOf() ===
+                    $scope.datePicker.weekPickerData.end &&
+                  $scope.datePicker.weekPickerData.end.valueOf()
+                ) {
+                  return;
+                }
+                $scope.weekPickerData = newVal;
+              }
+            },
+            true
+          );
+
+          $scope.$watch("weekPickerData", newVal => {
+            if (newVal && $scope.weekPick) {
+              if (
+                $scope.weekPickerData.start &&
+                $scope.weekPickerData.start.valueOf() ===
+                  $scope.datePicker.weekPickerData &&
+                $scope.datePicker.weekPickerData.start.valueOf() &&
+                $scope.weekPickerData.end &&
+                $scope.weekPickerData.end.valueOf() ===
+                  $scope.datePicker.weekPickerData.end &&
+                $scope.datePicker.weekPickerData.end.valueOf()
+              ) {
+                return;
+              }
+              datePicker.weekPickerData = newVal;
+            }
+          }, true);
 
           $scope.$watch("datePicker.refresh", (newVal, oldVal) => {
             if (newVal && newVal !== oldVal) {

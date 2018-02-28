@@ -2,15 +2,29 @@
 <div ng-code-directive>
     <input placeholder="结束时间" type="text" date-picker class="form-control input-date" init-date="null" ng-model="aa">
 </div>
+<h2>日期选择</h2>
+<div>
+    <input placeholder="结束时间" type="text" date-picker class="form-control input-date" min-view-mode="months" format-date="YYYY-MM"
+        init-date="null" ng-model="month">
+    <div>选择月份 {{month}}</div>
+</div>
 
 <h2>日期时间选择</h2>
 <input placeholder="结束时间" type="text" date-picker pick-time="true" use-seconds="true" init-date="0" ng-model="bb" format-date="YYYY-MM-DD HH:mm:ss"
     class="form-control input-date-time">
 
+<h2>日期时间选择(无秒选择)</h2>
+<input placeholder="结束时间" type="text" date-picker pick-time="true" use-seconds="false" init-date="0" ng-model="nosecond"
+    format-date="YYYY-MM-DD HH:mm" class="form-control input-date-time">
 
+<h2>周选择</h2>
+<div>
+    <input placeholder="结束时间" type="text" week-picker class="form-control input-date-range" week-data="weekData" init-date="null" ng-model="weekPicker">
+    {{weekData|json}}1
+</div>
 <h2>范围--日期选择</h2>
-<div date-picker-range  date-range-result="dateRangeResult" ng-init="startDateRange='2018-01-11';endDateRange='2018-03-23';"
-  start-date-range="startDateRange" end-date-range="endDateRange"></div>
+<div date-picker-range date-range-result="dateRangeResult" ng-init="startDateRange='2018-01-11';endDateRange='2018-03-23';"
+    start-date-range="startDateRange" end-date-range="endDateRange"></div>
 <div>
     开始时间:{{startDateRange}} 结束时间:{{endDateRange}}
 </div>

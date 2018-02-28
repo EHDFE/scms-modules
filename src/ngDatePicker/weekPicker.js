@@ -9,13 +9,13 @@
 
 import angular from "angular";
 import datePanel from "./datePanel";
-import html from "./datePicker.html";
-import "./datePicker.css";
+import html from "./weekPicker.html";
+import "./weekPicker.css";
 import moment from "moment";
 
 export default (app, elem, attrs, scope) => {
   datePanel(app, elem, attrs, scope);
-  app.directive("datePicker", [
+  app.directive("weekPicker", [
     "G",
     "$rootScope",
     "$document",
@@ -30,6 +30,7 @@ export default (app, elem, attrs, scope) => {
           minDateValue: "=", //@scope minDateValue 最小可选日期,距今天天数 {type:"number"}
           maxDateValue: "=", //@scope maxDateValue 最大可选日期,距今天天数 {type:"number"}
           initDate: "=", //@scope initDate 初始日期,它的值为距今天的天数 {type:"number"}
+          weekData: "=",
         },
         controller: [
           "$scope",
@@ -37,15 +38,18 @@ export default (app, elem, attrs, scope) => {
           "$attrs",
           "$timeout",
           function($scope, $element, $attrs, $timeout) {
-            $scope.useSeconds = $attrs.useSeconds;
-            $scope.minViewMode = $attrs.minViewMode;
-            $scope.pickTime = !!$attrs.pickTime;
-            $scope.formatDate = $attrs.formatDate;
+            $scope.formatDate = $attrs.formatDate||"YYYY-MM-DD";
             var panel = $compile(html)($scope);
             $document.find("body").append(panel);
             $scope.pick = function(data) {
               $scope.$broadcast("selectTime");
-              $element.trigger("blur");
+              // $timeout(() => {
+              //   console.log($scope.weekPickerData.start, 123232);
+                // $scope.weekData = {
+                //   start: $scope.weekPickerData.start.format($scope.formatDate),
+                //   end: $scope.weekPickerData.end.format($scope.formatDate),
+                // }
+              // })
             };
 
             $element.bind("focus", function(e) {
@@ -66,45 +70,16 @@ export default (app, elem, attrs, scope) => {
             });
 
             preventBlur($element, function(target) {
-              if ($scope.pickTime) {
-                if ($element[0] === target || ($.contains(panel[0], target))) {
-                  return true;
-                }
-              } else {
-                if ($(target).hasClass('disabled')||$(target).parent().hasClass('disabled')) {
-                  return true;
-                }
-                if ($scope.minViewMode === "months") {
-                  if (
-                    $element[0] === target ||
-                    ($.contains(panel[0], target) && !$(target).hasClass("month"))
-                  ) {
-                    return true;
-                  }
-                  if ($(target).hasClass("month")) {
-                    $scope.pick();
-                  }
-                } else {
-                  if (
-                    $element[0] === target ||
-                    ($.contains(panel[0], target) &&
-                      !(
-                        $(target)
-                          .parent()
-                          .hasClass("day") || $(target).hasClass("day")
-                      ))
-                  ) {
-                    return true;
-                  }
-                  if (
-                    $(target)
-                      .parent()
-                      .hasClass("day") ||
-                    $(target).hasClass("day")
-                  ) {
-                    $scope.pick();
-                  }
-                }
+              if (
+                $(target)
+                  .parent()
+                  .hasClass("day") ||
+                $(target).hasClass("day")
+              ) {
+                $scope.pick();
+              }
+              if ($element[0] === target ||($.contains(panel[0], target))) {
+                return true;
               }
               return false;
             });
@@ -127,6 +102,12 @@ export default (app, elem, attrs, scope) => {
                 $document.unbind("mousedown", fnDocumentMousedown);
               });
             }
+            $scope.clearTime = () => {
+              $scope.weekPickerData = {};
+              $timeout(() => {
+                $scope.$broadcast('refreshDate');
+              })
+            }
 
             $element.bind("blur", function() {
               $timeout(() => {
@@ -135,8 +116,19 @@ export default (app, elem, attrs, scope) => {
             });
 
             $scope.$on("$destroy", function() {
-              $document.find(".date-picker").remove();
+              $document.find(".week-picker").remove();
             });
+
+
+            $scope.$watch('weekPickerData', (newVal) => {
+            
+              $scope.weekData = {
+                start: newVal&&newVal.start&&newVal.start.format($scope.formatDate)||'',
+                end: newVal&&newVal.end&&newVal.end.format($scope.formatDate)||'',
+              }
+              $scope.ngModel = $scope.weekData.start&&$scope.weekData.end?`${$scope.weekData.start}~${$scope.weekData.end}`:'';
+            }, true)
+
           },
         ],
         link: function($scope, $element, $attrs, ngModel) {},
@@ -145,4 +137,3 @@ export default (app, elem, attrs, scope) => {
     },
   ]);
 };
-
