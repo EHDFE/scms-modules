@@ -19,7 +19,7 @@
 
 <h2>周选择</h2>
 <div>
-    <input placeholder="结束时间" type="text" week-picker class="form-control input-date-range" week-data="weekData" init-date="null" ng-model="weekPicker">
+    <input placeholder="结束时间" type="text" week-picker max-date-value="20" min-date-value="-30" class="form-control input-date-range" week-data="weekData" init-date="null" ng-model="weekPicker">
     {{weekData|json}}
 </div>
 <h2>范围--日期选择</h2>

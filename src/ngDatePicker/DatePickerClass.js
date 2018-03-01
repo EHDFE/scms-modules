@@ -431,6 +431,17 @@ class DatePicker {
   }
   setDate(momentDate) {
     if (!momentDate.disabled) {
+      if (this.weekPick) {
+        if (momentDate.data.clone().startOf('week').valueOf() < this.minDateArr.data&&this.minDateArr.data.valueOf()) {
+          return;
+        }
+        if (momentDate.data.clone().endOf('week').valueOf() > this.maxDateArr.data&&this.maxDateArr.data.valueOf()) {
+          return;
+        }
+        this.weekPickerData.start = momentDate.data.clone().startOf('week');  
+        this.weekPickerData.end = momentDate.data.clone().endOf('week');
+        this.weekPickerData.week =  momentDate.data.clone().week();
+      }
       this.dateData.date = momentDate.data.date();
       this.dateData.month = momentDate.data.month() + 1;
       this.dateData.year = momentDate.data.year();
@@ -460,11 +471,6 @@ class DatePicker {
             this.dateRangeData.start = momentDate.data;
           }
         }
-      }
-      if (this.weekPick) {
-        this.weekPickerData.start = momentDate.data.clone().startOf('week');  
-        this.weekPickerData.end = momentDate.data.clone().endOf('week');
-        this.weekPickerData.week =  momentDate.data.clone().week();
       }
       this.setDateView(momentDate.data);
       this.setMonthView();
@@ -623,6 +629,7 @@ class DatePicker {
       hour: time.hour(),
       minute: time.minute(),
       second: time.second(),
+      data: time,
     };
   }
   setMaxDate(date) {
@@ -635,6 +642,7 @@ class DatePicker {
       hour: time.hour(),
       minute: time.minute(),
       second: time.second(),
+      data: time,
     };
   }
   setHourView() {

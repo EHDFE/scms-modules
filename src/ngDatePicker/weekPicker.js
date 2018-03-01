@@ -43,13 +43,6 @@ export default (app, elem, attrs, scope) => {
             $document.find("body").append(panel);
             $scope.pick = function(data) {
               $scope.$broadcast("selectTime");
-              // $timeout(() => {
-              //   console.log($scope.weekPickerData.start, 123232);
-                // $scope.weekData = {
-                //   start: $scope.weekPickerData.start.format($scope.formatDate),
-                //   end: $scope.weekPickerData.end.format($scope.formatDate),
-                // }
-              // })
             };
 
             $element.bind("focus", function(e) {
