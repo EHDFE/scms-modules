@@ -65,21 +65,38 @@ define([
                         else {
                             $parent.addClass('active')
                         }
-                    }                    
+                    }
                     
                     //目录收展
                     $scope.toggleLock = function() {
-                        var isShrink = $element.hasClass('shrink');
+                        var isShrink = $element.hasClass('shrink-tag');
                         var $content = $('#content');
                         if(isShrink) {
                             $element.removeClass('shrink');
                             $content.removeClass('contentShrink');
+                            $element.removeClass('shrink-tag');
                         }
                         else {
+                            $element.addClass('shrink-tag');
                             $element.addClass('shrink');
                             $content.addClass('contentShrink');
                         }
                     }
+
+                    $element.hover(
+                        function(){
+                            if($element.hasClass('shrink-tag')){
+                                $('#content').removeClass('contentShrink');
+                                $element.removeClass('shrink');
+                            }
+                        },
+                        function(){
+                            if($element.hasClass('shrink-tag')){
+                                $element.addClass('shrink');
+                                $('#content').addClass('contentShrink');
+                            }
+                        }
+                    );
 
                 }
             };
