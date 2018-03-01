@@ -412,6 +412,7 @@ class DatePicker {
             disabled: minMomentValue > nowDate.valueOf() ||maxMomentValue < nowDate.valueOf(),
           },
         ]);
+        dateView[dateView.length - 1].week = nowDate.week();
       } else {
         dateView[dateView.length - 1].push({
           tag: tag || "now",
@@ -463,6 +464,7 @@ class DatePicker {
       if (this.weekPick) {
         this.weekPickerData.start = momentDate.data.clone().startOf('week');  
         this.weekPickerData.end = momentDate.data.clone().endOf('week');
+        this.weekPickerData.week =  momentDate.data.clone().week();
       }
       this.setDateView(momentDate.data);
       this.setMonthView();

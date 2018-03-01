@@ -111,7 +111,7 @@ export default (app, elem, attrs, scope) => {
 
             $element.bind("blur", function() {
               $timeout(() => {
-                panel.css("display", "none");
+                // panel.css("display", "none");
               }, 250);
             });
 
@@ -121,10 +121,11 @@ export default (app, elem, attrs, scope) => {
 
 
             $scope.$watch('weekPickerData', (newVal) => {
-            
+              console.log(newVal, 1111)
               $scope.weekData = {
                 start: newVal&&newVal.start&&newVal.start.format($scope.formatDate)||'',
                 end: newVal&&newVal.end&&newVal.end.format($scope.formatDate)||'',
+                week: newVal&&newVal.week,
               }
               $scope.ngModel = $scope.weekData.start&&$scope.weekData.end?`${$scope.weekData.start}~${$scope.weekData.end}`:'';
             }, true)

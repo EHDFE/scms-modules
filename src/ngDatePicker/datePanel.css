@@ -97,6 +97,21 @@
   width: 32px;
   padding: 0;
 }
+.date-panel-datetimepicker td.week, .date-panel-datetimepicker th.week{
+  height: 32px;
+  border-radius: 0;
+  width: 22px;
+  padding: 0;
+  background-color: #F7F7F7;
+}
+.date-panel-datetimepicker th.week {
+  color: #6E7382;
+  border-radius: 50% 50% 0 0 ;
+}
+.date-panel-datetimepicker td.last-week {
+  border-radius:0 0  50% 50%;
+}
+
 .date-panel-datetimepicker td.day .date-item {
   height: 28px;
   width: 28px;

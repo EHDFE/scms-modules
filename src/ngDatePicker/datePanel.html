@@ -16,6 +16,7 @@
               <th ng-show="hideYearRight"></th>
             </tr>
             <tr>
+              <th class="week" ng-show="weekPick">周</th>
               <th class="dow">日</th>
               <th class="dow">一</th>
               <th class="dow">二</th>
@@ -27,6 +28,7 @@
           </thead>
           <tbody ng-mouseleave="mouseleave()">
             <tr ng-repeat="rows in datePicker.dateView" >
+              <td class="week" ng-show="weekPick" ng-class="{'last-week': $index === 5}">{{rows.week}} </td>
               <td class="day" ng-class="{old: col.tag==='old', new: col.tag==='new', today: col.tag==='today', active: col.tag==='active', disabled: col.disabled, range: col.range, hover: col.tag === 'hover', 
                 weekStart: col.weekStart, weekBetween: col.weekBetween, weekEnd: col.weekEnd, weekRange:(col.weekStart||col.weekBetween||col.weekEnd)}"
                 ng-click="datePicker.setDate(col)" ng-repeat="col in rows"><span class="date-item" ng-mousemove="hover(col)">{{col.value}}</span></td>
