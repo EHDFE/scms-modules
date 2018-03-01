@@ -111,7 +111,7 @@ export default (app, elem, attrs, scope) => {
 
             $element.bind("blur", function() {
               $timeout(() => {
-                // panel.css("display", "none");
+                panel.css("display", "none");
               }, 250);
             });
 
