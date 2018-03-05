@@ -35,9 +35,12 @@ export default (app, elem, attrs, scope) => {
           formatDate: "=", //@scope initDate 初始日期,它的值为距今天的天数 {type:"number"}
           leftRange: "=",
           rightRange: "=",
+          useSeconds: '=',
           dateRangeData: "=",
           watchDate: "=",
           tmpDate: "=",
+          weekPickerData: "=",
+          
         },
         controller: [
           "$scope",
@@ -50,6 +53,7 @@ export default (app, elem, attrs, scope) => {
           var formatDate = $scope.formatDate || "YYYY-MM-DD";
           //@attrs initDate 初始日期字段,它的值为距今天的天数;当值为"null"时,input显示空值, {type:"string", defaultValue: 0}
           $scope.dateRange = $attrs.dateRange;
+          $scope.weekPick = $attrs.weekPick;
           var initDate = $scope.initDate;
           var newDate;
           if (initDate && initDate !== "null") {
@@ -59,7 +63,17 @@ export default (app, elem, attrs, scope) => {
           } else if ($scope.date) {
             newDate = $scope.date;
           }
-
+          $scope.$watch('useSeconds', (newVal) => {
+            if (newVal === 'false') {
+              $scope.showSeconds = false;
+              $element.find('.time-picker').width(100);
+            } else {
+              $scope.showSeconds = true;
+              $element.find('.time-picker').width(150);
+            }
+          })
+          const timepickTotalHeight = 170;
+          const timepickItemHeight = 30;
           // // $scope.useSeconds = !!$attrs.useSeconds;
           // // $scope.minViewMode = $attrs.minViewMode;
           // $scope.pickTime = !!$attrs.pickTime;
@@ -67,6 +81,8 @@ export default (app, elem, attrs, scope) => {
             dateRange: $scope.dateRange,
             dateRangeData: $scope.dateRangeData || {},
             $attrs: $attrs,
+            weekPick: $scope.weekPick,
+            weekPickerData: $scope.weekPickerData || {},
           });
           $scope.datePicker = datePicker;
           $scope.$watch('formatDate', (newVal) =>  {
@@ -76,9 +92,12 @@ export default (app, elem, attrs, scope) => {
           if ($attrs.dateRange) {
             $scope.dateRangeData = $scope.datePicker.dateRangeData;
           }
+          if ($attrs.weekPick) {
+            $scope.weekPickerData = $scope.datePicker.weekPickerData;
+          }
 
-          $scope.datePicker.minViewMode = $attrs.minViewMode;
           $scope.$watch("minViewMode", (newVal, oldVal) => {
+            $scope.datePicker.minViewMode = newVal;
             if (newVal === "months") {
               datePicker.showPanel = "month";
             }
@@ -290,6 +309,45 @@ export default (app, elem, attrs, scope) => {
               datePicker.dateRangeData = newVal;
             }
           });
+          $scope.$watch(
+            "datePicker.weekPickerData",
+            newVal => {
+              if (newVal&&$scope.weekPick) {
+                if (
+                  $scope.weekPickerData.start &&
+                  $scope.weekPickerData.start.valueOf() ===
+                    $scope.datePicker.weekPickerData &&
+                  $scope.datePicker.weekPickerData.start.valueOf() &&
+                  $scope.weekPickerData.end &&
+                  $scope.weekPickerData.end.valueOf() ===
+                    $scope.datePicker.weekPickerData.end &&
+                  $scope.datePicker.weekPickerData.end.valueOf()
+                ) {
+                  return;
+                }
+                $scope.weekPickerData = newVal;
+              }
+            },
+            true
+          );
+
+          $scope.$watch("weekPickerData", newVal => {
+            if (newVal && $scope.weekPick) {
+              if (
+                $scope.weekPickerData.start &&
+                $scope.weekPickerData.start.valueOf() ===
+                  $scope.datePicker.weekPickerData &&
+                $scope.datePicker.weekPickerData.start.valueOf() &&
+                $scope.weekPickerData.end &&
+                $scope.weekPickerData.end.valueOf() ===
+                  $scope.datePicker.weekPickerData.end &&
+                $scope.datePicker.weekPickerData.end.valueOf()
+              ) {
+                return;
+              }
+              datePicker.weekPickerData = newVal;
+            }
+          }, true);
 
           $scope.$watch("datePicker.refresh", (newVal, oldVal) => {
             if (newVal && newVal !== oldVal) {
@@ -340,8 +398,8 @@ export default (app, elem, attrs, scope) => {
               $timeout(() => {
                 let minElm = $element.find('.time-wrap').eq(1),
                     secElm = $element.find('.time-wrap').eq(2);
-                minElm.scrollTop(Number(minElm.find('.active').text()*30));
-                secElm.scrollTop(Number(secElm.find('.active').text()*30));
+                minElm.scrollTop(Number(minElm.find('.active').text()*timepickItemHeight));
+                secElm.scrollTop(Number(secElm.find('.active').text()*timepickItemHeight));
               });
             }
           }
@@ -351,7 +409,7 @@ export default (app, elem, attrs, scope) => {
             if (!second.disabled) {
               $timeout(() => {
                 let secElm = $element.find('.time-wrap').eq(2);
-                secElm.scrollTop(Number(secElm.find('.active').text()*30)); 
+                secElm.scrollTop(Number(secElm.find('.active').text()*timepickItemHeight)); 
               });
             }
           }
@@ -363,8 +421,8 @@ export default (app, elem, attrs, scope) => {
                 Math.round(
                   $(e.currentTarget)
                     .find(".time-wrap")
-                    .scrollTop() / 30
-                ) * 30
+                    .scrollTop() / timepickItemHeight
+                ) * timepickItemHeight
               );
           });
 
@@ -374,19 +432,19 @@ export default (app, elem, attrs, scope) => {
             .find(".scroll-bar-thumb")
             .css(
               "transform",
-              `translateY(${e.currentTarget.scrollTop / 220 * 100}%)`
+              `translateY(${e.currentTarget.scrollTop / timepickTotalHeight * 100}%)`
             );
           });
           $element.find(".time-wrap").bind("scroll", throttle(e => {
-            let index = Math.floor((e.currentTarget.scrollTop + 15) / 30);
+            let index = Math.floor((e.currentTarget.scrollTop + 15) / timepickItemHeight);
             if($(e.currentTarget).find(".time-zone li").eq(index).data('disabled')) {
               let scrollTop = $(e.currentTarget).scrollTop(),
                   firstIndex = $(e.currentTarget).find('.first').data('index'),
                   lastIndex = $(e.currentTarget).find('.last').data('index');
-              if (firstIndex&&(firstIndex*30>scrollTop)) {
-                $(e.currentTarget).scrollTop(firstIndex*30);
-              } else if (lastIndex&&(lastIndex*30< scrollTop )) {
-                $(e.currentTarget).scrollTop(lastIndex*30);
+              if (firstIndex&&(firstIndex*timepickItemHeight>scrollTop)) {
+                $(e.currentTarget).scrollTop(firstIndex*timepickItemHeight);
+              } else if (lastIndex&&(lastIndex*timepickItemHeight< scrollTop )) {
+                $(e.currentTarget).scrollTop(lastIndex*timepickItemHeight);
               }
               return;
             }
@@ -400,13 +458,13 @@ export default (app, elem, attrs, scope) => {
                   case 'setHour': {
                     let minElm = $element.find('.time-wrap').eq(1),
                       secElm = $element.find('.time-wrap').eq(2);
-                    minElm.scrollTop(Number(minElm.find('.active').text()*30));
-                    secElm.scrollTop(Number(secElm.find('.active').text()*30));
+                    minElm.scrollTop(Number(minElm.find('.active').text()*timepickItemHeight));
+                    secElm.scrollTop(Number(secElm.find('.active').text()*timepickItemHeight));
                     break;
                   }
                   case 'setMinute': {
                     let secElm = $element.find('.time-wrap').eq(2);
-                    secElm.scrollTop(Number(secElm.find('.active').text()*30)); 
+                    secElm.scrollTop(Number(secElm.find('.active').text()*timepickItemHeight)); 
                     break;
                   }
                   default: {
@@ -424,7 +482,7 @@ export default (app, elem, attrs, scope) => {
           */
           function locateTime() {
             $element.find(".time-wrap").each(function(i, elem){
-              $(this).scrollTop(Number($(this).find('.active').text()*30));
+              $(this).scrollTop(Number($(this).find('.active').text()*timepickItemHeight));
             });
           }
         },

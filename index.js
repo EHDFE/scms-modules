@@ -44,6 +44,7 @@ import treeViewDirective from "./src/treeView/treeView";
 import fileUploaderDirective from "./src/fileUploader/index";
 import datePicker from './src/ngDatePicker/datePicker';
 import datePickerRange from './src/ngDatePicker/datePickerRange';
+import weekPicker from './src/ngDatePicker/weekPicker';
 import buttonDropdown from "./src/buttonDropdown/buttonDropdown";
 import selectDropdown from "./src/selectDropdown/selectDropdown";
 import imageUpload from "./src/imageUpload/imageUpload";
@@ -83,6 +84,7 @@ export default {
   'treeView/treeViewDirective': treeViewDirective,
   'ngDatePicker/datePicker': datePicker,
   'ngDatePicker/datePickerRange': datePickerRange,
+  'ngDatePicker/weekPicker': weekPicker,
   'buttonDropdown': buttonDropdown,
   'selectDropdown': selectDropdown,
   'imageUpload/imageUpload': imageUpload

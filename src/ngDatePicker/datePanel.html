@@ -16,6 +16,7 @@
               <th ng-show="hideYearRight"></th>
             </tr>
             <tr>
+              <th class="week" ng-show="weekPick">周</th>
               <th class="dow">日</th>
               <th class="dow">一</th>
               <th class="dow">二</th>
@@ -27,7 +28,9 @@
           </thead>
           <tbody ng-mouseleave="mouseleave()">
             <tr ng-repeat="rows in datePicker.dateView" >
-              <td class="day" ng-class="{old: col.tag==='old', new: col.tag==='new', today: col.tag==='today', active: col.tag==='active', disabled: col.disabled, range: col.range, hover: col.tag === 'hover'}"
+              <td class="week" ng-show="weekPick" ng-class="{'last-week': $index === 5}">{{rows.week}} </td>
+              <td class="day" ng-class="{old: col.tag==='old', new: col.tag==='new', today: col.tag==='today', active: col.tag==='active', disabled: col.disabled, range: col.range, hover: col.tag === 'hover', 
+                weekStart: col.weekStart, weekBetween: col.weekBetween, weekEnd: col.weekEnd, weekRange:(col.weekStart||col.weekBetween||col.weekEnd)}"
                 ng-click="datePicker.setDate(col)" ng-repeat="col in rows"><span class="date-item" ng-mousemove="hover(col)">{{col.value}}</span></td>
             </tr>
           </tbody>
@@ -86,8 +89,8 @@
           <div class="text-center">
             分
           </div>
-          <div class="text-center">
-            时
+          <div class="text-center" ng-show="showSeconds">
+            秒
           </div>
         </div>
         <div class="time-picker-content-wrap">
@@ -112,7 +115,7 @@
                 <div class="scroll-bar-thumb" style="height:11.055%;" ></div>
               </div>
             </div>
-            <div ng-show="useSeconds" class="time-area">
+            <div ng-show="showSeconds" class="time-area">
               <div class="time-wrap" data-func="setSecond">
                 <ul class="time-zone" >
                   <li ng-class="{active: currsecond.active, disabled: currsecond.disabled, first: currsecond.first, last: currsecond.last  }"  data-value={{currsecond.value}} data-index={{$index}} data-disabled={{currsecond.disabled}} ng-click="setSecond(currsecond, $index)" ng-repeat="currsecond in datePicker.secondView">{{currsecond.value}}</li>

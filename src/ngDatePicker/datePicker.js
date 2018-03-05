@@ -37,11 +37,11 @@ export default (app, elem, attrs, scope) => {
           "$attrs",
           "$timeout",
           function($scope, $element, $attrs, $timeout) {
-            var panel = $compile(html)($scope);
-            $scope.useSeconds = !!$attrs.useSeconds;
+            $scope.useSeconds = $attrs.useSeconds;
             $scope.minViewMode = $attrs.minViewMode;
             $scope.pickTime = !!$attrs.pickTime;
             $scope.formatDate = $attrs.formatDate;
+            var panel = $compile(html)($scope);
             $document.find("body").append(panel);
             $scope.pick = function(data) {
               $scope.$broadcast("selectTime");

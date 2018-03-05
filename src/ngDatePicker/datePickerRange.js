@@ -109,8 +109,30 @@ export default (app, elem, attrs, scope) => {
                   }
                   
                   if (!$scope.dateRangeResult.start&&!$scope.dateRangeResult.end) {
-                    $scope.startDate = moment().add(-1, 'month').format($scope.formatDate);
-                    $scope.endDate = moment().format($scope.formatDate);
+                    if ($scope.maxDate) {
+                      if (moment($scope.maxDate).valueOf() < moment().valueOf()) {
+                        $scope.startDate = moment($scope.maxDate).add(-1, 'month').format($scope.formatDate);
+                        $scope.endDate = moment($scope.maxDate).format($scope.formatDate);
+                      }
+                    } else if ($scope.maxDateValue) {
+                      if (moment().add($scope.maxDateValue, 'day').valueOf() < moment().valueOf()) {
+                        $scope.startDate =moment().add($scope.maxDateValue, 'day').add(-1, 'month').format($scope.formatDate);
+                        $scope.endDate = moment().add($scope.maxDateValue, 'day').format($scope.formatDate);
+                      }
+                    } else if ($scope.minDate) {
+                      if (moment($scope.minDate).valueOf() > moment().add(-1, 'month').valueOf()) {
+                        $scope.startDate = moment($scope.minDate).format($scope.formatDate);
+                        $scope.endDate = moment($scope.minDate).add(1, month).format($scope.formatDate);
+                      }
+                    } else if ($scope.minDateValue) {
+                      if (moment().add($scope.minDateValue, 'day').valueOf() > moment().add(-1, 'month').valueOf()) {
+                        $scope.startDate = moment().add($scope.minDateValue, 'day').format($scope.formatDate);
+                        $scope.endDate = moment().add($scope.minDateValue, 'day').add(1, month).format($scope.formatDate);
+                      }
+                    } else {
+                        $scope.startDate = moment().add(-1, 'month').format($scope.formatDate);
+                        $scope.endDate = moment().format($scope.formatDate);
+                    }
                   } else {
                     $scope.startDate = $scope.dateRangeResult&&$scope.dateRangeResult.start;
                     if ($scope.dateRangeResult&&$scope.dateRangeResult.start&&$scope.dateRangeResult.end) {
