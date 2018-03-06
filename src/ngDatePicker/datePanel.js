@@ -166,7 +166,7 @@ export default (app, elem, attrs, scope) => {
               datePicker.tmpDate = col.data;
               $scope.$emit("refresh", datePicker.tmpDate);
             }
-          }, 200);
+          }, 100);
 
 
 

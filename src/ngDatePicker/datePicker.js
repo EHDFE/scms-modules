@@ -11,6 +11,8 @@ import angular from "angular";
 import datePanel from "./datePanel";
 import html from "./datePicker.html";
 import "./datePicker.css";
+import tpl from './datePickerTpl.html';
+import './datePickerTpl.css';
 import moment from "moment";
 
 export default (app, elem, attrs, scope) => {
@@ -31,6 +33,8 @@ export default (app, elem, attrs, scope) => {
           maxDateValue: "=", //@scope maxDateValue 最大可选日期,距今天天数 {type:"number"}
           initDate: "=", //@scope initDate 初始日期,它的值为距今天的天数 {type:"number"}
         },
+        template: tpl,
+        replace: true,
         controller: [
           "$scope",
           "$element",
@@ -45,10 +49,10 @@ export default (app, elem, attrs, scope) => {
             $document.find("body").append(panel);
             $scope.pick = function(data) {
               $scope.$broadcast("selectTime");
-              $element.trigger("blur");
+              $element.find('.form-control').trigger("blur");
             };
 
-            $element.bind("focus", function(e) {
+            $element.find('.form-control').bind("focus", function(e) {
               e.stopPropagation();
               var pos = e.target.getBoundingClientRect(),
                 offset = panel.offset(),
@@ -65,9 +69,9 @@ export default (app, elem, attrs, scope) => {
               $scope.$broadcast("init");
             });
 
-            preventBlur($element, function(target) {
+            preventBlur($element.find('.form-control'), function(target) {
               if ($scope.pickTime) {
-                if ($element[0] === target || ($.contains(panel[0], target))) {
+                if ($element[0] === target ||($.contains($element[0], target))|| ($.contains(panel[0], target))) {
                   return true;
                 }
               } else {
@@ -77,6 +81,7 @@ export default (app, elem, attrs, scope) => {
                 if ($scope.minViewMode === "months") {
                   if (
                     $element[0] === target ||
+                    $.contains($element[0], target)||
                     ($.contains(panel[0], target) && !$(target).hasClass("month"))
                   ) {
                     return true;
@@ -87,6 +92,7 @@ export default (app, elem, attrs, scope) => {
                 } else {
                   if (
                     $element[0] === target ||
+                    $.contains($element[0], target)||
                     ($.contains(panel[0], target) &&
                       !(
                         $(target)
@@ -128,7 +134,7 @@ export default (app, elem, attrs, scope) => {
               });
             }
 
-            $element.bind("blur", function() {
+            $element.find('.form-control').bind("blur", function() {
               $timeout(() => {
                 panel.css("display", "none");
               }, 250);
@@ -137,6 +143,10 @@ export default (app, elem, attrs, scope) => {
             $scope.$on("$destroy", function() {
               $document.find(".date-picker").remove();
             });
+
+            $scope.clearDate = ($event) => {
+              $scope.ngModel = '';
+            }
           },
         ],
         link: function($scope, $element, $attrs, ngModel) {},

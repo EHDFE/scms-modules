@@ -1,35 +1,34 @@
 <h2>日期选择</h2>
 <div>
-    <input placeholder="结束时间" type="text" date-picker class="form-control input-date" init-date="null" ng-model="aa">
+    <input placeholder="结束时间" type="text" date-picker  init-date="null" ng-model="aa">
 </div>
 <h2>月选择</h2>
 <div>
-    <input placeholder="结束时间" type="text" date-picker class="form-control input-date" min-view-mode="months" format-date="YYYY-MM"
+    <input placeholder="结束时间" type="text" date-picker  min-view-mode="months" format-date="YYYY-MM"
         init-date="null" ng-model="month">
     <div>选中的月份 {{month}}</div>
 </div>
 
 <h2>日期时间选择</h2>
 <div>
-    <input placeholder="结束时间" type="text" date-picker pick-time="true" use-seconds="true" init-date="0" ng-model="bb" format-date="YYYY-MM-DD HH:mm:ss"
-        class="form-control input-date-time">
+    <input placeholder="结束时间" type="text" date-picker pick-time="true" use-seconds="true" init-date="0" ng-model="bb" format-date="YYYY-MM-DD HH:mm:ss">
 </div>
 
 <h2>日期时间选择(无秒选择)</h2>
 <div>
     <input placeholder="结束时间" type="text" date-picker pick-time="true" use-seconds="false" init-date="0" ng-model="nosecond"
-        format-date="YYYY-MM-DD HH:mm" class="form-control input-date-time">
+        format-date="YYYY-MM-DD HH:mm" />
 </div>
 
 <h2>周选择</h2>
 <div>
-    <input placeholder="结束时间" type="text" week-picker max-date-value="20" min-date-value="-30" class="form-control input-date-range"
-        week-data="weekData" init-date="null" ng-model="weekPicker"> {{weekData|json}}
+    <input placeholder="结束时间" type="text" week-picker max-date-value="20" min-date-value="-30"
+        week-data="weekData" init-date="null"> {{weekData|json}}
 </div>
 <h2>范围--日期选择</h2>
 <div ng-init="startDateRange='2018-01-11';endDateRange='2018-03-23';">
-    <div date-picker-range date-range-result="dateRangeResult" 
-        start-date-range="startDateRange" end-date-range="endDateRange"></div>
+    <input date-picker-range date-range-result="dateRangeResult" 
+        start-date-range="startDateRange" end-date-range="endDateRange" />
     <div>
         开始时间:{{startDateRange}} 结束时间:{{endDateRange}}
     </div>

@@ -11,6 +11,8 @@ import angular from "angular";
 import datePanel from "./datePanel";
 import html from "./weekPicker.html";
 import "./weekPicker.css";
+import tpl from "./weekPickerTpl.html";
+import './weekPickerTpl.css';
 import moment from "moment";
 
 export default (app, elem, attrs, scope) => {
@@ -32,6 +34,8 @@ export default (app, elem, attrs, scope) => {
           initDate: "=", //@scope initDate 初始日期,它的值为距今天的天数 {type:"number"}
           weekData: "=",
         },
+        template: tpl,
+        replace: true,
         controller: [
           "$scope",
           "$element",
@@ -45,7 +49,24 @@ export default (app, elem, attrs, scope) => {
               $scope.$broadcast("selectTime");
             };
 
-            $element.bind("focus", function(e) {
+            function showPanel(e) {
+              e.stopPropagation();
+              var pos = e.target.getBoundingClientRect(),
+                offset = panel.offset(),
+                tipHeight = panel.outerHeight(),
+                tipWidth = panel.outerWidth(),
+                elWidth = pos.width || pos.right - pos.left,
+                elHeight = pos.height || pos.bottom - pos.top,
+                tipOffset = 0,
+                scrollWidth = $("body")[0].scrollWidth;
+              offset.top = pos.top + elHeight + tipOffset;
+              offset.left = pos.left;
+              panel.css("display", "inline-block");
+              panel.offset(offset);
+              $scope.$broadcast("init");
+            }
+
+            $element.find('.week-date').bind("focus", function(e) {
               e.stopPropagation();
               var pos = e.target.getBoundingClientRect(),
                 offset = panel.offset(),
@@ -62,7 +83,14 @@ export default (app, elem, attrs, scope) => {
               $scope.$broadcast("init");
             });
 
-            preventBlur($element, function(target) {
+            $element.find('input').on('focus', (e) => {
+              $element.find('.week-date').focus();
+            })
+
+            preventBlur($element.find('.week-date'), function(target) {
+              if ($.contains($element[0], target)) {
+                return true;
+              }
               if (
                 $(target)
                   .parent()
@@ -95,14 +123,14 @@ export default (app, elem, attrs, scope) => {
                 $document.unbind("mousedown", fnDocumentMousedown);
               });
             }
-            $scope.clearTime = () => {
+            $scope.clearDate = () => {
               $scope.weekPickerData = {};
               $timeout(() => {
                 $scope.$broadcast('refreshDate');
               })
             }
 
-            $element.bind("blur", function() {
+            $element.find('.week-date').bind("blur", function() {
               $timeout(() => {
                 panel.css("display", "none");
               }, 250);
@@ -114,13 +142,11 @@ export default (app, elem, attrs, scope) => {
 
 
             $scope.$watch('weekPickerData', (newVal) => {
-              console.log(newVal, 1111)
               $scope.weekData = {
                 start: newVal&&newVal.start&&newVal.start.format($scope.formatDate)||'',
                 end: newVal&&newVal.end&&newVal.end.format($scope.formatDate)||'',
                 week: newVal&&newVal.week,
               }
-              $scope.ngModel = $scope.weekData.start&&$scope.weekData.end?`${$scope.weekData.start}~${$scope.weekData.end}`:'';
             }, true)
 
           },

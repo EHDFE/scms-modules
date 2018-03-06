@@ -78,7 +78,7 @@ export default (app, elem, attrs, scope) => {
                       end: $scope.endDate,
                     }
                   }
-                  $element.trigger('blur');
+                  $element.find('.input-date-range').trigger('blur');
                   $scope.dateRangeData = {};
                   $timeout(() => {
                     $scope.$broadcast('refreshDate');
@@ -152,18 +152,18 @@ export default (app, elem, attrs, scope) => {
               }
               
               $element.find('input').on('focus', (e) => {
-                $element.focus();
+                $element.find('.input-date-range').focus();
               })
-              $element.on('focus', (e) => {
+              $element.find('.input-date-range').on('focus', (e) => {
                 showPanel(e);
               })
 
 
-              preventBlur($element, function(target){
+              preventBlur($element.find('.input-date-range'), function(target){
                 if ($.contains($element[0], target)) {
                   return true;
                 }
-                if($element[0] === target||($.contains(panel[0], target))){
+                if($element[0] === target||$.contains($element[0], target)||($.contains(panel[0], target))){
                   if ($(target).parent().hasClass('disabled')||$(target).hasClass('disabled')) {
                     return true;
                   }
@@ -179,7 +179,7 @@ export default (app, elem, attrs, scope) => {
                     }
                   }
                 }
-                $element.trigger('blur');
+                $element.find('.input-date-range').trigger('blur');
                 return false;
 
               });  
@@ -202,8 +202,7 @@ export default (app, elem, attrs, scope) => {
               $scope.$on('refresh', (e, data) => {
                 $scope.$broadcast('refreshDate', data);
               })
-              $element.bind('blur', function(){
-                console.log(+new Date())
+              $element.find('.input-date-range').bind('blur', function(){
                 $timeout(() => {
                   clickTimes = 0;
                   panel.css('display', 'none');
@@ -247,6 +246,14 @@ export default (app, elem, attrs, scope) => {
                   $scope.endDateRange = newVal&&newVal.end;
                 }
               }, true);
+
+
+              $scope.clearDate = () => {
+                $scope.dateRangeResult = {};
+                $timeout(() => {
+                  $scope.$broadcast('refreshDate');
+                })
+              }
           },
         ],
         link: function($scope, $element, $attrs, ngModel) {},

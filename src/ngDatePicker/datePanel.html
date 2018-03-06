@@ -9,7 +9,7 @@
               <th ng-show="hideYearLeft"></th>
               <th class="prev prevMonth" ng-class="{disabled: !datePicker.dateView.prevMonth}" ng-hide="hideMonthLeft" ng-click="datePicker.setPrevMonth()"></th>
               <th ng-show="hideMonthLeft"></th>
-              <th colspan="3" class="picker-switch" ng-click="datePicker.showPanel='month'">{{datePicker.dateData.year}}年{{datePicker.dateData.month}}月 </th>
+              <th colspan={{weekPick?4:3}} class="picker-switch" ng-click="datePicker.showPanel='month'">{{datePicker.dateData.year}}年{{datePicker.dateData.month}}月 </th>
               <th class="next nextMonth" ng-class="{disabled: !datePicker.dateView.nextMonth}" ng-hide="hideMonthRight" ng-click="datePicker.setNextMonth()"></th>
               <th ng-show="hideMonthRight"></th>
               <th class="next nextYear" ng-click="datePicker.setNextYear('day')" ng-hide="hideYearRight" ng-class="{disabled: !datePicker.dateView.nextYear}"></th>
