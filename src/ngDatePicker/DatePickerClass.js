@@ -239,8 +239,10 @@ class DatePicker {
       dateView.nextYear = true;
     }
 
-    let minMomentValue = moment([this.minDateArr.year, this.minDateArr.month - 1, this.minDateArr.date, ]).valueOf(),
-        maxMomentValue =  moment([this.maxDateArr.year,this.maxDateArr.month - 1, this.maxDateArr.date,]).valueOf(),
+    let minMomentValue = (this.dateRange||this.weekPick)? this.minDateArr.data&&this.minDateArr.data.valueOf():
+        moment([this.minDateArr.year, this.minDateArr.month - 1, this.minDateArr.date, ]).valueOf(),
+        maxMomentValue =  (this.dateRange||this.weekPick)? this.maxDateArr.data&&this.maxDateArr.data.valueOf():
+        moment([this.maxDateArr.year,this.maxDateArr.month - 1, this.maxDateArr.date,]).valueOf(),
         weekPickStartValue = this.weekPickerData.start&&this.weekPickerData.start.valueOf(),
         weekPickEndValue = this.weekPickerData.end&&this.weekPickerData.end.clone().hour(0).minute(0).second(0).millisecond(0).valueOf();
 

@@ -1,4 +1,4 @@
-<div class="week-picker-date-container">
+<div class="week-picker-date-container" ng-class="{'week-picker-hasdata': weekData&&weekData.start&&weekData.end}">
     <div class="week-date input-date-range"  tabindex="-1">
         <input placeholder="开始时间" type="text" ng-model="weekData.start" class="form-control input-date">
         <span class="input-group-addon input-group-addon-no">-</span>

@@ -47,6 +47,7 @@ export default (app, elem, attrs, scope) => {
             $document.find("body").append(panel);
             $scope.pick = function(data) {
               $scope.$broadcast("selectTime");
+              $element.find('.week-date').trigger("blur");
             };
 
             function showPanel(e) {

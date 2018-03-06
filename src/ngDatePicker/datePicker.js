@@ -144,6 +144,7 @@ export default (app, elem, attrs, scope) => {
               $document.find(".date-picker").remove();
             });
 
+
             $scope.clearDate = ($event) => {
               $scope.ngModel = '';
             }

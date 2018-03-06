@@ -1,4 +1,4 @@
-.week-picker-date-container:hover .input-date-range {
+.week-picker-hasdata:hover .input-date-range {
   background: none;
 }
 .input-date-range:focus {
@@ -17,7 +17,7 @@
 .week-picker-date-container  .clear-date {
   display: none;
 }
-.week-picker-date-container:hover .clear-date {
+.week-picker-hasdata:hover .clear-date {
   display: inline-block;
   position: absolute;
   margin-left: -26px;
@@ -25,4 +25,8 @@
   color: #B9BEC3;
   height: 12px;
   width: 12px;
+  cursor: pointer;
+}
+.week-picker-hasdata:hover .clear-date:hover {
+  color:#51A1FD;
 }

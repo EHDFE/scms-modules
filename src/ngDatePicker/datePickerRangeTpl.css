@@ -1,4 +1,4 @@
-.date-picker-range-date-container:hover  .input-date-range{
+.date-picker-range-hasdata:hover  .input-date-range{
   background: none;
 }
 .input-date-range:focus {
@@ -15,7 +15,7 @@
 .date-picker-range-date-container  .clear-date {
   display: none;
 }
-.date-picker-range-date-container:hover .clear-date {
+.date-picker-range-hasdata:hover .clear-date {
   display: inline-block;
   position: absolute;
   margin-left: -26px;
@@ -23,4 +23,8 @@
   color: #B9BEC3;
   height: 12px;
   width: 12px;
+  cursor: pointer;
+}
+.date-picker-range-hasdata:hover .clear-date:hover {
+  color:#51A1FD;
 }
