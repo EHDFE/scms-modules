@@ -124,7 +124,7 @@ const config = {
   },
   plugins: [
     new CleanWebpackPlugin([
-      './docs',
+      './build',
     ], {
       root: path.resolve(__dirname, '../'),
       verbose: true,
