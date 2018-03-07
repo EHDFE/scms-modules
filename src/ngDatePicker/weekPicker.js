@@ -92,6 +92,9 @@ export default (app, elem, attrs, scope) => {
               if ($.contains($element[0], target)) {
                 return true;
               }
+              if($(target).parentsUntil('tr').parent().find('.day').hasClass('disabled')) {
+                return true;
+              }
               if (
                 $(target)
                   .parent()

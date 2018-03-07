@@ -29,7 +29,17 @@
 <div ng-init="startDateRange='2018-01-11';endDateRange='2018-03-23';">
     <input date-picker-range date-range-result="dateRangeResult" 
         start-date-range="startDateRange" end-date-range="endDateRange" />
+        dateRangeResult返回值:{{dateRangeResult|json}}
     <div>
         开始时间:{{startDateRange}} 结束时间:{{endDateRange}}
     </div>
+</div>
+<h2>范围-日期选择 最大时间，最小时间</h2>
+<div>
+    <input date-picker-range min-date="'2018-02-23'"  max-date="'2018-04-24'" date-range-result="dateRangeResult2" 
+            start-date-range="startDateRange2" end-date-range="endDateRange2" />
+            dateRangeResult2返回值:{{dateRangeResult2|json}}
+            <div>
+                开始时间:{{startDateRange2}} 结束时间:{{endDateRange2}}
+            </div>
 </div>
