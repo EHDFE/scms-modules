@@ -8,7 +8,7 @@ module.exports = {
     app: 'scmsmodules-runner/app/main',
   },
   output: {
-    path: path.resolve(__dirname, '../docs'),
+    path: path.resolve(__dirname, '../build'),
   },
   resolve: {
     alias: {
