@@ -97,7 +97,7 @@ export default (app, elem, attrs, scope) => {
                       !(
                         $(target)
                           .parent()
-                          .hasClass("day") || $(target).hasClass("day")
+                          .hasClass("day")
                       ))
                   ) {
                     return true;
@@ -105,8 +105,7 @@ export default (app, elem, attrs, scope) => {
                   if (
                     $(target)
                       .parent()
-                      .hasClass("day") ||
-                    $(target).hasClass("day")
+                      .hasClass("day") 
                   ) {
                     $scope.pick();
                   }

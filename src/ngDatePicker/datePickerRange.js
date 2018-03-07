@@ -48,23 +48,25 @@ export default (app, elem, attrs, scope) => {
               $scope.minViewMode = $attrs.minViewMode;
               $scope.pickTime = !!$attrs.pickTime;
               $scope.formatDate = $attrs.formatDate||'YYYY-MM-DD';
-              
-              $timeout(()=> {
-                $scope.dateRangeResult = {
-                  start: '',
-                  end: '',
-                }
-                if ($scope.startDateRange) {
-                  $scope.dateRangeResult.start = $scope.startDate = $scope.startDateRange;
-                } else if ($scope.initStartDate&&($scope.initStartDate!== 'null')||$scope.initStartDate === 0) {
-                  $scope.dateRangeResult.start = $scope.startDate;
-                }
-                if ($scope.endDateRange) {
-                  $scope.dateRangeResult.end = $scope.endDate = $scope.endDateRange;
-                }else if ($scope.initEndDate&&($scope.initEndDate!== 'null')||$scope.initEndDate === 0) {
-                  $scope.dateRangeResult.end = $scope.endDate;
-                }
-              });
+              function init() {
+                $timeout(()=> {
+                  $scope.dateRangeResult = {
+                    start: '',
+                    end: '',
+                  }
+                  if ($scope.startDateRange) {
+                    $scope.dateRangeResult.start = $scope.startDate = $scope.startDateRange;
+                  } else if ($scope.initStartDate&&($scope.initStartDate!== 'null')||$scope.initStartDate === 0) {
+                    $scope.dateRangeResult.start = $scope.startDate;
+                  }
+                  if ($scope.endDateRange) {
+                    $scope.dateRangeResult.end = $scope.endDate = $scope.endDateRange;
+                  }else if ($scope.initEndDate&&($scope.initEndDate!== 'null')||$scope.initEndDate === 0) {
+                    $scope.dateRangeResult.end = $scope.endDate;
+                  }
+                });
+              }
+              init();
 
               $document.find('body').append(panel);
               var clickTimes = 0;
@@ -234,7 +236,6 @@ export default (app, elem, attrs, scope) => {
 
               var init = true;
               $scope.$watch('dateRangeResult', (newVal) => {
-                // console.log(newVal, '_+_+_+_-=-=-=-=-=-=-=-=-=-=-=')
                 if (init) {
                   init =false;
                   return;
@@ -246,10 +247,21 @@ export default (app, elem, attrs, scope) => {
                   $scope.endDateRange = newVal&&newVal.end;
                 }
               }, true);
+              $scope.$watch('startDateRange', (newVal, oldVal) => {
+                if(newVal !== oldVal) {
+                  init();
+                }
+              });
+              $scope.$watch('endDateRange', (newVal, oldVal) => {
+                if(newVal !== oldVal) {
+                  init();
+                }
+              });
 
 
               $scope.clearDate = () => {
                 $scope.dateRangeResult = {};
+                $scope.dateRangeData = {};
                 $timeout(() => {
                   $scope.$broadcast('refreshDate');
                 })

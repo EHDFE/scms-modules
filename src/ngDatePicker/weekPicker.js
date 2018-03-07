@@ -92,19 +92,19 @@ export default (app, elem, attrs, scope) => {
               if ($.contains($element[0], target)) {
                 return true;
               }
-              if($(target).parentsUntil('tr').parent().find('.day').hasClass('disabled')) {
+              if( $(target).parent().parent().find('.day').hasClass('disabled')) {
                 return true;
               }
               if (
                 $(target)
                   .parent()
-                  .hasClass("day") ||
-                $(target).hasClass("day")
+                  .hasClass("day") 
               ) {
                 $scope.pick();
               }
               if ($element[0] === target ||($.contains(panel[0], target))) {
                 return true;
+
               }
               return false;
             });
@@ -150,6 +150,7 @@ export default (app, elem, attrs, scope) => {
                 start: newVal&&newVal.start&&newVal.start.format($scope.formatDate)||'',
                 end: newVal&&newVal.end&&newVal.end.format($scope.formatDate)||'',
                 week: newVal&&newVal.week,
+                year: newVal&&newVal.year,
               }
             }, true)
 

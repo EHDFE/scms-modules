@@ -26,12 +26,12 @@
               <th class="dow">六</th>
             </tr>
           </thead>
-          <tbody ng-mouseleave="mouseleave()">
-            <tr ng-repeat="rows in datePicker.dateView" >
+          <tbody ng-mouseleave="mouseleave()" ng-class="{'weekpick': weekPick}">
+            <tr ng-repeat="rows in datePicker.dateView"  ng-class="{'week-pick-able': !(rows[0].disabled||rows[6].disabled) }">
               <td class="week" ng-show="weekPick" ng-class="{'last-week': $index === 5}">{{rows.week}} </td>
               <td class="day" ng-class="{old: col.tag==='old', new: col.tag==='new', today: col.tag==='today', active: col.tag==='active', disabled: col.disabled, range: col.range, hover: col.tag === 'hover', 
-                weekStart: col.weekStart, weekBetween: col.weekBetween, weekEnd: col.weekEnd, weekRange:(col.weekStart||col.weekBetween||col.weekEnd)}"
-                ng-click="datePicker.setDate(col)" ng-repeat="col in rows"><span class="date-item" ng-mousemove="hover(col)">{{col.value}}</span></td>
+                weekStart: !col.disabled&&weekPick&&($index === 0), weekBetween: !col.disabled&&weekPick&&(($index>0)&&($index<6)), weekEnd: !col.disabled&&weekPick&&($index === 6), weekRange:(col.weekStart||col.weekBetween||col.weekEnd)}"
+                ng-repeat="col in rows"><span class="date-item" ng-click="datePicker.setDate(col)" ng-mousemove="hover(col)">{{col.value}}</span></td>
             </tr>
           </tbody>
         </table>

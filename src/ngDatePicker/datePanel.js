@@ -193,6 +193,7 @@ export default (app, elem, attrs, scope) => {
            */
           $scope.$on('refreshDate', (e, data) => {
             datePicker.tmpDate = data;
+            console.log(datePicker.dateRangeData,datePicker.getResult(), 2345);
             datePicker.setDateView(datePicker.getResult());
           });
 
