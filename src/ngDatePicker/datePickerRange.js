@@ -33,7 +33,7 @@ export default (app, elem, attrs, scope) => {
           maxDateValue: "=", //@scope maxDateValue 最大可选日期,距今天天数 {type:"number"}
           initStartDate: "=", //@scope initDateStart 初始日期,它的值为距今天的天数 {type:"number"}
           initEndDate: "=", //@scope initDateEnd 初始日期,它的值为距今天的天数 {type:"number"}
-          dateRangeResult: "=",
+          dateRangeResultData: "=",
           startDateRange: '=', //开始时间
           endDateRange: '=', //结束时间
         },
@@ -44,29 +44,32 @@ export default (app, elem, attrs, scope) => {
           "$timeout",
           function($scope, $element, $attrs, $timeout) {
               var panel = $compile(html)($scope);
+              panel.css('display', 'none');
               $scope.useSeconds = !!$attrs.useSeconds;
               $scope.minViewMode = $attrs.minViewMode;
               $scope.pickTime = !!$attrs.pickTime;
               $scope.formatDate = $attrs.formatDate||'YYYY-MM-DD';
-              
-              $timeout(()=> {
-                $scope.dateRangeResult = {
-                  start: '',
-                  end: '',
-                }
-                if ($scope.startDateRange) {
-                  $scope.dateRangeResult.start = $scope.startDate = $scope.startDateRange;
-                } else if ($scope.initStartDate&&($scope.initStartDate!== 'null')||$scope.initStartDate === 0) {
-                  $scope.dateRangeResult.start = $scope.startDate;
-                }
-                if ($scope.endDateRange) {
-                  $scope.dateRangeResult.end = $scope.endDate = $scope.endDateRange;
-                }else if ($scope.initEndDate&&($scope.initEndDate!== 'null')||$scope.initEndDate === 0) {
-                  $scope.dateRangeResult.end = $scope.endDate;
-                }
-              });
+              function initDate() {
+                $timeout(()=> {
+                  $scope.dateRangeResult = {
+                    start: '',
+                    end: '',
+                  }
+                  if ($scope.startDateRange) {
+                    $scope.dateRangeResult.start = $scope.startDate = $scope.startDateRange;
+                  } else if ($scope.initStartDate&&($scope.initStartDate!== 'null')||$scope.initStartDate === 0) {
+                    $scope.dateRangeResult.start = $scope.startDate;
+                  }
+                  if ($scope.endDateRange) {
+                    $scope.dateRangeResult.end = $scope.endDate = $scope.endDateRange;
+                  }else if ($scope.initEndDate&&($scope.initEndDate!== 'null')||$scope.initEndDate === 0) {
+                    $scope.dateRangeResult.end = $scope.endDate;
+                  }
+                });
+              }
+              initDate();
 
-              $document.find('body').append(panel);
+              $document.find("#container").append(panel);
               var clickTimes = 0;
               $scope.pick = (data) => {
                 $timeout(() => {
@@ -234,10 +237,12 @@ export default (app, elem, attrs, scope) => {
 
               var init = true;
               $scope.$watch('dateRangeResult', (newVal) => {
-                // console.log(newVal, '_+_+_+_-=-=-=-=-=-=-=-=-=-=-=')
                 if (init) {
                   init =false;
                   return;
+                }
+                if($attrs.dateRangeResultData) {
+                  $scope.dateRangeResultData = Object.assign({},newVal);
                 }
                 if ($attrs.startDateRange) {
                   $scope.startDateRange = newVal&&newVal.start;
@@ -246,10 +251,21 @@ export default (app, elem, attrs, scope) => {
                   $scope.endDateRange = newVal&&newVal.end;
                 }
               }, true);
+              $scope.$watch('startDateRange', (newVal, oldVal) => {
+                if(newVal !== oldVal) {
+                  initDate();
+                }
+              });
+              $scope.$watch('endDateRange', (newVal, oldVal) => {
+                if(newVal !== oldVal) {
+                  initDate();
+                }
+              });
 
 
               $scope.clearDate = () => {
                 $scope.dateRangeResult = {};
+                $scope.dateRangeData = {};
                 $timeout(() => {
                   $scope.$broadcast('refreshDate');
                 })

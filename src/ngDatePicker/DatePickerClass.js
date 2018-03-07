@@ -442,6 +442,7 @@ class DatePicker {
         }
         this.weekPickerData.start = momentDate.data.clone().startOf('week');  
         this.weekPickerData.end = momentDate.data.clone().endOf('week');
+        this.weekPickerData.year = this.weekPickerData.end.clone().year();
         this.weekPickerData.week =  momentDate.data.clone().week();
       }
       this.dateData.date = momentDate.data.date();

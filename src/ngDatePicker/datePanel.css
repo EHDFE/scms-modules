@@ -129,30 +129,44 @@
   /* display: inline-block; */
 }
 
-.date-panel-datetimepicker td.day:hover .date-item,
-.date-panel-datetimepicker td.hour:hover .date-item,
-.date-panel-datetimepicker td.minute:hover .date-item,
-.date-panel-datetimepicker td.second:hover .date-item {
+.date-panel-datetimepicker td.day .date-item:hover,
+.date-panel-datetimepicker td.hour .date-item:hover,
+.date-panel-datetimepicker td.minute .date-item:hover,
+.date-panel-datetimepicker td.second .date-item:hover {
   background: #51A1FD;
   color: #fff;
   cursor: pointer;
 }
-.date-panel-datetimepicker td.day.disabled:hover .date-item,
-.date-panel-datetimepicker td.hour:hover .date-item,
-.date-panel-datetimepicker td.minute:hover .date-item,
-.date-panel-datetimepicker td.second:hover .date-item {
+.date-panel-datetimepicker td.day.disabled .date-item:hover,
+.date-panel-datetimepicker td.hour .date-item:hover,
+.date-panel-datetimepicker td.minute .date-item:hover,
+.date-panel-datetimepicker td.second .date-item:hover {
   background: #f5f5f5 !important;
   color: #b9bec3;
   cursor: not-allowed !important;
 }
 
+.date-panel-datetimepicker .weekpick td.day .date-item:hover {
+  background-color: #fff;
+  color: #333;
+}
+.date-panel-datetimepicker .weekpick .week-pick-able td.day .date-item:hover {
+  color: #333;
+  background-color: #E9EFF4;
+}
+
 .date-panel-datetimepicker td.active .date-item,
-.date-panel-datetimepicker td.active:hover .date-item {
+.date-panel-datetimepicker td.active .date-item:hover {
   background-color: #51A1FD;
   color: #fff;
-  /* background-color: #51A1FD;
-  
-  text-shadow: 0 -1px 0 rgba(0,0,0,.25); */
+}
+
+.date-panel-datetimepicker .datepicker-days .weekpick .week-pick-able:hover .date-item {
+  background-color: #E9EFF4;
+  color: #333;
+}
+.date-panel-datetimepicker .datepicker-days .weekpick tr:hover .disabled .date-item {
+  color: #b9bec3;
 }
 .date-panel-datetimepicker .time-zone .active,
 .date-panel-datetimepicker .time-zone .active:hover {
@@ -357,13 +371,16 @@
   padding: 5px;
 }
 
-.date-panel-datetimepicker .weekRange .date-item{
-  background-color: #51A1FD;
-  color: #fff;
+.date-panel-datetimepicker .weekpick .week-pick-able .date-item{
   width: 32px !important;
   height: 32px !important;
   line-height: 32px !important;
 }
+/* .date-panel-datetimepicker .weekpick .disabled .date-item{
+  width: 28px !important;
+  height: 28px !important;
+  line-height: 28px !important;
+} */
 .date-panel-datetimepicker .weekStart  .date-item{
   border-radius: 60% 0 0 60% !important;
 }
@@ -372,4 +389,8 @@
 }
 .date-panel-datetimepicker .weekEnd .date-item{
   border-radius: 0 60% 60% 0 !important;
+}
+.date-panel-datetimepicker .datepicker-days .weekpick tr .weekRange .date-item{
+  background-color: #51A1FD !important;
+  color: #fff !important;
 }

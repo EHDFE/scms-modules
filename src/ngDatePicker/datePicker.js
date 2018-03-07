@@ -46,7 +46,8 @@ export default (app, elem, attrs, scope) => {
             $scope.pickTime = !!$attrs.pickTime;
             $scope.formatDate = $attrs.formatDate;
             var panel = $compile(html)($scope);
-            $document.find("body").append(panel);
+            $document.find("#container").append(panel);
+            panel.css('display', 'none');
             $scope.pick = function(data) {
               $scope.$broadcast("selectTime");
               $element.find('.form-control').trigger("blur");
@@ -97,7 +98,7 @@ export default (app, elem, attrs, scope) => {
                       !(
                         $(target)
                           .parent()
-                          .hasClass("day") || $(target).hasClass("day")
+                          .hasClass("day")
                       ))
                   ) {
                     return true;
@@ -105,8 +106,7 @@ export default (app, elem, attrs, scope) => {
                   if (
                     $(target)
                       .parent()
-                      .hasClass("day") ||
-                    $(target).hasClass("day")
+                      .hasClass("day") 
                   ) {
                     $scope.pick();
                   }
