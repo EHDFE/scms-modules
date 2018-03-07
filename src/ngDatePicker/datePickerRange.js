@@ -68,7 +68,7 @@ export default (app, elem, attrs, scope) => {
               }
               init();
 
-              $document.find('body').append(panel);
+              $document.find("#container").append(panel);
               var clickTimes = 0;
               $scope.pick = (data) => {
                 $timeout(() => {

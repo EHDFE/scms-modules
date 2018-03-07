@@ -44,7 +44,7 @@ export default (app, elem, attrs, scope) => {
           function($scope, $element, $attrs, $timeout) {
             $scope.formatDate = $attrs.formatDate||"YYYY-MM-DD";
             var panel = $compile(html)($scope);
-            $document.find("body").append(panel);
+            $document.find("#container").append(panel);
             $scope.pick = function(data) {
               $scope.$broadcast("selectTime");
               $element.find('.week-date').trigger("blur");
