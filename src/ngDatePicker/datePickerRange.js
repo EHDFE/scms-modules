@@ -33,7 +33,7 @@ export default (app, elem, attrs, scope) => {
           maxDateValue: "=", //@scope maxDateValue 最大可选日期,距今天天数 {type:"number"}
           initStartDate: "=", //@scope initDateStart 初始日期,它的值为距今天的天数 {type:"number"}
           initEndDate: "=", //@scope initDateEnd 初始日期,它的值为距今天的天数 {type:"number"}
-          dateRangeResult: "=",
+          dateRangeResultData: "=",
           startDateRange: '=', //开始时间
           endDateRange: '=', //结束时间
         },
@@ -44,11 +44,12 @@ export default (app, elem, attrs, scope) => {
           "$timeout",
           function($scope, $element, $attrs, $timeout) {
               var panel = $compile(html)($scope);
+              panel.css('display', 'none');
               $scope.useSeconds = !!$attrs.useSeconds;
               $scope.minViewMode = $attrs.minViewMode;
               $scope.pickTime = !!$attrs.pickTime;
               $scope.formatDate = $attrs.formatDate||'YYYY-MM-DD';
-              function init() {
+              function initDate() {
                 $timeout(()=> {
                   $scope.dateRangeResult = {
                     start: '',
@@ -66,7 +67,7 @@ export default (app, elem, attrs, scope) => {
                   }
                 });
               }
-              init();
+              initDate();
 
               $document.find("#container").append(panel);
               var clickTimes = 0;
@@ -240,6 +241,9 @@ export default (app, elem, attrs, scope) => {
                   init =false;
                   return;
                 }
+                if($attrs.dateRangeResultData) {
+                  $scope.dateRangeResultData = Object.assign({},newVal);
+                }
                 if ($attrs.startDateRange) {
                   $scope.startDateRange = newVal&&newVal.start;
                 }
@@ -249,12 +253,12 @@ export default (app, elem, attrs, scope) => {
               }, true);
               $scope.$watch('startDateRange', (newVal, oldVal) => {
                 if(newVal !== oldVal) {
-                  init();
+                  initDate();
                 }
               });
               $scope.$watch('endDateRange', (newVal, oldVal) => {
                 if(newVal !== oldVal) {
-                  init();
+                  initDate();
                 }
               });
 

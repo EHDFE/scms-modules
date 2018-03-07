@@ -47,6 +47,7 @@ export default (app, elem, attrs, scope) => {
             $scope.formatDate = $attrs.formatDate;
             var panel = $compile(html)($scope);
             $document.find("#container").append(panel);
+            panel.css('display', 'none');
             $scope.pick = function(data) {
               $scope.$broadcast("selectTime");
               $element.find('.form-control').trigger("blur");
