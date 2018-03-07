@@ -42,7 +42,7 @@
     "less-loader": "^4.0.5",
     "postcss-loader": "^2.0.9",
     "posthtml-expressions": "^1.1.0",
-    "posthtml-loader": "^0.11.0",
+    "posthtml-loader": "^1.0.1",
     "style-loader": "^0.19.1",
     "url": "^0.11.0",
     "url-loader": "^0.6.2",
