@@ -1,13 +1,13 @@
-import 'bootstrap/less/bootstrap.less';
+// import 'bootstrap/less/bootstrap.less';
+import 'bootstrap/dist/css/bootstrap.css';
 import './libs/base.less';
 import './libs/font-awesome/css/font-awesome.css';
 import './libs/font-scms/less/style.less';
-import scmsUi from "./scmsUi/less/scmsUi.less";
-
+import scmsUi from './scmsUi/less/scmsUi.less';
 
 
 import 'bootstrap/dist/js/bootstrap.js';
-import angular from './libs/angular/angular.js';
+// import angular from './libs/angular/angular.js';
 import scmsUiJs from "./scmsUi/js/scmsUi.js";
 
 import ngHtmlContainer from "./src/ngHtmlContainer/ngHtmlContainer";
