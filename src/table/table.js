@@ -140,6 +140,7 @@ define(
                         $scope.isNoData = false;
                       } else {
                         $scope.isNoData = true;
+                        $rootScope.$broadcast('angularDomReady');
                       }
 
                       if ($scope.formatData) {

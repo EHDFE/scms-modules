@@ -49,6 +49,8 @@ export default (app, elem, attrs, scope) => {
               $scope.minViewMode = $attrs.minViewMode;
               $scope.pickTime = !!$attrs.pickTime;
               $scope.formatDate = $attrs.formatDate||'YYYY-MM-DD';
+              $scope.startPlaceholder = $attrs.startPlaceholder||'开始时间';
+              $scope.endPlaceholder = $attrs.endPlaceholder||'结束时间';
               function initDate() {
                 $timeout(()=> {
                   $scope.dateRangeResult = {

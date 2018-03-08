@@ -9,15 +9,15 @@
 
 import angular from "angular";
 import datePanel from "./datePanel";
-import html from "./datePicker.html";
-import "./datePicker.css";
-import tpl from './datePickerTpl.html';
-import './datePickerTpl.css';
+import html from "./timePicker.html";
+import "./timePicker.css";
+import tpl from './timePickerTpl.html';
+import './timePickerTpl.css';
 import moment from "moment";
 
 export default (app, elem, attrs, scope) => {
   datePanel(app, elem, attrs, scope);
-  app.directive("datePicker", [
+  app.directive("timePicker", [
     "G",
     "$rootScope",
     "$document",
@@ -27,11 +27,9 @@ export default (app, elem, attrs, scope) => {
         require: "?ngModel",
         scope: {
           ngModel: "=", //@scope ngModel 选择的日期 {type:"string", exampleValue:"2016-12-01",isDisabled:1}
-          minDate: "=", //@scope minDate 最小可选日期 {type:"string", exampleValue:"2016-06-07"}
-          maxDate: "=", //@scope maxDate 最大可选日期 {type:"string", exampleValue:"2017-06-29"}
-          minDateValue: "=", //@scope minDateValue 最小可选日期,距今天天数 {type:"number"}
-          maxDateValue: "=", //@scope maxDateValue 最大可选日期,距今天天数 {type:"number"}
           initDate: "=", //@scope initDate 初始日期,它的值为距今天的天数 {type:"number"}
+          minTime: '=',
+          maxTime: '=',
         },
         template: tpl,
         replace: true,
@@ -41,11 +39,7 @@ export default (app, elem, attrs, scope) => {
           "$attrs",
           "$timeout",
           function($scope, $element, $attrs, $timeout) {
-            $scope.useSeconds = $attrs.useSeconds;
-            $scope.minViewMode = $attrs.minViewMode;
-            $scope.pickTime = !!$attrs.pickTime;
             $scope.formatDate = $attrs.formatDate;
-
             $scope.placeholder = $attrs.placeholder;
             var panel = $compile(html)($scope);
             $document.find("#container").append(panel);
@@ -73,46 +67,8 @@ export default (app, elem, attrs, scope) => {
             });
 
             preventBlur($element.find('.form-control'), function(target) {
-              if ($scope.pickTime) {
-                if ($element[0] === target ||($.contains($element[0], target))|| ($.contains(panel[0], target))) {
-                  return true;
-                }
-              } else {
-                if ($(target).hasClass('disabled')||$(target).parent().hasClass('disabled')) {
-                  return true;
-                }
-                if ($scope.minViewMode === "months") {
-                  if (
-                    $element[0] === target ||
-                    $.contains($element[0], target)||
-                    ($.contains(panel[0], target) && !$(target).hasClass("month"))
-                  ) {
-                    return true;
-                  }
-                  if ($(target).hasClass("month")) {
-                    $scope.pick();
-                  }
-                } else {
-                  if (
-                    $element[0] === target ||
-                    $.contains($element[0], target)||
-                    ($.contains(panel[0], target) &&
-                      !(
-                        $(target)
-                          .parent()
-                          .hasClass("day")
-                      ))
-                  ) {
-                    return true;
-                  }
-                  if (
-                    $(target)
-                      .parent()
-                      .hasClass("day") 
-                  ) {
-                    $scope.pick();
-                  }
-                }
+              if ($element[0] === target ||($.contains($element[0], target))|| ($.contains(panel[0], target))) {
+                return true;
               }
               return false;
             });
