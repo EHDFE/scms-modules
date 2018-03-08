@@ -7,15 +7,9 @@
  * @html <form-radio-directive radio-list="radioList" radio-model="radioModel" link-model="linkModel"></form-radio-directive>
  * @htmlUrl scmsModules/formRadio/formRadio.html
  */
-define([
-    'angular',
-    './formRadio.css',
-    './formRadio.html'
-], function(
-    angular,
-    css,
-    html) {
-    return function(app, elem, attrs, scope) {
+import './formRadio.css';
+import html from './formRadio.html';
+export default (app, elem, attrs, scope) => {
         app.directive('formRadioDirective', ['$state', 'G', function($state, G) {
             return {
                 template: html,
@@ -86,4 +80,3 @@ define([
             };
         }]);
     }
-});

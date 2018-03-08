@@ -6,12 +6,7 @@
  * @lastBy 
  * @html <qrcode-directive url-address="urlAddress" ></qrcode-directive>
  */
-define([
-    'angular'
-], function(
-    angular) {
-    'use strict';
-    return function(app, elem, attrs, scope) {
+export default (app, elem, attrs, scope) => {
         app.directive('qrcodeDirective', ['$http','$timeout', function($http, $timeout) {
             return {
                 template: html,
@@ -35,4 +30,3 @@ define([
             }
         }])
     }
-})

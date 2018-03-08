@@ -1,14 +1,15 @@
 // import 'bootstrap/less/bootstrap.less';
 import 'bootstrap/dist/css/bootstrap.css';
 import './libs/base.less';
-import './libs/font-awesome/css/font-awesome.css';
+import 'font-awesome/css/font-awesome.css';
+// import './libs/font-awesome/css/font-awesome.css';
 import './libs/font-scms/less/style.less';
-import scmsUi from './scmsUi/less/scmsUi.less';
+import './scmsUi/less/index.less';
 
 
-import 'bootstrap/dist/js/bootstrap.js';
+import 'bootstrap';
 // import angular from './libs/angular/angular.js';
-import scmsUiJs from "./scmsUi/js/scmsUi.js";
+import './scmsUi';
 
 import ngHtmlContainer from "./src/ngHtmlContainer/ngHtmlContainer";
 import switchDirective from "./src/switch/switchDirective";

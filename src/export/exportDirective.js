@@ -6,11 +6,7 @@
  * @lastBy
  * @html <span export-directive api-url="'/goodstaxiAdmin/goodsseascs/downGoodsSeasListFile'" fetch-param="a" total-count="list.totalCount" max-number="5000" class="btn btn-export fr">导出</span>
  */
-define([
-    'angular'
-], function(
-    angular) {
-    return function(app, elem, attrs, scope) {
+export default (app, elem, attrs, scope) => {
         app.directive('exportDirective', ['G',function(G){
             return {
                 scope: {
@@ -46,4 +42,3 @@ define([
             };
         }]);
     };
-});

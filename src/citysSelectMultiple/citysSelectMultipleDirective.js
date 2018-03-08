@@ -7,13 +7,9 @@
  * @html <div citys-select-multiple-directive ng-model="ngModel" d-value="dValue" selected-city="selectedCity"></div>
  * @api 获取已开通城市接口:/goodstaxiAdmin/ehuodiactivitycs/selectCitylist
  */
-define([
-    'angular',
-    './citysSelectMultiple.css',
-    './citysSelectMultiple.html'
-], function(angular, css, html) {
-    'use strict';
-    return function(app, elem, attrs, scope) {
+import './citysSelectMultiple.css';
+import html from './citysSelectMultiple.html';
+export default (app, elem, attrs, scope) => {
         app.directive('citysSelectMultipleDirective', ['$http','$timeout','G',function($http, $timeout,G) {
             return {
                     template: html,
@@ -203,4 +199,3 @@ define([
                 }
             }])
         }
-})

@@ -7,15 +7,9 @@
  * @html <search-dropdown display-text="displayText" is-error-inline="isErrorInline" item-selected="itemSelected" list="list"></search-dropdown>
  * @htmlUrl scmsModules/searchDropdown/searchDropdown.html
  */
-define([
-    'angular',
-    './searchDropdown.css',
-    './searchDropdown.html'
-], function(
-    angular,
-    css,
-    html) {
-    return function(app, elem, attrs, scope) {
+import './searchDropdown.css';
+import html from './searchDropdown.html';
+export default (app, elem, attrs, scope) => {
         app.directive('searchDropdown', ['$timeout', function($timeout) {
             return {
                 template: html,
@@ -64,4 +58,3 @@ define([
             };
         }]);
     }
-});

@@ -2,14 +2,7 @@
  * <div chart-directive data-height="250" chart-data="usersActiveChartData"></div>
  */
 // TODO: Echart exclude
-define([
-	'angular',
-	// 'echarts'
-], function(
-	angular,
-	// echarts
-) {
-	return function(app, elem, attrs, scope) {
+export default (app, elem, attrs, scope) => {
 		app.directive('chartDirective',  [function() {
 			return {
 				//template: '<div></div>',
@@ -126,4 +119,3 @@ define([
 			};
 		}]);
 	}
-});

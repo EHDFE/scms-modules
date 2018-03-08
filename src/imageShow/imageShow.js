@@ -6,15 +6,9 @@
  * @lastBy 
  * @html <img image-show img-url="item.imageurl" alt-text="'卸货凭证'" text-only="显示文字" bg-click="false" mini-img="false">
  */
-define([
-    'angular',
-    './imageShow.html',
-    './imageShow.css'
-    ], function(
-        angular,
-        html,
-        css) {
-        return function(app, elem, attrs, scope) {
+import html from './imageShow.html';
+import './imageShow.css';
+export default (app, elem, attrs, scope) => {
             app.directive('imageShow', ['$timeout', '$document', '$compile',
                 function($timeout, $document, $compile) {
                     return {
@@ -257,4 +251,3 @@ define([
                     };
                 }]);
     };
-});

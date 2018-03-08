@@ -6,19 +6,10 @@
  * @lastBy
  * @html <input class="form-control input-date" date-picker-directive ng-model='ngModel' min-date="minDate" max-date="maxDate" max-date-value="maxDateValue" min-date-value="minDateValue">
  */
-define([
-  "angular", 
-  // "moment", 
-  "./datePanel", 
-  "./datePickerRange.html",
-  "./datePickerRange.css"    
-], function(
-angular,
-// moment,
-datePanel,
-html,
-) {
-return function(app, elem, attrs, scope) {
+import datePanel from "./datePanel";
+import html from "./datePickerRange.html";
+import "./datePickerRange.css";
+export default (app, elem, attrs, scope) => {
   datePanel(app, elem, attrs, scope);
   app.directive("datePickerRange", [
     "G",
@@ -199,4 +190,3 @@ return function(app, elem, attrs, scope) {
     },
   ]);
 };
-});

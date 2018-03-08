@@ -7,13 +7,8 @@
  * @lastBy 
  * @html <div progress-directive progress-status="progressStatus" reset="reset" style="width:80%"></div>
  */
-define([
-    'angular',
-    './progress.css'
-], function(
-    angular
-    ) {
-    return function(app, elem, attrs, scope) {
+import './progress';
+export default (app, elem, attrs, scope) => {
         app.directive('progressDirective', ['$interval', '$timeout',
             function($interval, $timeout) {
             return {
@@ -63,4 +58,3 @@ define([
             };
         }]);
     };
-});

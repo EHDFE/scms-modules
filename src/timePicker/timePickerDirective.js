@@ -6,11 +6,7 @@
  * @lastBy
  * @html <input class="form-control input-time" time-picker-directive ng-model='ngModel' now-time="true">
  */
-define([
-    'angular'
-], function(
-    angular) {
-    return function(app, elem, attrs, scope) {
+export default (app, elem, attrs, scope) => {
         app.directive('timePickerDirective', ['G','$rootScope', function(G, $rootScope) {
             return {
                     require: '?ngModel',
@@ -66,4 +62,3 @@ define([
                 }
             }])
         }
-})

@@ -7,13 +7,8 @@
  * @lastBy 
  * @html <steps current-index="currentIndex" status-data="statusData" data-direction="y"></steps>
  */
-define([
-    'angular',
-    './steps.css'
-], function(
-    angular
-    ) {
-    return function(app, elem, attrs, scope) {
+import './steps.css';
+export default (app, elem, attrs, scope) => {
         app.directive('steps', ['$timeout', function($timeout) {
             return {
                 restrict: 'E',
@@ -34,4 +29,3 @@ define([
             };
         }]);
     };
-});

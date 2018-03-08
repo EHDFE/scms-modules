@@ -1,10 +1,5 @@
-define([
-	'angular',
-	'./paginationMini.html'
-], function(
-	angular,
-	html) {
-	return function(app, elem, attrs, scope) {
+import html from './paginationMini.html';
+export default (app, elem, attrs, scope) => {
 		app.directive('paginationMiniDirective', [function() {
 			return {
 				template: html,
@@ -91,4 +86,3 @@ define([
 			};
 		}]);
 	}
-});

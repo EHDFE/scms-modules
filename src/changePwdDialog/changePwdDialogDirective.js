@@ -1,12 +1,7 @@
-define([
-    'angular',
-    './changePwdDialogService',
-    './changePwdDialog.html'
-    ], function(
-        angular,
-        changePwdDialogService,
-        html) {
-        return function(app, elem, attrs, scope) {
+import changePwdDialogService from './changePwdDialogService';
+import html from './changePwdDialog.html';
+
+export default (app, elem, attrs, scope) => {
             changePwdDialogService(app, elem, attrs, scope);
             app.directive('changePwdDialogDirective', ['G', 'changePwdDialogService', '$interval', '$cookies', '$window', function(G, service, $interval, $cookies, $window) {
                 return {
@@ -143,4 +138,3 @@ define([
                 };
             }]);
         }
-    });

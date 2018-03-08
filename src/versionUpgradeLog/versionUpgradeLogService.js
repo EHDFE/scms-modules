@@ -1,8 +1,5 @@
-define([
-    'angular',
-    './versionUpgradeLog.css',
-], function(angular) {
-    return function(app, elem, attrs, scope) {
+import './versionUpgradeLog.css';
+export default (app, elem, attrs, scope) => {
         app.factory('versionUpgradeLogService', ['$rootScope', '$http', 'G', function($rootScope, $http, G) {
             return {
                 queryVersionManageList: function(options) {
@@ -23,4 +20,3 @@ define([
             };
         }]);
     }
-});

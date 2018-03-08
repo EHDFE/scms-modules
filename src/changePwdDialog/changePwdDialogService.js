@@ -1,8 +1,5 @@
-define([
-    './changePwdDialog.css',
-    'angular'
-], function(angular) {
-    return function(app, elem, attrs, scope) {
+import './changePwdDialog.css';
+export default (app, elem, attrs, scope) => {
         app.factory('changePwdDialogService', ['$rootScope', '$http', 'G', function($rootScope, $http, G) {
             return {
                 changePwd: function(options) {
@@ -39,4 +36,3 @@ define([
             };
         }]);
     }
-});

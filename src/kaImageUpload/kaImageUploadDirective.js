@@ -11,15 +11,10 @@
  * @param canEdit, 可编辑的状态有删除按钮
  * @param source,调用插件的来源,不同来源接口回调内容不同,['ka']
  */
-define(
-  [
-    'angular',
-    '../imageShow/imageShow',
-    './kaImageUpload.css',
-    './kaImageUpload.html',
-  ],
-  function(angular, imageShow, css, html) {
-    return function(app, elem, attrs, scope) {
+import imageShow from '../imageShow/imageShow';
+import './kaImageUpload.css';
+import html from './kaImageUpload.html';
+export default (app, elem, attrs, scope) => {
       imageShow(app, elem, attrs, scope);
       app.directive('kaImageUploadDirective', [
         'G',
@@ -291,5 +286,3 @@ define(
         };
       });
     };
-  }
-);

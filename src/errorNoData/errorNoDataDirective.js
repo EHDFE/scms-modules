@@ -6,12 +6,7 @@
  * @lastBy 
  * @html <div error-no-data-directive data-content="暂无待审核的数据" show-by="showBy"></div>
  */
-define([
-    'angular'
-], function(
-    angular
-    ) {
-    return function(app, elem, attrs, scope) {
+export default (app, elem, attrs, scope) => {
         app.directive('errorNoDataDirective', ['$document', '$timeout',
             function($document, $timeout) {
             return {
@@ -41,4 +36,3 @@ define([
             };
         }]);
     };
-});

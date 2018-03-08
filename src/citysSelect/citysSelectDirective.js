@@ -7,12 +7,7 @@
  * @html <select citys-select-directive ng-model="ngModel" d-item="dItem" class="form-control"></select>
  * @api 获取已开通城市接口:/goodstaxiAdmin/ehuodiactivitycs/selectCitylist
  */
-define([
-    'angular'
-], function(
-    angular) {
-    'use strict';
-    return function(app, elem, attrs, scope) {
+export default (app, elem, attrs, scope) => {
         app.directive('citysSelectDirective', ['$http','$timeout', function($http, $timeout) {
 
             return {
@@ -67,4 +62,3 @@ define([
                 }
             }])
         }
-})

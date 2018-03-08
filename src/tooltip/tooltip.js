@@ -6,12 +6,7 @@
  * @lastBy 
  * @html <i class="fa fa-question-circle" tooltip="tooltip" tooltip-position="tooltipPosition"></i>
  */
-define([
-    'angular'
-], function(
-    angular
-    ) {
-    return function(app, elem, attrs, scope) {
+export default (app, elem, attrs, scope) => {
         app.directive('tooltip', ['$document', '$compile',
             function($document, $compile) {
             return {
@@ -119,4 +114,3 @@ define([
             };
         }]);
     };
-});

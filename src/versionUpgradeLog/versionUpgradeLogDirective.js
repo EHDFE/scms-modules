@@ -1,14 +1,7 @@
-define([
-    'angular',
-    '../pagination/paginationDirective',
-    './versionUpgradeLogService',
-    './versionUpgradeLog.html'
-    ], function(
-        angular,
-        paginationDirective,
-        versionUpgradeLogService,
-        html) {
-        return function(app, elem, attrs, scope) {
+import paginationDirective from '../pagination/paginationDirective';
+import versionUpgradeLogService from './versionUpgradeLogService';
+import html from'./versionUpgradeLog.html';
+export default (app, elem, attrs, scope) => {
             paginationDirective(app, elem, attrs, scope);
             versionUpgradeLogService(app, elem, attrs, scope);
             app.directive('versionUpgradeLogDirective', ['G', 'versionUpgradeLogService', function(G, service) {
@@ -65,4 +58,3 @@ define([
                 };
             }]);
         }
-    });

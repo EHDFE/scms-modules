@@ -7,15 +7,10 @@
  * @lastBy
  * @htmlUrl scmsModules/table/tableHtml.html
  */
-define(
-  [
-    'angular',
-    '../pagination/paginationDirective',
-    '../errorNoData/errorNoDataDirective',
-    './tableFixed'
-  ],
-  function(angular, paginationDirective, errorNoDataDirective, tableFixedDirective) {
-    return function(app, elem, attrs, scope) {
+import paginationDirective from '../pagination/paginationDirective';
+import errorNoDataDirective from '../errorNoData/errorNoDataDirective';
+import tableFixedDirective from './tableFixed';
+export default (app, elem, attrs, scope) => {
       paginationDirective(app);
       errorNoDataDirective(app);
       tableFixedDirective(app);
@@ -247,5 +242,3 @@ define(
         },
       ]);
     };
-  }
-);

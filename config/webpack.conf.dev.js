@@ -25,7 +25,7 @@ const config = {
                 babelrc: false,
                 presets: [
                   [
-                    'env',
+                    require.resolve('babel-preset-env'),
                     {
                       targets: {
                         browsers: BROWSER_SUPPORTS,

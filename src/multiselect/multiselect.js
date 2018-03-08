@@ -6,13 +6,8 @@
  * @lastBy 
  * @html <div multiselect-directive check-items="checkItems" items="items" placeholder="请选择您绑定的城市"></div>
  */
-define([
-    'angular',
-    './multiselect.css'
-], function(
-    angular
-    ) {
-    return function(app, elem, attrs, scope) {
+import './multiselect.css';
+export default (app, elem, attrs, scope) => {
         app.directive('multiselectDirective', ['$timeout',function($timeout) {
             return {
                 template: '<div class="multiselectDirective" role="group"><div class="form-control" data-toggle="dropdown" role="button" aria-expanded="false"><span class="placeholder" ng-if="!checkItems||checkItems.length<1">{{placeholder}}</span><span class="label label-default" ng-repeat="item in checkItems track by $index">{{item.name}}<i class="fa fa-close" ng-mousedown="remove(item);"></i></span><input type="text"><i class="fa fa-angle-down"></i></div><ul class="dropdown-menu"><li ng-repeat="item in items"><a href="javascript:void(0);" ng-click="doCheck(item)"><i class="fa fa-square-o" ng-show="!item.isChecked"></i><i ng-show="item.isChecked" class="fa fa-check-square-o"></i>{{item.name}}</a></li></ul></div>',
@@ -111,4 +106,3 @@ define([
             };
         }]);
     };
-});

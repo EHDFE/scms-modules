@@ -7,12 +7,9 @@
  * @lastBy
  * @htmlUrl scmsModules/table/tableFixed.html
  */
-define(['angular', './tableFixed.css', './tableFixed.html'], function(
-    angular,
-    css,
-    html
-) {
-    return function(app, elem, attrs, scope) {
+import html from './tableFixed.html';
+import css from './tableFixed.css';
+export default (app, elem, attrs, scope) => {
         app.directive('tableFixedDirective', [
             'G',
             '$state',
@@ -258,4 +255,3 @@ define(['angular', './tableFixed.css', './tableFixed.html'], function(
             }
         ]);
     };
-});

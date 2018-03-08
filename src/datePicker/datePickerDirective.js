@@ -6,8 +6,7 @@
  * @lastBy
  * @html <input class="form-control input-date" date-picker-directive ng-model='ngModel' min-date="minDate" max-date="maxDate" max-date-value="maxDateValue" min-date-value="minDateValue">
  */
-define(['angular'], function(angular) {
-  return function(app, elem, attrs, scope) {
+export default (app, elem, attrs, scope) => {
     app.directive('datePickerDirective', [
       'G',
       '$rootScope',
@@ -118,4 +117,3 @@ define(['angular'], function(angular) {
       },
     ]);
   };
-});

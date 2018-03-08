@@ -7,12 +7,8 @@
  * @lastBy
  * @html <div pagination-directive current-page="currentPage" total-count="totalCount" page-size="pageSize" onchanged="onchanged" hide-page-size="hidePageSize"></div>
  */
-define(['angular', './pagination.html'], function(
-  angular,
-  html,
-  css
-) {
-  return function(app, elem, attrs, scope) {
+import html from './pagination.html';
+export default (app, elem, attrs, scope) => {
     app.directive('paginationDirective', [
       function() {
         
@@ -173,4 +169,3 @@ define(['angular', './pagination.html'], function(
       },
     ]);
   };
-});
