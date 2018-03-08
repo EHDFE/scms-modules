@@ -638,6 +638,7 @@ class DatePicker {
       second: time.second(),
       data: time,
     };
+
     if (time.valueOf() > moment([
       this.dateData.year, 
       this.dateData.month-1, 
@@ -646,7 +647,7 @@ class DatePicker {
       this.dateData.minute,
       this.dateData.second,
     ]).valueOf()) {
-      this.dateData = {...this.minDateArr};
+      this.dateData = Object.assign({}, this.minDateArr);
     }
   }
   setMaxDate(date) {
@@ -671,7 +672,7 @@ class DatePicker {
       this.dateData.minute,
       this.dateData.second,
     ]).valueOf()) {
-      this.dateData = {...this.maxDateArr};
+      this.dateData = Object.assign({}, this.maxDateArr);
     }
   }
   setHourView() {
