@@ -251,14 +251,20 @@ export default (app, elem, attrs, scope) => {
                   $scope.endDateRange = newVal&&newVal.end;
                 }
               }, true);
+
+              function updateDate() {
+                $scope.dateRangeResult.start = $scope.startDate = $scope.startDateRange;
+                $scope.dateRangeResult.end = $scope.endDate = $scope.endDateRange;
+              }
+              
               $scope.$watch('startDateRange', (newVal, oldVal) => {
                 if(newVal !== oldVal) {
-                  initDate();
+                  updateDate();
                 }
               });
               $scope.$watch('endDateRange', (newVal, oldVal) => {
-                if(newVal !== oldVal) {
-                  initDate();
+                if(newVal !== oldVal) {            
+                  updateDate();
                 }
               });
 
@@ -266,6 +272,8 @@ export default (app, elem, attrs, scope) => {
               $scope.clearDate = () => {
                 $scope.dateRangeResult = {};
                 $scope.dateRangeData = {};
+                $scope.startDateRange = '';
+                $scope.endDateRange = '';
                 $timeout(() => {
                   $scope.$broadcast('refreshDate');
                 })
