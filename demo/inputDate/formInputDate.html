@@ -2,6 +2,10 @@
 <div>
     <input placeholder="结束时间" type="text" date-picker  init-date="null" ng-model="aa">
 </div>
+<h2>时间选择</h2>
+<div>
+    <input placeholder="结束时间" type="text" min-time="'11:34:34'" time-picker  init-date="0"  ng-model="abc">
+</div>
 <h2>月选择</h2>
 <div>
     <input placeholder="结束时间" type="text" date-picker  min-view-mode="months" format-date="YYYY-MM"
@@ -11,7 +15,7 @@
 
 <h2>日期时间选择</h2>
 <div>
-    <input placeholder="结束时间" type="text" date-picker pick-time="true" use-seconds="true" init-date="0" ng-model="bb" format-date="YYYY-MM-DD HH:mm:ss">
+    <input placeholder="结束时间" type="text" min-date="'2018-03-08 11:34:23'" date-picker pick-time="true" use-seconds="true" init-date="0" ng-model="bb" format-date="YYYY-MM-DD HH:mm:ss">
 </div>
 
 <h2>日期时间选择(无秒选择)</h2>
@@ -44,8 +48,8 @@
     </div>
 </div>
 <h2>范围-日期选择 默认时间范围</h2>
-<div>
-    <input date-picker-range init-start-date="-30" init-end-date="0"
+<div ng-init="startDateRange3='2017-09-11';endDateRange3='2018-03-23';">
+    <input date-picker-range init-start-date="-30" init-end-date="0" start-placeholder="开始时间" end-placeholder="截止日期"
             start-date-range="startDateRange3" end-date-range="endDateRange3" />
     <div>
         开始时间:{{startDateRange3}} 结束时间:{{endDateRange3}}

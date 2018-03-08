@@ -13,7 +13,9 @@ export default (app, elem, attrs, scope) => {
         app.directive('tableFixedDirective', [
             'G',
             '$state',
-            function(G, $state) {
+            '$compile',
+            '$timeout',
+            function(G, $state, $compile, $timeout) {
                 return {
                     template: html,
                     replace: true,
@@ -41,8 +43,14 @@ export default (app, elem, attrs, scope) => {
                         const $fixHeaderOuter = $('.fix-header-outer');
                         const $fixRightThead = $fixRight.find('.fix-thead');
                         const $fixLeftThead = $fixLeft.find('.fix-thead');
+                        // const headerScrollLeft = $('.outer-hide-scroll').offset().left;
+                        // const fixLeftTheadLeft = $fixLeftThead.offset().left;
+                        // const fixRightTheadLeft = $fixRightThead.offset().left;
+                        let headerScrollLeft = 0;
+                        let fixLeftTheadLeft = 0;
+                        let fixRightTheadLeft = 0;
 
-                        $tableBox.scroll(function() {
+                        let tableBoxScroll = function() {
                             $fixHeaderOuter.scrollLeft($tableBox.scrollLeft());
                             if ($tableBox.scrollLeft() > 0) {
                                 $fixLeft.addClass('left-box-shadow');
@@ -58,8 +66,10 @@ export default (app, elem, attrs, scope) => {
                             } else {
                                 $fixRight.removeClass('right-box-shadow');
                             }
-                        });
-                        $('#container').scroll(function() {
+                        };
+                        $tableBox.scroll(tableBoxScroll);
+
+                        let containerScroll = function() {
                             $fixedTable
                                 .find('.outer-hide-scroll')
                                 .height($fixHeader.height());
@@ -83,12 +93,37 @@ export default (app, elem, attrs, scope) => {
                                 $fixLeftThead.hide();
                                 $fixRightThead.hide();
                             }
-                        });
+                        };
+                        $('#container').scroll(containerScroll);
 
+                        let windowScroll = function(){
+                            if($('.tablebox').width()<1500){
+                                let scrollLeft = $('html').scrollLeft();
+                                $('.outer-hide-scroll')[0].style.left = headerScrollLeft - scrollLeft + 'px';
+                                $fixLeftThead[0].style.left = fixLeftTheadLeft -  scrollLeft + 'px';
+                                $fixRightThead[0].style.left = fixRightTheadLeft -  scrollLeft + 'px';
+                            }
+                        };
+                        $(window).scroll(windowScroll);
+
+                        $(window).resize(function(){
+                            containerScroll();
+                            windowScroll();
+                        });
                         $scope.$on('angularDomReady', function(a, tableDom) {
                             reset();
                             $fixRightThead.hide();
                             $fixLeftThead.hide();
+                            if(!tableDom){
+                                let headerThFromDom = $('.tablebox thead th');
+                                angular.forEach(headerThFromDom, function(
+                                    item,
+                                    index
+                                ) {
+                                    item.style.width = 'auto';
+                                });
+                                return;
+                            }
                             angular.forEach(tableDom.find('th'), function(
                                 item
                             ) {
@@ -169,10 +204,14 @@ export default (app, elem, attrs, scope) => {
                                     $(rightThDom[index]).width(
                                         $(item).outerWidth()
                                     );
+                                    $(rightThDom[index]).height(
+                                        $(item).outerHeight()
+                                    );
                                 });
                                 rightThTrDom.append(rightThDom);
-                                let tdDomList = [];
-                                angular.forEach(trDomList, function(tr) {
+
+                                let tempDom = $('<tbody></tbody>');
+                                angular.forEach(trDomList, function(tr, index){
                                     let trDom = $(tr).clone();
                                     trDom.empty();
                                     trDom.append(
@@ -184,8 +223,18 @@ export default (app, elem, attrs, scope) => {
                                             )
                                             .clone()
                                     );
-                                    trDom.height($(tr).height());
-                                    rightTbodyDom.append(trDom);
+                                    trDom.removeAttr('ng-init');
+                                    tempDom.append($compile(trDom)($scope.$parent.$parent));
+                                });
+                                $timeout(function(){
+                                    angular.forEach(tempDom.children(), function(item, index){
+                                        let tens = Math.floor(index/trDomList.length);
+                                        let units = index%trDomList.length;
+                                        if(tens===units){
+                                            $(item).height($(trDomList[tens]).height())
+                                            rightTbodyDom.append(item);
+                                        }
+                                    });
                                 });
                             }
                             //底部固定TODO
@@ -212,10 +261,14 @@ export default (app, elem, attrs, scope) => {
                                     $(leftThDom[index]).width(
                                         $(item).outerWidth()
                                     );
+                                    $(leftThDom[index]).height(
+                                        $(item).outerHeight()
+                                    );
                                 });
                                 leftThTrDom.append(leftThDom);
-                                let tdDomList = [];
-                                angular.forEach(trDomList, function(tr) {
+
+                                let tempDom = $('<tbody></tbody>');
+                                angular.forEach(trDomList, function(tr, index){
                                     let trDom = $(tr).clone();
                                     trDom.empty();
                                     trDom.append(
@@ -224,8 +277,18 @@ export default (app, elem, attrs, scope) => {
                                             .slice(0, $scope.fixLeft)
                                             .clone()
                                     );
-                                    trDom.height($(tr).height());
-                                    leftTbodyDom.append(trDom);
+                                    trDom.removeAttr('ng-init');
+                                    tempDom.append($compile(trDom)($scope.$parent.$parent));
+                                });
+                                $timeout(function(){
+                                    angular.forEach(tempDom.children(), function(item, index){
+                                        let tens = Math.floor(index/trDomList.length);
+                                        let units = index%trDomList.length;
+                                        if(tens===units){
+                                            $(item).height($(trDomList[tens]).height())
+                                            leftTbodyDom.append(item);
+                                        }
+                                    });
                                 });
                             }
 
@@ -249,6 +312,49 @@ export default (app, elem, attrs, scope) => {
                                 $element.find('.table-body thead tr').empty();
                                 $element.find('.table-body tbody').empty();
                             }
+
+                            let hoverStyle = function(){
+                                let $tableBoxTr = $('.tablebox tbody tr');
+                                let $fixLeftTr = $('.fixed-table .fix-left tbody tr');
+                                let $fixRightTr = $('.fixed-table .fix-right tbody tr');
+
+                                $tableBoxTr.hover(function(){
+                                    let hoverIndex = $tableBoxTr.index(this);
+                                    $fixLeftTr.eq(hoverIndex).addClass('fix-table-hover');
+                                    $fixRightTr.eq(hoverIndex).addClass('fix-table-hover');
+                                },function(){
+                                    let hoverIndex = $tableBoxTr.index(this);
+                                    $fixLeftTr.eq(hoverIndex).removeClass('fix-table-hover');
+                                    $fixRightTr.eq(hoverIndex).removeClass('fix-table-hover');
+                                });
+
+                                $fixLeftTr.hover(function(){
+                                    let hoverIndex = $fixLeftTr.index(this);
+                                    $tableBoxTr.eq(hoverIndex).addClass('fix-table-hover');
+                                    $fixRightTr.eq(hoverIndex).addClass('fix-table-hover');
+                                },function(){
+                                    let hoverIndex = $fixLeftTr.index(this);
+                                    $tableBoxTr.eq(hoverIndex).removeClass('fix-table-hover');
+                                    $fixRightTr.eq(hoverIndex).removeClass('fix-table-hover');
+                                });
+
+                                $fixRightTr.hover(function(){
+                                    let hoverIndex = $fixRightTr.index(this);
+                                    $fixLeftTr.eq(hoverIndex).addClass('fix-table-hover');
+                                    $tableBoxTr.eq(hoverIndex).addClass('fix-table-hover');
+                                },function(){
+                                    let hoverIndex = $fixRightTr.index(this);
+                                    $fixLeftTr.eq(hoverIndex).removeClass('fix-table-hover');
+                                    $tableBoxTr.eq(hoverIndex).removeClass('fix-table-hover');
+                                });
+                            }
+                            $timeout(function(){
+                                hoverStyle();
+                                headerScrollLeft = $('.outer-hide-scroll').offset().left;
+                                fixLeftTheadLeft = $('.fixed-table .fix-left').offset().left;
+                                fixRightTheadLeft = $('.fixed-table .fix-right').offset().left;
+                            });
+                            
                         });
                     }
                 };

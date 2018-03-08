@@ -46,6 +46,7 @@ import fileUploaderDirective from "./src/fileUploader/index";
 import datePicker from './src/ngDatePicker/datePicker';
 import datePickerRange from './src/ngDatePicker/datePickerRange';
 import weekPicker from './src/ngDatePicker/weekPicker';
+import timePicker from './src/ngDatePicker/timePicker';
 import buttonDropdown from "./src/buttonDropdown/buttonDropdown";
 import selectDropdown from "./src/selectDropdown/selectDropdown";
 import imageUpload from "./src/imageUpload/imageUpload";
@@ -86,6 +87,7 @@ export default {
   'ngDatePicker/datePicker': datePicker,
   'ngDatePicker/datePickerRange': datePickerRange,
   'ngDatePicker/weekPicker': weekPicker,
+  'ngDatePicker/timePicker': timePicker,
   'buttonDropdown': buttonDropdown,
   'selectDropdown': selectDropdown,
   'imageUpload/imageUpload': imageUpload

@@ -135,6 +135,7 @@ export default (app, elem, attrs, scope) => {
                         $scope.isNoData = false;
                       } else {
                         $scope.isNoData = true;
+                        $rootScope.$broadcast('angularDomReady');
                       }
 
                       if ($scope.formatData) {

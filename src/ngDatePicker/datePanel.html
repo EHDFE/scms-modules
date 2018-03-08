@@ -1,6 +1,6 @@
 <div class="date-panel-datetimepicker">
   <div style="display: flex;">
-    <div class="datepicker">
+    <div class="datepicker" ng-hide="timePick">
       <div class="datepicker-days" ng-show="datePicker.showPanel==='day'">
         <table class="table-condensed">
           <thead>
@@ -79,8 +79,8 @@
         </table>
       </div>
     </div>
-    <div class="date-panel-time" ng-show="pickTime">
-      <div class="time-title">时间</div>
+    <div class="date-panel-time" ng-show="pickTime||timePick" ng-class="{'time-picker-only':timePick }">
+      <div class="time-title" ng-hide="timePick">时间</div>
       <div class="time-picker">
         <div class="time-picker-title">          
           <div class="text-center">
@@ -102,7 +102,7 @@
                 </ul>
               </div>
               <div class="scroll-bar-vertical">
-                <div class="scroll-bar-thumb" style="height:24.175%;" ></div>
+                <div class="scroll-bar-thumb" style="height:19.767%;" ></div>
               </div>
             </div>
             <div class="time-area"> 
@@ -112,7 +112,7 @@
                 </ul>
               </div>
               <div class="scroll-bar-vertical">
-                <div class="scroll-bar-thumb" style="height:11.055%;" ></div>
+                <div class="scroll-bar-thumb" style="height:8.865%;" ></div>
               </div>
             </div>
             <div ng-show="showSeconds" class="time-area">
@@ -122,7 +122,7 @@
                 </ul>
               </div>
               <div class="scroll-bar-vertical">
-                <div class="scroll-bar-thumb" style="height:11.055%;" ></div>
+                <div class="scroll-bar-thumb" style="height:8.865%;" ></div>
               </div>
             </div>
           </div>
