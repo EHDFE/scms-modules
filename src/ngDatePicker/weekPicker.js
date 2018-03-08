@@ -43,6 +43,9 @@ export default (app, elem, attrs, scope) => {
           "$timeout",
           function($scope, $element, $attrs, $timeout) {
             $scope.formatDate = $attrs.formatDate||"YYYY-MM-DD";
+            $scope.startPlaceholder = $attrs.startPlaceholder||'开始时间';
+            $scope.endPlaceholder = $attrs.endPlaceholder||'结束时间';
+
             var panel = $compile(html)($scope);
             $document.find("#container").append(panel);
             panel.css('display', 'none');

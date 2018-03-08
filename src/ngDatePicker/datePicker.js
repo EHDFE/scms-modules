@@ -45,6 +45,8 @@ export default (app, elem, attrs, scope) => {
             $scope.minViewMode = $attrs.minViewMode;
             $scope.pickTime = !!$attrs.pickTime;
             $scope.formatDate = $attrs.formatDate;
+
+            $scope.placeholder = $attrs.placeholder;
             var panel = $compile(html)($scope);
             $document.find("#container").append(panel);
             panel.css('display', 'none');
