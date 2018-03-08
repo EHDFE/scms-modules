@@ -255,6 +255,11 @@
 .date-panel-time {
   padding-right: 20px;
 }
+.time-picker-only {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
 .date-panel-time .time-title{
   text-align: center;
   margin-top: 20px;
@@ -266,12 +271,20 @@
   margin-top: 4px;
   width: 150px;
 }
+.time-picker-only .time-picker {
+  margin: 5px;
+  margin-top: 20px;
+}
 .date-panel-time .time-picker-title {
   display: flex;
   justify-content: space-around;
   color: #9ba0aa;
   margin-bottom: 15px;
 }
+.time-picker-only .time-picker-title {
+  margin-bottom: 5px;
+}
+
 .date-panel-time .time-picker-content {
   display: flex;
   align-items: stretch;

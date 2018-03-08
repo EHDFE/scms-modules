@@ -54,6 +54,7 @@ export default (app, elem, attrs, scope) => {
           //@attrs initDate 初始日期字段,它的值为距今天的天数;当值为"null"时,input显示空值, {type:"string", defaultValue: 0}
           $scope.dateRange = $attrs.dateRange;
           $scope.weekPick = $attrs.weekPick;
+          $scope.timePick = $attrs.timePick;
           var initDate = $scope.initDate;
           var newDate;
           if (initDate && initDate !== "null") {
@@ -74,15 +75,13 @@ export default (app, elem, attrs, scope) => {
           })
           const timepickTotalHeight = 170;
           const timepickItemHeight = 30;
-          // // $scope.useSeconds = !!$attrs.useSeconds;
-          // // $scope.minViewMode = $attrs.minViewMode;
-          // $scope.pickTime = !!$attrs.pickTime;
           const datePicker = new DatePicker({
             dateRange: $scope.dateRange,
             dateRangeData: $scope.dateRangeData || {},
             $attrs: $attrs,
             weekPick: $scope.weekPick,
             weekPickerData: $scope.weekPickerData || {},
+            timePick: $scope.timePick,
           });
           $scope.datePicker = datePicker;
           $scope.$watch('formatDate', (newVal) =>  {
