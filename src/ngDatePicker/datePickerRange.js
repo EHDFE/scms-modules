@@ -90,8 +90,7 @@ export default (app, elem, attrs, scope) => {
                   $timeout(() => {
                     $scope.$broadcast('refreshDate');
                     if($scope.eventChange) {
-                      console.log(44444444,$scope.eventChange)
-                      $scope.eventChange().apply();
+                      $scope.eventChange();
                     }
                   });
                 }, 300);
@@ -285,7 +284,6 @@ export default (app, elem, attrs, scope) => {
                 $timeout(() => {
                   $scope.$broadcast('refreshDate');
                   if($scope.eventChange) {
-                    console.log(44444444,$scope.eventChange)
                     $scope.eventChange();
                   }
                 })
