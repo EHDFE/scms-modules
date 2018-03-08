@@ -170,7 +170,7 @@ export default (app, elem, attrs, scope) => {
                   if ($(target).parent().hasClass('disabled')||$(target).hasClass('disabled')) {
                     return true;
                   }
-                  if (!($(target).parent().hasClass('day')||$(target).hasClass('day'))) {
+                  if (!$(target).parent().hasClass('day')) {
                     return true;
                   } else {
                     clickTimes += 1;
