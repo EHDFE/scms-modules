@@ -46,9 +46,6 @@ define(['angular', './tableFixed.css', './tableFixed.html'], function(
                         const $fixHeaderOuter = $('.fix-header-outer');
                         const $fixRightThead = $fixRight.find('.fix-thead');
                         const $fixLeftThead = $fixLeft.find('.fix-thead');
-                        // const headerScrollLeft = $('.outer-hide-scroll').offset().left;
-                        // const fixLeftTheadLeft = $fixLeftThead.offset().left;
-                        // const fixRightTheadLeft = $fixRightThead.offset().left;
                         let headerScrollLeft = 0;
                         let fixLeftTheadLeft = 0;
                         let fixRightTheadLeft = 0;
@@ -103,8 +100,8 @@ define(['angular', './tableFixed.css', './tableFixed.html'], function(
                             if($('.tablebox').width()<1500){
                                 let scrollLeft = $('html').scrollLeft();
                                 $('.outer-hide-scroll')[0].style.left = headerScrollLeft - scrollLeft + 'px';
-                                $fixLeftThead[0].style.left = fixLeftTheadLeft -  scrollLeft + 'px';
-                                $fixRightThead[0].style.left = fixRightTheadLeft -  scrollLeft + 'px';
+                                $fixLeftThead[0].style.left = fixLeftTheadLeft -  scrollLeft + fixLeftBorderLeftWidth + 'px';
+                                $fixRightThead[0].style.left = fixRightTheadLeft -  scrollLeft + fixRightBorderLeftWidth + 'px';
                             }
                         };
                         $(window).scroll(windowScroll);
@@ -355,7 +352,9 @@ define(['angular', './tableFixed.css', './tableFixed.html'], function(
                                 hoverStyle();
                                 headerScrollLeft = $('.outer-hide-scroll').offset().left;
                                 fixLeftTheadLeft = $('.fixed-table .fix-left').offset().left;
+                                fixLeftBorderLeftWidth = Number(($('.fixed-table .fix-left').css('borderLeftWidth')).replace('px',''));
                                 fixRightTheadLeft = $('.fixed-table .fix-right').offset().left;
+                                fixRightBorderLeftWidth = Number(($('.fixed-table .fix-right').css('borderLeftWidth')).replace('px',''));
                             });
                             
                         });
