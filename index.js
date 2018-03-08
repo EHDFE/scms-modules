@@ -50,6 +50,8 @@ import buttonDropdown from "./src/buttonDropdown/buttonDropdown";
 import selectDropdown from "./src/selectDropdown/selectDropdown";
 import imageUpload from "./src/imageUpload/imageUpload";
 
+import numberSelect from "./src/numberSelect/numberSelect";
+
 
 export default {
   'ngCode/ngCodeDirective': ngCodeDirective,
@@ -89,5 +91,6 @@ export default {
   'ngDatePicker/timePicker': timePicker,
   'buttonDropdown': buttonDropdown,
   'selectDropdown': selectDropdown,
-  'imageUpload/imageUpload': imageUpload
+  'imageUpload/imageUpload': imageUpload,
+  'numberSelect': numberSelect
 };
