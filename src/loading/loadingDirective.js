@@ -1,7 +1,7 @@
 export default (app, elem, attrs, scope) => {
   app.directive('loadingDirective', [
     'G',
-    function(G) {
+    function (G) {
       return {
         restrict: 'EA',
         replace: true,
@@ -10,8 +10,8 @@ export default (app, elem, attrs, scope) => {
           currentPage: '=',
           isLoading: '=',
         },
-        controller: function($scope, $element, $attrs) {},
-        link: function($scope, $element, $attrs, ngModel) {},
+        controller($scope, $element, $attrs) {},
+        link($scope, $element, $attrs, ngModel) {},
       };
     },
   ]);

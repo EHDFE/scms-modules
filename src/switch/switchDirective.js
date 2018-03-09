@@ -9,7 +9,7 @@
 export default (app, elem, attrs, scope) => {
   app.directive('switchDirective', [
     '$rootScope',
-    function($rootScope) {
+    function ($rootScope) {
       return {
         template:
           '<label class="switch" ng-class="{\'switch-open\': isChecked, \'disabled\': isDisabled}"" ng-click="setChecked();"></label>',
@@ -21,8 +21,8 @@ export default (app, elem, attrs, scope) => {
         },
         link: function postLink($scope, $element, $attrs) {},
 
-        controller: function($scope, $element, $attrs) {
-          $scope.setChecked = function() {
+        controller($scope, $element, $attrs) {
+          $scope.setChecked = function () {
             if ($scope.isDisabled) {
               return;
             }
