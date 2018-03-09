@@ -1,7 +1,8 @@
 import html from './crumb.html';
+
 export default (app, elem, attrs, scope) => {
   app.directive('crumbDirective', [
-    function() {
+    function () {
       return {
         template: html,
         restrict: 'EA',
@@ -9,18 +10,18 @@ export default (app, elem, attrs, scope) => {
         scope: {
           crumbsData: '=',
         },
-        link: function($scope, $element, $attrs) {},
+        link($scope, $element, $attrs) {},
 
-        controller: function(
+        controller(
           $scope,
           $element,
           $attrs,
           $cookies,
           $timeout,
           $sce,
-          $compile
+          $compile,
         ) {
-          $scope.$watch('crumbsData', function(newValue, ole) {
+          $scope.$watch('crumbsData', (newValue, ole) => {
             $scope.crumbs = newValue;
           });
         },

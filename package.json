@@ -4,6 +4,8 @@
   "description": "scmsmodules",
   "repository": "https://github.com/EHDFE/scms-modules.git",
   "scripts": {
+    "lint": "eslint ./src ./scmsUi ./libs ./index.js",
+    "lint-fix": "eslint ./src ./scmsUi ./libs ./index.js --fix",
     "build": "webpack --config ./config/webpack.conf.prod --mode production",
     "server": "webpack-dev-server --config ./config/webpack.conf.dev --mode development --content-base ./docs --history-api-fallback --hot --open",
     "pack": "rollup --config ./config/rollup.config.js"
@@ -42,6 +44,9 @@
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "clean-webpack-plugin": "^0.1.18",
     "css-loader": "^0.28.7",
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
     "html-loader": "^0.5.1",

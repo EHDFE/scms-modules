@@ -10,7 +10,7 @@ export default (app, elem, attrs, scope) => {
   app.directive('weekPickerDirective', [
     'G',
     '$rootScope',
-    function(G, $rootScope) {
+    function (G, $rootScope) {
       return {
         require: '?ngModel',
         scope: {
@@ -23,7 +23,7 @@ export default (app, elem, attrs, scope) => {
           '$scope',
           '$element',
           '$attrs',
-          function($scope, $element, $attrs) {
+          function ($scope, $element, $attrs) {
             $scope.weekData = $scope.weekData || {};
             $element
               .datetimepicker({
@@ -31,7 +31,7 @@ export default (app, elem, attrs, scope) => {
                 calendarWeeks: true,
                 language: 'zh-cn',
               })
-              .each(function() {
+              .each(function () {
                 $(this)
                   .data('DateTimePicker')
                   .widget.find('.datepicker-days .dow')
@@ -41,13 +41,11 @@ export default (app, elem, attrs, scope) => {
             $element
               .data('DateTimePicker')
               .widget.find('.picker-switch.accordion-toggle')
-              .replaceWith(
-                '<li class="clearWeek"><a class="btn" style="width:100%"><span>清除</span></a></li>'
-              );
+              .replaceWith('<li class="clearWeek"><a class="btn" style="width:100%"><span>清除</span></a></li>');
             $element
               .data('DateTimePicker')
               .widget.find('.clearWeek')
-              .on('click', function() {
+              .on('click', () => {
                 $scope.weekData.week = '0';
                 $element.val('');
                 $scope.$apply();
@@ -64,46 +62,44 @@ export default (app, elem, attrs, scope) => {
                 var value = $element.val();
               } else {
                 if (num) {
-                  var now = new Date();
-                  var weekDate = new Date(
+                  const now = new Date();
+                  const weekDate = new Date(
                     now.getFullYear(),
                     now.getMonth(),
-                    now.getDate() - num * 7
+                    now.getDate() - num * 7,
                   );
                   var y = weekDate.getFullYear();
                   var m = weekDate.getMonth() + 1;
-                  m = m < 10 ? '0' + m : m;
+                  m = m < 10 ? `0${m}` : m;
                   var d = weekDate.getDate();
-                  d = d < 10 ? '0' + d : d;
+                  d = d < 10 ? `0${d}` : d;
                 } else {
-                  var date = new Date();
+                  const date = new Date();
                   var y = date.getFullYear();
                   var m = date.getMonth() + 1;
-                  m = m < 10 ? '0' + m : m;
+                  m = m < 10 ? `0${m}` : m;
                   var d = date.getDate();
-                  d = d < 10 ? '0' + d : d;
+                  d = d < 10 ? `0${d}` : d;
                 }
 
-                var value = y + '-' + m + '-' + d;
+                var value = `${y}-${m}-${d}`;
               }
-              var firstDate = moment(value, 'YYYY-MM-DD')
+              const firstDate = moment(value, 'YYYY-MM-DD')
                 .day(1)
                 .format('YYYY-MM-DD');
-              var lastDate = moment(value, 'YYYY-MM-DD')
+              const lastDate = moment(value, 'YYYY-MM-DD')
                 .day(7)
                 .format('YYYY-MM-DD');
-              var week = moment(value, 'YYYY-MM-DD').week();
+              const week = moment(value, 'YYYY-MM-DD').week();
 
               $element.data('DateTimePicker').setDate(value);
               $scope.weekData.week = week;
-              $scope.weekData.year = moment(firstDate, 'YYYY-MM-DD').format(
-                'YYYY'
-              );
+              $scope.weekData.year = moment(firstDate, 'YYYY-MM-DD').format('YYYY');
               $scope.weekData.firstDate = firstDate;
               $scope.weekData.lastDate = lastDate;
 
-              setTimeout(function() {
-                $element.val(firstDate + ' 到 ' + lastDate);
+              setTimeout(() => {
+                $element.val(`${firstDate} 到 ${lastDate}`);
                 $element
                   .data('DateTimePicker')
                   .widget.find('.day.active')
@@ -114,46 +110,44 @@ export default (app, elem, attrs, scope) => {
                 weekStyle();
                 $('.prev, .next, .month')
                   .off()
-                  .on('click', function() {
-                    setTimeout(function() {
+                  .on('click', () => {
+                    setTimeout(() => {
                       weekStyle();
                     }, 50);
                   });
               }, 50);
             }
 
-            $scope.$watch('defaultWeek', function(newVal) {
+            $scope.$watch('defaultWeek', (newVal) => {
               if (newVal || newVal === 0) {
-                var now = new Date();
-                var weekDate = new Date(
+                const now = new Date();
+                const weekDate = new Date(
                   now.getFullYear(),
                   now.getMonth(),
-                  now.getDate() - newVal * 7
+                  now.getDate() - newVal * 7,
                 );
-                var y = weekDate.getFullYear();
-                var m = weekDate.getMonth() + 1;
-                m = m < 10 ? '0' + m : m;
-                var d = weekDate.getDate();
-                d = d < 10 ? '0' + d : d;
-                var value = y + '-' + m + '-' + d;
-                var firstDate = moment(value, 'YYYY-MM-DD')
+                const y = weekDate.getFullYear();
+                let m = weekDate.getMonth() + 1;
+                m = m < 10 ? `0${m}` : m;
+                let d = weekDate.getDate();
+                d = d < 10 ? `0${d}` : d;
+                const value = `${y}-${m}-${d}`;
+                const firstDate = moment(value, 'YYYY-MM-DD')
                   .day(1)
                   .format('YYYY-MM-DD');
-                var lastDate = moment(value, 'YYYY-MM-DD')
+                const lastDate = moment(value, 'YYYY-MM-DD')
                   .day(7)
                   .format('YYYY-MM-DD');
-                var week = moment(value, 'YYYY-MM-DD').week();
+                const week = moment(value, 'YYYY-MM-DD').week();
 
                 $element.data('DateTimePicker').setDate(value);
                 $scope.weekData.week = week;
-                $scope.weekData.year = moment(firstDate, 'YYYY-MM-DD').format(
-                  'YYYY'
-                );
+                $scope.weekData.year = moment(firstDate, 'YYYY-MM-DD').format('YYYY');
                 $scope.weekData.firstDate = firstDate;
                 $scope.weekData.lastDate = lastDate;
 
-                setTimeout(function() {
-                  $element.val(firstDate + ' 到 ' + lastDate);
+                setTimeout(() => {
+                  $element.val(`${firstDate} 到 ${lastDate}`);
                   $element
                     .data('DateTimePicker')
                     .widget.find('.day.active')
@@ -164,20 +158,20 @@ export default (app, elem, attrs, scope) => {
                   weekStyle();
                   $('.prev, .next, .month')
                     .off()
-                    .on('click', function() {
-                      setTimeout(function() {
+                    .on('click', () => {
+                      setTimeout(() => {
                         weekStyle();
                       }, 50);
                     });
                 }, 50);
               }
             });
-            $element.on('dp.change', function(e) {
+            $element.on('dp.change', (e) => {
               setWeek();
             });
 
-            var weekStyle = function() {
-              var weekStart = 8,
+            var weekStyle = function () {
+              let weekStart = 8,
                 selectColor = '#ccc',
                 prevSlice,
                 nextSlice,
@@ -185,8 +179,8 @@ export default (app, elem, attrs, scope) => {
                 nextWeek;
 
               $('.day').hover(
-                function() {
-                  var index = $(this).index();
+                function () {
+                  const index = $(this).index();
                   if (index < weekStart) {
                     prevSlice = index;
                     nextSlice = weekStart - index - 1;
@@ -207,7 +201,7 @@ export default (app, elem, attrs, scope) => {
                     .slice(0, nextSlice)
                     .css('background-color', selectColor);
                 },
-                function() {
+                function () {
                   $(this)
                     .prevAll()
                     .slice(0, prevSlice)
@@ -216,11 +210,11 @@ export default (app, elem, attrs, scope) => {
                     .nextAll()
                     .slice(0, nextSlice)
                     .css('background-color', '');
-                }
+                },
               );
             };
 
-            $rootScope.$on('$stateChangeStart', function(event, next, curr) {
+            $rootScope.$on('$stateChangeStart', (event, next, curr) => {
               if (
                 $element.data('DateTimePicker') &&
                 $element.data('DateTimePicker').hide
@@ -230,7 +224,7 @@ export default (app, elem, attrs, scope) => {
             });
           },
         ],
-        link: function($scope, $element, $attrs, ngModel) {},
+        link($scope, $element, $attrs, ngModel) {},
       };
     },
   ]);
