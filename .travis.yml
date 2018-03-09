@@ -7,7 +7,7 @@ deploy:
   github-token: "$GITHUB_TOKEN"
   local-dir: build
   target-branch: gh-pages
-  keep-history: false
+  keep-history: true
   verbose: true
   on:
     branch: publish
