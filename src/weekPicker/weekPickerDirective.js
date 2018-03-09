@@ -10,7 +10,7 @@ export default (app, elem, attrs, scope) => {
   app.directive('weekPickerDirective', [
     'G',
     '$rootScope',
-    function (G, $rootScope) {
+    function(G, $rootScope) {
       return {
         require: '?ngModel',
         scope: {
@@ -23,7 +23,7 @@ export default (app, elem, attrs, scope) => {
           '$scope',
           '$element',
           '$attrs',
-          function ($scope, $element, $attrs) {
+          function($scope, $element, $attrs) {
             $scope.weekData = $scope.weekData || {};
             $element
               .datetimepicker({
@@ -31,7 +31,7 @@ export default (app, elem, attrs, scope) => {
                 calendarWeeks: true,
                 language: 'zh-cn',
               })
-              .each(function () {
+              .each(function() {
                 $(this)
                   .data('DateTimePicker')
                   .widget.find('.datepicker-days .dow')
@@ -41,7 +41,9 @@ export default (app, elem, attrs, scope) => {
             $element
               .data('DateTimePicker')
               .widget.find('.picker-switch.accordion-toggle')
-              .replaceWith('<li class="clearWeek"><a class="btn" style="width:100%"><span>清除</span></a></li>');
+              .replaceWith(
+                '<li class="clearWeek"><a class="btn" style="width:100%"><span>清除</span></a></li>'
+              );
             $element
               .data('DateTimePicker')
               .widget.find('.clearWeek')
@@ -66,7 +68,7 @@ export default (app, elem, attrs, scope) => {
                   const weekDate = new Date(
                     now.getFullYear(),
                     now.getMonth(),
-                    now.getDate() - num * 7,
+                    now.getDate() - num * 7
                   );
                   var y = weekDate.getFullYear();
                   var m = weekDate.getMonth() + 1;
@@ -94,7 +96,9 @@ export default (app, elem, attrs, scope) => {
 
               $element.data('DateTimePicker').setDate(value);
               $scope.weekData.week = week;
-              $scope.weekData.year = moment(firstDate, 'YYYY-MM-DD').format('YYYY');
+              $scope.weekData.year = moment(firstDate, 'YYYY-MM-DD').format(
+                'YYYY'
+              );
               $scope.weekData.firstDate = firstDate;
               $scope.weekData.lastDate = lastDate;
 
@@ -118,13 +122,13 @@ export default (app, elem, attrs, scope) => {
               }, 50);
             }
 
-            $scope.$watch('defaultWeek', (newVal) => {
+            $scope.$watch('defaultWeek', newVal => {
               if (newVal || newVal === 0) {
                 const now = new Date();
                 const weekDate = new Date(
                   now.getFullYear(),
                   now.getMonth(),
-                  now.getDate() - newVal * 7,
+                  now.getDate() - newVal * 7
                 );
                 const y = weekDate.getFullYear();
                 let m = weekDate.getMonth() + 1;
@@ -142,7 +146,9 @@ export default (app, elem, attrs, scope) => {
 
                 $element.data('DateTimePicker').setDate(value);
                 $scope.weekData.week = week;
-                $scope.weekData.year = moment(firstDate, 'YYYY-MM-DD').format('YYYY');
+                $scope.weekData.year = moment(firstDate, 'YYYY-MM-DD').format(
+                  'YYYY'
+                );
                 $scope.weekData.firstDate = firstDate;
                 $scope.weekData.lastDate = lastDate;
 
@@ -166,11 +172,11 @@ export default (app, elem, attrs, scope) => {
                 }, 50);
               }
             });
-            $element.on('dp.change', (e) => {
+            $element.on('dp.change', e => {
               setWeek();
             });
 
-            var weekStyle = function () {
+            var weekStyle = function() {
               let weekStart = 8,
                 selectColor = '#ccc',
                 prevSlice,
@@ -179,7 +185,7 @@ export default (app, elem, attrs, scope) => {
                 nextWeek;
 
               $('.day').hover(
-                function () {
+                function() {
                   const index = $(this).index();
                   if (index < weekStart) {
                     prevSlice = index;
@@ -201,7 +207,7 @@ export default (app, elem, attrs, scope) => {
                     .slice(0, nextSlice)
                     .css('background-color', selectColor);
                 },
-                function () {
+                function() {
                   $(this)
                     .prevAll()
                     .slice(0, prevSlice)
@@ -210,7 +216,7 @@ export default (app, elem, attrs, scope) => {
                     .nextAll()
                     .slice(0, nextSlice)
                     .css('background-color', '');
-                },
+                }
               );
             };
 
