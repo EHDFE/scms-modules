@@ -8,7 +8,7 @@
  * @html <div progress-directive progress-status="progressStatus" reset="reset" style="width:80%"></div>
  */
 export default (app, elem, attrs, scope) => {
-  app.directive('numberSelect', [function ($interval, $timeout) {
+  app.directive('numberSelect', () => {
     return {
       template: '<select-dropdown drop-data="dropData" checked-item="checkedItem"></select-dropdown>',
       restrict: 'EA',
@@ -19,16 +19,9 @@ export default (app, elem, attrs, scope) => {
         end: '@',
         step: '@',
       },
-      compile($element, $attrs, transcludeFn) {
-        // console.log($element,$attrs,transcludeFn)
-      },
-      link($scope, $element, $attrs) {
-
-      },
-
       controller($scope, $element, $attrs, $transclude, $log, $http, G) {
         $scope.dropData = [];
       },
     };
-  }]);
+  });
 };
