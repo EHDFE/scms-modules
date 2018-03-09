@@ -4,7 +4,7 @@ node_js: stable
 deploy:
   provider: pages
   skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  github-token: "$GITHUB_TOKEN"
   local-dir: build
   target-branch: gh-pages
   keep-history: false
@@ -21,4 +21,4 @@ cache:
 
 branches:
   only:
-    - publish
+  - publish
