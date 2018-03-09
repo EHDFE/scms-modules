@@ -1,29 +1,28 @@
-.btn-dropdown{
-    position: relative;
+.btn-dropdown {
+  position: relative;
 }
-.dropdown-toggle{
-    position: relative;
-    padding-right:25px !important;
-    padding-left:12px !important;
-}
-.dropdown-toggle::after{
-    content: "\f107";
-    width:10px;
-    height:10px;
+.dropdown-toggle {
+  position: relative;
+  padding-right: 25px !important;
+  padding-left: 12px !important;
+  &::after {
+    content: '\f107';
+    width: 10px;
+    height: 10px;
     position: absolute;
     right: 8px;
-    top:7px;
+    top: 7px;
     font: normal normal normal 14px/1 FontAwesome;
-    display: inline-block;
+  }
 }
 .open > .dropdown-toggle.btn-default,
 .open > .dropdown-toggle.btn-default:focus,
 .open > .dropdown-toggle.btn-default:active,
-.open > .dropdown-toggle.btn-default{
-    background-color: #fff;
-    border-color: #51A1FD;
-    color:#51A1FD;
+.open > .dropdown-toggle.btn-default {
+  background-color: #fff;
+  border-color: #51a1fd;
+  color: #51a1fd;
 }
-.open .dropdown-toggle::after{
-    content: "\f106";
+.open .dropdown-toggle::after {
+  content: '\f106';
 }
