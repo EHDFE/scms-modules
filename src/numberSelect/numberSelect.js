@@ -7,12 +7,7 @@
  * @lastBy 
  * @html <div progress-directive progress-status="progressStatus" reset="reset" style="width:80%"></div>
  */
-define([
-    'angular',
-], function(
-    angular
-    ) {
-    return function(app, elem, attrs, scope) {
+export default (app, elem, attrs, scope) => {
         app.directive('numberSelect', [function($interval, $timeout) {
             return {
                 template:'<select-dropdown drop-data="dropData" checked-item="checkedItem"></select-dropdown>',
@@ -38,4 +33,3 @@ define([
             };
         }]);
     };
-});
