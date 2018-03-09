@@ -13,12 +13,12 @@ deploy:
     branch: publish
 
 script:
-  - npm run build
+- npm run build
 
 cache:
   directories:
   - node_modules
-
+  
 branches:
   only:
   - publish
