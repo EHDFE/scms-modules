@@ -49,6 +49,8 @@ define(['angular', './tableFixed.css', './tableFixed.html'], function(
                         let headerScrollLeft = 0;
                         let fixLeftTheadLeft = 0;
                         let fixRightTheadLeft = 0;
+                        let fixLeftBorderLeftWidth = 0;
+                        let fixRightBorderLeftWidth = 0;
 
                         let tableBoxScroll = function() {
                             $fixHeaderOuter.scrollLeft($tableBox.scrollLeft());
