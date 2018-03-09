@@ -41,6 +41,7 @@ export default (app, elem, attrs, scope) => {
           function($scope, $element, $attrs, $timeout) {
             $scope.formatDate = $attrs.formatDate;
             $scope.placeholder = $attrs.placeholder;
+            $scope.useSeconds = $attrs.useSeconds;
             var panel = $compile(html)($scope);
             $document.find("#container").append(panel);
             panel.css('display', 'none');

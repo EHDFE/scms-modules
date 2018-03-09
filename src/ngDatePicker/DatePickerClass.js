@@ -638,6 +638,17 @@ class DatePicker {
       second: time.second(),
       data: time,
     };
+
+    if (time.valueOf() > moment([
+      this.dateData.year, 
+      this.dateData.month-1, 
+      this.dateData.date, 
+      this.dateData.hour, 
+      this.dateData.minute,
+      this.dateData.second,
+    ]).valueOf()) {
+      this.dateData = Object.assign({}, this.minDateArr);
+    }
   }
   setMaxDate(date) {
     let formatDate;
@@ -653,6 +664,16 @@ class DatePicker {
       second: time.second(),
       data: time,
     };
+    if (time.valueOf() < moment([
+      this.dateData.year, 
+      this.dateData.month-1, 
+      this.dateData.date, 
+      this.dateData.hour, 
+      this.dateData.minute,
+      this.dateData.second,
+    ]).valueOf()) {
+      this.dateData = Object.assign({}, this.maxDateArr);
+    }
   }
   setHourView() {
     if (!this.dateData.hour) {

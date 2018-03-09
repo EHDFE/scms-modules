@@ -8,25 +8,21 @@
 
     <div class="input-group">
         <span class="input-group-addon">完成时间</span>
-        <span class="input-date-range">
-            <input type="text" class="form-control input-date" ng-model="listDates.datestart" data-date="12-02-2012" data-init-date="-30" date-picker-directive>
-            <span class="input-group-addon input-group-addon-no">-</span>
-            <input type="text" class="form-control input-date" ng-model="listDates.dateend" data-init-date="0" date-picker-directive >
-        </span>
+        <div date-picker-range="" date-range-result="dateRangeResult" start-date-range="startDateRange" end-date-range="endDateRange"></div>
     </div>
 
-    <div class="input-group">
+    <div class="form-group input-group">
         <span class="input-group-addon">分值区间</span>
         <input type="text" class="form-control w100">
-        <span class="input-group-addon">-</span>          
+        <span class="input-group-addon input-group-addon-no">-</span>          
         <input type="text" class="form-control w100">
     </div>
 
     <div class="input-group">
-        <label class="checkbox-inline checkbox-inline-checked">
+        <label class="checkbox-inline" ng-class="{'checkbox-inline-checked': demoSearchFormCheckboxA}" ng-click="demoSearchFormCheckboxA = !demoSearchFormCheckboxA">
             线上支付
-         </label> 
-        <label class="checkbox-inline">
+        </label>
+        <label class="checkbox-inline" ng-class="{'checkbox-inline-checked': demoSearchFormCheckboxB}" ng-click="demoSearchFormCheckboxB = !demoSearchFormCheckboxB">
             线下支付
         </label>
     </div>

@@ -36,6 +36,7 @@ export default (app, elem, attrs, scope) => {
           dateRangeResultData: "=",
           startDateRange: '=', //开始时间
           endDateRange: '=', //结束时间
+          eventChange: '&'
         },
         controller: [
           "$scope",
@@ -74,6 +75,7 @@ export default (app, elem, attrs, scope) => {
               $document.find("#container").append(panel);
               var clickTimes = 0;
               $scope.pick = (data) => {
+                
                 $timeout(() => {
                   if ($scope.dateRangeData&&$scope.dateRangeData.start&&$scope.dateRangeData.end) {
                     $scope.startDate = $scope.dateRangeData.start.format($scope.formatDate);
@@ -87,6 +89,9 @@ export default (app, elem, attrs, scope) => {
                   $scope.dateRangeData = {};
                   $timeout(() => {
                     $scope.$broadcast('refreshDate');
+                    if($scope.eventChange) {
+                      $scope.eventChange();
+                    }
                   });
                 }, 300);
               }
@@ -278,7 +283,11 @@ export default (app, elem, attrs, scope) => {
                 $scope.endDateRange = '';
                 $timeout(() => {
                   $scope.$broadcast('refreshDate');
+                  if($scope.eventChange) {
+                    $scope.eventChange();
+                  }
                 })
+                
               }
           },
         ],

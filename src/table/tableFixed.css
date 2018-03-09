@@ -37,6 +37,7 @@
     position: fixed;
     top: 50px;
     height: 50px;
+    z-index: 1;
 }
 .fixed-table .outer-hide-scroll .fixed{
     position: relative;
