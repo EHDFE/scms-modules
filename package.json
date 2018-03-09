@@ -26,7 +26,10 @@
   "dependencies": {
     "angular-file-upload": "^2.5.0",
     "bootstrap": "^3.3.7",
+    "find-up": "^2.1.0",
     "font-awesome": "^4.7.0",
+    "ladash": "^1.2.0",
+    "lodash": "^4.17.5",
     "mime-match": "^1.0.2",
     "moment": "^2.20.1"
   },
