@@ -3,22 +3,22 @@ node_js: stable
 
 deploy:
   provider: pages
-  skip-cleanup: true
-  github-token: "$GITHUB_TOKEN"
+  skip-cleanup: false
+  github-token: $GITHUB_TOKEN
   local-dir: build
   target-branch: gh-pages
-  keep-history: true
+  keep-history: false
   verbose: true
   on:
     branch: publish
 
 script:
-- npm run build
+  - npm run build
 
 cache:
   directories:
-  - node_modules
+    - node_modules
   
 branches:
   only:
-  - publish
+    - publish
