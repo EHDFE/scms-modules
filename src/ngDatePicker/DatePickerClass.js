@@ -1,5 +1,5 @@
 import moment from 'moment';
-
+console.log(moment('2018-02-23').year())
 const initYear = Array(...Array(12)).map((item, i) => i - 1);
 
 function monthMap(month) {
@@ -37,6 +37,8 @@ class DatePicker {
     this.minDateArr = {};
     this.dateData = {};
     this.showPanel = 'day';
+    this.checkedData = {};
+    this.isCalender = args.isCalender;
   }
   init(date) {
     let formatDate;
@@ -256,6 +258,7 @@ class DatePicker {
         .valueOf();
 
     for (let i = 0; i < 42; i++) {
+      let isToday = false;
       const nowDate = startDate
         .clone()
         .add(i, 'day')
@@ -300,7 +303,9 @@ class DatePicker {
         (tag !== 'new' && tag !== 'old')
       ) {
         tag = 'today';
+        isToday = true;
       }
+
       if (this.dateRange) {
         if (
           this.dateRangeData &&
@@ -328,6 +333,7 @@ class DatePicker {
       } else if (this.weekPick) {
 
       } else if (
+        date && !this.isCalender && 
         nowDate.valueOf() ===
           moment([
             this.dateData.year,
@@ -411,9 +417,11 @@ class DatePicker {
       }
       if (nowDate.day() === 0) {
         dateView.push([{
+          isToday: isToday,
           tag: tag || 'now',
           value: nowDate.date(),
           data: nowDate,
+          dateValue: nowDate.format('YYYY-MM-DD'),
           range,
           weekStart,
           weekBetween,
@@ -423,9 +431,11 @@ class DatePicker {
         dateView[dateView.length - 1].week = nowDate.week();
       } else {
         dateView[dateView.length - 1].push({
+          isToday: isToday,
           tag: tag || 'now',
           value: nowDate.date(),
           data: nowDate,
+          dateValue: nowDate.format('YYYY-MM-DD'),
           range,
           weekStart,
           weekBetween,
