@@ -1,5 +1,5 @@
 import moment from 'moment';
-console.log(moment('2018-02-23').year())
+
 const initYear = Array(...Array(12)).map((item, i) => i - 1);
 
 function monthMap(month) {
