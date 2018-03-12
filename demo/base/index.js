@@ -1,8 +1,8 @@
-import base from "./base.html";
+import base from './base.html';
 
 export default {
-	title: "Base",
-	author: "tianyanrong",
-	html: [base],
-	isCode: false
-}
+  title: 'Base',
+  author: 'tianyanrong',
+  html: [base],
+  isCode: false,
+};

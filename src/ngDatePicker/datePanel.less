@@ -1,0 +1,394 @@
+.date-panel-datetimepicker {
+  display: block;
+  position: static;
+  float: none;
+  margin-top: 1px;
+  z-index: 99999 !important;
+  border: none;
+  display: block;
+
+  table {
+    width: 100%;
+    margin: 0;
+  }
+  thead tr:first-child th {
+    cursor: pointer;
+    &.disabled {
+      cursor: not-allowed !important;
+    }
+  }
+  th {
+    .picker-switch {
+      /* width: 145px; */
+      display: flex;
+      justify-content: space-between;
+    }
+    &.next,
+    &.prev {
+      font-size: 21px;
+    }
+  }
+  .prevYear {
+    background: url("./img/arrow_yearleft_normal.svg") no-repeat center;
+    &:hover {
+      background: url("./img/arrow_yearleft_hover.svg") no-repeat center;
+    }
+  }
+  .nextYear {
+    background: url("./img/arrow_yearright_normal.svg") no-repeat center;
+    &:hover {
+      background: url("./img/arrow_yearright_hover.svg") no-repeat center;
+    }
+  }
+  .prevMonth {
+    background: url("./img/arrow_monthleft_normal.svg") no-repeat center;
+    &:hover {
+      background: url("./img/arrow_monthleft_hover.svg") no-repeat center;
+    }
+  }
+  .nextMonth {
+    background: url("./img/arrow_monthright_normal.svg") no-repeat center;
+    &:hover {
+      background: url("./img/arrow_monthright_hover.svg") no-repeat center;
+    }
+  }
+  td,
+  th {
+    text-align: center;
+    border-radius: 4px;
+  }
+  td {
+    &.old, &.new {
+      color: #b9bec3;
+    }
+    .old {
+      color: #b9bec3;
+    }
+  }
+  .today {
+    color: #51A1FD;
+  }
+  .range .date-item {
+    color: #333;
+    background: #e9eff4;
+  }
+  .hover .date-item {
+    background: #51A1FD;
+    color: #fff;
+    cursor: pointer;
+  }
+  .disabled {
+    /* background-color: #F5F5F5; */
+    color: #B9BEC3;
+    cursor: not-allowed !important;
+  }
+  td.day {
+    height: 32px;
+    /* line-height: 20px; */
+    width: 32px;
+    padding: 0;
+    .date-item {
+      height: 28px;
+      width: 28px;
+      line-height: 28px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    &.disabled {
+      .date-item {
+        height: 28px;
+        width: 28px;
+        color: #b9bec3;
+        background-color: #f5f5f5;
+        /* line-height: 28px; */
+        border-radius: 50%;
+        /* display: inline-block; */
+      }
+    }
+  }
+  td.week, th.week{
+    height: 32px;
+    border-radius: 0;
+    width: 22px;
+    padding: 0;
+    background-color: #F7F7F7;
+  }
+  th.week {
+    color: #6E7382;
+    border-radius: 50% 50% 0 0 ;
+  }
+  td.last-week {
+    border-radius:0 0  50% 50%;
+  }
+  td.day .date-item:hover,
+  td.hour .date-item:hover,
+  td.minute .date-item:hover,
+  td.second .date-item:hover {
+    background: #51A1FD;
+    color: #fff;
+    cursor: pointer;
+  }
+  td.day.disabled .date-item:hover,
+  td.hour .date-item:hover,
+  td.minute .date-item:hover,
+  td.second .date-item:hover {
+    background: #f5f5f5 !important;
+    color: #b9bec3;
+    cursor: not-allowed !important;
+  }
+  .weekpick td.day .date-item:hover {
+    background-color: #fff;
+    color: #333;
+  }
+  .weekpick .week-pick-able td.day .date-item:hover {
+    color: #333;
+    background-color: #E9EFF4;
+  }
+  
+  td.active .date-item,
+  td.active .date-item:hover {
+    background-color: #51A1FD;
+    color: #fff;
+  }
+  
+  .datepicker-days {
+    padding: 15px;
+    .dow {
+      color: #9ba0aa;
+    }
+    .weekpick .week-pick-able:hover .date-item {
+      background-color: #E9EFF4;
+      color: #333;
+    }
+    .weekpick tr:hover .disabled .date-item {
+      color: #b9bec3;
+    }
+  }
+  
+  .time-zone .active,
+  .time-zone .active:hover {
+    color: #51A1FD;
+    font-weight: 700;
+  }
+  
+  .datepicker-months {
+    width: 296px;
+    padding: 16px 8px;
+  }
+  .datepicker-months td span {
+    display: inline-block;
+    width: 42px;
+    height: 30px;
+    line-height: 30px;
+    margin: 6px 14px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 12px;
+  }
+  
+  .datepicker-months td span.disabled {
+    color: #b9bec3;
+    background-color: #f5f5f5;
+  }
+  .datepicker-years {
+    width: 296px;
+    padding: 16px 8px;
+  }
+  .datepicker-years td span {
+    display: inline-block;
+    width: 42px;
+    height: 30px;
+    line-height: 30px;
+    margin: 6px 14px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 12px;
+  }
+  .datepicker-years td span.disabled {
+    display: inline-block;
+    width: 42px;
+    height: 30px;
+    line-height: 30px;
+    margin: 6px 14px;
+    cursor: pointer;
+    font-size: 12px;
+    border-radius: 12px;
+    color: #b9bec3;
+    background-color: #f5f5f5;
+  }
+
+  .month {
+    font-size: 14px;
+  }
+  .year {
+    font-size: 14px;
+  }
+
+  td {
+    span {
+      &.active {
+        background-color: #51A1FD;
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+      }
+      
+      &:hover {
+        background: #51A1FD;
+        color: #fff;
+      }
+      &.disabled:hover {
+        color: #b9bec3;
+      }
+    
+      &.active {
+        background-color: #51A1FD;
+        color: #fff;
+        text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+}
+
+.date-panel-time {
+  padding-right: 20px;
+  .time-title{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  
+  .time-picker {
+    margin-left: 5px;
+    margin-top: 4px;
+    width: 150px;
+    .time-area {
+      overflow: hidden;
+      flex-grow: 1;
+      position: relative;
+    }
+    .time-wrap {
+      overflow: scroll;
+      margin-right: -18px;
+      height: 187px;
+    }
+    .time-zone {
+      text-align: center;
+      cursor: pointer;
+      &:before, 
+      &:after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 70px;
+      }
+      li {
+        line-height: 30px;
+        height: 30px;
+        &:hover {
+          color: #51A1FD;
+        }
+        &.disabled:hover {
+          color: #b9bec3;
+        }
+      }
+    }
+  }
+  .time-picker-title {
+    display: flex;
+    justify-content: space-around;
+    color: #9ba0aa;
+    margin-bottom: 15px;
+  }
+  .time-picker-content {
+    display: flex;
+    align-items: stretch;
+    margin-top: 5px;
+    border: 1px solid #dadde4;
+    border-radius: 3px;
+    height: 170px;
+  }
+  .time-picker-content-wrap {
+    position: relative;
+    &:before,
+    &:after {
+      content: "";
+      top: 50%;
+      position: absolute;
+      margin-top: -15px;
+      height: 30px;
+      z-index: 1;
+      left: 0;
+      right: 0;
+      box-sizing: border-box;
+      padding-top: 6px;
+      text-align: left;
+      border-top: 1px solid #e4e7ed;
+      border-bottom: 1px solid #e4e7ed;
+      margin-left: 12%;
+      margin-right: 12%;
+    }
+  }
+  .scroll-bar-vertical {
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+    z-index: 1;
+    border-radius: 4px;
+    opacity: 1;
+    transition: opacity .12s ease-out;
+    width: 6px;
+    top: 2px;
+  }
+  
+  .time-area:hover .scroll-bar-thumb {
+    opacity: 1;
+  } 
+  
+  .scroll-bar-thumb {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 0;
+    opacity: 0;
+    cursor: pointer;
+    border-radius: inherit;
+    background-color: hsla(220,4%,58%,.3);
+    transition: background-color .3s;
+  }
+}
+.time-picker-only {
+  padding-right: 0px;
+  padding-left: 0px;
+  .time-picker {
+    margin: 5px;
+    margin-top: 20px;
+  }
+  .time-picker-title {
+    margin-bottom: 5px;
+  }
+}
+
+.date-panel-datetimepicker .confirm {
+  border-top: 1px solid #d9d9d9;
+  text-align: center;
+  padding: 5px;
+}
+
+.date-panel-datetimepicker .weekpick .week-pick-able .date-item{
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 32px !important;
+}
+.date-panel-datetimepicker .weekStart  .date-item{
+  border-radius: 60% 0 0 60% !important;
+}
+.date-panel-datetimepicker .weekBetween .date-item {
+  border-radius: 0 !important; 
+}
+.date-panel-datetimepicker .weekEnd .date-item {
+  border-radius: 0 60% 60% 0 !important;
+}
+.date-panel-datetimepicker .datepicker-days .weekpick tr .weekRange .date-item{
+  background-color: #51A1FD !important;
+  color: #fff !important;
+}

@@ -7,18 +7,18 @@
  * @html <input class="form-control input-date" date-picker-directive ng-model='ngModel' min-date="minDate" max-date="maxDate" max-date-value="maxDateValue" min-date-value="minDateValue">
  */
 import angular from 'angular';
-import html from './datePanel.html';
-import './datePanel.css';
+import throttle from 'lodash/throttle';
 import moment from 'moment';
+import html from './datePanel.html';
+import './datePanel.less';
 import DatePicker from './DatePickerClass';
-import { throttle } from './tool';
+import Defaults from './defaults';
 
 export default (app, elem, attrs, scope) => {
   app.directive('datePanel', [
-    'G',
     '$rootScope',
     '$timeout',
-    function (G, $rootScope, $timeout) {
+    function ($rootScope, $timeout) {
       return {
         // require: '?ngModel',
         template: html,
@@ -50,7 +50,7 @@ export default (app, elem, attrs, scope) => {
           function ($scope, $element, $attrs, $timeout) {},
         ],
         link($scope, $element, $attrs, ngModel) {
-          const formatDate = $scope.formatDate || 'YYYY-MM-DD';
+          const formatDate = $scope.formatDate || Defaults.format;
           // @attrs initDate 初始日期字段,它的值为距今天的天数;当值为"null"时,input显示空值, {type:"string", defaultValue: 0}
           $scope.dateRange = $attrs.dateRange;
           $scope.weekPick = $attrs.weekPick;

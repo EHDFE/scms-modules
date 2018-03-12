@@ -8,7 +8,7 @@
  */
 import datePanel from './datePanel';
 import html from './datePickerRange.html';
-import './datePickerRange.css';
+import './datePickerRange.less';
 
 export default (app, elem, attrs, scope) => {
   datePanel(app, elem, attrs, scope);

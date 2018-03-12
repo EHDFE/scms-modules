@@ -8,10 +8,11 @@
  */
 
 import angular from 'angular';
+import moment from 'moment';
 import DatePicker from './DatePickerClass';
 import html from './calendar.html';
 import './calendar.css';
-import moment from 'moment';
+import Defaults from './defaults';
 
 export default (app, elem, attrs, scope) => {
   app.directive('calendar', [
@@ -43,7 +44,7 @@ export default (app, elem, attrs, scope) => {
             $scope.useSeconds = $attrs.useSeconds;
             $scope.minViewMode = $attrs.minViewMode;
             $scope.pickTime = !!$attrs.pickTime;
-            let formatDate = 'YYYY-MM-DD';
+            let formatDate = Defaults.format;
             let isInitComplate = false;
             $scope.checkedDate = $scope.checkedDate || [];
             

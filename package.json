@@ -27,9 +27,7 @@
   "dependencies": {
     "angular-file-upload": "^2.5.0",
     "bootstrap": "^3.3.7",
-    "find-up": "^2.1.0",
     "font-awesome": "^4.7.0",
-    "ladash": "^1.2.0",
     "lodash": "^4.17.5",
     "mime-match": "^1.0.2",
     "moment": "^2.20.1"
@@ -49,7 +47,6 @@
     "clean-webpack-plugin": "^0.1.18",
     "css-loader": "^0.28.7",
     "eslint": "^4.18.2",
-    "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.9.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
