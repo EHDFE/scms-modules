@@ -8,6 +8,9 @@
 .calendar .date-panel-datetimepicker td.day .date-item i{
   font-style: normal;
 }
+.calendar .date-panel-datetimepicker td.active-view .date-item{
+  position: relative;
+}
 .calendar .date-panel-datetimepicker td.active-view .date-item::after{
   width: 5px;
   height:5px;
@@ -15,7 +18,8 @@
   border-radius: 5px;
   position: absolute;
   background: #50A0FC;
-  margin: 30px 0 0 -10px;
+  margin: 29px 0 0 -2px;
+  left:50%;
   display: inline-block;
 }
 .calendar .date-panel-datetimepicker td.day .date-item i.today{
@@ -35,4 +39,16 @@
   background:#50A0FC;
   color: #333;
   cursor: pointer;
+}
+.calendar .date-panel-datetimepicker td.day.status-success .date-item,
+.calendar .date-panel-datetimepicker td.day.status-success .date-item:hover{
+  background:#fff;
+  color: #333;
+  border:1px solid #E9EFF4;
+}
+
+.calendar .date-panel-datetimepicker td.day.status-error .date-item,
+.calendar .date-panel-datetimepicker td.day.status-error .date-item:hover{
+  background:#FE3824;
+  color: #fff;
 }
