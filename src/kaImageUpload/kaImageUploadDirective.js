@@ -13,7 +13,7 @@
  */
 import imageShow from '../imageShow/imageShow';
 import './kaImageUpload.css';
-import html from './kaImageUpload.html';
+import html from './kaImageUpload.template';
 
 export default (app, elem, attrs, scope) => {
   imageShow(app, elem, attrs, scope);

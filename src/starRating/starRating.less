@@ -1,0 +1,19 @@
+/*星星*/
+.star-box {
+  display: inline-block;
+  transform: translateY(4px);
+  .star {
+    display: inline-block;
+    margin-right: 2px;
+    width: 16px;
+    height: 16px;
+		background-image: url('./img/empty.png');
+    background-size: cover;
+    &.star-half {
+      background-image: url('./img/half.png');
+    }
+    &.star-full {
+      background-image: url('./img/full.png');
+    }
+  }
+}
