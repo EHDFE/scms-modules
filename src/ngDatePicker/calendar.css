@@ -34,21 +34,32 @@
   color: #333;
   cursor: pointer;
 }
+.calendar .date-panel-datetimepicker td.day.disabled .date-item:hover,
+{
+  color: #b9bec3;
+}
 .calendar .date-panel-datetimepicker td.day.active .date-item:hover,
 {
   background:#50A0FC;
   color: #333;
   cursor: pointer;
 }
+.calendar .date-panel-datetimepicker td.day.disabled.status-success,
+.calendar .date-panel-datetimepicker td.day.disabled.status-error{
+  cursor: pointer !important;
+}
 .calendar .date-panel-datetimepicker td.day.status-success .date-item,
-.calendar .date-panel-datetimepicker td.day.status-success .date-item:hover{
-  background:#fff;
-  color: #333;
-  border:1px solid #E9EFF4;
+.calendar .date-panel-datetimepicker td.day.status-success .date-item:hover,
+.calendar .date-panel-datetimepicker td.day.disabled.status-success .date-item:hover{
+  color: #fff !important;
+  cursor: pointer !important;
+  background: #6AC00B !important;
 }
 
 .calendar .date-panel-datetimepicker td.day.status-error .date-item,
-.calendar .date-panel-datetimepicker td.day.status-error .date-item:hover{
-  background:#FE3824;
-  color: #fff;
+.calendar .date-panel-datetimepicker td.day.status-error .date-item:hover,
+.calendar .date-panel-datetimepicker td.day.disabled.status-error .date-item:hover{
+  background:#FE3824 !important;
+  color: #fff !important;
+  cursor: pointer !important;
 }
