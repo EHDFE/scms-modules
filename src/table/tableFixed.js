@@ -97,7 +97,7 @@ export default (app, elem, attrs, scope) => {
           $('#container').scroll(containerScroll);
 
           const windowScroll = function () {
-            if ($('.tablebox').width() < 1500) {
+            if ($('.tablebox').length>0&&$('.tablebox').width() < 1500) {
               const scrollLeft = $('html').scrollLeft();
               $('.outer-hide-scroll')[0].style.left = `${headerScrollLeft - scrollLeft}px`;
               $fixLeftThead[0].style.left = `${fixLeftTheadLeft - scrollLeft + fixLeftBorderLeftWidth}px`;
