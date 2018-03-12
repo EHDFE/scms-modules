@@ -186,8 +186,6 @@ export default (app, elem, attrs, scope) => {
             */
             datePicker.init();
             $scope.$watch('checkedDate', function(newValue, old) {
-              console.log(newValue,'===',old, isInitComplate)
-
               if(newValue && !isInitComplate) {
                 isInitComplate = true;
                 getCheckedView(true);
