@@ -1,3 +1,3 @@
 export default (app, elem, attrs, scope) => {
-  app.controller('noPermissionCtrl', [function() {}]);
+  app.controller('noPermissionCtrl', [function () {}]);
 };

@@ -2,27 +2,27 @@
 /**
  * 节流
  * @param {*} fn 回调函数
- * @param {*} threshhold 节流时间 
+ * @param {*} threshhold 节流时间
  */
 export function throttle(fn, threshhold) {
-  let last
-  let timer
-  threshhold || (threshhold = 250)
+  let last;
+  let timer;
+  threshhold || (threshhold = 250);
   return function () {
-    let context = this
-    let args = arguments
-    let now = +new Date()
+    const context = this;
+    const args = arguments;
+    const now = +new Date();
     if (last && now < last + threshhold) {
-      clearTimeout(timer)
-      timer = setTimeout(function () {
-        last = now
-        fn.apply(context, args)
-      }, threshhold)
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        last = now;
+        fn.apply(context, args);
+      }, threshhold);
     } else {
-      last = now
-      fn.apply(context, args)
+      last = now;
+      fn.apply(context, args);
     }
-  }
+  };
 }
 
 /**
@@ -31,13 +31,13 @@ export function throttle(fn, threshhold) {
  * @param {*} delay  延迟时间
  */
 export function debounce(fn, delay) {
-  let timer
+  let timer;
   return function () {
-    let context = this
-    let args = arguments
-    clearTimeout(timer)
-    timer = setTimeout(function () {
-      fn.apply(context, args)
-    }, delay)
-  }
+    const context = this;
+    const args = arguments;
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(context, args);
+    }, delay);
+  };
 }

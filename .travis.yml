@@ -6,19 +6,26 @@ deploy:
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   local-dir: build
-  target-branch: gh-pages
-  keep-history: false
+  committer-from-gh: true
   verbose: true
   on:
     branch: publish
 
-script:
-  - npm run build
-
 cache:
   directories:
+<<<<<<< HEAD
     - node_modules
   
 branches:
   only:
     - publish
+=======
+  - node_modules
+
+script:
+  - npm run build
+
+branches:
+  only:
+    - master
+>>>>>>> master

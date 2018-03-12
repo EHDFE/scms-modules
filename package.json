@@ -4,9 +4,12 @@
   "description": "scmsmodules",
   "repository": "https://github.com/EHDFE/scms-modules.git",
   "scripts": {
+    "lint": "eslint ./src ./scmsUi ./libs ./index.js",
+    "lint-fix": "eslint ./src ./scmsUi ./libs ./index.js --fix",
     "build": "webpack --config ./config/webpack.conf.prod --mode production",
     "server": "webpack-dev-server --config ./config/webpack.conf.dev --mode development --content-base ./docs --history-api-fallback --hot --open",
-    "pack": "rollup --config ./config/rollup.config.js"
+    "pack": "rollup --config ./config/rollup.config.js",
+    "auto-pack": "rollup --config ./config/rollup.config.js --watch"
   },
   "bugs": {
     "url": "http://github.com/EHDFE/scms-modules/issues"
@@ -18,13 +21,16 @@
   ],
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
-  "homepage": "https://managementtest.ehuodi.com/view",
+  "homepage": "https://ehdfe.github.io/scms-modules/",
   "author": "tianyanrong",
   "license": "MIT",
   "dependencies": {
     "angular-file-upload": "^2.5.0",
     "bootstrap": "^3.3.7",
+    "find-up": "^2.1.0",
     "font-awesome": "^4.7.0",
+    "ladash": "^1.2.0",
+    "lodash": "^4.17.5",
     "mime-match": "^1.0.2",
     "moment": "^2.20.1"
   },
@@ -42,6 +48,9 @@
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
     "clean-webpack-plugin": "^0.1.18",
     "css-loader": "^0.28.7",
+    "eslint": "^4.18.2",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
     "html-loader": "^0.5.1",

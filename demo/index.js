@@ -19,7 +19,7 @@ import buttons from "./buttons/index.js";
 demoData = demoData.concat(buttons);
 
 import inputDate from "./inputDate/index.js";
-demoData.push(inputDate);
+demoData = demoData.concat(inputDate);
 
 import nav from "./nav/index.js";
 demoData = demoData.concat(nav);

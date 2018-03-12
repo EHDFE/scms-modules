@@ -1,0 +1,38 @@
+.calendar{
+    position: relative;
+    display: inline-block;
+}
+.calendar .date-panel-datetimepicker td.day{
+  padding:5px 18px;
+}
+.calendar .date-panel-datetimepicker td.day .date-item i{
+  font-style: normal;
+}
+.calendar .date-panel-datetimepicker td.active-view .date-item::after{
+  width: 5px;
+  height:5px;
+  content: '';
+  border-radius: 5px;
+  position: absolute;
+  background: #50A0FC;
+  margin: 30px 0 0 -10px;
+  display: inline-block;
+}
+.calendar .date-panel-datetimepicker td.day .date-item i.today{
+  color:#50A0FC;
+}
+.calendar .date-panel-datetimepicker td.active .date-item i.today{
+  color:#fff;
+}
+.calendar .date-panel-datetimepicker td.day .date-item:hover,
+{
+  background:#E9EFF4;
+  color: #333;
+  cursor: pointer;
+}
+.calendar .date-panel-datetimepicker td.day.active .date-item:hover,
+{
+  background:#50A0FC;
+  color: #333;
+  cursor: pointer;
+}

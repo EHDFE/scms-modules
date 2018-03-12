@@ -1,0 +1,83 @@
+<div class="date-picker calendar">
+    <div class="date-panel date-panel-datetimepicker">
+        <div style="display: flex;">
+            <div class="datepicker" ng-hide="timePick">
+            <div class="datepicker-days" ng-show="datePicker.showPanel==='day'">
+              <table class="table-condensed">
+                <thead>
+                  <tr>
+                    <!--<th class="prev prevYear" ng-click="datePicker.setPreYear('day')" ng-hide="hideYearLeft" ng-class="{disabled: !datePicker.dateView.prevYear}"></th>-->
+                    <th ></th>
+                    <th class="prev prevMonth" ng-class="{disabled: !datePicker.dateView.prevMonth}" ng-hide="hideMonthLeft" ng-click="setPrevMonth()"></th>
+                    <th ng-show="hideMonthLeft"></th>
+                    <th colspan={{weekPick?4:3}} class="picker-switch" ng-click="datePicker.showPanel='month'">{{datePicker.dateData.year}}年{{datePicker.dateData.month}}月 </th>
+                    <th class="next nextMonth" ng-class="{disabled: !datePicker.dateView.nextMonth}" ng-hide="hideMonthRight" ng-click="setNextMonth()"></th>
+                    <th ng-show="hideMonthRight"></th>
+                    <!--<th class="next nextYear" ng-click="datePicker.setNextYear('day')" ng-hide="hideYearRight" ng-class="{disabled: !datePicker.dateView.nextYear}"></th>-->
+                    <th ></th>
+                  </tr>
+                  <tr>
+                    <th class="week" ng-show="weekPick">周</th>
+                    <th class="dow">日</th>
+                    <th class="dow">一</th>
+                    <th class="dow">二</th>
+                    <th class="dow">三</th>
+                    <th class="dow">四</th>
+                    <th class="dow">五</th>
+                    <th class="dow">六</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="rows in datePicker.dateView">
+                    <td class="day" ng-class="{old: col.tag==='old', new: col.tag==='new', active: col.tag==='active', 'active-view': activeValue === col.dateValue, disabled: col.disabled}"
+                      ng-repeat="col in rows"><span class="date-item" ng-click="checked(col)" ng-mousemove="hover(col)"><i  ng-if="!col.isToday">{{col.value}}</i><i class="today" ng-if="col.isToday">今</i></span><i class="active-view"></i></i></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="datepicker-months" ng-show="datePicker.showPanel==='month'">
+              <table class="table-condensed">
+                <thead>
+                  <tr>
+                    <th class="prev prevYear" ng-click="datePicker.setPreYear()" ng-class="{disabled: !datePicker.monthView.prevYear}"></th>
+                    <th colspan="5" class="picker-switch" >{{datePicker.dateData.year}}</th>
+                    <th class="next nextYear" ng-click="datePicker.setNextYear()" ng-class="{disabled: !datePicker.monthView.nextYear}"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="7" style="font-size:0; padding: 0;" >
+                      <span class="month" ng-class="{today: currmonth.today, active: currmonth.checked, disabled: currmonth.disabled}" ng-repeat="currmonth in datePicker.monthView"
+                        ng-click="setMonth(currmonth)">{{currmonth.dataView}}月</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="datepicker-years" ng-show="datePicker.showPanel==='year'">
+              <table class="table-condensed">
+                <thead>
+                  <tr>
+                    <th colspan="7">
+                      <span class="picker-switch">
+                          <span class="prev prevYear" ng-click="datePicker.setPreDecade()" style="width: 35px;height: 20px;" ng-class="{disabled: datePicker.yearView[0].disabled}"></span>
+                          <span colspan="5" class="picker-switch">{{datePicker.yearView[1].data}}-{{datePicker.yearView[10].data}}</span>
+                          <span class="next nextYear" ng-click="datePicker.setNextDecade()" style="width: 35px;height: 20px;" ng-class="{disabled: datePicker.yearView[11].disabled}"></span>
+                      </span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="7" style="font-size:0; padding: 0;">
+                      <span class="year" ng-class="{old: $first||$last, active: curryear.checked, disabled: curryear.disabled}" ng-repeat="curryear in datePicker.yearView"
+                        ng-click="datePicker.setYear(curryear)">{{curryear.data}}</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>

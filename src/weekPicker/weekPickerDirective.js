@@ -47,7 +47,7 @@ export default (app, elem, attrs, scope) => {
             $element
               .data('DateTimePicker')
               .widget.find('.clearWeek')
-              .on('click', function() {
+              .on('click', () => {
                 $scope.weekData.week = '0';
                 $element.val('');
                 $scope.$apply();
@@ -64,35 +64,35 @@ export default (app, elem, attrs, scope) => {
                 var value = $element.val();
               } else {
                 if (num) {
-                  var now = new Date();
-                  var weekDate = new Date(
+                  const now = new Date();
+                  const weekDate = new Date(
                     now.getFullYear(),
                     now.getMonth(),
                     now.getDate() - num * 7
                   );
                   var y = weekDate.getFullYear();
                   var m = weekDate.getMonth() + 1;
-                  m = m < 10 ? '0' + m : m;
+                  m = m < 10 ? `0${m}` : m;
                   var d = weekDate.getDate();
-                  d = d < 10 ? '0' + d : d;
+                  d = d < 10 ? `0${d}` : d;
                 } else {
-                  var date = new Date();
+                  const date = new Date();
                   var y = date.getFullYear();
                   var m = date.getMonth() + 1;
-                  m = m < 10 ? '0' + m : m;
+                  m = m < 10 ? `0${m}` : m;
                   var d = date.getDate();
-                  d = d < 10 ? '0' + d : d;
+                  d = d < 10 ? `0${d}` : d;
                 }
 
-                var value = y + '-' + m + '-' + d;
+                var value = `${y}-${m}-${d}`;
               }
-              var firstDate = moment(value, 'YYYY-MM-DD')
+              const firstDate = moment(value, 'YYYY-MM-DD')
                 .day(1)
                 .format('YYYY-MM-DD');
-              var lastDate = moment(value, 'YYYY-MM-DD')
+              const lastDate = moment(value, 'YYYY-MM-DD')
                 .day(7)
                 .format('YYYY-MM-DD');
-              var week = moment(value, 'YYYY-MM-DD').week();
+              const week = moment(value, 'YYYY-MM-DD').week();
 
               $element.data('DateTimePicker').setDate(value);
               $scope.weekData.week = week;
@@ -102,8 +102,8 @@ export default (app, elem, attrs, scope) => {
               $scope.weekData.firstDate = firstDate;
               $scope.weekData.lastDate = lastDate;
 
-              setTimeout(function() {
-                $element.val(firstDate + ' 到 ' + lastDate);
+              setTimeout(() => {
+                $element.val(`${firstDate} 到 ${lastDate}`);
                 $element
                   .data('DateTimePicker')
                   .widget.find('.day.active')
@@ -114,35 +114,35 @@ export default (app, elem, attrs, scope) => {
                 weekStyle();
                 $('.prev, .next, .month')
                   .off()
-                  .on('click', function() {
-                    setTimeout(function() {
+                  .on('click', () => {
+                    setTimeout(() => {
                       weekStyle();
                     }, 50);
                   });
               }, 50);
             }
 
-            $scope.$watch('defaultWeek', function(newVal) {
+            $scope.$watch('defaultWeek', newVal => {
               if (newVal || newVal === 0) {
-                var now = new Date();
-                var weekDate = new Date(
+                const now = new Date();
+                const weekDate = new Date(
                   now.getFullYear(),
                   now.getMonth(),
                   now.getDate() - newVal * 7
                 );
-                var y = weekDate.getFullYear();
-                var m = weekDate.getMonth() + 1;
-                m = m < 10 ? '0' + m : m;
-                var d = weekDate.getDate();
-                d = d < 10 ? '0' + d : d;
-                var value = y + '-' + m + '-' + d;
-                var firstDate = moment(value, 'YYYY-MM-DD')
+                const y = weekDate.getFullYear();
+                let m = weekDate.getMonth() + 1;
+                m = m < 10 ? `0${m}` : m;
+                let d = weekDate.getDate();
+                d = d < 10 ? `0${d}` : d;
+                const value = `${y}-${m}-${d}`;
+                const firstDate = moment(value, 'YYYY-MM-DD')
                   .day(1)
                   .format('YYYY-MM-DD');
-                var lastDate = moment(value, 'YYYY-MM-DD')
+                const lastDate = moment(value, 'YYYY-MM-DD')
                   .day(7)
                   .format('YYYY-MM-DD');
-                var week = moment(value, 'YYYY-MM-DD').week();
+                const week = moment(value, 'YYYY-MM-DD').week();
 
                 $element.data('DateTimePicker').setDate(value);
                 $scope.weekData.week = week;
@@ -152,8 +152,8 @@ export default (app, elem, attrs, scope) => {
                 $scope.weekData.firstDate = firstDate;
                 $scope.weekData.lastDate = lastDate;
 
-                setTimeout(function() {
-                  $element.val(firstDate + ' 到 ' + lastDate);
+                setTimeout(() => {
+                  $element.val(`${firstDate} 到 ${lastDate}`);
                   $element
                     .data('DateTimePicker')
                     .widget.find('.day.active')
@@ -164,20 +164,20 @@ export default (app, elem, attrs, scope) => {
                   weekStyle();
                   $('.prev, .next, .month')
                     .off()
-                    .on('click', function() {
-                      setTimeout(function() {
+                    .on('click', () => {
+                      setTimeout(() => {
                         weekStyle();
                       }, 50);
                     });
                 }, 50);
               }
             });
-            $element.on('dp.change', function(e) {
+            $element.on('dp.change', e => {
               setWeek();
             });
 
             var weekStyle = function() {
-              var weekStart = 8,
+              let weekStart = 8,
                 selectColor = '#ccc',
                 prevSlice,
                 nextSlice,
@@ -186,7 +186,7 @@ export default (app, elem, attrs, scope) => {
 
               $('.day').hover(
                 function() {
-                  var index = $(this).index();
+                  const index = $(this).index();
                   if (index < weekStart) {
                     prevSlice = index;
                     nextSlice = weekStart - index - 1;
@@ -220,7 +220,7 @@ export default (app, elem, attrs, scope) => {
               );
             };
 
-            $rootScope.$on('$stateChangeStart', function(event, next, curr) {
+            $rootScope.$on('$stateChangeStart', (event, next, curr) => {
               if (
                 $element.data('DateTimePicker') &&
                 $element.data('DateTimePicker').hide
@@ -230,7 +230,7 @@ export default (app, elem, attrs, scope) => {
             });
           },
         ],
-        link: function($scope, $element, $attrs, ngModel) {},
+        link($scope, $element, $attrs, ngModel) {},
       };
     },
   ]);

@@ -3,45 +3,46 @@
  * @description 图片展示
  * @date 2017-08-03
  * @author 程乐
- * @lastBy 
+ * @lastBy
  * @html <img image-show img-url="item.imageurl" alt-text="'卸货凭证'" text-only="显示文字" bg-click="false" mini-img="false">
  */
 import html from './imageShow.html';
 import './imageShow.css';
+
 export default (app, elem, attrs, scope) => {
-            app.directive('imageShow', ['$timeout', '$document', '$compile',
-                function($timeout, $document, $compile) {
-                    return {
-                        template: html,
-                        restrict: 'EA',
-                        replace: true,
-                        scope: {
-                            imgUrl: '=',
-                            altText: '=',
-                            textOnly: '=',
-                            bgClick: '=',
-                            customCss: '=',
-                            clickFun:'=',
-                            miniImg: '='
-                        },
-                        link: function postLink() {
+  app.directive('imageShow', ['$timeout', '$document', '$compile',
+    function ($timeout, $document, $compile) {
+      return {
+        template: html,
+        restrict: 'EA',
+        replace: true,
+        scope: {
+          imgUrl: '=',
+          altText: '=',
+          textOnly: '=',
+          bgClick: '=',
+          customCss: '=',
+          clickFun: '=',
+          miniImg: '=',
+        },
+        link: function postLink() {
 
-                        },
-                        controller: function($scope,$element,$attrs,$transclude,$log,$http,G){
-
-                            var current = 0;
-                            var rotateW,rotateH;
-                            if($scope.miniImg){
-                                if($scope.imgUrl.substr(-4,4) == '.png'){
-                                    $scope.miniImgUrl = $scope.imgUrl.replace('.png','_100x100.png');
-                                }else if($scope.imgUrl.substr(-4,4) == '.jpg'){
-                                    $scope.miniImgUrl = $scope.imgUrl.replace('.jpg','_100x100.jpg');
-                                }else if($scope.imgUrl.substr(-4,4) == '.gif'){
-                                    $scope.miniImgUrl = $scope.imgUrl.replace('.gif','_100x100.gif');
-                                }
-                            }
-                            // $scope.customCss = $scope.customCss || false;
-                            var html = $compile(`
+        },
+        controller($scope, $element, $attrs, $transclude, $log, $http, G) {
+          let current = 0;
+          let rotateW,
+            rotateH;
+          if ($scope.miniImg) {
+            if ($scope.imgUrl.substr(-4, 4) == '.png') {
+              $scope.miniImgUrl = $scope.imgUrl.replace('.png', '_100x100.png');
+            } else if ($scope.imgUrl.substr(-4, 4) == '.jpg') {
+              $scope.miniImgUrl = $scope.imgUrl.replace('.jpg', '_100x100.jpg');
+            } else if ($scope.imgUrl.substr(-4, 4) == '.gif') {
+              $scope.miniImgUrl = $scope.imgUrl.replace('.gif', '_100x100.gif');
+            }
+          }
+          // $scope.customCss = $scope.customCss || false;
+          const html = $compile(`
                             <a href="javascript:;" class="imgShowClosBtn"></a>
                             <div class="imgUrlBox">
                                 <img>
@@ -79,175 +80,180 @@ export default (app, elem, attrs, scope) => {
                                     </span>
                                 </div>`)($scope);
 
-                            if($('.imgUrlBox').length<=0){
-                                $document.find('body').append(html);
-                                $document.find('body').append('<div class="modal-backdrop fade in" style="z-index: 9999;opacity: 0; display:none;" id="imgUrlBoxBG"></div>');
-                            }
-                            // $scope.altText = $scope.altText || '';
-                            $scope.imgClick = function($event,url){
-                                if($event){
-                                    var x= $event.pageX|| $event.clientX+$(window).scrollLeft();
-                                    var y= $event.pageY|| $event.clientY+$(window).scrollTop();
-                                }
+          if ($('.imgUrlBox').length <= 0) {
+            $document.find('body').append(html);
+            $document.find('body').append('<div class="modal-backdrop fade in" style="z-index: 9999;opacity: 0; display:none;" id="imgUrlBoxBG"></div>');
+          }
+          // $scope.altText = $scope.altText || '';
+          $scope.imgClick = function ($event, url) {
+            if ($event) {
+              var x = $event.pageX || $event.clientX + $(window).scrollLeft();
+              var y = $event.pageY || $event.clientY + $(window).scrollTop();
+            }
 
-                                $('.imgUrlBox').css({position:'absolute',top:y,left:x,width:'1px',height:'1px',overflow:'hidden'});
-                                $('.imgUrlBox img').remove();
-                                $('.imgUrlBox').append("<img src="+url+">");//添加大图
-                                $('.imgUrlBox').show();
+            $('.imgUrlBox').css({
+              position: 'absolute', top: y, left: x, width: '1px', height: '1px', overflow: 'hidden',
+            });
+            $('.imgUrlBox img').remove();
+            $('.imgUrlBox').append(`<img src=${url}>`);// 添加大图
+            $('.imgUrlBox').show();
 
-                                var img = new Image();
-                                img.src = $('.imgUrlBox img').attr("src");
-                                img.onload = function(){
-                                    var data = imgData(true,{
-                                        width:img.width,
-                                        height:img.height
-                                    });
-                                    
-                                    $('.imgUrlBox img').css({width:'100%'});
-                                    if(data.imgHeight === 'auto'){
-                                        $('.imgUrlBox').css({left:data.w,top:data.h,width:data.imgWidth,height:'100%',transition:0.2});
-                                        $('#imgUrlBoxBG').show().css({opacity: .8,transition:0.2});
-                                        $timeout(()=>{
-                                            $('.imgShowClosBtn,.imgUrlControl').show();
-                                        },150);
-                                    }else if(data.imgWidth === 'auto'){
-                                        $('.imgUrlBox').css({left:data.w,top:data.h,width:'100%',height:data.imgHeight,transition:0.2});
-                                        $('#imgUrlBoxBG').show().css({opacity: .8,transition:0.2});
-                                        $timeout(()=>{
-                                            $('.imgShowClosBtn,.imgUrlControl').show();
-                                        },150);
-                                    }else{
-                                        $('.imgUrlBox').css({left:data.w,top:data.h,width:data.imgWidth,height:data.imgHeight,transition:0.2});
-                                        $('#imgUrlBoxBG').show().css({opacity: .8,transition:0.2});
-                                        $timeout(()=>{
-                                            $('.imgShowClosBtn,.imgUrlControl').show();
-                                        },150);
-                                    }
-                                }
-                            }
-                            
-                            function imgData(type,obj){
-                                var data = {};
-                                var windowW = $(window).width();
-                                var windowH = $(window).height();
-                                
-                                if(type){
-                                    var realWidth = obj.width;
-                                    var realHeight = obj.height;
-                                }
-                                var imgWidth, imgHeight;  
-                                var scale = 0.9;
-                                if(type){
-                                    if(realHeight>windowH*scale) {
-                                        imgHeight = windowH*scale-80;
-                                        imgWidth = imgHeight/realHeight*realWidth;
-                                        if(imgWidth>windowW*scale) {
-                                            imgWidth = windowW*scale;
-                                        }
-                                    } else if(realWidth>windowW*scale) {
-                                        imgWidth = windowW*scale;
-                                        imgHeight = imgWidth/realWidth*realHeight;
-                                    } else {
-                                        imgHeight = realHeight-80;
-                                        imgWidth = realWidth-80;
-                                    }
-                                    rotateW = imgWidth;
-                                    rotateH = imgHeight;
+            const img = new Image();
+            img.src = $('.imgUrlBox img').attr('src');
+            img.onload = function () {
+              const data = imgData(true, {
+                width: img.width,
+                height: img.height,
+              });
 
-                                    data.x2=windowW/2-realWidth/2+$(window).scrollLeft();//在屏幕居中的坐标
-                                    data.y2=windowH/2-realHeight/2+$(window).scrollTop();
-                                    current = 0;
+              $('.imgUrlBox img').css({ width: '100%' });
+              if (data.imgHeight === 'auto') {
+                $('.imgUrlBox').css({
+                  left: data.w, top: data.h, width: data.imgWidth, height: '100%', transition: 0.2,
+                });
+                $('#imgUrlBoxBG').show().css({ opacity: 0.8, transition: 0.2 });
+                $timeout(() => {
+                  $('.imgShowClosBtn,.imgUrlControl').show();
+                }, 150);
+              } else if (data.imgWidth === 'auto') {
+                $('.imgUrlBox').css({
+                  left: data.w, top: data.h, width: '100%', height: data.imgHeight, transition: 0.2,
+                });
+                $('#imgUrlBoxBG').show().css({ opacity: 0.8, transition: 0.2 });
+                $timeout(() => {
+                  $('.imgShowClosBtn,.imgUrlControl').show();
+                }, 150);
+              } else {
+                $('.imgUrlBox').css({
+                  left: data.w, top: data.h, width: data.imgWidth, height: data.imgHeight, transition: 0.2,
+                });
+                $('#imgUrlBoxBG').show().css({ opacity: 0.8, transition: 0.2 });
+                $timeout(() => {
+                  $('.imgShowClosBtn,.imgUrlControl').show();
+                }, 150);
+              }
+            };
+          };
 
-                                    // 图片旋转
-                                    $('.imgUrlControl .anticlockwise').off().on('click',function(){
-                                        rotate('left');
-                                        return false;
-                                    });
-                                    $('.imgUrlControl .clockwise').off().on('click',function(){
-                                        rotate('right');
-                                        return false;
-                                    });
-                                }else{
-                                    if(!((current/90)%2) || rotateW <= rotateH){
-                                        imgWidth = rotateW;
-                                        imgHeight = rotateH;
-                                    }else{
-                                        if(rotateW>windowH*scale) {
-                                            imgWidth = windowH*scale-80;
-                                            imgHeight = imgWidth/rotateW*rotateH;
-                                            if(imgHeight>windowW*scale) {
-                                                imgHeight = windowW*scale;
-                                            }
-                                            console.log(1)
-                                        } else if(rotateH>windowW*scale) {
-                                            imgHeight = windowW*scale;
-                                            imgWidth = imgHeight/rotateH*rotateW;
-                                            console.log(2)
-                                        } else {
-                                            imgHeight = rotateH;
-                                            imgWidth = rotateW;
-                                            console.log(3)
-                                        }
-                                    }
-                                }
-                                
-                                data.w = (windowW-imgWidth)/2;
-                                data.h = (windowH-imgHeight)/2-50;
-                                if(imgWidth <= 1){
-                                    data.imgWidth = 'auto';
-                                }else{
-                                    data.imgWidth = imgWidth;
-                                }
-                                if(imgHeight <= 1){
-                                    data.imgHeight = 'auto';
-                                }else{
-                                    data.imgHeight = imgHeight;
-                                }
-                                return data;
-                            }
+          function imgData(type, obj) {
+            const data = {};
+            const windowW = $(window).width();
+            const windowH = $(window).height();
+
+            if (type) {
+              var realWidth = obj.width;
+              var realHeight = obj.height;
+            }
+            let imgWidth,
+              imgHeight;
+            const scale = 0.9;
+            if (type) {
+              if (realHeight > windowH * scale) {
+                imgHeight = windowH * scale - 80;
+                imgWidth = imgHeight / realHeight * realWidth;
+                if (imgWidth > windowW * scale) {
+                  imgWidth = windowW * scale;
+                }
+              } else if (realWidth > windowW * scale) {
+                imgWidth = windowW * scale;
+                imgHeight = imgWidth / realWidth * realHeight;
+              } else {
+                imgHeight = realHeight - 80;
+                imgWidth = realWidth - 80;
+              }
+              rotateW = imgWidth;
+              rotateH = imgHeight;
+
+              data.x2 = windowW / 2 - realWidth / 2 + $(window).scrollLeft();// 在屏幕居中的坐标
+              data.y2 = windowH / 2 - realHeight / 2 + $(window).scrollTop();
+              current = 0;
+
+              // 图片旋转
+              $('.imgUrlControl .anticlockwise').off().on('click', () => {
+                rotate('left');
+                return false;
+              });
+              $('.imgUrlControl .clockwise').off().on('click', () => {
+                rotate('right');
+                return false;
+              });
+            } else if (!((current / 90) % 2) || rotateW <= rotateH) {
+              imgWidth = rotateW;
+              imgHeight = rotateH;
+            } else if (rotateW > windowH * scale) {
+              imgWidth = windowH * scale - 80;
+              imgHeight = imgWidth / rotateW * rotateH;
+              if (imgHeight > windowW * scale) {
+                imgHeight = windowW * scale;
+              }
+              console.log(1);
+            } else if (rotateH > windowW * scale) {
+              imgHeight = windowW * scale;
+              imgWidth = imgHeight / rotateH * rotateW;
+              console.log(2);
+            } else {
+              imgHeight = rotateH;
+              imgWidth = rotateW;
+              console.log(3);
+            }
+
+            data.w = (windowW - imgWidth) / 2;
+            data.h = (windowH - imgHeight) / 2 - 50;
+            if (imgWidth <= 1) {
+              data.imgWidth = 'auto';
+            } else {
+              data.imgWidth = imgWidth;
+            }
+            if (imgHeight <= 1) {
+              data.imgHeight = 'auto';
+            } else {
+              data.imgHeight = imgHeight;
+            }
+            return data;
+          }
 
 
-                            $scope.clickFun= $scope.clickFun ;
-                            if($scope.clickFun){
-                                $scope.clickFun.imgClick = $scope.imgClick;
-                            }
+          $scope.clickFun = $scope.clickFun;
+          if ($scope.clickFun) {
+            $scope.clickFun.imgClick = $scope.imgClick;
+          }
 
-                            
 
-                            // 关闭图片
-                            $('.imgShowClosBtn').off().on('click',function(){
-                                clos();
-                                $('.imgUrlControl .clockwise,.imgUrlControl .anticlockwise').off()
-                                return false;
-                            });
-                            if($scope.bgClick){
-                                $('body').off().on('click','#imgUrlBoxBG',function(){
-                                    clos();
-                                    return false;
-                                });
-                            }
-                            function clos(){
-                                current = 0;
-                                $('#imgUrlBoxBG').css({opacity: 0}).hide();
-                                $('.imgUrlBox,.imgShowClosBtn,.imgUrlControl').hide();
-                                $('.imgUrlBox').css("transform",'rotate('+current+'deg)');
-                                $('.imgUrlBox img').css("width",'');
-                            }
-                            function rotate(type){
-                                if(type == 'left'){
-                                    current = (current-90);
-                                }else{
-                                    current = (current+90);
-                                }
-                                var data = imgData();
-                                $('.imgUrlBox').css({left:data.w,top:data.h,height:data.imgHeight,width:data.imgWidth,transform:'rotate('+current+'deg)'});
-                            }
+          // 关闭图片
+          $('.imgShowClosBtn').off().on('click', () => {
+            clos();
+            $('.imgUrlControl .clockwise,.imgUrlControl .anticlockwise').off();
+            return false;
+          });
+          if ($scope.bgClick) {
+            $('body').off().on('click', '#imgUrlBoxBG', () => {
+              clos();
+              return false;
+            });
+          }
+          function clos() {
+            current = 0;
+            $('#imgUrlBoxBG').css({ opacity: 0 }).hide();
+            $('.imgUrlBox,.imgShowClosBtn,.imgUrlControl').hide();
+            $('.imgUrlBox').css('transform', `rotate(${current}deg)`);
+            $('.imgUrlBox img').css('width', '');
+          }
+          function rotate(type) {
+            if (type == 'left') {
+              current -= 90;
+            } else {
+              current += 90;
+            }
+            const data = imgData();
+            $('.imgUrlBox').css({
+              left: data.w, top: data.h, height: data.imgHeight, width: data.imgWidth, transform: `rotate(${current}deg)`,
+            });
+          }
 
-                            $scope.$on('$destroy',function(){
-                                $document.find('.imgUrlBox,.imgUrlControl,.imgShowClosBtn').remove();
-                            });
-
-                        }
-                    };
-                }]);
-    };
+          $scope.$on('$destroy', () => {
+            $document.find('.imgUrlBox,.imgUrlControl,.imgShowClosBtn').remove();
+          });
+        },
+      };
+    }]);
+};
