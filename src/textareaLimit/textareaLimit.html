@@ -1,0 +1,8 @@
+<div class="textareaLimit grid-x-2-1">
+    <input ng-if="rows=='1'" ng-keyup="keupFun($event)" />
+    <textarea ng-if="rows!='1'" rows="{{rows}}"></textarea>
+    <div class="limit-count">
+        <span ng-class="{'limit-count-red':currLength>maxLength}">{{currLength}}/{{maxLength}}</span>
+        <p class="limit-count-red" ng-if="currLength>maxLength">最多只能输入{{maxLength}}个字</p>
+    </div>
+</div>

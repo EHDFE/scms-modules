@@ -1,0 +1,27 @@
+.textareaLimit{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #DADDE4;
+}
+.textareaLimit input,.textareaLimit textarea{
+    border:none;
+    display: inline-block;
+    width: 90%;
+    height: 100%;
+}
+.textareaLimit input{
+    height: 28px;
+    line-height: 30px;
+}
+.textareaLimit textarea{
+    resize: none;
+}
+.textareaLimit textarea:hover,.textareaLimit textarea:active{
+    border: none;
+}
+.textareaLimit .limit-count{
+    text-align: right;
+}
+.textareaLimit .limit-count-red{
+    color: #ff0000;
+}

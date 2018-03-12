@@ -47,6 +47,7 @@ import datePickerRange from './src/ngDatePicker/datePickerRange';
 import buttonDropdown from "./src/buttonDropdown/buttonDropdown";
 import selectDropdown from "./src/selectDropdown/selectDropdown";
 import imageUpload from "./src/imageUpload/imageUpload";
+import textareaLimitDirective from "./src/textareaLimit/textareaLimit";
 
 
 export default {
@@ -85,5 +86,6 @@ export default {
   'ngDatePicker/datePickerRange': datePickerRange,
   'buttonDropdown': buttonDropdown,
   'selectDropdown': selectDropdown,
-  'imageUpload/imageUpload': imageUpload
+  'imageUpload/imageUpload': imageUpload,
+  'textareaLimit/textareaLimit' : textareaLimitDirective
 };
