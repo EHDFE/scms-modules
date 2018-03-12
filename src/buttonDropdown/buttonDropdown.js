@@ -21,7 +21,7 @@ export default function (app, elem, attrs, scope) {
         onChange: '@',
       },
       link($scope, $element, $attrs) {
-        console.log($scope.dropData);
+        //console.log($scope.dropData);
       },
 
       controller($scope, $element, $attrs) {

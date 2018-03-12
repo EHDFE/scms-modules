@@ -10,7 +10,7 @@
             <li ng-show="isShowBeEllipsis">
                 <a href="javascript:void(0);" ng-click="goPage(1);">1</a>
             </li>
-            <li ng-show="isShowBeEllipsis" class="defaultA"><a href="javascript:void(0);">...</a></li>
+            <li ng-show="isShowBeEllipsis && pages[0] !== 2" class="defaultA"><a href="javascript:void(0);">...</a></li>
             <li ng-repeat="item in pages" ng-class="{active: item == currentPage}" >
                 <a href="javascript:void(0)" ng-bind="item" ng-click="goPage(item);"></a>
             </li>

@@ -46,8 +46,7 @@ export default (app, elem, attrs, scope) => {
             $scope.pickTime = !!$attrs.pickTime;
             let formatDate = Defaults.format;
             let isInitComplate = false;
-            $scope.checkedDate = $scope.checkedDate || [];
-            
+            $scope.checkedDate = $scope.checkedDate || [];            
 
             const datePicker = new DatePicker({
               dateRange: $scope.dateRange,
@@ -59,7 +58,6 @@ export default (app, elem, attrs, scope) => {
               isCalender: true
             });
             $scope.datePicker = datePicker;
-            
             
 
             $scope.$watch('minViewMode', (newVal, oldVal) => {
@@ -93,6 +91,7 @@ export default (app, elem, attrs, scope) => {
                   }
                   if(checkedObj[item.dateValue]) {
                     item.tag = 'active';
+                    item.status = checkedObj[item.dateValue].status;
                   }
                   if(item.tag === 'active') {
                     $scope.activeValue = item.data.format(formatDate);
@@ -103,7 +102,7 @@ export default (app, elem, attrs, scope) => {
                   getActiveDate();
                 })
               })
-            }
+            };
 
             
             /* 切换月操作 */
@@ -187,18 +186,29 @@ export default (app, elem, attrs, scope) => {
             */
             datePicker.init();
             $scope.$watch('checkedDate', function(newValue, old) {
-              console.log(newValue,'===',old, isInitComplate)
-
               if(newValue && !isInitComplate) {
                 isInitComplate = true;
                 getCheckedView(true);
               }
-            })
+            });
+
+            $scope.$watch('minDate', (newValue, oldValue) => {
+              if (!newValue) {
+                return;
+              }
+              const initTime = '00:00:00';
+              if (newValue.length > 11) {
+                newValue += initTime.slice(newValue.length - 11);
+              }
+              datePicker.setMinDate(newValue);
+              datePicker.init(datePicker.getResult());
+              getCheckedView(true);
+            });
 
             /*手动选中日期*/
             $scope.checked = function(col) {
               isInitComplate = true;
-              if($scope.isView) {
+              if($scope.isView || col.status || col.disabled) {
                 if(col.tag === 'active') {
                   $scope.activeValue = col.data.format(formatDate);
                   getActiveDate();

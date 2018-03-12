@@ -92,7 +92,7 @@ export default (app, elem, attrs, scope) => {
 
           // 下载文件
           $scope.download = function (event, url) {
-            console.log(url, 8888);
+            //console.log(url, 8888);
             $location.path(url);
           };
 

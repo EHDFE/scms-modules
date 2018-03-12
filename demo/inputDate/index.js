@@ -4,6 +4,8 @@ import weekPicker from "./weekPicker.html";
 import datePickerRange from "./datePickerRange.html";
 import calendar from './calendar.html';
 import calendar2 from './calendar2.html';
+import calendar3 from './calendar3.html';
+import month from './month.html';
 
 export default [{
 	title: "datePicker",
@@ -27,6 +29,13 @@ export default [{
 	isCode: true
 },
 {
+	title: "monthPicker",
+	parentTitle: "DatePickers",
+	author: "tianyanrong",
+	html: [month],
+	isCode: true
+},
+{
 	title: "datePickerRange",
 	parentTitle: "DatePickers",
 	author: "tianyanrong",
@@ -37,6 +46,6 @@ export default [{
 	title: "calendar",
 	parentTitle: "DatePickers",
 	author: "tianyanrong",
-	html: [calendar, calendar2],
+	html: [calendar, calendar2, calendar3],
 	isCode: true
 }]
