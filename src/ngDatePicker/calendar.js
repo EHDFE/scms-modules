@@ -92,6 +92,7 @@ export default (app, elem, attrs, scope) => {
                   }
                   if(checkedObj[item.dateValue]) {
                     item.tag = 'active';
+                    item.status = checkedObj[item.dateValue].status;
                   }
                   if(item.tag === 'active') {
                     $scope.activeValue = item.data.format(formatDate);
@@ -102,7 +103,7 @@ export default (app, elem, attrs, scope) => {
                   getActiveDate();
                 })
               })
-            }
+            };
 
             
             /* 切换月操作 */
@@ -195,7 +196,7 @@ export default (app, elem, attrs, scope) => {
             /*手动选中日期*/
             $scope.checked = function(col) {
               isInitComplate = true;
-              if($scope.isView) {
+              if($scope.isView || col.status) {
                 if(col.tag === 'active') {
                   $scope.activeValue = col.data.format(formatDate);
                   getActiveDate();
