@@ -9,7 +9,7 @@ deploy:
   committer-from-gh: true
   verbose: true
   on:
-    branch: master
+    branch: publish
 
 cache:
   directories:
