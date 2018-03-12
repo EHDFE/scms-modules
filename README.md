@@ -65,7 +65,9 @@ import scmsModules from 'scmsmodules';
 
 构建预览平台发布代码：
 ```sh
-    npm run build
+    git checkout publish
+    git merge 你要发布的代码分支
+    git push origin publish
 ```
 
 

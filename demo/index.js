@@ -19,7 +19,7 @@ import buttons from "./buttons/index.js";
 demoData = demoData.concat(buttons);
 
 import inputDate from "./inputDate/index.js";
-demoData.push(inputDate);
+demoData = demoData.concat(inputDate);
 
 import nav from "./nav/index.js";
 demoData = demoData.concat(nav);
@@ -41,6 +41,9 @@ demoData.push(dialog);
 
 import selectDropdown from "./selectDropdown/index.js";
 demoData.push(selectDropdown);
+
+import numberSelect from "./numberSelect/index.js";
+demoData = demoData.concat(numberSelect);
 
 import form from "./form/index.js";
 demoData = demoData.concat(form);

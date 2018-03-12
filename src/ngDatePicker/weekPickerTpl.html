@@ -1,0 +1,8 @@
+<div class="week-picker-date-container" ng-class="{'week-picker-hasdata': weekData&&weekData.start&&weekData.end}">
+    <div class="week-date input-date-range"  tabindex="-1">
+        <input placeholder="{{startPlaceholder}}" type="text" ng-model="weekData.start" class="form-control input-date">
+        <span class="input-group-addon input-group-addon-no">-</span>
+        <input placeholder="{{endPlaceholder}}" type="text"  ng-model="weekData.end" class="form-control input-date">
+    </div>
+    <span ng-click="clearDate($event)" class="clear-date icon-non-compliant-order"></span>
+</div>

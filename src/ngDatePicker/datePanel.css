@@ -10,10 +10,6 @@
   display: block;
 }
 
-.date-panel-datetimepicker .datepicker {
-  /* padding: 15px; */
-  /* width: 288px; */
-}
 .date-panel-datetimepicker table {
   width: 100%;
   margin: 0;
@@ -96,11 +92,26 @@
   cursor: not-allowed !important;
 }
 .date-panel-datetimepicker td.day {
-  height: 38px;
+  height: 32px;
   /* line-height: 20px; */
-  width: 38px;
-  /* padding: 0; */
+  width: 32px;
+  padding: 0;
 }
+.date-panel-datetimepicker td.week, .date-panel-datetimepicker th.week{
+  height: 32px;
+  border-radius: 0;
+  width: 22px;
+  padding: 0;
+  background-color: #F7F7F7;
+}
+.date-panel-datetimepicker th.week {
+  color: #6E7382;
+  border-radius: 50% 50% 0 0 ;
+}
+.date-panel-datetimepicker td.last-week {
+  border-radius:0 0  50% 50%;
+}
+
 .date-panel-datetimepicker td.day .date-item {
   height: 28px;
   width: 28px;
@@ -118,34 +129,48 @@
   /* display: inline-block; */
 }
 
-.date-panel-datetimepicker td.day:hover .date-item,
-.date-panel-datetimepicker td.hour:hover .date-item,
-.date-panel-datetimepicker td.minute:hover .date-item,
-.date-panel-datetimepicker td.second:hover .date-item {
+.date-panel-datetimepicker td.day .date-item:hover,
+.date-panel-datetimepicker td.hour .date-item:hover,
+.date-panel-datetimepicker td.minute .date-item:hover,
+.date-panel-datetimepicker td.second .date-item:hover {
   background: #51A1FD;
   color: #fff;
   cursor: pointer;
 }
-.date-panel-datetimepicker td.day.disabled:hover .date-item,
-.date-panel-datetimepicker td.hour:hover .date-item,
-.date-panel-datetimepicker td.minute:hover .date-item,
-.date-panel-datetimepicker td.second:hover .date-item {
+.date-panel-datetimepicker td.day.disabled .date-item:hover,
+.date-panel-datetimepicker td.hour .date-item:hover,
+.date-panel-datetimepicker td.minute .date-item:hover,
+.date-panel-datetimepicker td.second .date-item:hover {
   background: #f5f5f5 !important;
   color: #b9bec3;
   cursor: not-allowed !important;
 }
 
+.date-panel-datetimepicker .weekpick td.day .date-item:hover {
+  background-color: #fff;
+  color: #333;
+}
+.date-panel-datetimepicker .weekpick .week-pick-able td.day .date-item:hover {
+  color: #333;
+  background-color: #E9EFF4;
+}
+
 .date-panel-datetimepicker td.active .date-item,
-.date-panel-datetimepicker td.active:hover .date-item {
+.date-panel-datetimepicker td.active .date-item:hover {
   background-color: #51A1FD;
   color: #fff;
-  /* background-color: #51A1FD;
-  
-  text-shadow: 0 -1px 0 rgba(0,0,0,.25); */
+}
+
+.date-panel-datetimepicker .datepicker-days .weekpick .week-pick-able:hover .date-item {
+  background-color: #E9EFF4;
+  color: #333;
+}
+.date-panel-datetimepicker .datepicker-days .weekpick tr:hover .disabled .date-item {
+  color: #b9bec3;
 }
 .date-panel-datetimepicker .time-zone .active,
 .date-panel-datetimepicker .time-zone .active:hover {
-  color: #303133;
+  color: #51A1FD;
   font-weight: 700;
 }
 
@@ -230,6 +255,11 @@
 .date-panel-time {
   padding-right: 20px;
 }
+.time-picker-only {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
 .date-panel-time .time-title{
   text-align: center;
   margin-top: 20px;
@@ -241,20 +271,27 @@
   margin-top: 4px;
   width: 150px;
 }
+.time-picker-only .time-picker {
+  margin: 5px;
+  margin-top: 20px;
+}
 .date-panel-time .time-picker-title {
   display: flex;
   justify-content: space-around;
   color: #9ba0aa;
   margin-bottom: 15px;
 }
+.time-picker-only .time-picker-title {
+  margin-bottom: 5px;
+}
+
 .date-panel-time .time-picker-content {
   display: flex;
   align-items: stretch;
   margin-top: 5px;
   border: 1px solid #dadde4;
   border-radius: 3px;
-  height: 220px;
-  width: 150px;
+  height: 170px;
 }
 .date-panel-time .time-picker-content-wrap {
   position: relative;
@@ -286,7 +323,7 @@
 .date-panel-time .time-picker .time-wrap {
   overflow: scroll;
   margin-right: -18px;
-  height: 237px;
+  height: 187px;
 }
 .date-panel-time .time-picker .time-zone {
   text-align: center;
@@ -298,7 +335,7 @@
   content: "";
   display: block;
   width: 100%;
-  height: 95px;
+  height: 70px;
 }
 
 .date-panel-time .time-picker .time-zone li {
@@ -345,4 +382,28 @@
   border-top: 1px solid #d9d9d9;
   text-align: center;
   padding: 5px;
+}
+
+.date-panel-datetimepicker .weekpick .week-pick-able .date-item{
+  width: 32px !important;
+  height: 32px !important;
+  line-height: 32px !important;
+}
+/* .date-panel-datetimepicker .weekpick .disabled .date-item{
+  width: 28px !important;
+  height: 28px !important;
+  line-height: 28px !important;
+} */
+.date-panel-datetimepicker .weekStart  .date-item{
+  border-radius: 60% 0 0 60% !important;
+}
+.date-panel-datetimepicker .weekBetween .date-item{
+  border-radius: 0 !important; 
+}
+.date-panel-datetimepicker .weekEnd .date-item{
+  border-radius: 0 60% 60% 0 !important;
+}
+.date-panel-datetimepicker .datepicker-days .weekpick tr .weekRange .date-item{
+  background-color: #51A1FD !important;
+  color: #fff !important;
 }

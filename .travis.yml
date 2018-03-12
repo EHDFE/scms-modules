@@ -1,0 +1,23 @@
+language: node_js
+node_js: stable
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  local-dir: build
+  committer-from-gh: true
+  verbose: true
+  on:
+    branch: publish
+
+cache:
+  directories:
+  - node_modules
+
+script:
+  - npm run build
+
+branches:
+  only:
+    - master

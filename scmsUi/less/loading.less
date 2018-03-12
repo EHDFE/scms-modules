@@ -1,5 +1,33 @@
 
 /*loading*/
+/*loading 动画*/
+@-webkit-keyframes scale {
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes scale {
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes rotate {
+  to {
+    -webkit-transform: rotate(405deg);
+            transform: rotate(405deg);
+  }
+}
+@keyframes rotate {
+  to {
+    -webkit-transform: rotate(405deg);
+            transform: rotate(405deg);
+  }
+}
+
 .elayout-loading{
   text-align: center;
   position: absolute;
@@ -56,8 +84,6 @@
   height: 100%;
   background: #fff;
   opacity: 0.1;
-  -webkit-opacity: 0.1;
-  -moz-opacity: 0.1;
   top: 0;
   left: 0;
   position: absolute;

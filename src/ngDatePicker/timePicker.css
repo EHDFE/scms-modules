@@ -1,0 +1,22 @@
+.time-picker-wrap {
+  position: absolute;
+  border: 1px solid #DADDE4;
+  border-radius: 3px;
+  z-index:9999;
+}
+.time-picker-wrap .confirm {
+  text-align: center;
+  border-top: 1px solid #E4E7EF;
+  color: #4B5564;
+  font-size: 14px;
+  font-family: MicrosoftYaHei;
+  cursor: pointer;
+  height: 40px;
+  line-height: 40px;
+}
+
+.time-picker-wrap .date-panel {
+  background: #fff;
+  border-radius: 4px;
+  display: inline-block;
+}

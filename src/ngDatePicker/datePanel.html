@@ -1,6 +1,6 @@
 <div class="date-panel-datetimepicker">
   <div style="display: flex;">
-    <div class="datepicker">
+    <div class="datepicker" ng-hide="timePick">
       <div class="datepicker-days" ng-show="datePicker.showPanel==='day'">
         <table class="table-condensed">
           <thead>
@@ -9,13 +9,14 @@
               <th ng-show="hideYearLeft"></th>
               <th class="prev prevMonth" ng-class="{disabled: !datePicker.dateView.prevMonth}" ng-hide="hideMonthLeft" ng-click="datePicker.setPrevMonth()"></th>
               <th ng-show="hideMonthLeft"></th>
-              <th colspan="3" class="picker-switch" ng-click="datePicker.showPanel='month'">{{datePicker.dateData.year}}年{{datePicker.dateData.month}}月 </th>
+              <th colspan={{weekPick?4:3}} class="picker-switch" ng-click="datePicker.showPanel='month'">{{datePicker.dateData.year}}年{{datePicker.dateData.month}}月 </th>
               <th class="next nextMonth" ng-class="{disabled: !datePicker.dateView.nextMonth}" ng-hide="hideMonthRight" ng-click="datePicker.setNextMonth()"></th>
               <th ng-show="hideMonthRight"></th>
               <th class="next nextYear" ng-click="datePicker.setNextYear('day')" ng-hide="hideYearRight" ng-class="{disabled: !datePicker.dateView.nextYear}"></th>
               <th ng-show="hideYearRight"></th>
             </tr>
             <tr>
+              <th class="week" ng-show="weekPick">周</th>
               <th class="dow">日</th>
               <th class="dow">一</th>
               <th class="dow">二</th>
@@ -25,10 +26,12 @@
               <th class="dow">六</th>
             </tr>
           </thead>
-          <tbody ng-mouseleave="mouseleave()">
-            <tr ng-repeat="rows in datePicker.dateView" >
-              <td class="day" ng-class="{old: col.tag==='old', new: col.tag==='new', today: col.tag==='today', active: col.tag==='active', disabled: col.disabled, range: col.range, hover: col.tag === 'hover'}"
-                ng-click="datePicker.setDate(col)" ng-repeat="col in rows"><span class="date-item" ng-mousemove="hover(col)">{{col.value}}</span></td>
+          <tbody ng-mouseleave="mouseleave()" ng-class="{'weekpick': weekPick}">
+            <tr ng-repeat="rows in datePicker.dateView"  ng-class="{'week-pick-able': !(rows[0].disabled||rows[6].disabled) }">
+              <td class="week" ng-show="weekPick" ng-class="{'last-week': $index === 5}">{{rows.week}} </td>
+              <td class="day" ng-class="{old: col.tag==='old', new: col.tag==='new', today: col.tag==='today', active: col.tag==='active', disabled: col.disabled, range: col.range, hover: col.tag === 'hover', 
+                weekStart: !col.disabled&&weekPick&&($index === 0), weekBetween: !col.disabled&&weekPick&&(($index>0)&&($index<6)), weekEnd: !col.disabled&&weekPick&&($index === 6), weekRange:(col.weekStart||col.weekBetween||col.weekEnd)}"
+                ng-repeat="col in rows"><span class="date-item" ng-click="datePicker.setDate(col)" ng-mousemove="hover(col)">{{col.value}}</span></td>
             </tr>
           </tbody>
         </table>
@@ -76,8 +79,8 @@
         </table>
       </div>
     </div>
-    <div class="date-panel-time" ng-show="pickTime">
-      <div class="time-title">时间</div>
+    <div class="date-panel-time" ng-show="pickTime||timePick" ng-class="{'time-picker-only':timePick }">
+      <div class="time-title" ng-hide="timePick">时间</div>
       <div class="time-picker">
         <div class="time-picker-title">          
           <div class="text-center">
@@ -86,8 +89,8 @@
           <div class="text-center">
             分
           </div>
-          <div class="text-center">
-            时
+          <div class="text-center" ng-show="showSeconds">
+            秒
           </div>
         </div>
         <div class="time-picker-content-wrap">
@@ -99,7 +102,7 @@
                 </ul>
               </div>
               <div class="scroll-bar-vertical">
-                <div class="scroll-bar-thumb" style="height:24.175%;" ></div>
+                <div class="scroll-bar-thumb" style="height:19.767%;" ></div>
               </div>
             </div>
             <div class="time-area"> 
@@ -109,17 +112,17 @@
                 </ul>
               </div>
               <div class="scroll-bar-vertical">
-                <div class="scroll-bar-thumb" style="height:11.055%;" ></div>
+                <div class="scroll-bar-thumb" style="height:8.865%;" ></div>
               </div>
             </div>
-            <div ng-show="useSeconds" class="time-area">
+            <div ng-show="showSeconds" class="time-area">
               <div class="time-wrap" data-func="setSecond">
                 <ul class="time-zone" >
                   <li ng-class="{active: currsecond.active, disabled: currsecond.disabled, first: currsecond.first, last: currsecond.last  }"  data-value={{currsecond.value}} data-index={{$index}} data-disabled={{currsecond.disabled}} ng-click="setSecond(currsecond, $index)" ng-repeat="currsecond in datePicker.secondView">{{currsecond.value}}</li>
                 </ul>
               </div>
               <div class="scroll-bar-vertical">
-                <div class="scroll-bar-thumb" style="height:11.055%;" ></div>
+                <div class="scroll-bar-thumb" style="height:8.865%;" ></div>
               </div>
             </div>
           </div>

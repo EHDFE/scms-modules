@@ -1,0 +1,8 @@
+
+<div type="text" calendar  init-date="null" checked-date="calendarCheckedDate" active-date="activeCalendarDate" is-view="calendarIsView" delete-active-date-fn="deleteCalendarActiveDateFn"></div>
+<div class="mt10">[checkedDate]选中的所有日期：{{calendarCheckedDate}}</div>
+<div class="mt10">[activeDate]查看的当前日期：{{activeCalendarDate}}</div>
+<div class="mt10">
+    <button class="btn btn-default" ng-click="calendarIsView = !calendarIsView">切换<span ng-if="!calendarIsView">查看</span><span ng-if="calendarIsView">编辑</span>模式</button>
+    <button class="btn btn-default" ng-click="deleteCalendarActiveDateFn();">删除当天排班</button>
+</div>

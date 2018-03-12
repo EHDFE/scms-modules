@@ -1,19 +1,24 @@
-<h2>日期选择{{aa}}</h2>
-<div ng-code-directive>
-	<input placeholder="结束时间" type="text" date-picker class="form-control input-date"   init-date="null" ng-model="aa">
+<h2>日期选择</h2>
+<div>
+    <input placeholder="结束时间" type="text" date-picker  init-date="null" ng-model="aa">
+</div>
+
+<h2>月选择</h2>
+<div>
+    <input placeholder="结束时间" type="text" date-picker  min-view-mode="months" format-date="YYYY-MM"
+        init-date="null" ng-model="month">
+    <div>选中的月份 {{month}}</div>
 </div>
 
 <h2>日期时间选择</h2>
-<input placeholder="结束时间" type="text" date-picker pick-time="true" use-seconds="true" init-date="0" ng-model="bb"  format-date="YYYY-MM-DD HH:mm:ss"  class="form-control input-date-time">
+<div>
+    <input placeholder="结束时间" type="text" min-date="'2018-03-08 11:34:23'" date-picker pick-time="true" use-seconds="true" init-date="0" ng-model="bb" format-date="YYYY-MM-DD HH:mm:ss">
+</div>
 
-<h2>范围--日期选择</h2>
-<div date-picker-range  date-range-result="dateRangeResult"></div>
-
-<!-- <h2>范围--日期时间选择</h2>
-<div class="input-date-range">
-    <input placeholder="开始时间" type="text" class="form-control input-date-time">
-    <span class="input-group-addon input-group-addon-no">-</span>
-    <input placeholder="结束时间" type="text" class="form-control input-date-time">
-</div> -->
+<h2>日期时间选择(无秒选择)</h2>
+<div>
+    <input placeholder="结束时间" type="text" date-picker pick-time="true" use-seconds="false" init-date="0" ng-model="nosecond"
+        format-date="YYYY-MM-DD HH:mm" />
+</div>
 
 

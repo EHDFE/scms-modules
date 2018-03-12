@@ -3,7 +3,7 @@ import match from 'mime-match';
 import html from './index.html';
 
 export default (app, elem, attrs, scope) => {
-  app.directive('fileUploader', [function(){
+  app.directive('fileUploader', [function () {
     return {
       template: html,
       restrict: 'EA',
@@ -17,14 +17,14 @@ export default (app, elem, attrs, scope) => {
         name: '@', // 发到后台的文件参数名 默认 ‘file’,
       },
       transclude: true,
-      link: function(scope, element) {
+      link(scope, element) {
         const input = document.getElementById('upload-trigger');
-        element.on('click', scope.triggerId, e => {
+        element.on('click', scope.triggerId, (e) => {
           input.value = null;
           input.click();
         });
       },
-      controller: function($scope) {
+      controller($scope) {
         $scope.errorMsg = null;
 
         if (typeof FormData !== 'function') {
@@ -47,17 +47,16 @@ export default (app, elem, attrs, scope) => {
             const acceptList = accept.split(',');
             const fileType = file.type;
             const fileExt = file.name.split('.').pop();
-            const matched = acceptList.some(rule => {
+            const matched = acceptList.some((rule) => {
               if (rule.includes('/')) {
                 // match mime type
                 return match(rule, fileType);
-              } else {
-                // match extname
-                return fileExt === rule;
               }
+              // match extname
+              return fileExt === rule;
             });
             if (matched) return false;
-            return `不接受选择的文件类型！`;
+            return '不接受选择的文件类型！';
           },
         };
 
@@ -74,7 +73,7 @@ export default (app, elem, attrs, scope) => {
             upload(hook);
           }
         };
-        const upload = file => {
+        const upload = (file) => {
           const acceptValidateResult = validator.accept(file, $scope.accept);
           if (acceptValidateResult) {
             $scope.$apply(() => {
@@ -85,21 +84,21 @@ export default (app, elem, attrs, scope) => {
           const formData = new FormData();
           formData.append($scope.name || 'file', file);
           if ($scope.data) {
-            Object.keys($scope.data).forEach(key => {
+            Object.keys($scope.data).forEach((key) => {
               formData.append(key, $scope.data[key]);
             });
           }
 
           $.ajax({
-            url:  $scope.action,
+            url: $scope.action,
             type: 'POST',
             data: formData,
-            processData: false,  // 不处理数据
-            contentType: false   // 不设置内容类型
-          }).done(data => {
+            processData: false, // 不处理数据
+            contentType: false, // 不设置内容类型
+          }).done((data) => {
             const res = JSON.parse(data);
             if (res.status === 500 || res.result === 'error') {
-              console.warn('[FILEUPLAODER failed]')
+              console.warn('[FILEUPLAODER failed]');
               console.warn(res);
               $scope.onChange(res);
               $scope.$apply(() => {
@@ -111,7 +110,7 @@ export default (app, elem, attrs, scope) => {
                 $scope.errorMsg = null;
               });
             }
-          }).fail(err => {
+          }).fail((err) => {
             $scope.$apply(() => {
               if (typeof err === 'object') {
                 $scope.errorMsg = err.toString();
@@ -120,7 +119,7 @@ export default (app, elem, attrs, scope) => {
               }
             });
           });
-          
+
           // fetch($scope.action, {
           //   method: 'POST',
           //   body: formData,
@@ -152,8 +151,7 @@ export default (app, elem, attrs, scope) => {
         };
 
         $(input).on('change', handleUpload);
-        
-      }
-    }
+      },
+    };
   }]);
 };

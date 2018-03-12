@@ -15,7 +15,7 @@
 }
 .fixed-table .fix-header{
     position: absolute;
-    width: 1500px;
+    min-width: 1500px;
     top: 0;
 }
 .fixed-table .fix-right{
@@ -37,6 +37,7 @@
     position: fixed;
     top: 50px;
     height: 50px;
+    z-index: 1;
 }
 .fixed-table .outer-hide-scroll .fixed{
     position: relative;
@@ -53,4 +54,12 @@
 }
 .fixed-table .right-box-shadow{
     box-shadow: -6px 0 6px -4px rgba(0, 0, 0, 0.15);
+}
+.fixed-table .scroll-thead th{
+    border: none;
+}
+.fixed-table .table > tbody > tr.fix-table-hover, 
+table.table > tbody > tr:nth-of-type(even).fix-table-hover, 
+table.table > tbody > tr:nth-of-type(odd).fix-table-hover{
+    background: #E1E7ED;
 }

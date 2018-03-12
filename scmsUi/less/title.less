@@ -1,5 +1,5 @@
 /*带小圆点的标题*/
-.title-point{
+.title-point {
   font-size: 14px;
   color: #666;
   padding-left: 15px;
@@ -8,38 +8,38 @@
   background-size: 6px;
 }
 
-.title-square{
-	font-size: 14px;
-	color: #1E283C;
-}
-.title-square::before{
-	width:3px;
-	height:14px;
-	content:"";
-	background: #51A1FD;
-	display:inline-block;
-	margin-right:7px;
-	float:left;
-	margin-top:3px;
+.title-square {
+	display: flex;
+  font-size: 14px;
+	color: #1e283c;
+	align-items: center;
+	
+  &::before {
+    content: '';
+    margin-right: 7px;
+    width: 3px;
+    height: 14px;
+    background: #51a1fd;
+  }
 }
 
-.control-label-line{
-	position: relative;
-	width: 100%;
-	font-weight:normal;
-}
-.control-label-line i{
-	width: 100%;
-	display: block;
-	border-top:1px solid #ccc;
-	height: 15px;
-	margin-top:10px;
-}
-.control-label-line span{
-	position: absolute;
-	top: 50%;
-	margin-top: -15px;
-	background: #fff;
-	padding-right: 30px;
-	font-size: 18px;
+.control-label-line {
+  position: relative;
+  width: 100%;
+  font-weight: normal;
+	i {
+		width: 100%;
+		display: block;
+		border-top: 1px solid #ccc;
+		height: 15px;
+		margin-top: 10px;
+	}
+	span {
+		position: absolute;
+		top: 50%;
+		margin-top: -15px;
+		background: #fff;
+		padding-right: 30px;
+		font-size: 18px;
+	}
 }

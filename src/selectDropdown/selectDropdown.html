@@ -1,15 +1,20 @@
 <div class="btn-group form-content">
-    <input type="text" ng-model="inputVlue" ng-disabled="disabled" class="dropdown-toggle form-control" ng-transclude type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <input type="text" ng-model="inputVlue" ng-disabled="disabled" class="dropdown-toggle form-control" ng-transclude type="button"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <span class="glyphicon glyphicon-menu-down form-control-feedback" aria-hidden="true"></span>
     <div class="dropdown-menu">
         <ul>
             <dt class="dropdown-header" ng-if="mode==='group'" ng-repeat="item in dropData">
                 {{ item.name }}
                 <ul>
-                    <li ng-repeat="item1 in item.values" ng-click="checked(item1,$index);" ng-class="{'active' : item1.$$hashKey == itemId }"><a>{{ item1.name }}</a></li>
+                    <li ng-repeat="item1 in item.values" ng-click="checked(item1,$index);" ng-class="{'active' : item1.$$hashKey == itemId }">
+                        <a>{{ item1.name }}</a>
+                    </li>
                 </ul>
             </dt>
-            <li ng-repeat="item in dropData" ng-if="!mode" ng-click="checked(item,$index);" ng-class="{'active' : item.$$hashKey == itemId }"><a>{{ item.name }}</a></li>
+            <li ng-repeat="item in dropData" ng-if="!mode" ng-click="checked(item,$index);" ng-class="{'active' : item.$$hashKey == itemId }">
+                <a>{{ item.name }}</a>
+            </li>
         </ul>
     </div>
 </div>
