@@ -51,6 +51,7 @@ import selectDropdown from './src/selectDropdown/selectDropdown';
 import imageUpload from './src/imageUpload/imageUpload';
 
 import numberSelect from './src/numberSelect/numberSelect';
+import circleSchedule from './src/circleSchedule/circleSchedule';
 
 
 export default {
@@ -94,4 +95,5 @@ export default {
   selectDropdown,
   'imageUpload/imageUpload': imageUpload,
   numberSelect,
+  'circleSchedule/circleSchedule': circleSchedule
 };
