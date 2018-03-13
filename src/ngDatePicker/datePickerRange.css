@@ -19,3 +19,31 @@
   border-radius: 4px;
   display: flex;
 }
+
+.date-picker-range .date-btn-box{
+  background: #fff;
+  border-top:1px solid #eee;
+  overflow: hidden;
+  padding:8px 20px;
+}
+.date-picker-range .date-btn-box .btn{
+  float: right;
+}
+.date-picker-range .date-btn-box span{
+  float: left;
+  line-height: 25px;
+  font-size: 12px;
+  color:#666;
+  border:1px solid #eee;
+  height: 25px;
+  padding:0 10px;
+  border-radius: 4px;
+  color:#51A1FD;
+}
+.date-picker-range{
+  border-radius: 4px;
+  overflow: hidden;
+}
+.date-picker-range .date-panel-datetimepicker .datepicker-days{
+  padding-bottom:10px;
+}

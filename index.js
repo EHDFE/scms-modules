@@ -46,6 +46,7 @@ import datePickerRange from './src/ngDatePicker/datePickerRange';
 import weekPicker from './src/ngDatePicker/weekPicker';
 import timePicker from './src/ngDatePicker/timePicker';
 import calendar from './src/ngDatePicker/calendar';
+import calendarPanel from './src/ngDatePicker/calendarPanel';
 import buttonDropdown from './src/buttonDropdown/buttonDropdown';
 import selectDropdown from './src/selectDropdown/selectDropdown';
 import imageUpload from './src/imageUpload/imageUpload';
@@ -90,6 +91,7 @@ export default {
   'ngDatePicker/weekPicker': weekPicker,
   'ngDatePicker/timePicker': timePicker,
   'ngDatePicker/calendar': calendar,
+  'ngDatePicker/calendarPanel': calendarPanel,
   buttonDropdown,
   selectDropdown,
   'imageUpload/imageUpload': imageUpload,

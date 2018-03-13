@@ -105,7 +105,7 @@ export default (app, elem, attrs, scope) => {
           });
 
           $scope.$on('$destroy', () => {
-            tip.destroy();
+            $document.find('.tooltip').remove();
           });
         },
 

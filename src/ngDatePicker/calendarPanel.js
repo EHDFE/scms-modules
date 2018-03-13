@@ -8,14 +8,13 @@
  */
 
 import angular from 'angular';
-import moment from 'moment';
 import DatePicker from './DatePickerClass';
-import html from './calendar.html';
-import './calendar.css';
-import Defaults from './defaults';
+import html from './calendarPanel.html';
+import './calendarPanel.css';
+import moment from 'moment';
 
 export default (app, elem, attrs, scope) => {
-  app.directive('calendar', [
+  app.directive('calendarPanel', [
     'G',
     '$rootScope',
     '$document',
@@ -35,6 +34,15 @@ export default (app, elem, attrs, scope) => {
           activeDate: '='//@scope activeDate 当前查看日期 {type:'object', exampleValue:"{year:'2018',month:'2', date:'28', value:'2018-02-28'}"}
         },
         replace: true,
+        transclude: true,
+        compile: function(tEle, tAttrs, transcludeFn) {
+            
+            console.log(tEle, tAttrs, transcludeFn)
+            return transcludeFn(function(data) {
+                console.log(111, data)
+            })
+            
+        },
         controller: [
           '$scope',
           '$element',
@@ -44,7 +52,7 @@ export default (app, elem, attrs, scope) => {
             $scope.useSeconds = $attrs.useSeconds;
             $scope.minViewMode = $attrs.minViewMode;
             $scope.pickTime = !!$attrs.pickTime;
-            let formatDate = Defaults.format;
+            let formatDate = 'YYYY-MM-DD';
             let isInitComplate = false;
             $scope.checkedDate = $scope.checkedDate || [];            
 
@@ -186,7 +194,8 @@ export default (app, elem, attrs, scope) => {
             */
             datePicker.init();
             $scope.$watch('checkedDate', function(newValue, old) {
-              if(newValue && newValue.length && !newValue[0].year && newValue[0].value) {
+              if(newValue && !isInitComplate) {
+                isInitComplate = true;
                 getCheckedView(true);
               }
             });
