@@ -8,10 +8,11 @@
  */
 
 import angular from 'angular';
+import moment from 'moment';
 import DatePicker from './DatePickerClass';
 import html from './calendar.html';
 import './calendar.css';
-import moment from 'moment';
+import Defaults from './defaults';
 
 export default (app, elem, attrs, scope) => {
   app.directive('calendar', [
@@ -43,10 +44,9 @@ export default (app, elem, attrs, scope) => {
             $scope.useSeconds = $attrs.useSeconds;
             $scope.minViewMode = $attrs.minViewMode;
             $scope.pickTime = !!$attrs.pickTime;
-            let formatDate = 'YYYY-MM-DD';
+            let formatDate = Defaults.format;
             let isInitComplate = false;
-            $scope.checkedDate = $scope.checkedDate || [];
-            
+            $scope.checkedDate = $scope.checkedDate || [];            
 
             const datePicker = new DatePicker({
               dateRange: $scope.dateRange,
@@ -58,7 +58,6 @@ export default (app, elem, attrs, scope) => {
               isCalender: true
             });
             $scope.datePicker = datePicker;
-            
             
 
             $scope.$watch('minViewMode', (newVal, oldVal) => {
@@ -191,12 +190,25 @@ export default (app, elem, attrs, scope) => {
                 isInitComplate = true;
                 getCheckedView(true);
               }
-            })
+            });
+
+            $scope.$watch('minDate', (newValue, oldValue) => {
+              if (!newValue) {
+                return;
+              }
+              const initTime = '00:00:00';
+              if (newValue.length > 11) {
+                newValue += initTime.slice(newValue.length - 11);
+              }
+              datePicker.setMinDate(newValue);
+              datePicker.init(datePicker.getResult());
+              getCheckedView(true);
+            });
 
             /*手动选中日期*/
             $scope.checked = function(col) {
               isInitComplate = true;
-              if($scope.isView || col.status) {
+              if($scope.isView || col.status || col.disabled) {
                 if(col.tag === 'active') {
                   $scope.activeValue = col.data.format(formatDate);
                   getActiveDate();

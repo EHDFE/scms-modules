@@ -6,6 +6,7 @@ import babel from 'rollup-plugin-babel';
 import html from 'rollup-plugin-html';
 import filesize from 'rollup-plugin-filesize';
 import clear from 'rollup-plugin-clear';
+import image from 'rollup-plugin-img';
 import autoprefixer from 'autoprefixer';
 import postcssCopy from 'postcss-copy';
 import pkg from '../package.json';
@@ -42,6 +43,9 @@ const plugins = [
   cssPlugin,
   htmlPlugin,
   babelPlugin,
+  image({
+    output: './dist/assets',
+  }),
   filesize(),
 ];
 

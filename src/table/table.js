@@ -10,6 +10,7 @@
 import paginationDirective from '../pagination/paginationDirective';
 import errorNoDataDirective from '../errorNoData/errorNoDataDirective';
 import tableFixedDirective from './tableFixed';
+import html from './index.html';
 
 export default (app, elem, attrs, scope) => {
   paginationDirective(app);
@@ -18,23 +19,13 @@ export default (app, elem, attrs, scope) => {
   app.directive('tableDirective', [
     '$cookies',
     '$http',
-    'G',
     'allRouterData',
     '$rootScope',
     '$state',
     '$timeout',
-    function (
-      $cookies,
-      $http,
-      G,
-      allRouterData,
-      $rootScope,
-      $state,
-      $timeout,
-    ) {
+    function($cookies, $http, allRouterData, $rootScope, $state, $timeout) {
       return {
-        template:
-              '<div class="tablebox" ng-transclude></div><div ng-show="fixedTable" fixed-col="fixedPosition" table-fixed-directive></div><div ng-show="hasPagination"><div pagination-directive current-page="currPage" total-count="totalCount" page-size="pageSize" onchanged="fetch" hide-page-size="hidePageSize"></div></div><div error-no-data-directive show-by="isNoData"></div>',
+        template: html,
         scope: {
           apiUrl: '=', // @scope apiUrl 依赖后端api接口地址 {type: "string",exampleValue: '/scms/scmsmodules/table/data.json'}
           fetch: '=', // @scope fetch 获取数据的函数 {type: "function"}
@@ -53,26 +44,25 @@ export default (app, elem, attrs, scope) => {
         restrict: 'EA',
         transclude: true,
         link: function postLink($scope, $element, $attrs) {
-          G = $;
           // @attrs method http类型 {type: "string", defaultValue: "post"}
           $element.css({
             position: 'relative',
             'min-height': '200px',
           });
           // @attrs isPagination 是否显示分页 {type: "string", defaultValue: "true"}
-          $scope.hasPagination =
-                $attrs.hasPagination !== 'false';
+          $scope.hasPagination = $attrs.hasPagination !== 'false';
           $scope.hidePageSize = $attrs.hidePageSize || false;
           $scope.currPage = $scope.currPage || 1;
           $scope.fetchParam = $scope.fetchParam || {};
+
           if (
             localStorage.fetchParamList &&
-                !$scope.disableStorage &&
-                localStorage.fromInnerToTable === 'true'
+            !$scope.disableStorage &&
+            localStorage.fromInnerToTable === 'true'
           ) {
             try {
               const localStorageArray = JSON.parse(localStorage.fetchParamList);
-              angular.forEach(localStorageArray, (param) => {
+              angular.forEach(localStorageArray, param => {
                 if ($state.current.name === param.state) {
                   $timeout(() => {
                     $scope.fetchParam = JSON.parse(param.fetchParamObj);
@@ -86,12 +76,12 @@ export default (app, elem, attrs, scope) => {
           }
           $scope.items = [];
           $scope.pageSize =
-                $scope.pageSize || parseInt($cookies.pageSize, 10) || 15;
-          $scope.fetch = function (options) {
+            $scope.pageSize || parseInt($cookies.pageSize, 10) || 15;
+          $scope.fetch = function(options) {
             if (!$scope.apiUrl) {
               return;
             }
-            G.loading(true, {
+            $.loading(true, {
               $container: $element,
             });
 
@@ -106,26 +96,28 @@ export default (app, elem, attrs, scope) => {
               for (const key in $scope.params) {
                 if (
                   $scope.params[key] === '' ||
-                      $scope.params[key] === undefined
+                  $scope.params[key] === undefined
                 ) {
                   delete $scope.params[key];
                 }
               }
             }
 
-            const pageParams = $scope.hasPagination ? {
-              pageSize: $scope.pageSize,
-              skipCount: ($scope.currPage - 1) * $scope.pageSize,
-            } : {};
+            const pageParams = $scope.hasPagination
+              ? {
+                pageSize: $scope.pageSize,
+                skipCount: ($scope.currPage - 1) * $scope.pageSize,
+              }
+              : {};
 
             $http({
               url: $scope.apiUrl,
               method: $attrs.method || 'post',
-              data: angular.extend({}, $scope.params, pageParams),
+              data: Object.assign({}, $scope.params, pageParams),
               isDebug: $attrs.isDebug,
               test: $attrs.test,
             }).then(
-              (data) => {
+              data => {
                 if (data && data.data) {
                   data = data.data;
                   $scope.totalCount = data.count || 0;
@@ -141,81 +133,80 @@ export default (app, elem, attrs, scope) => {
                     $scope.formatData($scope.items, $scope.totalCount);
                   }
                 }
-                G.loading(false, {
+                $.loading(false, {
                   $container: $element,
                 });
               },
               () => {
                 $scope.totalCount = 0;
                 $scope.items = [];
-                G.loading(false, {
+                $.loading(false, {
                   $container: $element,
                 });
-              },
+              }
             );
           };
 
-          $rootScope.$on('$stateChangeStart', (
-            state,
-            next,
-            nextParam,
-            current,
-            currentParam,
-          ) => {
-            try {
-              let localStorageArray = [];
+          $rootScope.$on(
+            '$stateChangeStart',
+            (state, next, nextParam, current, currentParam) => {
+              try {
+                let localStorageArray = [];
 
-              let fromTableToInner = false,
-                fromInnerToTable = false,
-                fetchParamStorage = {};
-              angular.forEach(allRouterData, (router) => {
-                if (
-                  router.state === next.name &&
-                      router.inNav === current.name
-                ) {
-                  fromTableToInner = true;
-                } else if (
-                  router.state === current.name &&
-                      router.inNav === next.name
-                ) {
-                  fromInnerToTable = true;
-                }
-              });
-
-              if (fromTableToInner) {
-                fetchParamStorage.currPage = $scope.currPage;
-              }
-              if (fromInnerToTable) {
-                localStorage.currPage = fetchParamStorage.currPage;
-              }
-
-              localStorage.fromInnerToTable = fromInnerToTable;
-              fetchParamStorage.state = current.name;
-              fetchParamStorage.fetchParamObj = JSON.stringify($scope.fetchParam);
-
-              let foundState = false;
-              if (localStorage.fetchParamList) {
-                localStorageArray = JSON.parse(localStorage.fetchParamList);
-                angular.forEach(localStorageArray, (param) => {
-                  if (current.name === param.state) {
-                    param.fetchParamObj = fetchParamStorage.fetchParamObj;
-                    param.currPage = fetchParamStorage.currPage;
-                    foundState = true;
+                let fromTableToInner = false,
+                  fromInnerToTable = false,
+                  fetchParamStorage = {};
+                angular.forEach(allRouterData, router => {
+                  if (
+                    router.state === next.name &&
+                    router.inNav === current.name
+                  ) {
+                    fromTableToInner = true;
+                  } else if (
+                    router.state === current.name &&
+                    router.inNav === next.name
+                  ) {
+                    fromInnerToTable = true;
                   }
                 });
-              }
-              if (!foundState) {
-                localStorageArray.push(fetchParamStorage);
-              }
 
-              localStorage.fetchParamList = JSON.stringify(localStorageArray);
-            } catch (e) {
-              console.log(e);
+                if (fromTableToInner) {
+                  fetchParamStorage.currPage = $scope.currPage;
+                }
+                if (fromInnerToTable) {
+                  localStorage.currPage = fetchParamStorage.currPage;
+                }
+
+                localStorage.fromInnerToTable = fromInnerToTable;
+                fetchParamStorage.state = current.name;
+                fetchParamStorage.fetchParamObj = JSON.stringify(
+                  $scope.fetchParam
+                );
+
+                let foundState = false;
+                if (localStorage.fetchParamList) {
+                  localStorageArray = JSON.parse(localStorage.fetchParamList);
+                  angular.forEach(localStorageArray, param => {
+                    if (current.name === param.state) {
+                      param.fetchParamObj = fetchParamStorage.fetchParamObj;
+                      param.currPage = fetchParamStorage.currPage;
+                      foundState = true;
+                    }
+                  });
+                }
+                if (!foundState) {
+                  localStorageArray.push(fetchParamStorage);
+                }
+
+                localStorage.fetchParamList = JSON.stringify(localStorageArray);
+              } catch (e) {
+                console.warn(e);
+              }
             }
-          });
+          );
 
           if ($scope.fixedTable) {
-            $scope.domReady = function ($last) {
+            $scope.domReady = function($last) {
               if ($last) {
                 $timeout(() => {
                   $rootScope.$broadcast('angularDomReady', $element);
@@ -225,15 +216,7 @@ export default (app, elem, attrs, scope) => {
           }
         },
 
-        controller(
-          $scope,
-          $element,
-          $attrs,
-          $transclude,
-          $log,
-          $http,
-          G,
-        ) {},
+        controller($scope, $element, $attrs, $transclude, $log, $http) {},
       };
     },
   ]);

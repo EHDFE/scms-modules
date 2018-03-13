@@ -8,7 +8,7 @@
  */
 import datePanel from './datePanel';
 import html from './datePicker.html';
-import './datePicker.css';
+import './datePicker.less';
 
 export default (app, elem, attrs, scope) => {
   datePanel(app, elem, attrs, scope);
@@ -40,21 +40,21 @@ export default (app, elem, attrs, scope) => {
             $scope.pickTime = !!$attrs.pickTime;
             $scope.formatDate = $attrs.formatDate;
             $document.find('body').append(panel);
-            $scope.pick = function (data) {
+            $scope.pick = () => {
               $scope.$broadcast('selectTime');
               $element.trigger('blur');
             };
 
             $element.bind('focus', (e) => {
               e.stopPropagation();
-              let pos = e.target.getBoundingClientRect(),
-                offset = panel.offset(),
-                tipHeight = panel.outerHeight(),
-                tipWidth = panel.outerWidth(),
-                elWidth = pos.width || pos.right - pos.left,
-                elHeight = pos.height || pos.bottom - pos.top,
-                tipOffset = 0,
-                scrollWidth = $('body')[0].scrollWidth;
+              const pos = e.target.getBoundingClientRect();
+              const offset = panel.offset();
+              // const tipHeight = panel.outerHeight();
+              // const tipWidth = panel.outerWidth();
+              // const elWidth = pos.width || pos.right - pos.left;
+              const elHeight = pos.height || pos.bottom - pos.top;
+              const tipOffset = 0;
+              // const scrollWidth = $('body')[0].scrollWidth;
               offset.top = pos.top + elHeight + tipOffset;
               offset.left = pos.left;
               panel.css('display', 'inline-block');

@@ -1,9 +1,9 @@
-import gridX from "./gridX.html";
-import gridY from "./gridY.html";
+import gridX from './gridX.html';
+import gridY from './gridY.html';
 
 export default {
-	title: "Grid",
-	author: "tianyanrong",
-	html: [gridX, gridY],
-	isCode: true
-}
+  title: 'Grid',
+  author: 'tianyanrong',
+  html: [gridX, gridY],
+  isCode: true,
+};

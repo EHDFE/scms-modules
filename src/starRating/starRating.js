@@ -7,7 +7,7 @@
  * @html <span star-rating num="datanum"></span>
  */
 import html from './starRating.html';
-import './starRating.css';
+import './starRating.less';
 
 export default (app, elem, attrs, scope) => {
   app.directive('starRating', [
@@ -27,10 +27,6 @@ export default (app, elem, attrs, scope) => {
           $scope,
           $element,
           $attrs,
-          $transclude,
-          $log,
-          $http,
-          G,
         ) {
           function dispose(data) {
             $element.html('');

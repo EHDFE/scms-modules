@@ -13,15 +13,17 @@ import tpl from './datePickerRangeTpl.html';
 import './datePickerRangeTpl.css';
 import html from './datePickerRange.html';
 import './datePickerRange.css';
+import { preventBlur } from './utils';
+
+import Defautls from './defaults';
 
 export default (app, elem, attrs, scope) => {
   datePanel(app, elem, attrs, scope);
   app.directive('datePickerRange', [
-    'G',
     '$rootScope',
     '$document',
     '$compile',
-    function (G, $rootScope, $document, $compile) {
+    function ($rootScope, $document, $compile) {
       return {
         require: '?ngModel',
         template: tpl,
@@ -49,9 +51,9 @@ export default (app, elem, attrs, scope) => {
             $scope.useSeconds = !!$attrs.useSeconds;
             $scope.minViewMode = $attrs.minViewMode;
             $scope.pickTime = !!$attrs.pickTime;
-            $scope.formatDate = $attrs.formatDate || 'YYYY-MM-DD';
-            $scope.startPlaceholder = $attrs.startPlaceholder || '开始时间';
-            $scope.endPlaceholder = $attrs.endPlaceholder || '结束时间';
+            $scope.formatDate = $attrs.formatDate || Defautls.format;
+            $scope.startPlaceholder = $attrs.startPlaceholder || Defautls.lang.start;
+            $scope.endPlaceholder = $attrs.endPlaceholder || Defautls.lang.end;
             function initDate() {
               $timeout(() => {
                 $scope.dateRangeResult = {
@@ -189,22 +191,6 @@ export default (app, elem, attrs, scope) => {
               $element.find('.input-date-range').trigger('blur');
               return false;
             });
-            function preventBlur(elem, func) {
-              let fnDocumentMousedown;
-              angular.element(elem).bind('focus', () => {
-                $document.bind('mousedown', fnDocumentMousedown = function (event) {
-                  if (func(event.target)) {
-                    event.target.setAttribute('unselectable', 'on');
-                    event.preventDefault();
-                  } else if (event.target != elem) {
-                    $document.unbind('mousedown', fnDocumentMousedown);
-                  }
-                });
-              });
-              angular.element(elem).bind('blur', () => {
-                $document.unbind('mousedown', fnDocumentMousedown);
-              });
-            }
             $scope.$on('refresh', (e, data) => {
               $scope.$broadcast('refreshDate', data);
             });
