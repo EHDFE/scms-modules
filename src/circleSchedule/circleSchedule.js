@@ -4,7 +4,7 @@
  * @date 2018-03-13
  * @author 程乐
  * @lastBy
- * @html 
+ * @html <canvas circle-schedule percent="percent" ops="ops"  id="canvas1" width="200" height="200" ></canvas>
  */
 export default (app, elem, attrs, scope) => {
     app.directive('circleSchedule', [function () {
@@ -39,13 +39,10 @@ export default (app, elem, attrs, scope) => {
                 /*控制运动*/
                 var context=canvasC.getContext('2d');
                 var windowW=parseInt($(canvasC).parent().width());
-                var lineW1=15;
+                var lineW1=canvasC.width/10;
                 var lineW0=5;
                 var R1;
-                // if(windowW>500){
-                //     lineW1=15;
-                //     // lineW0=1;
-                // }
+                
                 var canvasW=canvasC.width;
                 var R1=parseInt(canvasW/2-lineW1-lineW0-10);
                 var ra=parseInt(canvasW/2-lineW0/2-5);
