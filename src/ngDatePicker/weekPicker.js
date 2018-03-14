@@ -97,19 +97,19 @@ export default (app, elem, attrs, scope) => {
               if ($.contains($element[0], target)) {
                 return true;
               }
-              if ($(target).parent().parent().find('.day')
-                .hasClass('disabled')) {
+              if ($(target).parents('.day').hasClass('disabled')) {
                 return true;
               }
-              if (
-                $(target)
-                  .parent()
-                  .hasClass('day')
-              ) {
-                $scope.pick();
-              }
-              if ($element[0] === target || ($.contains(panel[0], target))) {
+              
+              if(
+                $.contains(panel[0], target) && 
+                (!$(target).parents('.day').length || $(target).parents('.day').siblings('.disabled').length)) {
                 return true;
+              }
+              else {
+                if ($(target).parents('.day').length) {
+                  $scope.pick();
+                }
               }
               return false;
             });
