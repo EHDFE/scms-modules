@@ -1,0 +1,47 @@
+.calendar-panel{
+    position: relative;
+    display: block;
+}
+.calendar-panel .date-panel{
+    display: block;
+}
+.calendar-panel .date-panel-datetimepicker td.day{
+  padding:5px 18px;
+}
+.calendar-panel .datepicker-days table td{
+    text-align: left;
+}
+
+.calendar-panel .datepicker-days dl{
+    border:1px solid #ddd;
+    margin:0px;
+    border-radius: 3px;
+}
+.calendar-panel .datepicker-days .active dl{
+    border-color:#51a1fd;
+}
+.calendar-panel .datepicker-days .status-success dl{
+    border-color:#ddd;
+    background: #f0f7e7;
+}
+.calendar-panel .datepicker-days .status-error dl{
+    border-color:#ddd;
+    background: #fee4e1;
+}
+.calendar-panel .datepicker-days dl dt{
+    height: 80px;
+    line-height: 80px;
+    border-right:1px solid #ddd;
+    background: #f1f1f1;
+    color:#666;
+    width:25px;
+    text-align: center;
+    font-weight: bold;
+}
+.calendar-panel .datepicker-days dl dt i{
+    font-style: normal;
+}
+.calendar-panel .datepicker-days .old dl dt,
+.calendar-panel .datepicker-days .new dl dt{
+    font-weight: normal;
+}

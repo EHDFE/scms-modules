@@ -9,13 +9,13 @@
 import angular from 'angular';
 import throttle from 'lodash/throttle';
 import moment from 'moment';
-import html from './datePanel.html';
+import html from './datePanelItem.html';
 import './datePanel.less';
-import DatePicker from './DatePickerClass';
+import DatePicker from './DateRangeClass';
 import Defaults from './defaults';
 
 export default (app, elem, attrs, scope) => {
-  app.directive('datePanel', [
+  app.directive('datePanelItem', [
     '$rootScope',
     '$timeout',
     function ($rootScope, $timeout) {
@@ -40,7 +40,7 @@ export default (app, elem, attrs, scope) => {
           watchDate: '=',
           tmpDate: '=',
           weekPickerData: '=',
-          onPickEvent: '='
+
         },
         controller: [
           '$scope',
@@ -148,14 +148,6 @@ export default (app, elem, attrs, scope) => {
             } else if (date) {
               return date;
             }
-          }
-
-          $scope.pickEvent = function(col) {
-            datePicker.setDate(col);
-            try{
-              $scope.onPickEvent(col, $scope.dateRangeData);
-            }
-            catch(e) {}
           }
 
           $scope.hover = throttle((col) => {
@@ -274,9 +266,29 @@ export default (app, elem, attrs, scope) => {
             true,
           );
 
-          $scope.$watch('date', function(newvalue) {
-            datePicker.setDateView(datePicker.getResult());
-          })
+          $scope.$watch(
+            'datePicker.dateRangeData',
+            (newVal) => {
+              if (newVal) {
+                if ($scope.dateRange) {
+                  if (
+                    $scope.dateRangeData.start &&
+                    $scope.dateRangeData.start.valueOf() ===
+                      $scope.datePicker.dateRangeData &&
+                    $scope.datePicker.dateRangeData.start.valueOf() &&
+                    $scope.dateRangeData.end &&
+                    $scope.dateRangeData.end.valueOf() ===
+                      $scope.datePicker.dateRangeData.end &&
+                    $scope.datePicker.dateRangeData.end.valueOf()
+                  ) {
+                    return;
+                  }
+                  $scope.dateRangeData = newVal;
+                }
+              }
+            },
+            true,
+          );
 
           $scope.$watch('dateRangeData', (newVal) => {
             if (newVal && $scope.dateRange) {
@@ -366,6 +378,8 @@ export default (app, elem, attrs, scope) => {
           /**
            * 时间选择相关 函数
            */
+
+
           $scope.setHour = (hour, $index) => {
             datePicker.setHour(hour);
             if (!hour.disabled) {
