@@ -62,7 +62,7 @@ export default (app, elem, attrs, scope) => {
                     var startAa=-Math.PI/2;
                     var startA=0;
                     var Timer;
-                    var preSceond=100/(Math.PI*2);
+                    // var preSceond=100/(Math.PI*2);
                 
                     function drawScreen(){
                         if(startA<rotataRadians){
@@ -83,8 +83,9 @@ export default (app, elem, attrs, scope) => {
                         context.arc(0,0,R1,0,Math.PI*2,false);
                         context.stroke();
                         context.closePath();
+
+
                         context.beginPath();
-                        
                         var gradient2 = context.createLinearGradient(R1, 0,-R1,0);
                         gradient2.addColorStop(0, innerColorStart);
                         gradient2.addColorStop(1, innerColorEnd);
