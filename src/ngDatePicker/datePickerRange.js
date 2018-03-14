@@ -35,10 +35,10 @@ export default (app, elem, attrs, scope) => {
           maxDateValue: '=', // @scope maxDateValue 最大可选日期,距今天天数 {type:"number"}
           initStartDate: '=', // @scope initDateStart 初始日期,它的值为距今天的天数 {type:"number"}
           initEndDate: '=', // @scope initDateEnd 初始日期,它的值为距今天的天数 {type:"number"}
-          dateRangeResultData: '=',
+          //dateRangeResultData: '=',
           startDateRange: '=', // 开始时间
           endDateRange: '=', // 结束时间
-          eventChange: '&',
+          eventChange: '&' //当时间范围发生改变时，会触发时方式
         },
         controller: [
           '$scope',
@@ -47,56 +47,105 @@ export default (app, elem, attrs, scope) => {
           '$timeout',
           function ($scope, $element, $attrs, $timeout) {
             
+            $scope.isHideClose = $attrs.isHideClose;
             const panel = $compile(html)($scope);
             panel.css('display', 'none');
-            $scope.useSeconds = !!$attrs.useSeconds;
-            $scope.minViewMode = $attrs.minViewMode;
-            $scope.pickTime = !!$attrs.pickTime;
+            $document.find('#container').append(panel);
+            //$scope.useSeconds = !!$attrs.useSeconds;
+            //$scope.minViewMode = $attrs.minViewMode;
+            //$scope.pickTime = !!$attrs.pickTime;
             $scope.formatDate = $attrs.formatDate || Defautls.format;
             $scope.startPlaceholder = $attrs.startPlaceholder || Defautls.lang.start;
             $scope.endPlaceholder = $attrs.endPlaceholder || Defautls.lang.end;
-            function initDate() {
-              $timeout(() => {
-                $scope.dateRangeResult = {
-                  start: '',
-                  end: '',
-                };
-                if ($scope.startDateRange) {
-                  $scope.dateRangeResult.start = $scope.startDateRange;
-                } else if ($scope.initStartDate && ($scope.initStartDate !== 'null') || $scope.initStartDate === 0) {
-                  $scope.dateRangeResult.start = $scope.startDate;
-                }
-                if ($scope.endDateRange) {
-                  $scope.dateRangeResult.end = $scope.endDate = $scope.endDateRange;
-                } else if ($scope.initEndDate && ($scope.initEndDate !== 'null') || $scope.initEndDate === 0) {
-                  $scope.dateRangeResult.end = $scope.endDate;
-                }
-              });
+
+            /*
+             * 设置外部scope的值,触发外部scope事件
+             * start 开始时间值 如，'2018-03-02'
+             * end 结束时间值
+             * isFetch 是否需要触发外部scope事件
+             */
+            let setOutValue = function(start, end, isFetch) {
+              $scope.startDateRange = start;
+              $scope.endDateRange = end;
+              if ($scope.eventChange && isFetch) {
+                $timeout(function() {
+                  $scope.eventChange();
+                })
+              }
             }
-            initDate();
-            $document.find('#container').append(panel);
             
             /*
-             * 获取范围值
+             * 处理初始数据、面板数据
+             * isInit 值为：true 时是否是初始时执行，初始时需要处理设置的默认时间initStartDate、initEndDate
+             * isInit 值为：false 时，处理面板数据。
+             * $scope.dateRangeData 范围数据，用于在面板中选中范围
+             * $scope.startDate 范围数据，用于在面板中显示第一个面板在此时间的月份
+             * $scope.endDate 范围数据，用于在面板中显示第二个面板在此时间的月份
+             */
+            function initDate(isInit) {
+              if(isInit && $scope.initStartDate && ($scope.initEndDate || $scope.initEndDate === 0)) {
+                if(!$scope.startDateRange && !$scope.endDateRange) {
+                  $scope.endDate = moment().format($scope.formatDate);
+                  $scope.startDate = moment().add(-1, 'month').format($scope.formatDate); 
+                  $scope.startValue = $scope.startDate;
+                  $scope.endValue = $scope.endDate;                  
+                  setOutValue($scope.startValue, $scope.endValue)
+                }
+              }
+              if(isInit) {
+                return;
+              }
+              if($scope.startDateRange && $scope.endDateRange) {
+                if($scope.startDateRange.substr(0,7) === $scope.endDateRange.substr(0,7)) {
+                  $scope.startDate = $scope.startDateRange;
+                  $scope.endDate =  moment($scope.startDate).add(1, 'month').format($scope.formatDate);
+                  $scope.startValue = $scope.startDate;
+                  $scope.endValue = $scope.endDateRange;
+                  $scope.dateRangeData = {
+                    start: moment($scope.startValue),
+                    end: moment($scope.endValue)
+                  }
+                }
+                else {
+                  $scope.startDate = $scope.startDateRange;
+                  $scope.endDate = $scope.endDateRange;
+                  $scope.startValue = $scope.startDate;
+                  $scope.endValue = $scope.endDate;
+                  $scope.dateRangeData = {
+                    start: moment($scope.startValue),
+                    end: moment($scope.endValue)
+                  }
+                }
+              }
+              else{
+                if($scope.dateRangeData && $scope.dateRangeData.start) {
+
+                }
+                else {
+                  $scope.startDate = moment().format($scope.formatDate);
+                  $scope.endDate = moment().add(1, 'month').format($scope.formatDate);  
+                }               
+              }
+            };
+
+            initDate(true);
+            
+            /*
+             * 当面板中触发了“点击日期”事件，设置值。
              */
             $scope.onPickEvent = function(date, dateRangeData) {
-              $scope.startValue = dateRangeData.start.format('YYYY-MM-DD') || '';
-              $scope.endValue = dateRangeData.end.format('YYYY-MM-DD') || '';
-              $scope.endDate = dateRangeData.start.format('YYYY-MM-DD') || '';
-              $scope.startDate = dateRangeData.end.format('YYYY-MM-DD') || '';
+              $scope.startValue = dateRangeData.start.format($scope.formatDate) || '';
+              $scope.endValue = dateRangeData.end.format($scope.formatDate) || '';
+              $scope.endDate = dateRangeData.start.format($scope.formatDate) || '';
+              $scope.startDate = dateRangeData.end.format($scope.formatDate) || '';
             }
-
+            
+            /*
+             * 点“确认”提交选中的时间范围
+             */
             $scope.pick = () => {
-              $scope.startDateRange = $scope.startValue;
-              $scope.endDateRange = $scope.endValue;
-              $scope.dateRangeResult = {
-                start: $scope.startValue,
-                end: $scope.endDateRange
-              }
+              setOutValue($scope.startValue, $scope.endValue, true)
               $element.find('.input-date-range').trigger('blur');
-              if ($scope.eventChange) {
-                $scope.eventChange();
-              }
             };
 
             /*
@@ -116,61 +165,11 @@ export default (app, elem, attrs, scope) => {
               offset.left = pos.left;
               panel.css('display', 'inline-block');
               panel.offset(offset);
-
+              initDate();
               $timeout(() => {
-                if($scope.initStartDate && $scope.initEndDate+'') {
-                  if(!$scope.startDateRange && !$scope.endDateRange) {
-                    $scope.endDate = moment().format($scope.formatDate);
-                    $scope.startDate = moment().add(-1, 'month').format($scope.formatDate); 
-                    $scope.startValue = $scope.startDate;
-                    $scope.endValue = $scope.endDate;
-                    $scope.dateRangeData = {
-                      start: moment($scope.startValue),
-                      end: moment($scope.endValue)
-                    }
-                  }
-                }
-                if($scope.startDateRange && $scope.endDateRange) {
-                  if($scope.startDateRange.substr(0,7) === $scope.endDateRange.substr(0,7)) {
-                    $scope.startDate = $scope.startDateRange;
-                    $scope.endDate =  moment($scope.startDate).add(1, 'month').format($scope.formatDate);
-                    $scope.startValue = $scope.startDate;
-                    $scope.endValue = $scope.endDateRange;
-                    $scope.dateRangeData = {
-                      start: moment($scope.startValue),
-                      end: moment($scope.endValue)
-                    }
-                  }
-                  else {
-                    $scope.startDate = $scope.startDateRange;
-                    $scope.endDate = $scope.endDateRange;
-                    $scope.startValue = $scope.startDate;
-                    $scope.endValue = $scope.endDate;
-                    $scope.dateRangeData = {
-                      start: moment($scope.startValue),
-                      end: moment($scope.endValue)
-                    }   
-                  }
-                }
-                else{
-                  if($scope.dateRangeData && $scope.dateRangeData.start) {
-
-                  }
-                  else {
-                    $scope.startDate = moment().format($scope.formatDate);
-                    $scope.endDate = moment().add(1, 'month').format($scope.formatDate);  
-                  }
-                    
-                                  
-                }
-
-                $timeout(() => {
-                  $scope.$broadcast('init');
-                });
-
+                $scope.$broadcast('init');
               });
-            }
-
+            };
             $element.find('input').on('focus', (e) => {
               $element.find('.input-date-range').focus();
             });
@@ -207,8 +206,6 @@ export default (app, elem, attrs, scope) => {
                   $document.unbind("mousedown",fnDocumentMousedown);
               });
             }
-
-            //
             $scope.$on('refresh', (e, data) => {
               $scope.$broadcast('refreshDate', data);
             });
@@ -221,15 +218,21 @@ export default (app, elem, attrs, scope) => {
               $document.find('.date-picker-range').remove();
             });
 
-            $scope.clearDate = () => {
-              $scope.dateRangeResult = {};
-              $scope.startDateRange = '';
-              $scope.endDateRange = '';
+            /*
+             * 点关闭图标时，删除已选中的时间范围
+             */
+            $scope.clearDate = () => {              
+              $scope.startValue = '';
+              $scope.endValue = '';
+              $scope.startDate = '';
+              $scope.endDate = '';
+              $scope.dateRangeData = {
+                start: '',
+                end: ''
+              }
+              setOutValue($scope.startValue, $scope.endValue, true)
               $timeout(() => {
                 $scope.$broadcast('refreshDate');
-                if ($scope.eventChange) {
-                  $scope.eventChange();
-                }
               });
             };
           },

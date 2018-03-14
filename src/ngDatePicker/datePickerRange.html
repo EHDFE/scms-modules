@@ -6,7 +6,7 @@
       date="endDate" use-seconds="useSeconds" part="right" name="part2" watch-date="startDate" tmp-date="datePicker.tmpDate" date-range-data="dateRangeData" min-view-mode="minViewMode" pick-time="pickTime" format-date="formatDate"></div>
   </div>
   <div class="date-btn-box">
-    <span>{{startValue}} ~ {{endValue}}</span>
+    <span>{{startValue || ''}}</span><i> ~ </i><span>{{endValue || ''}}</span>
     <button class="btn btn-success btn-sm" ng-click="pick();" ng-disabled="!(startValue && endValue)">确认</button>
   </div>
 </div>

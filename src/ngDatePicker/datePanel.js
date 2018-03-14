@@ -275,6 +275,7 @@ export default (app, elem, attrs, scope) => {
           );
 
           $scope.$watch('date', function(newvalue) {
+            //console.log('setDateView', datePicker.getResult())
             datePicker.setDateView(datePicker.getResult());
           })
 
