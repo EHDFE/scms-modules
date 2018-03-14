@@ -24,7 +24,7 @@ export default {
 		}],
 	"attrs":[],
 	"deps":["scmsModules/imageUpload/imageUpload"],
-	"html":"<canvas circle-schedule percent=\"percent\" ops=\"ops\"  id=\"canvas1\" width=\"200\" height=\"200\" ></canvas>",
+	"html":"<canvas style=\"border:1px solid #000\" circle-schedule percent=\"percent\" ops=\"ops\"  id=\"canvas1\" width=\"200\" height=\"200\" ></canvas>",
 	"api":"",
 	"htmlUrl":""
 }

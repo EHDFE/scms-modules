@@ -44,11 +44,9 @@ export default (app, elem, attrs, scope) => {
                     canvasC.height = canvasC.height; 
                     var lineW1= option.lineW;
                     var lineW0=0;
-                    var R1;
                     
                     var canvasW=canvasC.width;
-                    var R1=parseInt(canvasW/2-lineW1-lineW0-10);
-                    var ra=parseInt(canvasW/2-lineW0/2-5);
+                    var R1=parseInt(canvasW/2-lineW1);
                     var canvasH=canvasW;
                     var rotateAngle=$scope.percent*360;
                     var anotherA=0;
@@ -62,7 +60,6 @@ export default (app, elem, attrs, scope) => {
                     var startAa=-Math.PI/2;
                     var startA=0;
                     var Timer;
-                    // var preSceond=100/(Math.PI*2);
                 
                     function drawScreen(){
                         if(startA<rotataRadians){
@@ -84,7 +81,6 @@ export default (app, elem, attrs, scope) => {
                         context.stroke();
                         context.closePath();
 
-
                         context.beginPath();
                         var gradient2 = context.createLinearGradient(R1, 0,-R1,0);
                         gradient2.addColorStop(0, innerColorStart);
@@ -95,7 +91,6 @@ export default (app, elem, attrs, scope) => {
                         context.arc(0,0,R1,0,startA,false);
                         context.stroke();
                         context.closePath();
-                        
                     
                         //画图
                         if(startAa<rotataRadians-Math.PI/2){
@@ -104,13 +99,6 @@ export default (app, elem, attrs, scope) => {
                             clearInterval(Timer);
                         }
                         
-                        context.save();
-                        context.setTransform(1,0,0,1,0,0);
-                        var ax=ra*Math.cos(startAa) ;
-                        var ay=ra*Math.sin(startAa) ;
-                        context.translate(x+ax,y+ay);
-                        context.rotate(startAa);
-                        context.restore();
                     }
                     drawScreen();
                     Timer=setInterval(drawScreen,20);
