@@ -86,14 +86,20 @@ export default (app, elem, attrs, scope) => {
           const windowScroll = function() {
             if ($('.tablebox').length > 0 && $('.tablebox').width() < 1500) {
               const scrollLeft = $('html').scrollLeft();
-              $('.outer-hide-scroll')[0].style.left = `${headerScrollLeft -
-                scrollLeft}px`;
-              $fixLeftThead[0].style.left = `${fixLeftTheadLeft -
-                scrollLeft +
-                fixLeftBorderLeftWidth}px`;
-              $fixRightThead[0].style.left = `${fixRightTheadLeft -
-                scrollLeft +
-                fixRightBorderLeftWidth}px`;
+              if($('.outer-hide-scroll')[0]) {
+                $('.outer-hide-scroll')[0].style.left = `${headerScrollLeft -
+                  scrollLeft}px`;
+              }
+              if($fixLeftThead[0]) {
+                $fixLeftThead[0].style.left = `${fixLeftTheadLeft -
+                  scrollLeft +
+                  fixLeftBorderLeftWidth}px`;
+              }
+              if($fixRightThead[0]) {
+                $fixRightThead[0].style.left = `${fixRightTheadLeft -
+                  scrollLeft +
+                  fixRightBorderLeftWidth}px`;
+              }
             }
           };
           $(window).scroll(windowScroll);
