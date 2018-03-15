@@ -1,8 +1,7 @@
-<h2>时间选择</h2>
+<h2>1. 时间选择</h2>
 <div>
     <input placeholder="结束时间" type="text"  time-picker  init-date="0"  ng-model="abc">
 </div>
-<h2>时间选择(无秒)</h2>
-<div>
-    <input placeholder="结束时间" type="text" use-seconds="false" min-time="'20:11'" format-date="HH:mm"  time-picker  init-date="0"  ng-model="abcd">
-</div>
+
+<h2 ng-init="pickTime2='20:50'">2. 时间选择(无秒|最小值)</h2>
+<input placeholder="结束时间" type="text" use-seconds="false" min-time="'20:11'" format-date="HH:mm"  time-picker  ng-model="pickTime2">

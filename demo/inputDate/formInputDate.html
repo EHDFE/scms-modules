@@ -8,13 +8,13 @@
     <input placeholder="日期时间选择" type="text" min-date="'2018-03-08 11:34:23'" date-picker pick-time="true" use-seconds="true" init-date="0" ng-model="datePickValue2" format-date="YYYY-MM-DD HH:mm:ss">
 </div>
 
-<h2  class="mt10">3. 日期时间选择(无秒选择): {{datePickValue3}}</h2>
+<h2  class="mt10">3. 日期时间选择(无秒): {{datePickValue3}}</h2>
 <div>
     <input placeholder="日期时间选择" type="text" date-picker pick-time="true" use-seconds="false" init-date="0" ng-model="datePickValue3" format-date="YYYY-MM-DD HH:mm" />
 </div>
 
-<h2 class="mt10">4. 日期有最小最大范围选择: {{datePickValue4}}</h2>
-<div>
+<h2 class="mt10" >4. 日期选择(最小|最大): {{datePickValue4}}</h2>
+<div ng-init="datePickValue4='2018-02-24'">
     <input placeholder="日期选择" type="text" date-picker  init-date="null" ng-model="datePickValue4" min-date="'2018-02-23'"  max-date="'2018-04-24'" />
 </div>
 

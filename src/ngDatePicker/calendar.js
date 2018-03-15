@@ -227,7 +227,7 @@ export default (app, elem, attrs, scope) => {
                 newValue += initTime.slice(newValue.length - 11);
               }              
               datePicker.setMinDate(newValue);              
-              //datePicker.init(datePicker.getResult());
+              datePicker.init(datePicker.getResult());
               getCheckedView();
             });
 
