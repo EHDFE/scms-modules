@@ -6,7 +6,8 @@ deploy:
   skip-cleanup: true
   github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
   local-dir: build
-  committer-from-gh: true
+  target-branch: gh-pages
+  keep-history: false
   verbose: true
   on:
     branch: publish
