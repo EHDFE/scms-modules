@@ -1,5 +1,6 @@
 import moment from 'moment';
-console.log(moment('2018-02-23').year())
+import momentLocale from 'moment/locale/zh-cn.js';
+
 const initYear = Array(...Array(12)).map((item, i) => i - 1);
 
 function monthMap(month) {
@@ -30,6 +31,9 @@ function getDate(date) {
     return date;
   }
 }
+
+let G = {};
+
 class DatePicker {
   constructor(args) {
     Object.assign(this, args);
@@ -365,17 +369,12 @@ class DatePicker {
           tag = 'hover';
         }
       }
+
+      //时间范围为中间日期设置属性
       let range = false;
-      if (
-        this.dateRange &&
-        this.tmpDate &&
-        (tag === 'now' || tag === 'today')
-      ) {
-        if (
-          this.dateRangeData &&
-          this.dateRangeData.start &&
-          !this.dateRangeData.end
-        ) {
+      let rangeTag = '';
+      if(this.dateRange) {
+        if(this.dateRangeData && this.dateRangeData.start && !this.dateRangeData.end && this.tmpDate && !(tag === 'old' || tag === 'new')) {
           if (
             nowDate.valueOf() > this.dateRangeData.start.valueOf() &&
             nowDate.valueOf() < this.tmpDate.valueOf()
@@ -389,20 +388,25 @@ class DatePicker {
             range = true;
           }
         }
-      }
-      if (
-        this.dateRangeData &&
-        this.dateRangeData.start &&
-        this.dateRangeData.end &&
-        (tag === 'now' || tag === 'today')
-      ) {
-        if (
-          nowDate.valueOf() > this.dateRangeData.start.valueOf() &&
-          nowDate.valueOf() < this.dateRangeData.end.valueOf()
-        ) {
-          range = true;
+        else if(this.dateRangeData && this.dateRangeData.start && this.dateRangeData.end && !(tag === 'old' || tag === 'new')) {
+          if (
+            nowDate.valueOf() > this.dateRangeData.start.valueOf() &&
+            nowDate.valueOf() < this.dateRangeData.end.valueOf()
+          ) {
+            range = true;
+          }
+          if(nowDate.valueOf() === this.dateRangeData.start.valueOf() && nowDate.valueOf() === this.dateRangeData.end.valueOf()) {
+            rangeTag = '';
+          }
+          else if(nowDate.valueOf() === this.dateRangeData.start.valueOf()){
+            rangeTag = 'start';
+          }
+          else if(nowDate.valueOf() === this.dateRangeData.end.valueOf()) {
+            rangeTag = 'end';
+          }
         }
       }
+
       let weekStart,
         weekBetween,
         weekEnd;
@@ -415,7 +419,8 @@ class DatePicker {
           weekEnd = true;
         }
       }
-      if (nowDate.day() === 0) {
+      
+      if (nowDate.day() === 1) {
         dateView.push([{
           isToday: isToday,
           tag: tag || 'now',
@@ -423,6 +428,7 @@ class DatePicker {
           data: nowDate,
           dateValue: nowDate.format('YYYY-MM-DD'),
           range,
+          rangeTag: rangeTag,
           weekStart,
           weekBetween,
           weekEnd,
@@ -437,6 +443,7 @@ class DatePicker {
           data: nowDate,
           dateValue: nowDate.format('YYYY-MM-DD'),
           range,
+          rangeTag: rangeTag,
           weekStart,
           weekBetween,
           weekEnd,
@@ -444,60 +451,70 @@ class DatePicker {
         });
       }
     }
+
     this.dateView = dateView;
     return dateView;
   }
   setDate(momentDate) {
-    if (!momentDate.disabled) {
-      if (this.weekPick) {
-        if (momentDate.data.clone().startOf('week').valueOf() < this.minDateArr.data && this.minDateArr.data.valueOf()) {
-          return;
-        }
-        if (momentDate.data.clone().endOf('week').valueOf() > this.maxDateArr.data && this.maxDateArr.data.valueOf()) {
-          return;
-        }
-        this.weekPickerData.start = momentDate.data.clone().startOf('week');
-        this.weekPickerData.end = momentDate.data.clone().endOf('week');
-        this.weekPickerData.year = this.weekPickerData.end.clone().year();
-        this.weekPickerData.week = momentDate.data.clone().week();
-      }
-      this.dateData.date = momentDate.data.date();
-      this.dateData.month = momentDate.data.month() + 1;
-      this.dateData.year = momentDate.data.year();
-      if (this.dateRange) {
-        if (
-          (this.dateRangeData.start && this.dateRangeData.end) ||
-          (!this.dateRangeData.start && !this.dateRangeData.end)
-        ) {
-          this.dateRangeData.start = momentDate.data;
-          this.dateRangeData.end = null;
-          this.refresh = new Date().getTime();
-        } else if (this.dateRangeData.start && !this.dateRangeData.end) {
-          if (
-            this.dateRangeData.start &&
-            this.dateRangeData.start.valueOf() >
-            momentDate.data.valueOf()
-          ) {
-            this.dateRangeData.end = this.dateRangeData.start.clone();
-            this.dateRangeData.start = momentDate.data;
-          } else if (
-            this.dateRangeData.start &&
-            this.dateRangeData.start.valueOf() <
-            momentDate.data.valueOf()
-          ) {
-            this.dateRangeData.end = momentDate.data;
-          } else {
-            this.dateRangeData.start = momentDate.data;
-          }
-        }
-      }
-      this.setDateView(momentDate.data);
-      this.setMonthView();
-      this.setYearView(this.dateData.year);
-      this.setHourView();
-      this.setMinView();
-      this.setSecondView();
+    if(this.isPickEvent || momentDate.disabled) {
+      return;
     }
+
+    this.isPickEventing = 1;
+    var _this = this;
+    setTimeout(function() {
+      _this.isPickEventing = null;
+    }, 500)
+
+    //周范围设置选中的值
+    if (this.weekPick) {
+      if (momentDate.data.clone().startOf('week').valueOf() < this.minDateArr.data && this.minDateArr.data.valueOf()) {
+        return;
+      }
+      if (momentDate.data.clone().endOf('week').valueOf() > this.maxDateArr.data && this.maxDateArr.data.valueOf()) {
+        return;
+      }
+      this.weekPickerData.start = momentDate.data.clone().startOf('week');
+      this.weekPickerData.end = momentDate.data.clone().endOf('week');
+      this.weekPickerData.year = this.weekPickerData.end.clone().year();
+      this.weekPickerData.week = momentDate.data.clone().week();
+    }
+    //时间范围设置选中的值
+    else if (this.dateRange) {
+      G.pickEventTimes = G.pickEventTimes || 0;
+      G.startValue = G.startValue || '';
+      G.endValue = G.endValue || '';
+      G.pickEventTimes ++;
+      if(G.pickEventTimes%2 > 0) {
+        G.startValue = momentDate.dateValue;
+        G.endValue = '';
+      }
+      else {
+        if(moment(G.startValue).valueOf() > moment(momentDate.dateValue).valueOf()) {
+          G.endValue = G.startValue;
+          G.startValue = momentDate.dateValue;
+        }
+        else {
+          G.endValue = momentDate.dateValue;
+        }
+        G.pickEventTimes = 0;
+      }
+
+      this.dateRangeData.start = G.startValue ? moment(G.startValue) : '';
+      this.dateRangeData.end = G.endValue ? moment(G.endValue) : '';
+    }
+
+    this.dateData.date = momentDate.data.date();
+    this.dateData.month = momentDate.data.month() + 1;
+    this.dateData.year = momentDate.data.year();
+
+    this.setDateView(momentDate.data);
+    this.setMonthView();
+    this.setYearView(this.dateData.year);
+    this.setHourView();
+    this.setMinView();
+    this.setSecondView();
+
   }
   setPrevMonth() {
     if (this.dateView.prevMonth) {
@@ -878,6 +895,10 @@ class DatePicker {
       .set('minute', this.dateData.minute || moment().minute())
       .set('second', this.dateData.second || moment().second())
       .format(formatDate);
+  }
+
+  getDateRangeData() {
+    return this.dateRangeData;
   }
 }
 

@@ -14,15 +14,15 @@ import './timePicker.css';
 import tpl from './timePickerTpl.html';
 import './timePickerTpl.css';
 import moment from 'moment';
+import { preventBlur } from './utils';
 
 export default (app, elem, attrs, scope) => {
   datePanel(app, elem, attrs, scope);
   app.directive('timePicker', [
-    'G',
     '$rootScope',
     '$document',
     '$compile',
-    function (G, $rootScope, $document, $compile) {
+    function ($rootScope, $document, $compile) {
       return {
         require: '?ngModel',
         scope: {
@@ -73,26 +73,6 @@ export default (app, elem, attrs, scope) => {
               }
               return false;
             });
-            function preventBlur(elem, func) {
-              let fnDocumentMousedown;
-              angular.element(elem).bind('focus', () => {
-                $document.bind(
-                  'mousedown',
-                  (fnDocumentMousedown = function (event) {
-                    if (func(event.target)) {
-                      event.target.setAttribute('unselectable', 'on');
-                      event.preventDefault();
-                    } else if (event.target != elem) {
-                      $document.unbind('mousedown', fnDocumentMousedown);
-                    }
-                  }),
-                );
-              });
-              angular.element(elem).bind('blur', () => {
-                $document.unbind('mousedown', fnDocumentMousedown);
-              });
-            }
-
             $element.find('.form-control').bind('blur', () => {
               $timeout(() => {
                 panel.css('display', 'none');

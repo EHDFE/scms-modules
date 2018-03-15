@@ -8,21 +8,22 @@
  */
 
 import angular from 'angular';
+import moment from 'moment';
 import datePanel from './datePanel';
 import html from './weekPicker.html';
 import './weekPicker.css';
 import tpl from './weekPickerTpl.html';
 import './weekPickerTpl.css';
-import moment from 'moment';
+import Defaults from './defaults';
+import { preventBlur } from './utils';
 
 export default (app, elem, attrs, scope) => {
   datePanel(app, elem, attrs, scope);
   app.directive('weekPicker', [
-    'G',
     '$rootScope',
     '$document',
     '$compile',
-    function (G, $rootScope, $document, $compile) {
+    function ($rootScope, $document, $compile) {
       return {
         require: '?ngModel',
         scope: {
@@ -42,9 +43,9 @@ export default (app, elem, attrs, scope) => {
           '$attrs',
           '$timeout',
           function ($scope, $element, $attrs, $timeout) {
-            $scope.formatDate = $attrs.formatDate || 'YYYY-MM-DD';
-            $scope.startPlaceholder = $attrs.startPlaceholder || '开始时间';
-            $scope.endPlaceholder = $attrs.endPlaceholder || '结束时间';
+            $scope.formatDate = $attrs.formatDate || Defaults.format;
+            $scope.startPlaceholder = $attrs.startPlaceholder || Defaults.lang.start;
+            $scope.endPlaceholder = $attrs.endPlaceholder || Defaults.lang.end;
 
             const panel = $compile(html)($scope);
             $document.find('#container').append(panel);
@@ -96,41 +97,23 @@ export default (app, elem, attrs, scope) => {
               if ($.contains($element[0], target)) {
                 return true;
               }
-              if ($(target).parent().parent().find('.day')
-                .hasClass('disabled')) {
+              if ($(target).parents('.day').hasClass('disabled')) {
                 return true;
               }
-              if (
-                $(target)
-                  .parent()
-                  .hasClass('day')
-              ) {
-                $scope.pick();
-              }
-              if ($element[0] === target || ($.contains(panel[0], target))) {
+              
+              if(
+                $.contains(panel[0], target) && 
+                (!$(target).parents('.day').length || $(target).parents('.day').siblings('.disabled').length)) {
                 return true;
+              }
+              else {
+                if ($(target).parents('.day').length) {
+                  $scope.pick();
+                }
               }
               return false;
             });
-            function preventBlur(elem, func) {
-              let fnDocumentMousedown;
-              angular.element(elem).bind('focus', () => {
-                $document.bind(
-                  'mousedown',
-                  (fnDocumentMousedown = function (event) {
-                    if (func(event.target)) {
-                      event.target.setAttribute('unselectable', 'on');
-                      event.preventDefault();
-                    } else if (event.target != elem) {
-                      $document.unbind('mousedown', fnDocumentMousedown);
-                    }
-                  }),
-                );
-              });
-              angular.element(elem).bind('blur', () => {
-                $document.unbind('mousedown', fnDocumentMousedown);
-              });
-            }
+            
             $scope.clearDate = () => {
               $scope.weekPickerData = {};
               $timeout(() => {

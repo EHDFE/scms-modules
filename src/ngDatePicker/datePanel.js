@@ -7,18 +7,18 @@
  * @html <input class="form-control input-date" date-picker-directive ng-model='ngModel' min-date="minDate" max-date="maxDate" max-date-value="maxDateValue" min-date-value="minDateValue">
  */
 import angular from 'angular';
-import html from './datePanel.html';
-import './datePanel.css';
+import throttle from 'lodash/throttle';
 import moment from 'moment';
+import html from './datePanel.html';
+import './datePanel.less';
 import DatePicker from './DatePickerClass';
-import { throttle } from './tool';
+import Defaults from './defaults';
 
 export default (app, elem, attrs, scope) => {
   app.directive('datePanel', [
-    'G',
     '$rootScope',
     '$timeout',
-    function (G, $rootScope, $timeout) {
+    function ($rootScope, $timeout) {
       return {
         // require: '?ngModel',
         template: html,
@@ -40,7 +40,7 @@ export default (app, elem, attrs, scope) => {
           watchDate: '=',
           tmpDate: '=',
           weekPickerData: '=',
-
+          onPickEvent: '='
         },
         controller: [
           '$scope',
@@ -50,7 +50,7 @@ export default (app, elem, attrs, scope) => {
           function ($scope, $element, $attrs, $timeout) {},
         ],
         link($scope, $element, $attrs, ngModel) {
-          const formatDate = $scope.formatDate || 'YYYY-MM-DD';
+          const formatDate = $scope.formatDate || Defaults.format;
           // @attrs initDate 初始日期字段,它的值为距今天的天数;当值为"null"时,input显示空值, {type:"string", defaultValue: 0}
           $scope.dateRange = $attrs.dateRange;
           $scope.weekPick = $attrs.weekPick;
@@ -150,6 +150,14 @@ export default (app, elem, attrs, scope) => {
             }
           }
 
+          $scope.pickEvent = function(col) {
+            datePicker.setDate(col);
+            try{
+              $scope.onPickEvent(col, $scope.dateRangeData);
+            }
+            catch(e) {}
+          }
+
           $scope.hover = throttle((col) => {
             if (
               $scope.dateRange &&
@@ -183,7 +191,7 @@ export default (app, elem, attrs, scope) => {
               $scope.date = datePicker.getResult();
             });
           } else {
-            $scope.date = '';
+            //$scope.date = '';
           }
 
           /**
@@ -266,29 +274,9 @@ export default (app, elem, attrs, scope) => {
             true,
           );
 
-          $scope.$watch(
-            'datePicker.dateRangeData',
-            (newVal) => {
-              if (newVal) {
-                if ($scope.dateRange) {
-                  if (
-                    $scope.dateRangeData.start &&
-                    $scope.dateRangeData.start.valueOf() ===
-                      $scope.datePicker.dateRangeData &&
-                    $scope.datePicker.dateRangeData.start.valueOf() &&
-                    $scope.dateRangeData.end &&
-                    $scope.dateRangeData.end.valueOf() ===
-                      $scope.datePicker.dateRangeData.end &&
-                    $scope.datePicker.dateRangeData.end.valueOf()
-                  ) {
-                    return;
-                  }
-                  $scope.dateRangeData = newVal;
-                }
-              }
-            },
-            true,
-          );
+          $scope.$watch('date', function(newvalue) {
+            datePicker.setDateView(datePicker.getResult());
+          })
 
           $scope.$watch('dateRangeData', (newVal) => {
             if (newVal && $scope.dateRange) {
@@ -378,8 +366,6 @@ export default (app, elem, attrs, scope) => {
           /**
            * 时间选择相关 函数
            */
-
-
           $scope.setHour = (hour, $index) => {
             datePicker.setHour(hour);
             if (!hour.disabled) {

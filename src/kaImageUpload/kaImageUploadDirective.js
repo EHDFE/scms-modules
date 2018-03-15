@@ -13,7 +13,7 @@
  */
 import imageShow from '../imageShow/imageShow';
 import './kaImageUpload.css';
-import html from './kaImageUpload.html';
+import html from './kaImageUpload.template';
 
 export default (app, elem, attrs, scope) => {
   imageShow(app, elem, attrs, scope);
@@ -92,7 +92,7 @@ export default (app, elem, attrs, scope) => {
 
           // 下载文件
           $scope.download = function (event, url) {
-            console.log(url, 8888);
+            //console.log(url, 8888);
             $location.path(url);
           };
 

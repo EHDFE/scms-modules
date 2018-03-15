@@ -1,0 +1,14 @@
+<div ng-init="calendarPanelData=[{'2018-02-06': {status:'已发布'}}];minDate3='2018-02-06';calendarCheckedDate3 = [{value:'2018-02-03', status: 'success'},{value:'2018-02-04',status:'error'}, {value:'2018-02-06'}]">
+        <div ng-repeat="item in calendarPanelData">
+                <p>fdddddddddddd</p>
+        </div>
+</div>
+
+
+<div calendar-panel  init-date="null" min-date="minDate3" checked-date="calendarCheckedDate3" active-date="activeCalendarDate3" is-view="calendarIsView3" delete-active-date-fn="deleteCalendarActiveDateFn3"></div>
+<div class="mt10">[checkedDate]选中的所有日期：{{calendarCheckedDate3}}</div>
+<div class="mt10">[activeDate]查看的当前日期：{{activeCalendarDate3}}</div>
+<div class="mt10">
+    <button class="btn btn-default" ng-click="calendarIsView3 = !calendarIsView3">切换<span ng-if="!calendarIsView3">查看</span><span ng-if="calendarIsView3">编辑</span>模式</button>
+    <button class="btn btn-default" ng-click="deleteCalendarActiveDateFn3();">删除当天排班</button>
+</div>

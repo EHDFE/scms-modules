@@ -29,7 +29,7 @@
                 </thead>
                 <tbody>
                   <tr ng-repeat="rows in datePicker.dateView">
-                    <td class="day" ng-class="{old: col.tag==='old', new: col.tag==='new', active: col.tag==='active', 'active-view': activeValue === col.dateValue, disabled: col.disabled}"
+                    <td class="day" ng-class="{old: col.tag==='old', new: col.tag==='new', active: col.tag==='active', 'active-view': activeValue === col.dateValue, disabled: col.disabled, 'status-success': col.status == 'success', 'status-error': col.status == 'error'}"
                       ng-repeat="col in rows"><span class="date-item" ng-click="checked(col)" ng-mousemove="hover(col)"><i  ng-if="!col.isToday">{{col.value}}</i><i class="today" ng-if="col.isToday">今</i></span><i class="active-view"></i></i></td>
                   </tr>
                 </tbody>

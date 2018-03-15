@@ -145,6 +145,7 @@ const config = {
       }),
     ],
   },
+  devtool: 'source-map',
 };
 
 module.exports = merge.smart(baseConfig, config);

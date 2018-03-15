@@ -8,10 +8,11 @@
  */
 
 import angular from 'angular';
+import moment from 'moment';
 import DatePicker from './DatePickerClass';
 import html from './calendar.html';
 import './calendar.css';
-import moment from 'moment';
+import Defaults from './defaults';
 
 export default (app, elem, attrs, scope) => {
   app.directive('calendar', [
@@ -43,10 +44,9 @@ export default (app, elem, attrs, scope) => {
             $scope.useSeconds = $attrs.useSeconds;
             $scope.minViewMode = $attrs.minViewMode;
             $scope.pickTime = !!$attrs.pickTime;
-            let formatDate = 'YYYY-MM-DD';
+            let formatDate = Defaults.format;
             let isInitComplate = false;
-            $scope.checkedDate = $scope.checkedDate || [];
-            
+            $scope.checkedDate = $scope.checkedDate || [];            
 
             const datePicker = new DatePicker({
               dateRange: $scope.dateRange,
@@ -59,7 +59,6 @@ export default (app, elem, attrs, scope) => {
             });
             $scope.datePicker = datePicker;
             
-            
 
             $scope.$watch('minViewMode', (newVal, oldVal) => {
               $scope.datePicker.minViewMode = newVal;
@@ -68,23 +67,33 @@ export default (app, elem, attrs, scope) => {
               }
             });
 
-            /* 在面板中标记已选中日期 */
+            /*
+             * 在面板中标记已选中日期 
+             */
             var getCheckedView = function(isViewPannel) {
               let checkedObj = {};
+              let activeValue = '';
+              let pannelValue = '';
               angular.forEach($scope.checkedDate, function(item) {
                 checkedObj[item.value] = item;
-                if(!item.year) {
+                if(!item.year && item.value) {
                   let momentData = moment(item.value);
                   item.year = momentData.year();
                   item.month = momentData.month()+1;
                   item.date = momentData.date();
                 }
-                if(isViewPannel) {
-                  datePicker.init(item.value);
+                if(!activeValue) {
+                  pannelValue = item.value;
+                }                
+                if(item.isActive) {
+                  activeValue = item.value;
+                  pannelValue = item.value;
                 }
                 
               });
-              
+              if(isViewPannel) {
+                datePicker.init(pannelValue);
+              }
               angular.forEach($scope.datePicker.dateView, function(row) {
                 angular.forEach(row, function(item) { 
                   if(item.tag === 'active') {
@@ -92,6 +101,7 @@ export default (app, elem, attrs, scope) => {
                   }
                   if(checkedObj[item.dateValue]) {
                     item.tag = 'active';
+                    item.status = checkedObj[item.dateValue].status;
                   }
                   if(item.tag === 'active') {
                     $scope.activeValue = item.data.format(formatDate);
@@ -99,13 +109,22 @@ export default (app, elem, attrs, scope) => {
                   if(item.isToday && item.tag === 'active') {
                     $scope.activeValue = item.data.format(formatDate);
                   }
+                  if(activeValue) {
+                    $scope.activeValue = activeValue;
+                  }
+                  
+
+                  
+
                   getActiveDate();
                 })
               })
-            }
+            };
 
             
-            /* 切换月操作 */
+            /*
+             * 切换月、年操作 
+             */
             $scope.setPrevMonth = function() {
               datePicker.setPrevMonth();
               getCheckedView();
@@ -127,7 +146,9 @@ export default (app, elem, attrs, scope) => {
               getCheckedView();
             }
 
-            /* 删除当前选中的排班 */
+            /*
+             * 删除当前选中的排班 
+             */
             $scope.deleteActiveDateFn = function() {
               isInitComplate = true;
               if(!$scope.activeValue) {
@@ -144,7 +165,9 @@ export default (app, elem, attrs, scope) => {
               getCheckedView();
             }
 
-            /* 添加已选中的日期 */
+            /*
+             * 添加已选中的日期 
+             */
             let pushCheckedDateItem = function(momentDate) {
               $scope.checkedDate.push({
                 year:momentDate.year(),
@@ -154,7 +177,9 @@ export default (app, elem, attrs, scope) => {
               });
             };
 
-            /* 删除已选中的日期 */
+            /* 
+             * 删除已选中的日期 
+             */
             let deleteCheckedDateItem = function(momentDate) {
               let deleteIndex;
               angular.forEach($scope.checkedDate, function(item, index) {
@@ -166,7 +191,9 @@ export default (app, elem, attrs, scope) => {
               getCheckedView();
             }
 
-            /* 获取当前查看的日期 */
+            /* 
+             * 获取当前查看的日期 
+             */
             let getActiveDate = function() {
               $scope.activeDate = '';
               if(!$scope.checkedDate || ($scope.checkedDate && !$scope.checkedDate.length)) {
@@ -186,18 +213,30 @@ export default (app, elem, attrs, scope) => {
             */
             datePicker.init();
             $scope.$watch('checkedDate', function(newValue, old) {
-              console.log(newValue,'===',old, isInitComplate)
-
-              if(newValue && !isInitComplate) {
-                isInitComplate = true;
+              if(newValue && newValue.length && !newValue[0].year && newValue[0].value) {
                 getCheckedView(true);
               }
-            })
+            });
 
-            /*手动选中日期*/
+            $scope.$watch('minDate', (newValue, oldValue) => {
+              if (!newValue) {
+                return;
+              }
+              const initTime = '00:00:00';
+              if (newValue.length > 11) {
+                newValue += initTime.slice(newValue.length - 11);
+              }              
+              datePicker.setMinDate(newValue);              
+              datePicker.init(datePicker.getResult());
+              getCheckedView();
+            });
+
+            /*
+             * 手动选中日期
+             */
             $scope.checked = function(col) {
               isInitComplate = true;
-              if($scope.isView) {
+              if($scope.isView || col.status || col.disabled) {
                 if(col.tag === 'active') {
                   $scope.activeValue = col.data.format(formatDate);
                   getActiveDate();
@@ -215,8 +254,8 @@ export default (app, elem, attrs, scope) => {
 
               getActiveDate();
             }
-          },
-        ],
+          
+        }],
         link($scope, $element, $attrs, ngModel) {},
         //
       };

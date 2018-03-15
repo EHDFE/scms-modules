@@ -26,7 +26,6 @@ export default (app, elem, attrs, scope) => {
         link: function postLink($scope, $element, $attrs) {},
 
         controller($scope, $element, $attrs, $cookies, $timeout) {
-          console.log('paginationDirective', 2);
           $scope.pages = [];
           $scope.hidePageSizeChange = $scope.hidePageSize || false;
           $scope.$watch('hidePageSize', (newValue) => {

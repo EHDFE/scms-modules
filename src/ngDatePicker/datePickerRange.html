@@ -1,8 +1,12 @@
 <div class="date-picker-range">
   <div class="date-panel">
-    <div date-panel init-date="initStartDate" part="left" date-range="true" max-date-value="maxDateValue" min-date-value="minDateValue" max-date="maxDate" min-date="minDate"
+    <div date-panel on-pick-event="onPickEvent" init-date="initStartDate" part="left" date-range="true" max-date-value="maxDateValue" min-date-value="minDateValue" max-date="maxDate" min-date="minDate"
       date="startDate" use-seconds="useSeconds" name="part1" watch-date="endDate" tmp-date="datePicker.tmpDate" date-range-data="dateRangeData" min-view-mode="minViewMode" pick-time="pickTime" format-date="formatDate"></div>
-    <div date-panel init-date="initDateEnd" date-range="true"  max-date-value="maxDateValue" min-date-value="minDateValue" max-date="maxDate" min-date="minDate"
+    <div date-panel on-pick-event="onPickEvent" init-date="initDateEnd" date-range="true"  max-date-value="maxDateValue" min-date-value="minDateValue" max-date="maxDate" min-date="minDate"
       date="endDate" use-seconds="useSeconds" part="right" name="part2" watch-date="startDate" tmp-date="datePicker.tmpDate" date-range-data="dateRangeData" min-view-mode="minViewMode" pick-time="pickTime" format-date="formatDate"></div>
+  </div>
+  <div class="date-btn-box">
+    <span>{{startValue || ''}}</span><i> ~ </i><span>{{endValue || ''}}</span>
+    <button class="btn btn-success btn-sm" ng-click="pick();" ng-disabled="!(startValue && endValue)">确认</button>
   </div>
 </div>
