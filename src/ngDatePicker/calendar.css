@@ -28,6 +28,9 @@
 .calendar .date-panel-datetimepicker td.active .date-item i.today{
   color:#fff;
 }
+.calendar .date-panel-datetimepicker td.day .date-item:hover i.today{
+  color:#fff;
+}
 .calendar .date-panel-datetimepicker td.day .date-item:hover,
 {
   background:#E9EFF4;

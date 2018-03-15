@@ -1,4 +1,5 @@
 import moment from 'moment';
+import momentLocale from 'moment/locale/zh-cn.js';
 
 const initYear = Array(...Array(12)).map((item, i) => i - 1);
 
@@ -371,8 +372,9 @@ class DatePicker {
 
       //时间范围为中间日期设置属性
       let range = false;
+      let rangeTag = '';
       if(this.dateRange) {
-        if(this.dateRangeData && this.dateRangeData.start && !this.dateRangeData.end && this.tmpDate) {
+        if(this.dateRangeData && this.dateRangeData.start && !this.dateRangeData.end && this.tmpDate && !(tag === 'old' || tag === 'new')) {
           if (
             nowDate.valueOf() > this.dateRangeData.start.valueOf() &&
             nowDate.valueOf() < this.tmpDate.valueOf()
@@ -386,12 +388,21 @@ class DatePicker {
             range = true;
           }
         }
-        else if(this.dateRangeData && this.dateRangeData.start && this.dateRangeData.end) {
+        else if(this.dateRangeData && this.dateRangeData.start && this.dateRangeData.end && !(tag === 'old' || tag === 'new')) {
           if (
             nowDate.valueOf() > this.dateRangeData.start.valueOf() &&
             nowDate.valueOf() < this.dateRangeData.end.valueOf()
           ) {
             range = true;
+          }
+          if(nowDate.valueOf() === this.dateRangeData.start.valueOf() && nowDate.valueOf() === this.dateRangeData.end.valueOf()) {
+            rangeTag = '';
+          }
+          else if(nowDate.valueOf() === this.dateRangeData.start.valueOf()){
+            rangeTag = 'start';
+          }
+          else if(nowDate.valueOf() === this.dateRangeData.end.valueOf()) {
+            rangeTag = 'end';
           }
         }
       }
@@ -408,7 +419,8 @@ class DatePicker {
           weekEnd = true;
         }
       }
-      if (nowDate.day() === 0) {
+      
+      if (nowDate.day() === 1) {
         dateView.push([{
           isToday: isToday,
           tag: tag || 'now',
@@ -416,6 +428,7 @@ class DatePicker {
           data: nowDate,
           dateValue: nowDate.format('YYYY-MM-DD'),
           range,
+          rangeTag: rangeTag,
           weekStart,
           weekBetween,
           weekEnd,
@@ -423,15 +436,14 @@ class DatePicker {
         }]);
         dateView[dateView.length - 1].week = nowDate.week();
       } else {
-        let length = dateView.length - 1 < 0 ? 0 : dateView.length - 1;
-        dateView[length] = dateView[length] || [];
-        dateView[length].push({
+        dateView[dateView.length - 1].push({
           isToday: isToday,
           tag: tag || 'now',
           value: nowDate.date(),
           data: nowDate,
           dateValue: nowDate.format('YYYY-MM-DD'),
           range,
+          rangeTag: rangeTag,
           weekStart,
           weekBetween,
           weekEnd,
@@ -439,6 +451,7 @@ class DatePicker {
         });
       }
     }
+
     this.dateView = dateView;
     return dateView;
   }

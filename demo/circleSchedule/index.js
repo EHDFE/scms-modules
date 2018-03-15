@@ -10,10 +10,10 @@ export default {
 	"scope":[
 		{
 			"type":"object",
-			"exampleValue":{circleBottomColor:'#f2f2f2',innerColorStart:'#ffdd00', innerColorEnd:'#fc7d37'},
+			"exampleValue":{circleBottomColor:'#f2f2f2',innerColorStart:'#ffdd00', innerColorEnd:'#fc7d37',lineW: 20},
 			"defaultValue":"{circleBottomColor:'#f2f2f2',//圆环底色innerColorStart:'#ffdd00',  //内部圆环 渐变色开始innerColorEnd:'#fc7d37' //内部圆环 渐变色结束}",
 			"key":"ops",
-			"description":"参数  默认{circleBottomColor:'#f2f2f2',//圆环底色innerColorStart:'#ffdd00',  //内部圆环 渐变色开始innerColorEnd:'#fc7d37' //内部圆环 渐变色结束}"
+			"description":"参数  默认{circleBottomColor:'#f2f2f2',//圆环底色innerColorStart:'#ffdd00',  //内部圆环 渐变色开始innerColorEnd:'#fc7d37' //内部圆环 渐变色结束,lineW: 20}"
 		},
 		{
 			"type":"number",

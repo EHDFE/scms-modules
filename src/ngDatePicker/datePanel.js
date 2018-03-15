@@ -191,7 +191,7 @@ export default (app, elem, attrs, scope) => {
               $scope.date = datePicker.getResult();
             });
           } else {
-            $scope.date = '';
+            //$scope.date = '';
           }
 
           /**
