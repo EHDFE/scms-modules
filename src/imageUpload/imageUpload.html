@@ -25,15 +25,16 @@
                     </div>
                 </div>
                 <div class="images-box" ng-show="item.uploadType.succeed " ng-class="{error: item.uploadType.error}">
-                    <div class="img" style="background: url({{ item.dataImg }}) no-repeat center center;background-size: contain;"></div>
+                    <!--<div class="img" style="background: url({{ item.dataImg }}) no-repeat center center;background-size: contain;"></div>-->
+                    <img class="img" image-show img-url="item.dataImg" custom-css="true" img-click="imgClick" bg-click="false" mini-img="false">
                     <div class="barrier">
-                        <a href="javascript:;" ng-click="">
+                        <a href="javascript:;" ng-click="imgClick($event,item.dataImg)">
                             <i class="glyphicon glyphicon-eye-open"></i>
                         </a>
                         <a href="javascript:;" ng-click="remove(item,$index)">
                             <i class="glyphicon glyphicon-trash"></i>
                         </a>
-                        <a href="javascript:;" ng-click="">
+                        <a href="{{item.dataImg}}" download="{{item.dataImg}}">
                             <i class="fa fa-download"></i>
                         </a>
                     </div>

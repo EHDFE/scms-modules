@@ -9,9 +9,11 @@
  */
 
 import angular from 'angular';
+import imageShow from '../imageShow/imageShow';
 import html from './imageUpload.html';
 
 export default (app, elem, attrs, scope) => {
+  imageShow(app, elem, attrs, scope);
   app.directive('imageUpload', [
     '$timeout',
     'G',
