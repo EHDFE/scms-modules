@@ -13,19 +13,8 @@ deploy:
 
 cache:
   directories:
-<<<<<<< HEAD
     - node_modules
   
 branches:
   only:
     - publish
-=======
-  - node_modules
-
-script:
-  - npm run build
-
-branches:
-  only:
-    - master
->>>>>>> master
