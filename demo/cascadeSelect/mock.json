@@ -1,0 +1,94 @@
+{
+  "data": [
+    {
+      "name": "所有",
+      "value": ""
+    },
+    {
+      "name": "水果",
+      "value": "fruit",
+      "children": [
+        {
+          "name": "所有",
+          "value": ""
+        },
+        {
+          "name": "西瓜",
+          "value": "watermelon"
+        },
+        {
+          "name": "苹果",
+          "value": "apple",
+          "children": [
+            {
+              "name": "所有",
+              "value": ""
+            },
+            {
+              "name": "富士",
+              "value": "fuji"
+            },
+            {
+              "name": "青森",
+              "value": "aomori"
+            },
+            {
+              "name": "绿苹果",
+              "value": "green-apple"
+            }
+          ]
+        },
+        {
+          "name": "草莓",
+          "value": "strawberry"
+        }
+      ]
+    },
+    {
+      "name": "汽车",
+      "value": "car",
+      "children": [
+        {
+          "name": "所有",
+          "value": ""
+        },
+        {
+          "name": "本田",
+          "value": "honda",
+          "children": [
+            {
+              "name": "所有",
+              "value": ""
+            },
+            {
+              "name": "雅阁",
+              "value": "accord"
+            },
+            {
+              "name": "思域",
+              "value": "civic"
+            }
+          ]
+        },
+        {
+          "name": "丰田",
+          "value": "toyota",
+          "children": [
+            {
+              "name": "所有",
+              "value": ""
+            },
+            {
+              "name": "卡罗拉",
+              "value": "carola"
+            },
+            {
+              "name": "皇冠",
+              "value": "crown"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

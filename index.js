@@ -53,6 +53,7 @@ import imageUpload from './src/imageUpload/imageUpload';
 
 import numberSelect from './src/numberSelect/numberSelect';
 import circleSchedule from './src/circleSchedule/circleSchedule';
+import cascadeSelect from './src/cascadeSelect';
 
 
 export default {
@@ -97,5 +98,6 @@ export default {
   selectDropdown,
   'imageUpload/imageUpload': imageUpload,
   numberSelect,
-  'circleSchedule/circleSchedule': circleSchedule
+  'circleSchedule/circleSchedule': circleSchedule,
+  cascadeSelect,
 };
