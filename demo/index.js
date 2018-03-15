@@ -72,7 +72,10 @@ demoData.push(starRating);
 import imageUpload from "./imageUpload/index.js";
 demoData.push(imageUpload);
 
-import circleSchedule from "./circleSchedule/index.js";
+import circleSchedule from "./circleSchedule/";
 demoData.push(circleSchedule);
 
-export default demoData
+import cascadeSelect from './cascadeSelect/';
+demoData.push(cascadeSelect);
+
+export default demoData;
