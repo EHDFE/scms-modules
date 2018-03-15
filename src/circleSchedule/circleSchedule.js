@@ -48,12 +48,12 @@ export default (app, elem, attrs, scope) => {
                         this.startAa=-Math.PI/2;
                         this.startA=0;
                         this.Timer;
-                        this.drawing();
+                        this.drawing(1);
                         this.Timer=setInterval(()=>{
-                            this.drawing();
+                            this.drawing(2);
                         },20);
                     },
-                    drawing: function(){
+                    drawing: function(type){
                         if(this.startA < this.rotataRadians){
                             this.startA+=0.1;
                         }
@@ -64,13 +64,15 @@ export default (app, elem, attrs, scope) => {
                         this.context.translate(this.x,this.y);
                         this.context.rotate(-Math.PI/2);
 
-                        //中环
-                        this.context.beginPath();
-                        this.context.strokeStyle=this.option.circleBottomColor;
-                        this.context.lineWidth = this.option.lineW;
-                        this.context.arc(0,0,this.R1,0,Math.PI*2,false);
-                        this.context.stroke();
-                        this.context.closePath();
+                        if(type === 1){
+                            //底环
+                            this.context.beginPath();
+                            this.context.strokeStyle=this.option.circleBottomColor;
+                            this.context.lineWidth = this.option.lineW;
+                            this.context.arc(0,0,this.R1,0,Math.PI*2,false);
+                            this.context.stroke();
+                            this.context.closePath();
+                        }
 
                         this.context.beginPath();
                         var gradient2 = this.context.createLinearGradient(this.R1, 0,-this.R1,0);
