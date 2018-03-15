@@ -58,7 +58,7 @@
     "less-loader": "^4.0.5",
     "postcss-copy": "^7.1.0",
     "postcss-loader": "^2.1.1",
-    "rollup": "^0.56.5",
+    "rollup": "^0.57.0",
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-clear": "^2.0.7",
     "rollup-plugin-commonjs": "^9.0.0",
