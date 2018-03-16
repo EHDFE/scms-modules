@@ -24,7 +24,7 @@ export default (app, elem, attrs, scope) => {
           customCss: '=',
           clickFun: '=',
           miniImg: '=',
-          imgClick: '='
+          showClick: '='
         },
         link: function postLink() {
 
@@ -135,6 +135,7 @@ export default (app, elem, attrs, scope) => {
               }
             };
           };
+          
 
           function imgData(type, obj) {
             const data = {};
@@ -214,6 +215,10 @@ export default (app, elem, attrs, scope) => {
           $scope.clickFun = $scope.clickFun;
           if ($scope.clickFun) {
             $scope.clickFun.imgClick = $scope.imgClick;
+          }
+          
+          if($scope.showClick){
+            $scope.showClick = $scope.imgClick;
           }
 
 

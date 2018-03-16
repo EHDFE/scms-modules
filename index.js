@@ -1,11 +1,7 @@
 // import 'bootstrap/less/bootstrap.less';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'font-awesome/css/font-awesome.css';
-import 'bootstrap';
+import './index.less';
 
-import './libs/base.less';
-import './libs/font-scms/less/style.less';
-import './scmsUi/less/index.less';
+import 'bootstrap';
 
 import './scmsUi';
 

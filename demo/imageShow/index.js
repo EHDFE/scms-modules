@@ -54,13 +54,13 @@ export default {
 			"type":"function",
 			"exampleValue":'',
             "defaultValue":'',
-			"key":"imgClick",
+			"key":"showClick",
 			"description":"图片点击放大事件"
 		}
         ],
 	"attrs":[],
 	"deps":["scmsModules/imageShow/imageShow"],
-	"html":"<div style=\"width:200px;\"><img image-show img-url=\"imgUrl\" img-click=\"imgClick\" custom-css=\"customCss\" alt-text=\"altText\" text-only=\"textOnly\" bg-click=\"bgClick\" mini-img=\"miniImg\"></div>",
+	"html":"<div style=\"width:200px;\"><img image-show img-url=\"imgUrl\" show-click=\"showClick\" custom-css=\"customCss\" alt-text=\"altText\" text-only=\"textOnly\" bg-click=\"bgClick\" mini-img=\"miniImg\"></div>",
 	"api":"",
 	"htmlUrl":""
 }
