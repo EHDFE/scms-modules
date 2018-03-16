@@ -40,6 +40,7 @@ export default (app, elem, attrs, scope) => {
           fixedTable: '=',
           fixedPosition: '@',
           domReady: '=',
+          miniPage: '=' //@scope miniPage 分页是否使用缩小样式 {type: "boolean", "exampleValue": false, defaultValue: false}
         },
         restrict: 'EA',
         transclude: true,
