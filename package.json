@@ -1,12 +1,13 @@
 {
   "name": "scmsmodules",
-  "version": "0.2.0-0",
+  "version": "0.2.0-1",
   "description": "scmsmodules",
   "repository": "https://github.com/EHDFE/scms-modules.git",
   "scripts": {
     "lint": "eslint ./src ./scmsUi ./libs ./index.js",
     "lint-fix": "eslint ./src ./scmsUi ./libs ./index.js --fix",
     "build": "webpack --config ./config/webpack.conf.prod --mode production",
+    "start": "webpack-dev-server --config ./config/webpack.conf.dev --mode development --content-base ./docs --history-api-fallback --hot --open",
     "server": "webpack-dev-server --config ./config/webpack.conf.dev --mode development --content-base ./docs --history-api-fallback --hot --open",
     "pack": "rollup --config ./config/rollup.config.js",
     "auto-pack": "rollup --config ./config/rollup.config.js --watch"

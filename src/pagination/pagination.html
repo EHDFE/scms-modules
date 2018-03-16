@@ -1,11 +1,11 @@
-<div class="pagination-box ng-hide form-inline" ng-show="pages && pages.length">
+<div class="pagination-box ng-hide form-inline" ng-show="pages && pages.length" ng-class="{'mini-page': miniPage}">
     <div class="fr">
-        <div class="fl">
+        <div class="fl hide-block">
             <label>共{{totalCount}}条</label>
         </div>
         <ul class="pagination fl">
             <li ng-class="{disabled: currentPage == 1}" ng-click="goPage(currentPage - 1);">
-                <a href="javascript:void(0)"><i>«</i></a>
+                <a href="javascript:void(0)"><i class="arrow">«</i></a>
             </li>
             <li ng-show="isShowBeEllipsis">
                 <a href="javascript:void(0);" ng-click="goPage(1);">1</a>
@@ -19,15 +19,15 @@
                     <a href="javascript:void(0);" ng-click="goPage(maxPage);">{{maxPage}}</a>
                 </li>
             <li ng-class="{disabled: currentPage == maxPage}" ng-click="goPage(currentPage + 1);">
-                <a href="javascript:void(0)"><i>»</i></a>
+                <a href="javascript:void(0)"><i class="arrow">»</i></a>
             </li>
         </ul>
         
         <div class="fr form-inline ml15">
-            <select class="form-control" ng-show="!hidePageSizeChange" ng-model="pageSize" ng-change="change()" ng-options="pageSizeListName[item] for item in pageSizeList">
+            <select class="form-control hide-block" ng-show="!hidePageSizeChange" ng-model="pageSize" ng-change="change()" ng-options="pageSizeListName[item] for item in pageSizeList">
                 </select>
-            <label>跳到</label>
-            <div class="input-group input-bar">
+            <label class="hide-block">跳到</label>
+            <div class="input-group input-bar jump-page">
                 <input type="text" class="form-control" ng-model="number"> 
                 <span class="input-group-btn">
                     <button class="btn" ng-click="goPage(number);">GO</button>
