@@ -39,6 +39,7 @@ export default (app, elem, attrs, scope) => {
           function ($scope, $element, $attrs, $timeout) {},
         ],
         link($scope, $element, $attrs, ngModel) {
+          $scope.showClick = ()=>{};
           $scope.type = 1;
           $scope.imageArray = [];
           $scope.imageUrls = $scope.imageUrls || [];
