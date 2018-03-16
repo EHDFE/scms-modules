@@ -22,6 +22,7 @@ export default (app, elem, attrs, scope) => {
           pageSize: '=', // @scope pageSize 一页显示行数 {type: "number", "exampleValue": 15, defaultValue: 15,isDisabled:1}
           onchanged: '=', // @scope onchanged 回调函数 {type: "function", "parentScopeValue": "$.alert('已执行回调函数,返回参数有:pageSize、currentPage', {type:'success'})"}
           hidePageSize: '=', // @scope hidePageSize pageSize是否显示 {type: "boolean", "exampleValue": false, defaultValue: false}
+          miniPage: '=' // @scope miniPage 是否使用缩小样式 {type: "boolean", "exampleValue": false, defaultValue: false}
         },
         link: function postLink($scope, $element, $attrs) {},
 

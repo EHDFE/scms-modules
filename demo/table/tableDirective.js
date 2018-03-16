@@ -69,6 +69,13 @@ export default [
         key: 'delEmptyParam',
         description: '是否删除值为空字符串的请求参数',
       },
+      {
+        type: 'boolean',
+        exampleValue: 'false',
+        defaultValue: 'false',
+        key: 'miniPage',
+        description: '是否使用缩小样式',
+      }
     ],
     attrs: [
       {
