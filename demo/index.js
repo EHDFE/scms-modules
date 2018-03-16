@@ -69,6 +69,9 @@ demoData.push(card);
 import starRating from "./starRating/index.js";
 demoData.push(starRating);
 
+import imageShow from "./imageShow/index.js";
+demoData.push(imageShow);
+
 import imageUpload from "./imageUpload/index.js";
 demoData.push(imageUpload);
 

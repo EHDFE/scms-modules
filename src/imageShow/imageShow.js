@@ -187,15 +187,12 @@ export default (app, elem, attrs, scope) => {
               if (imgHeight > windowW * scale) {
                 imgHeight = windowW * scale;
               }
-              console.log(1);
             } else if (rotateH > windowW * scale) {
               imgHeight = windowW * scale;
               imgWidth = imgHeight / rotateH * rotateW;
-              console.log(2);
             } else {
               imgHeight = rotateH;
               imgWidth = rotateW;
-              console.log(3);
             }
 
             data.w = (windowW - imgWidth) / 2;
