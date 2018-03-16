@@ -92,9 +92,7 @@ export default [
       },
     ],
     deps: [''],
-    html: 'Url scmsModules/table/tableHtml.html',
     api: '',
-    htmlUrl: ['scmsModules/table/tableHtml.html'],
     type: 'directive',
   },
 ];

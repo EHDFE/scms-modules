@@ -1,0 +1,14 @@
+<div class="cascade-selector">
+  <select
+    class="form-control"
+    ng-repeat="source in renderList"
+    ng-model="selectedList[$index]"
+    style="width: {{width}}px"
+  >
+    <option
+      ng-repeat="item in source"
+      value="{{item.value}}"
+      ng-selected="selectedList[$parent.$index] === item.value"
+    >{{item.name}}</option>
+  </select>
+</div>

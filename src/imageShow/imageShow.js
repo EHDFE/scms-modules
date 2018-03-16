@@ -24,6 +24,7 @@ export default (app, elem, attrs, scope) => {
           customCss: '=',
           clickFun: '=',
           miniImg: '=',
+          imgClick: '='
         },
         link: function postLink() {
 

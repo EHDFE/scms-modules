@@ -1,6 +1,7 @@
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const baseConfig = require('./webpack.conf.base');
 
 const BROWSER_SUPPORTS = ['last 2 versions'];
@@ -111,7 +112,9 @@ const config = {
     ],
   },
   plugins: [
+    new ErrorOverlayPlugin(),
   ],
+  devtool: 'cheap-module-source-map',
 };
 
 module.exports = merge.smart(baseConfig, config);
