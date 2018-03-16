@@ -43,11 +43,18 @@ export default {
       key: 'hidePageSize',
       description: 'pageSize是否显示',
     },
+    {
+      type: 'boolean',
+      exampleValue: false,
+      defaultValue: false,
+      key: 'miniPage',
+      description: '是否显示缩小分页',
+    }
   ],
   attrs: [],
   deps: ['scmsModules/pagination/paginationDirective'],
   html:
-    '<div pagination-directive current-page="currentPage" total-count="totalCount" page-size="pageSize" onchanged="onchanged" hide-page-size="hidePageSize"></div>',
+    '<div pagination-directive current-page="currentPage" total-count="totalCount" page-size="pageSize" onchanged="onchanged" hide-page-size="hidePageSize" mini-page="miniPage"></div>',
   api: '',
   htmlUrl: '',
 };
