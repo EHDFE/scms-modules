@@ -9,6 +9,13 @@ const baseConfig = require('./webpack.conf.base');
 
 const BROWSER_SUPPORTS = ['last 2 versions'];
 
+const extractCSS = new ExtractTextPlugin({
+  filename: '[name].[contenthash:8]-css.css',
+});
+const extractLESS = new ExtractTextPlugin({
+  filename: '[name].[contenthash:8]-less.css',
+});
+
 const config = {
   output: {
     filename: '[name].[chunkhash:8].js',
@@ -55,8 +62,8 @@ const config = {
             },
           },
           {
-            test: /\.(le|c)ss$/,
-            loader: ExtractTextPlugin.extract({
+            test: /\.css$/,
+            loader: extractCSS.extract({
               fallback: {
                 loader: 'style-loader',
                 options: {
@@ -84,9 +91,40 @@ const config = {
                     ],
                   },
                 },
-                {
-                  loader: 'less-loader',
+              ],
+            }),
+          },
+          {
+            test: /\.less$/,
+            loader: extractLESS.extract({
+              fallback: {
+                loader: 'style-loader',
+                options: {
+                  hmr: false,
                 },
+              },
+              use: [
+                {
+                  loader: 'css-loader',
+                  options: {
+                    importLoaders: 1,
+                    minimize: true,
+                  },
+                },
+                {
+                  loader: 'postcss-loader',
+                  options: {
+                    // Necessary for external CSS imports to work
+                    // https://github.com/facebookincubator/create-react-app/issues/2677
+                    ident: 'postcss',
+                    plugins: () => [
+                      autoprefixer({
+                        browsers: BROWSER_SUPPORTS,
+                      }),
+                    ],
+                  },
+                },
+                'less-loader',
               ],
             }),
           },
@@ -131,9 +169,8 @@ const config = {
       dry: false,
     }),
     new webpack.HashedModuleIdsPlugin(),
-    new ExtractTextPlugin({
-      filename: '[name].[contenthash:8].css',
-    }),
+    extractCSS,
+    extractLESS,
   ],
   optimization: {
     minimizer: [
