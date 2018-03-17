@@ -261,7 +261,7 @@ class DatePicker {
         .millisecond(0)
         .valueOf();
 
-    for (let i = 0; i < 42; i++) {
+    for (let i = -1; i < 41; i++) {
       let isToday = false;
       const nowDate = startDate
         .clone()
@@ -420,7 +420,7 @@ class DatePicker {
         }
       }
       
-      if (nowDate.day() === 1) {
+      if (nowDate.day() === 0) {
         dateView.push([{
           isToday: isToday,
           tag: tag || 'now',
