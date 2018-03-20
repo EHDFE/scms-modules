@@ -30,6 +30,7 @@ export default (app, elem, attrs, scope) => {
           dSize: '=',
           apiUrl: '=',
           dNum: '=',
+          clearData: '='
         },
         controller: [
           '$scope',
@@ -43,31 +44,34 @@ export default (app, elem, attrs, scope) => {
           $scope.type = 1;
           $scope.imageArray = [];
           $scope.imageUrls = $scope.imageUrls || [];
-          if ($scope.moduleType === 'noThumb') {
-            if ($scope.imageUrls && $scope.imageUrls.length > 0) {
+          $scope.init = ()=>{
+            if ($scope.moduleType === 'noThumb') {
+              if ($scope.imageUrls && $scope.imageUrls.length > 0) {
+                $scope.imageArray = $scope.imageUrls;
+              } else {
+                $scope.imageUrls = $scope.imageArray;
+              }
+            } else if ($scope.imageUrls && $scope.imageUrls.length) {
               $scope.imageArray = $scope.imageUrls;
+              $scope.imageArray.push({
+                uploadType: {
+                  succeed: false,
+                  error: false,
+                  loading: false,
+                },
+              });
             } else {
-              $scope.imageUrls = $scope.imageArray;
+              $scope.imageArray.push({
+                uploadType: {
+                  succeed: false,
+                  error: false,
+                  loading: false,
+                },
+              });
+              $scope.imageUrls = [];
             }
-          } else if ($scope.imageUrls && $scope.imageUrls.length) {
-            $scope.imageArray = $scope.imageUrls;
-            $scope.imageArray.push({
-              uploadType: {
-                succeed: false,
-                error: false,
-                loading: false,
-              },
-            });
-          } else {
-            $scope.imageArray.push({
-              uploadType: {
-                succeed: false,
-                error: false,
-                loading: false,
-              },
-            });
-            $scope.imageUrls = [];
           }
+          $scope.init();
 
           $scope.remove = (item, index) => {
             $scope.imageArray.splice(index, 1);
@@ -252,6 +256,9 @@ export default (app, elem, attrs, scope) => {
               }
             }
           };
+          $scope.clearData = ()=>{
+            $scope.init();
+          }
         },
       };
     },

@@ -24,17 +24,17 @@
                         <span class="loading" ng-show="item.uploadType.loading" style="width: {{ item.loadingTempo }}%;"></span>
                     </div>
                 </div>
-                <div class="images-box" ng-show="item.uploadType.succeed " ng-class="{error: item.uploadType.error}">
+                <div class="images-box" ng-show="item.uploadType.succeed || item.uploadType.error" ng-class="{error: item.uploadType.error}">
                     <!--<div class="img" style="background: url({{ item.dataImg }}) no-repeat center center;background-size: contain;"></div>-->
-                    <img class="img" image-show img-url="item.dataImg" custom-css="true" show-click="showClick" bg-click="false" mini-img="false">
+                    <img class="img" image-show img-url="item.dataImg" custom-css="true" show-click="showClick" bg-click="false" mini-img="false" ng-show="item.uploadType.succeed">
                     <div class="barrier">
-                        <a href="javascript:;" ng-click="showClick($event,item.dataImg)">
+                        <a href="javascript:;" ng-show="item.uploadType.succeed" ng-click="showClick($event,item.dataImg)">
                             <i class="glyphicon glyphicon-eye-open"></i>
                         </a>
                         <a href="javascript:;" ng-click="remove(item,$index)">
                             <i class="glyphicon glyphicon-trash"></i>
                         </a>
-                        <a href="{{item.dataImg}}" download="{{item.dataImg}}">
+                        <a href="{{item.dataImg}}" ng-show="item.uploadType.succeed" download="{{item.dataImg}}">
                             <i class="fa fa-download"></i>
                         </a>
                     </div>
