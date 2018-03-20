@@ -72,7 +72,7 @@ export default (app, elem, attrs, scope) => {
             }
           }
           $scope.init();
-
+          
           $scope.remove = (item, index) => {
             $scope.imageArray.splice(index, 1);
             $scope.selectImg();
@@ -84,8 +84,7 @@ export default (app, elem, attrs, scope) => {
                 } else {
                   break;
                 }
-              }
-              console.log(num, $scope.dNum);
+              };
               if (num === $scope.dNum - 1) {
                 $scope.imageArray.push({
                   uploadType: {
@@ -256,11 +255,13 @@ export default (app, elem, attrs, scope) => {
               }
             }
           };
-          $scope.clearData = ()=>{
+          
+          $scope.clearData = function () {
             $scope.init();
           }
-        },
-      };
-    },
-  ]);
+          // $scope.clearData = $scope.clear;
+        }
+      }
+    }
+  ])
 };
