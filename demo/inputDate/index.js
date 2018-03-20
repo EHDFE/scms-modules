@@ -6,6 +6,7 @@ import calendar from './calendar.html';
 import calendar2 from './calendar2.html';
 import calendar3 from './calendar3.html';
 import month from './month.html';
+import monthRange from './monthRange.html';
 import calendarPanel from './calendarPanel.html'
 
 export default [{
@@ -34,6 +35,13 @@ export default [{
 	parentTitle: "DatePickers",
 	author: "tianyanrong",
 	html: [month],
+	isCode: true
+},
+{
+	title: "monthRangePicker",
+	parentTitle: "DatePickers",
+	author: "tianyanrong",
+	html: [monthRange],
 	isCode: true
 },
 {
