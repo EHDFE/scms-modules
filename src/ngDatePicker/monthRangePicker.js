@@ -19,7 +19,7 @@ import Defautls from './defaults';
 
 export default (app, elem, attrs, scope) => {
   datePanel(app, elem, attrs, scope);
-  app.directive('datePickerRange', [
+  app.directive('monthRangePicker', [
     '$rootScope',
     '$document',
     '$compile',
@@ -46,15 +46,12 @@ export default (app, elem, attrs, scope) => {
           '$attrs',
           '$timeout',
           function ($scope, $element, $attrs, $timeout) {
-            
             $scope.isHideClose = $attrs.isHideClose;
             const panel = $compile(html)($scope);
             panel.css('display', 'none');
             $document.find('#container').append(panel);
-            //$scope.useSeconds = !!$attrs.useSeconds;
-            //$scope.minViewMode = $attrs.minViewMode;
-            //$scope.pickTime = !!$attrs.pickTime;
-            $scope.formatDate = $attrs.formatDate || Defautls.format;
+            $scope.minViewMode = 'months';
+            $scope.formatDate = 'YYYY-MM';
             $scope.startPlaceholder = $attrs.startPlaceholder || Defautls.lang.start;
             $scope.endPlaceholder = $attrs.endPlaceholder || Defautls.lang.end;
 
@@ -86,7 +83,7 @@ export default (app, elem, attrs, scope) => {
               if(isInit && $scope.initStartDate && ($scope.initEndDate || $scope.initEndDate === 0)) {
                 if(!$scope.startDateRange && !$scope.endDateRange) {
                   $scope.endDate = moment().format($scope.formatDate);
-                  $scope.startDate = moment().add(-1, 'month').format($scope.formatDate); 
+                  $scope.startDate = moment().add(-1, 'year').format($scope.formatDate); 
                   $scope.startValue = $scope.startDate;
                   $scope.endValue = $scope.endDate;                  
                   setOutValue($scope.startValue, $scope.endValue)
@@ -133,14 +130,31 @@ export default (app, elem, attrs, scope) => {
             /*
              * 当面板中触发了“点击日期”事件，设置值。
              */
-            $scope.onPickEvent = function(type, date, dateRangeData) {
-              if(type !== 'date') {
-                return;
-              }
-              $scope.startValue = dateRangeData.start.format($scope.formatDate) || '';
-              $scope.endValue = dateRangeData.end.format($scope.formatDate) || '';
-              $scope.endDate = dateRangeData.start.format($scope.formatDate) || '';
-              $scope.startDate = dateRangeData.end.format($scope.formatDate) || '';
+            var pickTimes = 0;
+            $scope.onPickEvent = function(type, month, datePicker) {
+                if(type !== 'month') {
+                    return;
+                }
+                if(type === 'month') {
+                    pickTimes ++;
+                    if(pickTimes%2 > 0) {
+                        $scope.startValue = moment(month.year+'-'+month.data).format($scope.formatDate) || '';
+                        $scope.startDate = moment(month.year+'-'+month.data+'-'+'1').format('YYYY-MM-DD');
+                        $scope.endValue = '';
+                        $scope.endDate = '';
+                    }
+                    else {
+                        $scope.endValue = moment(month.year+'-'+month.data).format($scope.formatDate) || '';
+                        $scope.endDate = moment(month.year+'-'+month.data+'-'+'1').format('YYYY-MM-DD');
+                    }
+                }
+                
+                //angular.forEach(monthData, function(item) {
+                    //if($panelAttrs.name === 'part1' ) {
+                        //if(moment($scope.startValue).valueOf )
+                    //}
+                //})
+              
             }
             
             /*
@@ -214,7 +228,7 @@ export default (app, elem, attrs, scope) => {
             });
             
             $element.find('.input-date-range').bind('blur', () => {
-              panel.css('display', 'none');
+              //panel.css('display', 'none');
             });
 
             $scope.$on('$destroy', () => {
@@ -224,7 +238,7 @@ export default (app, elem, attrs, scope) => {
             /*
              * 点关闭图标时，删除已选中的时间范围
              */
-            $scope.clearDate = () => {              
+            $scope.clearDate = () => {
               $scope.startValue = '';
               $scope.endValue = '';
               $scope.startDate = '';

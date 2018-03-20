@@ -115,6 +115,7 @@ class DatePicker {
       const thisMonth = i + 1;
       return {
         data: thisMonth,
+        year: this.dateData.year,
         dataView: monthMap(thisMonth),
         checked: thisMonth === this.dateData.month,
         today: this.dateData.year == moment().year() &&

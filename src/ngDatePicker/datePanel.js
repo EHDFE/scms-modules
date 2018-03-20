@@ -153,9 +153,24 @@ export default (app, elem, attrs, scope) => {
           $scope.pickEvent = function(col) {
             datePicker.setDate(col);
             try{
-              $scope.onPickEvent(col, $scope.dateRangeData);
+              $scope.onPickEvent('date', col, $scope.dateRangeData);
             }
             catch(e) {}
+          }
+
+          $scope.pickMonthEvent = function(currmonth) {
+            try{
+              if($scope.onPickEvent) {
+                $scope.onPickEvent('month', currmonth, datePicker);
+              }
+              else{
+                datePicker.setMonth(currmonth);
+              }
+            }
+            catch(e) {
+              datePicker.setMonth(currmonth);
+            }
+            
           }
 
           $scope.hover = throttle((col) => {

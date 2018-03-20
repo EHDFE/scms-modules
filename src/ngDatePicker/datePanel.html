@@ -50,8 +50,8 @@
           <tbody>
             <tr>
               <td colspan="7" style="font-size:0; padding: 0;" >
-                <span class="month" ng-class="{today: currmonth.today, active: currmonth.checked, disabled: currmonth.disabled}" ng-repeat="currmonth in datePicker.monthView"
-                  ng-click="datePicker.setMonth(currmonth)">{{currmonth.dataView}}月</span>
+                <span ng-repeat="currmonth in datePicker.monthView" class="month"  ng-class="{today: currmonth.today, active: currmonth.checked, disabled: currmonth.disabled}" 
+                  ng-click="pickMonthEvent(currmonth)">{{currmonth.dataView}}月</span>
               </td>
             </tr>
           </tbody>
