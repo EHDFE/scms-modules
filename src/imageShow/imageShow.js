@@ -85,6 +85,9 @@ export default (app, elem, attrs, scope) => {
             $document.find('body').append(html);
             $document.find('body').append('<div class="modal-backdrop fade in" style="z-index: 9999;opacity: 0; display:none;" id="imgUrlBoxBG"></div>');
           }
+          if($('#imgUrlBoxBG').length <= 0){
+            $document.find('body').append('<div class="modal-backdrop fade in" style="z-index: 9999;opacity: 0; display:none;" id="imgUrlBoxBG"></div>');
+          }
           // $scope.altText = $scope.altText || '';
           $scope.imgClick = function ($event, url) {
             if ($event) {
@@ -254,7 +257,7 @@ export default (app, elem, attrs, scope) => {
           }
 
           // $scope.$on('$destroy', () => {
-          //   $document.find('.imgUrlBox,.imgUrlControl,.imgShowClosBtn').remove();
+            // $document.find('.imgUrlBox,.imgUrlControl,.imgShowClosBtn').remove();
           // });
         },
       };

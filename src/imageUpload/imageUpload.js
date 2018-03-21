@@ -42,9 +42,9 @@ export default (app, elem, attrs, scope) => {
         link($scope, $element, $attrs, ngModel) {
           $scope.showClick = ()=>{};
           $scope.type = 1;
-          $scope.imageArray = [];
-          $scope.imageUrls = $scope.imageUrls || [];
           $scope.init = ()=>{
+            $scope.imageArray = [];
+            $scope.imageUrls = $scope.imageUrls || [];
             if ($scope.moduleType === 'noThumb') {
               if ($scope.imageUrls && $scope.imageUrls.length > 0) {
                 $scope.imageArray = $scope.imageUrls;
