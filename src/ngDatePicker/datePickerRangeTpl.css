@@ -28,3 +28,6 @@
 .date-picker-range-hasdata:hover .clear-date:hover {
   color:#51A1FD;
 }
+.month-range-picker .input-date-range .input-date{
+  width: 60px !important;
+}

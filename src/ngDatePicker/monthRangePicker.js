@@ -46,6 +46,7 @@ export default (app, elem, attrs, scope) => {
           '$attrs',
           '$timeout',
           function ($scope, $element, $attrs, $timeout) {
+            
             $scope.isHideClose = $attrs.isHideClose;
             const panel = $compile(html)($scope);
             panel.css('display', 'none');
@@ -54,7 +55,7 @@ export default (app, elem, attrs, scope) => {
             $scope.formatDate = 'YYYY-MM';
             $scope.startPlaceholder = $attrs.startPlaceholder || Defautls.lang.start;
             $scope.endPlaceholder = $attrs.endPlaceholder || Defautls.lang.end;
-
+            $element.addClass('month-range-picker');
             /*
              * 设置外部scope的值,触发外部scope事件
              * start 开始时间值 如，'2018-03-02'
