@@ -64,7 +64,7 @@ export default (app, elem, attrs, scope) => {
              */
             let setOutValue = function(start, end, isFetch) {
               $scope.startDateRange = start;
-              $scope.endDateRange = end;
+              $scope.endDateRange =  end;
               if ($scope.eventChange && isFetch) {
                 $timeout(function() {
                   $scope.eventChange();
@@ -83,10 +83,10 @@ export default (app, elem, attrs, scope) => {
             function initDate(isInit) {
               if(isInit && $scope.initStartDate && ($scope.initEndDate || $scope.initEndDate === 0)) {
                 if(!$scope.startDateRange && !$scope.endDateRange) {
-                  $scope.endDate = moment().format($scope.formatDate);
-                  $scope.startDate = moment().add(-1, 'year').format($scope.formatDate); 
+                  $scope.startDate = moment().add($scope.initStartDate+1, 'month').format($scope.formatDate); 
+                  $scope.endDate = moment().add(moment($scope.startDate).year - moment().year(), 'year').format($scope.formatDate);
                   $scope.startValue = $scope.startDate;
-                  $scope.endValue = $scope.endDate;                  
+                  $scope.endValue = $scope.endDate;
                   setOutValue($scope.startValue, $scope.endValue)
                 }
               }
@@ -94,7 +94,7 @@ export default (app, elem, attrs, scope) => {
                 return;
               }
               if($scope.startDateRange && $scope.endDateRange) {
-                if($scope.startDateRange.substr(0,7) === $scope.endDateRange.substr(0,7)) {
+                if($scope.startDateRange === $scope.endDateRange) {
                   $scope.startDate = $scope.startDateRange;
                   $scope.endDate =  moment($scope.startDate).add(-1, 'year').format($scope.formatDate);
                   $scope.startValue = $scope.startDate;
@@ -114,6 +114,7 @@ export default (app, elem, attrs, scope) => {
                     end: moment($scope.endValue)
                   }
                 }
+                
               }
               else{
                 if($scope.monthRangeData && $scope.monthRangeData.start) {
@@ -124,6 +125,7 @@ export default (app, elem, attrs, scope) => {
                   $scope.endDate = moment().add(-1, 'year').format($scope.formatDate);  
                 }               
               }
+              
             };
 
             initDate(true);
@@ -139,7 +141,7 @@ export default (app, elem, attrs, scope) => {
              * min 最小moment时间
              * max 最大moment时间
              */
-            var setMonthStatus = function(currMonth, start, end, min, max) {
+            let setMonthStatus = function(currMonth, start, end, min, max) {
               let startMonthValueOf = start ? start.valueOf() : '';
               let endMonthValueOf = end ? end.valueOf() : '';
               let currMonthValueOf = currMonth.valueOf();
@@ -161,7 +163,7 @@ export default (app, elem, attrs, scope) => {
                 isChecked = true;
                 rangeTag = 'end';
               }
-              if(currMonthValueOf === moment(moment().year() + '-'+(moment().month()+1)).valueOf()) {
+              if(currMonthValueOf === moment({year: moment().year(), month: moment().month()}).valueOf()) {
                 isToday = true;
               }
               if(min && currMonthValueOf < min.valueOf()) {
@@ -243,15 +245,11 @@ export default (app, elem, attrs, scope) => {
 
               this.monthView = Array(...Array(12)).map((item, i) => {
                 const thisMonth = i + 1;
-
-                let status = setMonthStatus(
-                  moment(this.dateData.year+'-'+thisMonth), 
-                  this.monthRangeData.start, 
-                  this.monthRangeData.end, 
-                  moment(this.minDateArr.year+'-'+ this.minDateArr.month),
-                  moment(this.maxDateArr.year+'-'+ this.maxDateArr.month)
-                );
                 
+                const thisMoment = moment({year:this.dateData.year, month: i});
+                const minMoment = this.minDateArr && this.minDateArr.year && this.minDateArr.month ? moment({year: this.minDateArr.year, month: this.minDateArr.month-1}) : '';
+                const maxMoment = this.maxDateArr && this.maxDateArr.year && this.maxDateArr.month ? moment({year: this.maxDateArr.year, month: this.maxDateArr.month-1}) : '';
+                let status = setMonthStatus(thisMoment,this.monthRangeData.start,this.monthRangeData.end,minMoment,maxMoment);
                 return {
                   data: thisMonth,
                   year: this.dateData.year,
@@ -285,6 +283,7 @@ export default (app, elem, attrs, scope) => {
               switch(type) {
                 //事件为初始化时
                 case 'init':
+                
                   datepickers[$panelAttrs.name] = datePicker;
                   datePicker.setMonthView = setMonthView;
 
@@ -300,7 +299,7 @@ export default (app, elem, attrs, scope) => {
                   };
                   if($scope.monthRangeData.start.year() === $scope.monthRangeData.end.year()) {
                     datepickers['part1'].dateData = {
-                      year: $scope.monthRangeData.start.add('-1', 'year'),
+                      year: $scope.monthRangeData.start.year() -1,
                       month: $scope.monthRangeData.start.month()
                     };
                   }
@@ -318,17 +317,20 @@ export default (app, elem, attrs, scope) => {
 
                 //事件为"选中月份"时
                 case 'month':
+                  if(month.disabled) {
+                    return;
+                  }
                   pickTimes ++;
                   console.log(4444,month)
                   if(pickTimes%2 > 0) {
                       $scope.startValue = moment(month.year+'-'+month.data).format($scope.formatDate) || '';
-                      $scope.startDate = moment(month.year+'-'+month.data+'-'+'1').format('YYYY-MM-DD');
+                      $scope.startDate = $scope.endValue;
                       $scope.endValue = '';
                       $scope.endDate = '';
                   }
                   else {
                       $scope.endValue = moment(month.year+'-'+month.data).format($scope.formatDate) || '';
-                      $scope.endDate = moment(month.year+'-'+month.data+'-'+'1').format('YYYY-MM-DD');
+                      $scope.endDate = $scope.endValue;
                       if(moment($scope.startValue).valueOf() > moment($scope.endValue).valueOf()) {
                         var startValue = $scope.startValue;
                         var startDate = $scope.startDate;

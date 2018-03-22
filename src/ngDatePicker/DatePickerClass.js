@@ -25,7 +25,9 @@ class DatePicker {
     this.showPanel = 'day';
     this.checkedData = {};
     this.isCalender = args.isCalender;
+    this.moment = moment;
   }
+  
   init(date) {
     let formatDate;
     formatDate = this.formatDate || (this.timePick ? 'HH:mm:ss' : 'YYYY-MM-DD');
