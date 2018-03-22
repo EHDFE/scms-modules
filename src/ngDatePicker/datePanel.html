@@ -50,8 +50,13 @@
           <tbody>
             <tr>
               <td colspan="7" style="font-size:0; padding: 0;" >
-                <span ng-repeat="currmonth in datePicker.monthView" class="month"  ng-class="{today: currmonth.today, active: currmonth.checked, disabled: currmonth.disabled}" 
-                  ng-click="pickMonthEvent(currmonth)">{{currmonth.dataView}}月</span>
+                <div ng-repeat="currmonth in datePicker.monthView" class="month-item" ng-class="{range: currmonth.isRange, start: currmonth.rangeTag=='start', end: currmonth.rangeTag=='end'}">
+                  <div class="month-item-bg">
+                    <span  class="month"  ng-class="{today: currmonth.today, active: currmonth.checked,  disabled: currmonth.disabled}"ng-click="pickMonthEvent(currmonth)" ng-mouseenter="hoverMonth(currmonth);">
+                      {{currmonth.dataView}}月
+                    </span>
+                  </div>
+                </div>
               </td>
             </tr>
           </tbody>
