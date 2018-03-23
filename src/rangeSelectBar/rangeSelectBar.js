@@ -100,7 +100,6 @@ export default (app, elem, attrs, scope) => {
                 startMoment: startMoment,
                 endMoment: endMoment,
               });
-              console.log('onChange');
               if (!arrived) {
                 $scope.cursorOffsetPanel.backgroundPositionX += stepWidth;
                 if (Math.abs(totalWidth - $scope.cursorOffsetPanel.backgroundPositionX) < stepWidth) {
