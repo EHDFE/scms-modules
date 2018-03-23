@@ -116,7 +116,7 @@ export default (app, elem, attrs, scope) => {
               $scope.playing = false;
               $scope.cursorOffsetPanel.backgroundPositionX = 0;
             }
-          }, 1000);
+          }, 500);
         }
 
         var resizeTimer;
