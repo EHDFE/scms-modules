@@ -272,7 +272,7 @@ export default (app, elem, attrs, scope) => {
               canvas.width = img.width;
               canvas.height = img.height;
               canvas.getContext("2d").drawImage(img, 0, 0);
-              url = canvas.toDataURL();
+              var url = canvas.toDataURL();
               $($event.target).attr("href", url).attr("download", name+".png");
               $($event.target).click();
           }
