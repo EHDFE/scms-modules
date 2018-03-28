@@ -253,9 +253,9 @@ export default (app, elem, attrs, scope) => {
             });
           }
 
-          $scope.$on('$destroy', () => {
-            $document.find('.imgUrlBox,.imgUrlControl,.imgShowClosBtn').remove();
-          });
+          // $scope.$on('$destroy', () => {
+          //   $document.find('.imgUrlBox,.imgUrlControl,.imgShowClosBtn').remove();
+          // });
         },
       };
     }]);

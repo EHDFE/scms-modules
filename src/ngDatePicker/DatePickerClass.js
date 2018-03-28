@@ -261,7 +261,7 @@ class DatePicker {
         .millisecond(0)
         .valueOf();
 
-    for (let i = 0; i < 42; i++) {
+    for (let i = -1; i < 41; i++) {
       let isToday = false;
       const nowDate = startDate
         .clone()
@@ -420,7 +420,7 @@ class DatePicker {
         }
       }
       
-      if (nowDate.day() === 1) {
+      if (nowDate.day() === 0) {
         dateView.push([{
           isToday: isToday,
           tag: tag || 'now',
@@ -703,7 +703,7 @@ class DatePicker {
     }
   }
   setHourView() {
-    if (!this.dateData.hour) {
+    if (!this.dateData.hour && this.dateData.hour !== 0) {
       this.dateData.hour = moment().hour();
     }
     this.hourView = Array(...Array(24)).map((item, i) => ({
@@ -757,7 +757,7 @@ class DatePicker {
     }
   }
   setMinView() {
-    if (!this.dateData.minute) {
+    if (!this.dateData.minute && this.dateData.minute !== 0) {
       this.dateData.minute = moment().minute();
     }
     let minMomentValue = moment([this.minDateArr.year, this.minDateArr.month - 1, this.minDateArr.date, this.minDateArr.hour, this.minDateArr.minute]).valueOf(),
@@ -809,7 +809,7 @@ class DatePicker {
     }
   }
   setSecondView() {
-    if (!this.dateData.second) {
+    if (!this.dateData.second && this.dateData.second !== 0) {
       this.dateData.second = moment().second();
     }
     let minMomentValue = moment([this.minDateArr.year, this.minDateArr.month - 1, this.minDateArr.date, this.minDateArr.hour, this.minDateArr.minute, this.minDateArr.second]).valueOf(),
@@ -879,9 +879,9 @@ class DatePicker {
     formatDate = this.formatDate || (this.timePick ? 'HH:mm:ss' : 'YYYY-MM-DD');
     if (this.timePick) {
       return moment()
-        .set('hour', this.dateData.hour || moment().hour())
-        .set('minute', this.dateData.minute || moment().minute())
-        .set('second', this.dateData.second || moment().second())
+        .set('hour', this.dateData.hour || this.dateData.hour === 0 ? this.dateData.hour : moment().hour())
+        .set('minute', this.dateData.minute || this.dateData.minute === 0 ? this.dateData.minute : moment().minute())
+        .set('second', this.dateData.second || this.dateData.second === 0 ? this.dateData.second : moment().second())
         .format(formatDate);
     }
     return moment()

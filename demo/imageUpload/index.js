@@ -54,10 +54,17 @@ export default {
 			"defaultValue":5,
 			"key":"dNum",
 			"description":"设定上传图片的数量，只限 “thumb” 使用"
+		},
+        {
+			"type":"function",
+			"exampleValue":'',
+            "defaultValue":'',
+			"key":"clearData",
+			"description":"清除数据"
 		}],
 	"attrs":[],
 	"deps":["scmsModules/imageUpload/imageUpload"],
-	"html":"<div image-upload module-type=\"moduleType\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\"></div><div image-upload module-type=\"'thumb'\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\" d-num=\"dNum\"></div>",
+	"html":"<div image-upload module-type=\"moduleType\" clear-data=\"clearData\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\"></div><div image-upload module-type=\"'thumb'\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\" d-num=\"dNum\"></div>",
 	"api":"",
 	"htmlUrl":""
 }
