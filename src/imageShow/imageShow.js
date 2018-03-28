@@ -139,7 +139,6 @@ export default (app, elem, attrs, scope) => {
             };
           };
           
-
           function imgData(type, obj) {
             const data = {};
             const windowW = $(window).width();
@@ -163,8 +162,13 @@ export default (app, elem, attrs, scope) => {
                 imgWidth = windowW * scale;
                 imgHeight = imgWidth / realWidth * realHeight;
               } else {
-                imgHeight = realHeight - 80;
-                imgWidth = realWidth - 80;
+                if(windowH-(92+80) > realHeight){
+                  imgHeight = realHeight;
+                  imgWidth = realWidth;
+                }else{
+                  imgHeight = realHeight - 80;
+                  imgWidth = realWidth - 80;
+                }
               }
               rotateW = imgWidth;
               rotateH = imgHeight;

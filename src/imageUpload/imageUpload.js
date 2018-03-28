@@ -229,6 +229,12 @@ export default (app, elem, attrs, scope) => {
                   const d = JSON.parse(xhr.responseText);
                   if (d && d.result === 'success') {
                     $scope.imageArray[index].data = d.data;
+                  }else{
+                    $scope.imageArray[index].uploadType = {
+                      succeed: false,
+                      error: true,
+                      loading: false,
+                    };
                   }
                   $scope.selectImg();
                   $scope.$apply();
@@ -255,6 +261,23 @@ export default (app, elem, attrs, scope) => {
               }
             }
           };
+
+          // 下载图片
+          $scope.download = ($event,dataImg)=>{
+              var canvas = document.createElement("canvas");
+              var name = new Date().getTime();
+              const img = new Image();
+              img.src = dataImg;
+
+              canvas.width = img.width;
+              canvas.height = img.height;
+              canvas.getContext("2d").drawImage(img, 0, 0);
+              url = canvas.toDataURL();
+              $($event.target).attr("href", url).attr("download", name+".png");
+              $($event.target).click();
+          }
+
+          
           
           $scope.clearData = function () {
             $scope.init();
