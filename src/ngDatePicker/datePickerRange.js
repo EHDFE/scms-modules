@@ -8,6 +8,7 @@
  */
 import angular from 'angular';
 import moment from 'moment';
+import isInteger from 'lodash/isInteger';
 import datePanel from './datePanel';
 import tpl from './datePickerRangeTpl.html';
 import './datePickerRangeTpl.css';
@@ -70,9 +71,9 @@ export default (app, elem, attrs, scope) => {
               if ($scope.eventChange && isFetch) {
                 $timeout(function() {
                   $scope.eventChange();
-                })
+                });
               }
-            }
+            };
             
             /*
              * 处理初始数据、面板数据
@@ -83,13 +84,13 @@ export default (app, elem, attrs, scope) => {
              * $scope.endDate 范围数据，用于在面板中显示第二个面板在此时间的月份
              */
             function initDate(isInit) {
-              if(isInit && $scope.initStartDate && ($scope.initEndDate || $scope.initEndDate === 0)) {
+              if(isInit && isInteger($scope.initStartDate) && isInteger($scope.initEndDate)) {
                 if(!$scope.startDateRange && !$scope.endDateRange) {
-                  $scope.endDate = moment().format($scope.formatDate);
-                  $scope.startDate = moment().add(-1, 'month').format($scope.formatDate); 
+                  $scope.endDate = moment().add($scope.initEndDate, 'd').format($scope.formatDate);
+                  $scope.startDate = moment().add($scope.initStartDate, 'd').format($scope.formatDate); 
                   $scope.startValue = $scope.startDate;
                   $scope.endValue = $scope.endDate;                  
-                  setOutValue($scope.startValue, $scope.endValue)
+                  setOutValue($scope.startValue, $scope.endValue);
                 }
               }
               if(isInit) {
@@ -101,32 +102,23 @@ export default (app, elem, attrs, scope) => {
                   $scope.endDate =  moment($scope.startDate).add(1, 'month').format($scope.formatDate);
                   $scope.startValue = $scope.startDate;
                   $scope.endValue = $scope.endDateRange;
-                  $scope.dateRangeData = {
-                    start: moment($scope.startValue),
-                    end: moment($scope.endValue)
-                  }
-                }
-                else {
+                } else {
                   $scope.startDate = $scope.startDateRange;
                   $scope.endDate = $scope.endDateRange;
                   $scope.startValue = $scope.startDate;
                   $scope.endValue = $scope.endDate;
-                  $scope.dateRangeData = {
-                    start: moment($scope.startValue),
-                    end: moment($scope.endValue)
-                  }
                 }
-              }
-              else{
-                if($scope.dateRangeData && $scope.dateRangeData.start) {
-
-                }
-                else {
+                $scope.dateRangeData = {
+                  start: moment($scope.startValue),
+                  end: moment($scope.endValue)
+                };
+              } else{
+                if(!$scope.dateRangeData || !$scope.dateRangeData.start) {
                   $scope.startDate = moment().format($scope.formatDate);
                   $scope.endDate = moment().add(1, 'month').format($scope.formatDate);  
                 }               
               }
-            };
+            }
 
             initDate(true);
             
@@ -138,13 +130,13 @@ export default (app, elem, attrs, scope) => {
               $scope.endValue = dateRangeData.end.format($scope.formatDate) || '';
               $scope.endDate = dateRangeData.start.format($scope.formatDate) || '';
               $scope.startDate = dateRangeData.end.format($scope.formatDate) || '';
-            }
+            };
             
             /*
              * 点“确认”提交选中的时间范围
              */
             $scope.pick = () => {
-              setOutValue($scope.startValue, $scope.endValue, true)
+              setOutValue($scope.startValue, $scope.endValue, true);
               $element.find('.input-date-range').trigger('blur');
             };
 
@@ -169,7 +161,7 @@ export default (app, elem, attrs, scope) => {
               $timeout(() => {
                 $scope.$broadcast('init');
               });
-            };
+            }
             $element.find('input').on('focus', (e) => {
               $element.find('.input-date-range').focus();
             });
@@ -192,18 +184,18 @@ export default (app, elem, attrs, scope) => {
             });
             function preventBlur(elem, func) {
               var fnDocumentMousedown;
-              angular.element(elem).bind("focus",function(){
-                  $document.bind("mousedown",fnDocumentMousedown=function(event){
-                      if(func(event.target)){
-                          event.target.setAttribute("unselectable","on");
-                          event.preventDefault();
-                      }else if(event.target!=elem){
-                         $document.unbind("mousedown",fnDocumentMousedown);
-                      }
-                  });
+              angular.element(elem).bind('focus',function(){
+                $document.bind('mousedown',fnDocumentMousedown=function(event){
+                  if(func(event.target)){
+                    event.target.setAttribute('unselectable','on');
+                    event.preventDefault();
+                  }else if(event.target!=elem){
+                    $document.unbind('mousedown',fnDocumentMousedown);
+                  }
+                });
               });
-              angular.element(elem).bind("blur",function(){
-                  $document.unbind("mousedown",fnDocumentMousedown);
+              angular.element(elem).bind('blur',function(){
+                $document.unbind('mousedown',fnDocumentMousedown);
               });
             }
             $scope.$on('refresh', (e, data) => {
@@ -229,8 +221,8 @@ export default (app, elem, attrs, scope) => {
               $scope.dateRangeData = {
                 start: '',
                 end: ''
-              }
-              setOutValue($scope.startValue, $scope.endValue, true)
+              };
+              setOutValue($scope.startValue, $scope.endValue, true);
               $timeout(() => {
                 $scope.$broadcast('refreshDate');
               });
