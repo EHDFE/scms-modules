@@ -264,17 +264,19 @@ export default (app, elem, attrs, scope) => {
 
           // 下载图片
           $scope.download = ($event,dataImg)=>{
+              var $ele = $($event.target).parent();
               var canvas = document.createElement("canvas");
               var name = new Date().getTime();
               const img = new Image();
+              img.crossOrigin = 'anonymous';
               img.src = dataImg;
 
               canvas.width = img.width;
               canvas.height = img.height;
               canvas.getContext("2d").drawImage(img, 0, 0);
               var url = canvas.toDataURL();
-              $($event.target).attr("href", url).attr("download", name+".png");
-              $($event.target).click();
+              $ele.attr("href", url).attr("download", name+".png");
+              $ele.click();
           }
 
           
