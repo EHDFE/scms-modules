@@ -276,11 +276,6 @@ export default (app, elem, attrs, scope) => {
               canvas.getContext("2d").drawImage(img, 0, 0);
               var url = canvas.toDataURL();
               $ele.attr("href", url).attr("download", name+".png");
-              // $ele.click();
-              // $ele.trigger();
-              // $scope.$apply(function() {
-                // $ele.click();
-              // });
           }
 
           
