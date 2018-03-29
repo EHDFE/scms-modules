@@ -235,6 +235,9 @@ export default (app, elem, attrs, scope) => {
                       error: true,
                       loading: false,
                     };
+                    G.alert(d.msg , {
+                      type: 'error',
+                    });
                   }
                   $scope.selectImg();
                   $scope.$apply();
