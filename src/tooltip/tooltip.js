@@ -29,7 +29,7 @@ export default (app, elem, attrs, scope) => {
             if (position) {
               $scope.tipClass = `tooltip-${position}`;
             } else {
-              $scope.tipClass = 'tooltip-down';
+              $scope.tipClass = 'tooltip-bottom';
             }
           };
 
