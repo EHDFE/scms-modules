@@ -31,16 +31,25 @@ export default (app, elem, attrs, scope) => {
                             innerColorEnd:'#fc7d37', //内部圆环 渐变色结束
                             lineW: 20
                         };
-                        
                     this.option=$.extend({},this.defaultSetting,ops);
                     this.preA=Math.PI/180;
-                    
+                    this.width = this.canvasC.width;
+                    this.height = this.canvasC.height;
                     this.R1=parseInt(this.canvasC.width/2-this.option.lineW);
+
+                    this.canvasC.style.width = this.width/2 + "px";
+                    this.canvasC.style.height = this.height/2 + "px";
+                    this.canvasC.height = this.height;
+                    this.canvasC.width = this.width;
+                    
                     this.init(percent);
                 }
                 circleSchedule.prototype = {
+
                     init: function(percent){
-                        this.canvasC.height = this.canvasC.height;
+                        
+                        console.log(window.devicePixelRatio)
+                        // this.canvasC.height = this.canvasC.height;
                         var rotateAngle = percent*360;
                         this.rotataRadians = this.preA*rotateAngle;
                         this.x=this.canvasC.width/2;
@@ -69,9 +78,9 @@ export default (app, elem, attrs, scope) => {
                             this.context.beginPath();
                             this.context.strokeStyle=this.option.circleBottomColor;
                             this.context.lineWidth = this.option.lineW;
+                            this.context.translate(0.5, 0.5);
                             this.context.arc(0,0,this.R1,0,Math.PI*2,false);
                             this.context.stroke();
-                            this.context.globalCompositeOperation = 'source-atop';
                             this.context.closePath();
                         }
 
@@ -82,6 +91,7 @@ export default (app, elem, attrs, scope) => {
                         this.context.lineCap="round";
                         this.context.strokeStyle=gradient2;
                         this.context.lineWidth = this.option.lineW;
+                        this.context.translate(0.5, 0.5);
                         this.context.arc(0,0,this.R1,0,this.startA,false);
                         this.context.stroke();
                         this.context.closePath();
