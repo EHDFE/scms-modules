@@ -71,6 +71,7 @@ export default (app, elem, attrs, scope) => {
                             this.context.lineWidth = this.option.lineW;
                             this.context.arc(0,0,this.R1,0,Math.PI*2,false);
                             this.context.stroke();
+                            this.context.globalCompositeOperation = 'source-atop';
                             this.context.closePath();
                         }
 
