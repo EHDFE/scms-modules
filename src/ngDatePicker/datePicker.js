@@ -86,7 +86,6 @@ export default (app, elem, attrs, scope) => {
                     $.contains($element[0], target) ||
                     ($.contains(panel[0], target) && !$(target).hasClass('month'))
                 ) {
-                  console.log(555555)
                   return true;
                   
                 }
