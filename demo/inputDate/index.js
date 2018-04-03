@@ -7,10 +7,7 @@ import calendar2 from './calendar2.html';
 import calendar3 from './calendar3.html';
 import month from './month.html';
 import calendarPanel from './calendarPanel.html';
-<<<<<<< HEAD
-=======
 import rangeSelectBar from './rangeSelectBar.html';
->>>>>>> branch_rangeSelectBar
 
 export default [{
   title: 'datePicker',
@@ -55,14 +52,6 @@ export default [{
   isCode: true
 },
 {
-<<<<<<< HEAD
-  title: 'calendarPanel',
-  parentTitle: 'DatePickers',
-  author: 'tianyanrong',
-  html: [calendarPanel],
-  isCode: true
-}];
-=======
 	title: "calendarPanel",
 	parentTitle: "DatePickers",
 	author: "tianyanrong",
@@ -76,4 +65,3 @@ export default [{
 	html: [rangeSelectBar],
 	isCode: true
 }]
->>>>>>> branch_rangeSelectBar
