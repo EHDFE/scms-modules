@@ -6,9 +6,6 @@
         line-height: 1.2;
     }
 }
-.pagination-box .total{
-
-}
 .pagination-box .pagination{
     float: left;
 }
@@ -42,7 +39,6 @@
 .pagination-box .pagination .defaultA a{
     cursor: default;
     color: #6E7382;
-    // line-height: 24px;
 }
 .pagination-box .pagination .defaultA:hover{
     background: none;
@@ -84,9 +80,38 @@
 
 .pagination-box .input-bar .input-group-btn{
     line-height: 12px;
-  }
+}
 
-  .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
-      z-index: 0;
-  }
-  
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+    z-index: 0;
+}
+
+.pagination-box.mini-page .hide-block{
+    display: none;
+}
+
+.pagination-box.mini-page .pagination li{
+    text-align: center;
+    line-height: 20px;
+    height: 20px;
+    margin-right: 2px;
+}
+
+.pagination-box.mini-page .pagination li a{
+    height: 20px;
+    line-height: 20px;
+    padding: 0 6px;
+    border: none;
+}
+.pagination-box.mini-page .pagination .arrow{
+    font-size: 13px;
+}
+.pagination-box.mini-page .pagination{
+    margin-top: 3px;
+}
+.pagination-box.mini-page .jump-page input{
+    height: 26px;
+}
+.pagination-box.mini-page .jump-page .btn{
+    height: 24px;
+}

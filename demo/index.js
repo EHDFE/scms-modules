@@ -42,8 +42,8 @@ demoData.push(dialog);
 import selectDropdown from "./selectDropdown/index.js";
 demoData.push(selectDropdown);
 
-import numberSelect from "./numberSelect/index.js";
-demoData = demoData.concat(numberSelect);
+//import numberSelect from "./numberSelect/index.js";
+//demoData = demoData.concat(numberSelect);
 
 import form from "./form/index.js";
 demoData = demoData.concat(form);
@@ -67,7 +67,16 @@ demoData.push(card);
 import starRating from "./starRating/index.js";
 demoData.push(starRating);
 
+import imageShow from "./imageShow/index.js";
+demoData.push(imageShow);
+
 import imageUpload from "./imageUpload/index.js";
 demoData.push(imageUpload);
 
-export default demoData
+import circleSchedule from "./circleSchedule/";
+demoData.push(circleSchedule);
+
+import cascadeSelect from './cascadeSelect/';
+demoData.push(cascadeSelect);
+
+export default demoData;

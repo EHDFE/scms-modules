@@ -9,9 +9,11 @@
  */
 
 import angular from 'angular';
+import imageShow from '../imageShow/imageShow';
 import html from './imageUpload.html';
 
 export default (app, elem, attrs, scope) => {
+  imageShow(app, elem, attrs, scope);
   app.directive('imageUpload', [
     '$timeout',
     'G',
@@ -28,6 +30,7 @@ export default (app, elem, attrs, scope) => {
           dSize: '=',
           apiUrl: '=',
           dNum: '=',
+          clearData: '='
         },
         controller: [
           '$scope',
@@ -37,35 +40,39 @@ export default (app, elem, attrs, scope) => {
           function ($scope, $element, $attrs, $timeout) {},
         ],
         link($scope, $element, $attrs, ngModel) {
+          $scope.showClick = ()=>{};
           $scope.type = 1;
           $scope.imageArray = [];
           $scope.imageUrls = $scope.imageUrls || [];
-          if ($scope.moduleType === 'noThumb') {
-            if ($scope.imageUrls && $scope.imageUrls.length > 0) {
+          $scope.init = ()=>{
+            if ($scope.moduleType === 'noThumb') {
+              if ($scope.imageUrls && $scope.imageUrls.length > 0) {
+                $scope.imageArray = $scope.imageUrls;
+              } else {
+                $scope.imageUrls = $scope.imageArray;
+              }
+            } else if ($scope.imageUrls && $scope.imageUrls.length) {
               $scope.imageArray = $scope.imageUrls;
+              $scope.imageArray.push({
+                uploadType: {
+                  succeed: false,
+                  error: false,
+                  loading: false,
+                },
+              });
             } else {
-              $scope.imageUrls = $scope.imageArray;
+              $scope.imageArray.push({
+                uploadType: {
+                  succeed: false,
+                  error: false,
+                  loading: false,
+                },
+              });
+              $scope.imageUrls = [];
             }
-          } else if ($scope.imageUrls && $scope.imageUrls.length) {
-            $scope.imageArray = $scope.imageUrls;
-            $scope.imageArray.push({
-              uploadType: {
-                succeed: false,
-                error: false,
-                loading: false,
-              },
-            });
-          } else {
-            $scope.imageArray.push({
-              uploadType: {
-                succeed: false,
-                error: false,
-                loading: false,
-              },
-            });
-            $scope.imageUrls = [];
           }
-
+          $scope.init();
+          
           $scope.remove = (item, index) => {
             $scope.imageArray.splice(index, 1);
             $scope.selectImg();
@@ -77,8 +84,7 @@ export default (app, elem, attrs, scope) => {
                 } else {
                   break;
                 }
-              }
-              console.log(num, $scope.dNum);
+              };
               if (num === $scope.dNum - 1) {
                 $scope.imageArray.push({
                   uploadType: {
@@ -249,8 +255,13 @@ export default (app, elem, attrs, scope) => {
               }
             }
           };
-        },
-      };
-    },
-  ]);
+          
+          $scope.clearData = function () {
+            $scope.init();
+          }
+          // $scope.clearData = $scope.clear;
+        }
+      }
+    }
+  ])
 };

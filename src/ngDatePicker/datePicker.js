@@ -76,8 +76,9 @@ export default (app, elem, attrs, scope) => {
                 return true;
               }
             } else {
-              if ($(target).hasClass('disabled') || $(target).parent().hasClass('disabled')) {
+              if ($(target).hasClass('disabled') || $(target).parents('.day').hasClass('disabled')) {
                 return true;
+                
               }
               if ($scope.minViewMode === 'months') {
                 if (
@@ -86,6 +87,7 @@ export default (app, elem, attrs, scope) => {
                     ($.contains(panel[0], target) && !$(target).hasClass('month'))
                 ) {
                   return true;
+                  
                 }
                 if ($(target).hasClass('month')) {
                   $scope.pick();
@@ -94,19 +96,12 @@ export default (app, elem, attrs, scope) => {
                 if (
                   $element[0] === target ||
                     $.contains($element[0], target) ||
-                    ($.contains(panel[0], target) &&
-                      !(
-                        $(target)
-                          .parent()
-                          .hasClass('day')
-                      ))
+                    ($.contains(panel[0], target) && !$(target).hasClass('date-item'))
                 ) {
                   return true;
                 }
                 if (
-                  $(target)
-                    .parent()
-                    .hasClass('day')
+                  $(target).hasClass('date-item')
                 ) {
                   $scope.pick();
                 }

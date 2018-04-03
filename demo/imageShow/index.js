@@ -1,0 +1,66 @@
+export default {
+	title: "imageShow",
+	author:"程乐",
+	type: "directive",
+	"keyName":"imageShow",
+	"name":"imageShow 图片展示",
+	"lastBy":"",
+	"description":"",
+	"date":"2018-03-16",
+	"scope":[
+		{
+			"type":"string",
+			"exampleValue":'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',
+            "defaultValue":'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',
+			"key":"imgUrl",
+			"description":"图片地址"
+		},
+        {
+			"type":"string",
+			"exampleValue":'卸货凭证',
+            "defaultValue":'卸货凭证',
+			"key":"altText",
+			"description":"描述文字"
+		},
+        {
+			"type":"boolean",
+			"exampleValue":false,
+            "defaultValue":false,
+			"key":"textOnly",
+			"description":"是否以文字展示"
+		},
+        {
+			"type":"boolean",
+			"exampleValue":false,
+            "defaultValue":false,
+			"key":"bgClick",
+			"description":"是否点击背景空白处关闭图片"
+		},
+        {
+			"type":"boolean",
+			"exampleValue":false,
+            "defaultValue":false,
+			"key":"miniImg",
+			"description":"是否用缩略图展示，需要后端支持"
+		},
+        {
+			"type":"boolean",
+			"exampleValue":false,
+            "defaultValue":false,
+			"key":"customCss",
+			"description":"是否自定义样式,搭配miniImg使用"
+		},
+        {
+			"type":"function",
+			"exampleValue":'',
+            "defaultValue":'',
+			"key":"showClick",
+			"description":"图片点击放大事件"
+		}
+        ],
+	"attrs":[],
+	"deps":["scmsModules/imageShow/imageShow"],
+	"html":"<div style=\"width:200px;\"><img image-show img-url=\"imgUrl\" show-click=\"showClick\" custom-css=\"customCss\" alt-text=\"altText\" text-only=\"textOnly\" bg-click=\"bgClick\" mini-img=\"miniImg\"></div>",
+	"api":"",
+	"htmlUrl":""
+}

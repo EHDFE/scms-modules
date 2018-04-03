@@ -24,6 +24,7 @@ export default (app, elem, attrs, scope) => {
           customCss: '=',
           clickFun: '=',
           miniImg: '=',
+          showClick: '='
         },
         link: function postLink() {
 
@@ -134,6 +135,7 @@ export default (app, elem, attrs, scope) => {
               }
             };
           };
+          
 
           function imgData(type, obj) {
             const data = {};
@@ -186,15 +188,12 @@ export default (app, elem, attrs, scope) => {
               if (imgHeight > windowW * scale) {
                 imgHeight = windowW * scale;
               }
-              console.log(1);
             } else if (rotateH > windowW * scale) {
               imgHeight = windowW * scale;
               imgWidth = imgHeight / rotateH * rotateW;
-              console.log(2);
             } else {
               imgHeight = rotateH;
               imgWidth = rotateW;
-              console.log(3);
             }
 
             data.w = (windowW - imgWidth) / 2;
@@ -216,6 +215,10 @@ export default (app, elem, attrs, scope) => {
           $scope.clickFun = $scope.clickFun;
           if ($scope.clickFun) {
             $scope.clickFun.imgClick = $scope.imgClick;
+          }
+          
+          if($scope.showClick){
+            $scope.showClick = $scope.imgClick;
           }
 
 
@@ -250,9 +253,9 @@ export default (app, elem, attrs, scope) => {
             });
           }
 
-          $scope.$on('$destroy', () => {
-            $document.find('.imgUrlBox,.imgUrlControl,.imgShowClosBtn').remove();
-          });
+          // $scope.$on('$destroy', () => {
+          //   $document.find('.imgUrlBox,.imgUrlControl,.imgShowClosBtn').remove();
+          // });
         },
       };
     }]);
