@@ -81,4 +81,7 @@ demoData.push(circleSchedule);
 import cascadeSelect from './cascadeSelect/';
 demoData.push(cascadeSelect);
 
+import cascadeOrganizationSelect from './cascadeOrganizationSelect/';
+demoData.unshift(cascadeOrganizationSelect);
+
 export default demoData;

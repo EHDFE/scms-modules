@@ -115,6 +115,14 @@ const config = {
     new ErrorOverlayPlugin(),
   ],
   devtool: 'cheap-module-source-map',
+  devServer: {
+    proxy: {
+      '/ehuodiBedrockApi': {
+        'target': 'http://managementtest.ehuodi.com',
+        'changeOrigin': true,
+      },
+    },
+  },
 };
 
 module.exports = merge.smart(baseConfig, config);
