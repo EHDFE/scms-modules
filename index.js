@@ -55,6 +55,7 @@ import imageUpload from './src/imageUpload/imageUpload';
 import numberSelect from './src/numberSelect/numberSelect';
 import circleSchedule from './src/circleSchedule/circleSchedule';
 import cascadeSelect from './src/cascadeSelect';
+import cascadeOrganizationSelect from './src/cascadeOrganizationSelect';
 
 
 export default {
@@ -101,4 +102,5 @@ export default {
   numberSelect,
   'circleSchedule/circleSchedule': circleSchedule,
   cascadeSelect,
+  cascadeOrganizationSelect,
 };

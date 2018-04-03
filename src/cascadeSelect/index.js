@@ -25,18 +25,23 @@ export default (app, elem, attrs, scope) => {
             }
           });
 
-          $scope.selectedList = $scope.ngModel || [];
+          $scope.selectedList = Array.isArray($scope.ngModel) ? $scope.ngModel.slice(0) : [];
           $scope.renderList = [];
 
           const getSelectValue = (target, currentValue, prev) => {
             let match;
             const value = currentValue.shift();
             if (typeof value !== 'undefined') {
+              let found = false;
               for (let i = 0, len = target.length; i < len; i += 1) {
                 if (target[i].value === value) {
                   match = target[i];
+                  found = true;
                   break;
                 }
+              }
+              if (!found && target.length) {
+                match = target[0];
               }
             } else {
               match = target[0];
@@ -64,46 +69,53 @@ export default (app, elem, attrs, scope) => {
             }, []);
           };
 
-          $scope.$watch('sourceData', newValue => {
+          const parseSourceData = sourceData => {
             console.group('sourceData change');
-            const defaultValue = getSelectValue(newValue, $scope.selectedList, []);
-            const renderList = getRenderList(defaultValue, $scope.sourceData);
+            const defaultValue = getSelectValue(sourceData, $scope.selectedList, []);
+            const renderList = getRenderList(defaultValue, sourceData);
             $scope.selectedList = defaultValue;
             $scope.renderList = renderList;
             console.log(defaultValue, renderList);
             console.groupEnd('sourceData change');
+          };
+
+          parseSourceData($scope.sourceData || []);
+
+          $scope.$watch('sourceData', (newValue, oldValue) => {
+            if (!isEqual(newValue, oldValue)) {
+              parseSourceData(newValue);
+            }
           });
 
-          $scope.$watch('selectedList', (newValue, oldValue) => {
-            console.group('selectedList change');
-            let selectedList = [];
-            for (let i = 0, len = newValue.length; i < len; i += 1) {
-              selectedList.push(newValue[i]);
-              if (newValue[i] !== oldValue[i]) {
-                break;
-              }
-            }
-            selectedList = getSelectValue(
+          const normalizer = newValue => {
+            const selectedList = [...newValue];
+            return getSelectValue(
               $scope.sourceData,
               selectedList,
               []
             );
-            if (isEqual(selectedList, newValue)) {
-              const renderList = getRenderList(
-                selectedList,
-                $scope.sourceData
-              );
-              $scope.renderList = renderList;
-              $scope.selectedList = selectedList;
-              console.log(selectedList, renderList);
-              $scope.ngModel = selectedList;
-            } else {
-              $scope.selectedList = selectedList;
-            }
+          };
+
+          let normalizedList;
+          $scope.$watch('selectedList', (newValue, oldValue) => {
+            if (isEqual(newValue, oldValue) || isEqual(newValue, normalizedList)) return;
+            console.group('selectedList change');
+            normalizedList = normalizer(newValue);
+
+            const renderList = getRenderList(
+              normalizedList,
+              $scope.sourceData
+            );
+            $scope.renderList = renderList;
+            $scope.selectedList = normalizedList.slice(0);
+            console.log('set ngModel:', normalizedList, renderList);
+
+            $scope.ngModel = normalizedList.slice(0);
             console.groupEnd('selectedList change');
           }, true);
 
-          $scope.$watch('ngModel', newValue => {
+          $scope.$watch('ngModel', (newValue, oldValue) => {
+            if (isEqual(newValue, oldValue)) return;
             $scope.selectedList = newValue;
           });
 
