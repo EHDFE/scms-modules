@@ -20,7 +20,7 @@ export default {
     {
       type: 'object',
       key: 'model',
-      exampleValue: [],
+      exampleValue: ['fruit'],
       description: 'model',
     },
     {
