@@ -56,6 +56,8 @@ import numberSelect from './src/numberSelect/numberSelect';
 import circleSchedule from './src/circleSchedule/circleSchedule';
 import cascadeSelect from './src/cascadeSelect';
 import rangeSelectBar from './src/rangeSelectBar/rangeSelectBar';
+import cascadeOrganizationSelect from './src/cascadeOrganizationSelect';
+
 
 export default {
   'ngCode/ngCodeDirective': ngCodeDirective,
@@ -101,5 +103,6 @@ export default {
   numberSelect,
   'circleSchedule/circleSchedule': circleSchedule,
   cascadeSelect,
-  rangeSelectBar
+  rangeSelectBar,
+  cascadeOrganizationSelect,
 };
