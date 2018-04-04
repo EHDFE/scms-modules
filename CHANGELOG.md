@@ -7,6 +7,11 @@
 ##### 
 - rangeSelectBar
   - 📌 新增
+  
+#### Bugfix
+- Tooltip 定位和销毁bug
+- DatePickerRange 属性设置无效的问题
+ 
 
 
 ### v0.2.0
