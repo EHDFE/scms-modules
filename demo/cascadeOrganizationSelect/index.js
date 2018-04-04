@@ -70,6 +70,11 @@ export default {
       exampleValue: '//green-sun-9840.getsandbox.com/selectCascadeRbacOrganizationByCode',
       description: '接口地址，默认不用传',
     },
+    {
+      type: 'function',
+      key: 'sourceFormatter',
+      description: '处理数据格式，返回对象必须包含 name 和 value 字段'
+    }
   ],
   deps: [''],
   html,
