@@ -34,11 +34,7 @@ export default {
       key: 'openCityType',
       scopeType: '@',
       exampleValue: 'GOODS_TAXI',
-<<<<<<< HEAD
-      description: '开城业务类型',
-=======
       description: '开城业务类型枚举 整车：GOODS_TAXI 零担：PART_LOAD 大客户：KA 班车：ARER_BUS',
->>>>>>> feat/cascadeOrganizationSelector
     },
     {
       type: 'boolean',
