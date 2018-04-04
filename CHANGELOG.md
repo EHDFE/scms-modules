@@ -1,5 +1,14 @@
 # Changelog
 
+### v0.2.1
+---
+
+#### Components Update
+##### 
+- rangeSelectBar
+  - 📌 新增
+
+
 ### v0.2.0
 ---
 #### Features
