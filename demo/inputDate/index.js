@@ -52,16 +52,16 @@ export default [{
   isCode: true
 },
 {
-	title: "calendarPanel",
-	parentTitle: "DatePickers",
-	author: "tianyanrong",
-	html: [calendarPanel],
-	isCode: true
+  title: 'calendarPanel',
+  parentTitle: 'DatePickers',
+  author: 'tianyanrong',
+  html: [calendarPanel],
+  isCode: true
 },
 {
-	title: "rangeSelectBar",
-	parentTitle: "DatePickers",
-	author: "lhf",
-	html: [rangeSelectBar],
-	isCode: true
-}]
+  title: 'rangeSelectBar',
+  parentTitle: 'DatePickers',
+  author: 'lhf',
+  html: [rangeSelectBar],
+  isCode: true
+}];

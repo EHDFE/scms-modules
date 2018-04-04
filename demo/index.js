@@ -82,6 +82,6 @@ import cascadeSelect from './cascadeSelect/';
 demoData.push(cascadeSelect);
 
 import cascadeOrganizationSelect from './cascadeOrganizationSelect/';
-demoData.unshift(cascadeOrganizationSelect);
+demoData.push(cascadeOrganizationSelect);
 
 export default demoData;
