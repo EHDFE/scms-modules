@@ -1,7 +1,6 @@
 import isEqual from 'lodash/isEqual';
 import isBoolean from 'lodash/isBoolean';
 
-const SOURCE_API = '/ehuodiBedrockApi/ehdrbacorganizationcs/selectCascadeRbacOrganizationByCode';
 
 export default class DataSource {
   constructor(options) {
@@ -14,6 +13,7 @@ export default class DataSource {
       organizationCode: this.organizationCode || '',
     }, options);
     this.openCityType = this.options.openCityType;
+    this.apiUrl = this.options.apiUrl;
     this.isActivated = this.options.isActivated;
     this.organizationCode = this.options.organizationCode;
     this.prependOption = this.options.prependOption;
@@ -31,7 +31,7 @@ export default class DataSource {
     return new Promise((resolve, reject) => {
       $.ajax({
         type: 'post',
-        url: SOURCE_API,
+        url: this.apiUrl,
         data,
       }).then(res => {
         if (res.result === 'success') {
@@ -66,7 +66,7 @@ export default class DataSource {
     });
   }
   parser([regionList, cityList]) {
-    console.log(regionList, cityList);
+    // console.log(regionList, cityList);
     const regionMap = {};
     regionList.forEach(d => {
       if (d.organizationcode !== '88888888') {
