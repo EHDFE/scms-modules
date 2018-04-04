@@ -4,6 +4,12 @@ import isEqual from 'lodash/isEqual';
 import cascadeSelect from '../cascadeSelect';
 import DataSource from './dataSource';
 
+import DevTool from '../../utils/DevTool';
+
+const devTool = new DevTool('cascadeOrganizationSelect');
+
+const SOURCE_API = '/ehuodiBedrockApi/ehdrbacorganizationcs/selectCascadeRbacOrganizationByCode';
+
 const DEFAULT_PREPEND_OPTION_CONFIG = {
   prependOptionName: '全部',
   prependOptionType: 'NULL',
@@ -20,7 +26,8 @@ export default (app, elem, attrs, scope) => {
       label: '@',
       prependOption: '@',
       prependOptionName: '@',
-      prependOptionType: '@', // 'NULL' or 'CONCAT'
+      prependOptionType: '@', // 'NULL' or 'CONCAT',
+      apiUrl: '@',
     },
     replace: true,
     controller: [
@@ -37,6 +44,7 @@ export default (app, elem, attrs, scope) => {
           openCityType: $scope.openCityType,
           isActivated: $scope.isActivated,
           organizationCode: currentOrganizationCode,
+          apiUrl: $scope.apiUrl || SOURCE_API,
         }, {
           prependOption: $scope.prependOption === 'true' ? true : false,
           prependOptionName: $scope.prependOptionName || DEFAULT_PREPEND_OPTION_CONFIG.prependOptionName,
@@ -87,6 +95,7 @@ export default (app, elem, attrs, scope) => {
 
         $scope.$watch('ngModel', (value, oldValue) => {
           if (!isEqual(value, oldValue)) {
+            devTool.info('ngModel change', value);
             $scope.selected = value;
           }
         });

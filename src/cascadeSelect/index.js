@@ -1,8 +1,11 @@
 import find from 'lodash/find';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
+import DevTool from '../../utils/DevTool';
 import template from './index.html';
 import './index.less';
+
+const devTool = new DevTool('cascadeSelect');
 
 export default (app, elem, attrs, scope) => {
   app.directive('cascadeSelect', [
@@ -70,13 +73,13 @@ export default (app, elem, attrs, scope) => {
           };
 
           const parseSourceData = sourceData => {
-            console.group('sourceData change');
+            devTool.group('sourceData change');
             const defaultValue = getSelectValue(sourceData, $scope.selectedList, []);
             const renderList = getRenderList(defaultValue, sourceData);
             $scope.selectedList = defaultValue;
             $scope.renderList = renderList;
-            console.log(defaultValue, renderList);
-            console.groupEnd('sourceData change');
+            devTool.log(defaultValue, renderList);
+            devTool.groupEnd('sourceData change');
           };
 
           parseSourceData($scope.sourceData || []);
@@ -99,7 +102,7 @@ export default (app, elem, attrs, scope) => {
           let normalizedList;
           $scope.$watch('selectedList', (newValue, oldValue) => {
             if (isEqual(newValue, oldValue) || isEqual(newValue, normalizedList)) return;
-            console.group('selectedList change');
+            devTool.group('selectedList change');
             normalizedList = normalizer(newValue);
 
             const renderList = getRenderList(
@@ -108,10 +111,10 @@ export default (app, elem, attrs, scope) => {
             );
             $scope.renderList = renderList;
             $scope.selectedList = normalizedList.slice(0);
-            console.log('set ngModel:', normalizedList, renderList);
+            devTool.log('set ngModel:', normalizedList, renderList);
 
             $scope.ngModel = normalizedList.slice(0);
-            console.groupEnd('selectedList change');
+            devTool.groupEnd('selectedList change');
           }, true);
 
           $scope.$watch('ngModel', (newValue, oldValue) => {
