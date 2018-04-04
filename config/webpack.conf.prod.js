@@ -2,19 +2,12 @@ const path = require('path');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
 const baseConfig = require('./webpack.conf.base');
 
 const BROWSER_SUPPORTS = ['last 2 versions'];
-
-const extractCSS = new ExtractTextPlugin({
-  filename: '[name].[contenthash:8]-css.css',
-});
-const extractLESS = new ExtractTextPlugin({
-  filename: '[name].[contenthash:8]-less.css',
-});
 
 const config = {
   output: {
@@ -63,70 +56,56 @@ const config = {
           },
           {
             test: /\.css$/,
-            loader: extractCSS.extract({
-              fallback: {
-                loader: 'style-loader',
+            use: [
+              MiniCssExtractPlugin.loader,
+              {
+                loader: 'css-loader',
                 options: {
-                  hmr: false,
+                  importLoaders: 1,
+                  minimize: true,
                 },
               },
-              use: [
-                {
-                  loader: 'css-loader',
-                  options: {
-                    importLoaders: 1,
-                    minimize: true,
-                  },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  // Necessary for external CSS imports to work
+                  // https://github.com/facebookincubator/create-react-app/issues/2677
+                  ident: 'postcss',
+                  plugins: () => [
+                    autoprefixer({
+                      browsers: BROWSER_SUPPORTS,
+                    }),
+                  ],
                 },
-                {
-                  loader: 'postcss-loader',
-                  options: {
-                    // Necessary for external CSS imports to work
-                    // https://github.com/facebookincubator/create-react-app/issues/2677
-                    ident: 'postcss',
-                    plugins: () => [
-                      autoprefixer({
-                        browsers: BROWSER_SUPPORTS,
-                      }),
-                    ],
-                  },
-                },
-              ],
-            }),
+              },
+            ],
           },
           {
             test: /\.less$/,
-            loader: extractLESS.extract({
-              fallback: {
-                loader: 'style-loader',
+            use: [
+              MiniCssExtractPlugin.loader,
+              {
+                loader: 'css-loader',
                 options: {
-                  hmr: false,
+                  importLoaders: 1,
+                  minimize: true,
                 },
               },
-              use: [
-                {
-                  loader: 'css-loader',
-                  options: {
-                    importLoaders: 1,
-                    minimize: true,
-                  },
+              {
+                loader: 'postcss-loader',
+                options: {
+                  // Necessary for external CSS imports to work
+                  // https://github.com/facebookincubator/create-react-app/issues/2677
+                  ident: 'postcss',
+                  plugins: () => [
+                    autoprefixer({
+                      browsers: BROWSER_SUPPORTS,
+                    }),
+                  ],
                 },
-                {
-                  loader: 'postcss-loader',
-                  options: {
-                    // Necessary for external CSS imports to work
-                    // https://github.com/facebookincubator/create-react-app/issues/2677
-                    ident: 'postcss',
-                    plugins: () => [
-                      autoprefixer({
-                        browsers: BROWSER_SUPPORTS,
-                      }),
-                    ],
-                  },
-                },
-                'less-loader',
-              ],
-            }),
+              },
+              'less-loader',
+            ],
           },
           {
             test: /\.html$/,
@@ -169,8 +148,9 @@ const config = {
       dry: false,
     }),
     new webpack.HashedModuleIdsPlugin(),
-    extractCSS,
-    extractLESS,
+    new MiniCssExtractPlugin({
+      filename: '[name].[chunkhash:8].css',
+    })
   ],
   optimization: {
     minimizer: [
