@@ -19,6 +19,10 @@ export default class DataSource {
     this.prependOption = this.options.prependOption;
     this.prependOptionName = this.options.prependOptionName;
     this.prependOptionType = this.options.prependOptionType;
+    this.sourceFormatter = this.options.sourceFormatter ? this.options.sourceFormatter : data => ({
+      name: data.organizationname,
+      value: data.organizationcode,
+    });
   }
   update(options) {
     const prevOptions = Object.assign({}, this.options);
@@ -71,25 +75,23 @@ export default class DataSource {
     regionList.forEach(d => {
       if (d.organizationcode !== '88888888') {
         Object.assign(regionMap, {
-          [d.organizationcode]: {
+          [d.organizationcode]: Object.assign({
             name: d.organizationname,
             children: [],
-          },
+          }, d),
         });
       }
     });
     cityList.forEach(d => {
       if (d.organizationcode !== '88888888') {
-        regionMap[d.parorganizationcode].children.push({
-          name: d.organizationname,
-          value: d.organizationcode,
-        });
+        const transformed = this.sourceFormatter(d);
+        regionMap[d.parorganizationcode].children.push(transformed);
       }
     });
-    const company = {
-      name: '全国',
-      value: '88888888',
-    };
+    const company = this.sourceFormatter({
+      organizationname: '全国',
+      organizationcode: '88888888',
+    });
     return [company].concat(Object.keys(regionMap).map(code => {
       const children = regionMap[code].children;
       if (this.prependOption) {
@@ -98,9 +100,10 @@ export default class DataSource {
           value: this.prependOptionType === 'NULL' ? '' : children.map(d => d.value).join(','),
         });
       }
+      const formattedData = this.sourceFormatter(regionMap[code]);
       return {
-        name: regionMap[code].name,
-        value: code,
+        name: formattedData.name,
+        value: formattedData.value,
         children,
       };
     }));

@@ -28,6 +28,8 @@ export default (app, elem, attrs, scope) => {
       prependOptionName: '@',
       prependOptionType: '@', // 'NULL' or 'CONCAT',
       apiUrl: '@',
+      sourceFormatter: '=',
+      defaultValue: '@'
     },
     replace: true,
     controller: [
@@ -45,6 +47,11 @@ export default (app, elem, attrs, scope) => {
           isActivated: $scope.isActivated,
           organizationCode: currentOrganizationCode,
           apiUrl: $scope.apiUrl || SOURCE_API,
+          sourceFormatter: $scope.sourceFormatter,
+          // sourceFormatter: data => ({
+          //   name: data.organizationname,
+          //   value: data.organizationname,
+          // }),
         }, {
           prependOption: $scope.prependOption === 'true' ? true : false,
           prependOptionName: $scope.prependOptionName || DEFAULT_PREPEND_OPTION_CONFIG.prependOptionName,
@@ -99,10 +106,11 @@ export default (app, elem, attrs, scope) => {
             $scope.selected = value;
           }
         });
-
+        
         $scope.$watch('selected', (value, oldValue) => {
           if (!isEqual(value, oldValue)) {
-            $scope.ngModel = value;
+            devTool.info('change selected', value, oldValue);
+            $scope.ngModel = value.slice(0);
           }
         });
 
