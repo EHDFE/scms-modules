@@ -100,7 +100,6 @@ export default (app, elem, attrs, scope) => {
                 startMoment: startMoment,
                 endMoment: endMoment,
               });
-              console.log('onChange');
               if (!arrived) {
                 $scope.cursorOffsetPanel.backgroundPositionX += stepWidth;
                 if (Math.abs(totalWidth - $scope.cursorOffsetPanel.backgroundPositionX) < stepWidth) {
@@ -116,7 +115,7 @@ export default (app, elem, attrs, scope) => {
               $scope.playing = false;
               $scope.cursorOffsetPanel.backgroundPositionX = 0;
             }
-          }, 1000);
+          }, 500);
         }
 
         var resizeTimer;
