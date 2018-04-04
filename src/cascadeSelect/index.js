@@ -16,6 +16,7 @@ export default (app, elem, attrs, scope) => {
         ngModel: '=',
         sourceData: '=',
         width: '@',
+        defaultValue: '@',
       },
       controller: [
         '$scope',
@@ -74,11 +75,27 @@ export default (app, elem, attrs, scope) => {
 
           const parseSourceData = sourceData => {
             devTool.group('sourceData change');
-            const defaultValue = getSelectValue(sourceData, $scope.selectedList, []);
-            const renderList = getRenderList(defaultValue, sourceData);
-            $scope.selectedList = defaultValue;
-            $scope.renderList = renderList;
-            devTool.log(defaultValue, renderList);
+            let defaultMatch;
+            if (!$scope.ngModel && $scope.defaultValue) {
+              devTool.log('ngModel', $scope.ngModel);
+              devTool.log('defaultValue', $scope.defaultValue, sourceData);
+              defaultMatch = find(sourceData, group => {
+                if (Array.isArray(group.children)) {
+                  return group.children.some(d => d.value === $scope.defaultValue);
+                }
+                return false;
+              });
+            }
+            if (defaultMatch) {
+              $scope.selectedList = [defaultMatch.value, $scope.defaultValue];
+              devTool.log('found default value', $scope.selectedList);
+            } else {
+              const defaultValue = getSelectValue(sourceData, $scope.selectedList, []);
+              const renderList = getRenderList(defaultValue, sourceData);
+              $scope.selectedList = defaultValue;
+              $scope.renderList = renderList;
+              devTool.log(defaultValue, renderList);
+            }            
             devTool.groupEnd('sourceData change');
           };
 

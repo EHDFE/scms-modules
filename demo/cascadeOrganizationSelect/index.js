@@ -17,6 +17,13 @@ export default {
     },
     {
       type: 'string',
+      key: 'defaultValue',
+      scopeType: '@',
+      exampleValue: '',
+      description: '默认值',
+    },
+    {
+      type: 'string',
       key: 'label',
       scopeType: '@',
       exampleValue: '城市',
