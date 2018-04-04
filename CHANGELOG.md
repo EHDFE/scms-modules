@@ -7,10 +7,13 @@
 ##### 
 - rangeSelectBar
   - 📌 新增
+- circleSchedule
+  - 📌 新增
   
 #### Bugfix
 - Tooltip 定位和销毁bug
 - DatePickerRange 属性设置无效的问题
+- imageUpload 图片下载base64格式时无效问题
  
 
 
