@@ -207,7 +207,7 @@ export default (app, elem, attrs, scope) => {
             });
 
             $scope.$on('$destroy', () => {
-              $document.find('.date-picker-range').remove();
+              panel.remove();
             });
 
             /*

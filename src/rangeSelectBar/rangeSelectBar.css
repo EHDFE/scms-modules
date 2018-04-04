@@ -1,0 +1,160 @@
+.range-select-bar {
+  background-color: rgba(255, 255, 255, .9);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  z-index: 6;
+  
+}
+.range-select-jumper {
+  float: left;
+  padding: 7px 0;
+  width: 190px;
+  text-align: center;
+}
+.jump-action-btn {
+  padding: 0 4px;
+  background: none;
+  border: 0 none;
+  color: #999;
+  font-size: 14px!important;
+}
+.jump-action-btn:hover {
+  color: #6ac9ff;
+}
+.current-moment {}
+.range-pick-bar {
+  margin-right: 20px;
+  margin-left: 190px;
+}
+.pick-bar-track {
+  position: relative;
+  display: flex;
+  margin-bottom: 12px;
+  height: 40px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid rgba(204, 204, 204, .7);
+}
+.range-select-tick {
+  position: relative;
+  flex: 1;
+  cursor: pointer;
+}
+.range-select-tick:hover .tick-line {
+  background-color: #6ac9ff;
+}
+.range-select-tick:hover .tick-label {
+  color: #6ac9ff;
+}
+.range-select-tick .tick-line {
+  display: block;
+  margin: 0 auto;
+  width: 2px;
+  height: 12px;
+  background-color: #f0f3f4;
+}
+.range-select-tick-active .tick-line {
+  background-color: #6ac9ff;
+}
+.range-select-tick .tick-line.tick-line-half {
+  height: 8px;
+  opacity: .7;
+}
+.range-select-tick .tick-label {
+  position: absolute;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  top: 11px;
+  left: 50%;
+  z-index: 3;
+  user-select: none;
+}
+.range-select-tick .tick-label-hidden {
+  display: none;
+}
+.range-select-tick-active .tick-label {
+  display: block;
+  padding: 0 4px;
+  background-color: #6ac9ff;
+  color: #fff!important;
+  border-radius: 2px;
+  z-index: 4;
+}
+.range-select-tick-active .tick-line {
+  position: relative;
+  height: 38px!important;
+  z-index: 1;
+}
+.range-select-tick-disabled {
+  cursor: not-allowed;
+}
+.range-select-tick-disabled .tick-label {
+  color: #999!important;
+}
+.range-select-tick-disabled:hover .tick-line {
+  background-color: #f0f3f4;
+}
+.tick-cursor {
+  position: absolute;
+  height: 100%;
+  border-width: 0 2px;
+  border-style: solid;
+  border-color: #6ac9ff;
+  background: rgba(176, 226, 255, 0.8);
+  background: linear-gradient(to right, rgba(176, 226, 255, 0.2), rgba(176, 226, 255, 0.9) 100%);
+  background-position-x: 0;
+  z-index: 3;
+  pointer-events: none;
+  transition: left ease-in-out .375s, right ease-in-out .375s;
+}
+.tick-cursor-playing {
+  transition: background-position linear 0.5s, left ease-in-out .375s, right ease-in-out .375s;
+}
+.tick-cursor:before,
+.tick-cursor:after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+  border: 2px solid #6ac9ff;
+  border-radius: 4px;
+  z-index: 2;
+}
+.tick-cursor:before {
+  left: -4px;
+}
+.tick-cursor:after {
+  right: -4px;
+}
+.tick-cursor .action-icon {
+  margin: 12px auto;
+  width: 14px;
+  height: 14px;
+  display: block;
+  pointer-events: all;
+  cursor: pointer;
+  background-size: contain;
+}
+.tick-cursor .action-icon.action-play {
+  background-image: url('http://image.tf56.com/dfs/group1/M00/35/94/CiFBClnAmHuAD5muAAACD25MRBs087.png');
+}
+.tick-cursor .action-icon.action-pause {
+  background-image: url('http://image.tf56.com/dfs/group1/M00/35/93/CiFBCVnAmHyAHURFAAABmnBAvz0677.png');
+}
+.left-bar,.right-bar{
+  width: 10px;
+  height: 50px;
+  background: url('./assets/1.png') center no-repeat;
+  z-index: 5;
+  margin-left: -5px;
+  position: absolute;
+  margin-top: -9px;
+  pointer-events: none;
+}
+.right-bar{
+  margin-right: -5px;
+}
+.left-bar-active,.right-bar-active{
+  background-image: url('./assets/2.png');
+}

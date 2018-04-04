@@ -1,0 +1,35 @@
+<div class="range-select-bar" >
+  <div class="range-select-jumper">
+    <button class="jump-action-btn" ng-click="onJump(-1, 2)">
+      <i class="fa fa-angle-double-left"></i>
+    </button>
+    <button class="jump-action-btn" ng-click="onJump(-1, 1)">
+      <i class="fa fa-angle-left"></i>
+    </button>
+    <span class="current-moment">{{displayMoment}}</span>
+    <button class="jump-action-btn" ng-click="onJump(1, 1)">
+      <i class="fa fa-angle-right"></i>
+    </button>
+    <button class="jump-action-btn" ng-click="onJump(1, 2)">
+      <i class="fa fa-angle-double-right"></i>
+    </button>
+  </div>
+  <div class="range-pick-bar" >
+    
+    <div class="pick-bar-track" >
+      <div ng-class="{'range-select-tick': true, 'range-select-tick-active': tick.active, 'range-select-tick-disabled': tick.disable}" ng-repeat="tick in iterateTicks" ng-click="setTick(tick.value, tick.disable)" ng-mouseenter="mouseenterTick(tick.value, tick.disable)">
+        <span ng-class="{'tick-line': true, 'tick-line-half': tick.half}"></span>
+        <span ng-class="{'tick-label': true, 'tick-label-hidden': !tick.showLabel}" ng-if="tick.label">{{tick.label}}</span>
+      </div>
+      <div class="left-bar" ng-style="cursorOffsetLeft"  ng-class="{'left-bar-active':clickTimes%2 > 0}"></div>
+      <div ng-style="cursorOffsetPanel" ng-class="{'tick-cursor': true, 'tick-cursor-playing': playing}">
+        <span ng-if="!playing" class="action-icon action-play" ng-click="startPlay()">
+        </span>
+        <span ng-if="playing" class="action-icon action-pause" ng-click="stopPlay()">
+        </span>
+      </div>
+      <div class="right-bar"  ng-style="cursorOffsetRight"  ng-class="{'right-bar-active':clickTimes%2 > 0}"></div>
+    </div>
+  </div>
+  
+</div>
