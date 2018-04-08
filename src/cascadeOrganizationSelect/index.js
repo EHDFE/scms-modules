@@ -48,10 +48,13 @@ export default (app, elem, attrs, scope) => {
           organizationCode: currentOrganizationCode,
           apiUrl: $scope.apiUrl || SOURCE_API,
           sourceFormatter: $scope.sourceFormatter,
-          // sourceFormatter: data => ({
-          //   name: data.organizationname,
-          //   value: data.organizationname,
-          // }),
+          // sourceFormatter: data => {
+          //   if (data.organizationcode === '88888888') return false;
+          //   return {
+          //     name: data.organizationname,
+          //     value: data.organizationname,
+          //   };
+          // },
         }, {
           prependOption: $scope.prependOption === 'true' ? true : false,
           prependOptionName: $scope.prependOptionName || DEFAULT_PREPEND_OPTION_CONFIG.prependOptionName,
