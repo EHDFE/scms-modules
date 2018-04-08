@@ -105,21 +105,21 @@ export default (app, elem, attrs, scope) => {
         //   });
         // });
         
-        let modelUpdateTimer;
         $scope.$watch('ngModel', (value, oldValue) => {
           if (!isEqual(value, oldValue)) {
-            modelUpdateTimer && clearTimeout(modelUpdateTimer);
-            modelUpdateTimer = setTimeout(() => {
-              devTool.info('ngModel change', value, oldValue);
-              $scope.selected = value;
-            }, 50);
+            devTool.info('ngModel change', value, oldValue);
+            $scope.selected = value;
           }
         });
         
+        let modelUpdateTimer;
         $scope.$watch('selected', (value, oldValue) => {
           if (!isEqual(value, oldValue)) {
-            devTool.info('change selected', value, oldValue);
-            $scope.ngModel = value.slice(0);
+            modelUpdateTimer && clearTimeout(modelUpdateTimer);
+            modelUpdateTimer = setTimeout(() => {
+              devTool.info('change selected', value, oldValue);
+              $scope.ngModel = value.slice(0);
+            }, 50);
           }
         });
 
