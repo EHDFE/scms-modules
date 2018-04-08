@@ -13,7 +13,7 @@ export default class DataSource {
     }, options);
     this.openCityType = this.options.openCityType;
     this.apiUrl = this.options.apiUrl;
-    this.isActivated = isBoolean(options.isActivated) ? options.isActivated : (this.isActivated !== null ? this.isActivated : true);
+    this.isActivated = isBoolean(options.isActivated) ? options.isActivated : (this.isActivated !== null && this.isActivated !== undefined ? this.isActivated : true);
     this.organizationCode = this.options.organizationCode;
     this.prependOption = this.options.prependOption;
     this.prependOptionName = this.options.prependOptionName;
