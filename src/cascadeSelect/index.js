@@ -107,6 +107,21 @@ export default (app, elem, attrs, scope) => {
             }
           });
 
+          $scope.$watch('defaultValue', value => {
+            if (!value) return;
+            devTool.log('defaultValue change', value);
+            const sourceData = $scope.sourceData;
+            const defaultMatch = find(sourceData, group => {
+              if (Array.isArray(group.children)) {
+                return group.children.some(d => d.value === value);
+              }
+              return false;
+            });
+            if (defaultMatch) {
+              $scope.selectedList = [defaultMatch.value, $scope.defaultValue];
+            }
+          });
+
           const normalizer = newValue => {
             const selectedList = [...newValue];
             return getSelectValue(

@@ -84,6 +84,11 @@ export default (app, elem, attrs, scope) => {
             isActivated: value,
           });
         });
+
+        $scope.$watch('defaultValue', value => {
+          devTool.log('defaultValue change', value);
+        });
+
         $scope.$watch('prependOption', value => {
           dataSource.update({
             prependOption: value === 'true',
@@ -99,11 +104,15 @@ export default (app, elem, attrs, scope) => {
         //     prependOptionType: value,
         //   });
         // });
-
+        
+        let modelUpdateTimer;
         $scope.$watch('ngModel', (value, oldValue) => {
           if (!isEqual(value, oldValue)) {
-            devTool.info('ngModel change', value);
-            $scope.selected = value;
+            modelUpdateTimer && clearTimeout(modelUpdateTimer);
+            modelUpdateTimer = setTimeout(() => {
+              devTool.info('ngModel change', value, oldValue);
+              $scope.selected = value;
+            }, 50);
           }
         });
         
