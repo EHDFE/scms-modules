@@ -1,4 +1,5 @@
 import find from 'lodash/find';
+import findIndex from 'lodash/findIndex';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
 import DevTool from '../../utils/DevTool';
@@ -29,7 +30,7 @@ export default (app, elem, attrs, scope) => {
             }
           });
 
-          $scope.selectedList = Array.isArray($scope.ngModel) ? $scope.ngModel.slice(0) : [];
+          // $scope.selectedList = Array.isArray($scope.ngModel) ? $scope.ngModel.slice(0) : [];
           $scope.renderList = [];
 
           const getSelectValue = (target, currentValue, prev) => {
@@ -73,24 +74,50 @@ export default (app, elem, attrs, scope) => {
             }, []);
           };
 
-          const parseSourceData = sourceData => {
-            devTool.group('sourceData change');
-            let defaultMatch;
-            if (!$scope.ngModel && $scope.defaultValue) {
-              devTool.log('ngModel', $scope.ngModel);
-              devTool.log('defaultValue', $scope.defaultValue, sourceData);
-              defaultMatch = find(sourceData, group => {
-                if (Array.isArray(group.children)) {
-                  return group.children.some(d => d.value === $scope.defaultValue);
+          const matchFinder = (ary, value, prev) => {
+            let found, ret;
+            for (let i = 0, len = ary.length; i < len; i += 1) {
+              const d = ary[i];
+              if (d.value === value) {
+                found = {
+                  name: d.name,
+                  value: d.value,
+                };
+                ret = [found];
+                break;
+              } else if (Array.isArray(d.children)) {
+                found = {
+                  name: d.name,
+                  value: d.value,
+                };
+                const next = matchFinder(d.children, value, found);
+                if (Array.isArray(next)) {
+                  ret = next;
+                  break;
                 }
-                return false;
-              });
+              }
+            }
+            if (ret) {
+              if (prev) {
+                return [prev].concat(ret);
+              }
+              return ret;
+            }
+            return false;
+          };
+
+          const parseSourceData = (sourceData, value) => {
+            devTool.group('sourceData change', sourceData);
+            let defaultMatch;
+            if ($scope.ngModel) {
+              defaultMatch = matchFinder(sourceData, $scope.ngModel);
+              devTool.log('matchFinder', defaultMatch);
             }
             if (defaultMatch) {
-              $scope.selectedList = [defaultMatch.value, $scope.defaultValue];
-              devTool.log('found default value', $scope.selectedList);
+              $scope.selectedList = defaultMatch.map(d => d.value);
+              $scope.renderList = getRenderList($scope.selectedList, sourceData);
             } else {
-              const defaultValue = getSelectValue(sourceData, $scope.selectedList, []);
+              const defaultValue = getSelectValue(sourceData, $scope.selectedList || [], []);
               const renderList = getRenderList(defaultValue, sourceData);
               $scope.selectedList = defaultValue;
               $scope.renderList = renderList;
@@ -99,26 +126,18 @@ export default (app, elem, attrs, scope) => {
             devTool.groupEnd('sourceData change');
           };
 
-          parseSourceData($scope.sourceData || []);
+          parseSourceData($scope.sourceData || [], $scope.ngModel);
 
           $scope.$watch('sourceData', (newValue, oldValue) => {
             if (!isEqual(newValue, oldValue)) {
-              parseSourceData(newValue);
+              parseSourceData(newValue, $scope.ngModel);
             }
           });
 
-          $scope.$watch('defaultValue', value => {
-            if (!value) return;
-            devTool.log('defaultValue change', value);
-            const sourceData = $scope.sourceData;
-            const defaultMatch = find(sourceData, group => {
-              if (Array.isArray(group.children)) {
-                return group.children.some(d => d.value === value);
-              }
-              return false;
-            });
-            if (defaultMatch) {
-              $scope.selectedList = [defaultMatch.value, $scope.defaultValue];
+          $scope.$watch('ngModel', value => {
+            devTool.log('ngModel change', value);
+            if ($scope.sourceData) {
+              parseSourceData($scope.sourceData, value);
             }
           });
 
@@ -145,14 +164,14 @@ export default (app, elem, attrs, scope) => {
             $scope.selectedList = normalizedList.slice(0);
             devTool.log('set ngModel:', normalizedList, renderList);
 
-            $scope.ngModel = normalizedList.slice(0);
+            $scope.ngModel = normalizedList[normalizedList.length - 1];
             devTool.groupEnd('selectedList change');
           }, true);
 
-          $scope.$watch('ngModel', (newValue, oldValue) => {
-            if (isEqual(newValue, oldValue)) return;
-            $scope.selectedList = newValue;
-          });
+          // $scope.$watch('ngModel', (newValue, oldValue) => {
+          //   if (isEqual(newValue, oldValue)) return;
+          //   $scope.selectedList = newValue;
+          // });
 
         }
       ],
