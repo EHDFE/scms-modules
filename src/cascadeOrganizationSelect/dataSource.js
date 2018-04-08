@@ -103,7 +103,7 @@ export default class DataSource {
       if (this.prependOption) {
         children.unshift({
           name: this.prependOptionName,
-          value: this.prependOptionType === 'NULL' ? '' : children.map(d => d.value).join(','),
+          value: this.prependOptionType === 'PARENT_VALUE' ? code : children.map(d => d.value).join(','),
         });
       }
       const formattedData = this.sourceFormatter(regionMap[code]);

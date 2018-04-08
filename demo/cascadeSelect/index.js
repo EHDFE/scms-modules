@@ -18,9 +18,9 @@ export default {
       description: '数据源, array',
     },
     {
-      type: 'object',
+      type: 'string',
       key: 'model',
-      exampleValue: ['fruit'],
+      exampleValue: 'fuji',
       description: 'model',
     },
     {

@@ -26,10 +26,9 @@ export default (app, elem, attrs, scope) => {
       label: '@',
       prependOption: '@',
       prependOptionName: '@',
-      prependOptionType: '@', // 'NULL' or 'CONCAT',
+      prependOptionType: '@', // 'PARENT_VALUE' or 'CONCAT',
       apiUrl: '@',
       sourceFormatter: '=',
-      defaultValue: '@'
     },
     replace: true,
     controller: [
@@ -62,17 +61,16 @@ export default (app, elem, attrs, scope) => {
         }));
 
         dataSource.setUpdater(source => {
-          $timeout(() => {
+          $scope.$apply(() => {
             $scope.source = source;
           });
         });
 
         dataSource.getSource()
           .then(() => {
-            if (Array.isArray($scope.ngModel)) {
-              const defaultSelected = $scope.ngModel.slice(0);
-              $timeout(() => {
-                $scope.selected = defaultSelected;
+            if ($scope.ngModel) {
+              $scope.$apply(() => {
+                $scope.selected = $scope.ngModel;
               });
             }
           });
@@ -86,10 +84,6 @@ export default (app, elem, attrs, scope) => {
           dataSource.update({
             isActivated: value,
           });
-        });
-
-        $scope.$watch('defaultValue', value => {
-          devTool.log('defaultValue change', value);
         });
 
         $scope.$watch('prependOption', value => {
@@ -109,23 +103,13 @@ export default (app, elem, attrs, scope) => {
         // });
         
         $scope.$watch('ngModel', (value, oldValue) => {
-          if (!isEqual(value, oldValue)) {
-            devTool.info('ngModel change', value, oldValue);
-            $scope.selected = value;
-          }
+          devTool.info('ngModel change', value, oldValue);
+          $scope.selected = value;
         });
         
-        let modelUpdateTimer;
         $scope.$watch('selected', (value, oldValue) => {
-          if (!isEqual(value, oldValue)) {
-            modelUpdateTimer && clearTimeout(modelUpdateTimer);
-            modelUpdateTimer = setTimeout(() => {
-              $scope.$apply(() => {
-                devTool.info('change selected', value, oldValue);
-                $scope.ngModel = value.slice(0);
-              });
-            }, 50);
-          }
+          devTool.info('change selected', value, oldValue);
+          $scope.ngModel = value;
         });
 
         // 控制数据权限
