@@ -6,10 +6,7 @@ const KEYS_NEED_UPDATE = ['apiUrl', 'openCityType', 'isActivated', 'organization
 
 export default class DataSource {
   constructor(options) {
-    this.setOption(options);
-  }
-  setOption(options) {
-    this.options = defaults({
+    this.options = {
       openCityType: 'GOODS_TAXI',
       organizationCode: undefined,
       isActivated: true,
@@ -19,7 +16,13 @@ export default class DataSource {
           value: data.organizationcode,
         };
       },
-    }, this.options || {}, options);
+    };
+    this.setOption(options);
+  }
+  setOption(options) {
+    this.options = defaults({}, options, this.options);
+    console.log(options, this.options);
+    console.log(this.options.sourceFormatter, options.sourceFormatter);
     this.openCityType = this.options.openCityType;
     this.apiUrl = this.options.apiUrl;
     this.isActivated = this.options.isActivated;

@@ -117,8 +117,10 @@ export default (app, elem, attrs, scope) => {
           if (!isEqual(value, oldValue)) {
             modelUpdateTimer && clearTimeout(modelUpdateTimer);
             modelUpdateTimer = setTimeout(() => {
-              devTool.info('change selected', value, oldValue);
-              $scope.ngModel = value.slice(0);
+              $scope.$apply(() => {
+                devTool.info('change selected', value, oldValue);
+                $scope.ngModel = value.slice(0);
+              });
             }, 50);
           }
         });
