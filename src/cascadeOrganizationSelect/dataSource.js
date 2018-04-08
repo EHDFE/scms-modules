@@ -1,32 +1,38 @@
 import isEqual from 'lodash/isEqual';
-import isBoolean from 'lodash/isBoolean';
+import defaults from 'lodash/defaults';
+import pick from 'lodash/pick';
 
+const KEYS_NEED_UPDATE = ['apiUrl', 'openCityType', 'isActivated', 'organizationCode'];
 
 export default class DataSource {
   constructor(options) {
     this.setOption(options);
   }
   setOption(options) {
-    this.options = Object.assign(this.options || {}, {
-      openCityType: this.openCityType || 'GOODS_TAXI',
-      organizationCode: this.organizationCode || '',
-    }, options);
+    this.options = defaults({
+      openCityType: 'GOODS_TAXI',
+      organizationCode: '',
+      isActivated: true,
+      sourceFormatter(data) {
+        return {
+          name: data.organizationname,
+          value: data.organizationcode,
+        };
+      },
+    }, this.options || {}, options);
     this.openCityType = this.options.openCityType;
     this.apiUrl = this.options.apiUrl;
-    this.isActivated = isBoolean(options.isActivated) ? options.isActivated : (this.isActivated !== null && this.isActivated !== undefined ? this.isActivated : true);
+    this.isActivated = this.options.isActivated;
     this.organizationCode = this.options.organizationCode;
     this.prependOption = this.options.prependOption;
     this.prependOptionName = this.options.prependOptionName;
     this.prependOptionType = this.options.prependOptionType;
-    this.sourceFormatter = this.options.sourceFormatter ? this.options.sourceFormatter : data => ({
-      name: data.organizationname,
-      value: data.organizationcode,
-    });
+    this.sourceFormatter = this.options.sourceFormatter;
   }
   update(options) {
     const prevOptions = Object.assign({}, this.options);
     this.setOption(options);
-    if (!isEqual(prevOptions, this.options)) {
+    if (!isEqual(pick(prevOptions, KEYS_NEED_UPDATE), pick(this.options, KEYS_NEED_UPDATE))) {
       this.getSource();
     }
   }
