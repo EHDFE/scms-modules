@@ -9,12 +9,11 @@ export default class DataSource {
   setOption(options) {
     this.options = Object.assign(this.options || {}, {
       openCityType: this.openCityType || 'GOODS_TAXI',
-      isActivated: isBoolean(this.isActivated) ? this.isActivated : true,
       organizationCode: this.organizationCode || '',
     }, options);
     this.openCityType = this.options.openCityType;
     this.apiUrl = this.options.apiUrl;
-    this.isActivated = this.options.isActivated;
+    this.isActivated = isBoolean(options.isActivated) ? options.isActivated : (this.isActivated !== null ? this.isActivated : true);
     this.organizationCode = this.options.organizationCode;
     this.prependOption = this.options.prependOption;
     this.prependOptionName = this.options.prependOptionName;
