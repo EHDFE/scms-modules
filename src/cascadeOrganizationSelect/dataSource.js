@@ -11,7 +11,7 @@ export default class DataSource {
   setOption(options) {
     this.options = defaults({
       openCityType: 'GOODS_TAXI',
-      organizationCode: '',
+      organizationCode: undefined,
       isActivated: true,
       sourceFormatter(data) {
         return {
