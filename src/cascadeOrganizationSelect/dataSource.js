@@ -98,7 +98,7 @@ export default class DataSource {
       organizationname: '全国',
       organizationcode: '88888888',
     });
-    return [company].concat(Object.keys(regionMap).map(code => {
+    return (company ? [company] : []).concat(Object.keys(regionMap).map(code => {
       const children = regionMap[code].children;
       if (this.prependOption) {
         children.unshift({
