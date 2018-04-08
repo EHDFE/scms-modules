@@ -21,8 +21,6 @@ export default class DataSource {
   }
   setOption(options) {
     this.options = defaults({}, options, this.options);
-    console.log(options, this.options);
-    console.log(this.options.sourceFormatter, options.sourceFormatter);
     this.openCityType = this.options.openCityType;
     this.apiUrl = this.options.apiUrl;
     this.isActivated = this.options.isActivated;
