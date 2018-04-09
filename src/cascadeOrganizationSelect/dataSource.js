@@ -91,7 +91,9 @@ export default class DataSource {
     cityList.forEach(d => {
       if (d.organizationcode !== '88888888') {
         const transformed = this.sourceFormatter(d);
-        regionMap[d.parorganizationcode].children.push(transformed);
+        if (transformed) {
+          regionMap[d.parorganizationcode].children.push(transformed);
+        }
       }
     });
     const company = this.sourceFormatter({
@@ -106,13 +108,14 @@ export default class DataSource {
           value: this.prependOptionType === 'PARENT_VALUE' ? code : children.map(d => d.value).join(','),
         });
       }
+      if (children.length === 0) return false;
       const formattedData = this.sourceFormatter(regionMap[code]);
       return {
         name: formattedData.name,
         value: formattedData.value,
         children,
       };
-    }));
+    })).filter(d => !!d);
   }
   setUpdater(updater) {
     this.updater = updater;
