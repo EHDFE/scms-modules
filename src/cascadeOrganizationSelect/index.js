@@ -62,6 +62,7 @@ export default (app, elem, attrs, scope) => {
 
         dataSource.setUpdater(source => {
           $scope.$apply(() => {
+            devTool.log('source update', source);
             $scope.source = source;
           });
         });
