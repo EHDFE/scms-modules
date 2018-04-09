@@ -171,7 +171,7 @@ export default (app, elem, attrs, scope) => {
                 return;
               }
               datePicker.tmpDate = col.data;
-              $scope.$emit('refresh', datePicker.tmpDate);
+              $scope.$emit('datePickerRefresh', datePicker.tmpDate);
             }
           }, 100);
 
@@ -180,7 +180,7 @@ export default (app, elem, attrs, scope) => {
             if ($scope.dateRange) {
               $timeout(() => {
                 datePicker.tmpDate = null;
-                $scope.$emit('refresh');
+                $scope.$emit('datePickerRefresh');
               });
             }
           };
@@ -337,7 +337,7 @@ export default (app, elem, attrs, scope) => {
 
           $scope.$watch('datePicker.refresh', (newVal, oldVal) => {
             if (newVal && newVal !== oldVal) {
-              $scope.$emit('refresh');
+              $scope.$emit('datePickerRefresh');
             }
           });
           $scope.$on('init', () => {

@@ -198,7 +198,7 @@ export default (app, elem, attrs, scope) => {
                 $document.unbind('mousedown',fnDocumentMousedown);
               });
             }
-            $scope.$on('refresh', (e, data) => {
+            $scope.$on('datePickerRefresh', (e, data) => {
               $scope.$broadcast('refreshDate', data);
             });
             
