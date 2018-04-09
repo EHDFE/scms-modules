@@ -1,17 +1,26 @@
 import isEqual from 'lodash/isEqual';
-import isBoolean from 'lodash/isBoolean';
+import defaults from 'lodash/defaults';
+import pick from 'lodash/pick';
 
+const KEYS_NEED_UPDATE = ['apiUrl', 'openCityType', 'isActivated', 'organizationCode'];
 
 export default class DataSource {
   constructor(options) {
+    this.options = {
+      openCityType: 'GOODS_TAXI',
+      organizationCode: undefined,
+      isActivated: true,
+      sourceFormatter(data) {
+        return {
+          name: data.organizationname,
+          value: data.organizationcode,
+        };
+      },
+    };
     this.setOption(options);
   }
   setOption(options) {
-    this.options = Object.assign(this.options || {}, {
-      openCityType: this.openCityType || 'GOODS_TAXI',
-      isActivated: isBoolean(this.isActivated) ? this.isActivated : true,
-      organizationCode: this.organizationCode || '',
-    }, options);
+    this.options = defaults({}, options, this.options);
     this.openCityType = this.options.openCityType;
     this.apiUrl = this.options.apiUrl;
     this.isActivated = this.options.isActivated;
@@ -19,15 +28,12 @@ export default class DataSource {
     this.prependOption = this.options.prependOption;
     this.prependOptionName = this.options.prependOptionName;
     this.prependOptionType = this.options.prependOptionType;
-    this.sourceFormatter = this.options.sourceFormatter ? this.options.sourceFormatter : data => ({
-      name: data.organizationname,
-      value: data.organizationcode,
-    });
+    this.sourceFormatter = this.options.sourceFormatter;
   }
   update(options) {
     const prevOptions = Object.assign({}, this.options);
     this.setOption(options);
-    if (!isEqual(prevOptions, this.options)) {
+    if (!isEqual(pick(prevOptions, KEYS_NEED_UPDATE), pick(this.options, KEYS_NEED_UPDATE))) {
       this.getSource();
     }
   }
@@ -85,28 +91,39 @@ export default class DataSource {
     cityList.forEach(d => {
       if (d.organizationcode !== '88888888') {
         const transformed = this.sourceFormatter(d);
-        regionMap[d.parorganizationcode].children.push(transformed);
+        if (transformed) {
+          regionMap[d.parorganizationcode].children.push(transformed);
+        }
       }
     });
     const company = this.sourceFormatter({
       organizationname: '全国',
       organizationcode: '88888888',
     });
-    return [company].concat(Object.keys(regionMap).map(code => {
+    return (company ? [company] : []).concat(Object.keys(regionMap).map(code => {
       const children = regionMap[code].children;
       if (this.prependOption) {
+        let value;
+        if (this.prependOptionType === 'CONCAT') {
+          value = children.map(d => d.value);
+        } else if (this.prependOptionType === 'CONCAT_ALL') {
+          value = [code].concat(children.map(d => d.value)).join(',');
+        } else {
+          value = code;
+        }
         children.unshift({
           name: this.prependOptionName,
-          value: this.prependOptionType === 'NULL' ? '' : children.map(d => d.value).join(','),
+          value,
         });
       }
+      if (children.length === 0) return false;
       const formattedData = this.sourceFormatter(regionMap[code]);
       return {
         name: formattedData.name,
         value: formattedData.value,
         children,
       };
-    }));
+    })).filter(d => !!d);
   }
   setUpdater(updater) {
     this.updater = updater;

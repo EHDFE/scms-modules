@@ -10,17 +10,10 @@ export default {
   description: '城市级联选择',
   scope: [
     {
-      type: 'object',
-      key: 'model',
-      exampleValue: ['测试事业部', '7bcb87d'],
-      description: 'model',
-    },
-    {
       type: 'string',
-      key: 'defaultValue',
-      scopeType: '@',
-      exampleValue: '',
-      description: '默认值',
+      key: 'model',
+      exampleValue: '7bcb87d',
+      description: 'model',
     },
     {
       type: 'string',
@@ -60,8 +53,8 @@ export default {
       type: 'string',
       key: 'prependOptionType',
       scopeType: '@',
-      exampleValue: 'NULL',
-      description: '前置选项值模式 可选 ("NULL": 空值) 或 ("CONCAT": 包含全部城市code，逗号分隔)',
+      exampleValue: 'CONCAT_ALL',
+      description: '前置选项值模式 可选 \'PARENT_VALUE\': 大区value 或 \'CONCAT\': 包含全部城市value，逗号分隔 或 \'CONCAT_ALL\'',
     },
     {
       type: 'string',

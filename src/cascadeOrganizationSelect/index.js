@@ -1,6 +1,6 @@
 import template from './index.html';
 import get from 'lodash/get';
-import isEqual from 'lodash/isEqual';
+// import isEqual from 'lodash/isEqual';
 import cascadeSelect from '../cascadeSelect';
 import DataSource from './dataSource';
 
@@ -26,10 +26,9 @@ export default (app, elem, attrs, scope) => {
       label: '@',
       prependOption: '@',
       prependOptionName: '@',
-      prependOptionType: '@', // 'NULL' or 'CONCAT',
+      prependOptionType: '@', // 'PARENT_VALUE' or 'CONCAT',
       apiUrl: '@',
       sourceFormatter: '=',
-      defaultValue: '@'
     },
     replace: true,
     controller: [
@@ -48,10 +47,13 @@ export default (app, elem, attrs, scope) => {
           organizationCode: currentOrganizationCode,
           apiUrl: $scope.apiUrl || SOURCE_API,
           sourceFormatter: $scope.sourceFormatter,
-          // sourceFormatter: data => ({
-          //   name: data.organizationname,
-          //   value: data.organizationname,
-          // }),
+          // sourceFormatter: data => {
+          //   if (data.organizationcode === '88888888') return false;
+          //   return {
+          //     name: data.organizationname,
+          //     value: data.organizationname,
+          //   };
+          // },
         }, {
           prependOption: $scope.prependOption === 'true' ? true : false,
           prependOptionName: $scope.prependOptionName || DEFAULT_PREPEND_OPTION_CONFIG.prependOptionName,
@@ -59,17 +61,16 @@ export default (app, elem, attrs, scope) => {
         }));
 
         dataSource.setUpdater(source => {
-          $timeout(() => {
+          $scope.$apply(() => {
             $scope.source = source;
           });
         });
 
         dataSource.getSource()
           .then(() => {
-            if (Array.isArray($scope.ngModel)) {
-              const defaultSelected = $scope.ngModel.slice(0);
-              $timeout(() => {
-                $scope.selected = defaultSelected;
+            if ($scope.ngModel) {
+              $scope.$apply(() => {
+                $scope.selected = $scope.ngModel;
               });
             }
           });
@@ -84,6 +85,7 @@ export default (app, elem, attrs, scope) => {
             isActivated: value,
           });
         });
+
         $scope.$watch('prependOption', value => {
           dataSource.update({
             prependOption: value === 'true',
@@ -99,19 +101,15 @@ export default (app, elem, attrs, scope) => {
         //     prependOptionType: value,
         //   });
         // });
-
+        
         $scope.$watch('ngModel', (value, oldValue) => {
-          if (!isEqual(value, oldValue)) {
-            devTool.info('ngModel change', value);
-            $scope.selected = value;
-          }
+          devTool.info('ngModel change', value, oldValue);
+          $scope.selected = value;
         });
         
         $scope.$watch('selected', (value, oldValue) => {
-          if (!isEqual(value, oldValue)) {
-            devTool.info('change selected', value, oldValue);
-            $scope.ngModel = value.slice(0);
-          }
+          devTool.info('change selected', value, oldValue);
+          $scope.ngModel = value;
         });
 
         // 控制数据权限
