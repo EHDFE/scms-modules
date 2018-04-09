@@ -53,8 +53,8 @@ export default {
       type: 'string',
       key: 'prependOptionType',
       scopeType: '@',
-      exampleValue: 'NULL',
-      description: '前置选项值模式 可选 ("PARENT_VALUE": 大区value) 或 ("CONCAT": 包含全部城市value，逗号分隔)',
+      exampleValue: 'CONCAT_ALL',
+      description: '前置选项值模式 可选 \'PARENT_VALUE\': 大区value 或 \'CONCAT\': 包含全部城市value，逗号分隔 或 \'CONCAT_ALL\'',
     },
     {
       type: 'string',

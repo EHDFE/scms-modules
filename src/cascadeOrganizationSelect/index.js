@@ -1,6 +1,6 @@
 import template from './index.html';
 import get from 'lodash/get';
-import isEqual from 'lodash/isEqual';
+// import isEqual from 'lodash/isEqual';
 import cascadeSelect from '../cascadeSelect';
 import DataSource from './dataSource';
 
