@@ -103,9 +103,17 @@ export default class DataSource {
     return (company ? [company] : []).concat(Object.keys(regionMap).map(code => {
       const children = regionMap[code].children;
       if (this.prependOption) {
+        let value;
+        if (this.prependOptionType === 'CONCAT') {
+          value = children.map(d => d.value);
+        } else if (this.prependOptionType === 'CONCAT_ALL') {
+          value = [code].concat(children.map(d => d.value)).join(',');
+        } else {
+          value = code;
+        }
         children.unshift({
           name: this.prependOptionName,
-          value: this.prependOptionType === 'PARENT_VALUE' ? code : children.map(d => d.value).join(','),
+          value,
         });
       }
       if (children.length === 0) return false;
