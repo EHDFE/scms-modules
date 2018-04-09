@@ -118,7 +118,7 @@ export default (app, elem, attrs, scope) => {
           if (currentOrganizationCode === nextOrganizationCode) return;
           currentOrganizationCode = nextOrganizationCode;
           dataSource.update({
-            organizationcode: nextOrganizationCode,
+            organizationCode: nextOrganizationCode,
           });
         });
 
