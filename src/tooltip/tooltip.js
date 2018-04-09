@@ -34,7 +34,9 @@ export default (app, elem, attrs, scope) => {
           };
 
           $scope.$watch('tooltipPosition', position => {
-            updateClassByPosition(position);
+            if (position) {
+              updateClassByPosition(position);
+            }
           });
 
           updateClassByPosition($scope.tooltipPosition || $attrs.position);

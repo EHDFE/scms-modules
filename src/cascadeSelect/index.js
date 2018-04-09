@@ -1,8 +1,12 @@
 import find from 'lodash/find';
+import findIndex from 'lodash/findIndex';
 import get from 'lodash/get';
 import isEqual from 'lodash/isEqual';
+import DevTool from '../../utils/DevTool';
 import template from './index.html';
 import './index.less';
+
+const devTool = new DevTool('cascadeSelect');
 
 export default (app, elem, attrs, scope) => {
   app.directive('cascadeSelect', [
@@ -13,6 +17,7 @@ export default (app, elem, attrs, scope) => {
         ngModel: '=',
         sourceData: '=',
         width: '@',
+        defaultValue: '@',
       },
       controller: [
         '$scope',
@@ -25,18 +30,23 @@ export default (app, elem, attrs, scope) => {
             }
           });
 
-          $scope.selectedList = $scope.ngModel || [];
+          // $scope.selectedList = Array.isArray($scope.ngModel) ? $scope.ngModel.slice(0) : [];
           $scope.renderList = [];
 
           const getSelectValue = (target, currentValue, prev) => {
             let match;
             const value = currentValue.shift();
             if (typeof value !== 'undefined') {
+              let found = false;
               for (let i = 0, len = target.length; i < len; i += 1) {
                 if (target[i].value === value) {
                   match = target[i];
+                  found = true;
                   break;
                 }
+              }
+              if (!found && target.length) {
+                match = target[0];
               }
             } else {
               match = target[0];
@@ -64,48 +74,104 @@ export default (app, elem, attrs, scope) => {
             }, []);
           };
 
-          $scope.$watch('sourceData', newValue => {
-            console.group('sourceData change');
-            const defaultValue = getSelectValue(newValue, $scope.selectedList, []);
-            const renderList = getRenderList(defaultValue, $scope.sourceData);
-            $scope.selectedList = defaultValue;
-            $scope.renderList = renderList;
-            console.log(defaultValue, renderList);
-            console.groupEnd('sourceData change');
-          });
-
-          $scope.$watch('selectedList', (newValue, oldValue) => {
-            console.group('selectedList change');
-            let selectedList = [];
-            for (let i = 0, len = newValue.length; i < len; i += 1) {
-              selectedList.push(newValue[i]);
-              if (newValue[i] !== oldValue[i]) {
+          const matchFinder = (ary, value, prev) => {
+            let found, ret;
+            for (let i = 0, len = ary.length; i < len; i += 1) {
+              const d = ary[i];
+              if (d.value === value) {
+                found = {
+                  name: d.name,
+                  value: d.value,
+                };
+                ret = [found];
                 break;
+              } else if (Array.isArray(d.children)) {
+                found = {
+                  name: d.name,
+                  value: d.value,
+                };
+                const next = matchFinder(d.children, value, found);
+                if (Array.isArray(next)) {
+                  ret = next;
+                  break;
+                }
               }
             }
-            selectedList = getSelectValue(
+            if (ret) {
+              if (prev) {
+                return [prev].concat(ret);
+              }
+              return ret;
+            }
+            return false;
+          };
+
+          const parseSourceData = (sourceData, value) => {
+            devTool.group('sourceData change', sourceData);
+            let defaultMatch;
+            if ($scope.ngModel) {
+              defaultMatch = matchFinder(sourceData, $scope.ngModel);
+              devTool.log('matchFinder', defaultMatch);
+            }
+            if (defaultMatch) {
+              $scope.selectedList = defaultMatch.map(d => d.value);
+              $scope.renderList = getRenderList($scope.selectedList, sourceData);
+            } else {
+              const defaultValue = getSelectValue(sourceData, $scope.selectedList || [], []);
+              const renderList = getRenderList(defaultValue, sourceData);
+              $scope.selectedList = defaultValue;
+              $scope.renderList = renderList;
+              devTool.log(defaultValue, renderList);
+            }            
+            devTool.groupEnd('sourceData change');
+          };
+
+          parseSourceData($scope.sourceData || [], $scope.ngModel);
+
+          $scope.$watch('sourceData', (newValue, oldValue) => {
+            if (!isEqual(newValue, oldValue)) {
+              parseSourceData(newValue, $scope.ngModel);
+            }
+          });
+
+          $scope.$watch('ngModel', value => {
+            devTool.log('ngModel change', value);
+            if ($scope.sourceData) {
+              parseSourceData($scope.sourceData, value);
+            }
+          });
+
+          const normalizer = newValue => {
+            const selectedList = [...newValue];
+            return getSelectValue(
               $scope.sourceData,
               selectedList,
               []
             );
-            if (isEqual(selectedList, newValue)) {
-              const renderList = getRenderList(
-                selectedList,
-                $scope.sourceData
-              );
-              $scope.renderList = renderList;
-              $scope.selectedList = selectedList;
-              console.log(selectedList, renderList);
-              $scope.ngModel = selectedList;
-            } else {
-              $scope.selectedList = selectedList;
-            }
-            console.groupEnd('selectedList change');
+          };
+
+          let normalizedList;
+          $scope.$watch('selectedList', (newValue, oldValue) => {
+            if (isEqual(newValue, oldValue) || isEqual(newValue, normalizedList)) return;
+            devTool.group('selectedList change');
+            normalizedList = normalizer(newValue);
+
+            const renderList = getRenderList(
+              normalizedList,
+              $scope.sourceData
+            );
+            $scope.renderList = renderList;
+            $scope.selectedList = normalizedList.slice(0);
+            devTool.log('set ngModel:', normalizedList, renderList);
+
+            $scope.ngModel = normalizedList[normalizedList.length - 1];
+            devTool.groupEnd('selectedList change');
           }, true);
 
-          $scope.$watch('ngModel', newValue => {
-            $scope.selectedList = newValue;
-          });
+          // $scope.$watch('ngModel', (newValue, oldValue) => {
+          //   if (isEqual(newValue, oldValue)) return;
+          //   $scope.selectedList = newValue;
+          // });
 
         }
       ],
