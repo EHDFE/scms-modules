@@ -2,12 +2,14 @@
   <div
     cascade-organization-select
     ng-model="model"
+    mode="mode"
+    city-only="cityOnly"
+    readonly="readonly"
     label="{{label}}"
+    width="{{width}}"
     open-city-type="{{openCityType}}"
     is-activated="isActivated"
     api-url="{{apiUrl}}"
-    prepend-option="{{prependOption}}"
-    prepend-option-name="{{prependOptionName}}"
     prepend-option-type="{{prependOptionType}}"
   ></div>
   model: {{model}}

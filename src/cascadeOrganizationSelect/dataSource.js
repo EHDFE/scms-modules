@@ -3,6 +3,7 @@ import defaults from 'lodash/defaults';
 import pick from 'lodash/pick';
 
 const KEYS_NEED_UPDATE = ['apiUrl', 'openCityType', 'isActivated', 'organizationCode'];
+const COUNTRY_CODE = '88888888';
 
 export default class DataSource {
   constructor(options) {
@@ -25,8 +26,6 @@ export default class DataSource {
     this.apiUrl = this.options.apiUrl;
     this.isActivated = this.options.isActivated;
     this.organizationCode = this.options.organizationCode;
-    this.prependOption = this.options.prependOption;
-    this.prependOptionName = this.options.prependOptionName;
     this.prependOptionType = this.options.prependOptionType;
     this.sourceFormatter = this.options.sourceFormatter;
   }
@@ -60,7 +59,7 @@ export default class DataSource {
   getSource() {
     return Promise.all([
       this.request({
-        organizationcode: this.organizationCode,
+        organizationcode: COUNTRY_CODE,
         returnformat: 1,
       }),
       this.request({
@@ -73,13 +72,14 @@ export default class DataSource {
       return this.parser(regionList, cityList);
     }).then(source => {
       this.updater(source);
+      return source;
     });
   }
   parser([regionList, cityList]) {
     // console.log(regionList, cityList);
     const regionMap = {};
     regionList.forEach(d => {
-      if (d.organizationcode !== '88888888') {
+      if (d.organizationcode !== COUNTRY_CODE) {
         Object.assign(regionMap, {
           [d.organizationcode]: Object.assign({
             name: d.organizationname,
@@ -89,38 +89,38 @@ export default class DataSource {
       }
     });
     cityList.forEach(d => {
-      if (d.organizationcode !== '88888888') {
+      if (d.organizationcode !== COUNTRY_CODE) {
         const transformed = this.sourceFormatter(d);
         if (transformed) {
           regionMap[d.parorganizationcode].children.push(transformed);
         }
       }
     });
-    const company = this.sourceFormatter({
-      organizationname: '全国',
-      organizationcode: '88888888',
-    });
-    return (company ? [company] : []).concat(Object.keys(regionMap).map(code => {
+    let company;
+    if (this.organizationCode === COUNTRY_CODE) {
+      company = this.sourceFormatter({
+        organizationname: '全国',
+        organizationcode: COUNTRY_CODE,
+      });
+    } else {
+      company = false; 
+    }
+    company = company ? [ company ] : [];
+    return company.concat(Object.keys(regionMap).map(code => {
       const children = regionMap[code].children;
-      if (this.prependOption) {
-        let value;
-        if (this.prependOptionType === 'CONCAT') {
-          value = children.map(d => d.value);
-        } else if (this.prependOptionType === 'CONCAT_ALL') {
-          value = [code].concat(children.map(d => d.value)).join(',');
-        } else {
-          value = code;
-        }
-        children.unshift({
-          name: this.prependOptionName,
-          value,
-        });
-      }
       if (children.length === 0) return false;
       const formattedData = this.sourceFormatter(regionMap[code]);
+      let regionValue;
+      if (this.prependOptionType === 'CONCAT') {
+        regionValue = children.map(d => d.value).join(',');
+      } else if (this.prependOptionType === 'CONCAT_ALL') {
+        regionValue = [formattedData.value].concat(children.map(d => d.value)).join(',');
+      } else {
+        regionValue = formattedData.value;
+      }
       return {
         name: formattedData.name,
-        value: formattedData.value,
+        value: regionValue,
         children,
       };
     })).filter(d => !!d);
