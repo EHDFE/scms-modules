@@ -1,7 +1,7 @@
-<div class="form-group input-group cascade-organization-select" ng-class="{'cascade-organization-select-active': active}">
+<div class="form-group input-group business-city-select" ng-class="{'business-city-select-active': active}">
   <span ng-if="label" class="input-group-addon">{{label}}</span>
   <input type="text" class="form-control" style="width: {{width}}px" value="{{displayValue}}" ng-click="!readonly && (active = true)" ng-readonly="readonly">
-  <div class="cascade-organization-select-layer" tabindex="0">
+  <div class="business-city-select-layer" tabindex="0" style="left: {{layerOffset}}px">
     <div class="organization-container" ng-class="{'organization-container-with-bottom': multipleSelectMode}">
       <dl class="organization-group" ng-repeat="group in source">
         <dt>

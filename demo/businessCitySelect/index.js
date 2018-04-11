@@ -1,26 +1,27 @@
 import html from './index.html';
 
 export default {
-  title: 'cascadeOrganizationSelect',
+  title: 'businessCitySelect',
   author: 'ryan.bian',
   type: 'directive',
-  keyName: 'cascadeOrganizationSelectDirective',
-  name: '组织&城市级联选择',
+  keyName: 'businessCitySelectDirective',
+  name: '组织&城市选择',
   date: '2018-04-3',
   description: '城市级联选择',
   scope: [
     {
       type: 'string',
       key: 'model',
-      // exampleValue: '7bcb87d',
-      exampleValue: ['huabeiqu','dongbeiqu','测试事业部'],
+      exampleValue: '7bcb87d',
+      // exampleValue: '',
+      // exampleValue: ['huabeiqu','dongbeiqu','测试事业部'],
       description: 'model',
     },
     {
       type: 'string',
       key: 'mode',
-      exampleValue: 'MULTIPLE',
-      // exampleValue: 'SINGLE',
+      // exampleValue: 'MULTIPLE',
+      exampleValue: 'SINGLE',
       description: '选择模式，SINGLE 或者 MULTIPLE,  默认单选 SINGLE',
     },
     {

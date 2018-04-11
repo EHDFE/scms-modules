@@ -1,8 +1,3 @@
-/**
- * TODO:
- * 1. 和用户组织解绑
- */
-
 import template from './index.html';
 import get from 'lodash/get';
 import find from 'lodash/find';
@@ -13,13 +8,13 @@ import DataSource from './dataSource';
 import DevTool from '../../utils/DevTool';
 import './index.less';
 
-const devTool = new DevTool('cascadeOrganizationSelect');
+const devTool = new DevTool('citySelect');
 
 const SOURCE_API = '/ehuodiBedrockApi/ehdrbacorganizationcs/selectCascadeRbacOrganizationByCode';
 
 export default (app, elem, attrs, scope) => {
   // cascadeSelect(app, elem, attrs, scope);
-  app.directive('cascadeOrganizationSelect', [() => ({
+  app.directive('businessCitySelect', [() => ({
     template,
     scope: {
       ngModel: '=',
@@ -45,7 +40,13 @@ export default (app, elem, attrs, scope) => {
       ($scope, $attrs, $element, $rootScope, $timeout, G) => {
         let currentOrganizationCode = get(G, 'userInfo.organizationcode', '88888888');
 
-        const $layer = $element.find('.cascade-organization-select-layer');
+        const $inputField = $element.find('input');
+        const $layer = $element.find('.business-city-select-layer');
+        setTimeout(() => {
+          $scope.$apply(() => {
+            $scope.layerOffset = $inputField[0].getBoundingClientRect().left - $element[0].getBoundingClientRect().left;
+          });
+        }, 0);
         // 多选模式
         $scope.multipleSelectMode = $scope.mode === 'MULTIPLE';
         $scope.active = false;
@@ -85,26 +86,29 @@ export default (app, elem, attrs, scope) => {
 
         const updateSelectListByModel = (source, value) => {
           devTool.log(source, value);
-          if (!value) return;
-          let targetList;
-          if (!Array.isArray(value)) {
-            targetList = [value];
-          } else {
-            targetList = value;
-          }
-          const flatSource = source.reduce((prev, item) => {
-            if (item.children) {
-              return prev.concat(item, item.children);
-            }
-            return prev.concat(item);
-          }, []);
           const matchedList = [];
-          targetList.forEach(targetValue => {
-            const matchOne = find(flatSource, d => d.value === targetValue);
-            if (matchOne) {
-              matchedList.push(matchOne);
+          if (!value) {
+            matchedList.push(source[0]);
+          } else {
+            let targetList;
+            if (!Array.isArray(value)) {
+              targetList = [value];
+            } else {
+              targetList = value;
             }
-          });
+            const flatSource = source.reduce((prev, item) => {
+              if (item.children) {
+                return prev.concat(item, item.children);
+              }
+              return prev.concat(item);
+            }, []);
+            targetList.forEach(targetValue => {
+              const matchOne = find(flatSource, d => d.value === targetValue);
+              if (matchOne) {
+                matchedList.push(matchOne);
+              }
+            });
+          }
           devTool.log('matchedList:', matchedList);
           $scope.selectedList = matchedList.map(d => Object.assign(d, {
             selected: true,
@@ -112,23 +116,23 @@ export default (app, elem, attrs, scope) => {
           $scope.displayValue = matchedList.map(d => d.name).join('/');
         };
 
+        let initialized = false;
         dataSource.setUpdater(source => {
           $scope.$apply(() => {
             devTool.log('source update', source);
             $scope.source = source;
             nationNode = find(source, d => d.value === '88888888');
+            if (initialized) {
+              updateSelectListByModel(source, null);
+            } else {
+              // 初始化赋值
+              updateSelectListByModel(source, $scope.ngModel);
+              initialized = true;
+            }
           });
         });
 
-        dataSource.getSource()
-          .then(source => {
-            // 初始化赋值
-            if ($scope.ngModel) {
-              $scope.$apply(() => {
-                updateSelectListByModel(source, $scope.ngModel);
-              });
-            }
-          });
+        dataSource.getSource();
 
         let nationNode;
         $scope.selectedList = [];
@@ -267,7 +271,7 @@ export default (app, elem, attrs, scope) => {
 
         $scope.$watch('selectedList', value => {
           devTool.log('selectedList change:', value);
-          if (!$scope.multipleSelectMode) {
+          if (!$scope.multipleSelectMode && initialized) {
             $scope.confirmSelected();
           }
         }, true);
