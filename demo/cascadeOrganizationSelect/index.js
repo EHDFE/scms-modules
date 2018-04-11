@@ -12,15 +12,16 @@ export default {
     {
       type: 'string',
       key: 'model',
-      // exampleValue: '7bcb87d',
-      exampleValue: ['huabeiqu','dongbeiqu','测试事业部'],
+      exampleValue: '7bcb87d',
+      // exampleValue: '',
+      // exampleValue: ['huabeiqu','dongbeiqu','测试事业部'],
       description: 'model',
     },
     {
       type: 'string',
       key: 'mode',
-      exampleValue: 'MULTIPLE',
-      // exampleValue: 'SINGLE',
+      // exampleValue: 'MULTIPLE',
+      exampleValue: 'SINGLE',
       description: '选择模式，SINGLE 或者 MULTIPLE,  默认单选 SINGLE',
     },
     {
