@@ -68,6 +68,14 @@ export default {
     },
     {
       type: 'boolean',
+      key: 'autoSelect',
+      scopeType: '=',
+      // exampleValue: true,
+      exampleValue: false,
+      description: '是否默认选中第一个可选城市',
+    },
+    {
+      type: 'boolean',
       key: 'ignoreDataPermission',
       scopeType: '=',
       // exampleValue: true,

@@ -28,6 +28,8 @@ export default (app, elem, attrs, scope) => {
       sourceFormatter: '=',
       readonly: '=',
       ignoreDataPermission: '=',
+      prependOptionType: '@',
+      autoSelect: '=',
     },
     replace: true,
     controller: [
@@ -59,6 +61,9 @@ export default (app, elem, attrs, scope) => {
           mouseInPanel = false;
           $layer[0].focus();
         });
+        $inputField.on('keypress', e => {
+          e.preventDefault();
+        });
         
         $layer.on('blur', () => {
           if (!mouseInPanel) {
@@ -88,7 +93,15 @@ export default (app, elem, attrs, scope) => {
           devTool.log(source, value);
           const matchedList = [];
           if (!value) {
-            matchedList.push(source[0]);
+            if ($scope.autoSelect) {
+              let defaultSelect;
+              if ($scope.cityOnly) {
+                defaultSelect = find(source, d => d && !d.children);
+              } else {
+                defaultSelect = source[0];
+              }
+              defaultSelect && matchedList.push(defaultSelect);
+            }
           } else {
             let targetList;
             if (!Array.isArray(value)) {
@@ -110,6 +123,9 @@ export default (app, elem, attrs, scope) => {
             });
           }
           devTool.log('matchedList:', matchedList);
+          $scope.selectedList.forEach(d => Object.assign(d, {
+            selected: false,
+          }));
           $scope.selectedList = matchedList.map(d => Object.assign(d, {
             selected: true,
           }));
@@ -121,7 +137,7 @@ export default (app, elem, attrs, scope) => {
           $scope.$apply(() => {
             devTool.log('source update', source);
             $scope.source = source;
-            nationNode = find(source, d => d.value === '88888888');
+            nationNode = find(source, d => d.isNational);
             if (initialized) {
               updateSelectListByModel(source, null);
             } else {
@@ -139,9 +155,9 @@ export default (app, elem, attrs, scope) => {
 
         $scope.handleSelectAction = (data, isCity, parent) => {
           devTool.log(data, isCity, parent);
-          if (!isCity && $scope.cityOnly) return false;
           const nextSelectStatus = !data.selected;
-          const isNational = data.value === '88888888';
+          const isNational = !!data.isNational;
+          if (!isCity && $scope.cityOnly && !isNational) return false;
           if (isNational) {
             Object.assign(data, {
               selected: nextSelectStatus,
@@ -300,9 +316,12 @@ export default (app, elem, attrs, scope) => {
         
         $scope.$watch('ngModel', (value, oldValue) => {
           devTool.info('ngModel change:', value, oldValue);
+          if (value !== oldValue) {
+            updateSelectListByModel($scope.source, value);
+          }
         });
 
-        if ($scope.ignoreDataPermission) {
+        if (!$scope.ignoreDataPermission) {
           // 控制数据权限
           const handleUserOrgChange = $rootScope.$on('updateOrg', () => {
             const nextOrganizationCode = get(G, 'userInfo.organizationcode', '');
@@ -317,8 +336,6 @@ export default (app, elem, attrs, scope) => {
             handleUserOrgChange();
           });
         }
-        
-
       }],
   })]);
 };
