@@ -28,6 +28,8 @@ export default (app, elem, attrs, scope) => {
       sourceFormatter: '=',
       readonly: '=',
       ignoreDataPermission: '=',
+      prependOptionType: '@',
+      autoSelect: '=',
     },
     replace: true,
     controller: [
@@ -91,9 +93,15 @@ export default (app, elem, attrs, scope) => {
           devTool.log(source, value);
           const matchedList = [];
           if (!value) {
-            // if (source[0]) {
-            //   matchedList.push(source[0]);
-            // }
+            if ($scope.autoSelect) {
+              let defaultSelect;
+              if ($scope.cityOnly) {
+                defaultSelect = find(source, d => d && !d.children);
+              } else {
+                defaultSelect = source[0];
+              }
+              defaultSelect && matchedList.push(defaultSelect);
+            }
           } else {
             let targetList;
             if (!Array.isArray(value)) {
