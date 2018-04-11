@@ -1,8 +1,3 @@
-/**
- * TODO:
- * 1. 和用户组织解绑
- */
-
 import template from './index.html';
 import get from 'lodash/get';
 import find from 'lodash/find';
@@ -13,13 +8,13 @@ import DataSource from './dataSource';
 import DevTool from '../../utils/DevTool';
 import './index.less';
 
-const devTool = new DevTool('cascadeOrganizationSelect');
+const devTool = new DevTool('citySelect');
 
 const SOURCE_API = '/ehuodiBedrockApi/ehdrbacorganizationcs/selectCascadeRbacOrganizationByCode';
 
 export default (app, elem, attrs, scope) => {
   // cascadeSelect(app, elem, attrs, scope);
-  app.directive('cascadeOrganizationSelect', [() => ({
+  app.directive('businessCitySelect', [() => ({
     template,
     scope: {
       ngModel: '=',
@@ -46,7 +41,7 @@ export default (app, elem, attrs, scope) => {
         let currentOrganizationCode = get(G, 'userInfo.organizationcode', '88888888');
 
         const $inputField = $element.find('input');
-        const $layer = $element.find('.cascade-organization-select-layer');
+        const $layer = $element.find('.business-city-select-layer');
         setTimeout(() => {
           $scope.$apply(() => {
             $scope.layerOffset = $inputField[0].getBoundingClientRect().left - $element[0].getBoundingClientRect().left;

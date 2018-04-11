@@ -1,11 +1,11 @@
 import html from './index.html';
 
 export default {
-  title: 'cascadeOrganizationSelect',
+  title: 'businessCitySelect',
   author: 'ryan.bian',
   type: 'directive',
-  keyName: 'cascadeOrganizationSelectDirective',
-  name: '组织&城市级联选择',
+  keyName: 'businessCitySelectDirective',
+  name: '组织&城市选择',
   date: '2018-04-3',
   description: '城市级联选择',
   scope: [
