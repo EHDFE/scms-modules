@@ -3,24 +3,6 @@ import momentLocale from 'moment/locale/zh-cn.js';
 
 const initYear = Array(...Array(12)).map((item, i) => i - 1);
 
-function monthMap(month) {
-  const map = {
-    1: '一',
-    2: '二',
-    3: '三',
-    4: '四',
-    5: '五',
-    6: '六',
-    7: '七',
-    8: '八',
-    9: '九',
-    10: '十',
-    11: '十一',
-    12: '十二',
-  };
-  return map[month];
-}
-
 function getDate(date) {
   date = parseInt(date, 10);
   if (typeof date === 'number') {
@@ -43,7 +25,9 @@ class DatePicker {
     this.showPanel = 'day';
     this.checkedData = {};
     this.isCalender = args.isCalender;
+    this.moment = moment;
   }
+  
   init(date) {
     let formatDate;
     formatDate = this.formatDate || (this.timePick ? 'HH:mm:ss' : 'YYYY-MM-DD');
@@ -60,6 +44,23 @@ class DatePicker {
     this.setHourView();
     this.setMinView();
     this.setSecondView();
+  }
+  monthMap(month) {
+    const map = {
+      1: '一',
+      2: '二',
+      3: '三',
+      4: '四',
+      5: '五',
+      6: '六',
+      7: '七',
+      8: '八',
+      9: '九',
+      10: '十',
+      11: '十一',
+      12: '十二',
+    };
+    return map[month];
   }
   setYearView(year = moment().year()) {
     if (!this.dateData.year) {
@@ -110,12 +111,12 @@ class DatePicker {
     if (!this.dateData.month) {
       this.dateData.month = moment().month() + 1;
     }
-
     this.monthView = Array(...Array(12)).map((item, i) => {
       const thisMonth = i + 1;
       return {
         data: thisMonth,
-        dataView: monthMap(thisMonth),
+        year: this.dateData.year,
+        dataView: this.monthMap(thisMonth),
         checked: thisMonth === this.dateData.month,
         today: this.dateData.year == moment().year() &&
           i == moment().month(),
