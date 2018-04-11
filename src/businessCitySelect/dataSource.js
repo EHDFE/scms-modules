@@ -90,7 +90,7 @@ export default class DataSource {
     });
     cityList.forEach(d => {
       if (d.organizationcode !== COUNTRY_CODE) {
-        const transformed = this.sourceFormatter(d);
+        const transformed = this.sourceFormatter(d, regionMap[d.parorganizationcode]);
         if (transformed) {
           regionMap[d.parorganizationcode].children.push(transformed);
         }
