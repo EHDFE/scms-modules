@@ -30,6 +30,7 @@ export default (app, elem, attrs, scope) => {
       ignoreDataPermission: '=',
       prependOptionType: '@',
       autoSelect: '=',
+      onChange: '=',
     },
     replace: true,
     controller: [
@@ -96,7 +97,14 @@ export default (app, elem, attrs, scope) => {
             if ($scope.autoSelect) {
               let defaultSelect;
               if ($scope.cityOnly) {
-                defaultSelect = find(source, d => d && !d.children);
+                const flatSource = source.reduce((prev, item) => {
+                  if (item.children) {
+                    return prev.concat(item.children);
+                  } else {
+                    return prev.concat(item);
+                  }
+                }, []);
+                defaultSelect = flatSource[0];
               } else {
                 defaultSelect = source[0];
               }
@@ -281,6 +289,7 @@ export default (app, elem, attrs, scope) => {
           } else {
             $scope.ngModel = selectedValues.join(',');
           }
+          $scope.onChange && $scope.onChange($scope.selectedList);
           $scope.displayValue = $scope.selectedList.map(d => d.name).join('/');
           $scope.active = false;
         };
