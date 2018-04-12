@@ -17,13 +17,7 @@
             </tr>
             <tr>
               <th class="week" ng-show="weekPick">周</th>
-              <th class="dow">日</th>
-              <th class="dow">一</th>
-              <th class="dow">二</th>
-              <th class="dow">三</th>
-              <th class="dow">四</th>
-              <th class="dow">五</th>
-              <th class="dow">六</th>
+              <th class="dow" ng-repeat="item in datePicker.weekDayNames">{{item}}</th>
             </tr>
           </thead>
           <tbody ng-mouseleave="mouseleave()" ng-class="{'weekpick': weekPick}">
@@ -50,8 +44,13 @@
           <tbody>
             <tr>
               <td colspan="7" style="font-size:0; padding: 0;" >
-                <span class="month" ng-class="{today: currmonth.today, active: currmonth.checked, disabled: currmonth.disabled}" ng-repeat="currmonth in datePicker.monthView"
-                  ng-click="datePicker.setMonth(currmonth)">{{currmonth.dataView}}月</span>
+                <div ng-repeat="currmonth in datePicker.monthView" class="month-item" ng-class="{range: currmonth.isRange, start: currmonth.rangeTag=='start', end: currmonth.rangeTag=='end'}">
+                  <div class="month-item-bg">
+                    <span  class="month"  ng-class="{today: currmonth.today, active: currmonth.checked,  disabled: currmonth.disabled}"ng-click="pickMonthEvent(currmonth)" ng-mouseenter="hoverMonth(currmonth);">
+                      {{currmonth.dataView}}月
+                    </span>
+                  </div>
+                </div>
               </td>
             </tr>
           </tbody>

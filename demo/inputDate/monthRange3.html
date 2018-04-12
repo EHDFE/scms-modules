@@ -1,0 +1,5 @@
+<!--月选择 最大月份 最小月份 当有start-date-range，end-date-range,优先显示这个时间，init-start-month、init-end-month失效-->
+<switch-directive is-checked="weekPickDisabled"></switch-directive>
+<div class="mt5" ng-init="startMonthRange3 = '2017-08';endMonthRange4 = '2018-01';">
+    <input month-range-picker min-date="'2017-02'"  max-date="'2018-07'" init-start-month="-3" init-end-month="0" start-placeholder="开始月份" end-placeholder="截止月份" start-date-range="startMonthRange3" end-date-range="endMonthRange4" event-change="">
+</div>

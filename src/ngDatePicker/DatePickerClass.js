@@ -3,24 +3,6 @@ import momentLocale from 'moment/locale/zh-cn.js';
 
 const initYear = Array(...Array(12)).map((item, i) => i - 1);
 
-function monthMap(month) {
-  const map = {
-    1: '一',
-    2: '二',
-    3: '三',
-    4: '四',
-    5: '五',
-    6: '六',
-    7: '七',
-    8: '八',
-    9: '九',
-    10: '十',
-    11: '十一',
-    12: '十二',
-  };
-  return map[month];
-}
-
 function getDate(date) {
   date = parseInt(date, 10);
   if (typeof date === 'number') {
@@ -43,10 +25,15 @@ class DatePicker {
     this.showPanel = 'day';
     this.checkedData = {};
     this.isCalender = args.isCalender;
+    this.moment = moment;
+    this.startDay = 0;//开始天（一周的周几）
+    this.weekDayNames = ['日','一','二','三','四','五','六'];
   }
+  
   init(date) {
     let formatDate;
     formatDate = this.formatDate || (this.timePick ? 'HH:mm:ss' : 'YYYY-MM-DD');
+    
     this.dateData = {};
     this.dateData.year = moment(date, formatDate).year();
     this.dateData.month = moment(date, formatDate).month() + 1;
@@ -61,10 +48,28 @@ class DatePicker {
     this.setMinView();
     this.setSecondView();
   }
-  setYearView(year = moment().year()) {
+  monthMap(month) {
+    const map = {
+      1: '一',
+      2: '二',
+      3: '三',
+      4: '四',
+      5: '五',
+      6: '六',
+      7: '七',
+      8: '八',
+      9: '九',
+      10: '十',
+      11: '十一',
+      12: '十二',
+    };
+    return map[month];
+  }
+  setYearView(year) {
     if (!this.dateData.year) {
       this.dateData.year = moment().year();
     }
+    year = year || moment().year();
     const decade = Math.floor(year / 10) * 10;
     this.yearView = initYear.map((data, index) => {
       const thisYear = data + decade;
@@ -110,12 +115,12 @@ class DatePicker {
     if (!this.dateData.month) {
       this.dateData.month = moment().month() + 1;
     }
-
     this.monthView = Array(...Array(12)).map((item, i) => {
       const thisMonth = i + 1;
       return {
         data: thisMonth,
-        dataView: monthMap(thisMonth),
+        year: this.dateData.year,
+        dataView: this.monthMap(thisMonth),
         checked: thisMonth === this.dateData.month,
         today: this.dateData.year == moment().year() &&
           i == moment().month(),
@@ -261,7 +266,7 @@ class DatePicker {
         .millisecond(0)
         .valueOf();
 
-    for (let i = -1; i < 41; i++) {
+    for (let i = this.startDay-1; i < 41; i++) {
       let isToday = false;
       const nowDate = startDate
         .clone()
@@ -420,7 +425,7 @@ class DatePicker {
         }
       }
       
-      if (nowDate.day() === 0) {
+      if (nowDate.day() === this.startDay) {
         dateView.push([{
           isToday: isToday,
           tag: tag || 'now',

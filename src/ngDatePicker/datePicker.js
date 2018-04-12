@@ -8,6 +8,7 @@
  */
 
 import angular from 'angular';
+import moment from 'moment';
 import datePanel from './datePanel';
 import html from './datePicker.html';
 import './datePicker.css';
@@ -30,6 +31,7 @@ export default (app, elem, attrs, scope) => {
         minDateValue: '=', // @scope minDateValue 最小可选日期,距今天天数 {type:"number"}
         maxDateValue: '=', // @scope maxDateValue 最大可选日期,距今天天数 {type:"number"}
         initDate: '=', // @scope initDate 初始日期,它的值为距今天的天数 {type:"number"}
+        ngDisabled: '='
       },
       template: tpl,
       replace: true,
@@ -42,7 +44,28 @@ export default (app, elem, attrs, scope) => {
           $scope.useSeconds = $attrs.useSeconds;
           $scope.minViewMode = $attrs.minViewMode;
           $scope.pickTime = !!$attrs.pickTime;
-          $scope.formatDate = $attrs.formatDate;
+          $scope.formatDate = 'YYYY-MM-DD';
+          if($scope.pickTime) {
+            $scope.formatDate = 'YYYY-MM-DD hh:mm:ss';
+          }
+          else if($scope.useSeconds === 'false') {
+            $scope.formatDate = 'YYYY-MM-DD hh:mm';
+          }
+
+          var getInitDate = function() {
+            let initDate = $scope.initDate;
+            let newDate;
+            if (initDate && initDate !== 'null') {
+              initDate = initDate * 24 * 60 * 60 * 1000;
+              newDate = +new Date() + initDate;
+              newDate = new Date(newDate);
+            }
+            return moment(newDate).format($scope.formatDate);
+          };
+          if($scope.initDate && $scope.ngModel) {}
+          else if($scope.initDate){
+            $scope.ngModel = $scope.ngModel || getInitDate();
+          }          
 
           $scope.placeholder = $attrs.placeholder;
           const panel = $compile(html)($scope);
@@ -52,6 +75,14 @@ export default (app, elem, attrs, scope) => {
             $scope.$broadcast('selectTime');
             $element.find('.form-control').trigger('blur');
           };
+
+          $scope.onPickEvent = function(type, date, datePicker, $attrs) {
+            switch(type) {
+              case 'month':
+              datePicker.setMonth(date);
+              break;
+            }
+          }
 
           $element.find('.form-control').bind('focus', (e) => {
             e.stopPropagation();

@@ -39,6 +39,7 @@ export default (app, elem, attrs, scope) => {
           //dateRangeResultData: '=',
           startDateRange: '=', // 开始时间
           endDateRange: '=', // 结束时间
+          ngDisabled: '=',
           eventChange: '&' //当时间范围发生改变时，会触发时方式
         },
         controller: [
@@ -125,12 +126,21 @@ export default (app, elem, attrs, scope) => {
             /*
              * 当面板中触发了“点击日期”事件，设置值。
              */
-            $scope.onPickEvent = function(date, dateRangeData) {
-              $scope.startValue = dateRangeData.start.format($scope.formatDate) || '';
-              $scope.endValue = dateRangeData.end.format($scope.formatDate) || '';
-              $scope.endDate = dateRangeData.start.format($scope.formatDate) || '';
-              $scope.startDate = dateRangeData.end.format($scope.formatDate) || '';
-            };
+            $scope.onPickEvent = function(type, date, datePicker) {
+              switch(type) {
+                case 'date':
+                var dateRangeData = datePicker.dateRangeData;
+                $scope.startValue = dateRangeData.start.format($scope.formatDate) || '';
+                $scope.endValue = dateRangeData.end.format($scope.formatDate) || '';
+                $scope.endDate = dateRangeData.start.format($scope.formatDate) || '';
+                $scope.startDate = dateRangeData.end.format($scope.formatDate) || '';
+                break;
+                case 'month':
+                datePicker.setMonth(date);
+                break;
+              }
+            }
+
             
             /*
              * 点“确认”提交选中的时间范围
@@ -163,9 +173,15 @@ export default (app, elem, attrs, scope) => {
               });
             }
             $element.find('input').on('focus', (e) => {
+              if($scope.ngDisabled) {
+                return;
+              }
               $element.find('.input-date-range').focus();
             });
             $element.find('.input-date-range').on('focus', (e) => {
+              if($scope.ngDisabled) {
+                return;
+              }
               showPanel(e);
             });
 
