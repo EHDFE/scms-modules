@@ -125,11 +125,8 @@ export default (app, elem, attrs, scope) => {
             });
             
             $scope.clearDate = () => {
-              $scope.weekData = {};
               $scope.datePicker.weekPickerData = {};
-              $timeout(() => {
-                $scope.$broadcast('refreshDate');
-              });
+              setWeekData(null, true)
             };
 
             $element.find('.week-date').bind('blur', () => {
@@ -143,17 +140,23 @@ export default (app, elem, attrs, scope) => {
             });
 
             //设置最终选择的周
-            var setWeekData = function(newVal) {
+            var setWeekData = function(newVal, isFetch) {
               $scope.weekData = {
                 start: newVal && newVal.start && newVal.start.format($scope.formatDate) || '',
                 end: newVal && newVal.end && newVal.end.format($scope.formatDate) || '',
-                week: newVal && newVal.week,
-                year: newVal && newVal.year,
+                week: newVal ? newVal.week || '' : '',
+                year: newVal ? newVal.year || '' : '',
+              };
+              if ($scope.eventChange && isFetch) {
+                $timeout(function() {
+                  $scope.eventChange();
+                })
               }
             };
 
             //设置在datePicker中选择的周
             var setDatePickerData = function(date) {
+              date = date || '';
               return {
                 start: moment(date).startOf('week'),
                 end: moment(date).endOf('week'),
@@ -165,18 +168,30 @@ export default (app, elem, attrs, scope) => {
             }
 
             //初始化数据
-            var init = function(type,datePicker) {
+            var init = function(type, isUpdate) {
               if(type === 'init') {
-                if($scope.weekData && $scope.weekData.start) {
+                if($scope.weekData && $scope.weekData.start && !isUpdate) {
                   return setDatePickerData($scope.weekData.start);
                 }
-                else if($scope.initWeek) {
+                else if($scope.initWeek || $scope.initWeek === 0) {
                   var initWeek = parseInt($scope.initWeek, 10);
                   var startDate = moment().add(initWeek*7, 'day').format($scope.formatDate);
                   return setDatePickerData(startDate);
                 }
               }
             }
+
+            var isHasFirst = false;
+            $scope.$watch('initWeek', function(newValue, oldValue) {
+              if(parseInt(newValue, 10) && isHasFirst) {
+                var initData = init('init', true);
+                if(initData) {
+                  angular.extend($scope.datePicker.weekPickerData, initData);
+                  setWeekData($scope.datePicker.weekPickerData, true);
+                  $scope.selectDate = initData.date;
+                }
+              }
+            });
 
             /*
              * 当面板中触发的事件。
@@ -187,15 +202,16 @@ export default (app, elem, attrs, scope) => {
                   $scope.datePicker = datePicker;
                   datePicker.startDay = 1;
                   datePicker.weekDayNames = ['一','二','三','四','五','六','日'];                
-                  var initData = init('init', datePicker);
+                  var initData = init('init');
                   if(initData) {
                     angular.extend(datePicker.weekPickerData, initData);
-                    setWeekData(datePicker.weekPickerData);
+                    setWeekData(datePicker.weekPickerData, true);
                     $scope.selectDate = initData.date;
                   }
+                  isHasFirst = true;
                 break;
                 case 'date':
-                  setWeekData(datePicker.weekPickerData);
+                  setWeekData(datePicker.weekPickerData, true);
                 break;
                 case 'month':
                   datePicker.setMonth(date);

@@ -38,7 +38,8 @@ export default (app, elem, attrs, scope) => {
           //dateRangeResultData: '=',
           startDateRange: '=', // 开始时间
           endDateRange: '=', // 结束时间
-          eventChange: '&' //当时间范围发生改变时，会触发时方式
+          eventChange: '&', //当时间范围发生改变时，会触发时方式
+          ngDisabled: '='
         },
         controller: [
           '$scope',
@@ -88,6 +89,10 @@ export default (app, elem, attrs, scope) => {
                   $scope.startValue = $scope.startDate;
                   $scope.endValue = $scope.endDate;
                   setOutValue($scope.startValue, $scope.endValue)
+                  $scope.monthRangeData = {
+                    start: moment($scope.startValue),
+                    end: moment($scope.endValue)
+                  }
                 }
               }
               else if(isInit) {
@@ -166,7 +171,7 @@ export default (app, elem, attrs, scope) => {
                 isChecked = true;
                 rangeTag = 'end';
               }
-              if(currMonthValueOf === moment({year: moment().year(), month: moment().month()}).valueOf()) {
+              if(currMonthValueOf === moment(moment().year()+'-'+moment().month(), ['YYYY-MM']).valueOf()) {
                 isToday = true;
               }
               if(min && currMonthValueOf < min.valueOf()) {
@@ -205,7 +210,7 @@ export default (app, elem, attrs, scope) => {
               }
               
               angular.forEach(data, function(item) {
-                status = setMonthStatus(moment(item.year+'-'+item.data), datePicker.monthRangeData.start, datePicker.monthRangeData.end);
+                status = setMonthStatus(moment(item.year+'-'+item.data,['YYYY-MM']), datePicker.monthRangeData.start, datePicker.monthRangeData.end);
                 item.checked = status.isChecked;
                 item.isRange = status.isRange;
                 item.rangeTag = type === 'month' ? status.rangeTag : '';
@@ -242,17 +247,16 @@ export default (app, elem, attrs, scope) => {
             };
 
             var setMonthView = function() {
-              if(!this.monthRangeData) {
-                return;
-              }
+              this.monthRangeData = this.monthRangeData || {};
 
               this.monthView = Array(...Array(12)).map((item, i) => {
                 const thisMonth = i + 1;
+                let status = {};
                 
-                const thisMoment = moment({year:this.dateData.year, month: i});
-                const minMoment = this.minDateArr && this.minDateArr.year && this.minDateArr.month ? moment({year: this.minDateArr.year, month: this.minDateArr.month-1}) : '';
-                const maxMoment = this.maxDateArr && this.maxDateArr.year && this.maxDateArr.month ? moment({year: this.maxDateArr.year, month: this.maxDateArr.month-1}) : '';
-                let status = setMonthStatus(thisMoment,this.monthRangeData.start,this.monthRangeData.end,minMoment,maxMoment);
+                const thisMoment = moment({year: this.dateData.year, month: i});
+                const minMoment = this.minDateArr && this.minDateArr.year && this.minDateArr.month ? moment({year: this.minDateArr.year, month: this.minDateArr.month}) : '';
+                const maxMoment = this.maxDateArr && this.maxDateArr.year && this.maxDateArr.month ? moment({year: this.maxDateArr.year, month: this.maxDateArr.month}) : '';
+                status = setMonthStatus(thisMoment,this.monthRangeData.start,this.monthRangeData.end,minMoment,maxMoment);
                 return {
                   data: thisMonth,
                   year: this.dateData.year,
@@ -264,12 +268,11 @@ export default (app, elem, attrs, scope) => {
                   disabled: status.isDisabled
                 };
               });
-              
+
               this.monthView.prevYear = getYearsStatus('prevYear', this).isPreYear;
               this.monthView.nextYear = getYearsStatus('nextYear', this).isNextYear;
               if(this.name === 'part1' && datepickers && datepickers['part2'] && datepickers['part2'].monthView) {
                 datepickers['part2'].monthView.prevYear = getYearsStatus('prevYear', datepickers['part2']).isPreYear;
-                console.log('update part2', datepickers['part2'].monthView.prevYear)
               }
               if(this.name === 'part2' && datepickers && datepickers['part1'] && datepickers['part1'].monthView) {
                 datepickers['part1'].monthView.nextYear = getYearsStatus('nextYear', datepickers['part1']).isNextYear;
@@ -289,6 +292,7 @@ export default (app, elem, attrs, scope) => {
                 
                   datepickers[$panelAttrs.name] = datePicker;
                   datePicker.setMonthView = setMonthView;
+                  datePicker.setDateView = function() {};
 
                   //初始化面板数据
                   if(!datepickers['part1'] || !datepickers['part2']) {
@@ -301,7 +305,6 @@ export default (app, elem, attrs, scope) => {
                     year: $scope.monthRangeData.end.year(),
                     month: $scope.monthRangeData.end.month()
                   };
-
                   if(!$scope.monthRangeData.start) {
                     datepickers['part1'].dateData = {
                       year: $scope.monthRangeData.end.year() -1,
@@ -332,15 +335,14 @@ export default (app, elem, attrs, scope) => {
                     return;
                   }
                   pickTimes ++;
-                  console.log(4444,month)
                   if(pickTimes%2 > 0) {
-                      $scope.startValue = moment(month.year+'-'+month.data).format($scope.formatDate) || '';
+                      $scope.startValue = moment(month.year + '-' + month.data, ['YYYY-MM']).format($scope.formatDate) || '';
                       $scope.startDate = $scope.endValue;
                       $scope.endValue = '';
                       $scope.endDate = '';
                   }
                   else {
-                      $scope.endValue = moment(month.year+'-'+month.data).format($scope.formatDate) || '';
+                      $scope.endValue = moment(month.year + '-' + month.data, ['YYYY-MM']).format($scope.formatDate) || '';
                       $scope.endDate = $scope.endValue;
                       if(moment($scope.startValue).valueOf() > moment($scope.endValue).valueOf()) {
                         var startValue = $scope.startValue;
@@ -363,8 +365,8 @@ export default (app, elem, attrs, scope) => {
                 //事件为"hover月份"时
                 case 'hoverMonth': 
                   if($scope.startValue && !$scope.endValue) {
-                    updateMonthData(datepickers['part1'], $scope.monthRangeData.start, moment(month.year+'-'+month.data), 'hoverMonth');
-                    updateMonthData(datepickers['part2'], $scope.monthRangeData.start, moment(month.year+'-'+month.data), 'hoverMonth');
+                    updateMonthData(datepickers['part1'], $scope.monthRangeData.start, moment(month.year + '-' + month.data, ['YYYY-MM']), 'hoverMonth');
+                    updateMonthData(datepickers['part2'], $scope.monthRangeData.start, moment(month.year + '-' + month.data, ['YYYY-MM']), 'hoverMonth');
                   }
                   break;
               }
@@ -398,9 +400,15 @@ export default (app, elem, attrs, scope) => {
               initDate();
             };
             $element.find('input').on('focus', (e) => {
+              if($scope.ngDisabled) {
+                return;
+              }
               $element.find('.input-date-range').focus();
             });
             $element.find('.input-date-range').on('focus', (e) => {
+              if($scope.ngDisabled) {
+                return;
+              }
               showPanel(e);
             });
 
@@ -458,9 +466,8 @@ export default (app, elem, attrs, scope) => {
                 end: ''
               }
               setOutValue($scope.startValue, $scope.endValue, true)
-              $timeout(() => {
-                $scope.$broadcast('refreshDate');
-              });
+              updateMonthData(datepickers['part1'], $scope.monthRangeData.start, $scope.monthRangeData.end, 'month');
+              updateMonthData(datepickers['part2'], $scope.monthRangeData.start, $scope.monthRangeData.end, 'month');
             };
           },
         ],
