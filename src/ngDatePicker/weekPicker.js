@@ -183,7 +183,7 @@ export default (app, elem, attrs, scope) => {
 
             var isHasFirst = false;
             $scope.$watch('initWeek', function(newValue, oldValue) {
-              if(parseInt(newValue, 10) && isHasFirst) {
+              if((parseInt(newValue, 10) || parseInt(newValue, 10) === 0) && isHasFirst) {
                 var initData = init('init', true);
                 if(initData) {
                   angular.extend($scope.datePicker.weekPickerData, initData);
