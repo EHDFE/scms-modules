@@ -28,3 +28,8 @@
         开始时间:{{startDateRange3}} 结束时间:{{endDateRange3}}
     </div>
 </div>
+
+<h2>4) 范围-日期选择 默认时间范围</h2>
+<div ng-init="startDisabled = true; startDateRange5='2017-09-11';endDateRange5='2018-03-23';">
+    <input ng-disabled="startDisabled" date-picker-range init-start-date="-30" init-end-date="0" start-placeholder="开始时间" end-placeholder="截止日期" start-date-range="startDateRange5" end-date-range="endDateRange5" />
+</div>

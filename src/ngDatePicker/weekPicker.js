@@ -32,8 +32,10 @@ export default (app, elem, attrs, scope) => {
           maxDate: '=', // @scope maxDate 最大可选日期 {type:"string", exampleValue:"2017-06-29"}
           minDateValue: '=', // @scope minDateValue 最小可选日期,距今天天数 {type:"number"}
           maxDateValue: '=', // @scope maxDateValue 最大可选日期,距今天天数 {type:"number"}
-          initDate: '=', // @scope initDate 初始日期,它的值为距今天的天数 {type:"number"}
+          initWeek: '=', // @scope initWeek 初始周,它的值为距这周的周数 {type:"number"}
           weekData: '=',
+          ngDisabled: '=',
+          eventChange: '&'
         },
         template: tpl,
         replace: true,
@@ -46,6 +48,8 @@ export default (app, elem, attrs, scope) => {
             $scope.formatDate = $attrs.formatDate || Defaults.format;
             $scope.startPlaceholder = $attrs.startPlaceholder || Defaults.lang.start;
             $scope.endPlaceholder = $attrs.endPlaceholder || Defaults.lang.end;
+            $scope.isHideClose = $attrs.isHideClose;
+            $scope.startDay = $attrs.startDay ? parseInt($attrs.startDay, 10) || 0 : 1;
 
             const panel = $compile(html)($scope);
             $document.find('#container').append(panel);
@@ -54,6 +58,7 @@ export default (app, elem, attrs, scope) => {
               $scope.$broadcast('selectTime');
               $element.find('.week-date').trigger('blur');
             };
+
 
             function showPanel(e) {
               e.stopPropagation();
@@ -73,6 +78,9 @@ export default (app, elem, attrs, scope) => {
             }
 
             $element.find('.week-date').bind('focus', (e) => {
+              if($scope.ngDisabled) {
+                return;
+              }
               e.stopPropagation();
               let pos = e.target.getBoundingClientRect(),
                 offset = panel.offset(),
@@ -90,6 +98,9 @@ export default (app, elem, attrs, scope) => {
             });
 
             $element.find('input').on('focus', (e) => {
+              if($scope.ngDisabled) {
+                return;
+              }
               $element.find('.week-date').focus();
             });
 
@@ -115,7 +126,8 @@ export default (app, elem, attrs, scope) => {
             });
             
             $scope.clearDate = () => {
-              $scope.weekPickerData = {};
+              $scope.weekData = {};
+              $scope.datePicker.weekPickerData = {};
               $timeout(() => {
                 $scope.$broadcast('refreshDate');
               });
@@ -131,16 +143,70 @@ export default (app, elem, attrs, scope) => {
               $document.find('.week-picker').remove();
             });
 
-
-            $scope.$watch('weekPickerData', (newVal) => {
+            //设置最终选择的周
+            var setWeekData = function(newVal) {
               $scope.weekData = {
                 start: newVal && newVal.start && newVal.start.format($scope.formatDate) || '',
                 end: newVal && newVal.end && newVal.end.format($scope.formatDate) || '',
                 week: newVal && newVal.week,
                 year: newVal && newVal.year,
-              };
-            }, true);
-          },
+              }
+            };
+
+            //设置在datePicker中选择的周
+            var setDatePickerData = function(date) {
+              return {
+                start: moment(date).startOf('week'),
+                end: moment(date).endOf('week'),
+                year: moment(date).year(),
+                week: moment(date).week(),
+                month: moment(date).month(),
+                date: moment(date)
+              }
+            }
+
+            //初始化数据
+            var init = function(type,datePicker) {
+              if(type === 'init') {
+                if($scope.weekData && $scope.weekData.start) {
+                  return setDatePickerData($scope.weekData.start);
+                }
+                else if($scope.initWeek) {
+                  var initWeek = parseInt($scope.initWeek, 10);
+                  var startDate = moment().add(initWeek*7, 'day').format($scope.formatDate);
+                  return setDatePickerData(startDate);
+                }
+              }
+            }
+
+            /*
+             * 当面板中触发的事件。
+             */
+            $scope.onPickEvent = function(type, date, datePicker, $attrs) {
+              switch(type) {
+                case 'init':
+                  $scope.datePicker = datePicker;
+                  if(datePicker.startDay === 1) {
+                    datePicker.startDay = 1;
+                    datePicker.weekDayNames = ['一','二','三','四','五','六','日'];
+                  }                  
+                  var initData = init('init', datePicker);
+                  if(initData) {
+                    angular.extend(datePicker.weekPickerData, initData);
+                    setWeekData(datePicker.weekPickerData);
+                    $scope.selectDate = initData.date;
+                  }
+                break;
+                case 'date':
+                  setWeekData(datePicker.weekPickerData);
+                break;
+                case 'month':
+                  datePicker.setMonth(date);
+                break;
+              }
+            };
+
+          }
         ],
         link($scope, $element, $attrs, ngModel) {},
         //

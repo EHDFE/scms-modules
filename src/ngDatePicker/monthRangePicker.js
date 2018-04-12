@@ -33,8 +33,8 @@ export default (app, elem, attrs, scope) => {
           maxDate: '=', // @scope maxDate 最大可选日期 {type:"string", exampleValue:"2017-06-29"}
           minDateValue: '=', // @scope minDateValue 最小可选日期,距今天天数 {type:"number"}
           maxDateValue: '=', // @scope maxDateValue 最大可选日期,距今天天数 {type:"number"}
-          initStartDate: '=', // @scope initDateStart 初始日期,它的值为距今天的天数 {type:"number"}
-          initEndDate: '=', // @scope initDateEnd 初始日期,它的值为距今天的天数 {type:"number"}
+          initStartMonth: '=', // @scope initDateStart 初始日期,它的值为距今天的天数 {type:"number"}
+          initEndMonth: '=', // @scope initDateEnd 初始日期,它的值为距今天的天数 {type:"number"}
           //dateRangeResultData: '=',
           startDateRange: '=', // 开始时间
           endDateRange: '=', // 结束时间
@@ -74,21 +74,24 @@ export default (app, elem, attrs, scope) => {
             
             /*
              * 处理初始数据、面板数据
-             * isInit 值为：true 时是否是初始时执行，初始时需要处理设置的默认时间initStartDate、initEndDate
+             * isInit 值为：true 时是否是初始时执行，初始时需要处理设置的默认时间initStartMonth、initEndMonth
              * isInit 值为：false 时，处理面板数据。
              * $scope.monthRangeData 范围数据，用于在面板中选中范围
              * $scope.startDate 范围数据，用于在面板中显示第一个面板在此时间的月份
              * $scope.endDate 范围数据，用于在面板中显示第二个面板在此时间的月份
              */
             function initDate(isInit) {
-              if(isInit && $scope.initStartDate && ($scope.initEndDate || $scope.initEndDate === 0)) {
+              if(isInit && $scope.initStartMonth && ($scope.initEndMonth || $scope.initEndMonth === 0)) {
                 if(!$scope.startDateRange && !$scope.endDateRange) {
-                  $scope.startDate = moment().add($scope.initStartDate+1, 'month').format($scope.formatDate); 
-                  $scope.endDate = moment().add(moment($scope.startDate).year - moment().year(), 'year').format($scope.formatDate);
+                  $scope.startDate = moment().add($scope.initStartMonth, 'month').format($scope.formatDate); 
+                  $scope.endDate = moment().add($scope.initEndMonth, 'month').format($scope.formatDate);
                   $scope.startValue = $scope.startDate;
                   $scope.endValue = $scope.endDate;
                   setOutValue($scope.startValue, $scope.endValue)
                 }
+              }
+              else if(isInit) {
+                
               }
               if(isInit) {
                 return;
@@ -293,11 +296,19 @@ export default (app, elem, attrs, scope) => {
                   }
                   initDate();
                   datepickers['part1'].monthRangeData = datepickers['part2'].monthRangeData = $scope.monthRangeData;
+                  $scope.monthRangeData = $scope.monthRangeData || {end: moment()};
                   datepickers['part2'].dateData = {
                     year: $scope.monthRangeData.end.year(),
                     month: $scope.monthRangeData.end.month()
                   };
-                  if($scope.monthRangeData.start.year() === $scope.monthRangeData.end.year()) {
+
+                  if(!$scope.monthRangeData.start) {
+                    datepickers['part1'].dateData = {
+                      year: $scope.monthRangeData.end.year() -1,
+                      month: $scope.monthRangeData.end.month()
+                    };
+                  }
+                  else if($scope.monthRangeData.start && $scope.monthRangeData.start.year() === $scope.monthRangeData.end.year()) {
                     datepickers['part1'].dateData = {
                       year: $scope.monthRangeData.start.year() -1,
                       month: $scope.monthRangeData.start.month()

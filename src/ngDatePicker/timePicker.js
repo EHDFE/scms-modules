@@ -50,6 +50,9 @@ export default (app, elem, attrs, scope) => {
               $element.find('.form-control').trigger('blur');
             };
 
+            $scope.onPickEvent = function(type, date, datePicker) {
+            }
+
             $element.find('.form-control').bind('focus', (e) => {
               e.stopPropagation();
               let pos = e.target.getBoundingClientRect(),

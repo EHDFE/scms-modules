@@ -1,8 +1,8 @@
-<div class="date-picker-range-date-container" ng-class="{'date-picker-range-hasdata': startDateRange&&endDateRange&&!isHideClose}">
-    <div class="input-date-range"  tabindex="-1">
-        <input placeholder="{{startPlaceholder}}" type="text" ng-model="startDateRange" class="form-control input-date">
+<div class="date-picker-range-date-container" ng-class="{'date-picker-range-hasdata': startDateRange&&endDateRange&&!isHideClose&&!ngDisabled}">
+    <div class="input-date-range"  tabindex="-1" ng-class="{'disabled': ngDisabled}">
+        <input ng-disabled="ngDisabled" placeholder="{{startPlaceholder}}" type="text" ng-model="startDateRange" class="form-control input-date">
         <span class="input-group-addon input-group-addon-no">-</span>
-        <input placeholder="{{endPlaceholder}}" type="text"  ng-model="endDateRange" class="form-control input-date">
+        <input ng-disabled="ngDisabled" placeholder="{{endPlaceholder}}" type="text"  ng-model="endDateRange" class="form-control input-date">
     </div>
-    <span ng-click="clearDate($event);" class="clear-date icon-non-compliant-order" ng-if="!isHideClose"></span>
+    <span ng-click="clearDate($event);" class="clear-date icon-non-compliant-order" ng-if="!isHideClose && !ngDisabled"></span>
 </div>
