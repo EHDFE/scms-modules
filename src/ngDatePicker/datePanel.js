@@ -89,7 +89,6 @@ export default (app, elem, attrs, scope) => {
           });
 
           try{
-            console.log('onPickEvent=', $scope.onPickEvent)
             $timeout(function() {
               $scope.onPickEvent('init', null, datePicker, $attrs);
             })            

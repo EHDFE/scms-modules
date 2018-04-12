@@ -22,7 +22,11 @@ import monthPicker1 from './monthPicker1.html';
 import monthPicker2 from './monthPicker2.html';
 import monthPicker3 from './monthPicker3.html';
 
-import datePickerRange from './datePickerRange.html';
+import datePickerRange1 from './datePickerRange1.html';
+import datePickerRange2 from './datePickerRange2.html';
+import datePickerRange3 from './datePickerRange3.html';
+import datePickerRange4 from './datePickerRange4.html';
+
 import calendar from './calendar.html';
 import calendar2 from './calendar2.html';
 import calendar3 from './calendar3.html';
@@ -75,7 +79,7 @@ export default [{
 	title: "datePickerRange",
 	parentTitle: "DatePickers",
 	author: "tianyanrong",
-	html: [datePickerRange],
+	html: [datePickerRange1,datePickerRange2,datePickerRange3,datePickerRange4],
 	isCode: true
 },
 {
