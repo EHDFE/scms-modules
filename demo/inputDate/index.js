@@ -8,6 +8,9 @@ import datePicker7 from './datePicker7.html';
 import datePicker8 from './datePicker8.html';
 
 import timePicker from './timePicker.html';
+import timePicker1 from './timePicker1.html';
+import timePicker2 from './timePicker2.html';
+import timePicker3 from './timePicker3.html';
 
 import weekPicker1 from './weekPicker1.html';
 import weekPicker2 from './weekPicker2.html';
@@ -39,7 +42,7 @@ export default [{
   title: 'timePicker',
   parentTitle: 'DatePickers',
   author: 'tianyanrong',
-  html: [timePicker],
+  html: [timePicker1,timePicker2,timePicker3],
   isCode: true
 },
 {

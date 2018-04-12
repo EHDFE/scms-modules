@@ -1,0 +1,5 @@
+<!--时间选择器 最小最大时间 秒不显示 设置已选中的时间-->
+<switch-directive is-checked="timePickDisable"></switch-directive>
+<div class="mt5" ng-init="timePicker3='14:50'">
+    <input time-picker use-seconds="false" placeholder="结束时间" type="text" ng-model="timePicker3" min-time="'08:30'" max-time="'17:30'" format-date="HH:mm" ng-disabled="timePickDisable">
+</div>
