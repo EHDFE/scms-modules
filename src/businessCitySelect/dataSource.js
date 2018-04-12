@@ -90,7 +90,7 @@ export default class DataSource {
     });
     cityList.forEach(d => {
       if (d.organizationcode !== COUNTRY_CODE) {
-        const transformed = this.sourceFormatter(d);
+        const transformed = this.sourceFormatter(d, regionMap[d.parorganizationcode]);
         if (transformed) {
           regionMap[d.parorganizationcode].children.push(transformed);
         }
@@ -98,10 +98,17 @@ export default class DataSource {
     });
     let company;
     if (this.organizationCode === COUNTRY_CODE) {
-      company = this.sourceFormatter({
+      company = {
         organizationname: '全国',
         organizationcode: COUNTRY_CODE,
-      });
+        isNational: true,
+      };
+      const formattedCompany = this.sourceFormatter(company);
+      if (formattedCompany) {
+        Object.assign(company, formattedCompany);
+      } else {
+        company = false;
+      }
     } else {
       company = false; 
     }

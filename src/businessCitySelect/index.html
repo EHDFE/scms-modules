@@ -1,0 +1,19 @@
+<div class="form-group input-group business-city-select" ng-class="{'business-city-select-active': active}">
+  <span ng-if="label" class="input-group-addon">{{label}}</span>
+  <input placeholder="请选择" type="text" class="form-control" style="width: {{width}}px" value="{{displayValue}}" ng-click="!readonly && (active = true)" ng-readonly="readonly">
+  <div class="business-city-select-layer" tabindex="0" style="left: {{layerOffset}}px">
+    <div class="organization-container" ng-class="{'organization-container-with-bottom': multipleSelectMode}">
+      <dl class="organization-group" ng-repeat="group in source">
+        <dt>
+          <button type="button" ng-click="handleSelectAction(group, false)" class="organization-group-name" ng-class="{selectable: !cityOnly, selected: group.selected}">{{group.name}}</button>
+        </dt>
+        <dd ng-if="group.children">
+          <button type="button" class="organization-item-name selectable" ng-click="handleSelectAction(city, true, group)" ng-repeat="city in group.children" ng-class="{selected: city.selected, 'parent-selected': group.selected}">{{city.name}}</button>
+        </dd>
+      </dl>
+    </div>
+    <div class="action-panel" ng-if="multipleSelectMode">
+      <button type="button" ng-click="confirmSelected()" class="bgtn btn-primary">确定</button>
+    </div>
+  </div>
+</div>

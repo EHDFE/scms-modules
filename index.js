@@ -57,7 +57,7 @@ import numberSelect from './src/numberSelect/numberSelect';
 import circleSchedule from './src/circleSchedule/circleSchedule';
 import cascadeSelect from './src/cascadeSelect';
 import rangeSelectBar from './src/rangeSelectBar/rangeSelectBar';
-import cascadeOrganizationSelect from './src/cascadeOrganizationSelect';
+import businessCitySelect from './src/businessCitySelect';
 
 
 export default {
@@ -106,5 +106,5 @@ export default {
   'circleSchedule/circleSchedule': circleSchedule,
   cascadeSelect,
   rangeSelectBar,
-  cascadeOrganizationSelect,
+  businessCitySelect,
 };
