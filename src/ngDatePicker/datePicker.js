@@ -50,6 +50,8 @@ export default (app, elem, attrs, scope) => {
           }
           else if($scope.useSeconds === 'false') {
             $scope.formatDate = 'YYYY-MM-DD hh:mm';
+          }else if($scope.minViewMode === 'months') {
+            $scope.formatDate = 'YYYY-MM';
           }
 
           var getInitDate = function() {
