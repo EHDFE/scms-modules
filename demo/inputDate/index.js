@@ -18,11 +18,15 @@ import weekPicker3 from './weekPicker3.html';
 import weekPicker4 from './weekPicker4.html';
 import weekPicker5 from './weekPicker5.html';
 
+import monthPicker1 from './monthPicker1.html';
+import monthPicker2 from './monthPicker2.html';
+import monthPicker3 from './monthPicker3.html';
+
 import datePickerRange from './datePickerRange.html';
 import calendar from './calendar.html';
 import calendar2 from './calendar2.html';
 import calendar3 from './calendar3.html';
-import month from './month.html';
+
 import monthRange from './monthRange.html';
 import monthRange2 from './monthRange2.html';
 import monthRange3 from './monthRange3.html';
@@ -56,7 +60,7 @@ export default [{
   title: 'monthPicker',
   parentTitle: 'DatePickers',
   author: 'tianyanrong',
-  html: [month],
+  html: [monthPicker1,monthPicker2,monthPicker3],
   isCode: true
 },
 {

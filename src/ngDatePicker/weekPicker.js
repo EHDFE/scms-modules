@@ -49,7 +49,6 @@ export default (app, elem, attrs, scope) => {
             $scope.startPlaceholder = $attrs.startPlaceholder || Defaults.lang.start;
             $scope.endPlaceholder = $attrs.endPlaceholder || Defaults.lang.end;
             $scope.isHideClose = $attrs.isHideClose;
-            $scope.startDay = $attrs.startDay ? parseInt($attrs.startDay, 10) || 0 : 1;
 
             const panel = $compile(html)($scope);
             $document.find('#container').append(panel);
@@ -186,10 +185,8 @@ export default (app, elem, attrs, scope) => {
               switch(type) {
                 case 'init':
                   $scope.datePicker = datePicker;
-                  if(datePicker.startDay === 1) {
-                    datePicker.startDay = 1;
-                    datePicker.weekDayNames = ['一','二','三','四','五','六','日'];
-                  }                  
+                  datePicker.startDay = 1;
+                  datePicker.weekDayNames = ['一','二','三','四','五','六','日'];                
                   var initData = init('init', datePicker);
                   if(initData) {
                     angular.extend(datePicker.weekPickerData, initData);
