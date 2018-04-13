@@ -38,7 +38,7 @@ export default (app, elem, attrs, scope) => {
           disableStorage: '=', // @scope disableStorage 是否禁止从localStorage中获取搜索条件 {type: "boolean", exampleValue: "false"}
           delEmptyParam: '=', // @scope delEmptyParam 是否删除值为空字符串的请求参数 {type: "boolean", exampleValue: "false"}
           fixedTable: '=',
-          fixedPosition: '@',
+          fixedInfo: '=',
           domReady: '=',
           miniPage: '=' //@scope miniPage 分页是否使用缩小样式 {type: "boolean", "exampleValue": false, defaultValue: false}
         },
