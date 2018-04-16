@@ -26,8 +26,6 @@ export default class DataSource {
     this.apiUrl = this.options.apiUrl;
     this.isActivated = this.options.isActivated;
     this.organizationCode = this.options.organizationCode;
-    this.prependOption = this.options.prependOption;
-    this.prependOptionName = this.options.prependOptionName;
     this.prependOptionType = this.options.prependOptionType;
     this.sourceFormatter = this.options.sourceFormatter;
   }
@@ -74,6 +72,7 @@ export default class DataSource {
       return this.parser(regionList, cityList);
     }).then(source => {
       this.updater(source);
+      return source;
     });
   }
   parser([regionList, cityList]) {
@@ -91,7 +90,7 @@ export default class DataSource {
     });
     cityList.forEach(d => {
       if (d.organizationcode !== COUNTRY_CODE) {
-        const transformed = this.sourceFormatter(d);
+        const transformed = this.sourceFormatter(d, regionMap[d.parorganizationcode]);
         if (transformed) {
           regionMap[d.parorganizationcode].children.push(transformed);
         }
@@ -99,10 +98,17 @@ export default class DataSource {
     });
     let company;
     if (this.organizationCode === COUNTRY_CODE) {
-      company = this.sourceFormatter({
+      company = {
         organizationname: '全国',
         organizationcode: COUNTRY_CODE,
-      });
+        isNational: true,
+      };
+      const formattedCompany = this.sourceFormatter(company);
+      if (formattedCompany) {
+        Object.assign(company, formattedCompany);
+      } else {
+        company = false;
+      }
     } else {
       company = false; 
     }
@@ -110,25 +116,18 @@ export default class DataSource {
     return company.concat(Object.keys(regionMap).map(code => {
       const children = regionMap[code].children;
       if (children.length === 0) return false;
-      // 只有在全国的时候，需要全部选项
-      if (this.prependOption && this.organizationCode === COUNTRY_CODE) {
-        let value;
-        if (this.prependOptionType === 'CONCAT') {
-          value = children.map(d => d.value).join(',');
-        } else if (this.prependOptionType === 'CONCAT_ALL') {
-          value = [code].concat(children.map(d => d.value)).join(',');
-        } else {
-          value = code;
-        }
-        children.unshift({
-          name: this.prependOptionName,
-          value,
-        });
-      }
       const formattedData = this.sourceFormatter(regionMap[code]);
+      let regionValue;
+      if (this.prependOptionType === 'CONCAT') {
+        regionValue = children.map(d => d.value).join(',');
+      } else if (this.prependOptionType === 'CONCAT_ALL') {
+        regionValue = [formattedData.value].concat(children.map(d => d.value)).join(',');
+      } else {
+        regionValue = formattedData.value;
+      }
       return {
         name: formattedData.name,
-        value: formattedData.value,
+        value: regionValue,
         children,
       };
     })).filter(d => !!d);

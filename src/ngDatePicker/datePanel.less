@@ -175,15 +175,44 @@
     width: 296px;
     padding: 16px 8px;
   }
-  .datepicker-months td span {
+  
+
+  .datepicker-months td .month-item{
     display: inline-block;
-    width: 42px;
+    width:70px;
     height: 30px;
+    margin:6px 0;
+  }
+  .datepicker-months td .month-item.range{
+    color: #333;
+    background: #e9eff4;
+  }
+  .datepicker-months td .month-item .month-item-bg{
+    padding: 0 2px;
+    height: 30px;
+  }
+  .datepicker-months td .month-item.start .month-item-bg{
+    height: 30px;
+    //padding: 0;
+    border-radius: 50px 0 0 50px;
+    background: #e9eff4;
+  }
+
+  .datepicker-months td .month-item.end .month-item-bg{
+    height: 30px;
+    //padding: 0;
+    border-radius: 0 50px 50px 0;
+    background: #e9eff4;
+  }
+
+  .datepicker-months td span {
+    
+    display: block;
     line-height: 30px;
-    margin: 6px 14px;
+    text-align: center;
     cursor: pointer;
     font-size: 12px;
-    border-radius: 12px;
+    border-radius: 50px;
   }
   
   .datepicker-months td span.disabled {

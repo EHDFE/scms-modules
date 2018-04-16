@@ -48,6 +48,7 @@ import weekPicker from './src/ngDatePicker/weekPicker';
 import timePicker from './src/ngDatePicker/timePicker';
 import calendar from './src/ngDatePicker/calendar';
 import calendarPanel from './src/ngDatePicker/calendarPanel';
+import monthRangePicker from './src/ngDatePicker/monthRangePicker';
 import buttonDropdown from './src/buttonDropdown/buttonDropdown';
 import selectDropdown from './src/selectDropdown/selectDropdown';
 import imageUpload from './src/imageUpload/imageUpload';
@@ -56,7 +57,7 @@ import numberSelect from './src/numberSelect/numberSelect';
 import circleSchedule from './src/circleSchedule/circleSchedule';
 import cascadeSelect from './src/cascadeSelect';
 import rangeSelectBar from './src/rangeSelectBar/rangeSelectBar';
-import cascadeOrganizationSelect from './src/cascadeOrganizationSelect';
+import businessCitySelect from './src/businessCitySelect';
 
 
 export default {
@@ -97,6 +98,7 @@ export default {
   'ngDatePicker/timePicker': timePicker,
   'ngDatePicker/calendar': calendar,
   'ngDatePicker/calendarPanel': calendarPanel,
+  'ngDatePicker/monthRangePicker': monthRangePicker,
   buttonDropdown,
   selectDropdown,
   'imageUpload/imageUpload': imageUpload,
@@ -104,5 +106,5 @@ export default {
   'circleSchedule/circleSchedule': circleSchedule,
   cascadeSelect,
   rangeSelectBar,
-  cascadeOrganizationSelect,
+  businessCitySelect,
 };
