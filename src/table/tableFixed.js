@@ -227,7 +227,6 @@ export default (app, elem, attrs, scope) => {
                 headerThFromDom = tableDom.find('.tablebox thead th'),
                 headerTheadDom = tableDom.find('.tablebox thead');
               angular.forEach(headerThFromDom, (item, index) => {
-                // $(headerDom.find('th')[index]).outerWidth($(item).outerWidth());
                 $(headerDom.find('th')[index]).outerWidth(actualVolume.headerThFromDomW[index]);
               });
               headerThDom.append(headerDom);
@@ -241,9 +240,7 @@ export default (app, elem, attrs, scope) => {
                   .slice(thLength - $scope.fixRight, thLength);
               rightThDom = rightThFromDom.clone();
               angular.forEach(rightThFromDom, (item, index) => {
-                // $(rightThDom[index]).outerWidth($(item).outerWidth());
-                // $(rightThDom[index]).outerHeight($(item).outerHeight());
-                $(rightThDom[index]).outerWidth(actualVolume.rightThFromDomW[index]);console.log($(rightThDom[index]).outerWidth(),9090);
+                $(rightThDom[index]).outerWidth(actualVolume.rightThFromDomW[index]);
                 $(rightThDom[index]).outerHeight(actualVolume.rightThFromDomH[index]);
               });
               rightThTrDom.append(rightThDom);
@@ -266,7 +263,6 @@ export default (app, elem, attrs, scope) => {
                   const tens = Math.floor(index / trDomList.length);
                   const units = index % trDomList.length;
                   if (tens === units) {
-                    // $(item).height($(trDomList[tens]).height());
                     $(item).height(actualVolume.trDomListH[tens]);
                     let arr = $.makeArray($(item).find('td'));
                     arr.map(function(tdItem, tdIndex){
@@ -294,8 +290,6 @@ export default (app, elem, attrs, scope) => {
                   .slice(0, $scope.fixLeft);
               leftThDom = leftThFromDom.clone();
               angular.forEach(leftThFromDom, (item, index) => {
-                // $(leftThDom[index]).outerWidth($(item).outerWidth());
-                // $(leftThDom[index]).outerHeight($(item).outerHeight());
                 $(leftThDom[index]).outerWidth(actualVolume.leftThFromDomW[index]);
                 $(leftThDom[index]).outerHeight(actualVolume.leftThFromDomH[index]);
               });
@@ -319,7 +313,6 @@ export default (app, elem, attrs, scope) => {
                   const tens = Math.floor(index / trDomList.length);
                   const units = index % trDomList.length;
                   if (tens === units) {
-                    // $(item).height($(trDomList[tens]).height());
                     $(item).height(actualVolume.trDomListH[tens]);
                     let arr = $.makeArray($(item).find('td'));
                     arr.map(function(tdItem, tdIndex){
