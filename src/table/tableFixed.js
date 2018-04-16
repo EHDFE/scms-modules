@@ -28,10 +28,10 @@ export default (app, elem, attrs, scope) => {
           const $fixedTable = $('.fixed-table');
           const $tableBox = $('.tablebox');
           const $tableBoxTable = $('.tablebox .table');
-          const $fixLeft = $('.fix-left');
-          const $fixRight = $('.fix-right');
-          const $fixHeader = $('.fix-header');
-          const $fixHeaderOuter = $('.fix-header-outer');
+          const $fixLeft = $('.fixed-table .fix-left');
+          const $fixRight = $('.fixed-table .fix-right');
+          const $fixHeader = $('.fixed-table .fix-header');
+          const $fixHeaderOuter = $('.fixed-table .fix-header-outer');
           const $fixRightThead = $fixRight.find('.fix-thead');
           const $fixLeftThead = $fixLeft.find('.fix-thead');
           let headerScrollLeft = 0;
@@ -41,15 +41,19 @@ export default (app, elem, attrs, scope) => {
           let fixRightBorderLeftWidth = 0;
 
           const tableBoxScroll = function() {
-            $fixHeaderOuter.scrollLeft($tableBox.scrollLeft());
-            if ($tableBox.scrollLeft() > 0) {
+            let tableBoxScrollLeft = $tableBox.scrollLeft(),
+            tableBoxTableWidth = $tableBox.find('table').width(),
+            tableBoxWidth = $tableBox.width();
+
+            $fixHeaderOuter.scrollLeft(tableBoxScrollLeft);
+            if (tableBoxScrollLeft > 0) {
               $fixLeft.addClass('left-box-shadow');
             } else {
               $fixLeft.removeClass('left-box-shadow');
             }
             if (
-              $tableBox.find('table').width() - $tableBox.width() >
-              $tableBox.scrollLeft()
+              tableBoxTableWidth - tableBoxWidth >
+              tableBoxScrollLeft
             ) {
               $fixRight.addClass('right-box-shadow');
             } else {
@@ -59,10 +63,13 @@ export default (app, elem, attrs, scope) => {
           $tableBox.scroll(tableBoxScroll);
 
           const containerScroll = function() {
-            $fixedTable.find('.outer-hide-scroll').height($fixHeader.height());
-            $fixHeaderOuter.outerWidth($tableBox.outerWidth());
-            let offsetTop = $tableBox.offset().top,
-              headerHeight = $('.container').outerHeight();
+            let fixHeaderHeight = $fixHeader.height(),
+            tableBoxOuterWidth = $tableBox.outerWidth(),
+            offsetTop = $tableBox.offset().top,
+            headerHeight = $('.container').outerHeight();
+
+            $fixedTable.find('.outer-hide-scroll').height(fixHeaderHeight);
+            $fixHeaderOuter.outerWidth(tableBoxOuterWidth);
             if (offsetTop < headerHeight) {
               if (!$fixHeaderOuter.hasClass('fixed')) {
                 $fixHeaderOuter.addClass('fixed');
@@ -84,7 +91,9 @@ export default (app, elem, attrs, scope) => {
           $('#container').scroll(containerScroll);
 
           const windowScroll = function() {
-            if ($('.tablebox').length > 0 && $('.tablebox').width() < 1500) {
+            let tableboxWidth = $('.tablebox').width();
+
+            if ($('.tablebox').length > 0 && tableboxWidth < 1500) {
               const scrollLeft = $('html').scrollLeft();
               if($('.outer-hide-scroll') && $('.outer-hide-scroll')[0]) {
                 $('.outer-hide-scroll')[0].style.left = `${headerScrollLeft -
@@ -108,6 +117,71 @@ export default (app, elem, attrs, scope) => {
             containerScroll();
             windowScroll();
           });
+
+          function getColVolume(staticTableEl){
+            let elLength = staticTableEl.find('th').length;
+            let colResult = {
+              staticThW: new Array(elLength),
+              staticTdW: new Array(elLength),
+              rightColThW: [],
+              leftColThW: []
+            };
+            if($scope.fixedCol.left){
+              let leftCol = $scope.fixedCol.left.split(' ');
+              leftCol.map(function(item, index){
+                colResult.staticThW[index] = item;
+                colResult.staticTdW[index] = item;
+                colResult.leftColThW[index] = item;
+              });
+            }
+            if($scope.fixedCol.right){
+              let rightCol = $scope.fixedCol.right.split(' ').reverse();
+              rightCol.map(function(item, index){
+                colResult.staticThW[elLength-index-1] = item;
+                colResult.staticTdW[elLength-index-1] = item;
+                colResult.rightColThW[index] = item;
+              });
+            }
+            return colResult;
+          }
+          function afterReflowVolume(staticTableEl, tableColVolume){
+            let thLength = staticTableEl.find('.tablebox th').length,
+                rightThFromDom = staticTableEl
+                  .find('.tablebox th')
+                  .slice(thLength - $scope.fixRight, thLength),
+                leftThFromDom = staticTableEl
+                  .find('.tablebox th')
+                  .slice(0, $scope.fixLeft),
+                headerThFromDom = staticTableEl.find('.tablebox thead th'),
+                trDomList = staticTableEl.find('.tablebox tbody tr');
+            let colResult = {
+              rightThFromDomW: Object.assign([],tableColVolume.rightColThW),
+              rightThFromDomH: [],
+              leftThFromDomW: Object.assign([],tableColVolume.leftColThW),
+              leftThFromDomH: [],
+              headerThFromDomW: [],
+              trDomListH: []
+            };
+            angular.forEach(headerThFromDom, (item, index) => {
+              colResult.headerThFromDomW.push($(item).outerWidth());
+            });
+            angular.forEach(rightThFromDom, (item, index) => {
+              if(!colResult.rightThFromDomW[index]){
+                colResult.rightThFromDomW.push($(item).outerWidth());
+              }
+              colResult.rightThFromDomH.push($(item).outerHeight());
+            });
+            angular.forEach(leftThFromDom, (item, index) => {
+              if(!colResult.leftThFromDomW[index]){
+                colResult.leftThFromDomW.push($(item).outerWidth());
+              }
+              colResult.leftThFromDomH.push($(item).outerHeight());
+            });
+            angular.forEach(trDomList, (item, index) => {
+              colResult.trDomListH.push($(item).height());
+            });
+            return colResult;
+          }
           $scope.$on('angularDomReady', (a, tableDom) => {
             reset();
             $fixRightThead.hide();
@@ -119,13 +193,7 @@ export default (app, elem, attrs, scope) => {
               });
               return;
             }
-            angular.forEach(tableDom.find('th'), item => {
-              $(item).outerWidth($(item).outerWidth());
-            });
-            angular.forEach(tableDom.find('td'), item => {
-              $(item).outerWidth($(item).outerWidth());
-            });
-            const colArray = $scope.fixedCol.split(' ');
+            const colArray = $scope.fixedCol.position.split('');
             $scope.fixHeader =
               Number(colArray[0]) >= 1 ? Number(colArray[0]) >= 1 : false;
             $scope.fixRight =
@@ -138,6 +206,20 @@ export default (app, elem, attrs, scope) => {
               trDomList = tableDom.find('.tablebox tbody tr'),
               thLength = tableDom.find('.tablebox th').length;
 
+              
+            if (($scope.fixHeader || $scope.fixRight || $scope.fixLeft) && !$tableBoxTable.hasClass('fix-table')) {
+              $tableBoxTable.addClass('fix-table');
+            }
+            const tableColVolume = getColVolume(tableDom);
+            angular.forEach(tableDom.find('th'), (item, index) => {
+              if(tableColVolume.staticThW[index]){
+                $(item).outerWidth(tableColVolume.staticThW[index]);
+              }
+            });
+
+            //DOM操作批处理分离
+            const actualVolume = afterReflowVolume(tableDom, tableColVolume);
+
             // 头部固定
             if ($scope.fixHeader) {
               let headerThDom = $element.find('.fix-header thead'),
@@ -145,15 +227,13 @@ export default (app, elem, attrs, scope) => {
                 headerThFromDom = tableDom.find('.tablebox thead th'),
                 headerTheadDom = tableDom.find('.tablebox thead');
               angular.forEach(headerThFromDom, (item, index) => {
-                $(headerDom.find('th')[index]).width($(item).outerWidth());
+                // $(headerDom.find('th')[index]).outerWidth($(item).outerWidth());
+                $(headerDom.find('th')[index]).outerWidth(actualVolume.headerThFromDomW[index]);
               });
               headerThDom.append(headerDom);
             }
             // 右侧固定
             if ($scope.fixRight) {
-              if (!$tableBoxTable.hasClass('fix-table')) {
-                $tableBoxTable.addClass('fix-table');
-              }
               let rightThTrDom = $element.find('.fix-right thead tr'),
                 rightTbodyDom = $element.find('.fix-right tbody'),
                 rightThFromDom = tableDom
@@ -161,8 +241,10 @@ export default (app, elem, attrs, scope) => {
                   .slice(thLength - $scope.fixRight, thLength);
               rightThDom = rightThFromDom.clone();
               angular.forEach(rightThFromDom, (item, index) => {
-                $(rightThDom[index]).width($(item).outerWidth());
-                $(rightThDom[index]).height($(item).outerHeight());
+                // $(rightThDom[index]).outerWidth($(item).outerWidth());
+                // $(rightThDom[index]).outerHeight($(item).outerHeight());
+                $(rightThDom[index]).outerWidth(actualVolume.rightThFromDomW[index]);console.log($(rightThDom[index]).outerWidth(),9090);
+                $(rightThDom[index]).outerHeight(actualVolume.rightThFromDomH[index]);
               });
               rightThTrDom.append(rightThDom);
 
@@ -184,19 +266,27 @@ export default (app, elem, attrs, scope) => {
                   const tens = Math.floor(index / trDomList.length);
                   const units = index % trDomList.length;
                   if (tens === units) {
-                    $(item).height($(trDomList[tens]).height());
+                    // $(item).height($(trDomList[tens]).height());
+                    $(item).height(actualVolume.trDomListH[tens]);
+                    let arr = $.makeArray($(item).find('td'));
+                    arr.map(function(tdItem, tdIndex){
+                      if(tableColVolume.rightColThW[tdIndex]){
+                        $(tdItem).outerWidth(tableColVolume.rightColThW[tdIndex]);
+                      }else{
+                        $(tdItem).outerWidth(actualVolume.rightThFromDomW[tdIndex]);
+                      }
+                    });
                     rightTbodyDom.append(item);
                   }
                 });
               });
+              if ($fixHeaderOuter.hasClass('fixed')) {
+                $fixRightThead.show();
+              }
             }
-            // 底部固定TODO
 
             // 左侧固定
             if ($scope.fixLeft) {
-              if (!$tableBoxTable.hasClass('fix-table')) {
-                $tableBoxTable.addClass('fix-table');
-              }
               let leftThTrDom = $element.find('.fix-left thead tr'),
                 leftTbodyDom = $element.find('.fix-left tbody'),
                 leftThFromDom = tableDom
@@ -204,8 +294,10 @@ export default (app, elem, attrs, scope) => {
                   .slice(0, $scope.fixLeft);
               leftThDom = leftThFromDom.clone();
               angular.forEach(leftThFromDom, (item, index) => {
-                $(leftThDom[index]).width($(item).outerWidth());
-                $(leftThDom[index]).height($(item).outerHeight());
+                // $(leftThDom[index]).outerWidth($(item).outerWidth());
+                // $(leftThDom[index]).outerHeight($(item).outerHeight());
+                $(leftThDom[index]).outerWidth(actualVolume.leftThFromDomW[index]);
+                $(leftThDom[index]).outerHeight(actualVolume.leftThFromDomH[index]);
               });
               leftThTrDom.append(leftThDom);
 
@@ -227,11 +319,23 @@ export default (app, elem, attrs, scope) => {
                   const tens = Math.floor(index / trDomList.length);
                   const units = index % trDomList.length;
                   if (tens === units) {
-                    $(item).height($(trDomList[tens]).height());
+                    // $(item).height($(trDomList[tens]).height());
+                    $(item).height(actualVolume.trDomListH[tens]);
+                    let arr = $.makeArray($(item).find('td'));
+                    arr.map(function(tdItem, tdIndex){
+                      if(tableColVolume.rightColThW[tdIndex]){
+                        $(tdItem).outerWidth(tableColVolume.leftColThW[tdIndex]);
+                      }else{
+                        $(tdItem).outerWidth(actualVolume.leftThFromDomW[tdIndex]);
+                      }
+                    });
                     leftTbodyDom.append(item);
                   }
                 });
               });
+              if ($fixHeaderOuter.hasClass('fixed')) {
+                $fixLeftThead.show();
+              }
             }
 
             if ($tableBox.scrollLeft() > 0) {

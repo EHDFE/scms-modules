@@ -27,6 +27,8 @@
 .fixed-table .fix-left{
     position: absolute;
     border-right: none;
+    table-layout: fixed;
+    word-break: break-all;
     top: 0;
     left: 0;
 }
