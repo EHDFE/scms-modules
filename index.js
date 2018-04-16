@@ -1,5 +1,6 @@
 // import 'bootstrap/less/bootstrap.less';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css';
 import 'font-awesome/css/font-awesome.css';
 
 import './libs/base.less';
@@ -7,6 +8,7 @@ import './libs/font-scms/less/style.less';
 import './scmsUi/less/index.less';
 
 import 'bootstrap';
+import 'bootstrap-colorpicker';
 
 import './scmsUi';
 
@@ -55,6 +57,7 @@ import imageUpload from './src/imageUpload/imageUpload';
 import numberSelect from './src/numberSelect/numberSelect';
 import circleSchedule from './src/circleSchedule/circleSchedule';
 import cascadeSelect from './src/cascadeSelect';
+import selectColor from './src/selectColor';
 
 
 export default {
@@ -101,4 +104,5 @@ export default {
   numberSelect,
   'circleSchedule/circleSchedule': circleSchedule,
   cascadeSelect,
+  selectColor
 };

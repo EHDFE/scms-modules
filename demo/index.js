@@ -81,4 +81,7 @@ demoData.push(circleSchedule);
 import cascadeSelect from './cascadeSelect/';
 demoData.push(cascadeSelect);
 
+import selectColor from './selectColor/';
+demoData.push(selectColor);
+
 export default demoData;
