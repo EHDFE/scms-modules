@@ -144,7 +144,7 @@ export default (app, elem, attrs, scope) => {
             }
             return colResult;
           }
-          function afterReflowVolume(staticTableEl){
+          function afterReflowVolume(staticTableEl, tableColVolume){
             let thLength = staticTableEl.find('.tablebox th').length,
                 rightThFromDom = staticTableEl
                   .find('.tablebox th')
@@ -155,9 +155,9 @@ export default (app, elem, attrs, scope) => {
                 headerThFromDom = staticTableEl.find('.tablebox thead th'),
                 trDomList = staticTableEl.find('.tablebox tbody tr');
             let colResult = {
-              rightThFromDomW: [],
+              rightThFromDomW: Object.assign([],tableColVolume.rightColThW),
               rightThFromDomH: [],
-              leftThFromDomW: [],
+              leftThFromDomW: Object.assign([],tableColVolume.leftColThW),
               leftThFromDomH: [],
               headerThFromDomW: [],
               trDomListH: []
@@ -166,11 +166,15 @@ export default (app, elem, attrs, scope) => {
               colResult.headerThFromDomW.push($(item).outerWidth());
             });
             angular.forEach(rightThFromDom, (item, index) => {
-              colResult.rightThFromDomW.push($(item).outerWidth());
+              if(!colResult.rightThFromDomW[index]){
+                colResult.rightThFromDomW.push($(item).outerWidth());
+              }
               colResult.rightThFromDomH.push($(item).outerHeight());
             });
             angular.forEach(leftThFromDom, (item, index) => {
-              colResult.leftThFromDomW.push($(item).outerWidth());
+              if(!colResult.leftThFromDomW[index]){
+                colResult.leftThFromDomW.push($(item).outerWidth());
+              }
               colResult.leftThFromDomH.push($(item).outerHeight());
             });
             angular.forEach(trDomList, (item, index) => {
@@ -214,7 +218,7 @@ export default (app, elem, attrs, scope) => {
             });
 
             //DOM操作批处理分离
-            const actualVolume = afterReflowVolume(tableDom);
+            const actualVolume = afterReflowVolume(tableDom, tableColVolume);
 
             // 头部固定
             if ($scope.fixHeader) {
@@ -239,7 +243,7 @@ export default (app, elem, attrs, scope) => {
               angular.forEach(rightThFromDom, (item, index) => {
                 // $(rightThDom[index]).outerWidth($(item).outerWidth());
                 // $(rightThDom[index]).outerHeight($(item).outerHeight());
-                $(rightThDom[index]).outerWidth(actualVolume.rightThFromDomW[index]);
+                $(rightThDom[index]).outerWidth(actualVolume.rightThFromDomW[index]);console.log($(rightThDom[index]).outerWidth(),9090);
                 $(rightThDom[index]).outerHeight(actualVolume.rightThFromDomH[index]);
               });
               rightThTrDom.append(rightThDom);
@@ -266,7 +270,11 @@ export default (app, elem, attrs, scope) => {
                     $(item).height(actualVolume.trDomListH[tens]);
                     let arr = $.makeArray($(item).find('td'));
                     arr.map(function(tdItem, tdIndex){
-                      $(tdItem).outerWidth(tableColVolume.rightColThW[tdIndex]);
+                      if(tableColVolume.rightColThW[tdIndex]){
+                        $(tdItem).outerWidth(tableColVolume.rightColThW[tdIndex]);
+                      }else{
+                        $(tdItem).outerWidth(actualVolume.rightThFromDomW[tdIndex]);
+                      }
                     });
                     rightTbodyDom.append(item);
                   }
@@ -315,7 +323,11 @@ export default (app, elem, attrs, scope) => {
                     $(item).height(actualVolume.trDomListH[tens]);
                     let arr = $.makeArray($(item).find('td'));
                     arr.map(function(tdItem, tdIndex){
-                      $(tdItem).outerWidth(tableColVolume.leftColThW[tdIndex]);
+                      if(tableColVolume.rightColThW[tdIndex]){
+                        $(tdItem).outerWidth(tableColVolume.leftColThW[tdIndex]);
+                      }else{
+                        $(tdItem).outerWidth(actualVolume.leftThFromDomW[tdIndex]);
+                      }
                     });
                     leftTbodyDom.append(item);
                   }
