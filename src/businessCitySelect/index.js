@@ -82,16 +82,6 @@ export default (app, elem, attrs, scope) => {
           organizationCode: currentOrganizationCode,
           apiUrl: $scope.apiUrl || SOURCE_API,
           prependOptionType: $scope.prependOptionType || 'PARENT_VALUE',
-<<<<<<< HEAD
-          // sourceFormatter: $scope.sourceFormatter,
-          sourceFormatter: data => {
-            // if (data.organizationcode === '88888888') return false;
-            return {
-              name: data.organizationname,
-              value: data.organizationcode === '88888888' ? '' : data.organizationcode,
-            };
-          },
-=======
           sourceFormatter: $scope.sourceFormatter,
           // sourceFormatter: data => {
           //   // if (data.organizationcode === '88888888') return false;
@@ -100,7 +90,6 @@ export default (app, elem, attrs, scope) => {
           //     value: data.organizationcode === '88888888' ? '' : data.organizationcode,
           //   };
           // },
->>>>>>> feat/cascadeOrganizationSelector
         }));
 
         const updateSelectListByModel = (source, value) => {
