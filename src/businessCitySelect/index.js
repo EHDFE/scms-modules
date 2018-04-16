@@ -1,6 +1,7 @@
 import template from './index.html';
 import get from 'lodash/get';
 import find from 'lodash/find';
+import isFunction from 'lodash/isFunction';
 // import isEqual from 'lodash/isEqual';
 // import cascadeSelect from '../cascadeSelect';
 import DataSource from './dataSource';
@@ -31,6 +32,7 @@ export default (app, elem, attrs, scope) => {
       prependOptionType: '@',
       autoSelect: '=',
       onChange: '=',
+      onBeforeChange: '=',
     },
     replace: true,
     controller: [
@@ -82,10 +84,10 @@ export default (app, elem, attrs, scope) => {
           prependOptionType: $scope.prependOptionType || 'PARENT_VALUE',
           sourceFormatter: $scope.sourceFormatter,
           // sourceFormatter: data => {
-          //   if (data.organizationcode === '88888888') return false;
+          //   // if (data.organizationcode === '88888888') return false;
           //   return {
           //     name: data.organizationname,
-          //     value: data.organizationname,
+          //     value: data.organizationcode === '88888888' ? '' : data.organizationcode,
           //   };
           // },
         }));
@@ -93,7 +95,7 @@ export default (app, elem, attrs, scope) => {
         const updateSelectListByModel = (source, value) => {
           devTool.log(source, value);
           const matchedList = [];
-          if (!value) {
+          if (value === null || value === undefined) {
             if ($scope.autoSelect) {
               let defaultSelect;
               if ($scope.cityOnly) {
@@ -163,6 +165,9 @@ export default (app, elem, attrs, scope) => {
 
         $scope.handleSelectAction = (data, isCity, parent) => {
           devTool.log(data, isCity, parent);
+          if (isFunction($scope.onBeforeChange)) {
+            if (!$scope.onBeforeChange(data, isCity, parent)) return false;
+          }
           const nextSelectStatus = !data.selected;
           const isNational = !!data.isNational;
           if (!isCity && $scope.cityOnly && !isNational) return false;
