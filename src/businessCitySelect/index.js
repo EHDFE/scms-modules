@@ -1,6 +1,7 @@
 import template from './index.html';
 import get from 'lodash/get';
 import find from 'lodash/find';
+import isEqual from 'lodash/isEqual';
 import isFunction from 'lodash/isFunction';
 // import isEqual from 'lodash/isEqual';
 // import cascadeSelect from '../cascadeSelect';
@@ -64,7 +65,7 @@ export default (app, elem, attrs, scope) => {
           mouseInPanel = false;
           $layer[0].focus();
         });
-        $inputField.on('keypress', e => {
+        $inputField.on('keydown', e => {
           e.preventDefault();
         });
         
@@ -95,6 +96,7 @@ export default (app, elem, attrs, scope) => {
         const updateSelectListByModel = (source, value) => {
           devTool.log(source, value);
           const matchedList = [];
+          if (!Array.isArray(source)) return;
           if (value === null || value === undefined) {
             if ($scope.autoSelect) {
               let defaultSelect;
@@ -319,12 +321,19 @@ export default (app, elem, attrs, scope) => {
             isActivated: value,
           });
         });
-        $scope.$watch('active', value => {
+        $scope.$watch('active', (value, oldValue) => {
           if (value) {
             devTool.log($layer);
             setTimeout(() => {
               $layer[0].focus();
             }, 0);
+          } else {
+            if ($scope.multipleSelectMode && oldValue && !value) {
+              const currentSelectValues = $scope.selectedList.map(d => d.value);
+              if (!isEqual(currentSelectValues, $scope.ngModel)) {
+                updateSelectListByModel($scope.source, $scope.ngModel)
+              }
+            }
           }
         });
         
