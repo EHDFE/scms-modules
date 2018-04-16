@@ -8,7 +8,6 @@ import './libs/font-scms/less/style.less';
 import './scmsUi/less/index.less';
 
 import 'bootstrap';
-import 'bootstrap-colorpicker';
 
 import './scmsUi';
 

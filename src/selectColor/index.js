@@ -6,6 +6,7 @@
  * @lastBy
  * @html <div select-color-directive init-color="initColor"></div>
  */
+import 'bootstrap-colorpicker';
 import html from './selectColor.html';
 
 export default (app, elem, attrs, scope) => {
@@ -17,7 +18,7 @@ export default (app, elem, attrs, scope) => {
         template: html,
         restrict: 'EA',
         scope: {
-            initColor: '=', //  当前选中的颜色 {type: "string", exampleValue: "", defaultValue: ""}
+            initColor: '=', 
         },
         controller($scope, $element, $attrs) {
             $element.colorpicker({color:$scope.initColor});
