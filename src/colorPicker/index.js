@@ -4,13 +4,13 @@
  * @date 2018-04-16
  * @author 程乐
  * @lastBy
- * @html <div select-color-directive init-color="initColor"></div>
+ * @html <div color-picker-directive init-color="initColor"></div>
  */
 import 'bootstrap-colorpicker';
-import html from './selectColor.html';
+import html from './colorPicker.html';
 
 export default (app, elem, attrs, scope) => {
-  app.directive('selectColorDirective', [
+  app.directive('colorPickerDirective', [
     '$http',
     '$timeout',
     function ($http, $timeout) {

@@ -1,9 +1,9 @@
 export default {
-	title: "selectColor",
+	title: "colorPicker",
 	author:"程乐",
 	type: "directive",
-	"keyName":"selectColor",
-	"name":"selectColor 颜色选择器",
+	"keyName":"colorPicker",
+	"name":"colorPicker 颜色选择器",
 	"lastBy":"",
 	"description":"",
 	"date":"2018-03-13",
@@ -16,8 +16,8 @@ export default {
 			"description":"颜色"
 		}],
 	"attrs":[],
-	"deps":["scmsModules/selectColor"],
-	"html":"<div select-color-directive init-color=\"initColor\"></div>",
+	"deps":["scmsModules/colorPicker"],
+	"html":"<div color-picker-directive init-color=\"initColor\"></div>",
 	"api":"",
 	"htmlUrl":""
 }
