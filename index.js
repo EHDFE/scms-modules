@@ -1,5 +1,6 @@
 // import 'bootstrap/less/bootstrap.less';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css';
 import 'font-awesome/css/font-awesome.css';
 
 import './libs/base.less';
@@ -56,8 +57,12 @@ import imageUpload from './src/imageUpload/imageUpload';
 import numberSelect from './src/numberSelect/numberSelect';
 import circleSchedule from './src/circleSchedule/circleSchedule';
 import cascadeSelect from './src/cascadeSelect';
+<<<<<<< HEAD
 import rangeSelectBar from './src/rangeSelectBar/rangeSelectBar';
 import businessCitySelect from './src/businessCitySelect';
+=======
+import colorPicker from './src/colorPicker';
+>>>>>>> chengle
 
 
 export default {
@@ -107,4 +112,5 @@ export default {
   cascadeSelect,
   rangeSelectBar,
   businessCitySelect,
+  colorPicker
 };
