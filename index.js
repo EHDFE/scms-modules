@@ -57,12 +57,9 @@ import imageUpload from './src/imageUpload/imageUpload';
 import numberSelect from './src/numberSelect/numberSelect';
 import circleSchedule from './src/circleSchedule/circleSchedule';
 import cascadeSelect from './src/cascadeSelect';
-<<<<<<< HEAD
 import rangeSelectBar from './src/rangeSelectBar/rangeSelectBar';
 import businessCitySelect from './src/businessCitySelect';
-=======
 import colorPicker from './src/colorPicker';
->>>>>>> chengle
 
 
 export default {
