@@ -92,7 +92,7 @@ export default class DataSource {
       if (d.organizationcode !== COUNTRY_CODE) {
         const transformed = this.sourceFormatter(d, regionMap[d.parorganizationcode]);
         if (transformed) {
-          regionMap[d.parorganizationcode].children.push(transformed);
+          regionMap[d.parorganizationcode] && regionMap[d.parorganizationcode].children && regionMap[d.parorganizationcode].children.push(transformed);
         }
       }
     });
