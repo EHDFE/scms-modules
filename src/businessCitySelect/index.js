@@ -149,6 +149,9 @@ export default (app, elem, attrs, scope) => {
         dataSource.setUpdater(({source, hasRegionPermission}) => {
           $scope.$apply(() => {
             devTool.log('source update', source, hasRegionPermission);
+            if (source.length === 0) {
+              $.alert('当前登陆人所属城市未开通对应业务！');
+            }
             $scope.source = source;
             $scope.hasRegionPermission = hasRegionPermission;
             nationNode = find(source, d => d.isNational);
