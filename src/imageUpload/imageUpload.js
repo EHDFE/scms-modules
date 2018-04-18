@@ -43,7 +43,6 @@ export default (app, elem, attrs, scope) => {
           $scope.showClick = ()=>{};
           $scope.type = 1;
           $scope.init = ()=>{
-            console.log($scope.imageUrls,22222)
             $scope.imageArray = [];
             $scope.imageUrls = $scope.imageUrls || [];
             if ($scope.moduleType === 'noThumb') {
@@ -295,7 +294,6 @@ export default (app, elem, attrs, scope) => {
           }
           $scope.initType = true;
           $scope.$watch('imageUrls',function(newValue,oldValue){
-            console.log(newValue,oldValue, $scope.initType)
             if((newValue.length > oldValue.length) && $scope.initType){
               $scope.initType = false;
               $scope.init();
