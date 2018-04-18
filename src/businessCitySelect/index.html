@@ -5,7 +5,7 @@
     <div class="organization-container" ng-class="{'organization-container-with-bottom': multipleSelectMode}">
       <dl class="organization-group" ng-repeat="group in source">
         <dt>
-          <button type="button" ng-click="handleSelectAction(group, false)" class="organization-group-name" ng-class="{selectable: !cityOnly, selected: group.selected}">{{group.name}}</button>
+          <button type="button" ng-click="handleSelectAction(group, false)" class="organization-group-name" ng-class="{selectable: !cityOnly && hasRegionPermission, selected: group.selected}">{{group.name}}</button>
         </dt>
         <dd ng-if="group.children">
           <button type="button" class="organization-item-name selectable" ng-click="handleSelectAction(city, true, group)" ng-repeat="city in group.children" ng-class="{selected: city.selected, 'parent-selected': group.selected}">{{city.name}}</button>

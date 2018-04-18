@@ -100,7 +100,7 @@ export default (app, elem, attrs, scope) => {
           if (value === null || value === undefined) {
             if ($scope.autoSelect) {
               let defaultSelect;
-              if ($scope.cityOnly) {
+              if ($scope.cityOnly || !$scope.hasRegionPermission) {
                 const flatSource = source.reduce((prev, item) => {
                   if (item.children) {
                     return prev.concat(item.children);
@@ -145,10 +145,11 @@ export default (app, elem, attrs, scope) => {
         };
 
         let initialized = false;
-        dataSource.setUpdater(source => {
+        dataSource.setUpdater(({source, hasRegionPermission}) => {
           $scope.$apply(() => {
-            devTool.log('source update', source);
+            devTool.log('source update', source, hasRegionPermission);
             $scope.source = source;
+            $scope.hasRegionPermission = hasRegionPermission;
             nationNode = find(source, d => d.isNational);
             if (initialized) {
               updateSelectListByModel(source, null);
@@ -172,7 +173,7 @@ export default (app, elem, attrs, scope) => {
           }
           const nextSelectStatus = !data.selected;
           const isNational = !!data.isNational;
-          if (!isCity && $scope.cityOnly && !isNational) return false;
+          if (!isCity && ($scope.cityOnly || !$scope.hasRegionPermission) && !isNational) return false;
           if (isNational) {
             Object.assign(data, {
               selected: nextSelectStatus,
@@ -221,7 +222,7 @@ export default (app, elem, attrs, scope) => {
                       if (d === data) return true;
                       return d.selected;
                     });
-                    if (parentNeedToBeSelected && !$scope.cityOnly) {
+                    if (parentNeedToBeSelected && !$scope.cityOnly && $scope.hasRegionPermission) {
                       Object.assign(parent, {
                         selected: true,
                       });
