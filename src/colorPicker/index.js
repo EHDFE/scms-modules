@@ -19,8 +19,10 @@ export default (app, elem, attrs, scope) => {
         restrict: 'EA',
         scope: {
             initColor: '=', 
+            colorValue: '='
         },
         controller($scope, $element, $attrs) {
+            $scope.colorValue = $scope.initColor||'';
             $element.colorpicker({color:$scope.initColor});
         },
 
