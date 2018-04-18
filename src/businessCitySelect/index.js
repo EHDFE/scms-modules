@@ -34,6 +34,7 @@ export default (app, elem, attrs, scope) => {
       autoSelect: '=',
       onChange: '=',
       onBeforeChange: '=',
+      mustSelect: '=',
     },
     replace: true,
     controller: [
@@ -174,6 +175,7 @@ export default (app, elem, attrs, scope) => {
           const nextSelectStatus = !data.selected;
           const isNational = !!data.isNational;
           if (!isCity && ($scope.cityOnly || !$scope.hasRegionPermission) && !isNational) return false;
+          if ($scope.mustSelect && !nextSelectStatus && $scope.selectedList.length === 1) return false;
           if (isNational) {
             Object.assign(data, {
               selected: nextSelectStatus,
