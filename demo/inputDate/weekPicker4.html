@@ -1,0 +1,6 @@
+<!--周选择 当有了week-data数据后，init-week失效 有disabled状态-->
+<switch-directive is-checked="weekPickDisabled"></switch-directive>
+<div class="mt5" ng-init="weekData4={start:'2018-04-01', end: '2018-04-07'}">
+    <input week-picker week-data="weekData4" max-date-value="20" min-date-value="-30" init-week="-1" ng-disabled="weekPickDisabled"> 
+    {{weekData4|json}}
+</div>

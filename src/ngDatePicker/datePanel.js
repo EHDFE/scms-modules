@@ -89,7 +89,6 @@ export default (app, elem, attrs, scope) => {
           });
 
           try{
-            console.log('onPickEvent=', $scope.onPickEvent)
             $timeout(function() {
               $scope.onPickEvent('init', null, datePicker, $attrs);
             })            
@@ -160,7 +159,7 @@ export default (app, elem, attrs, scope) => {
           $scope.pickEvent = function(col) {
             datePicker.setDate(col);
             try{
-              $scope.onPickEvent('date', col, $scope.dateRangeData);
+              $scope.onPickEvent('date', col, datePicker);//$scope.dateRangeData
             }
             catch(e) {}
           }

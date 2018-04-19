@@ -30,6 +30,7 @@ export default (app, elem, attrs, scope) => {
           initDate: '=', // @scope initDate 初始日期,它的值为距今天的天数 {type:"number"}
           minTime: '=',
           maxTime: '=',
+          ngDisabled: '='
         },
         template: tpl,
         replace: true,
@@ -50,6 +51,9 @@ export default (app, elem, attrs, scope) => {
               $element.find('.form-control').trigger('blur');
             };
 
+            $scope.onPickEvent = function(type, date, datePicker) {
+            }
+
             $element.find('.form-control').bind('focus', (e) => {
               e.stopPropagation();
               let pos = e.target.getBoundingClientRect(),
@@ -61,7 +65,12 @@ export default (app, elem, attrs, scope) => {
                 tipOffset = 0,
                 scrollWidth = $('body')[0].scrollWidth;
               offset.top = pos.top + elHeight + tipOffset;
-              offset.left = pos.left;
+              if(scrollWidth > pos.left + tipWidth) {
+                offset.left = pos.left;
+              }
+              else {
+                offset.left = pos.left - (tipWidth - elWidth);
+              }
               panel.css('display', 'inline-block');
               panel.offset(offset);
               $scope.$broadcast('init');

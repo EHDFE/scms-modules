@@ -11,14 +11,13 @@
 				<span type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></span>
 				<h4 class="modal-title" id="myModalLabel">选择地区</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body" style="height:500px;overflow-y:auto;">
 					<div class="list" ng-show="chooseAll">
 							<div ng-click="checkAll();" class="ml15"><div class="checkbox-inline" ng-class="{'checkbox-inline-checked':all}">全选</div></div>
 					</div>
 					<ul class="list">
-				        <li ng-repeat="item in list">
+				        <li ng-repeat="item in list" ng-if="!item.disable">
 				            <div ng-click="checked(item);" ng-hide="item.disable"><div  class="checkbox-inline" ng-class="{'checkbox-inline-checked': item.isChecked}">{{item.isChonsen}}{{item.name}}</div></div>
-				            <div ng-show="item.disable"><div class="checkbox-disable">{{item.name}}</div></div>
 				        </li>
 				    </ul>
 				</div>
