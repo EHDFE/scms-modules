@@ -22,8 +22,17 @@ export default (app, elem, attrs, scope) => {
             colorValue: '='
         },
         controller($scope, $element, $attrs) {
+          $scope.init = function(){
             $scope.colorValue = $scope.initColor||'';
             $element.colorpicker({color:$scope.initColor});
+          }
+          $scope.init();
+          $scope.$watch('initColor',function(newValue,oldValue){
+            if(newValue!==oldValue){
+              $scope.init();
+            }
+          });
+
         },
 
         link($scope, $element, $attrs, ngModel) {},
