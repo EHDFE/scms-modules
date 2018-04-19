@@ -88,6 +88,13 @@ export default (app, elem, attrs, scope) => {
             datePicker.formatDate = newVal;
           });
 
+          try{
+            console.log('onPickEvent=', $scope.onPickEvent)
+            $timeout(function() {
+              $scope.onPickEvent('init', null, datePicker, $attrs);
+            })            
+          }catch(e) {}
+
           if ($attrs.dateRange) {
             $scope.dateRangeData = $scope.datePicker.dateRangeData;
           }
@@ -153,10 +160,32 @@ export default (app, elem, attrs, scope) => {
           $scope.pickEvent = function(col) {
             datePicker.setDate(col);
             try{
-              $scope.onPickEvent(col, $scope.dateRangeData);
+              $scope.onPickEvent('date', col, $scope.dateRangeData);
             }
             catch(e) {}
           }
+
+          $scope.pickMonthEvent = function(currmonth) {
+            try{
+              if($scope.onPickEvent) {
+                $scope.onPickEvent('month', currmonth, datePicker, $attrs);
+              }
+              else{
+                datePicker.setMonth(currmonth);
+              }
+            }
+            catch(e) {
+              datePicker.setMonth(currmonth);
+            }
+            
+          }
+
+          $scope.hoverMonth = function(currmonth) {
+            try{
+              $scope.onPickEvent('hoverMonth', currmonth, datePicker, $attrs);
+            }
+            catch(e) {}
+          };
 
           $scope.hover = throttle((col) => {
             if (
