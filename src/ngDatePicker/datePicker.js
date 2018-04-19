@@ -48,9 +48,10 @@ export default (app, elem, attrs, scope) => {
           if($scope.pickTime) {
             $scope.formatDate = 'YYYY-MM-DD hh:mm:ss';
           }
-          else if($scope.useSeconds === 'false') {
+          if($scope.useSeconds === 'false') {
             $scope.formatDate = 'YYYY-MM-DD hh:mm';
-          }else if($scope.minViewMode === 'months') {
+          }
+          if($scope.minViewMode === 'months') {
             $scope.formatDate = 'YYYY-MM';
           }
 
