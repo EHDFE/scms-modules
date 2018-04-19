@@ -125,11 +125,18 @@ export default (app, elem, attrs, scope) => {
             /*
              * 当面板中触发了“点击日期”事件，设置值。
              */
-            $scope.onPickEvent = function(date, dateRangeData) {
-              $scope.startValue = dateRangeData.start.format($scope.formatDate) || '';
-              $scope.endValue = dateRangeData.end.format($scope.formatDate) || '';
-              $scope.endDate = dateRangeData.start.format($scope.formatDate) || '';
-              $scope.startDate = dateRangeData.end.format($scope.formatDate) || '';
+            $scope.onPickEvent = function(type, date, dateRangeData) {
+              switch(type) {
+              case 'date':
+                $scope.startValue = dateRangeData.start.format($scope.formatDate) || '';
+                $scope.endValue = dateRangeData.end.format($scope.formatDate) || '';
+                $scope.endDate = dateRangeData.start.format($scope.formatDate) || '';
+                $scope.startDate = dateRangeData.end.format($scope.formatDate) || '';
+                break;
+              case 'month':
+                dateRangeData.setMonth(date);
+                break;
+              }
             };
             
             /*
