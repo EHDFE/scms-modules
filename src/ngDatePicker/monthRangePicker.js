@@ -101,6 +101,7 @@ export default (app, elem, attrs, scope) => {
               if(isInit) {
                 return;
               }
+
               if($scope.startDateRange && $scope.endDateRange) {
                 if($scope.startDateRange === $scope.endDateRange) {
                   $scope.startDate = $scope.startDateRange;
@@ -171,7 +172,7 @@ export default (app, elem, attrs, scope) => {
                 isChecked = true;
                 rangeTag = 'end';
               }
-              if(currMonthValueOf === moment(moment().year()+'-'+moment().month(), ['YYYY-MM']).valueOf()) {
+              if(currMonthValueOf === moment(moment().year()+'-'+(moment().month()+1), ['YYYY-MM']).valueOf()) {
                 isToday = true;
               }
               if(min && currMonthValueOf < min.valueOf()) {
@@ -248,7 +249,6 @@ export default (app, elem, attrs, scope) => {
 
             var setMonthView = function() {
               this.monthRangeData = this.monthRangeData || {};
-
               this.monthView = Array(...Array(12)).map((item, i) => {
                 const thisMonth = i + 1;
                 let status = {};
@@ -279,6 +279,51 @@ export default (app, elem, attrs, scope) => {
               }
             };
 
+            var initPanelView = function() {
+              //初始化面板数据
+              if(!datepickers['part1'] || !datepickers['part2']) {
+                return;
+              }
+              initDate();
+              $scope.monthRangeData = $scope.monthRangeData || {end: moment()};
+              
+              datepickers['part1'].monthRangeData = $scope.monthRangeData;
+              datepickers['part2'].monthRangeData = $scope.monthRangeData;
+              
+              
+              if(!$scope.monthRangeData.start) {
+                datepickers['part1'].dateData = {
+                  year: $scope.monthRangeData.end.year() -1,
+                  month: $scope.monthRangeData.end.month()
+                };
+              }
+              else if($scope.monthRangeData.start && $scope.monthRangeData.start.year() === $scope.monthRangeData.end.year()) {
+                if(!(datepickers['part1'].dateData.year === datepickers['part2'].dateData.year - 1)){
+                  datepickers['part1'].dateData = {
+                    year: $scope.monthRangeData.start.year() -1,
+                    month: $scope.monthRangeData.start.month()
+                  };
+                }
+              }
+              else {
+                datepickers['part1'].dateData = {
+                  year: $scope.monthRangeData.start.year(),
+                  month: $scope.monthRangeData.start.month()
+                };
+              }
+              if(!(datepickers['part1'].dateData.year === datepickers['part2'].dateData.year - 1)){
+                datepickers['part2'].dateData = {
+                  year: $scope.monthRangeData.end.year(),
+                  month: $scope.monthRangeData.end.month()
+                };
+              }
+
+              datepickers['part1'].name = 'part1';
+              datepickers['part2'].name = 'part2';
+              datepickers['part1'].setMonthView();
+              datepickers['part2'].setMonthView();
+            }
+
             /**
              * 当面板中触发了事件,会回调此函数。
              * init 当面板初始化时触发
@@ -295,38 +340,7 @@ export default (app, elem, attrs, scope) => {
                   datePicker.setDateView = function() {};
 
                   //初始化面板数据
-                  if(!datepickers['part1'] || !datepickers['part2']) {
-                    return;
-                  }
-                  initDate();
-                  datepickers['part1'].monthRangeData = datepickers['part2'].monthRangeData = $scope.monthRangeData;
-                  $scope.monthRangeData = $scope.monthRangeData || {end: moment()};
-                  datepickers['part2'].dateData = {
-                    year: $scope.monthRangeData.end.year(),
-                    month: $scope.monthRangeData.end.month()
-                  };
-                  if(!$scope.monthRangeData.start) {
-                    datepickers['part1'].dateData = {
-                      year: $scope.monthRangeData.end.year() -1,
-                      month: $scope.monthRangeData.end.month()
-                    };
-                  }
-                  else if($scope.monthRangeData.start && $scope.monthRangeData.start.year() === $scope.monthRangeData.end.year()) {
-                    datepickers['part1'].dateData = {
-                      year: $scope.monthRangeData.start.year() -1,
-                      month: $scope.monthRangeData.start.month()
-                    };
-                  }
-                  else {
-                    datepickers['part1'].dateData = {
-                      year: $scope.monthRangeData.start.year(),
-                      month: $scope.monthRangeData.start.month()
-                    };
-                  }
-                  datepickers['part1'].name = 'part1';
-                  datepickers['part2'].name = 'part2';
-                  datepickers['part1'].setMonthView();
-                  datepickers['part2'].setMonthView();
+                  initPanelView();
                   break;
 
                 //事件为"选中月份"时
@@ -402,8 +416,11 @@ export default (app, elem, attrs, scope) => {
               }
               panel.css('display', 'inline-block');
               panel.offset(offset);
-              initDate();
+              $timeout(function() {
+                initPanelView();
+              },0)
             };
+
             $element.find('input').on('focus', (e) => {
               if($scope.ngDisabled) {
                 return;

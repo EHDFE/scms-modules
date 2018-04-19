@@ -46,10 +46,10 @@ export default (app, elem, attrs, scope) => {
           $scope.pickTime = !!$attrs.pickTime;
           $scope.formatDate = 'YYYY-MM-DD';
           if($scope.pickTime) {
-            $scope.formatDate = 'YYYY-MM-DD hh:mm:ss';
+            $scope.formatDate = 'YYYY-MM-DD HH:mm:ss';
           }
           if($scope.useSeconds === 'false') {
-            $scope.formatDate = 'YYYY-MM-DD hh:mm';
+            $scope.formatDate = 'YYYY-MM-DD HH:mm';
           }
           if($scope.minViewMode === 'months') {
             $scope.formatDate = 'YYYY-MM';
