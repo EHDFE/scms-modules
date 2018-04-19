@@ -92,7 +92,7 @@ export default class DataSource {
       if (d.organizationcode !== COUNTRY_CODE) {
         const transformed = this.sourceFormatter(d, regionMap[d.parorganizationcode]);
         if (transformed) {
-          regionMap[d.parorganizationcode].children.push(transformed);
+          regionMap[d.parorganizationcode] && regionMap[d.parorganizationcode].children && regionMap[d.parorganizationcode].children.push(transformed);
         }
       }
     });
@@ -113,7 +113,7 @@ export default class DataSource {
       company = false; 
     }
     company = company ? [ company ] : [];
-    return company.concat(Object.keys(regionMap).map(code => {
+    const source = company.concat(Object.keys(regionMap).map(code => {
       const children = regionMap[code].children;
       if (children.length === 0) return false;
       const formattedData = this.sourceFormatter(regionMap[code]);
@@ -131,6 +131,10 @@ export default class DataSource {
         children,
       };
     })).filter(d => !!d);
+    return {
+      source,
+      hasRegionPermission: this.organizationCode === COUNTRY_CODE || this.organizationCode in regionMap,
+    };
   }
   setUpdater(updater) {
     this.updater = updater;

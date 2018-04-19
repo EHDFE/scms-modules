@@ -1,5 +1,6 @@
 // import 'bootstrap/less/bootstrap.less';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css';
 import 'font-awesome/css/font-awesome.css';
 
 import './libs/base.less';
@@ -58,6 +59,7 @@ import circleSchedule from './src/circleSchedule/circleSchedule';
 import cascadeSelect from './src/cascadeSelect';
 import rangeSelectBar from './src/rangeSelectBar/rangeSelectBar';
 import businessCitySelect from './src/businessCitySelect';
+import colorPicker from './src/colorPicker';
 
 
 export default {
@@ -107,4 +109,5 @@ export default {
   cascadeSelect,
   rangeSelectBar,
   businessCitySelect,
+  colorPicker
 };

@@ -53,13 +53,25 @@ export default (app, elem, attrs, scope) => {
               }
             } else if ($scope.imageUrls && $scope.imageUrls.length) {
               $scope.imageArray = $scope.imageUrls;
-              $scope.imageArray.push({
-                uploadType: {
-                  succeed: false,
-                  error: false,
-                  loading: false,
-                },
-              });
+              if($scope.dNum){
+                if($scope.imageArray.length < $scope.dNum){
+                  $scope.imageArray.push({
+                    uploadType: {
+                      succeed: false,
+                      error: false,
+                      loading: false,
+                    },
+                  });
+                }
+              }else{
+                $scope.imageArray.push({
+                  uploadType: {
+                    succeed: false,
+                    error: false,
+                    loading: false,
+                  },
+                });
+              }
             } else {
               $scope.imageArray.push({
                 uploadType: {
@@ -280,8 +292,13 @@ export default (app, elem, attrs, scope) => {
               var url = canvas.toDataURL();
               $ele.attr("href", url).attr("download", name+".png");
           }
-
-          
+          $scope.initType = true;
+          $scope.$watch('imageUrls',function(newValue,oldValue){
+            if((newValue.length > oldValue.length) && $scope.initType){
+              $scope.initType = false;
+              $scope.init();
+            }
+          },true);
           
           $scope.clearData = function () {
             $scope.init();
