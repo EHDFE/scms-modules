@@ -57,6 +57,7 @@ export default [
       'bootstrap',
       'moment',
       'angular',
+      'jquery',
     ],
     output: [
       { file: pkg.main, format: 'cjs', sourcemap: true },
