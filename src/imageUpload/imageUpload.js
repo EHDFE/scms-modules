@@ -134,13 +134,13 @@ export default (app, elem, attrs, scope) => {
               image.src = theFile.target.result;
               image.onload = function () {
                 if ($scope.dWidth && this.width !== $scope.dWidth) {
-                  G.alert(`图片宽度大于${$scope.dWidth}px`, {
+                  G.alert(`图片宽度不等于${$scope.dWidth}px`, {
                     type: 'error',
                   });
                   return;
                 }
                 if ($scope.dHeight && this.height !== $scope.dHeight) {
-                  G.alert(`图片高度大于${$scope.dHeight}px`, {
+                  G.alert(`图片高度不等于${$scope.dHeight}px`, {
                     type: 'error',
                   });
                   return;
