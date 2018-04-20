@@ -7,7 +7,6 @@ import datePicker6 from './datePicker6.html';
 import datePicker7 from './datePicker7.html';
 import datePicker8 from './datePicker8.html';
 
-import timePicker from './timePicker.html';
 import timePicker1 from './timePicker1.html';
 import timePicker2 from './timePicker2.html';
 import timePicker3 from './timePicker3.html';
@@ -16,7 +15,6 @@ import weekPicker1 from './weekPicker1.html';
 import weekPicker2 from './weekPicker2.html';
 import weekPicker3 from './weekPicker3.html';
 import weekPicker4 from './weekPicker4.html';
-import weekPicker5 from './weekPicker5.html';
 
 import monthPicker1 from './monthPicker1.html';
 import monthPicker2 from './monthPicker2.html';
@@ -31,13 +29,13 @@ import calendar from './calendar.html';
 import calendar2 from './calendar2.html';
 import calendar3 from './calendar3.html';
 
+import calendarPanel from './calendarPanel.html';
+import rangeSelectBar from './rangeSelectBar.html';
+
 import monthRange from './monthRange.html';
 import monthRange2 from './monthRange2.html';
 import monthRange3 from './monthRange3.html';
 import monthRange4 from './monthRange4.html';
-import calendarPanel from './calendarPanel.html'
-import rangeSelectBar from './rangeSelectBar.html';
-
 
 export default [{
   title: 'datePicker',
@@ -68,19 +66,18 @@ export default [{
   isCode: true
 },
 {
-
-	title: "monthRangePicker",
-	parentTitle: "DatePickers",
-	author: "tianyanrong",
-	html: [monthRange, monthRange4,monthRange2, monthRange3],
-	isCode: true
+  title: 'monthRangePicker',
+  parentTitle: 'DatePickers',
+  author: 'tianyanrong',
+  html: [monthRange, monthRange4,monthRange2, monthRange3],
+  isCode: true
 },
 {
-	title: "datePickerRange",
-	parentTitle: "DatePickers",
-	author: "tianyanrong",
-	html: [datePickerRange1,datePickerRange2,datePickerRange3,datePickerRange4],
-	isCode: true
+  title: 'datePickerRange',
+  parentTitle: 'DatePickers',
+  author: 'tianyanrong',
+  html: [datePickerRange1,datePickerRange2,datePickerRange3,datePickerRange4],
+  isCode: true
 },
 {
   title: 'calendar',

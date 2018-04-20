@@ -14,7 +14,7 @@ import tpl from './datePickerRangeTpl.html';
 import './datePickerRangeTpl.css';
 import html from './datePickerRange.html';
 import './datePickerRange.css';
-import { preventBlur } from './utils';
+// import { preventBlur } from './utils';
 
 import Defautls from './defaults';
 
@@ -128,18 +128,18 @@ export default (app, elem, attrs, scope) => {
              */
             $scope.onPickEvent = function(type, date, datePicker) {
               switch(type) {
-                case 'date':
+              case 'date':
                 var dateRangeData = datePicker.dateRangeData;
                 $scope.startValue = dateRangeData.start.format($scope.formatDate) || '';
                 $scope.endValue = dateRangeData.end.format($scope.formatDate) || '';
                 $scope.endDate = dateRangeData.start.format($scope.formatDate) || '';
                 $scope.startDate = dateRangeData.end.format($scope.formatDate) || '';
                 break;
-                case 'month':
+              case 'month':
                 datePicker.setMonth(date);
                 break;
               }
-            }
+            };
 
             
             /*
@@ -157,7 +157,7 @@ export default (app, elem, attrs, scope) => {
               e.stopPropagation();
               let pos = e.target.getBoundingClientRect(),
                 offset = panel.offset(),
-                tipHeight = panel.outerHeight(),
+                // tipHeight = panel.outerHeight(),
                 tipWidth = panel.outerWidth(),
                 elWidth = pos.width || pos.right - pos.left,
                 elHeight = pos.height || pos.bottom - pos.top,
@@ -178,7 +178,7 @@ export default (app, elem, attrs, scope) => {
                 $scope.$broadcast('init');
               });
             }
-            $element.find('input').on('focus', (e) => {
+            $element.find('input').on('focus', () => {
               if($scope.ngDisabled) {
                 return;
               }
