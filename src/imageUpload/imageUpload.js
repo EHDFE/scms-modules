@@ -297,6 +297,7 @@ export default (app, elem, attrs, scope) => {
             if((newValue.length > oldValue.length) && $scope.initType){
               $scope.initType = false;
               $scope.init();
+              $scope.selectImg();
             }
           },true);
           
