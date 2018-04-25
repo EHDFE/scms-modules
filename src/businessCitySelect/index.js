@@ -122,12 +122,22 @@ export default (app, elem, attrs, scope) => {
             } else {
               targetList = value;
             }
-            const flatSource = source.reduce((prev, item) => {
-              if (item.children) {
-                return prev.concat(item, item.children);
-              }
-              return prev.concat(item);
-            }, []);
+            let flatSource;
+            if ($scope.cityOnly || !$scope.hasRegionPermission) {
+              flatSource = source.reduce((prev, item) => {
+                if (item.children) {
+                  return prev.concat(item.children);
+                }
+                return prev.concat(item);
+              }, []);
+            } else {
+              flatSource = source.reduce((prev, item) => {
+                if (item.children) {
+                  return prev.concat(item, item.children);
+                }
+                return prev.concat(item);
+              }, []);
+            }
             targetList.forEach(targetValue => {
               const matchOne = find(flatSource, d => d.value === targetValue);
               if (matchOne) {
