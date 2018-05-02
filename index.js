@@ -60,6 +60,7 @@ import cascadeSelect from './src/cascadeSelect';
 import rangeSelectBar from './src/rangeSelectBar/rangeSelectBar';
 import businessCitySelect from './src/businessCitySelect';
 import colorPicker from './src/colorPicker';
+import multipleSelect from './src/multipleSelect';
 
 
 export default {
@@ -109,5 +110,6 @@ export default {
   cascadeSelect,
   rangeSelectBar,
   businessCitySelect,
-  colorPicker
+  colorPicker,
+  multipleSelect,
 };

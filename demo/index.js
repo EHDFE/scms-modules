@@ -82,9 +82,12 @@ import cascadeSelect from './cascadeSelect/';
 demoData.push(cascadeSelect);
 
 import businessCitySelect from './businessCitySelect/';
-demoData.unshift(businessCitySelect);
+demoData.push(businessCitySelect);
 
 import colorPicker from './colorPicker/';
 demoData.push(colorPicker);
+
+import multipleSelect from './multipleSelect/';
+demoData.unshift(multipleSelect);
 
 export default demoData;
