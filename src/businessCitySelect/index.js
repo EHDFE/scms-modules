@@ -45,7 +45,7 @@ export default (app, elem, attrs, scope) => {
       '$timeout',
       'G',
       ($scope, $attrs, $element, $rootScope, $timeout, G) => {
-        let currentOrganizationCode = get(G, 'userInfo.organizationcode', '88888888');
+        let currentOrganizationCode = $scope.ignoreDataPermission ? '88888888' : get(G, 'userInfo.organizationcode', '88888888');
 
         const $inputField = $element.find('input');
         const $layer = $element.find('.business-city-select-layer');
@@ -122,12 +122,22 @@ export default (app, elem, attrs, scope) => {
             } else {
               targetList = value;
             }
-            const flatSource = source.reduce((prev, item) => {
-              if (item.children) {
-                return prev.concat(item, item.children);
-              }
-              return prev.concat(item);
-            }, []);
+            let flatSource;
+            if ($scope.cityOnly || !$scope.hasRegionPermission) {
+              flatSource = source.reduce((prev, item) => {
+                if (item.children) {
+                  return prev.concat(item.children);
+                }
+                return prev.concat(item);
+              }, []);
+            } else {
+              flatSource = source.reduce((prev, item) => {
+                if (item.children) {
+                  return prev.concat(item, item.children);
+                }
+                return prev.concat(item);
+              }, []);
+            }
             targetList.forEach(targetValue => {
               const matchOne = find(flatSource, d => d.value === targetValue);
               if (matchOne) {
