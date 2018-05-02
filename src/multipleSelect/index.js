@@ -38,6 +38,32 @@ export default (app, elem, attrs, scope) => {
           const maxSelectLimit = $attrs.maxSelectLimit ? parseInt($attrs.maxSelectLimit, 10) : Infinity;
           const separator = $attrs.separator ? $attrs.separator : ',';
 
+          $scope.paneVisible = false;
+
+          let mouseInPanel = false;
+          $pane.on('mouseenter', () => {
+            mouseInPanel = true;
+          });
+          $pane.on('mouseleave', () => {
+            mouseInPanel = false;
+          });
+          $pane.on('click', () => {
+            $element.focus();
+          });
+
+          $element.on('focus', () => {
+            $scope.$apply(() => {
+              $scope.paneVisible = true;
+            });
+          });
+          $element.on('blur', () => {
+            if (!mouseInPanel) {
+              $scope.$apply(() => {
+                $scope.paneVisible = false;
+              });
+            }
+          });
+
           $scope.handleClick = data => {
             devTool.log(data);
             if (!data.selected) {
@@ -89,6 +115,10 @@ export default (app, elem, attrs, scope) => {
           $scope.$watch('ngModel', (newValue, oldValue) => {
             if (newValue === oldValue) return;
             devTool.info('ngModel Change', newValue, oldValue);
+          });
+
+          $scope.$on('$destroy', () => {
+            $pane.remove();
           });
         }
       ],
