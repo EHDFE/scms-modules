@@ -90,18 +90,28 @@ export default (app, elem, attrs, scope) => {
             });
           });
 
-          
-          const initialize = () => {
-            if ($scope.ngModel) {
-              $scope.selectedList = $scope.ngModel
+          const updateSelectList = data => {
+            let selectedList;
+            if (data) {
+              selectedList = data
                 .split(separator)
-                .map(value => sourceMapByValue[value]);
+                .map(value => sourceMapByValue[value])
+                .filter(value => value);
             } else {
-              $scope.selectedList = [];
+              selectedList = [];
             }
-            $scope.selectedList.forEach(item => Object.assign(item, {
+            $scope.selectedList && $scope.selectedList.forEach(item => Object.assign(item, {
+              selected: false,
+            }));
+            selectedList.forEach(item => Object.assign(item, {
               selected: true,
             }));
+            $scope.selectedList = selectedList;
+          };
+
+          
+          const initialize = () => {
+            updateSelectList($scope.ngModel);
           };
 
           initialize();
@@ -115,6 +125,7 @@ export default (app, elem, attrs, scope) => {
           $scope.$watch('ngModel', (newValue, oldValue) => {
             if (newValue === oldValue) return;
             devTool.info('ngModel Change', newValue, oldValue);
+            updateSelectList(newValue);
           });
 
           $scope.$on('$destroy', () => {
