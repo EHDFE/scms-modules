@@ -45,6 +45,7 @@ export default (app, elem, attrs, scope) => {
       '$timeout',
       'G',
       ($scope, $attrs, $element, $rootScope, $timeout, G) => {
+        $element.children('input').addClass('select');
         let currentOrganizationCode = $scope.ignoreDataPermission ? '88888888' : get(G, 'userInfo.organizationcode', '88888888');
 
         const $inputField = $element.find('input');

@@ -400,20 +400,28 @@ export default (app, elem, attrs, scope) => {
             function showPanel(e) {
               e.stopPropagation();
               let pos = e.target.getBoundingClientRect(),
-                offset = panel.offset(),
-                tipHeight = panel.outerHeight(),
+                elPos = $(e.target).offset(),
+                offset = {},
                 tipWidth = panel.outerWidth(),
+                tipHeight = panel.outerHeight(),
                 elWidth = pos.width || pos.right - pos.left,
                 elHeight = pos.height || pos.bottom - pos.top,
-                tipOffset = 0,
-                scrollWidth = $('body')[0].scrollWidth;
-              offset.top = pos.top + elHeight + tipOffset;
-              if(scrollWidth > pos.left + tipWidth) {
-                offset.left = pos.left;
+                tipOffset = 1,
+                scrollWidth = $('body')[0].scrollWidth,
+                scrollHeight = $('body')[0].scrollHeight;
+              if(scrollHeight < elPos.top + elHeight + tipHeight + tipOffset && e.target.offsetTop > tipHeight){
+                offset.top = elPos.top - (tipHeight - elHeight) - elHeight - tipOffset;
               }
               else {
-                offset.left = pos.left - (tipWidth - elWidth);
+                offset.top = elPos.top + elHeight + tipOffset;
               }
+              if(scrollWidth > elPos.left + tipWidth) {
+                offset.left = elPos.left;
+              }
+              else {
+                offset.left = elPos.left - (tipWidth - elWidth);
+              }
+              
               panel.css('display', 'inline-block');
               panel.offset(offset);
               $timeout(function() {
