@@ -14,7 +14,7 @@
 
 .date-picker-hasdata .clear-date {
   position: absolute;
-  top:-1px;
+  top:0px;
   right:10px;
   color: #B9BEC3;
   height: 12px;
