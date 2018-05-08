@@ -10,15 +10,21 @@
 .date-picker-range-hasdata:hover  .input-date-range{
   background: none;
 }
-.date-picker-range-hasdata:hover .clear-date {
-  display: inline-block;
+.date-picker-range-hasdata{
+  position: relative;
+}
+.date-picker-range-hasdata .clear-date{
   position: absolute;
-  margin-left: -26px;
-  margin-top: 14px;
+  top:12px;
+  right:10px;
   color: #B9BEC3;
   height: 12px;
   width: 12px;
   cursor: pointer;
+}
+.date-picker-range-hasdata:hover .clear-date {
+  display: inline-block;
+ 
 }
 .date-picker-range-hasdata:hover .clear-date:hover {
   color:#51A1FD;
