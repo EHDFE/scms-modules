@@ -8,20 +8,26 @@
 .date-picker-date-container  .clear-date {
   display: none;
 }
-.date-picker-hasdata:hover .clear-date {
-  display: inline-block;
+.date-picker-hasdata{
+  position: relative;
+}
+
+.date-picker-hasdata .clear-date {
   position: absolute;
-  margin-left: -21px;
-  margin-top: 13px;
+  top:0px;
+  right:10px;
   color: #B9BEC3;
   height: 12px;
   width: 12px;
   cursor: pointer;
+}
+.date-picker-hasdata:hover .clear-date {
+  display: inline-block;
 }
 .date-picker-hasdata:hover .clear-date:hover {
   color:#51A1FD;
 }
 .date-picker-date-container .form-control[readonly],
 .date-picker-date-container .form-control[disabled]{
-  background: #fff;
+  background-color: #fff;
 }
