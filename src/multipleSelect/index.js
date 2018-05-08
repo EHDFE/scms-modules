@@ -106,6 +106,7 @@ export default (app, elem, attrs, scope) => {
             selectedList.forEach(item => Object.assign(item, {
               selected: true,
             }));
+            $scope.ngModel = selectedList.map(d => d.value).join(separator);
             $scope.selectedList = selectedList;
           };
 
