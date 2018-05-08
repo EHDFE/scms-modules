@@ -1,9 +1,12 @@
 import isEqual from 'lodash/isEqual';
 import defaults from 'lodash/defaults';
 import pick from 'lodash/pick';
+import DevTool from '../../utils/DevTool';
 
 const KEYS_NEED_UPDATE = ['apiUrl', 'openCityType', 'isActivated', 'organizationCode'];
 const COUNTRY_CODE = '88888888';
+
+const requestResultCache = {};
 
 export default class DataSource {
   constructor(options) {
@@ -37,13 +40,18 @@ export default class DataSource {
     }
   }
   request(data) {
+    const paramKey = JSON.stringify(data);
     return new Promise((resolve, reject) => {
+      if (requestResultCache[paramKey]) {
+        return resolve(requestResultCache[paramKey]);
+      }
       $.ajax({
         type: 'post',
         url: this.apiUrl,
         data,
       }).then(res => {
         if (res.result === 'success') {
+          requestResultCache[paramKey] = res.data;
           resolve(res.data);
         } else {
           $.alert(res.msg, {
