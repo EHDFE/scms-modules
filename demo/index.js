@@ -64,8 +64,6 @@ demoData.push(crumb);
 import card from "./card/index.js";
 demoData.push(card);
 
-
-
 import starRating from "./starRating/index.js";
 demoData.push(starRating);
 
