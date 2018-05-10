@@ -1,12 +1,4 @@
-.date-picker-range-hasdata:hover  .input-date-range{
-  background: none;
-}
-.input-date-range:focus {
-  outline: none;
-  box-shadow: none;
-  border-color: #51A1FD;
-  border-width: 1px;
-}
+
 
 .date-picker-range-date-container {
   display: inline-block;
@@ -15,16 +7,28 @@
 .date-picker-range-date-container  .clear-date {
   display: none;
 }
-.date-picker-range-hasdata:hover .clear-date {
-  display: inline-block;
+.date-picker-range-hasdata:hover  .input-date-range{
+  background: none;
+}
+.date-picker-range-hasdata{
+  position: relative;
+}
+.date-picker-range-hasdata .clear-date{
   position: absolute;
-  margin-left: -26px;
-  margin-top: 14px;
+  top:13px;
+  right:10px;
   color: #B9BEC3;
   height: 12px;
   width: 12px;
   cursor: pointer;
 }
+.date-picker-range-hasdata:hover .clear-date {
+  display: inline-block;
+ 
+}
 .date-picker-range-hasdata:hover .clear-date:hover {
   color:#51A1FD;
+}
+.month-range-picker .input-date-range .input-date{
+  width: 60px !important;
 }

@@ -23,8 +23,13 @@
 	border: 1px solid @input-border-default;
     border-radius:@input-border-radius;
 }
-.input-date-range.focus{
+.input-date-range:focus{
+	outline: none;
+	box-shadow: none;
 	border: 1px solid @input-border-focus;
+}
+.input-date-range.disabled:focus{
+	border: 1px solid @input-border-default;
 }
 .input-date-range .input-date-time,
 .input-date-range .input-date-time:focus,

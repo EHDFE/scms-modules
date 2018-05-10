@@ -1,4 +1,4 @@
-<div class="date-picker-date-container" ng-class="{'date-picker-hasdata': ngModel}">
-  <input class="form-control" placeholder="{{placeholder}}" ng-class="{'input-date': !pickTime, 'input-date-time':pickTime }" style="display:inline-block;" ng-model="ngModel"/>
-  <span ng-click="clearDate($event)" class="clear-date icon-non-compliant-order"></span>
+<div class="date-picker-date-container" ng-class="{'date-picker-hasdata': ngModel&&!ngDisabled}">
+  <input class="form-control" ng-disabled="ngDisabled" placeholder="{{placeholder}}" ng-class="{'input-date': !pickTime, 'input-date-time':pickTime }" style="display:inline-block;" ng-model="ngModel" readonly="readonly"/>
+  <span ng-click="clearDate($event)" class="clear-date icon-non-compliant-order" ng-if="!ngDisabled"></span>
 </div>

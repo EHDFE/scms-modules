@@ -2,7 +2,7 @@
   "data": [
     {
       "name": "所有",
-      "value": ""
+      "value": "fruit,car"
     },
     {
       "name": "水果",
@@ -10,7 +10,7 @@
       "children": [
         {
           "name": "所有",
-          "value": ""
+          "value": "watermelon,apple,strawberry"
         },
         {
           "name": "西瓜",
@@ -22,7 +22,7 @@
           "children": [
             {
               "name": "所有",
-              "value": ""
+              "value": "fuji,aomori,green-apple"
             },
             {
               "name": "富士",
@@ -50,7 +50,7 @@
       "children": [
         {
           "name": "所有",
-          "value": ""
+          "value": "honda,toyota"
         },
         {
           "name": "本田",
@@ -58,7 +58,7 @@
           "children": [
             {
               "name": "所有",
-              "value": ""
+              "value": "accord,civic"
             },
             {
               "name": "雅阁",
@@ -76,7 +76,7 @@
           "children": [
             {
               "name": "所有",
-              "value": ""
+              "value": "carola,crown"
             },
             {
               "name": "卡罗拉",

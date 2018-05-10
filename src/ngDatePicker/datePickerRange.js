@@ -14,7 +14,7 @@ import tpl from './datePickerRangeTpl.html';
 import './datePickerRangeTpl.css';
 import html from './datePickerRange.html';
 import './datePickerRange.css';
-import { preventBlur } from './utils';
+// import { preventBlur } from './utils';
 
 import Defautls from './defaults';
 
@@ -39,6 +39,7 @@ export default (app, elem, attrs, scope) => {
           //dateRangeResultData: '=',
           startDateRange: '=', // 开始时间
           endDateRange: '=', // 结束时间
+          ngDisabled: '=',
           eventChange: '&' //当时间范围发生改变时，会触发时方式
         },
         controller: [
@@ -125,12 +126,21 @@ export default (app, elem, attrs, scope) => {
             /*
              * 当面板中触发了“点击日期”事件，设置值。
              */
-            $scope.onPickEvent = function(date, dateRangeData) {
-              $scope.startValue = dateRangeData.start.format($scope.formatDate) || '';
-              $scope.endValue = dateRangeData.end.format($scope.formatDate) || '';
-              $scope.endDate = dateRangeData.start.format($scope.formatDate) || '';
-              $scope.startDate = dateRangeData.end.format($scope.formatDate) || '';
+            $scope.onPickEvent = function(type, date, datePicker) {
+              switch(type) {
+              case 'date':
+                var dateRangeData = datePicker.dateRangeData;
+                $scope.startValue = dateRangeData.start.format($scope.formatDate) || '';
+                $scope.endValue = dateRangeData.end.format($scope.formatDate) || '';
+                $scope.endDate = dateRangeData.start.format($scope.formatDate) || '';
+                $scope.startDate = dateRangeData.end.format($scope.formatDate) || '';
+                break;
+              case 'month':
+                datePicker.setMonth(date);
+                break;
+              }
             };
+
             
             /*
              * 点“确认”提交选中的时间范围
@@ -146,15 +156,28 @@ export default (app, elem, attrs, scope) => {
             function showPanel(e) {
               e.stopPropagation();
               let pos = e.target.getBoundingClientRect(),
-                offset = panel.offset(),
-                tipHeight = panel.outerHeight(),
+                elPos = $(e.target).offset(),
+                offset = {},
                 tipWidth = panel.outerWidth(),
+                tipHeight = panel.outerHeight(),
                 elWidth = pos.width || pos.right - pos.left,
                 elHeight = pos.height || pos.bottom - pos.top,
-                tipOffset = 0,
-                scrollWidth = $('body')[0].scrollWidth;
-              offset.top = pos.top + elHeight + tipOffset;
-              offset.left = pos.left;
+                tipOffset = 1,
+                scrollWidth = $('body')[0].scrollWidth,
+                scrollHeight = $('body')[0].scrollHeight;
+              if(scrollHeight < elPos.top + elHeight + tipHeight + tipOffset && e.target.offsetTop > tipHeight){
+                offset.top = elPos.top - (tipHeight - elHeight) - elHeight - tipOffset;
+              }
+              else {
+                offset.top = elPos.top + elHeight + tipOffset;
+              }
+              if(scrollWidth > elPos.left + tipWidth) {
+                offset.left = elPos.left;
+              }
+              else {
+                offset.left = elPos.left - (tipWidth - elWidth);
+              }
+
               panel.css('display', 'inline-block');
               panel.offset(offset);
               initDate();
@@ -162,10 +185,16 @@ export default (app, elem, attrs, scope) => {
                 $scope.$broadcast('init');
               });
             }
-            $element.find('input').on('focus', (e) => {
+            $element.find('input').on('focus', () => {
+              if($scope.ngDisabled) {
+                return;
+              }
               $element.find('.input-date-range').focus();
             });
             $element.find('.input-date-range').on('focus', (e) => {
+              if($scope.ngDisabled) {
+                return;
+              }
               showPanel(e);
             });
 
@@ -198,7 +227,7 @@ export default (app, elem, attrs, scope) => {
                 $document.unbind('mousedown',fnDocumentMousedown);
               });
             }
-            $scope.$on('refresh', (e, data) => {
+            $scope.$on('datePickerRefresh', (e, data) => {
               $scope.$broadcast('refreshDate', data);
             });
             

@@ -5,11 +5,14 @@
 @input-disabled-bg:					#F5F5F5;
 @input-disabled-color:					#bbb;
 
+.select,
 select{
-	appearance:none;
+	appearance: none;
 	-moz-appearance:none;
 	-webkit-appearance:none;
-	background: url(./img/selecticon.png?asFile) 100% center no-repeat !important;
+	background-image: url(./img/selecticon.png?asFile) !important;
+	background-position: 100% center !important;
+	background-repeat: no-repeat !important;
 	padding-right:25px !important;
 	padding-left:5px !important;
 }
@@ -38,23 +41,23 @@ input::-webkit-input-placeholder{
 
 /**/
 .form-control{
-    height: 30px;
-    border:1px solid @input-border-default;
+	height: 30px;
+	border:1px solid @input-border-default;
 	border-radius: @input-border-radius;
 	box-shadow: none;
 	padding-top:0;
 	padding-bottom:0;
 }
 .form-control[readonly]{
-	background-color: #fff;
+	background-color: @input-disabled-bg;
 }
 .form-control:focus,
-.form-control:active{
+.form-control:active {
 	box-shadow: none;
-	border-color:@input-border-focus;
+	border-color: @input-border-focus;
 }
 .form-control:disabled{
-	background-color: #F5F5F5;
+	background-color: @input-disabled-bg;
 	color:#B9BEC3;
 }
 select.form-control{

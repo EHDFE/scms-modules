@@ -23,3 +23,18 @@
   display: inline-block;
 }
 
+.week-picker-hasdata{
+  position: relative;
+}
+.week-picker-hasdata .clear-date {
+  position: absolute;
+  top:-1px;
+  right:10px;
+  color: #B9BEC3;
+  height: 12px;
+  width: 12px;
+  cursor: pointer;
+}
+.week-picker-hasdata:hover .clear-date {
+  display: inline-block;
+}

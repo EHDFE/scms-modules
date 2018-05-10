@@ -88,6 +88,12 @@ export default (app, elem, attrs, scope) => {
             datePicker.formatDate = newVal;
           });
 
+          try{
+            $timeout(function() {
+              $scope.onPickEvent('init', null, datePicker, $attrs);
+            })            
+          }catch(e) {}
+
           if ($attrs.dateRange) {
             $scope.dateRangeData = $scope.datePicker.dateRangeData;
           }
@@ -153,10 +159,32 @@ export default (app, elem, attrs, scope) => {
           $scope.pickEvent = function(col) {
             datePicker.setDate(col);
             try{
-              $scope.onPickEvent(col, $scope.dateRangeData);
+              $scope.onPickEvent('date', col, datePicker);//$scope.dateRangeData
             }
             catch(e) {}
           }
+
+          $scope.pickMonthEvent = function(currmonth) {
+            try{
+              if($scope.onPickEvent) {
+                $scope.onPickEvent('month', currmonth, datePicker, $attrs);
+              }
+              else{
+                datePicker.setMonth(currmonth);
+              }
+            }
+            catch(e) {
+              datePicker.setMonth(currmonth);
+            }
+            
+          }
+
+          $scope.hoverMonth = function(currmonth) {
+            try{
+              $scope.onPickEvent('hoverMonth', currmonth, datePicker, $attrs);
+            }
+            catch(e) {}
+          };
 
           $scope.hover = throttle((col) => {
             if (
@@ -171,7 +199,7 @@ export default (app, elem, attrs, scope) => {
                 return;
               }
               datePicker.tmpDate = col.data;
-              $scope.$emit('refresh', datePicker.tmpDate);
+              $scope.$emit('datePickerRefresh', datePicker.tmpDate);
             }
           }, 100);
 
@@ -180,7 +208,7 @@ export default (app, elem, attrs, scope) => {
             if ($scope.dateRange) {
               $timeout(() => {
                 datePicker.tmpDate = null;
-                $scope.$emit('refresh');
+                $scope.$emit('datePickerRefresh');
               });
             }
           };
@@ -337,7 +365,7 @@ export default (app, elem, attrs, scope) => {
 
           $scope.$watch('datePicker.refresh', (newVal, oldVal) => {
             if (newVal && newVal !== oldVal) {
-              $scope.$emit('refresh');
+              $scope.$emit('datePickerRefresh');
             }
           });
           $scope.$on('init', () => {
