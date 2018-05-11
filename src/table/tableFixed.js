@@ -126,7 +126,7 @@ export default (app, elem, attrs, scope) => {
               rightColThW: [],
               leftColThW: []
             };
-            if($scope.fixedCol.left){
+            if($scope.fixedCol&&$scope.fixedCol.left){
               let leftCol = $scope.fixedCol.left.split(' ');
               leftCol.map(function(item, index){
                 colResult.staticThW[index] = item;
@@ -134,7 +134,7 @@ export default (app, elem, attrs, scope) => {
                 colResult.leftColThW[index] = item;
               });
             }
-            if($scope.fixedCol.right){
+            if($scope.fixedCol&&$scope.fixedCol.right){
               let rightCol = $scope.fixedCol.right.split(' ').reverse();
               rightCol.map(function(item, index){
                 colResult.staticThW[elLength-index-1] = item;
@@ -186,6 +186,10 @@ export default (app, elem, attrs, scope) => {
             reset();
             $fixRightThead.hide();
             $fixLeftThead.hide();
+            if(!$scope.fixedCol){
+                console.warn('table info is required if using table fixed directive');
+                return;
+            }
             if (!tableDom) {
               const headerThFromDom = $('.tablebox thead th');
               angular.forEach(headerThFromDom, (item, index) => {
