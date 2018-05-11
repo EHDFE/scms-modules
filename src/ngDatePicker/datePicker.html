@@ -1,7 +1,7 @@
 <div class="date-picker">
   <div class="date-panel">
-    <div date-panel init-date="initDate" max-date-value="maxDateValue" min-date-value="minDateValue" max-date="maxDate" min-date="minDate"
-      date="ngModel" use-seconds="useSeconds" min-view-mode="minViewMode" pick-time="pickTime" format-date="formatDate"></div>
+    <div date-panel init-date="initData" max-date-value="maxDateValue" min-date-value="minDateValue" max-date="maxDate" min-date="minDate"
+      date="ngModel" use-seconds="useSeconds" min-view-mode="minViewMode" pick-time="pickTime" format-date="formatDate" on-pick-event="onPickEvent"></div>
     <div class="confirm" ng-click="pick()" ng-show="pickTime">
       确定
     </div>

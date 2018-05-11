@@ -83,5 +83,9 @@ demoData.push(cascadeSelect);
 
 import businessCitySelect from './businessCitySelect/';
 demoData.push(businessCitySelect);
+demoData.unshift(businessCitySelect);
+
+import colorPicker from './colorPicker/';
+demoData.push(colorPicker);
 
 export default demoData;

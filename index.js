@@ -1,5 +1,6 @@
 // import 'bootstrap/less/bootstrap.less';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css';
 import 'font-awesome/css/font-awesome.css';
 
 import './libs/base.less';
@@ -48,6 +49,7 @@ import weekPicker from './src/ngDatePicker/weekPicker';
 import timePicker from './src/ngDatePicker/timePicker';
 import calendar from './src/ngDatePicker/calendar';
 import calendarPanel from './src/ngDatePicker/calendarPanel';
+import monthRangePicker from './src/ngDatePicker/monthRangePicker';
 import buttonDropdown from './src/buttonDropdown/buttonDropdown';
 import selectDropdown from './src/selectDropdown/selectDropdown';
 import imageUpload from './src/imageUpload/imageUpload';
@@ -57,6 +59,8 @@ import circleSchedule from './src/circleSchedule/circleSchedule';
 import cascadeSelect from './src/cascadeSelect';
 import rangeSelectBar from './src/rangeSelectBar/rangeSelectBar';
 import businessCitySelect from './src/businessCitySelect';
+import colorPicker from './src/colorPicker';
+
 
 
 export default {
@@ -97,6 +101,7 @@ export default {
   'ngDatePicker/timePicker': timePicker,
   'ngDatePicker/calendar': calendar,
   'ngDatePicker/calendarPanel': calendarPanel,
+  'ngDatePicker/monthRangePicker': monthRangePicker,
   buttonDropdown,
   selectDropdown,
   'imageUpload/imageUpload': imageUpload,
@@ -105,4 +110,5 @@ export default {
   cascadeSelect,
   rangeSelectBar,
   businessCitySelect,
+  colorPicker
 };

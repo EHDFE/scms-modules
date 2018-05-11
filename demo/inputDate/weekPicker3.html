@@ -1,0 +1,11 @@
+<!--周选择 最大日期 最小日期 初始值(距本周多少周)-->
+<div class="form-inline">
+    <select class="form-control" ng-model="weekPicker3InitValue" ng-init="weekPicker3InitValue = '-1';">
+        <option value="0">0</option>
+        <option value="-1">-1</option>
+        <option value="-2">-2</option>
+        <option value="-3">-3</option>
+    </select>
+    <input week-picker week-data="weekData3" max-date-value="20" min-date-value="-30" init-week="weekPicker3InitValue"> 
+    {{weekData3|json}}
+</div>

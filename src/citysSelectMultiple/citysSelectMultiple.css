@@ -42,18 +42,6 @@
 #citysSelectmultipleDialog ul li > div:hover{
 	background-color: #f5f5f5;
 }
-#citysSelectmultipleDialog .checkbox-inline{
-	background: url(./img/formIcon.png) -7px -2px no-repeat;
-	padding-left:30px;
-}
 #citysSelectmultipleDialog .checkbox-inline input[type="checkbox"]{
 	display: none;
-}
-#citysSelectmultipleDialog .checkbox-inline-checked{
-	background: url(./img/formIcon.png) -7px -38px no-repeat;
-}
-#citysSelectmultipleDialog .checkbox-disable{
-	background: url(./img/disable.png) 2px 7px no-repeat;
-	padding-left: 30px;
-	line-height: 34px;
 }

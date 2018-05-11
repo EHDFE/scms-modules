@@ -53,13 +53,25 @@ export default (app, elem, attrs, scope) => {
               }
             } else if ($scope.imageUrls && $scope.imageUrls.length) {
               $scope.imageArray = $scope.imageUrls;
-              $scope.imageArray.push({
-                uploadType: {
-                  succeed: false,
-                  error: false,
-                  loading: false,
-                },
-              });
+              if($scope.dNum){
+                if($scope.imageArray.length < $scope.dNum){
+                  $scope.imageArray.push({
+                    uploadType: {
+                      succeed: false,
+                      error: false,
+                      loading: false,
+                    },
+                  });
+                }
+              }else{
+                $scope.imageArray.push({
+                  uploadType: {
+                    succeed: false,
+                    error: false,
+                    loading: false,
+                  },
+                });
+              }
             } else {
               $scope.imageArray.push({
                 uploadType: {
@@ -122,13 +134,13 @@ export default (app, elem, attrs, scope) => {
               image.src = theFile.target.result;
               image.onload = function () {
                 if ($scope.dWidth && this.width !== $scope.dWidth) {
-                  G.alert(`图片宽度大于${$scope.dWidth}px`, {
+                  G.alert(`图片宽度不等于${$scope.dWidth}px`, {
                     type: 'error',
                   });
                   return;
                 }
                 if ($scope.dHeight && this.height !== $scope.dHeight) {
-                  G.alert(`图片高度大于${$scope.dHeight}px`, {
+                  G.alert(`图片高度不等于${$scope.dHeight}px`, {
                     type: 'error',
                   });
                   return;
@@ -280,8 +292,14 @@ export default (app, elem, attrs, scope) => {
               var url = canvas.toDataURL();
               $ele.attr("href", url).attr("download", name+".png");
           }
-
-          
+          $scope.initType = true;
+          $scope.$watch('imageUrls',function(newValue,oldValue){
+            if((newValue.length > oldValue.length) && $scope.initType){
+              $scope.initType = false;
+              $scope.init();
+              $scope.selectImg();
+            }
+          },true);
           
           $scope.clearData = function () {
             $scope.init();

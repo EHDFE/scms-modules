@@ -90,23 +90,30 @@ export default class DataSource {
     });
     cityList.forEach(d => {
       if (d.organizationcode !== COUNTRY_CODE) {
-        const transformed = this.sourceFormatter(d);
+        const transformed = this.sourceFormatter(d, regionMap[d.parorganizationcode]);
         if (transformed) {
-          regionMap[d.parorganizationcode].children.push(transformed);
+          regionMap[d.parorganizationcode] && regionMap[d.parorganizationcode].children && regionMap[d.parorganizationcode].children.push(transformed);
         }
       }
     });
     let company;
     if (this.organizationCode === COUNTRY_CODE) {
-      company = this.sourceFormatter({
+      company = {
         organizationname: '全国',
         organizationcode: COUNTRY_CODE,
-      });
+        isNational: true,
+      };
+      const formattedCompany = this.sourceFormatter(company);
+      if (formattedCompany) {
+        Object.assign(company, formattedCompany);
+      } else {
+        company = false;
+      }
     } else {
       company = false; 
     }
     company = company ? [ company ] : [];
-    return company.concat(Object.keys(regionMap).map(code => {
+    const source = company.concat(Object.keys(regionMap).map(code => {
       const children = regionMap[code].children;
       if (children.length === 0) return false;
       const formattedData = this.sourceFormatter(regionMap[code]);
@@ -124,6 +131,10 @@ export default class DataSource {
         children,
       };
     })).filter(d => !!d);
+    return {
+      source,
+      hasRegionPermission: this.organizationCode === COUNTRY_CODE || this.organizationCode in regionMap,
+    };
   }
   setUpdater(updater) {
     this.updater = updater;

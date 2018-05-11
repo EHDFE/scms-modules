@@ -1,0 +1,5 @@
+<!--月份选择器-->
+<switch-directive is-checked="monthPickDisable"></switch-directive>
+<div class="mt5" ng-init="monthPicker4 = '2018-02'">
+    <input placeholder="结束时间" type="text" date-picker  min-view-mode="months" format-date="YYYY-MM" ng-model="monthPicker4" min-date="'2017-05'" max-date="'2019-04'" ng-disabled="monthPickDisable">
+</div>

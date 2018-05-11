@@ -1,6 +1,8 @@
 import template from './index.html';
 import get from 'lodash/get';
 import find from 'lodash/find';
+import isEqual from 'lodash/isEqual';
+import isFunction from 'lodash/isFunction';
 // import isEqual from 'lodash/isEqual';
 // import cascadeSelect from '../cascadeSelect';
 import DataSource from './dataSource';
@@ -28,6 +30,11 @@ export default (app, elem, attrs, scope) => {
       sourceFormatter: '=',
       readonly: '=',
       ignoreDataPermission: '=',
+      prependOptionType: '@',
+      autoSelect: '=',
+      onChange: '=',
+      onBeforeChange: '=',
+      mustSelect: '=',
     },
     replace: true,
     controller: [
@@ -38,7 +45,8 @@ export default (app, elem, attrs, scope) => {
       '$timeout',
       'G',
       ($scope, $attrs, $element, $rootScope, $timeout, G) => {
-        let currentOrganizationCode = get(G, 'userInfo.organizationcode', '88888888');
+        $element.children('input').addClass('select');
+        let currentOrganizationCode = $scope.ignoreDataPermission ? '88888888' : get(G, 'userInfo.organizationcode', '88888888');
 
         const $inputField = $element.find('input');
         const $layer = $element.find('.business-city-select-layer');
@@ -59,6 +67,9 @@ export default (app, elem, attrs, scope) => {
           mouseInPanel = false;
           $layer[0].focus();
         });
+        $inputField.on('keydown', e => {
+          e.preventDefault();
+        });
         
         $layer.on('blur', () => {
           if (!mouseInPanel) {
@@ -76,10 +87,10 @@ export default (app, elem, attrs, scope) => {
           prependOptionType: $scope.prependOptionType || 'PARENT_VALUE',
           sourceFormatter: $scope.sourceFormatter,
           // sourceFormatter: data => {
-          //   if (data.organizationcode === '88888888') return false;
+          //   // if (data.organizationcode === '88888888') return false;
           //   return {
           //     name: data.organizationname,
-          //     value: data.organizationname,
+          //     value: data.organizationcode === '88888888' ? '' : data.organizationcode,
           //   };
           // },
         }));
@@ -87,8 +98,24 @@ export default (app, elem, attrs, scope) => {
         const updateSelectListByModel = (source, value) => {
           devTool.log(source, value);
           const matchedList = [];
-          if (!value) {
-            matchedList.push(source[0]);
+          if (!Array.isArray(source)) return;
+          if (value === null || value === undefined) {
+            if ($scope.autoSelect) {
+              let defaultSelect;
+              if ($scope.cityOnly || !$scope.hasRegionPermission) {
+                const flatSource = source.reduce((prev, item) => {
+                  if (item.children) {
+                    return prev.concat(item.children);
+                  } else {
+                    return prev.concat(item);
+                  }
+                }, []);
+                defaultSelect = flatSource[0];
+              } else {
+                defaultSelect = source[0];
+              }
+              defaultSelect && matchedList.push(defaultSelect);
+            }
           } else {
             let targetList;
             if (!Array.isArray(value)) {
@@ -96,12 +123,22 @@ export default (app, elem, attrs, scope) => {
             } else {
               targetList = value;
             }
-            const flatSource = source.reduce((prev, item) => {
-              if (item.children) {
-                return prev.concat(item, item.children);
-              }
-              return prev.concat(item);
-            }, []);
+            let flatSource;
+            if ($scope.cityOnly || !$scope.hasRegionPermission) {
+              flatSource = source.reduce((prev, item) => {
+                if (item.children) {
+                  return prev.concat(item.children);
+                }
+                return prev.concat(item);
+              }, []);
+            } else {
+              flatSource = source.reduce((prev, item) => {
+                if (item.children) {
+                  return prev.concat(item, item.children);
+                }
+                return prev.concat(item);
+              }, []);
+            }
             targetList.forEach(targetValue => {
               const matchOne = find(flatSource, d => d.value === targetValue);
               if (matchOne) {
@@ -110,6 +147,9 @@ export default (app, elem, attrs, scope) => {
             });
           }
           devTool.log('matchedList:', matchedList);
+          $scope.selectedList.forEach(d => Object.assign(d, {
+            selected: false,
+          }));
           $scope.selectedList = matchedList.map(d => Object.assign(d, {
             selected: true,
           }));
@@ -117,11 +157,15 @@ export default (app, elem, attrs, scope) => {
         };
 
         let initialized = false;
-        dataSource.setUpdater(source => {
+        dataSource.setUpdater(({source, hasRegionPermission}) => {
           $scope.$apply(() => {
-            devTool.log('source update', source);
+            devTool.log('source update', source, hasRegionPermission);
+            if (source.length === 0) {
+              $.alert('当前登陆人所属城市未开通对应业务！');
+            }
             $scope.source = source;
-            nationNode = find(source, d => d.value === '88888888');
+            $scope.hasRegionPermission = hasRegionPermission;
+            nationNode = find(source, d => d.isNational);
             if (initialized) {
               updateSelectListByModel(source, null);
             } else {
@@ -139,9 +183,13 @@ export default (app, elem, attrs, scope) => {
 
         $scope.handleSelectAction = (data, isCity, parent) => {
           devTool.log(data, isCity, parent);
-          if (!isCity && $scope.cityOnly) return false;
+          if (isFunction($scope.onBeforeChange)) {
+            if (!$scope.onBeforeChange(data, isCity, parent)) return false;
+          }
           const nextSelectStatus = !data.selected;
-          const isNational = data.value === '88888888';
+          const isNational = !!data.isNational;
+          if (!isCity && ($scope.cityOnly || !$scope.hasRegionPermission) && !isNational) return false;
+          if ($scope.mustSelect && !nextSelectStatus && $scope.selectedList.length === 1) return false;
           if (isNational) {
             Object.assign(data, {
               selected: nextSelectStatus,
@@ -190,7 +238,7 @@ export default (app, elem, attrs, scope) => {
                       if (d === data) return true;
                       return d.selected;
                     });
-                    if (parentNeedToBeSelected && !$scope.cityOnly) {
+                    if (parentNeedToBeSelected && !$scope.cityOnly && $scope.hasRegionPermission) {
                       Object.assign(parent, {
                         selected: true,
                       });
@@ -265,6 +313,7 @@ export default (app, elem, attrs, scope) => {
           } else {
             $scope.ngModel = selectedValues.join(',');
           }
+          $scope.onChange && $scope.onChange($scope.selectedList);
           $scope.displayValue = $scope.selectedList.map(d => d.name).join('/');
           $scope.active = false;
         };
@@ -289,20 +338,30 @@ export default (app, elem, attrs, scope) => {
             isActivated: value,
           });
         });
-        $scope.$watch('active', value => {
+        $scope.$watch('active', (value, oldValue) => {
           if (value) {
             devTool.log($layer);
             setTimeout(() => {
               $layer[0].focus();
             }, 0);
+          } else {
+            if ($scope.multipleSelectMode && oldValue && !value) {
+              const currentSelectValues = $scope.selectedList.map(d => d.value);
+              if (!isEqual(currentSelectValues, $scope.ngModel)) {
+                updateSelectListByModel($scope.source, $scope.ngModel)
+              }
+            }
           }
         });
         
         $scope.$watch('ngModel', (value, oldValue) => {
           devTool.info('ngModel change:', value, oldValue);
+          if (value !== oldValue) {
+            updateSelectListByModel($scope.source, value);
+          }
         });
 
-        if ($scope.ignoreDataPermission) {
+        if (!$scope.ignoreDataPermission) {
           // 控制数据权限
           const handleUserOrgChange = $rootScope.$on('updateOrg', () => {
             const nextOrganizationCode = get(G, 'userInfo.organizationcode', '');
@@ -317,8 +376,6 @@ export default (app, elem, attrs, scope) => {
             handleUserOrgChange();
           });
         }
-        
-
       }],
   })]);
 };
