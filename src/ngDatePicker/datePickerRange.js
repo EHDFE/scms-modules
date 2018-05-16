@@ -122,12 +122,80 @@ export default (app, elem, attrs, scope) => {
             }
 
             initDate(true);
+
+            var datepickers = {};
+            //
+            var setTitleStatus = function() {
+              if(!datepickers['part1'] ||  !datepickers['part2']) {
+                return;
+              }
+              if(
+                (datepickers['part1'].dateData.year >= datepickers['part2'].dateData.year) || 
+                (datepickers['part1'].dateData.year + 1 === datepickers['part2'].dateData.year && datepickers['part1'].dateData.month >= datepickers['part2'].dateData.month)
+              ) {
+                datepickers['part1'].isHideYearRight = true;
+                datepickers['part2'].isHideYearLeft = true;
+              }
+              else {
+                datepickers['part1'].isHideYearRight = false;
+                datepickers['part2'].isHideYearLeft = false;
+              }
+              if(datepickers['part1'].dateData.year === datepickers['part2'].dateData.year && datepickers['part1'].dateData.month + 1 === datepickers['part2'].dateData.month) {
+                datepickers['part1'].isHideMonthRight = true;
+                datepickers['part2'].isHideMonthLeft = true;
+              }
+              else {
+                datepickers['part1'].isHideMonthRight = false;
+                datepickers['part2'].isHideMonthLeft = false;
+              }
+
+              angular.forEach(datepickers['part1'].monthView, function(item) {
+                if(item.year === datepickers['part2'].dateData.year && item.data >= datepickers['part2'].dateData.month) {
+                  item.disabled = true;
+                }
+                else {
+                  item.disabled = false;
+                }
+              });
+
+              angular.forEach(datepickers['part2'].monthView, function(item) {
+                if(item.year === datepickers['part1'].dateData.year && item.data <= datepickers['part1'].dateData.month) {
+                  item.disabled = true;
+                }
+                else {
+                  item.disabled = false;
+                }
+              });
+
+              angular.forEach(datepickers['part1'].yearView, function(item) {
+                if(item.data > datepickers['part2'].dateData.year) {
+                  item.disabled = true;
+                }
+                else {
+                  item.disabled = false;
+                }
+              });
+
+              angular.forEach(datepickers['part2'].yearView, function(item) {
+                if(item.data < datepickers['part1'].dateData.year) {
+                  item.disabled = true;
+                }
+                else {
+                  item.disabled = false;
+                }
+              });
+            }
             
             /*
              * 当面板中触发了“点击日期”事件，设置值。
              */
-            $scope.onPickEvent = function(type, date, datePicker) {
+            
+            $scope.onPickEvent = function(type, date, datePicker, $panelAttrs) {
               switch(type) {
+              case 'init':
+                datepickers[$panelAttrs.name] = datePicker;
+                datepickers[$panelAttrs.name].setTitleStatus = setTitleStatus;
+                break;
               case 'date':
                 var dateRangeData = datePicker.dateRangeData;
                 $scope.startValue = dateRangeData.start.format($scope.formatDate) || '';

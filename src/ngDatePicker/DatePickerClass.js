@@ -84,11 +84,13 @@ class DatePicker {
   setPreDecade() {
     if (!this.yearView[0].disabled) {
       this.setYearView(this.yearView[0].data - 1);
+      this.setTitleStatus();
     }
   }
   setNextDecade() {
     if (!this.yearView[11].disabled) {
       this.setYearView(this.yearView[11].data + 1);
+      this.setTitleStatus();
     }
   }
   setYear(year) {
@@ -109,6 +111,7 @@ class DatePicker {
       }
       this.setMonthView();
       this.showPanel = 'month';
+      this.setTitleStatus();
     }
   }
   setMonthView() {
@@ -456,7 +459,7 @@ class DatePicker {
         });
       }
     }
-
+    this.setTitleStatus();
     this.dateView = dateView;
     return dateView;
   }
@@ -519,6 +522,9 @@ class DatePicker {
     this.setHourView();
     this.setMinView();
     this.setSecondView();
+
+  }
+  setTitleStatus() {
 
   }
   setPrevMonth() {
