@@ -5,15 +5,15 @@
         <table class="table-condensed">
           <thead>
             <tr>
-              <th class="prev prevYear" ng-click="datePicker.setPreYear('day')" ng-hide="hideYearLeft" ng-class="{disabled: !datePicker.dateView.prevYear}"></th>
-              <th ng-show="hideYearLeft"></th>
-              <th class="prev prevMonth" ng-class="{disabled: !datePicker.dateView.prevMonth}" ng-hide="hideMonthLeft" ng-click="datePicker.setPrevMonth()"></th>
-              <th ng-show="hideMonthLeft"></th>
+              <th class="prev prevYear" ng-click="datePicker.setPreYear('day')" ng-hide="datePicker.isHideYearLeft" ng-class="{disabled: !datePicker.dateView.prevYear}"></th>
+              <th ng-show="datePicker.isHideYearLeft"></th>
+              <th class="prev prevMonth fa fa-angle-left" ng-class="{disabled: !datePicker.dateView.prevMonth}" ng-hide="datePicker.isHideMonthLeft" ng-click="datePicker.setPrevMonth()"></th>
+              <th ng-show="datePicker.isHideMonthLeft"></th>
               <th colspan={{weekPick?4:3}} class="picker-switch" ng-click="datePicker.showPanel='month'">{{datePicker.dateData.year}}年{{datePicker.dateData.month}}月 </th>
-              <th class="next nextMonth" ng-class="{disabled: !datePicker.dateView.nextMonth}" ng-hide="hideMonthRight" ng-click="datePicker.setNextMonth()"></th>
-              <th ng-show="hideMonthRight"></th>
-              <th class="next nextYear" ng-click="datePicker.setNextYear('day')" ng-hide="hideYearRight" ng-class="{disabled: !datePicker.dateView.nextYear}"></th>
-              <th ng-show="hideYearRight"></th>
+              <th class="next nextMonth" ng-class="{disabled: !datePicker.dateView.nextMonth}" ng-hide="datePicker.isHideMonthRight" ng-click="datePicker.setNextMonth()"></th>
+              <th ng-show="datePicker.isHideMonthRight"></th>
+              <th class="next nextYear" ng-click="datePicker.setNextYear('day')" ng-hide="datePicker.isHideYearRight" ng-class="{disabled: !datePicker.dateView.nextYear}"></th>
+              <th ng-show="datePicker.isHideYearRight"></th>
             </tr>
             <tr>
               <th class="week" ng-show="weekPick">周</th>
@@ -36,9 +36,11 @@
         <table class="table-condensed">
           <thead>
             <tr>
-              <th class="prev prevYear" ng-click="datePicker.setPreYear()" ng-class="{disabled: !datePicker.monthView.prevYear}"></th>
+              <th class="prev prevYear" ng-click="datePicker.setPreYear()" ng-hide="datePicker.isHideYearLeft" ng-class="{disabled: !datePicker.monthView.prevYear}"></th>
+              <th ng-show="datePicker.isHideYearLeft"></th>
               <th colspan="5" class="picker-switch" ng-click="datePicker.showPanel='year'">{{datePicker.dateData.year}}</th>
-              <th class="next nextYear" ng-click="datePicker.setNextYear()" ng-class="{disabled: !datePicker.monthView.nextYear}"></th>
+              <th class="next nextYear" ng-click="datePicker.setNextYear()" ng-hide="datePicker.isHideYearRight" ng-class="{disabled: !datePicker.monthView.nextYear}"></th>
+              <th ng-show="datePicker.isHideYearRight"></th>
             </tr>
           </thead>
           <tbody>

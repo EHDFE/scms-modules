@@ -232,7 +232,7 @@ export default (app, elem, attrs, scope) => {
 
           /**
            * 判断是否显示日期面板 上一年下一年上一月下一月的箭头
-          */
+          
           function showArrow() {
             if ($attrs.part === 'left' && $scope.watchDate) {
               if (
@@ -283,20 +283,20 @@ export default (app, elem, attrs, scope) => {
                 $scope.hideYearLeft = false;
               }
             }
-          }
+          }*/
 
 
-          $scope.$watch('watchDate', (newVal) => {
-            if ($scope.dateRange) {
-              showArrow();
-            }
-          });
+          //$scope.$watch('watchDate', (newVal) => {
+            //if ($scope.dateRange) {
+              //showArrow();
+            //}
+          //});
           $scope.$watch(
             'datePicker.dateData',
             (newVal) => {
               if ($scope.dateRange) {
                 $scope.date = datePicker.getResult();
-                showArrow();
+                //showArrow();
               }
             },
             true,
