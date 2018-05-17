@@ -28,29 +28,27 @@
       font-size: 21px;
     }
   }
-  .prevYear {
-    background: url("./img/arrow_yearleft_normal.svg") no-repeat center;
-    &:hover {
-      background: url("./img/arrow_yearleft_hover.svg") no-repeat center;
-    }
-  }
-  .nextYear {
-    background: url("./img/arrow_yearright_normal.svg") no-repeat center;
-    &:hover {
-      background: url("./img/arrow_yearright_hover.svg") no-repeat center;
-    }
-  }
+
+  .prevYear,
+  .nextYear,
+  .nextMonth,
   .prevMonth {
-    //background: url("./img/arrow_monthleft_normal.svg") no-repeat center;
+    display: table-cell;
+    font-size: 18px !important;
+    color: #999;
+    ::before{
+      display: inline-block;
+    }
+    
     &:hover {
-      background: url("./img/arrow_monthleft_hover.svg") no-repeat center;
+      color: #64abfd;
     }
   }
-  .nextMonth {
-    background: url("./img/arrow_monthright_normal.svg") no-repeat center;
-    &:hover {
-      background: url("./img/arrow_monthright_hover.svg") no-repeat center;
-    }
+  .prevYear.disabled,
+  .nextYear.disabled,
+  .nextMonth.disabled,
+  .prevMonth.disabled{
+    color:#ddd;
   }
   td,
   th {
