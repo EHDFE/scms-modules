@@ -140,7 +140,10 @@ export default (app, elem, attrs, scope) => {
                 datepickers['part1'].isHideYearRight = false;
                 datepickers['part2'].isHideYearLeft = false;
               }
-              if(datepickers['part1'].dateData.year === datepickers['part2'].dateData.year && datepickers['part1'].dateData.month + 1 === datepickers['part2'].dateData.month) {
+              if(
+                datepickers['part1'].dateData.year > datepickers['part2'].dateData.year || 
+                (datepickers['part1'].dateData.year === datepickers['part2'].dateData.year && datepickers['part1'].dateData.month + 1 >= datepickers['part2'].dateData.month)
+              ) {
                 datepickers['part1'].isHideMonthRight = true;
                 datepickers['part2'].isHideMonthLeft = true;
               }
