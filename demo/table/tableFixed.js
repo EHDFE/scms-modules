@@ -10,14 +10,26 @@ export default [
         '列表固定头部行、左边列或右边列',
       date: '2018-05-01',
       scope: [
-        {
-          type: 'object',
-          exampleValue: {left: '1'},
-          key: 'fixedCol',
-          description: '固定列',
-        }
       ],
       attrs: [
+        {
+          type: 'number',
+          exampleValue: '2',
+          key: 'fixedLeft',
+          description: '左则固定列的个数',
+        },
+        {
+          type: 'number',
+          exampleValue: '2',
+          key: 'fixedRight',
+          description: '右则固定列的个数',
+        },
+        {
+          type: 'string',
+          exampleValue: 'true',
+          key: 'fixedHeader',
+          description: '是否固定头部,为空不固定头部',
+        }
       ],
       deps: [''],
       api: '',

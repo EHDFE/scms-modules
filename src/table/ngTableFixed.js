@@ -14,11 +14,11 @@ export default (app, elem, attrs, scope) => {
     '$timeout',
     function($state, $compile, $timeout) {
       var TableFixed = function(options) {
-        //需要配置的信息
-        this.config = this.getConfig(options);
-
         //父元素容器
         this.$parentEl = $('[ng-table-fixed]').addClass('fixed-table-container');
+
+        //需要配置的信息
+        this.config = this.getConfig(options);        
 
         //给tr加上当前索引值，以方便hover时，样式的显示
         this.$parentEl.find('tbody tr').attr('current-index', '{{$index}}');
@@ -58,9 +58,9 @@ export default (app, elem, attrs, scope) => {
         */
         getConfig: function(options) {
           return {
-            left: 2 || 0,
-            right: 1 || 0,
-            header: true
+            left: options.left || 0,
+            right: options.right || 0,
+            header:options.header ? true : false
           }
         },
 
@@ -278,9 +278,12 @@ export default (app, elem, attrs, scope) => {
       var tableFixed;
       return {
         restrict: 'A',
-        compile: function($element) {
-          tableFixed = new TableFixed({});
-          console.log(555555555)
+        compile: function($element, $attrs) {
+          tableFixed = new TableFixed({
+            left: $attrs.fixedLeft,
+            right: $attrs.fixedRight,
+            header: $attrs.fixedHeader
+          });
         },
         controller: function($scope, $element, $attrs) {
           console.log(666666666, tableFixed)
