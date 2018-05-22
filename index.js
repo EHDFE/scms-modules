@@ -61,6 +61,7 @@ import rangeSelectBar from './src/rangeSelectBar/rangeSelectBar';
 import businessCitySelect from './src/businessCitySelect';
 import colorPicker from './src/colorPicker';
 import multipleSelect from './src/multipleSelect';
+import ngTableFixed from './src/table/ngTableFixed';
 
 
 export default {
@@ -112,4 +113,5 @@ export default {
   businessCitySelect,
   colorPicker,
   multipleSelect,
+  ngTableFixed,
 };

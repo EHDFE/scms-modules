@@ -6,15 +6,13 @@
  * @author 田艳容
  * @lastBy
  */
-import './tableFixed.css';
-
+import './ngTableFixed.css';
 export default (app, elem, attrs, scope) => {
   app.directive('ngTableFixed', [
     '$state',
     '$compile',
     '$timeout',
     function($state, $compile, $timeout) {
-
       var TableFixed = function(options) {
         //需要配置的信息
         this.config = this.getConfig(options);
@@ -276,12 +274,16 @@ export default (app, elem, attrs, scope) => {
           }, 0)
         }
       };
-
-
-      var tableFixed = new TableFixed({});
+      
+      var tableFixed;
       return {
         restrict: 'A',
-        link: function($scope, $element, $attrs) {
+        compile: function($element) {
+          tableFixed = new TableFixed({});
+          console.log(555555555)
+        },
+        controller: function($scope, $element, $attrs) {
+          console.log(666666666, tableFixed)
           var isViewLoad = false;
           $scope.$watch('items', function(newValue, old) {
             if(newValue === old) {
