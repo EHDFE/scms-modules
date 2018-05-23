@@ -57,16 +57,17 @@ export default (app, elem, attrs, scope) => {
          * header boolear 是否固定头部栏
         */
         getConfig: function(options) {
-        var heightOpt = options.height || '', floatHeight, height;
-        if(heightOpt.match(/^\d+\.\d+$/)) {
-          floatHeight = heightOpt.match(/^\d+\.\d+$/)[0];
-        }
-        else if(heightOpt.match(/^\-\d+$/)) {
-          height = heightOpt.match(/^\-\d+$/)[0];
-        }
-        else {
-          floatHeight = 0.8;
-        }
+          var heightOpt = options.height || '', floatHeight, height;
+          if(heightOpt.match(/^\d+\.\d+$/)) {
+            floatHeight = heightOpt.match(/^\d+\.\d+$/)[0];
+          }
+          else if(heightOpt.match(/^\-\d+$/)) {
+            height = parseInt(heightOpt.match(/^\-\d+$/)[0], 10);
+          }
+          else {
+            floatHeight = 0.8;
+          }
+
           return {
             left: options.left || 0,
             right: options.right || 0,
@@ -206,44 +207,7 @@ export default (app, elem, attrs, scope) => {
           })
         },
 
-        setInitView: function() {
-          var _this = this;
-          this.$tableBox = this.$parentEl.find('.tablebox');
-          this.$fixedColBox = this.$parentEl.find('.fixed-table');
-          this.$left = this.$fixedColBox.find('.fix-left');
-          this.$right = this.$fixedColBox.find('.fix-right');
-
-          if(_this.$tableBox[0].scrollWidth <= _this.$tableBox.width()) {
-            _this.$left.css({'display': 'none'});
-            _this.$right.css({'display': 'none'});
-          }
-          else {
-            _this.$left.css({'display': ''});
-            _this.$right.css({'display': ''});
-          }
-          if(_this.showSidebarValue) {
-            clearTimeout(_this.showSidebarValue);
-            _this.showSidebarValue = null;
-          }
-          this.showSidebarValue = setTimeout(function() {
-            clearTimeout(_this.showSidebarValue);
-            _this.showSidebarValue = null;
-            if(_this.$tableBox[0].scrollWidth <= _this.$tableBox.width()) {
-              _this.$left.css({'display': 'none'});
-              _this.$right.css({'display': 'none'});
-            }
-            else {
-              _this.$left.css({'display': ''});
-              _this.$right.css({'display': ''});
-            }
-          }, 1000)
-          
-          
-          if(this.config.header && !this.isBuildHeader) {
-            this.isBuildHeader = true;
-            this.$parentEl.prepend(this.$fixedHeaderBox);
-            this.buildHeaderRow();
-          }
+        setBoxHeight: function() {
           var height;
           if(this.config.height) {
             height = ($('#container').height() || $('body').height()) + this.config.height;
@@ -251,7 +215,6 @@ export default (app, elem, attrs, scope) => {
           else {
             height = ($('#container').height() || $('body').height()) * this.config.floatHeight;
           }
-          
           if(this.$tableBox[0] && this.$tableBox[0].scrollHeight > height) {
             this.$fixedHeaderBox.css({'display': ''});
             this.$tableBox.css({height: height+'px'});
@@ -260,7 +223,45 @@ export default (app, elem, attrs, scope) => {
             this.$fixedHeaderBox.css({'display': 'none'});
             this.$tableBox.css({height: 'auto'});
           }
+        },
 
+        setShowSidebarCol: function() {
+          if(this.$tableBox[0].scrollWidth <= this.$tableBox.width()) {
+            this.$left.css({'display': 'none'});
+            this.$right.css({'display': 'none'});
+          }
+          else {
+            this.$left.css({'display': ''});
+            this.$right.css({'display': ''});
+          } 
+        },
+
+        setInitView: function() {
+          var _this = this;
+          this.$tableBox = this.$parentEl.find('.tablebox');
+          this.$fixedColBox = this.$parentEl.find('.fixed-table');
+          this.$left = this.$fixedColBox.find('.fix-left');
+          this.$right = this.$fixedColBox.find('.fix-right');
+
+          this.setShowSidebarCol();
+          this.setBoxHeight();
+
+          if(_this.showSidebarValue) {
+            clearTimeout(_this.showSidebarValue);
+            _this.showSidebarValue = null;
+          }
+          this.showSidebarValue = setTimeout(function() {
+            clearTimeout(_this.showSidebarValue);
+            _this.showSidebarValue = null;
+            _this.setShowSidebarCol();
+          }, 1000)
+
+          if(this.config.header && !this.isBuildHeader) {
+            this.isBuildHeader = true;
+            this.$parentEl.prepend(this.$fixedHeaderBox);
+            this.buildHeaderRow();
+          }
+          this.setBoxHeight();
           this.bindEvent();
         },
 
@@ -271,7 +272,7 @@ export default (app, elem, attrs, scope) => {
           var _this = this;
           setTimeout(function() {
             var $table = _this.$tableBox.find('[ng-transclude] > table');
-            _this.$fixedHeaderBox.find('.fix-top').width($table.width());
+            _this.$fixedHeaderBox.find('.fix-top').width(_this.$tableBox.width());
             $table.find('thead tr th').each(function(index, el) {
               var width = $(el).width();
               _this.$left.find('thead tr th').eq(index).width(width);
