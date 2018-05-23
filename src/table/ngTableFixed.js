@@ -198,12 +198,10 @@ export default (app, elem, attrs, scope) => {
           });
 
           //蓝听浏览器窗口大小变化
-          $(window).resize(function() {
-            if(_this.$tableBox && _this.$tableBox[0]) {
-              _this.$tableBox[0].scrollLeft = 0;
-            }
+          $(window).resize(function() {            
             _this.setInitView();
             _this.setThWidth();
+            _this.setBoxScrollInit();
           })
         },
 
@@ -272,7 +270,7 @@ export default (app, elem, attrs, scope) => {
           var _this = this;
           setTimeout(function() {
             var $table = _this.$tableBox.find('[ng-transclude] > table');
-            _this.$fixedHeaderBox.find('.fix-top').width(_this.$tableBox.width());
+            _this.$fixedHeaderBox.find('.fix-top').width(_this.$tableBox[0].scrollWidth);
             $table.find('thead tr th').each(function(index, el) {
               var width = $(el).width();
               _this.$left.find('thead tr th').eq(index).width(width);
@@ -296,6 +294,13 @@ export default (app, elem, attrs, scope) => {
             }, 0);
             
           }, 0)
+        },
+
+        setBoxScrollInit: function() {
+          if(this.$tableBox && this.$tableBox[0]) {
+            this.$tableBox[0].scrollLeft = 0;
+            this.$tableBox[0].scrollTop = 0;
+          }
         }
       };
       
@@ -314,6 +319,7 @@ export default (app, elem, attrs, scope) => {
           $scope.$watch('ngTableFixed', function(newValue, old) {
             tableFixed.setInitView();
             tableFixed.setThWidth();
+            tableFixed.setBoxScrollInit();
           })
         }
       };
