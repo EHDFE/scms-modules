@@ -60,7 +60,8 @@ export default (app, elem, attrs, scope) => {
           return {
             left: options.left || 0,
             right: options.right || 0,
-            header:options.header ? true : false
+            header:options.header ? true : false,
+            height: parseFloat(options.height) || 0.8
           }
         },
 
@@ -232,7 +233,7 @@ export default (app, elem, attrs, scope) => {
             this.$parentEl.prepend(this.$fixedHeaderBox);
             this.buildHeaderRow();
           }
-          var height = ($('#container').height() || $('body').height()) * 0.8;
+          var height = ($('#container').height() || $('body').height()) * this.config.height;
           if(this.$tableBox[0] && this.$tableBox[0].scrollHeight > height) {
             this.$fixedHeaderBox.css({'display': ''});
             this.$tableBox.css({height: height+'px'});
@@ -286,7 +287,8 @@ export default (app, elem, attrs, scope) => {
           tableFixed = new TableFixed({
             left: $attrs.fixedLeft,
             right: $attrs.fixedRight,
-            header: $attrs.fixedHeader
+            header: $attrs.fixedHeader,
+            height: $attrs.fixedHeight
           });
         },
         controller: function($scope, $element, $attrs) {
