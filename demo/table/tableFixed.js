@@ -34,7 +34,7 @@ export default [
           type: 'number',
           exampleValue: 'true',
           key: 'fixedHeight',
-          description: '列表高度系数,指令中会用：系数 * body的高度 = 列表高度；例0.8',
+          description: '列表高度系数,指令中会用：系数 * body的高度 = 列表高度；默认为：0.8',
         }
       ],
       deps: ['与tableDirective指令一块使用，已在tableDirective指令中引入依赖'],
