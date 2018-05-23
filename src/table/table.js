@@ -43,7 +43,7 @@ export default (app, elem, attrs, scope) => {
           fixedTable: '=',
           fixedInfo: '=',
           domReady: '=',
-          ngTableFixed: '=',
+          ngTableFixed: '=',//ngTableFixed指令在监听他的变化，重置计算：th宽度、是否显示固定元素、设置父容器高度
           miniPage: '=' //@scope miniPage 分页是否使用缩小样式 {type: "boolean", "exampleValue": false, defaultValue: false}
         },
         restrict: 'EA',
