@@ -29,9 +29,15 @@ export default [
           exampleValue: 'true',
           key: 'fixedHeader',
           description: '是否固定头部,为空不固定头部',
+        },
+        {
+          type: 'number',
+          exampleValue: 'true',
+          key: 'fixedHeight',
+          description: '列表高度系数,指令中会用：系数 * body的高度 = 列表高度；例0.8',
         }
       ],
-      deps: [''],
+      deps: ['与tableDirective指令一块使用，已在tableDirective指令中引入依赖'],
       api: '',
       type: 'directive',
     },
