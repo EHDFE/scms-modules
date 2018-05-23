@@ -1,6 +1,12 @@
 .fixed-table-container *{
     white-space: nowrap;
 }
+.fixed-table-container .table > tbody > tr > td{
+    padding-top:0px;
+    padding-bottom: 0px;
+    height: 40px;
+    line-height: 40px;
+}
 .fixed-table{
     position: absolute;
     width: 100%;
@@ -35,13 +41,7 @@
     top: 0;
     left: 0;
 }
-.fixed-table td::before{
-    width: 1px;
-    height: 18px;
-    content: " ";
-    display: inline-block;
-    float: left;
-}
+
 .fixed-table .fix-table-colgroup{
     background: #fff;
 }
