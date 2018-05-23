@@ -57,11 +57,22 @@ export default (app, elem, attrs, scope) => {
          * header boolear 是否固定头部栏
         */
         getConfig: function(options) {
+        var heightOpt = options.height || '', floatHeight, height;
+        if(heightOpt.match(/^\d+\.\d+$/)) {
+          floatHeight = heightOpt.match(/^\d+\.\d+$/)[0];
+        }
+        else if(heightOpt.match(/^\-\d+$/)) {
+          height = heightOpt.match(/^\-\d+$/)[0];
+        }
+        else {
+          floatHeight = 0.8;
+        }
           return {
             left: options.left || 0,
             right: options.right || 0,
             header:options.header ? true : false,
-            height: parseFloat(options.height) || 0.8
+            floatHeight: parseFloat(floatHeight),
+            height: height
           }
         },
 
@@ -233,7 +244,14 @@ export default (app, elem, attrs, scope) => {
             this.$parentEl.prepend(this.$fixedHeaderBox);
             this.buildHeaderRow();
           }
-          var height = ($('#container').height() || $('body').height()) * this.config.height;
+          var height;
+          if(this.config.height) {
+            height = ($('#container').height() || $('body').height()) + this.config.height;
+          }
+          else {
+            height = ($('#container').height() || $('body').height()) * this.config.floatHeight;
+          }
+          
           if(this.$tableBox[0] && this.$tableBox[0].scrollHeight > height) {
             this.$fixedHeaderBox.css({'display': ''});
             this.$tableBox.css({height: height+'px'});
