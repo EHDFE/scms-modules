@@ -185,9 +185,7 @@ export default (app, elem, attrs, scope) => {
           });
 
           //蓝听浏览器窗口大小变化
-
           $(window).resize(function() {
-            
             if(_this.$tableBox && _this.$tableBox[0]) {
               _this.$tableBox[0].scrollLeft = 0;
             }
@@ -253,7 +251,7 @@ export default (app, elem, attrs, scope) => {
         setThWidth: function() {
           var _this = this;
           setTimeout(function() {
-            var $table = _this.$tableBox.children('table');
+            var $table = _this.$tableBox.find('[ng-transclude] > table');
             _this.$fixedHeaderBox.find('.fix-top').width($table.width());
             $table.find('thead tr th').each(function(index, el) {
               var width = $(el).width();
