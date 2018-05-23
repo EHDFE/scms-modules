@@ -235,7 +235,7 @@ export default (app, elem, attrs, scope) => {
             this.buildHeaderRow();
           }
           var height = ($('#container').height() || $('body').height()) * 0.8;
-          if(this.$tableBox.height() > height) {
+          if(this.$tableBox[0] && this.$tableBox[0].scrollHeight > height) {
             this.$fixedHeaderBox.css({'display': ''});
             this.$tableBox.css({height: height+'px'});
           }
