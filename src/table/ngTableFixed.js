@@ -99,7 +99,10 @@ export default (app, elem, attrs, scope) => {
          * 当tablebox左右滑动时，列固定栏也跟个滚动
          */
         setSideBarScroll: function($parentEl, scrollEl) {
-          this.$fixedColBox.css({'margin-left': scrollEl.scrollLeft+'px'})
+          this.$fixedColBox.css({'transform': 'translateX('+scrollEl.scrollLeft+'px)'});
+          this.$fixedColBox.css({'-webkit-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
+          this.$fixedColBox.css({'-ms-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
+          this.$fixedColBox.css({'-moz-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
         },
 
         /*
