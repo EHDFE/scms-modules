@@ -7,33 +7,41 @@
     height: 40px;
     line-height: 40px;
 }
-.fixed-table{
+.fixed-table-container .fix-top-left,
+.fixed-table-container .fix-left table{
+    border-right: none;
+}
+.fixed-table-container .fix-top-right,
+.fixed-table-container .fix-right table{
+    border-left: none;
+}
+.fixed-table-container .fixed-table{
     position: absolute;
     width: 100%;
     top: 0;
     left: 0;
 }
-.fixed-table .table{
+.fixed-table-container .fixed-table .table{
     width: auto;
 }
-.fixed-table .fix-header-outer{
+.fixed-table-container .fixed-table .fix-header-outer{
     display: none;
     width: 1200px;
     overflow-x: scroll;
     overflow-y: hidden;
 }
-.fixed-table .fix-header{
+.fixed-table-container .fixed-table .fix-header{
     position: absolute;
     min-width: 1500px;
     top: 0;
 }
-.fixed-table .fix-right{
+.fixed-table-container .fixed-table .fix-right{
     position: absolute;
     border-left: none;
     top: 0;
     right: 0;
 }
-.fixed-table .fix-left{
+.fixed-table-container .fixed-table .fix-left{
     position: absolute;
     border-right: none;
     table-layout: fixed;
@@ -41,41 +49,12 @@
     top: 0;
     left: 0;
 }
-
-.fixed-table .fix-table-colgroup{
-    background: #fff;
-}
-.fixed-table .fixed{
-    position: fixed;
-    top: 50px;
-    height: 50px;
-    z-index: 1;
-}
-.fixed-table .outer-hide-scroll .fixed{
-    position: relative;
-    top: 0;
-}
-.fixed-table .outer-hide-scroll{
-    position: fixed;
-    top: 50px;
-    height: 35px;
-    overflow: hidden;
-}
-.fixed-table .left-box-shadow{
+.fixed-table-container .fixed-table .left-box-shadow{
     box-shadow: 6px 0 6px -4px rgba(0, 0, 0, 0.15);
 }
-.fixed-table .right-box-shadow{
+.fixed-table-container .fixed-table .right-box-shadow{
     box-shadow: -6px 0 6px -4px rgba(0, 0, 0, 0.15);
 }
-.fixed-table .scroll-thead th{
-    border: none;
-}
-.fixed-table .table > tbody > tr.fix-table-hover, 
-table.table > tbody > tr:nth-of-type(even).fix-table-hover, 
-table.table > tbody > tr:nth-of-type(odd).fix-table-hover{
-    background: #E1E7ED;
-}
-
 .fixed-table-container .tablebox{
     position: relative;
 }
