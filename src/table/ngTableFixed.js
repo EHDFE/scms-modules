@@ -99,7 +99,10 @@ export default (app, elem, attrs, scope) => {
          * 当tablebox左右滑动时，列固定栏也跟个滚动
          */
         setSideBarScroll: function($parentEl, scrollEl) {
-          this.$fixedColBox.css({'margin-left': scrollEl.scrollLeft+'px'})
+          this.$fixedColBox.css({'transform': 'translateX('+scrollEl.scrollLeft+'px)'});
+          this.$fixedColBox.css({'-webkit-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
+          this.$fixedColBox.css({'-ms-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
+          this.$fixedColBox.css({'-moz-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
         },
 
         /*
@@ -225,13 +228,16 @@ export default (app, elem, attrs, scope) => {
             }
           }, 1000)
           
-          var height = ($('#container').height() || $('body').height()) * 0.8;
-          if(this.config.header && !this.isBuildHeader && this.$tableBox.height() > height) {
+          
+          if(this.config.header && !this.isBuildHeader) {
             this.isBuildHeader = true;
-            this.$fixedHeaderBox.css({'display': ''});
             this.$parentEl.prepend(this.$fixedHeaderBox);
-            this.$tableBox.css({height: height+'px'});
             this.buildHeaderRow();
+          }
+          var height = ($('#container').height() || $('body').height()) * 0.8;
+          if(this.$tableBox[0] && this.$tableBox[0].scrollHeight > height) {
+            this.$fixedHeaderBox.css({'display': ''});
+            this.$tableBox.css({height: height+'px'});
           }
           else {
             this.$fixedHeaderBox.css({'display': 'none'});
@@ -286,17 +292,8 @@ export default (app, elem, attrs, scope) => {
           });
         },
         controller: function($scope, $element, $attrs) {
-          console.log(666666666, tableFixed)
-          var isViewLoad = false;
-          $scope.$watch('items', function(newValue, old) {
-            if(newValue === old) {
-              return;
-            }
-            if(!isViewLoad) {
-              tableFixed.setInitView();
-              isViewLoad = true;
-            }
-            
+          $scope.$watch('ngTableFixed', function(newValue, old) {
+            tableFixed.setInitView();
             tableFixed.setThWidth();
           })
         }

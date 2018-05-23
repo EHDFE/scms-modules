@@ -35,6 +35,13 @@
     top: 0;
     left: 0;
 }
+.fixed-table td::before{
+    width: 1px;
+    height: 18px;
+    content: " ";
+    display: inline-block;
+    float: left;
+}
 .fixed-table .fix-table-colgroup{
     background: #fff;
 }

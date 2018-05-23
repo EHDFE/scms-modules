@@ -11,12 +11,14 @@ import find from 'lodash/find';
 import paginationDirective from '../pagination/paginationDirective';
 import errorNoDataDirective from '../errorNoData/errorNoDataDirective';
 import tableFixedDirective from './tableFixed';
+import ngTableFixed from './ngTableFixed';
 import html from './index.html';
 
 export default (app, elem, attrs, scope) => {
   paginationDirective(app);
   errorNoDataDirective(app);
   tableFixedDirective(app);
+  ngTableFixed(app);
   app.directive('tableDirective', [
     '$cookies',
     '$http',
@@ -41,6 +43,7 @@ export default (app, elem, attrs, scope) => {
           fixedTable: '=',
           fixedInfo: '=',
           domReady: '=',
+          ngTableFixed: '=',
           miniPage: '=' //@scope miniPage 分页是否使用缩小样式 {type: "boolean", "exampleValue": false, defaultValue: false}
         },
         restrict: 'EA',
@@ -133,6 +136,7 @@ export default (app, elem, attrs, scope) => {
 
                   if ($scope.formatData) {
                     $scope.formatData($scope.items, $scope.totalCount);
+                    $scope.ngTableFixed = (+new Date()) + '';
                   }
                 }
                 $.loading(false, {
