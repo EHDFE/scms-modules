@@ -316,6 +316,7 @@ export default (app, elem, attrs, scope) => {
           });
         },
         controller: function($scope, $element, $attrs) {
+          $scope.ngTableFixed = '1';
           $scope.$watch('ngTableFixed', function(newValue, old) {
             tableFixed.setInitView();
             tableFixed.setThWidth();
