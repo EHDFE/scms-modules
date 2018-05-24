@@ -132,7 +132,13 @@ export default (app, elem, attrs, scope) => {
                     $scope.formatData($scope.items, $scope.totalCount);
                   }
                 }
-                $scope.ngTableFixed = (+new Date()) + '';
+                try {
+                  $scope.ngTableFixed = (+new Date()) + '';
+                }
+                catch(e){
+
+                }
+                
                 $.loading(false, {
                   $container: $element,
                 });
