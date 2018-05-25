@@ -66,19 +66,21 @@ export default (app, elem, attrs, scope) => {
 
           $scope.handleClick = data => {
             devTool.log(data);
+            const selectedList = $scope.selectedList.slice(0);
             if (!data.selected) {
               if (Number.isFinite(maxSelectLimit) && $scope.selectedList.length >= maxSelectLimit) {
                 devTool.warn('maximum limit reached', $scope.selectedList);
                 return false;
               }
-              $scope.selectedList.push(data);
+              selectedList.push(data);
             } else {
-              $scope.selectedList.splice(
-                $scope.selectedList.indexOf(data),
+              selectedList.splice(
+                selectedList.indexOf(data),
                 1
               );
             }
             data.selected = !data.selected;
+            $scope.selectedList = selectedList;
           };
 
           let sourceMapByValue = {};
