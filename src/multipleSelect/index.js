@@ -85,12 +85,13 @@ export default (app, elem, attrs, scope) => {
           $scope.options.forEach(group => {
             group.children.forEach(item => {
               Object.assign(sourceMapByValue, {
-                [item.value]: item
+                [item.value]: item,
               });
             });
           });
 
-          const updateSelectList = data => {
+          const updateSelectList = (data, isInit) => {
+            if (isInit && Object.keys(sourceMapByValue).length === 0) return;
             let selectedList;
             if (data) {
               selectedList = data
@@ -122,7 +123,7 @@ export default (app, elem, attrs, scope) => {
             newOptions.forEach(group => {
               group.children.forEach(item => {
                 Object.assign(sourceMapByValue, {
-                  [item.value]: item
+                  [item.value]: item,
                 });
               });
             });
