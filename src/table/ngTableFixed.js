@@ -109,17 +109,6 @@ export default (app, elem, attrs, scope) => {
         setHeaderScrollLeft: function($parentEl, scrollEl) {
           $parentEl.find('.fix-top').css({'margin-left': -scrollEl.scrollLeft+'px'})
         },
-        
-        /*
-         * 当tablebox上面滑动时，列固定栏也跟个滚动
-         */
-        setSideBarScroll: function($parentEl, scrollEl) {
-          
-          //this.$fixedColBox.css({'transform': 'translateX('+scrollEl.scrollLeft+'px)'});
-          //this.$fixedColBox.css({'-webkit-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
-          //this.$fixedColBox.css({'-ms-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
-          //this.$fixedColBox.css({'-moz-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
-        },
 
         /*
          * 生成左则固定列
@@ -342,7 +331,6 @@ export default (app, elem, attrs, scope) => {
       return {
         restrict: 'A',
         compile: function($element, $attrs) {
-          console.log(22222222222, $element.html())
           tableFixed = new TableFixed({
             left: $attrs.fixedLeft,
             right: $attrs.fixedRight,
