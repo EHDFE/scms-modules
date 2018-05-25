@@ -246,12 +246,10 @@ export default (app, elem, attrs, scope) => {
           }
 
           if(this.$tableBox[0] && this.$tableBox[0].scrollHeight > height) {
-            this.$fixedHeaderBox.css({'display': ''});
             this.$tableBox.css({height: height+'px'});
             this.$fixedColBox.css({height: (height-this.getScrollHeight())+'px'});
           }
           else {
-            this.$fixedHeaderBox.css({'display': 'none'});
             this.$tableBox.css({height: 'auto'});
             this.$fixedColBox.css({height: 'auto'});
           }

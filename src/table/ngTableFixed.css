@@ -6,7 +6,7 @@
     overflow: hidden;
 }
 .fixed-table-container .tablebox .tablebox-content{
-    overflow: scroll;
+    overflow: auto;
     width: 100%;
     min-height: 10px;
 }
@@ -36,7 +36,7 @@
     height: 100%;
     width: 100%;
     pointer-events: none;
-    overflow-y: scroll;
+    overflow-y: auto;/*scroll*/
 }  
 .fixed-table-container .fixed-table .table{
     width: auto;
