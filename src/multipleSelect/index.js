@@ -138,7 +138,7 @@ export default (app, elem, attrs, scope) => {
             if (isEqual(newValue, oldValue)) return;
             devTool.info('SelectedList Change:', newValue, oldValue);
             $scope.ngModel = newValue.map(d => d.value).join(separator);
-          }, true);
+          });
 
           $scope.$watch('ngModel', (newValue, oldValue) => {
             if (newValue === oldValue) return;
