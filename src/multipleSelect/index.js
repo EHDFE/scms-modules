@@ -91,7 +91,9 @@ export default (app, elem, attrs, scope) => {
           });
 
           const updateSelectList = (data, isInit) => {
-            if (isInit && Object.keys(sourceMapByValue).length === 0) return;
+            if (isInit && Object.keys(sourceMapByValue).length === 0) {
+              return;
+            }
             let selectedList;
             if (data) {
               selectedList = data
@@ -112,13 +114,15 @@ export default (app, elem, attrs, scope) => {
           };
 
           
+          $scope.selectedList = [];
           const initialize = () => {
-            updateSelectList($scope.ngModel);
+            updateSelectList($scope.ngModel, true);
           };
 
           initialize();
 
           $scope.$watch('options', newOptions => {
+            devTool.info('options Change:', newOptions);
             sourceMapByValue = {};
             newOptions.forEach(group => {
               group.children.forEach(item => {
@@ -128,7 +132,7 @@ export default (app, elem, attrs, scope) => {
               });
             });
             updateSelectList($scope.ngModel);
-          }, true);
+          });
 
           $scope.$watch('selectedList', (newValue, oldValue) => {
             if (isEqual(newValue, oldValue)) return;
