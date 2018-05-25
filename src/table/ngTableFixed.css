@@ -1,12 +1,6 @@
 .fixed-table-container *{
     white-space: nowrap;
 }
-.fixed-table-container .table > tbody > tr > td{
-    padding-top:0px;
-    padding-bottom: 0px;
-    height: 40px;
-    line-height: 40px;
-}
 .fixed-table-container .fix-top-left,
 .fixed-table-container .fix-left table{
     border-right: none;
