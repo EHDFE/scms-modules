@@ -282,6 +282,10 @@ export default (app, elem, attrs, scope) => {
               }
             });
 
+            $table.find('tbody tr').each(function(index, el) {
+              _this.$fixedColBox.find('tbody tr').eq(index).height($(el).height());
+            });
+
             _this.$fixedHeaderBox.width(_this.$fixedColBox[0].scrollWidth);
             if(_this.fixedHeaderBoxWidth) {
               clearInterval(_this.fixedHeaderBoxWidth);
