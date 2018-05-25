@@ -66,19 +66,21 @@ export default (app, elem, attrs, scope) => {
 
           $scope.handleClick = data => {
             devTool.log(data);
+            const selectedList = $scope.selectedList.slice(0);
             if (!data.selected) {
               if (Number.isFinite(maxSelectLimit) && $scope.selectedList.length >= maxSelectLimit) {
                 devTool.warn('maximum limit reached', $scope.selectedList);
                 return false;
               }
-              $scope.selectedList.push(data);
+              selectedList.push(data);
             } else {
-              $scope.selectedList.splice(
-                $scope.selectedList.indexOf(data),
+              selectedList.splice(
+                selectedList.indexOf(data),
                 1
               );
             }
             data.selected = !data.selected;
+            $scope.selectedList = selectedList;
           };
 
           let sourceMapByValue = {};
@@ -91,7 +93,9 @@ export default (app, elem, attrs, scope) => {
           });
 
           const updateSelectList = (data, isInit) => {
-            if (isInit && Object.keys(sourceMapByValue).length === 0) return;
+            if (isInit && Object.keys(sourceMapByValue).length === 0) {
+              return;
+            }
             let selectedList;
             if (data) {
               selectedList = data
@@ -112,13 +116,15 @@ export default (app, elem, attrs, scope) => {
           };
 
           
+          $scope.selectedList = [];
           const initialize = () => {
-            updateSelectList($scope.ngModel);
+            updateSelectList($scope.ngModel, true);
           };
 
           initialize();
 
           $scope.$watch('options', newOptions => {
+            devTool.info('options Change:', newOptions);
             sourceMapByValue = {};
             newOptions.forEach(group => {
               group.children.forEach(item => {
@@ -128,13 +134,13 @@ export default (app, elem, attrs, scope) => {
               });
             });
             updateSelectList($scope.ngModel);
-          }, true);
+          });
 
           $scope.$watch('selectedList', (newValue, oldValue) => {
             if (isEqual(newValue, oldValue)) return;
             devTool.info('SelectedList Change:', newValue, oldValue);
             $scope.ngModel = newValue.map(d => d.value).join(separator);
-          }, true);
+          });
 
           $scope.$watch('ngModel', (newValue, oldValue) => {
             if (newValue === oldValue) return;
