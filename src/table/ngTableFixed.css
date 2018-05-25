@@ -14,6 +14,8 @@
     overflow: hidden;
     width:100%;
     z-index: 1;
+    border-radius: 4px 4px 0 0;
+    overflow-x: hidden;
 }
 .fixed-table-container .fix-top-left{
     position: absolute;
