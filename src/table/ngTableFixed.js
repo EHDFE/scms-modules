@@ -295,7 +295,7 @@ export default (app, elem, attrs, scope) => {
               headerColWidth, 
               scrollWidth = _this.getScrollWidth();
             _this.$fixedHeaderBox.find('.fix-top').width(_this.$tableBox[0].scrollWidth + scrollWidth);
-            $table.find('tbody tr:eq(0) td').each(function(index, el) {
+            $table.find('thead tr th').each(function(index, el) {
               width = $(el).width();
               headerColWidth = width;
               _this.$left.find('tbody tr:eq(0) td').eq(index).width(width);
