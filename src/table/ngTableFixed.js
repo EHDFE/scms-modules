@@ -25,6 +25,8 @@ export default (app, elem, attrs, scope) => {
 
         //copy内容代码
         this.html = this.$parentEl.html();
+        //原始列表头部行
+        this.$parentEl.wrapInner('<div class="tablebox-content"></div>');
 
         //右则固定列的开始索引值
         this.colLength = $(this.html).find('thead tr th').length;
@@ -109,13 +111,14 @@ export default (app, elem, attrs, scope) => {
         },
         
         /*
-         * 当tablebox左右滑动时，列固定栏也跟个滚动
+         * 当tablebox上面滑动时，列固定栏也跟个滚动
          */
         setSideBarScroll: function($parentEl, scrollEl) {
-          this.$fixedColBox.css({'transform': 'translateX('+scrollEl.scrollLeft+'px)'});
-          this.$fixedColBox.css({'-webkit-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
-          this.$fixedColBox.css({'-ms-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
-          this.$fixedColBox.css({'-moz-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
+          
+          //this.$fixedColBox.css({'transform': 'translateX('+scrollEl.scrollLeft+'px)'});
+          //this.$fixedColBox.css({'-webkit-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
+          //this.$fixedColBox.css({'-ms-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
+          //this.$fixedColBox.css({'-moz-transform': 'translateX('+scrollEl.scrollLeft+'px)'});
         },
 
         /*
@@ -125,7 +128,7 @@ export default (app, elem, attrs, scope) => {
           var leftCol = this.config.left;
           if(leftCol) {
             var $left = $('<div>'+this.html+'</div>');
-            $left.find('thead tr th').eq(leftCol - 1).nextAll().remove();
+            $left.find('thead').remove();
             $left.find('tbody tr td').eq(leftCol - 1).nextAll().remove();
             this.$fixedColBox.append($left.addClass('fix-left'));
             $left = null;
@@ -139,11 +142,21 @@ export default (app, elem, attrs, scope) => {
           var rightCol = this.config.right;
           if(rightCol) {
             var $right = $('<div>'+this.html+'</div>');
-            $right.find('thead tr th').eq(this.rightStartIndex).prevAll().remove();
+            $right.find('thead').remove();
             $right.find('tbody tr td').eq(this.rightStartIndex).prevAll().remove();
             this.$fixedColBox.append($right.addClass('fix-right'));
             $right = null;
           }
+        },
+
+        //获取滚动条的宽，在各种设置上滚动条宽不同
+        getScrollWidth: function() {
+          return this.$tableBox && this.$tableBox[0] ? this.$tableBox[0].offsetWidth - this.$tableBox[0].clientWidth : 0;
+        },
+
+        //获取滚动条的宽，在各种设置上滚动条宽不同
+        getScrollHeight: function() {
+          return this.$tableBox && this.$tableBox[0] ? this.$tableBox[0].offsetHeight - this.$tableBox[0].clientHeight : 0;
         },
 
         /*
@@ -180,11 +193,29 @@ export default (app, elem, attrs, scope) => {
           this.isBindEvent = true;
 
           //列表滚动时:左右则固定栏样式，与所有固定栏的位移样式
-          this.$tableBox.scroll(function() {
-            _this.setBoxShadow(_this.$parentEl, this);
-            _this.setHeaderScrollLeft(_this.$parentEl, this);
-            _this.setSideBarScroll(_this.$parentEl, this);
+          this.$tableBox.scroll(function() {           
+            if(_this.preScrollTopValue !== this.scrollTop) {
+              _this.$fixedColBox[0].scrollTop = this.scrollTop;
+              _this.preScrollTopValue = this.scrollTop;
+            }            
+            
+            if(_this.preScrollLeftValue !== this.scrollLeft) {
+              _this.setBoxShadow(_this.$parentEl, this);
+              _this.setHeaderScrollLeft(_this.$parentEl, this);
+              _this.preScrollLeftValue = this.scrollLeft;
+            }
+            
           });
+
+          //列表滚动时:左右则固定栏样式，与所有固定栏的位移样式
+          this.$fixedColBox.scroll(function() {
+            if(_this.preScrollTopValue !== this.scrollTop) {
+              _this.$tableBox[0].scrollTop = this.scrollTop;
+              _this.preScrollTopValue = this.scrollTop;
+            }
+            
+          });
+
 
           //hover时列表行的样式
           var $currentHoverIndex, _this = this;;
@@ -213,13 +244,16 @@ export default (app, elem, attrs, scope) => {
           else {
             height = ($('#container').height() || $('body').height()) * this.config.floatHeight;
           }
+
           if(this.$tableBox[0] && this.$tableBox[0].scrollHeight > height) {
             this.$fixedHeaderBox.css({'display': ''});
             this.$tableBox.css({height: height+'px'});
+            this.$fixedColBox.css({height: (height-this.getScrollHeight())+'px'});
           }
           else {
             this.$fixedHeaderBox.css({'display': 'none'});
             this.$tableBox.css({height: 'auto'});
+            this.$fixedColBox.css({height: 'auto'});
           }
         },
 
@@ -236,7 +270,7 @@ export default (app, elem, attrs, scope) => {
 
         setInitView: function() {
           var _this = this;
-          this.$tableBox = this.$parentEl.find('.tablebox');
+          this.$tableBox = this.$parentEl.find('.tablebox-content');
           this.$fixedColBox = this.$parentEl.find('.fixed-table');
           this.$left = this.$fixedColBox.find('.fix-left');
           this.$right = this.$fixedColBox.find('.fix-right');
@@ -269,34 +303,31 @@ export default (app, elem, attrs, scope) => {
         setThWidth: function() {
           var _this = this;
           setTimeout(function() {
-            var $table = _this.$tableBox.find('[ng-transclude] > table');
-            _this.$fixedHeaderBox.find('.fix-top').width(_this.$tableBox[0].scrollWidth);
-            $table.find('thead tr th').each(function(index, el) {
-              var width = $(el).width();
-              _this.$left.find('thead tr th').eq(index).width(width);
-              _this.$fixedHeaderBox.find('.fix-top thead tr th').eq(index).width(width);
+            var $table = _this.$tableBox.find('> table'), 
+              width, 
+              headerColWidth, 
+              scrollWidth = _this.getScrollWidth();
+            _this.$fixedHeaderBox.find('.fix-top').width(_this.$tableBox[0].scrollWidth + scrollWidth);
+            $table.find('tbody tr:eq(0) td').each(function(index, el) {
+              width = $(el).width();
+              headerColWidth = width;
+              _this.$left.find('tbody tr:eq(0) td').eq(index).width(width);
               _this.$fixedHeaderBox.find('.fix-top-left thead tr th').eq(index).width(width);
-              if(index >= _this.rightStartIndex) {
-                _this.$right.find('thead tr th').eq(index-_this.rightStartIndex).width(width);
-                _this.$fixedHeaderBox.find('.fix-top-right thead tr th').eq(index-_this.rightStartIndex).width(width);
+              if(index === _this.colLength - 1) {
+                headerColWidth = width + scrollWidth;
               }
+              if(index >= _this.rightStartIndex) {
+                _this.$right.find('tbody tr:eq(0) td').eq(index-_this.rightStartIndex).width(width);
+                _this.$fixedHeaderBox.find('.fix-top-right thead tr th').eq(index-_this.rightStartIndex).width(headerColWidth);
+              }
+              _this.$fixedHeaderBox.find('.fix-top thead tr th').eq(index).width(headerColWidth);
             });
 
             $table.find('tbody tr').each(function(index, el) {
               _this.$left.find('tbody tr').eq(index).height($(el).height());
               _this.$right.find('tbody tr').eq(index).height($(el).height());
             });
-
-            _this.$fixedHeaderBox.width(_this.$fixedColBox[0].scrollWidth);
-            if(_this.fixedHeaderBoxWidth) {
-              clearInterval(_this.fixedHeaderBoxWidth);
-              _this.fixedHeaderBoxWidth = null;
-            }
-            _this.fixedHeaderBoxWidth = setTimeout(function() {
-              clearInterval(_this.fixedHeaderBoxWidth);
-              _this.fixedHeaderBoxWidth = null;
-              _this.$fixedHeaderBox.width(_this.$fixedColBox[0].scrollWidth);
-            }, 0);
+            $table.css({'margin-top': '-'+$table.find('thead').height()+'px'})        
             
           }, 0)
         },
@@ -313,6 +344,7 @@ export default (app, elem, attrs, scope) => {
       return {
         restrict: 'A',
         compile: function($element, $attrs) {
+          console.log(22222222222, $element.html())
           tableFixed = new TableFixed({
             left: $attrs.fixedLeft,
             right: $attrs.fixedRight,
