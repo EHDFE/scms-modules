@@ -1,0 +1,48 @@
+.table-handle {
+  .table-handle-childlist {
+    display: inline-table;
+
+    & > * {
+      display: table-cell;
+      padding-right: 5px;
+    }
+  }
+
+  .more {
+    display: inline-block;
+    position: relative;
+
+    .btn-more-btn {
+      z-index: 19;
+      cursor: pointer;
+    }
+
+    .more-btns {
+      background: #ffffff;
+      border: 1px solid #dadde4;
+      box-shadow: 0 1px 6px 0 rgba(30, 40, 60, 0.1);
+      border-radius: 3px;
+      padding: 5px;
+      position: absolute;
+      z-index: 20;
+
+      .arrow {
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        border-left: solid 1px #ccc;
+        border-top: solid 1px #ccc;
+        background-color: #fff;
+      }
+
+      ul {
+        list-style: none;
+        li {
+          min-width: 40px;
+          text-align: center;
+          margin: 5px;
+        }
+      }
+    }
+  }
+}

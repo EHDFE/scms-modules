@@ -88,4 +88,7 @@ demoData.push(colorPicker);
 import multipleSelect from './multipleSelect/';
 demoData.unshift(multipleSelect);
 
+import tableHandleDirective from './tableHandle/';
+demoData = demoData.concat(tableHandleDirective);
+
 export default demoData;

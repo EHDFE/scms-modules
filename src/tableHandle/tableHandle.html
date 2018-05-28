@@ -1,0 +1,22 @@
+<div class="table-handle">
+
+  <div ng-transclude class="table-handle-childlist"></div>
+
+
+  <div class="more">
+    <div class="btn-more-btn" ng-mouseenter="showMore()" ng-mouseleave="askHideMore()">
+      更多
+    </div>
+    <div class="more-btns" ng-mouseleave="hideMore()" ng-show="isMoreShown" ng-mouseenter="askNotHideMore()">
+      <div class="arrow"></div>
+      <ul class="more-btns-ul">
+
+      </ul>
+    </div>
+
+
+
+  </div>
+
+
+</div>
