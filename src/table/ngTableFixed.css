@@ -3,7 +3,6 @@
 }
 .fixed-table-container .tablebox{
     position: relative;
-    overflow: hidden;
 }
 .fixed-table-container .tablebox .tablebox-content{
     overflow: auto;
@@ -75,5 +74,5 @@
 }
 .fixed-table-container .fix-right,
 .fixed-table-container .fix-left{
-    overflow-y: hidden;
+    
 }
