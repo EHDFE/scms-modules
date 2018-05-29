@@ -30,6 +30,10 @@ export default (app, elem, attrs, scope) => {
           const parentRect = $parent[0].getBoundingClientRect();
           const elemRect = $element[0].getBoundingClientRect();
 
+          $element.on('keypress', e => {
+            e.preventDefault();
+          });
+
           $pane.css({
             left: elemRect.left - parentRect.left,
             top: elemRect.top - parentRect.top + elemRect.height + 2,
