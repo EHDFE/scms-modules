@@ -3,9 +3,9 @@
 }
 .fixed-table-container .tablebox{
     position: relative;
+    overflow:visible; 
 }
 .fixed-table-container .tablebox .tablebox-content{
-    overflow: auto;
     width: 100%;
     min-height: 10px;
 }
@@ -14,8 +14,8 @@
     width:100%;
     z-index: 1;
     border-radius: 4px 4px 0 0;
-    overflow-x: hidden;
 }
+
 .fixed-table-container .fix-top-left{
     position: absolute;
     top:0;
@@ -37,7 +37,6 @@
     height: 100%;
     width: 100%;
     pointer-events: none;
-    overflow-y: auto;/*scroll*/
 }  
 .fixed-table-container .fixed-table .table{
     width: auto;
@@ -70,9 +69,12 @@
 }
 .fixed-table-container tr.hover{
     background: #E1E7ED !important;
-    overflow-y: auto !important;
 }
-.fixed-table-container .fix-right,
-.fixed-table-container .fix-left{
-    
+
+.fixed-table-overflow-x .tablebox .tablebox-content{
+    overflow-x: auto;
+}
+.fixed-table-overflow-y .fixed-table,
+.fixed-table-overflow-y .tablebox .tablebox-content{
+    overflow-y: auto;
 }

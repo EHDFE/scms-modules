@@ -235,23 +235,27 @@ export default (app, elem, attrs, scope) => {
           }
 
           if(this.$tableBox[0] && this.$tableBox[0].scrollHeight > height) {
+            this.$parentEl.addClass('fixed-table-overflow-y');
             this.$tableBox.css({height: height+'px'});
             this.$fixedColBox.css({height: (height-this.getScrollHeight())+'px'});
           }
           else {
             this.$tableBox.css({height: 'auto'});
             this.$fixedColBox.css({height: 'auto'});
+            this.$parentEl.removeClass('fixed-table-overflow-y');
           }
         },
 
         setShowSidebarCol: function() {
           if(this.$tableBox[0].scrollWidth <= this.$tableBox.width()) {
+            this.$parentEl.removeClass('fixed-table-overflow-x');
             this.$left.css({'display': 'none'});
-            this.$right.css({'display': 'none'});
+            this.$right.css({'display': 'none'});            
           }
           else {
+            this.$parentEl.addClass('fixed-table-overflow-x');
             this.$left.css({'display': ''});
-            this.$right.css({'display': ''});
+            this.$right.css({'display': ''});            
           } 
         },
 
