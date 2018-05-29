@@ -152,9 +152,7 @@ export default (app, elem, attrs, scope) => {
          * 生成头部固定行
          */
         buildHeaderRow: function() {
-          if(!this.config.header) {
-            return;
-          }  
+           
           var $header = $(this.html);
           $header.find('tbody').remove();
           this.$fixedHeaderBox.append($header.addClass('fix-top'));
@@ -234,7 +232,7 @@ export default (app, elem, attrs, scope) => {
             height = ($('#container').height() || $('body').height()) * this.config.floatHeight;
           }
 
-          if(this.$tableBox[0] && this.$tableBox[0].scrollHeight > height) {
+          if(this.$tableBox[0] && this.$tableBox[0].scrollHeight > height && this.config.header) {
             this.$parentEl.addClass('fixed-table-overflow-y');
             this.$tableBox.css({height: height+'px'});
             this.$fixedColBox.css({height: (height-this.getScrollHeight())+'px'});
@@ -279,7 +277,7 @@ export default (app, elem, attrs, scope) => {
             _this.setShowSidebarCol();
           }, 1000)
 
-          if(this.config.header && !this.isBuildHeader) {
+          if(!this.isBuildHeader) {
             this.isBuildHeader = true;
             this.$parentEl.prepend(this.$fixedHeaderBox);
             this.buildHeaderRow();
