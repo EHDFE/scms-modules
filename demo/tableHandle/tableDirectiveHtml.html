@@ -1,22 +1,37 @@
-<div class="tablebox">
+
+<div 
+    table-directive 
+    api-url="'//www.mocky.io/v2/5aa2278c2f0000751ad4639f'" 
+    items="items" 
+    page-size="pageSize" 
+    curr-page="currPage" 
+    fetch="fetch"
+    fetch-param="fetchParam" 
+    format-data="formatData" 
+    method="get" 
+    mini-page="miniPage"
+    
+    ng-table-fixed="ngTableFixed" 
+    fixed-left="2" 
+    fixed-right="1" 
+    fixed-header="true"
+    >
     <table class="table">
         <thead>
             <tr>
-                <th class="nowrap">序号</th>
-                <th class="nowrap">订单号</th>
-                <th class="nowrap">地址</th>
-                <th class="nowrap">状态</th>
-                <th class="nowrap">操作</th>
+                <th>操作</th>
+                <th>序号</th>
+                <th>手机号1</th>
+                <th>手机号2</th>
+                <th>手机号3</th>
+                <th>手机号4</th>
+                <th>手机号5</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td class="nowrap">小红</td>
-                <td>11225566778656556789</td>
-                <td>中国浙江省杭州市</td>
-                <td class="nowrap">出车</td>
+            <tr ng-repeat="item in items">
                 <td class="handle">
-                    <div table-handle-directive more-position="'BottomRight'">
+                    <div table-handle-directive side="'right'">
                         <a href="">审核</a>
                         <a href="">详情</a>
                         <a href="" fold="true">删除</a>
@@ -24,129 +39,19 @@
                         <a href="" fold>取消</a>
                     </div>
                 </td>
-            </tr>
-            <tr>
-                <td class="nowrap">小红</td>
-                <td>11225566778656556789</td>
-                <td>中国浙江省杭州市</td>
-                <td class="nowrap">出车</td>
+                <td>{{ $index + 1 + (currPage - 1) * pageSize }}</td>
+                <td>{{ item.mobilenumber }}</td>
+                <td>{{ item.mobilenumber }}</td>
+                <td>{{ item.mobilenumber }}</td>
+                <td>{{ item.mobilenumber }}</td>
+                <td>{{ item.mobilenumber }}</td>
                 <td class="handle">
-                    <div table-handle-directive>
+                    <div table-handle-directive side="'left'">
                         <a href="">审核</a>
                         <a href="">详情</a>
                         <a href="" fold="true">删除</a>
-                        <a href="" fold="true">处理</a>
-                        <a href="" fold="true">取消</a>
-                        <a href="javascript:void(0)" fold="true">查看详情</a>
-                        <span class="text-disabled" fold="true">编辑</span>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="nowrap">小红</td>
-                <td>11225566778656556789</td>
-                <td>中国浙江省杭州市</td>
-                <td class="nowrap">出车</td>
-                <td class="handle">
-                    <div table-handle-directive>
-                        <a href="">审核</a>
-                        <a href="">详情</a>
-                        <a href="" fold="true">删除</a>
-                        <a href="" fold="true">处理</a>
-                        <a href="" fold="true" ng-show="false">取消</a>
-                        <a href="javascript:void(0)" fold="true" ng-show="false">查看详情</a>
-                        <a href="javascript:void(0)" fold="true">编辑</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="nowrap">小红</td>
-                <td>11225566778656556789</td>
-                <td>中国浙江省杭州市</td>
-                <td class="nowrap">出车</td>
-                <td class="handle">
-                    <div table-handle-directive more-position="'Bottom'">
-                        <a href="">审核</a>
-                        <a href="">详情</a>
-                        <a href="" fold="true">删除</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="nowrap">小红</td>
-                <td>11225566778656556789</td>
-                <td>中国浙江省杭州市</td>
-                <td class="nowrap">出车</td>
-                <td class="handle">
-                    <div table-handle-directive more-position="'BottomLeft'">
-                        <a href="">审核</a>
-                        <a href="">详情</a>
-                        <a href="" fold="true">删除</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="nowrap">小红</td>
-                <td>11225566778656556789</td>
-                <td>中国浙江省杭州市</td>
-                <td class="nowrap">出车</td>
-                <td class="handle">
-                    <div table-handle-directive more-position="'BottomRight'">
-                        <a href="">审核</a>
-                        <a href="">详情</a>
-                        <a href="" fold="true">删除</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="nowrap">小红</td>
-                <td>11225566778656556789</td>
-                <td>中国浙江省杭州市</td>
-                <td class="nowrap">出车</td>
-                <td class="handle">
-                    <div table-handle-directive more-position="'Top'">
-                        <a href="">审核</a>
-                        <a href="">详情</a>
-                        <a href="" fold="true">删除</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="nowrap">小红</td>
-                <td>11225566778656556789</td>
-                <td>中国浙江省杭州市</td>
-                <td class="nowrap">出车</td>
-                <td class="handle">
-                    <div table-handle-directive more-position="'TopRight'">
-                        <a href="">审核</a>
-                        <a href="">详情</a>
-                        <a href="" fold="true">删除</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="nowrap">小红</td>
-                <td>11225566778656556789</td>
-                <td>中国浙江省杭州市</td>
-                <td class="nowrap">出车</td>
-                <td class="handle">
-                    <div table-handle-directive more-position="'TopLeft'">
-                        <a href="">审核</a>
-                        <a href="">详情</a>
-                        <a href="" fold="true">删除</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="nowrap">小红</td>
-                <td>11225566778656556789</td>
-                <td>中国浙江省杭州市</td>
-                <td class="nowrap">出车</td>
-                <td class="handle">
-                    <div table-handle-directive>
-                        <a href="">审核</a>
-                        <a href="">详情</a>
-                        <a href="">删除</a>
+                        <a href="" fold="false">处理</a>
+                        <a href="" fold>取消</a>
                     </div>
                 </td>
             </tr>

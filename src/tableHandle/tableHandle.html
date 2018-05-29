@@ -4,19 +4,15 @@
 
 
   <div class="more">
-    <div class="btn-more-btn" ng-mouseenter="showMore()" ng-mouseleave="askHideMore()">
-      更多
+    <div class="more-btn" ng-mouseenter="showMore()" ng-mouseleave="askHideMore()">
+      <span class="glyphicon glyphicon-option-vertical"></span>
     </div>
-    <div class="more-btns" ng-mouseleave="hideMore()" ng-show="isMoreShown" ng-mouseenter="askNotHideMore()">
+    <div class="more-btns-div" ng-mouseleave="hideMore()" ng-mouseenter="askNotHideMore()">
       <div class="arrow"></div>
       <ul class="more-btns-ul">
 
       </ul>
     </div>
-
-
-
   </div>
-
 
 </div>

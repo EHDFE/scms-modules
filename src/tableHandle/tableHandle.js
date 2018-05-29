@@ -13,80 +13,44 @@ export default (app, elem, attrs, scope) => {
       return {
         template: html,
         scope: {
-          morePosition: "=" // 可选值: TopLeft, Top, TopRight, BottomLeft, Bottom, BottomRight
+          side: '=', // left(默认),right'
         },
         restrict: "EA",
         transclude: true,
         link: function($scope, $element, $attr) {
-          let childlist = $element.find(".table-handle-childlist");
-          let moreBtnsUl = $element.find(".more-btns-ul");
-          let more = $element.find(".more");
-          let moreBtns = $element.find(".more-btns");
-          let arrow = $element.find(".arrow");
+          let _childlist = $element.find(".table-handle-childlist");
+          let _moreBtnsUl = $element.find(".more-btns-ul");
+          let _more = $element.find(".more");
+          let _moreBtnsDiv = $element.find(".more-btns-div");
+
+          let side = $scope.side || 'left';
+
+          _moreBtnsDiv.addClass(side);
 
           // 将按钮移到更新列表中
-          function moveToMoreList() {
-            let hideBtns = childlist.children("[fold][fold!=false]");
+          let moveTimeout = setTimeout(() => {
+            let hideBtns = _childlist.children("[fold][fold!=false]");
             if (hideBtns && hideBtns.length) {
               for (let i = 0; i < hideBtns.length; i++) {
                 let li = $("<li></li>");
                 li.append(hideBtns[i]);
-                moreBtnsUl.append(li);
+                _moreBtnsUl.append(li);
               }
-              more.show();
+              _more.show();
             } else {
-              more.hide();
+              _more.hide();
             }
-          }
-
-          function setMorePosition() {
-            moreBtns.css({ left: "auto", right: "auto", top: "auto", bottom: "auto", transform: "unset" });
-            arrow.css({ left: "auto", right: "auto", top: "auto", bottom: "auto", transform: "unset" });
-            switch ($scope.morePosition) {
-              case "TopLeft":
-                moreBtns.css({ right: "0px", bottom: "20px" });
-                arrow.css({ right: "5px", bottom: "-6px", transform: "rotateZ(225deg)" });
-                break;
-              case "Top":
-                moreBtns.css({ left: "50%", bottom: "20px", transform: "translateX(-50%)" });
-                arrow.css({ left: "50%", bottom: "-6px", transform: "translateX(-50%) rotateZ(225deg)" });
-                break;
-              case "TopRight":
-                moreBtns.css({ left: "0px", bottom: "20px" });
-                arrow.css({ left: "5px", bottom: "-6px", transform: "rotateZ(225deg)" });
-                break;
-
-              case "BottomLeft":
-                moreBtns.css({ right: "0px", top: "20px" });
-                arrow.css({ right: "5px", top: "-6px", transform: "rotateZ(45deg)" });
-                break;
-
-              case "BottomRight":
-                moreBtns.css({ left: "0px", top: "20px" });
-                arrow.css({ left: "5px", top: "-6px", transform: "rotateZ(45deg)" });
-                break;
-              case "Bottom":
-              default:
-                moreBtns.css({ left: "50%", top: "20px", transform: "translateX(-50%)" });
-                arrow.css({ left: "50%", top: "-6px", transform: "translateX(-50%) rotateZ(45deg)" });
-                break;
-            }
-          }
-
-          setMorePosition();
-
-          setTimeout(() => {
-            moveToMoreList();
+            window.clearTimeout(moveTimeout);
           }, 1);
 
           $scope.showMore = () => {
-            $scope.isMoreShown = true;
+            _moreBtnsDiv.show();
           };
 
           let askHideMoreTimeout = null;
 
           $scope.hideMore = () => {
-            $scope.isMoreShown = false;
+            _moreBtnsDiv.hide();
           };
 
           $scope.askNotHideMore = () => {
@@ -104,7 +68,6 @@ export default (app, elem, attrs, scope) => {
           };
         },
         controller: function($scope, $element, $attrs) {
-          // console.log("controller");
         }
       };
     }

@@ -15,9 +15,9 @@ export default [
     attrs: [
       {
         type: 'string',
-        defaultValue: 'Bottom',
-        key: 'morePosition',
-        description: '更多下接按钮弹出位置，可选值：TopLeft, Top, TopRight, BottomLeft, Bottom, BottomRight',
+        defaultValue: 'left',
+        key: 'side',
+        description: '更多下接按钮弹出水平方向，可选值：left(默认),right',
       }
     ],
     deps: [''],
@@ -25,3 +25,6 @@ export default [
     type: 'directive',
   },
 ];
+
+
+
