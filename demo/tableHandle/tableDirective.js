@@ -7,7 +7,7 @@ export default [
     author: 'djd',
     lastBy: '',
     description:
-      '列表指令，将多余的按隐藏，并显示更多，当鼠标移到更多上时显示隐藏的按钮',
+      '列表指令，将多余的按钮(需要有属性fold="true")隐藏，并显示更多，当鼠标移到更多上时显示隐藏的按钮',
     date: '2018-05-25',
     scope: [
       

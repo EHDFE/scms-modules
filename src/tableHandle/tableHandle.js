@@ -42,30 +42,6 @@ export default (app, elem, attrs, scope) => {
             }
             window.clearTimeout(moveTimeout);
           }, 1);
-
-          $scope.showMore = () => {
-            _moreBtnsDiv.show();
-          };
-
-          let askHideMoreTimeout = null;
-
-          $scope.hideMore = () => {
-            _moreBtnsDiv.hide();
-          };
-
-          $scope.askNotHideMore = () => {
-            if (askHideMoreTimeout) {
-              clearTimeout(askHideMoreTimeout);
-            }
-          };
-
-          $scope.askHideMore = () => {
-            askHideMoreTimeout = setTimeout(() => {
-              $timeout(() => {
-                $scope.hideMore();
-              });
-            }, 300);
-          };
         },
         controller: function($scope, $element, $attrs) {
         }
