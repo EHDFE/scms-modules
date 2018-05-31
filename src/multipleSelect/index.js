@@ -30,6 +30,10 @@ export default (app, elem, attrs, scope) => {
           const parentRect = $parent[0].getBoundingClientRect();
           const elemRect = $element[0].getBoundingClientRect();
 
+          $element.on('keypress', e => {
+            e.preventDefault();
+          });
+
           $pane.css({
             left: elemRect.left - parentRect.left,
             top: elemRect.top - parentRect.top + elemRect.height + 2,
@@ -66,31 +70,36 @@ export default (app, elem, attrs, scope) => {
 
           $scope.handleClick = data => {
             devTool.log(data);
+            const selectedList = $scope.selectedList.slice(0);
             if (!data.selected) {
               if (Number.isFinite(maxSelectLimit) && $scope.selectedList.length >= maxSelectLimit) {
                 devTool.warn('maximum limit reached', $scope.selectedList);
                 return false;
               }
-              $scope.selectedList.push(data);
+              selectedList.push(data);
             } else {
-              $scope.selectedList.splice(
-                $scope.selectedList.indexOf(data),
+              selectedList.splice(
+                selectedList.indexOf(data),
                 1
               );
             }
             data.selected = !data.selected;
+            $scope.selectedList = selectedList;
           };
 
-          const sourceMapByValue = {};
+          let sourceMapByValue = {};
           $scope.options.forEach(group => {
             group.children.forEach(item => {
               Object.assign(sourceMapByValue, {
-                [item.value]: item
+                [item.value]: item,
               });
             });
           });
 
-          const updateSelectList = data => {
+          const updateSelectList = (data, isInit) => {
+            if (isInit && Object.keys(sourceMapByValue).length === 0) {
+              return;
+            }
             let selectedList;
             if (data) {
               selectedList = data
@@ -111,17 +120,31 @@ export default (app, elem, attrs, scope) => {
           };
 
           
+          $scope.selectedList = [];
           const initialize = () => {
-            updateSelectList($scope.ngModel);
+            updateSelectList($scope.ngModel, true);
           };
 
           initialize();
+
+          $scope.$watch('options', newOptions => {
+            devTool.info('options Change:', newOptions);
+            sourceMapByValue = {};
+            newOptions.forEach(group => {
+              group.children.forEach(item => {
+                Object.assign(sourceMapByValue, {
+                  [item.value]: item,
+                });
+              });
+            });
+            updateSelectList($scope.ngModel);
+          });
 
           $scope.$watch('selectedList', (newValue, oldValue) => {
             if (isEqual(newValue, oldValue)) return;
             devTool.info('SelectedList Change:', newValue, oldValue);
             $scope.ngModel = newValue.map(d => d.value).join(separator);
-          }, true);
+          });
 
           $scope.$watch('ngModel', (newValue, oldValue) => {
             if (newValue === oldValue) return;

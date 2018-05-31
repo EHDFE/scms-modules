@@ -85,7 +85,7 @@ export default {
       type: 'number',
       key: 'maxSelectLimit',
       scopeType: '@',
-      exampleValue: 3,
+      exampleValue: 4,
       description: '最大可选数量'
     },
     {
