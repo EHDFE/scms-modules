@@ -1,0 +1,85 @@
+.table-handle {
+  .table-handle-childlist {
+    display: inline-table;
+
+    & > * {
+      display: table-cell;
+      padding-right: 5px;
+    }
+  }
+
+  .more {
+    display: inline-block;
+    position: relative;
+
+    .more-btn {
+      z-index: 19;
+      cursor: pointer;
+      display: inline-block;
+      width: 20px;
+      text-align: center;
+    }
+
+    .more-btns-div {
+      background: #ffffff;
+      border: 1px solid #dadde4;
+      box-shadow: 0 1px 6px 0 rgba(30, 40, 60, 0.1);
+      border-radius: 3px;
+      padding: 5px 3px 5px 8px;
+      position: absolute;
+      z-index: 20;
+      display: none;
+
+      .arrow {
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        border-left: solid 1px #ccc;
+        border-top: solid 1px #ccc;
+        background-color: #fff;
+      }
+
+      &.left {
+        right: 22px;
+        top: -7px;
+
+        .arrow {
+          right: -6px;
+          top: 9px;
+          transform: rotateZ(135deg);
+        }
+      }
+
+      &.right {
+        left: 22px;
+        top: -7px;
+
+        .arrow {
+          left: -6px;
+          top: 9px;
+          transform: rotateZ(-45deg);
+        }
+      }
+
+      ul {
+        list-style: none;
+        li {
+          min-width: 40px;
+          text-align: center;
+          display: inline;
+
+          & * {
+            padding-right: 5px;
+            margin-right: 0;
+          }
+        }
+      }
+    }
+
+    &:hover {
+      .more-btns-div {
+        display: block;
+      }
+    }
+  }
+}
