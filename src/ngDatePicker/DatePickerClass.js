@@ -459,8 +459,9 @@ class DatePicker {
         });
       }
     }
-    this.setTitleStatus();
+    
     this.dateView = dateView;
+    this.setTitleStatus();
     return dateView;
   }
   setDate(momentDate) {

@@ -64,6 +64,8 @@ import colorPicker from './src/colorPicker';
 import multipleSelect from './src/multipleSelect';
 import ngTableFixed from './src/table/ngTableFixed';
 
+import datePickerRangeFixPanel from './src/ngDatePicker/datePickerRangeFixPanel';
+
 
 export default {
   'ngCode/ngCodeDirective': ngCodeDirective,
@@ -116,4 +118,5 @@ export default {
   colorPicker,
   multipleSelect,
   ngTableFixed,
+  'ngDatePicker/datePickerRangeFixPanel': datePickerRangeFixPanel,
 };
