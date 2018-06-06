@@ -64,8 +64,6 @@ demoData.push(crumb);
 import card from "./card/index.js";
 demoData.push(card);
 
-
-
 import starRating from "./starRating/index.js";
 demoData.push(starRating);
 
@@ -83,9 +81,14 @@ demoData.push(cascadeSelect);
 
 import businessCitySelect from './businessCitySelect/';
 demoData.push(businessCitySelect);
-demoData.unshift(businessCitySelect);
 
 import colorPicker from './colorPicker/';
 demoData.push(colorPicker);
+
+import multipleSelect from './multipleSelect/';
+demoData.push(multipleSelect);
+
+import tableHandleDirective from './tableHandle/';
+demoData = demoData.concat(tableHandleDirective);
 
 export default demoData;

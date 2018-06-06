@@ -72,3 +72,16 @@
   background: #e9eff4;
   border-radius: 50px 0 0 50px;
 }
+
+//
+.date-panel-title > h2{
+  margin: 10px 0px -15px 10px;
+  background: #f5f5f5;
+  text-align: center;
+  padding: 8px 0;
+  color:#666;
+  border-radius: 3px 3px 0 0;
+}
+.date-panel-title:last-child > h2{
+  margin: 10px 10px -15px 10px;
+}

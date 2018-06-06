@@ -60,6 +60,19 @@ export default (app, elem, attrs, scope) => {
             }
           };
 
+          var timeTriggerEventValue;
+          var triggerEvent = function() {
+            if(timeTriggerEventValue) {
+              clearTimeout(timeTriggerEventValue);
+              timeTriggerEventValue = null;
+            }
+            timeTriggerEventValue = setTimeout(function() {
+              clearTimeout(timeTriggerEventValue);
+              timeTriggerEventValue = null;
+              $(window).trigger('resize');
+            }, 500);
+          };
+
           // 目录收展
           $scope.toggleLock = function () {
             const isShrink = $element.hasClass('shrink-tag');
@@ -73,6 +86,8 @@ export default (app, elem, attrs, scope) => {
               $element.addClass('shrink');
               $content.addClass('contentShrink');
             }
+            triggerEvent();
+            
           };
 
           $element.hover(
@@ -80,12 +95,14 @@ export default (app, elem, attrs, scope) => {
               if ($element.hasClass('shrink-tag')) {
                 $('#content').removeClass('contentShrink');
                 $element.removeClass('shrink');
+                triggerEvent();
               }
             },
             () => {
               if ($element.hasClass('shrink-tag')) {
                 $element.addClass('shrink');
                 $('#content').addClass('contentShrink');
+                triggerEvent();
               }
             },
           );

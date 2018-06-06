@@ -1,8 +1,8 @@
-import title from "./title.html";
+import title from './title.html';
 
 export default {
-	title: "Title",
-	author: "tianyanrong",
-	html: [title],
-	isCode: true
-}
+  title: 'Title',
+  author: 'tianyanrong',
+  html: [title],
+  isCode: true,
+};

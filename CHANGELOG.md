@@ -1,4 +1,20 @@
 # Changelog
+### v0.2.2
+---
+
+#### Components Update
+##### 
+- datePickerRangeFixPanel
+  - 📌 新增时间范围选择-固定开始结束面板指令
+- ngTableFixed
+  - 📌 新增列表固定头，左右则栏指令
+- tableHandleDirective
+  - 📌 新增列表操作栏按钮收起指令
+- colorPickerDirective
+  - 📌 新增颜色选择指令
+- businessCitySelect
+  - 📌 新增业务城市单多选择指令
+  
 
 ### v0.2.1
 ---

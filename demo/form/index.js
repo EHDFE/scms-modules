@@ -30,4 +30,5 @@ export default [{
 	author: "tianyanrong",
 	html: [formY],
 	isCode: true
-}]
+}
+]
