@@ -1,0 +1,18 @@
+<div class="date-picker-range">
+  <div class="date-panel">
+    <div class="date-panel-title">
+      <h2>开始时间</h2>
+      <div date-panel on-pick-event="onPickEvent" init-date="initStartDate" part="left"  max-date-value="maxDateValue" min-date-value="minDateValue" max-date="maxDate" min-date="minDate"
+      date="startDate" use-seconds="useSeconds" name="part1" watch-date="endDate" tmp-date="datePicker.tmpDate" date-range-data="dateRangeData" min-view-mode="minViewMode" pick-time="pickTime" format-date="formatDate"></div>
+    </div>
+    <div class="date-panel-title">
+        <h2>结束时间</h2>
+        <div date-panel on-pick-event="onPickEvent" init-date="initDateEnd"  max-date-value="maxDateValue" min-date-value="minDateValue" max-date="maxDate" min-date="minDate"
+      date="endDate" use-seconds="useSeconds" part="right" name="part2" watch-date="startDate" tmp-date="datePicker.tmpDate" date-range-data="dateRangeData" min-view-mode="minViewMode" pick-time="pickTime" format-date="formatDate"></div>
+    </div>
+  </div>
+  <div class="date-btn-box">
+    <span>{{startValue || ''}}</span><i> ~ </i><span>{{endValue || ''}}</span>
+    <button class="btn btn-success btn-sm" ng-click="pick();" ng-disabled="!(startValue && endValue)">确认</button>
+  </div>
+</div>

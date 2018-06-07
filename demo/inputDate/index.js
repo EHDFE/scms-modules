@@ -25,6 +25,11 @@ import datePickerRange2 from './datePickerRange2.html';
 import datePickerRange3 from './datePickerRange3.html';
 import datePickerRange4 from './datePickerRange4.html';
 
+import datePickerRangeFixPannel1 from './datePickerRangeFixPannel1.html';
+import datePickerRangeFixPannel2 from './datePickerRangeFixPannel2.html';
+import datePickerRangeFixPannel3 from './datePickerRangeFixPannel3.html';
+import datePickerRangeFixPannel4 from './datePickerRangeFixPannel4.html';
+
 import calendar from './calendar.html';
 import calendar2 from './calendar2.html';
 import calendar3 from './calendar3.html';
@@ -77,6 +82,13 @@ export default [{
   parentTitle: 'DatePickers',
   author: 'tianyanrong',
   html: [datePickerRange1,datePickerRange2,datePickerRange3,datePickerRange4],
+  isCode: true
+},
+{
+  title: 'datePickerRangeFixPanel',
+  parentTitle: 'DatePickers',
+  author: 'tianyanrong',
+  html: [datePickerRangeFixPannel1,datePickerRangeFixPannel3,datePickerRangeFixPannel4],
   isCode: true
 },
 {
