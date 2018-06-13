@@ -60,7 +60,7 @@
     border-right:1px solid #DADDE4;
 }
 .fixed-table-container.left-box-shadow .fix-left{
-    box-shadow: 4px 0 4px 0px rgba(235, 239, 246, 0.5);
+    box-shadow: 3px 0 3px 3px rgba(235, 239, 246, 0.5);
     
     border-right:1px solid #ebeff6;
 }
