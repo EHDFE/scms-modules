@@ -39,6 +39,7 @@ import searchDropdownDirective from './src/searchDropdown/searchDropdown';
 import starRatingDirective from './src/starRating/starRating';
 import stepsDirective from './src/steps/steps';
 import tableDirective from './src/table/table';
+import tableHandleDirective from './src/tableHandle/tableHandle';
 import timePickerDirective from './src/timePicker/timePickerDirective';
 import tooltipDirective from './src/tooltip/tooltip';
 import treeViewDirective from './src/treeView/treeView';
@@ -61,6 +62,9 @@ import rangeSelectBar from './src/rangeSelectBar/rangeSelectBar';
 import businessCitySelect from './src/businessCitySelect';
 import colorPicker from './src/colorPicker';
 import multipleSelect from './src/multipleSelect';
+import ngTableFixed from './src/table/ngTableFixed';
+
+import datePickerRangeFixPanel from './src/ngDatePicker/datePickerRangeFixPanel';
 
 
 export default {
@@ -92,6 +96,7 @@ export default {
   'starRating/starRatingDirective': starRatingDirective,
   'steps/stepsDirective': stepsDirective,
   'table/tableDirective': tableDirective,
+  'tableHandle/tableHandleDirective': tableHandleDirective,
   'timePicker/timePickerDirective': timePickerDirective,
   'tooltip/tooltip': tooltipDirective,
   'treeView/treeViewDirective': treeViewDirective,
@@ -112,4 +117,6 @@ export default {
   businessCitySelect,
   colorPicker,
   multipleSelect,
+  ngTableFixed,
+  'ngDatePicker/datePickerRangeFixPanel': datePickerRangeFixPanel,
 };

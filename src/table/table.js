@@ -10,13 +10,13 @@
 import find from 'lodash/find';
 import paginationDirective from '../pagination/paginationDirective';
 import errorNoDataDirective from '../errorNoData/errorNoDataDirective';
-import tableFixedDirective from './tableFixed';
+import ngTableFixed from './ngTableFixed';
 import html from './index.html';
 
 export default (app, elem, attrs, scope) => {
   paginationDirective(app);
   errorNoDataDirective(app);
-  tableFixedDirective(app);
+  ngTableFixed(app);
   app.directive('tableDirective', [
     '$cookies',
     '$http',
@@ -38,9 +38,7 @@ export default (app, elem, attrs, scope) => {
           formatData: '=', // @scope formatData 格式化列表数据 {type: "function", parentScopeValue: "console.log('格式化数据:',arguments);"}
           disableStorage: '=', // @scope disableStorage 是否禁止从localStorage中获取搜索条件 {type: "boolean", exampleValue: "false"}
           delEmptyParam: '=', // @scope delEmptyParam 是否删除值为空字符串的请求参数 {type: "boolean", exampleValue: "false"}
-          fixedTable: '=',
-          fixedInfo: '=',
-          domReady: '=',
+          ngTableFixed: '=',//ngTableFixed指令在监听他的变化，重置计算：th宽度、是否显示固定元素、设置父容器高度
           miniPage: '=' //@scope miniPage 分页是否使用缩小样式 {type: "boolean", "exampleValue": false, defaultValue: false}
         },
         restrict: 'EA',
@@ -128,13 +126,17 @@ export default (app, elem, attrs, scope) => {
                     $scope.isNoData = false;
                   } else {
                     $scope.isNoData = true;
-                    $rootScope.$broadcast('angularDomReady');
                   }
 
                   if ($scope.formatData) {
                     $scope.formatData($scope.items, $scope.totalCount);
                   }
                 }
+
+                if($attrs.ngTableFixed) {
+                  $scope.ngTableFixed = (+new Date()) + '';
+                }
+                
                 $.loading(false, {
                   $container: $element,
                 });
@@ -189,13 +191,6 @@ export default (app, elem, attrs, scope) => {
                     matchedParam.currPage = fetchParamStorage.currPage;
                     foundState = true;
                   }
-                  // angular.forEach(localStorageArray, param => {
-                  //   if (current.name === param.state) {
-                  //     param.fetchParamObj = fetchParamStorage.fetchParamObj;
-                  //     param.currPage = fetchParamStorage.currPage;
-                  //     foundState = true;
-                  //   }
-                  // });
                 }
                 if (!foundState) {
                   localStorageArray.push(fetchParamStorage);
@@ -207,16 +202,6 @@ export default (app, elem, attrs, scope) => {
               }
             }
           );
-
-          if ($scope.fixedTable) {
-            $scope.domReady = function($last) {
-              if ($last) {
-                $timeout(() => {
-                  $rootScope.$broadcast('angularDomReady', $element);
-                });
-              }
-            };
-          }
         },
 
         controller($scope, $element, $attrs, $transclude, $log, $http) {},

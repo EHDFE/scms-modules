@@ -84,11 +84,13 @@ class DatePicker {
   setPreDecade() {
     if (!this.yearView[0].disabled) {
       this.setYearView(this.yearView[0].data - 1);
+      this.setTitleStatus();
     }
   }
   setNextDecade() {
     if (!this.yearView[11].disabled) {
       this.setYearView(this.yearView[11].data + 1);
+      this.setTitleStatus();
     }
   }
   setYear(year) {
@@ -109,6 +111,7 @@ class DatePicker {
       }
       this.setMonthView();
       this.showPanel = 'month';
+      this.setTitleStatus();
     }
   }
   setMonthView() {
@@ -266,7 +269,7 @@ class DatePicker {
         .millisecond(0)
         .valueOf();
 
-    for (let i = this.startDay-1; i < 41; i++) {
+    for (let i = this.startDay-1; i < (41+this.startDay); i++) {
       let isToday = false;
       const nowDate = startDate
         .clone()
@@ -456,8 +459,9 @@ class DatePicker {
         });
       }
     }
-
+    
     this.dateView = dateView;
+    this.setTitleStatus();
     return dateView;
   }
   setDate(momentDate) {
@@ -519,6 +523,9 @@ class DatePicker {
     this.setHourView();
     this.setMinView();
     this.setSecondView();
+
+  }
+  setTitleStatus() {
 
   }
   setPrevMonth() {

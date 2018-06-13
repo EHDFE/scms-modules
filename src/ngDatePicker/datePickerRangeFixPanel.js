@@ -12,7 +12,7 @@ import isInteger from 'lodash/isInteger';
 import datePanel from './datePanel';
 import tpl from './datePickerRangeTpl.html';
 import './datePickerRangeTpl.css';
-import html from './datePickerRange.html';
+import html from './datePickerRangeFixPanel.html';
 import './datePickerRange.css';
 // import { preventBlur } from './utils';
 
@@ -20,7 +20,7 @@ import Defautls from './defaults';
 
 export default (app, elem, attrs, scope) => {
   datePanel(app, elem, attrs, scope);
-  app.directive('datePickerRange', [
+  app.directive('datePickerRangeFixPanel', [
     '$rootScope',
     '$document',
     '$compile',
@@ -80,7 +80,6 @@ export default (app, elem, attrs, scope) => {
              * 处理初始数据、面板数据
              * isInit 值为：true 时是否是初始时执行，初始时需要处理设置的默认时间initStartDate、initEndDate
              * isInit 值为：false 时，处理面板数据。
-             * $scope.dateRangeData 范围数据，用于在面板中选中范围
              * $scope.startDate 范围数据，用于在面板中显示第一个面板在此时间的月份
              * $scope.endDate 范围数据，用于在面板中显示第二个面板在此时间的月份
              */
@@ -98,32 +97,46 @@ export default (app, elem, attrs, scope) => {
                 return;
               }
               if($scope.startDateRange && $scope.endDateRange) {
-                if($scope.startDateRange.substr(0,7) === $scope.endDateRange.substr(0,7)) {
-                  $scope.startDate = $scope.startDateRange;
-                  $scope.endDate =  moment($scope.startDate).add(1, 'month').format($scope.formatDate);
-                  $scope.startValue = $scope.startDate;
-                  $scope.endValue = $scope.endDateRange;
-                } else {
-                  $scope.startDate = $scope.startDateRange;
-                  $scope.endDate = $scope.endDateRange;
-                  $scope.startValue = $scope.startDate;
-                  $scope.endValue = $scope.endDate;
-                }
-                $scope.dateRangeData = {
-                  start: moment($scope.startValue),
-                  end: moment($scope.endValue)
-                };
-              } else{
-                if(!$scope.dateRangeData || !$scope.dateRangeData.start) {
-                  $scope.startDate = moment().format($scope.formatDate);
-                  $scope.endDate = moment().add(1, 'month').format($scope.formatDate);  
-                }               
+                $scope.startDate = $scope.startDateRange;
+                $scope.endDate = $scope.endDateRange;
+                $scope.startValue = $scope.startDate;
+                $scope.endValue = $scope.endDate;
               }
             }
 
             initDate(true);
 
             var datepickers = {};
+
+            //设置dateView数据中的状态
+            var setDateViewStatus = function() {
+              if(!datepickers['part1'] ||  !datepickers['part2']) {
+                return;
+              }
+              angular.forEach(datepickers['part1'].dateView, function(item) {
+                angular.forEach(item, function(col) {
+                  col.disabled = $scope.endValue && moment($scope.endValue).valueOf() < col.data.valueOf();
+                  if(moment($scope.startValue).valueOf() === col.data.valueOf()) {
+                    col.tag = 'active';
+                  }
+                  else {
+                    col.tag = col.tag === 'active' ? '' : col.tag;
+                  }
+                })
+              });
+              angular.forEach(datepickers['part2'].dateView, function(item) {
+                angular.forEach(item, function(col) {
+                  col.disabled = $scope.startValue && moment($scope.startValue, 'YYYY-MM-DD').valueOf() > col.data.valueOf();
+                  if(moment($scope.endValue).valueOf() === col.data.valueOf()) {
+                    col.tag = 'active';
+                  }
+                  else {
+                    col.tag = col.tag === 'active' ? '' : col.tag;
+                  }
+                })
+                
+              });
+            }
             //
             var setTitleStatus = function() {
               if(!datepickers['part1'] ||  !datepickers['part2']) {
@@ -142,7 +155,7 @@ export default (app, elem, attrs, scope) => {
               }
               if(
                 datepickers['part1'].dateData.year > datepickers['part2'].dateData.year || 
-                (datepickers['part1'].dateData.year === datepickers['part2'].dateData.year && datepickers['part1'].dateData.month + 1 >= datepickers['part2'].dateData.month)
+                (datepickers['part1'].dateData.year === datepickers['part2'].dateData.year && datepickers['part1'].dateData.month >= datepickers['part2'].dateData.month)
               ) {
                 datepickers['part1'].isHideMonthRight = true;
                 datepickers['part2'].isHideMonthLeft = true;
@@ -152,41 +165,25 @@ export default (app, elem, attrs, scope) => {
                 datepickers['part2'].isHideMonthLeft = false;
               }
 
+              
+
               angular.forEach(datepickers['part1'].monthView, function(item) {
-                if(item.year === datepickers['part2'].dateData.year && item.data >= datepickers['part2'].dateData.month) {
-                  item.disabled = true;
-                }
-                else {
-                  item.disabled = false;
-                }
+                item.disabled = item.year === datepickers['part2'].dateData.year && item.data >= datepickers['part2'].dateData.month;
               });
 
               angular.forEach(datepickers['part2'].monthView, function(item) {
-                if(item.year === datepickers['part1'].dateData.year && item.data <= datepickers['part1'].dateData.month) {
-                  item.disabled = true;
-                }
-                else {
-                  item.disabled = false;
-                }
+                item.disabled = item.year === datepickers['part1'].dateData.year && item.data <= datepickers['part1'].dateData.month;
               });
 
               angular.forEach(datepickers['part1'].yearView, function(item) {
-                if(item.data > datepickers['part2'].dateData.year) {
-                  item.disabled = true;
-                }
-                else {
-                  item.disabled = false;
-                }
+                item.disabled = item.data > datepickers['part2'].dateData.year;
               });
 
               angular.forEach(datepickers['part2'].yearView, function(item) {
-                if(item.data < datepickers['part1'].dateData.year) {
-                  item.disabled = true;
-                }
-                else {
-                  item.disabled = false;
-                }
+                item.disabled = item.data < datepickers['part1'].dateData.year;
               });
+
+              setDateViewStatus();
             }
             
             /*
@@ -200,11 +197,16 @@ export default (app, elem, attrs, scope) => {
                 datepickers[$panelAttrs.name].setTitleStatus = setTitleStatus;
                 break;
               case 'date':
-                var dateRangeData = datePicker.dateRangeData;
-                $scope.startValue = dateRangeData.start.format($scope.formatDate) || '';
-                $scope.endValue = dateRangeData.end.format($scope.formatDate) || '';
-                $scope.endDate = dateRangeData.start.format($scope.formatDate) || '';
-                $scope.startDate = dateRangeData.end.format($scope.formatDate) || '';
+                if(date.disabled) {
+                  return;
+                }
+                if($panelAttrs.name === 'part1') {
+                  $scope.startValue = date.dateValue;
+                }
+                else {
+                  $scope.endValue = date.dateValue;
+                }
+                setDateViewStatus();
                 break;
               case 'month':
                 datePicker.setMonth(date);
@@ -318,10 +320,6 @@ export default (app, elem, attrs, scope) => {
               $scope.endValue = '';
               $scope.startDate = '';
               $scope.endDate = '';
-              $scope.dateRangeData = {
-                start: '',
-                end: ''
-              };
               setOutValue($scope.startValue, $scope.endValue, true);
               $timeout(() => {
                 $scope.$broadcast('refreshDate');
