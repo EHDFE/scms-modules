@@ -14,6 +14,7 @@
     width:100%;
     z-index: 1;
     border-radius: 4px 4px 0 0;
+    position: relative;
 }
 
 .fixed-table-container .fix-top-left{
@@ -91,8 +92,15 @@
 .fixed-table-overflow-y .tablebox .tablebox-content{
     overflow-y: auto;
 }
+.fixed-table-container .tablebox-content,
+.fixed-table-container .fixed-table{
+    margin-top: -2px;
+}
 .fixed-table-container.table-th-border .tablebox-content,
 .fixed-table-container.table-th-border .fixed-table{
     margin-top: -1px;
+}
+.fixed-table-container .fixed-header-box table{
+    border-radius: 3px 3px 0 0;
 }
 
