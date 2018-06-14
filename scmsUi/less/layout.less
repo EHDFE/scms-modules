@@ -60,3 +60,19 @@
   width: auto;
   padding:0;
 }
+
+.bottom-fixed-bar{
+	bottom: 0;
+  position: fixed;
+  background: #ebf0f5;
+  border-top: 1px solid #ebf0f5;
+  z-index: 8;
+  right: 15px;
+  left: 0;
+  min-height: 60px;
+	padding: 15px 20px 15px 200px;
+	transition: padding-left .5s;
+}
+.contentShrink .bottom-fixed-bar{
+	padding-left: 65px;
+}
