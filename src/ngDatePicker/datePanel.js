@@ -159,7 +159,7 @@ export default (app, elem, attrs, scope) => {
           $scope.pickEvent = function(col) {
             datePicker.setDate(col);
             try{
-              $scope.onPickEvent('date', col, datePicker);//$scope.dateRangeData
+              $scope.onPickEvent('date', col, datePicker, $attrs);//$scope.dateRangeData
             }
             catch(e) {}
           }
