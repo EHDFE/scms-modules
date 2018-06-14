@@ -14,6 +14,7 @@ export default (app, elem, attrs, scope) => {
         template: html,
         scope: {
           side: '=', // left(默认),right'
+          count: '=', // 按钮个数
         },
         restrict: "EA",
         transclude: true,
@@ -29,7 +30,10 @@ export default (app, elem, attrs, scope) => {
 
           // 将按钮移到更新列表中
           let moveTimeout = setTimeout(() => {
-            let hideBtns = _childlist.children("[fold][fold!=false]");
+            // let hideBtns = _childlist.children("[fold][fold!=false]");
+            let btns = _childlist.children("[handle]:visible");
+            let hideBtns = btns.slice($scope.count || 3);
+            
             if (hideBtns && hideBtns.length) {
               for (let i = 0; i < hideBtns.length; i++) {
                 let li = $("<li></li>");
