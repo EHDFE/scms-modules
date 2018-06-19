@@ -277,6 +277,15 @@ export default (app, elem, attrs, scope) => {
             
           });
 
+          //固定列滚动时:原始列表跟着改动
+          this.$fixedColBox.scroll(function() {
+            if(_this.preScrollTopValue !== this.scrollTop) {
+              _this.$tableBox[0].scrollTop = this.scrollTop;
+              _this.preScrollTopValue = this.scrollTop;
+            }
+            
+          });
+
           //hover时列表行的样式
           var $currentHoverIndex, _this = this;;
           this.$parentEl.delegate('tbody tr', 'mouseenter', function(event) {
