@@ -197,7 +197,6 @@ export default (app, elem, attrs, scope) => {
           $header.find('tbody').remove();
           this.setThWidthCode($header.find('tr'), 0, 'th');
           this.$fixedHeaderBox.append($header.addClass('fix-top'));
-          this.$fixedHeaderBox.css('visibility', 'hidden');
           
           var colLeftIndexs = [],
             colRightIndexs = [], 
@@ -407,9 +406,6 @@ export default (app, elem, attrs, scope) => {
 
             $table.css({'margin-top': '-'+$table.find('thead').height()+'px'});
 
-            if(isUpdate && isUpdate.length > 2) {
-              _this.$parentEl.find('.fixed-header-box').css('visibility', 'visible');
-            }
           }, 0)
         },
 
