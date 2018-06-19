@@ -25,8 +25,10 @@ export default (app, elem, attrs, scope) => {
 
         //copy内容代码
         this.html = this.$parentEl.html();
+
         //原始列表头部行
         this.$parentEl.wrapInner('<div class="tablebox-content"></div>');
+        
 
         //右则固定列的开始索引值
         this.colLength = $(this.html).find('tbody tr').eq(0).find('td').length;
@@ -292,6 +294,8 @@ export default (app, elem, attrs, scope) => {
           this.bindEvent();
 
           this.$fixedColBox.css('top', this.$fixedHeaderBox.height()+'px');
+
+          this.$tableBox.append(this.$parentEl.find('.error-no-data'));
         },
 
         setThWidthValue: function($scope, $timeout, value) {
@@ -335,11 +339,15 @@ export default (app, elem, attrs, scope) => {
 
             //设置头部宽度
             $table.find('thead tr').each(function(thItemIndex) {
+              var thLength = $(this).find('th').length - 1;
               $(this).find('th').each(function(thIndex) {
-                var width = this.clientWidth;
-                _this.$fixedHeaderBox.find('table').each(function() {
-                  $(this).find('tr').eq(thItemIndex).find('th').eq(thIndex).css('width', width+'px');
-                })
+                var width = $(this).width();
+                if(thIndex < thLength) {
+                  _this.$fixedHeaderBox.find('table').each(function() {
+                    $(this).find('tr').eq(thItemIndex).find('th').eq(thIndex).width(width);
+                  })
+                }
+                
               })
             });
 
