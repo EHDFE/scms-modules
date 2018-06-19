@@ -15,7 +15,7 @@ export default (app, elem, attrs, scope) => {
     function($state, $compile, $timeout) {
       var TableFixed = function(options) {
         //父元素容器
-        this.$parentEl = $('[ng-table-fixed]').addClass('fixed-table-container');
+        this.$parentEl = options.$element.addClass('fixed-table-container');
 
         //需要配置的信息
         this.config = this.getConfig(options);        
@@ -25,8 +25,10 @@ export default (app, elem, attrs, scope) => {
 
         //copy内容代码
         this.html = this.$parentEl.html();
+
         //原始列表头部行
         this.$parentEl.wrapInner('<div class="tablebox-content"></div>');
+        
 
         //右则固定列的开始索引值
         this.colLength = $(this.html).find('tbody tr').eq(0).find('td').length;
@@ -57,8 +59,6 @@ export default (app, elem, attrs, scope) => {
 
         this.buildLeftCol();
         this.buildRightCol();
-
-        this.$fixedColBox.css('top', this.$fixedHeaderBox.height()+'px');
       };
       TableFixed.prototype = {
         /*
@@ -147,43 +147,14 @@ export default (app, elem, attrs, scope) => {
           }
         },
 
-        //获取滚动条的宽，在各种设置上滚动条宽不同
+        /*获取滚动条的宽，在各种设置上滚动条宽不同*/
         getScrollWidth: function() {
           return this.$tableBox && this.$tableBox[0] ? this.$tableBox[0].offsetWidth - this.$tableBox[0].clientWidth : 0;
         },
 
-        //获取滚动条的宽，在各种设置上滚动条宽不同
+        /*获取滚动条的宽，在各种设置上滚动条宽不同*/
         getScrollHeight: function() {
           return this.$tableBox && this.$tableBox[0] ? this.$tableBox[0].offsetHeight - this.$tableBox[0].clientHeight : 0;
-        },
-
-        setThWidthCode: function($trs, startIndex, tag, isRight) {
-          var _this = this;
-          startIndex = parseInt(startIndex, 10) || 0;
-          $trs.each(function() {
-            var $tr = $(this);
-            startIndex = 0;
-            $tr.find(tag).each(function(index) {
-              var currenIndex = startIndex + index,
-                i,
-                colspan = parseInt(this.getAttribute('colspan'), 10),
-                value = 'theadWidth.thItemsWidth['+currenIndex+']';
-              if(tag === 'th' && currenIndex === _this.colLength - 1) {
-                value += '+scrollWidth';
-              }
-              
-  
-              if(colspan && colspan > 1) {
-                for(i = 1; i < colspan; i++) {
-                  value += '+theadWidth.thItemsWidth['+(currenIndex+i)+']';
-                  startIndex ++;
-                }
-              }
-              this.setAttribute('width','{{'+value+'}}');
-            });
-            $tr = null;
-          })
-          
         },
 
         /*
@@ -195,59 +166,17 @@ export default (app, elem, attrs, scope) => {
             configRight = parseInt(this.rightStartIndex, 10);
           var $header = $(this.html);
           $header.find('tbody').remove();
-          this.setThWidthCode($header.find('tr'), 0, 'th');
           this.$fixedHeaderBox.append($header.addClass('fix-top'));
-          
-          var colLeftIndexs = [],
-            colRightIndexs = [], 
-            i;
-
-          $header.find('tr').each(function(trIndex) {
-            var rowIndexs = 0, 
-              hasLeftIndex, 
-              hasRightIndex = $(this).find('th').length, 
-              currentIndex,
-              rowSpans = [];
-            //for(i = 0; i < _this.colLength; i ++) {
-            //  currentIndex = parseInt($tr.eq(i).getAttribute('colspan'), 10) || 1;
-           // }
-            $(this).find('th').each(function(index) {
-              currentIndex = parseInt(this.getAttribute('colspan'), 10) || 1;
-              rowIndexs += currentIndex;
-              if(trIndex === 0) {
-                rowSpans[rowIndexs] = {};
-                rowSpans[rowIndexs].row = parseInt(this.getAttribute('rowspan'), 10) || 1;
-                rowSpans[rowIndexs].col = parseInt(this.getAttribute('colspan'), 10) - 1 || 0;
-              }
-              else if(trIndex > 0 && rowSpans[rowIndexs] && rowSpans[rowIndexs].row > 1) {
-                rowIndexs += rowSpans[index].col;
-              }
-              
-              if(configLeft === rowIndexs) {
-                hasLeftIndex = index;
-              }
-              if(configRight+1 === rowIndexs) {
-                hasRightIndex = index;
-              }
-              
-            });
-            colLeftIndexs.push(hasLeftIndex);
-            colRightIndexs.push(hasRightIndex);
-          });
 
           if(this.config.left) {
             var $headerLeft = $('<div>'+this.html+'</div>');
             $headerLeft.find('tbody').remove();
-            $headerLeft.attr('style','width:{{theadWidth.leftTotalWidth}}px;');
-            this.setThWidthCode($headerLeft.find('tr'), 0, 'th');
             this.$fixedHeaderBox.append($headerLeft.addClass('fix-top-left'));
             $headerLeft = null;
           }
           if(this.config.right) {
             var $headerRight = $('<div>'+this.html+'</div>');
             $headerRight.find('tbody').remove();
-            $headerRight.attr('style','width:{{theadWidth.rightTotalWidth}}px;');
-            this.setThWidthCode($headerRight.find('tr'), 0, 'th', true);
             this.$fixedHeaderBox.append($headerRight.addClass('fix-top-right'));
             $headerRight = null;
           }
@@ -273,6 +202,15 @@ export default (app, elem, attrs, scope) => {
               _this.setBoxShadow(_this.$parentEl, this);
               _this.setHeaderScrollLeft(_this.$parentEl, this);
               _this.preScrollLeftValue = this.scrollLeft;
+            }
+            
+          });
+
+          //固定列滚动时:原始列表跟着改动
+          this.$fixedColBox.scroll(function() {
+            if(_this.preScrollTopValue !== this.scrollTop) {
+              _this.$tableBox[0].scrollTop = this.scrollTop;
+              _this.preScrollTopValue = this.scrollTop;
             }
             
           });
@@ -336,6 +274,7 @@ export default (app, elem, attrs, scope) => {
           this.$fixedColBox = this.$parentEl.find('.fixed-table');
           this.$left = this.$fixedColBox.find('.fix-left');
           this.$right = this.$fixedColBox.find('.fix-right');
+          this.$fixedHeaderBox = this.$parentEl.find('.fixed-header-box');
 
           this.setShowSidebarCol();
           this.setBoxHeight();
@@ -353,6 +292,10 @@ export default (app, elem, attrs, scope) => {
           
           this.setBoxHeight();
           this.bindEvent();
+
+          this.$fixedColBox.css('top', this.$fixedHeaderBox.height()+'px');
+
+          this.$tableBox.append(this.$parentEl.find('.error-no-data'));
         },
 
         setThWidthValue: function($scope, $timeout, value) {
@@ -375,12 +318,12 @@ export default (app, elem, attrs, scope) => {
               scrollWidth = _this.getScrollWidth();
             _this.$parentEl.find('.fixed-header-box table').width(_this.$tableBox[0].scrollWidth + scrollWidth);
             
-            var thItemsWidth = [];
+            //左右固定列宽度设置
             var rightTotalWidth = 0,
               leftTotalWidth = 0;
+              
             $table.find('tbody tr:eq(0) td').each(function(index, el) {
               width = $(el)[0].clientWidth;
-              thItemsWidth.push(width);
               if(index >= _this.rightStartIndex) {
                 rightTotalWidth += width;
                 _this.$right.find('tr:eq(0) td').eq(_this.rightStartIndex-index).css('width', width+'px');
@@ -390,13 +333,25 @@ export default (app, elem, attrs, scope) => {
                 _this.$left.find('tr:eq(0) td').eq(index).css('width', width+'px');
               }
             });
-            $scope.scrollWidth = scrollWidth;
-            $scope.theadWidth = {
-              rightTotalWidth: rightTotalWidth+scrollWidth+2,
-              leftTotalWidth: leftTotalWidth+1,
-              thItemsWidth: thItemsWidth
-            };
 
+            _this.$fixedHeaderBox.find('.fix-top-left').css('width', (leftTotalWidth+1)+'px');
+            _this.$fixedHeaderBox.find('.fix-top-right').css('width', (rightTotalWidth+scrollWidth+2)+'px');
+
+            //设置头部宽度
+            $table.find('thead tr').each(function(thItemIndex) {
+              var thLength = $(this).find('th').length - 1;
+              $(this).find('th').each(function(thIndex) {
+                var width = $(this).width();
+                if(thIndex < thLength) {
+                  _this.$fixedHeaderBox.find('table').each(function() {
+                    $(this).find('tr').eq(thItemIndex).find('th').eq(thIndex).width(width);
+                  })
+                }
+                
+              })
+            });
+
+            //设置行高
             $table.find('tbody tr').each(function(index, el) {
               var height = $(el).height();
               _this.$left.find('tbody tr').eq(index).height(height);
@@ -404,9 +359,10 @@ export default (app, elem, attrs, scope) => {
               height = null;
             });
 
+            //原始列表头部隐藏起来
             $table.css({'margin-top': '-'+$table.find('thead').height()+'px'});
 
-          }, 0)
+          }, 200)
         },
 
         setBoxScrollInit: function() {
@@ -417,19 +373,20 @@ export default (app, elem, attrs, scope) => {
         }
       };
       
-      var tableFixed;
       return {
         restrict: 'A',
-        compile: function($element, $attrs) {
-          tableFixed = new TableFixed({
+        compile: function($element, $attrs,$scope) {
+          $element.data('tableFixed', new TableFixed({
+            $element: $element,
             left: $attrs.fixedLeft,
             right: $attrs.fixedRight,
             header: $attrs.fixedHeader,
             height: $attrs.fixedHeight
-          });
+          }))
         },
         controller: function($scope, $element, $attrs) {
           $scope.ngTableFixed = '1';
+          var tableFixed = $element.data('tableFixed');
           $scope.$watch('ngTableFixed', function(newValue, old) {
             tableFixed.setInitView();
             tableFixed.setThWidth(newValue, $scope);
