@@ -46,7 +46,7 @@ export default {
 			"exampleValue":30,
 			"defaultValue":30,
 			"key":"dSize",
-			"description":"设定上传图片的大小，单位KB"
+			"description":"设定上传图片或文件的大小，单位KB"
 		},
 		{
 			"type":"number",
@@ -61,6 +61,20 @@ export default {
             "defaultValue":'',
 			"key":"clearData",
 			"description":"清除数据"
+		},
+        {
+			"type":"boolean",
+			"exampleValue":false,
+            "defaultValue":false,
+			"key":"file",
+			"description":"上传文件功能，，值适用于noThumb默认false"
+		},
+        {
+			"type":"object",
+			"exampleValue":['pnd','docx','xlsx'],
+            "defaultValue":"['pnd','docx','xlsx']",
+			"key":"fileType",
+			"description":"与file搭配，file为true后，此选项必填"
 		}],
 	"attrs":[],
 	"deps":["scmsModules/imageUpload/imageUpload"],
