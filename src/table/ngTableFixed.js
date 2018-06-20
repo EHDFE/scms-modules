@@ -316,7 +316,7 @@ export default (app, elem, attrs, scope) => {
               width, 
               headerColWidth, 
               scrollWidth = _this.getScrollWidth();
-            _this.$parentEl.find('.fixed-header-box table').width(_this.$tableBox[0].scrollWidth + scrollWidth);
+            _this.$parentEl.find('.fixed-header-box table').width(_this.$tableBox[0].scrollWidth - 1 + scrollWidth);
             
             //左右固定列宽度设置
             var rightTotalWidth = 0,
@@ -338,17 +338,25 @@ export default (app, elem, attrs, scope) => {
             _this.$fixedHeaderBox.find('.fix-top-right').css('width', (rightTotalWidth+scrollWidth+2)+'px');
 
             //设置头部宽度
+            var rowspanByFistRow = 0;
+            var thLength = $table.find('tbody tr:eq(0) td').length;
             $table.find('thead tr').each(function(thItemIndex) {
-              var thLength = $(this).find('th').length - 1;
+              var startIndex = thItemIndex === 0 ? 0 : rowspanByFistRow;
               $(this).find('th').each(function(thIndex) {
                 var width = $(this).width();
-                if(thIndex < thLength) {
+                startIndex += parseInt($(this).attr('colspan'), 10) || 1;
+                if(thItemIndex === 0 && startIndex < thLength) {
+                  rowspanByFistRow += (parseInt($(this).attr('rowspan'), 10) - 1) ? 1 : 0;
+                }
+
+                if(startIndex < thLength) {
                   _this.$fixedHeaderBox.find('table').each(function() {
                     $(this).find('tr').eq(thItemIndex).find('th').eq(thIndex).width(width);
                   })
                 }
                 
               })
+              
             });
 
             //设置行高
