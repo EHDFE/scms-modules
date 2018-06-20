@@ -316,7 +316,6 @@ export default (app, elem, attrs, scope) => {
               width, 
               headerColWidth, 
               scrollWidth = _this.getScrollWidth();
-              console.log(333333333, _this.$tableBox[0].scrollWidth, _this.$tableBox[0].clientWidth)
             _this.$parentEl.find('.fixed-header-box table').width(_this.$tableBox[0].scrollWidth - 1 + scrollWidth);
             
             //左右固定列宽度设置
