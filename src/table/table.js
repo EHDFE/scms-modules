@@ -122,7 +122,7 @@ export default (app, elem, attrs, scope) => {
                   data = data.data;
                   $scope.totalCount = data.count || 0;
                   $scope.items = data.data;
-                  if ($scope.items && $scope.items.length) {
+                  if ($scope.items && $scope.items.length || $scope.totalCount!==0) {
                     $scope.isNoData = false;
                   } else {
                     $scope.isNoData = true;
