@@ -119,7 +119,8 @@ export default (app, elem, attrs, scope) => {
             }).then(
               data => {
                 if (data && data.data) {
-                  data = data.data;
+                  // data = data.data;
+                  data = {data:[],count:0};
                   $scope.totalCount = data.count || 0;
                   $scope.items = data.data;
                   if ($scope.items && $scope.items.length) {
