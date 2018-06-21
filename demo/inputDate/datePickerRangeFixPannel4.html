@@ -1,0 +1,5 @@
+<!--日期范围 最大最小日期 设置默认时间范围-->
+<switch-directive is-checked="datePickRangeDisable"></switch-directive>
+<div class="mt5" ng-init="startDateRange4='2017-09-11';endDateRange4='2018-03-23';">
+    <input date-picker-range-fix-panel min-date="'2017-02-23'"  max-date="'2018-04-24'" start-date-range="startDateRange4" end-date-range="endDateRange4" init-start-date="-30" init-end-date="0" ng-disabled="datePickRangeDisable"/>
+</div>

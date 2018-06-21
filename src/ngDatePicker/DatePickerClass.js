@@ -269,7 +269,7 @@ class DatePicker {
         .millisecond(0)
         .valueOf();
 
-    for (let i = this.startDay-1; i < 41; i++) {
+    for (let i = this.startDay-1; i < (41+this.startDay); i++) {
       let isToday = false;
       const nowDate = startDate
         .clone()
@@ -459,8 +459,9 @@ class DatePicker {
         });
       }
     }
-    this.setTitleStatus();
+    
     this.dateView = dateView;
+    this.setTitleStatus();
     return dateView;
   }
   setDate(momentDate) {

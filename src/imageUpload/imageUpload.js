@@ -2,9 +2,10 @@
  * <directive>
  * @description 图片上传
  * @date 2018-02-02
- * @author 程乐
+ * @athor 程乐
  * @lastBy
  * @html <div image-upload module-type="'noThumb'" api-url="'/goodstaxiAdmin/imagecs/uploadImage'"" image-urls="imageUrls" d-width="30" d-height="30" d-size="30"></div>
+ * @html <div image-upload module-type="'noThumb'" clear-data="clearData" api-url="'goodstaxiAdmin/einvoiceapplicationcs/uploadAttachment'" image-urls="imageUrls" file="true" file-type="['pdf','png','xlsx','docx']"></div>
  * @html <div image-upload module-type="'thumb'" api-url="'/goodstaxiAdmin/imagecs/uploadImage1'" d-num="3" d-width="30" d-height="30" d-size="30" image-urls="imageUrls"></div>
  */
 
@@ -30,7 +31,9 @@ export default (app, elem, attrs, scope) => {
           dSize: '=',
           apiUrl: '=',
           dNum: '=',
-          clearData: '='
+          clearData: '=',
+          file:'=',
+          fileType:'='
         },
         controller: [
           '$scope',
@@ -116,9 +119,17 @@ export default (app, elem, attrs, scope) => {
             if (!file.files || (file.files && !file.files.length)) {
               return;
             }
+            if($scope.file){
+              var text = $scope.fileType.join('|');
+              var alertText = $scope.fileType.join('/');
+            }else{
+              var text = 'jpg|jepg|png|bmp';
+              var alertText = 'JPG/PNG/BMP';
+            }
+            var pattern = new RegExp('.('+text+')$');
             angular.forEach(file.files, (item, index) => {
-              if (!/\.(jpg|jepg|png|bmp)$/.test(item.name)) {
-                G.alert('请上传格式为JPG/PNG/BMP格式的图片', { type: 'error' });
+              if (!pattern.test(item.name)) {
+                G.alert('请上传格式为'+alertText+'格式的文件', { type: 'error' });
               } else {
                 verify(item);
               }
@@ -130,28 +141,72 @@ export default (app, elem, attrs, scope) => {
             const reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = function (theFile) {
-              const image = new Image();
-              image.src = theFile.target.result;
-              image.onload = function () {
-                if ($scope.dWidth && this.width !== $scope.dWidth) {
-                  G.alert(`图片宽度不等于${$scope.dWidth}px`, {
-                    type: 'error',
-                  });
-                  return;
-                }
-                if ($scope.dHeight && this.height !== $scope.dHeight) {
-                  G.alert(`图片高度不等于${$scope.dHeight}px`, {
-                    type: 'error',
-                  });
-                  return;
-                }
-                if ($scope.dSize && file.size / 1024 > parseInt($scope.dSize, 10)) {
-                  G.alert(`图片大于${$scope.dSize}KB`, {
-                    type: 'error',
-                  });
-                  return;
-                }
-                if ($scope.moduleType === 'noThumb') {
+              if(!$scope.file){
+                const image = new Image();
+                image.src = theFile.target.result;
+                image.onload = function () {
+                  if ($scope.dWidth && this.width !== $scope.dWidth) {
+                    G.alert(`图片宽度不等于${$scope.dWidth}px`, {
+                      type: 'error',
+                    });
+                    return;
+                  }
+                  if ($scope.dHeight && this.height !== $scope.dHeight) {
+                    G.alert(`图片高度不等于${$scope.dHeight}px`, {
+                      type: 'error',
+                    });
+                    return;
+                  }
+                  if ($scope.dSize && file.size / 1024 > parseInt($scope.dSize, 10)) {
+                    G.alert(`图片大于${$scope.dSize}KB`, {
+                      type: 'error',
+                    });
+                    return;
+                  }
+                  if ($scope.moduleType === 'noThumb') {
+                    $scope.imageArray.push({
+                      imgName: file.name,
+                      uploadType: {
+                        succeed: false,
+                        error: false,
+                        loading: true,
+                      },
+                    });
+                    const index = $scope.imageArray.length - 1;
+                    $scope.$apply();
+                    data.append('file', file);
+                    uploadImage(data, index);
+                  } else {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                      console.log('成功读取文件路径');
+                      const index = $scope.imageArray.length - 1;
+                      if ($scope.moduleType === 'thumb') {
+                        $scope.imageArray[index].dataImg = e.target.result;
+                      }
+                      $scope.$apply();
+                      data.append('file', file);
+                      uploadImage(data, index);
+                      if ($scope.moduleType === 'thumb' && $scope.imageArray.length < $scope.dNum) {
+                        $scope.imageArray.push({
+                          uploadType: {
+                            succeed: false,
+                            error: false,
+                            loading: false,
+                          },
+                        });
+                      }
+                    };
+                    reader.readAsDataURL(file);
+                  }
+                };
+              }else{
+                  if ($scope.dSize && file.size / 1024 > parseInt($scope.dSize, 10)) {
+                    G.alert(`文件大于${$scope.dSize}KB`, {
+                      type: 'error',
+                    });
+                    return;
+                  }
                   $scope.imageArray.push({
                     imgName: file.name,
                     uploadType: {
@@ -164,30 +219,7 @@ export default (app, elem, attrs, scope) => {
                   $scope.$apply();
                   data.append('file', file);
                   uploadImage(data, index);
-                } else {
-                  const reader = new FileReader();
-                  reader.onload = function (e) {
-                    console.log('成功读取图片路径');
-                    const index = $scope.imageArray.length - 1;
-                    if ($scope.moduleType === 'thumb') {
-                      $scope.imageArray[index].dataImg = e.target.result;
-                    }
-                    $scope.$apply();
-                    data.append('file', file);
-                    uploadImage(data, index);
-                    if ($scope.moduleType === 'thumb' && $scope.imageArray.length < $scope.dNum) {
-                      $scope.imageArray.push({
-                        uploadType: {
-                          succeed: false,
-                          error: false,
-                          loading: false,
-                        },
-                      });
-                    }
-                  };
-                  reader.readAsDataURL(file);
-                }
-              };
+              }
             };
           }
           // 请求

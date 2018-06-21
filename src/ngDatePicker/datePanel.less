@@ -6,6 +6,7 @@
   z-index: 99999 !important;
   border: none;
   display: block;
+  
 
   table {
     width: 100%;
@@ -96,8 +97,9 @@
       .date-item {
         height: 28px;
         width: 28px;
-        color: #b9bec3;
-        background-color: #f5f5f5;
+
+        
+        text-decoration: line-through;
         /* line-height: 28px; */
         border-radius: 50%;
         /* display: inline-block; */
@@ -130,7 +132,7 @@
   td.hour .date-item:hover,
   td.minute .date-item:hover,
   td.second .date-item:hover {
-    background: #f5f5f5 !important;
+    background: none !important;
     color: #b9bec3;
     cursor: not-allowed !important;
   }
@@ -215,7 +217,10 @@
   
   .datepicker-months td span.disabled {
     color: #b9bec3;
-    background-color: #f5f5f5;
+    text-decoration: line-through;
+    &:hover{
+      background: none !important;
+    }
   }
   .datepicker-years {
     width: 296px;
@@ -241,7 +246,10 @@
     font-size: 12px;
     border-radius: 12px;
     color: #b9bec3;
-    background-color: #f5f5f5;
+    text-decoration: line-through;
+    &:hover{
+      background: none !important;
+    }
   }
 
   .month {

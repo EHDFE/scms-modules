@@ -3,6 +3,7 @@
   border: 1px solid #DADDE4;
   border-radius: 3px;
   z-index: 9999;
+  box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
 }
 .date-picker-range .date-panel > div:first-child .date-panel-datetimepicker .datepicker-days{
   padding-right:0;
@@ -71,4 +72,20 @@
 .date-picker-range .date-panel-datetimepicker .start  .date-item-bg{
   background: #e9eff4;
   border-radius: 50px 0 0 50px;
+}
+
+//
+.date-panel-title{
+  
+}
+.date-panel-title > h2{
+  margin: 10px 0px -15px 10px;
+  background: #f5f5f5;
+  text-align: center;
+  padding: 8px 0;
+  color:#666;
+  border-radius: 3px 3px 0 0;
+}
+.date-panel-title:last-child > h2{
+  margin: 10px 10px -15px 10px;
 }

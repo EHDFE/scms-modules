@@ -14,6 +14,7 @@
     width:100%;
     z-index: 1;
     border-radius: 4px 4px 0 0;
+    position: relative;
 }
 
 .fixed-table-container .fix-top-left{
@@ -21,12 +22,17 @@
     top:0;
     left:0;
     width: auto;
+    overflow: hidden;
 }
 .fixed-table-container .fix-top-right{
     position: absolute;
     top:0;
     right:0;
     width: auto;
+    overflow: hidden;
+}
+.fixed-table-container .fix-top-right table{
+    float: right;
 }
 
 .fixed-table-container .fixed-table{
@@ -51,13 +57,21 @@
     border-right: none;
     pointer-events: all;
 }
-.fixed-table-container .fixed-table .left-box-shadow{
-    box-shadow: 6px 0 6px -4px rgba(0, 0, 0, 0.15);
+.table-th-border.left-box-shadow .fix-top-left{
+    border-right:1px solid #DADDE4;
 }
-.fixed-table-container .fixed-table .right-box-shadow{
-    box-shadow: -6px 0 6px -4px rgba(0, 0, 0, 0.15);
+.fixed-table-container.left-box-shadow .fix-left{
+    box-shadow: 3px 0 3px 3px rgba(235, 239, 246, 0.5);
+    
+    border-right:1px solid #ebeff6;
 }
-
+.table-th-border.right-box-shadow .fix-top-right{
+    border-left:1px solid #DADDE4;
+}
+.fixed-table-container.right-box-shadow .fix-right{
+    box-shadow: -3px 0px 3px 3px rgba(235, 239, 246, 0.5);
+    border-left:1px solid #ebeff6;
+}
 
 .fixed-table-container .fix-top-left,
 .fixed-table-container .fix-left table{
@@ -78,3 +92,15 @@
 .fixed-table-overflow-y .tablebox .tablebox-content{
     overflow-y: auto;
 }
+.fixed-table-container .tablebox-content,
+.fixed-table-container .fixed-table{
+    margin-top: -2px;
+}
+.fixed-table-container.table-th-border .tablebox-content,
+.fixed-table-container.table-th-border .fixed-table{
+    margin-top: -1px;
+}
+.fixed-table-container .fixed-header-box table{
+    border-radius: 3px 3px 0 0;
+}
+

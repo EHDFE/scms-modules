@@ -5,21 +5,21 @@
         </div>
         <ul class="pagination fl">
             <li ng-class="{disabled: currentPage == 1}" ng-click="goPage(currentPage - 1);">
-                <a href="javascript:void(0)"><i class="arrow">«</i></a>
+                <a ><i class="arrow">«</i></a>
             </li>
             <li ng-show="isShowBeEllipsis">
-                <a href="javascript:void(0);" ng-click="goPage(1);">1</a>
+                <a  ng-click="goPage(1);">1</a>
             </li>
-            <li ng-show="isShowBeEllipsis && pages[0] !== 2" class="defaultA"><a href="javascript:void(0);">...</a></li>
+            <li ng-show="isShowBeEllipsis && pages[0] !== 2" class="defaultA"><a >...</a></li>
             <li ng-repeat="item in pages" ng-class="{active: item == currentPage}" >
-                <a href="javascript:void(0)" ng-bind="item" ng-click="goPage(item);"></a>
+                <a  ng-bind="item" ng-click="goPage(item);"></a>
             </li>
-            <li ng-show="isShowAfEllipsis" class="defaultA"><a href="javascript:void(0);">...</a></li>
+            <li ng-show="isShowAfEllipsis" class="defaultA"><a >...</a></li>
             <li ng-show="isShowAfEllipsis">
-                    <a href="javascript:void(0);" ng-click="goPage(maxPage);">{{maxPage}}</a>
+                    <a  ng-click="goPage(maxPage);">{{maxPage}}</a>
                 </li>
             <li ng-class="{disabled: currentPage == maxPage}" ng-click="goPage(currentPage + 1);">
-                <a href="javascript:void(0)"><i class="arrow">»</i></a>
+                <a href=""><i class="arrow">»</i></a>
             </li>
         </ul>
         
