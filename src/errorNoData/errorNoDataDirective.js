@@ -11,7 +11,7 @@ export default (app, elem, attrs, scope) => {
   app.directive('errorNoDataDirective', ['$document', '$timeout',
     function ($document, $timeout) {
       return {
-        template: `<div class='error-no-data' ng-show='isShow'><img  ng-src='${noDataImg}' ><div ng-bind='content'></div></div>`,
+        template: `<div class='error-no-data' ng-show='isShow'><div ng-bind='content'></div></div>`,
         replace: true,
         restrict: 'EA',
         scope: {
