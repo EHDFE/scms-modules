@@ -6,7 +6,7 @@
  * @lastBy
  * @html <div error-no-data-directive data-content="暂无待审核的数据" show-by="showBy"></div>
  */
-import noDataImg from '../../scmsUi/less/img/noData.svg';
+import noDataImg from './img/noData.svg';
 export default (app, elem, attrs, scope) => {
   app.directive('errorNoDataDirective', ['$document', '$timeout',
     function ($document, $timeout) {
