@@ -21,7 +21,7 @@ export default (app, elem, attrs, scope) => {
         link: function($scope, $element, $attr) {
           let _childlist = $element.find(".table-handle-childlist");
           let _moreBtnsUl = $element.find(".more-btns-ul");
-          let _more = $element.find(".more");
+          let _more = $element.find(".table-handle-more");
           let _moreBtnsDiv = $element.find(".more-btns-div");
 
           let side = $scope.side || 'left';
