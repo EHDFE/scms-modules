@@ -1,8 +1,8 @@
 export default [
     {
       keyName: 'ngTableFixed',
-      name: 'Table Fixed',
-      title: 'Table Fixed',
+      name: 'Table Fixed TheadRows',
+      title: 'Table Fixed Rows',
       parentTitle: 'Tables',
       author: '黄思飞',
       lastBy: '',

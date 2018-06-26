@@ -197,6 +197,9 @@ export default (app, elem, attrs, scope) => {
                 datepickers[$panelAttrs.name].setTitleStatus = setTitleStatus;
                 break;
               case 'date':
+                if(date.disabled) {
+                  return;
+                }
                 if($panelAttrs.name === 'part1') {
                   $scope.startValue = date.dateValue;
                 }
