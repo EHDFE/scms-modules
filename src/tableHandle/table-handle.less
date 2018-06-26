@@ -1,22 +1,27 @@
 .table-handle {
-  .table-handle-childlist {
-    display: inline-table;
+  display: table;
+  .table-handle-btns {
+    display: table-cell;
 
-    & > * {
-      display: table-cell;
-      padding-right: 5px;
+    .table-handle-childlist {
+      display: inline-table;
+
+      & > * {
+        display: table-cell;
+        padding-right: 5px;
+      }
     }
   }
 
-  .more {
-    display: inline-block;
+  .table-handle-more {
+    display: table-cell;
     position: relative;
 
     .more-btn {
       z-index: 19;
       cursor: pointer;
       display: inline-block;
-      width: 20px;
+      width: 13px;
       text-align: center;
     }
 
@@ -40,8 +45,8 @@
       }
 
       &.left {
-        right: 22px;
-        top: -7px;
+        right: 18px;
+        top: -6px;
 
         .arrow {
           right: -6px;
@@ -51,8 +56,8 @@
       }
 
       &.right {
-        left: 22px;
-        top: -7px;
+        left: 16px;
+        top: -6px;
 
         .arrow {
           left: -6px;
