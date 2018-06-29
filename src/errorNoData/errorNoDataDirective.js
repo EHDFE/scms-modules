@@ -6,11 +6,12 @@
  * @lastBy
  * @html <div error-no-data-directive data-content="暂无待审核的数据" show-by="showBy"></div>
  */
+import noDataImg from './img/noData.svg';
 export default (app, elem, attrs, scope) => {
   app.directive('errorNoDataDirective', ['$document', '$timeout',
     function ($document, $timeout) {
       return {
-        template: "<div class='error-no-data' ng-show='isShow'><span ng-bind='content'></span></div>",
+        template: `<div class='error-no-data' ng-show='isShow'><div ng-bind='content'></div></div>`,
         replace: true,
         restrict: 'EA',
         scope: {
@@ -19,7 +20,7 @@ export default (app, elem, attrs, scope) => {
         link($scope, $element, $attrs) {
           // @attrs content 提示内容 {type: "string", defaultValue: "暂无数据"}
           $scope.isShow = false;
-          $scope.content = $attrs.content || '暂无数据';
+          $scope.content = $attrs.content || '暂无数据\n请重新输入，或改变筛选条件';
           const getIsShow = function () {
             $scope.isShow = $scope.showBy;
           };

@@ -30,14 +30,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="item in items">
+            <tr ng-repeat="(i, item) in items">
                 <td class="handle">
-                    <div table-handle-directive side="'right'">
-                        <a href="">审核</a>
-                        <a href="">详情</a>
-                        <a href="" fold="true">删除</a>
-                        <a href="" fold="false">处理</a>
-                        <a href="" fold>取消</a>
+                    <div table-handle-directive side="'right'" count="2">
+                        <a handle href="" ng-show="true">审核</a>
+                        <a handle href="" ng-show="false">详情</a>
+                        <a handle href="">删除</a>
+                        <a handle href="">处理</a>
+                        <a handle href="">取消</a>
                     </div>
                 </td>
                 <td>{{ $index + 1 + (currPage - 1) * pageSize }}</td>
@@ -47,13 +47,17 @@
                 <td>{{ item.mobilenumber }}</td>
                 <td>{{ item.mobilenumber }}</td>
                 <td class="handle">
-                    <div table-handle-directive side="'left'">
-                        <a href="">审核</a>
-                        <a href="">详情</a>
-                        <a href="" fold="true">删除</a>
-                        <a href="" fold="false">处理</a>
-                        <a href="" fold="true" ng-show="false">处理</a>
-                        <a href="" fold>取消</a>
+                    <div table-handle-directive side="'left'" count="3">
+                        <a handle href="" ng-show="i + 1 == 1">操作1</a>
+                        <a handle href="" ng-if="i + 1 == 2">操作2</a>
+                        <a handle href="" ng-if="i + 1 >= 3">操作3</a>
+                        <a handle href="" ng-if="i + 1 >= 4">操作4</a>
+                        <a handle href="" ng-if="i + 1 >= 5">操作5</a>
+                        <a handle href="" ng-if="i + 1 >= 6">操作6</a>
+                        <a handle href="" ng-if="i + 1 >= 7">操作7</a>
+                        <a handle href="" ng-if="i + 1 >= 8">操作8</a>
+                        <a handle href="" ng-if="i + 1 >= 9">操作9</a>
+                        <a handle href="" ng-if="i + 1 >= 10">操作10</a>
                     </div>
                 </td>
             </tr>
