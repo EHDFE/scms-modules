@@ -37,10 +37,10 @@
   display: inline-block;
   line-height: 25px;
   font-size: 12px;
-  border:1px solid #51A1FD;
+  border:1px solid #ddd;
   height: 25px;
   border-radius: 4px;
-  color:#51A1FD;
+  color:#666;
   width:85px;
   text-align: center;
   float: left;
@@ -72,20 +72,4 @@
 .date-picker-range .date-panel-datetimepicker .start  .date-item-bg{
   background: #e9eff4;
   border-radius: 50px 0 0 50px;
-}
-
-//
-.date-panel-title{
-  
-}
-.date-panel-title > h2{
-  margin: 10px 0px -15px 10px;
-  background: #f5f5f5;
-  text-align: center;
-  padding: 8px 0;
-  color:#666;
-  border-radius: 3px 3px 0 0;
-}
-.date-panel-title:last-child > h2{
-  margin: 10px 10px -15px 10px;
 }
