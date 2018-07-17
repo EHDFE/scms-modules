@@ -12,7 +12,7 @@ export default {
 			"exampleValue":'noThumb',
 			"defaultValue":'noThumb',
 			"key":"moduleType",
-			"description":"样式类型，有 “noThumb” 和 “thumb” 两种"
+			"description":"样式类型，有 “noThumb”、 “thumb” 和 “example”"
 		},
 		{
 			"type":"string",
@@ -75,10 +75,31 @@ export default {
             "defaultValue":"['pnd','docx','xlsx']",
 			"key":"fileType",
 			"description":"与file搭配，file为true后，此选项必填"
+		},
+		{
+			"type":"string",
+			"exampleValue":"http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/0A/24/CgcN7VtNhFmAHEbtAABHOlfUJaE375.png",
+			"key":"defaultImg",
+			"description":"示例图片，只适用于moduleType为example"
+		},
+		{
+			"type":"string",
+			"exampleValue":"上传图片清晰可见，不可超过3M，支持jpg、jpeg、png",
+			"defaultValue":"上传图片清晰可见，不可超过3M，支持jpg、jpeg、png",
+			"key":"exampleText",
+			"description":"提示文字，只适用于moduleType为example"
 		}],
 	"attrs":[],
 	"deps":["scmsModules/imageUpload/imageUpload"],
-	"html":"<div image-upload module-type=\"moduleType\" clear-data=\"clearData\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\"></div><div image-upload module-type=\"'thumb'\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\" d-num=\"dNum\"></div>",
+	"html":`
+	<h3>moduleType</h3>
+	<div image-upload module-type=\"moduleType\" clear-data=\"clearData\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\"></div>
+	<hr>
+	<h3>thumb</h3>
+	<div image-upload module-type=\"'thumb'\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\" d-num=\"dNum\"></div>
+	<hr>
+	<h3>example</h3>
+	<div image-upload module-type=\"'example'\" api-url=\"apiUrl\" default-img=\"{{defaultImg}}\" example-text=\"{{exampleText}}\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\"></div>`,
 	"api":"",
 	"htmlUrl":""
 }
