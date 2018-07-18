@@ -110,7 +110,7 @@ Confirm.prototype = {
 		});
 		if(options.buttons) {
 			_this.$el.find('.tx_confirm_type_buttons').css('display', 'none');
-			_this.$el.find('.tx_confirm_type_myButtons').css('display', '')
+			_this.$el.find('.tx_confirm_type_myButtons').css('display', '');
 			options.buttons.map(item => {
 				var className = item.type ? 'btn-'+item.type : 'btn-default';
 				var $button = $('<button class="btn '+className+'">'+item.name+'</button>');
@@ -122,6 +122,7 @@ Confirm.prototype = {
 			
 		}
 		else {
+			_this.$el.find('.tx_confirm_type_myButtons').css('display', 'none');
 			_this.$el.find('.tx_confirm_type_buttons').css('display', '');
 			this.$el.delegate('.tx_submit', 'click', function() {
 				if (options.submit && typeof options.submit === 'function') {
@@ -156,7 +157,7 @@ Confirm.prototype = {
 				<div class="tx_content elayerout-alert-content">\
 					<div class="tx_msg elayerout-alert-msg"></div>\
 				</div>\
-				<div class="modal-footer tx_confirm_type_myButtons" style="display:none"></div>\
+				<div class="modal-footer tx_confirm_type_myButtons"></div>\
 				<div class="modal-footer tx_confirm_type_buttons">\
 					<a href="javascript:void(0);" class="btn btn-default tx_cansel">取消</a>\
 					<a href="javascript:void(0);" class="btn btn-success tx_submit">确认</a>\
