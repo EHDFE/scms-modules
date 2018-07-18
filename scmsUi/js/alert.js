@@ -108,24 +108,43 @@ Confirm.prototype = {
 		this.$el.delegate('.tx_cansel', 'click', function() {
 			_this.hide();
 		});
-
-		this.$el.delegate('.tx_submit', 'click', function() {
-			if (options.submit && typeof options.submit === 'function') {
-				options.submit(_this);
-			}
-			else {
-				if (options.callback && typeof options.callback === 'function') {
-					options.callback();
+		if(options.buttons) {
+			_this.$el.find('.tx_confirm_type_buttons').css('display', 'none');
+			_this.$el.find('.tx_confirm_type_myButtons').css('display', '')
+			options.buttons.map(item => {
+				var className = item.type ? 'btn-'+item.type : 'btn-default';
+				var $button = $('<button class="btn '+className+'">'+item.name+'</button>');
+				_this.$el.find('.tx_confirm_type_myButtons').append($button);
+				$button.bind('click', function() {
+					item.callback(_this);
+				})
+			})
+			
+		}
+		else {
+			_this.$el.find('.tx_confirm_type_buttons').css('display', '');
+			this.$el.delegate('.tx_submit', 'click', function() {
+				if (options.submit && typeof options.submit === 'function') {
+					options.submit(_this);
 				}
-				_this.hide();
-			}
-		});
+				else {
+					if (options.callback && typeof options.callback === 'function') {
+						options.callback();
+					}
+					_this.hide();
+				}
+			});
+		}
+		
 	},
 	hide: function() {
 		var _this = this;
 		_this.$el.removeClass('elayerout-confirm-show');
 		_this.$over.removeClass('elayerout-alert-over-show');
+		
 		this.hideTimeout = setTimeout(function() {
+			_this.$el.find('.tx_confirm_type_myButtons button').unbind();
+			_this.$el.find('.tx_confirm_type_myButtons').html('');
 			_this.$el.css('display', 'none');
 			_this.$over.css('display', 'none');
 		}, 500)
@@ -137,7 +156,8 @@ Confirm.prototype = {
 				<div class="tx_content elayerout-alert-content">\
 					<div class="tx_msg elayerout-alert-msg"></div>\
 				</div>\
-				<div class="modal-footer ">\
+				<div class="modal-footer tx_confirm_type_myButtons" style="display:none"></div>\
+				<div class="modal-footer tx_confirm_type_buttons">\
 					<a href="javascript:void(0);" class="btn btn-default tx_cansel">取消</a>\
 					<a href="javascript:void(0);" class="btn btn-success tx_submit">确认</a>\
 				</div>\
@@ -160,68 +180,4 @@ $.alert = function (msg, options) {
 	}
 };
 
-
-/*loading*/
-var loadingTimeoutValue = {};
-$.loading = function (isShow, options) {
-	options = options || {};
-	var $container = options.$container || $('.elayout-loading-container');
-	if ($container && $container.length) {
-		$container.css({
-			position: 'relative'
-		});
-	}
-
-	$container = $container && $container.length ? $container : $('body');
-	var $el = $container.children('.elayout-loading');
-	var $over = $container.children('.elayout-loading-over');
-	$container = $container.length ? $container : $('body');
-	if (!$el.length) {
-		$over = $('<div class="elayout-loading-over" style="display:none;"></div>');
-		var $el = $('<div class="elayout-loading" style="display:none;">\
-		        <span class="icon">\
-		            <i></i><i></i><i></i><i></i>\
-		        </span>\
-		        <div class="text">Loading...</div>\
-		    </div>');
-		$container.append($over);
-		$container.append($el);
-	}
-
-	var name = $container.attr('id') + '_' + $container.attr('class');
-
-	if (loadingTimeoutValue[name]) {
-		clearTimeout(loadingTimeoutValue[name]);
-		loadingTimeoutValue[name] = null;
-	}
-
-	if (isShow) {
-
-		loadingTimeoutValue[name] = setTimeout(function () {
-			clearTimeout(loadingTimeoutValue[name]);
-			loadingTimeoutValue[name] = null;
-			$el.css({
-				'display': '',
-				'margin-top': $container.scrollTop() + 'px'
-			});
-			$over.css({
-				'display': '',
-				'height': ($container[0].scrollHeight || $container.height()) + 'px'
-			});
-		}, 200);
-	}
-	else {
-		$el.css('display', 'none');
-		$over.css('display', 'none');
-	}
-
-	if (options.isClear) {
-		if (loadingTimeoutValue[name]) {
-			clearTimeout(loadingTimeoutValue[name]);
-			loadingTimeoutValue[name] = null;
-		}
-		$('elayout-loading').css('display', 'none');
-		$('elayout-loading-over').css('display', 'none');
-	}
-}
 
