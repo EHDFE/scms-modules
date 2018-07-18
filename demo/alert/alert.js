@@ -33,5 +33,10 @@ export default {
       callback:
         "$.alert('是否确认删除此记录？', {type:'confirm', title:'确认提示',submit:function(object) {object.hide();}});",
     },
+    {
+      value: '确认提示有title,有回调函数，提交后需在回调中调用关闭弹出框事件, ',
+      callback:
+        "$.alert('是否确认删除此记录？', {type:'confirm', title:'确认提示',buttons:[{name: '走了',callback:function(object) {object.hide();}},{name:'去', type: 'success',callback: function(object) {object.hide();}}]});",
+    },
   ],
 };

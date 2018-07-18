@@ -14,6 +14,7 @@ import tpl from './datePickerRangeTpl.html';
 import './datePickerRangeTpl.css';
 import html from './datePickerRangeFixPanel.html';
 import './datePickerRange.css';
+import './datePickerRangeFixPanel.css';
 // import { preventBlur } from './utils';
 
 import Defautls from './defaults';

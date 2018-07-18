@@ -1,0 +1,30 @@
+.data-picker-range-fix-panel .date-panel{
+    
+}
+.data-picker-range-fix-panel .date-panel-title{
+    border:1px solid #51A1FD;
+    margin:5px 5px 0 5px;
+    background: #fff;
+    border-radius: 4px;
+}
+.data-picker-range-fix-panel .date-panel-title:first-child{
+    margin-right:0px;
+}
+.data-picker-range-fix-panel .date-btn-box{
+    border:none;
+}
+.data-picker-range-fix-panel .date-panel-title:first-child .date-panel-datetimepicker{
+    margin-right:15px;
+}
+
+.data-picker-range-fix-panel .date-panel-title > h2{
+    margin: 0 0px -15px 0;
+    background: #51A1FD;
+    text-align: center;
+    padding: 8px 0;
+    color:#fff;
+    border-radius: 3px 3px 0 0;
+  }
+.data-picker-range-fix-panel .date-panel-title:last-child > h2{
+    margin: 0 0 -15px 0;
+  }

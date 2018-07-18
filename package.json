@@ -1,6 +1,6 @@
 {
   "name": "scmsmodules",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "scmsmodules",
   "repository": "https://github.com/EHDFE/scms-modules.git",
   "scripts": {
@@ -55,6 +55,7 @@
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^3.1.0",
     "less": "^2.7.3",
+    "mini-css-extract-plugin": "^0.4.0",
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.0",
     "postcss-copy": "^7.1.0",
