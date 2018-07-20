@@ -7,6 +7,7 @@
  * @html <div image-upload module-type="'noThumb'" api-url="'/goodstaxiAdmin/imagecs/uploadImage'"" image-urls="imageUrls" d-width="30" d-height="30" d-size="30"></div>
  * @html <div image-upload module-type="'noThumb'" clear-data="clearData" api-url="'goodstaxiAdmin/einvoiceapplicationcs/uploadAttachment'" image-urls="imageUrls" file="true" file-type="['pdf','png','xlsx','docx']"></div>
  * @html <div image-upload module-type="'thumb'" api-url="'/goodstaxiAdmin/imagecs/uploadImage1'" d-num="3" d-width="30" d-height="30" d-size="30" image-urls="imageUrls"></div>
+ * example
  */
 
 import angular from 'angular';
@@ -33,16 +34,12 @@ export default (app, elem, attrs, scope) => {
           dNum: '=',
           clearData: '=',
           file:'=',
-          fileType:'='
+          fileType:'=',
+          exampleText:'@',
+          defaultImg:'@'
         },
-        controller: [
-          '$scope',
-          '$element',
-          '$attrs',
-          '$timeout',
-          function ($scope, $element, $attrs, $timeout) {},
-        ],
-        link($scope, $element, $attrs, ngModel) {
+        controller: function ($scope, $element, $attrs, $timeout) {
+          $scope.exampleText = $scope.exampleText || '上传图片清晰可见，不可超过3M，支持jpg、jpeg、png';
           $scope.showClick = ()=>{};
           $scope.type = 1;
           $scope.init = ()=>{
@@ -337,6 +334,7 @@ export default (app, elem, attrs, scope) => {
             $scope.init();
           }
           // $scope.clearData = $scope.clear;
+          console.log($scope.imageArray)
         }
       }
     }
