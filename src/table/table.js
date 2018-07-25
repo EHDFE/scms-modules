@@ -154,6 +154,9 @@ export default (app, elem, attrs, scope) => {
           $rootScope.$on(
             '$stateChangeStart',
             (state, next, nextParam, current, currentParam) => {
+              if($scope.disableStorage) {
+                return;
+              }
               try {
                 let localStorageArray = [];
 
