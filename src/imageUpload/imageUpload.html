@@ -66,4 +66,25 @@
             </li>
         </ul>
     </div>
+    <div class="example" ng-if="moduleType === 'example'">
+        <div class="bgImg">
+            <div ng-show="imageArray[0] && imageArray[0].uploadType.succeed" style="background: url({{ imageArray[0].dataImg }}) no-repeat center center;background-size: cover;"></div>
+            <div ng-show="!imageArray[0] || !imageArray[0].uploadType.succeed" style="background: url({{ defaultImg }}) no-repeat center center;background-size: cover;"></div>
+        </div>
+        <div class="type" ng-show="item.uploadType.loading || item.uploadType.error">
+            <span class="succeed" ng-show="imageArray[0].uploadType.succeed" style="width: {{ imageArray[0].loadingTempo }}%;"></span>
+            <span class="error" ng-show="imageArray[0].uploadType.error" style="width: {{ imageArray[0].loadingTempo }}%;"></span>
+            <span class="loading" ng-show="imageArray[0].uploadType.loading" style="width: {{ imageArray[0].loadingTempo }}%;"></span>
+        </div>
+        <span class="errorText" ng-show="imageArray[0].uploadType.error">上传失败</span>
+        <div class="clearfix operation">
+            <div class="fl">
+                <label>
+                    <input type="file" ng-model="file" style="display: none;">
+                    上传
+                </label>
+            </div>
+            <div class="fl hint">{{ exampleText }}</div>
+        </div>
+    </div>
 </div>
