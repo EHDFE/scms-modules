@@ -120,8 +120,8 @@ export default (app, elem, attrs, scope) => {
               var text = $scope.fileType.join('|');
               var alertText = $scope.fileType.join('/');
             }else{
-              var text = 'jpg|jepg|png|bmp';
-              var alertText = 'JPG/PNG/BMP';
+              var text = 'jpg|jpeg|png|bmp';
+              var alertText = 'JPG/JPEG/PNG/BMP';
             }
             var pattern = new RegExp('.('+text+')$');
             angular.forEach(file.files, (item, index) => {
