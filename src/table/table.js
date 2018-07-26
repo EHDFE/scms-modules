@@ -39,7 +39,8 @@ export default (app, elem, attrs, scope) => {
           disableStorage: '=', // @scope disableStorage 是否禁止从localStorage中获取搜索条件 {type: "boolean", exampleValue: "false"}
           delEmptyParam: '=', // @scope delEmptyParam 是否删除值为空字符串的请求参数 {type: "boolean", exampleValue: "false"}
           ngTableFixed: '=',//ngTableFixed指令在监听他的变化，重置计算：th宽度、是否显示固定元素、设置父容器高度
-          miniPage: '=' //@scope miniPage 分页是否使用缩小样式 {type: "boolean", "exampleValue": false, defaultValue: false}
+          miniPage: '=', //@scope miniPage 分页是否使用缩小样式 {type: "boolean", "exampleValue": false, defaultValue: false}
+          getCountFromOtherApi: '=' //@scope getCountFromOtherApi 是否从其他接口获取总count {type: "function"}
         },
         restrict: 'EA',
         transclude: true,
@@ -77,13 +78,17 @@ export default (app, elem, attrs, scope) => {
           $scope.items = [];
           $scope.pageSize =
             $scope.pageSize || parseInt($cookies.pageSize, 10) || 15;
-          $scope.fetch = function(options) {
+          $scope.fetch = async function(options) {
             if (!$scope.apiUrl) {
               return;
             }
             $.loading(true, {
               $container: $element,
             });
+            
+            if($scope.getCountFromOtherApi){
+              var totalCount = await $scope.getCountFromOtherApi();
+            }
 
             options = options || {};
             $scope.currPage = options.currPage || $scope.currPage;
@@ -121,6 +126,10 @@ export default (app, elem, attrs, scope) => {
                 if (data && data.data) {
                   data = data.data;
                   $scope.totalCount = data.count || 0;
+                  if($scope.getCountFromOtherApi){
+                    $scope.totalCount = totalCount;
+                    
+                  }
                   $scope.items = data.data;
                   if ($scope.items && $scope.items.length || $scope.totalCount!==0) {
                     $scope.isNoData = false;
