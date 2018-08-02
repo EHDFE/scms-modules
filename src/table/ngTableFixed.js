@@ -319,14 +319,19 @@ export default (app, elem, attrs, scope) => {
             _this.$parentEl.find('.fixed-header-box table').width(_this.$tableBox[0].scrollWidth - 1 + scrollWidth);
             
             //左右固定列宽度设置
+            //左右固定列宽度设置
             var rightTotalWidth = 0,
-              leftTotalWidth = 0;
-              
-            $table.find('tbody tr:eq(0) td').each(function(index, el) {
-              width = $(el)[0].clientWidth;
-              if(index >= _this.rightStartIndex) {
+            leftTotalWidth = 0,
+            $tableFirstRow = $table.find('tbody tr:eq(0) td');
+          
+            var tableFirstRowLength = $tableFirstRow.length;
+            var $rightTableFirstRow = _this.$right.find('tr:eq(0) td');
+            var rightTableFirstRowLength = $rightTableFirstRow.length;
+            $tableFirstRow.each(function(index, el) {
+              width = this.clientWidth;
+              if(index >= tableFirstRowLength - rightTableFirstRowLength) {
                 rightTotalWidth += width;
-                _this.$right.find('tr:eq(0) td').eq(_this.rightStartIndex-index).css('width', width+'px');
+                $rightTableFirstRow.eq(index - (tableFirstRowLength - rightTableFirstRowLength)).css('width', width+'px');
               }
               if(index < _this.config.left) {
                 leftTotalWidth += width;
