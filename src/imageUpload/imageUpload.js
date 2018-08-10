@@ -335,6 +335,10 @@ export default (app, elem, attrs, scope) => {
           }
           // $scope.clearData = $scope.clear;
           console.log($scope.imageArray)
+          $scope.fileFn = ()=>{
+            console.log(123123123)
+            G.alert(`上传数量已满`,{type:'error'});
+          }
         }
       }
     }

@@ -44,9 +44,18 @@
         </ul>
     </div>
     <div class="noThumb" ng-if="moduleType === 'noThumb'">
-        <label>
+        <label ng-if="!dNum">
             <i class="fa fa-upload mr5"></i>
             <input type="file" ng-model="file" style="display: none;">
+            上传文件
+        </label>
+        <label ng-if="dNum && dNum<imageArray.length">
+            <i class="fa fa-upload mr5"></i>
+            <input type="file" ng-model="file" style="display: none;">
+            上传文件
+        </label>
+        <label ng-click="fileFn();" ng-if="dNum && dNum>=imageArray.length">
+            <i class="fa fa-upload mr5"></i>
             上传文件
         </label>
         <ul>

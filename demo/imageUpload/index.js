@@ -53,7 +53,7 @@ export default {
 			"exampleValue":5,
 			"defaultValue":5,
 			"key":"dNum",
-			"description":"设定上传图片的数量，只限 “thumb” 使用"
+			"description":"设定上传图片的数量，只限 “thumb,moduleType” 使用"
 		},
         {
 			"type":"function",
