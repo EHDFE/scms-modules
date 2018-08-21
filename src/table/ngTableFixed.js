@@ -259,12 +259,16 @@ export default (app, elem, attrs, scope) => {
           if(this.$tableBox[0].scrollWidth <= this.$tableBox.width()) {
             this.$parentEl.removeClass('fixed-table-overflow-x');
             this.$left.css({'display': 'none'});
-            this.$right.css({'display': 'none'});            
+            this.$right.css({'display': 'none'});
+            this.$fixedHeaderBox.find('.fix-top-left').css({'display': 'none'});
+            this.$fixedHeaderBox.find('.fix-top-right').css({'display': 'none'});
           }
           else {
             this.$parentEl.addClass('fixed-table-overflow-x');
             this.$left.css({'display': ''});
-            this.$right.css({'display': ''});            
+            this.$right.css({'display': ''});   
+            this.$fixedHeaderBox.find('.fix-top-left').css({'display': ''});
+            this.$fixedHeaderBox.find('.fix-top-right').css({'display': ''});         
           } 
         },
 
