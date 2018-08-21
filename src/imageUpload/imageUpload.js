@@ -45,14 +45,18 @@ export default (app, elem, attrs, scope) => {
           $scope.init = ()=>{
             $scope.imageArray = [];
             $scope.imageUrls = $scope.imageUrls || [];
+            var arr = $scope.imageUrls.map(item=>{
+              return item;
+            });
             if ($scope.moduleType === 'noThumb') {
               if ($scope.imageUrls && $scope.imageUrls.length > 0) {
-                $scope.imageArray = $scope.imageUrls;
+                $scope.imageArray = arr;
               } else {
-                $scope.imageUrls = $scope.imageArray;
+                arr = $scope.imageArray;
+                $scope.imageUrls = arr;
               }
             } else if ($scope.imageUrls && $scope.imageUrls.length) {
-              $scope.imageArray = $scope.imageUrls;
+              $scope.imageArray = arr;
               if($scope.dNum){
                 if($scope.imageArray.length < $scope.dNum){
                   $scope.imageArray.push({
@@ -172,18 +176,18 @@ export default (app, elem, attrs, scope) => {
                     const index = $scope.imageArray.length - 1;
                     $scope.$apply();
                     data.append('file', file);
-                    uploadImage(data, index);
+                    uploadImage(data, $scope.imageArray[index]);
                   } else {
                     const reader = new FileReader();
                     reader.onload = function (e) {
-                      console.log('成功读取文件路径');
+                      // console.log('成功读取文件路径');
                       const index = $scope.imageArray.length - 1;
                       if ($scope.moduleType === 'thumb') {
                         $scope.imageArray[index].dataImg = e.target.result;
                       }
                       $scope.$apply();
                       data.append('file', file);
-                      uploadImage(data, index);
+                      uploadImage(data, $scope.imageArray[index]);
                       if ($scope.moduleType === 'thumb' && $scope.imageArray.length < $scope.dNum) {
                         $scope.imageArray.push({
                           uploadType: {
@@ -215,29 +219,29 @@ export default (app, elem, attrs, scope) => {
                   const index = $scope.imageArray.length - 1;
                   $scope.$apply();
                   data.append('file', file);
-                  uploadImage(data, index);
+                  uploadImage(data, $scope.imageArray[index]);
               }
             };
           }
           // 请求
-          function uploadImage(data, index) {
+          function uploadImage(data, item) {
             const xhr = new XMLHttpRequest();
             xhr.timeout = 30000;
             xhr.onloadstart = function (evt) {
               // console.log('开始')
               if ($scope.moduleType === 'thumb') {
-                $scope.imageArray[index].uploadType = {
+                item.uploadType = {
                   succeed: false,
                   error: false,
                   loading: true,
                 };
               }
-              $scope.imageArray[index].loadingTempo = 1;
+              item.loadingTempo = 1;
               $scope.$apply();
             };
             xhr.upload.onprogress = function (evt) {
               if (evt.lengthComputable) {
-                $scope.imageArray[index].loadingTempo = (evt.loaded / evt.total) * 100;
+                item.loadingTempo = (evt.loaded / evt.total) * 100;
                 $scope.$apply();
               } else {
                 console.log('无法计算进度信息，总大小是未知的', evt);
@@ -245,7 +249,7 @@ export default (app, elem, attrs, scope) => {
             };
             xhr.ontimeout = function (event) {
               // 请求超时！
-              $scope.imageArray[index].uploadType = {
+              item.uploadType = {
                 succeed: false,
                 error: true,
                 loading: false,
@@ -262,16 +266,16 @@ export default (app, elem, attrs, scope) => {
             xhr.onreadystatechange = function () {
               if (xhr.readyState == 4) {
                 if (xhr.status === 200) {
-                  $scope.imageArray[index].uploadType = {
+                  item.uploadType = {
                     succeed: true,
                     error: false,
                     loading: false,
                   };
                   const d = JSON.parse(xhr.responseText);
                   if (d && d.result === 'success') {
-                    $scope.imageArray[index].data = d.data;
+                    item.data = d.data;
                   }else{
-                    $scope.imageArray[index].uploadType = {
+                    item.uploadType = {
                       succeed: false,
                       error: true,
                       loading: false,
@@ -283,7 +287,7 @@ export default (app, elem, attrs, scope) => {
                   $scope.selectImg();
                   $scope.$apply();
                 } else {
-                  $scope.imageArray[index].uploadType = {
+                  item.uploadType = {
                     succeed: false,
                     error: true,
                     loading: false,
@@ -297,10 +301,11 @@ export default (app, elem, attrs, scope) => {
           // 筛选可用图片
           $scope.selectImg = function () {
             $scope.imageUrls = [];
-            if ($scope.imageArray.length > 0) {
-              for (let i = 0; i < $scope.imageArray.length; i++) {
-                if ($scope.imageArray[i].uploadType.succeed) {
-                  $scope.imageUrls.push($scope.imageArray[i]);
+            var arr = G.clone($scope.imageArray);
+            if (arr.length > 0) {
+              for (let i = 0; i < arr.length; i++) {
+                if (arr[i].uploadType.succeed) {
+                  $scope.imageUrls.push(arr[i]);
                 }
               }
             }
@@ -325,7 +330,7 @@ export default (app, elem, attrs, scope) => {
           $scope.$watch('imageUrls',function(newValue,oldValue){
             if((newValue.length > oldValue.length) && $scope.initType){
               $scope.initType = false;
-              $scope.init();
+              // $scope.init();
               $scope.selectImg();
             }
           },true);
@@ -334,7 +339,10 @@ export default (app, elem, attrs, scope) => {
             $scope.init();
           }
           // $scope.clearData = $scope.clear;
-          console.log($scope.imageArray)
+          // console.log($scope.imageArray)
+          $scope.fileFn = ()=>{
+            G.alert(`上传数量已满`,{type:'error'});
+          }
         }
       }
     }

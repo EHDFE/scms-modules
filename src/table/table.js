@@ -86,6 +86,9 @@ export default (app, elem, attrs, scope) => {
             $.loading(true, {
               $container: $element,
             });
+            $element.css({
+              'min-height': '200px',
+            });
             
             if($scope.getCountFromOtherApi){
               var totalCount = await $scope.getCountFromOtherApi();
@@ -158,12 +161,18 @@ export default (app, elem, attrs, scope) => {
                 $.loading(false, {
                   $container: $element,
                 });
+                $element.css({
+                  'min-height': 'auto',
+                });
               },
               () => {
                 $scope.totalCount = 0;
                 $scope.items = [];
                 $.loading(false, {
                   $container: $element,
+                });
+                $element.css({
+                  'min-height': 'auto',
                 });
               }
             );
