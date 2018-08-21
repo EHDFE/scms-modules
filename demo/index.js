@@ -91,4 +91,7 @@ demoData.unshift(multipleSelect);
 import tableHandleDirective from './tableHandle/';
 demoData = demoData.concat(tableHandleDirective);
 
+import filter from "./filter/index.js";
+demoData.push(filter);
+
 export default demoData;
