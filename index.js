@@ -65,6 +65,7 @@ import multipleSelect from './src/multipleSelect';
 import ngTableFixed from './src/table/ngTableFixed';
 
 import datePickerRangeFixPanel from './src/ngDatePicker/datePickerRangeFixPanel';
+import carTypeSelect from './src/carTypeSelect';
 
 
 export default {
@@ -119,4 +120,5 @@ export default {
   multipleSelect,
   ngTableFixed,
   'ngDatePicker/datePickerRangeFixPanel': datePickerRangeFixPanel,
+  carTypeSelect,
 };

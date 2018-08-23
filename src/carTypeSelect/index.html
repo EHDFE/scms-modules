@@ -1,0 +1,16 @@
+<div class="multiple-select-pane" ng-show="paneVisible">
+  <div class="multiple-select-pane-container">
+    <div class="category-group" ng-show="selectType === 'radio'">
+      <h4 class="category-name"><a href="#" ng-class="{selected: selectedAll}" ng-click="selectClick({name:'全部',value:'全部'})">全部</a></h4>
+    </div>
+    <div class="category-group" ng-repeat="group in options">
+      <h4 class="category-name">{{group.name}}</h4>
+      <ul class="option-list">
+        <li class="option-item" ng-class="{selected: item.selected}" ng-repeat="item in group.children">
+          <button type="button" ng-click="handleClick(item)" ng-show="selectType !== 'radio'">{{item.name}}</button>
+          <button type="button" ng-click="selectClick(item)" ng-show="selectType === 'radio'">{{item.name}}</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

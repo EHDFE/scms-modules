@@ -94,4 +94,7 @@ demoData = demoData.concat(tableHandleDirective);
 import filter from "./filter/index.js";
 demoData.push(filter);
 
+import carTypeSelect from "./carTypeSelect/index.js";
+demoData.push(carTypeSelect);
+
 export default demoData;
