@@ -7,7 +7,7 @@ export default [
       author: '黄思飞',
       lastBy: '',
       description:
-        '列表固定头部行、左边列或右边列',
+        '列表固定头部行、左边列或右边列。 tableFixed宽高更新条件，1. 初始化时、2.tableDirective指令数据更新时、3.可自定义更新，只须改变ngTableFixed的值，如$scope.ngTableFixed = (+new Date()) + "";',
       date: '2018-05-01',
       scope: [
       ],
