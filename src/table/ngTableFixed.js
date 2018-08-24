@@ -404,7 +404,6 @@ export default (app, elem, attrs, scope) => {
           $scope.ngTableFixed = '1';
           var tableFixed = $element.data('tableFixed');
           $scope.$watch('ngTableFixed', function(newValue, old) {
-            console.log(33333333333)
             tableFixed.setInitView();
             tableFixed.setThWidth(newValue, $scope);
             tableFixed.setBoxScrollInit();
