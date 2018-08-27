@@ -296,8 +296,7 @@ export default (app, elem, attrs, scope) => {
           
           this.setBoxHeight();
           this.bindEvent();
-
-          this.$fixedColBox.css('top', this.$fixedHeaderBox.height()+'px');
+          
 
           this.$tableBox.append(this.$parentEl.find('.error-no-data'));
         },
@@ -378,7 +377,7 @@ export default (app, elem, attrs, scope) => {
 
             //原始列表头部隐藏起来
             $table.css({'margin-top': '-'+$table.find('thead').height()+'px'});
-
+            _this.$fixedColBox.css('top', _this.$fixedHeaderBox.height()+'px');
           }, 200)
         },
 

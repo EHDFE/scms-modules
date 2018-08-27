@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 // import 'bootstrap/less/bootstrap.less';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-colorpicker/dist/css/bootstrap-colorpicker.css';
@@ -65,6 +66,7 @@ import multipleSelect from './src/multipleSelect';
 import ngTableFixed from './src/table/ngTableFixed';
 
 import datePickerRangeFixPanel from './src/ngDatePicker/datePickerRangeFixPanel';
+import carTypeSelect from './src/carTypeSelect';
 
 
 
@@ -120,4 +122,5 @@ export default {
   multipleSelect,
   ngTableFixed,
   'ngDatePicker/datePickerRangeFixPanel': datePickerRangeFixPanel,
+  carTypeSelect,
 };
