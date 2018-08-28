@@ -358,10 +358,19 @@ export default (app, elem, attrs, scope) => {
                 }
 
                 if(startIndex < thLength) {
-                  _this.$fixedHeaderBox.find('table').each(function() {
+                  _this.$fixedHeaderBox.find('.fix-top-left table, > table').each(function() {
                     $(this).find('tr').eq(thItemIndex).find('th').eq(thIndex).width(width);
                   })
                 }
+
+                if(startIndex > 2) {
+                  _this.$fixedHeaderBox.find('.fix-top-right table').each(function() {
+                    if(startIndex === thLength) {
+                      width = width + scrollWidth+2;
+                    }
+                    $(this).find('tr').eq(thItemIndex).find('th').eq(thIndex).width(width);
+                  })
+                };
                 
               })
               
@@ -383,8 +392,18 @@ export default (app, elem, attrs, scope) => {
 
         setBoxScrollInit: function() {
           if(this.$tableBox && this.$tableBox[0]) {
-            this.$tableBox[0].scrollLeft = 0;
-            this.$tableBox[0].scrollTop = 0;
+            var scrollHeight = this.getScrollHeight();
+            var scrollWidth = this.getScrollWidth();
+            if(scrollHeight !== this.preScrollHeight) {
+              this.$tableBox[0].scrollTop = 0;
+            }
+            
+            if(scrollWidth !== this.preScrollWidth) {
+              this.$tableBox[0].scrollLeft = 0;
+            }
+
+            this.preScrollHeight = scrollHeight;
+            this.preScrollWidth = scrollWidth;
           }
         }
       };
