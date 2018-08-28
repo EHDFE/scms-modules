@@ -242,6 +242,9 @@ export default (app, elem, attrs, scope) => {
           else {
             height = ($('#container').height() || $('body').height()) * this.config.floatHeight;
           }
+          if(height < 300) {
+            height = 300;
+          }
 
           if(this.$tableBox[0] && this.$tableBox[0].scrollHeight > height && this.config.header) {
             this.$parentEl.addClass('fixed-table-overflow-y');
