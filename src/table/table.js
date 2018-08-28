@@ -40,6 +40,7 @@ export default (app, elem, attrs, scope) => {
           delEmptyParam: '=', // @scope delEmptyParam 是否删除值为空字符串的请求参数 {type: "boolean", exampleValue: "false"}
           ngTableFixed: '=',//ngTableFixed指令在监听他的变化，重置计算：th宽度、是否显示固定元素、设置父容器高度
           miniPage: '=', //@scope miniPage 分页是否使用缩小样式 {type: "boolean", "exampleValue": false, defaultValue: false}
+          sendJson: '=', //@scope contentType 请求类型
           getCountFromOtherApi: '=' //@scope getCountFromOtherApi 是否从其他接口获取总count {type: "function"}
         },
         restrict: 'EA',
@@ -118,13 +119,21 @@ export default (app, elem, attrs, scope) => {
               }
               : {};
 
-            $http({
+            const fetchConfig = {
               url: $scope.apiUrl,
               method: $attrs.method || 'post',
               data: Object.assign({}, $scope.params, pageParams),
               isDebug: $attrs.isDebug,
               test: $attrs.test,
-            }).then(
+            };
+
+            if ($scope.sendJson) {
+              Object.assign(fetchConfig, {
+                isJson: true,
+              });
+            }
+
+            $http(fetchConfig).then(
               data => {
                 if (data && data.data) {
                   data = data.data;
