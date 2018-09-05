@@ -14,8 +14,13 @@ export default (app, elem, attrs, scope) => {
         scope: {
           tooltip: '@', // @scope tooltip 提示的文本内容 {type: "string", "exampleValue": "这是一个小tip"}
           tooltipPosition: '=', // @scope tooltipPosition 提示弹框的位置 {type: "string", "exampleValue": "left", defaultValue: "down"}
+          tooltipHide: '='
         },
         link: function postLink($scope, $element, $attrs) {
+          if($scope.tooltipHide){
+            return;
+          }
+
           const tip = $compile('<div class="tooltip" ng-class="tipClass"><div ng-bind-html="text"></div><div class="tooltip-arrow"></div></div>')($scope);
           const tipActiveClassName = 'tooltip-show';
           let initialClassName = '';
