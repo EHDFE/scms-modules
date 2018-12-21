@@ -88,6 +88,13 @@ export default {
 			"defaultValue":"上传图片清晰可见，不可超过3M，支持jpg、jpeg、png",
 			"key":"exampleText",
 			"description":"提示文字，只适用于moduleType为example"
+		},
+		{
+			"type":"object",
+			"exampleValue":"{a:1,b:2}",
+			"defaultValue":"{a:1,b:2}",
+			"key":"params",
+			"description":"接口参数配置"
 		}],
 	"attrs":[],
 	"deps":["scmsModules/imageUpload/imageUpload"],

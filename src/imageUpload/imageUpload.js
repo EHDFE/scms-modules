@@ -36,7 +36,8 @@ export default (app, elem, attrs, scope) => {
           file:'=',
           fileType:'=',
           exampleText:'@',
-          defaultImg:'@'
+          defaultImg:'@',
+          params:'='
         },
         controller: function ($scope, $element, $attrs, $timeout) {
           $scope.exampleText = $scope.exampleText || '上传图片清晰可见，不可超过3M，支持jpg、jpeg、png';
@@ -176,6 +177,11 @@ export default (app, elem, attrs, scope) => {
                     const index = $scope.imageArray.length - 1;
                     $scope.$apply();
                     data.append('file', file);
+                    if($scope.params){
+                      for(var key in $scope.params) {
+                        data.append(key, $scope.params[key]);
+                      }
+                    }
                     uploadImage(data, $scope.imageArray[index]);
                   } else {
                     const reader = new FileReader();
@@ -187,6 +193,11 @@ export default (app, elem, attrs, scope) => {
                       }
                       $scope.$apply();
                       data.append('file', file);
+                      if($scope.params){
+                        for(var key in $scope.params) {
+                          data.append(key, $scope.params[key]);
+                        }
+                      }
                       uploadImage(data, $scope.imageArray[index]);
                       if ($scope.moduleType === 'thumb' && $scope.imageArray.length < $scope.dNum) {
                         $scope.imageArray.push({
@@ -219,6 +230,11 @@ export default (app, elem, attrs, scope) => {
                   const index = $scope.imageArray.length - 1;
                   $scope.$apply();
                   data.append('file', file);
+                  if($scope.params){
+                    for(var key in $scope.params) {
+                      data.append(key, $scope.params[key]);
+                    }
+                  }
                   uploadImage(data, $scope.imageArray[index]);
               }
             };
