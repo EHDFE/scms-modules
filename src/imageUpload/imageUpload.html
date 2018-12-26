@@ -64,7 +64,9 @@
                     <i class="fa fa-chain-broken"></i>
                 </span>
                 <div>
-                    <a href="javascript:;" class="succeed" ng-class="{succeed:item.uploadType.succeed,error:item.uploadType.error,loading:item.uploadType.loading}">{{ item.imgName }}</a>
+                    <a href="javascript:;" class="succeed" ng-class="succeed" ng-show="item.uploadType.succeed" ng-click="noThumbDownload($event,item)">{{ item.imgName }}</a>
+                    <a href="javascript:;" class="succeed" ng-class="error" ng-show="item.uploadType.error">{{ item.imgName }}</a>
+                    <a href="javascript:;" class="succeed" ng-class="loading" ng-show="item.uploadType.loading">{{ item.imgName }}</a>
                     <a href="javascript:;" class="remove" ng-click="remove(item,$index)">
                         <i class="icon-close"></i>
                     </a>

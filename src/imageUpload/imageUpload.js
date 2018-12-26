@@ -342,6 +342,28 @@ export default (app, elem, attrs, scope) => {
               var url = canvas.toDataURL();
               $ele.attr("href", url).attr("download", name+".png");
           }
+          $scope.noThumbDownload = ($event,item) => {
+            if(item.imgName) {
+              var name = item.imgName;
+            } else {
+              var name = new Date().getTime();
+            }
+            var $ele = $($event.target).parent();
+            if(item.dataImg.indexOf('.png')>-1 || item.dataImg.indexOf('.jpg')>-1 || item.dataImg.indexOf('.jpeg')>-1){
+              var canvas = document.createElement("canvas");
+              const img = new Image();
+              img.crossOrigin = 'anonymous';
+              img.src = item.dataImg;
+              canvas.width = img.width;
+              canvas.height = img.height;
+              canvas.getContext("2d").drawImage(img, 0, 0);
+              var url = canvas.toDataURL();
+              $ele.attr("href", url).attr("download", name+".png");
+            }else{
+              var url = item.dataImg;
+              $ele.attr("href", url).attr("download", name);
+            }
+          }
           $scope.initType = true;
           $scope.$watch('imageUrls',function(newValue,oldValue){
             if((newValue.length > oldValue.length) && $scope.initType){
