@@ -343,12 +343,8 @@ export default (app, elem, attrs, scope) => {
               $ele.attr("href", url).attr("download", name+".png");
           }
           $scope.noThumbDownload = ($event,item) => {
-            if(item.imgName) {
-              var name = item.imgName;
-            } else {
-              var name = new Date().getTime();
-            }
-            var $ele = $($event.target).parent();
+            var name = item.imgName;
+            var $ele = $($event.target);
             if(item.dataImg.indexOf('.png')>-1 || item.dataImg.indexOf('.jpg')>-1 || item.dataImg.indexOf('.jpeg')>-1){
               var canvas = document.createElement("canvas");
               const img = new Image();
@@ -358,7 +354,7 @@ export default (app, elem, attrs, scope) => {
               canvas.height = img.height;
               canvas.getContext("2d").drawImage(img, 0, 0);
               var url = canvas.toDataURL();
-              $ele.attr("href", url).attr("download", name+".png");
+              $ele.attr("href", url).attr("download", name);
             }else{
               var url = item.dataImg;
               $ele.attr("href", url).attr("download", name);
