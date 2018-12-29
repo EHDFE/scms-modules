@@ -140,7 +140,7 @@
             }
         }
         ul{
-            width: 270px;
+            width: 100%;
             li{
                 line-height: 30px;
                 padding-left: 5px;
@@ -155,11 +155,20 @@
                 }
                 &>div{
                     margin-left: 10px;
-                    width: 240px;
+                    width: 89%;
                     a.succeed{
                         color: #51A1FD;
                         &:hover{
                             text-decoration: underline;
+                        }
+                    }
+                    .succeed{
+                        float: left;
+                        a{
+                            color: #51A1FD;
+                            &:hover{
+                                text-decoration: underline;
+                            }
                         }
                     }
                     a.error{
@@ -174,7 +183,7 @@
                             text-decoration: underline;
                         }
                     }
-                    div{
+                    .schedule{
                         height: 1px;
                         width: 100%;
                         background: #E4E7EF;

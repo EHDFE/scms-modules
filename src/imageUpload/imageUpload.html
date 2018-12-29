@@ -64,13 +64,14 @@
                     <i class="fa fa-chain-broken"></i>
                 </span>
                 <div>
-                    <a href="javascript:;" class="succeed" ng-show="item.uploadType.succeed" ng-click="noThumbDownload($event,item)">{{ item.imgName }}</a>
+                    <a href="javascript:;" image-show img-url="item.dataImg" text-only="true" alt-text="item.imgName" show-click="showClick" class="succeed" ng-show="item.uploadType.succeed && (item.imgName.indexOf('.jpg')>-1 || item.imgName.indexOf('.jpeg')>-1 || item.imgName.indexOf('.png')>-1)"></a>
+                    <a href="javascript:;" class="succeed" ng-show="item.uploadType.succeed && item.imgName.indexOf('.jpg')<=-1 && item.imgName.indexOf('.jpeg')<=-1 && item.imgName.indexOf('.png')<=-1" ng-click="noThumbDownload($event,item)">{{ item.imgName }}</a>
                     <a href="javascript:;" class="error" ng-show="item.uploadType.error">{{ item.imgName }}</a>
                     <a href="javascript:;" class="loading" ng-show="item.uploadType.loading">{{ item.imgName }}</a>
                     <a href="javascript:;" class="remove" ng-click="remove(item,$index)">
                         <i class="icon-close"></i>
                     </a>
-                    <div ng-show="item.uploadType.loading">
+                    <div class="schedule" ng-show="item.uploadType.loading">
                         <span style="width: {{ item.loadingTempo }}%;"></span>
                     </div>
                 </div>
