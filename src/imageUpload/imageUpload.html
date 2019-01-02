@@ -49,12 +49,12 @@
             <input type="file" ng-model="file" style="display: none;">
             上传文件
         </label>
-        <label ng-if="dNum && dNum<imageArray.length">
+        <label ng-if="dNum && imageArray.length < dNum">
             <i class="fa fa-upload mr5"></i>
             <input type="file" ng-model="file" style="display: none;">
             上传文件
         </label>
-        <label ng-click="fileFn();" ng-if="dNum && dNum>=imageArray.length">
+        <label ng-click="fileFn();" ng-if="dNum && imageArray.length >= dNum">
             <i class="fa fa-upload mr5"></i>
             上传文件
         </label>

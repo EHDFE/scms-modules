@@ -59,6 +59,7 @@ export default (app, elem, attrs, scope) => {
             } else if ($scope.imageUrls && $scope.imageUrls.length) {
               $scope.imageArray = arr;
               if($scope.dNum){
+                console.log(88888, $scope.imageArray.length < $scope.dNum,$scope.imageArray)
                 if($scope.imageArray.length < $scope.dNum){
                   $scope.imageArray.push({
                     uploadType: {
@@ -277,8 +278,8 @@ export default (app, elem, attrs, scope) => {
             // xhr.onerror = function(evt) {
             //     console.log("在传输文件时发生了错误.");
             // }
-
-            xhr.open('post', $scope.apiUrl);
+            console.log(999999, $scope.apiUrl)
+            xhr.open('post', $scope.apiUrl || '/ehuodiGateway/huilianApi/uploader/attachment');
             xhr.onreadystatechange = function () {
               if (xhr.readyState == 4) {
                 if (xhr.status === 200) {
@@ -290,6 +291,12 @@ export default (app, elem, attrs, scope) => {
                   const d = JSON.parse(xhr.responseText);
                   if (d && d.result === 'success') {
                     item.data = d.data;
+                    const imgs = [];
+                    angular.forEach(d.data, function(item) {
+                      imgs.push(item.attachmenturl);
+                    });
+                    item.imageUrl = imgs[0];
+                    console.log(7766, item)
                   }else{
                     item.uploadType = {
                       succeed: false,
