@@ -1,0 +1,61 @@
+<div class="ngImageUpload">
+  <div class="thumb">
+    <ul>
+      <li ng-repeat="item in imageArray">
+        <div class="upload-box" ng-if="!item.status">
+          <label>
+            <span> <i class="fa fa-plus"></i> </span>
+            <input type="file" ng-model="file" style="display: none;" />上传
+          </label>
+        </div>
+        <div
+          class="loading-box"
+          ng-show="item.status && item.status !== 'success'"
+        >
+          <p><span ng-show="item.status === 'loading'">上传中 ···</span></p>
+          <div>
+            <span
+              class="loading"
+              ng-show="item.status === 'loading'"
+              style="width: {{ item.loadingTempo }}%;"
+            ></span>
+          </div>
+        </div>
+        <div class="images-box" ng-show="item.url">
+          <div class="images-box-img" ng-show="item.type === 'IMG'">
+            <img
+              class="img"
+              image-show
+              img-url="item.imgData || item.url"
+              custom-css="true"
+              show-click="showClick"
+              bg-click="false"
+              mini-img="false"
+            />
+          </div>
+          <div  class="images-box-img" ng-show="item.type !== 'IMG'">
+                <img
+                  class="img fileTypeImg"
+                />
+              </div>
+          <div class="barrier">
+            <a
+              href="javascript:;"
+              ng-show="item.type === 'IMG'"
+              ng-click="showClick($event,item.url)"
+            >
+              <i class="fa fa-eye"></i>
+            </a>
+            <a href="javascript:;" ng-click="remove(item,$index)" ng-if="!readonly">
+              <i class="glyphicon glyphicon-trash"></i>
+            </a>
+            <a href="javascript:;" ng-click="download($event,item)">
+              <i class="fa fa-download"></i>
+            </a>
+            <a style="display: none;"></a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
