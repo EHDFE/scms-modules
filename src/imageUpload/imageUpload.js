@@ -59,7 +59,6 @@ export default (app, elem, attrs, scope) => {
             } else if ($scope.imageUrls && $scope.imageUrls.length) {
               $scope.imageArray = arr;
               if($scope.dNum){
-                console.log(88888, $scope.imageArray.length < $scope.dNum,$scope.imageArray)
                 if($scope.imageArray.length < $scope.dNum){
                   $scope.imageArray.push({
                     uploadType: {
@@ -127,7 +126,7 @@ export default (app, elem, attrs, scope) => {
               var alertText = $scope.fileType.join('/');
             }else{
               var text = 'jpg|jpeg|png|bmp';
-              var alertText = 'JPG/JPEG/PNG/BMP';
+              var alertText = 'JPG/JPEG/PNG/BMP';
             }
             var pattern = new RegExp('.('+text+')$');
             angular.forEach(file.files, (item, index) => {

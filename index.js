@@ -55,6 +55,7 @@ import monthRangePicker from './src/ngDatePicker/monthRangePicker';
 import buttonDropdown from './src/buttonDropdown/buttonDropdown';
 import selectDropdown from './src/selectDropdown/selectDropdown';
 import imageUpload from './src/imageUpload/imageUpload';
+import ngFileUpload from './src/ngFileUpload/ngFileUpload';
 
 import numberSelect from './src/numberSelect/numberSelect';
 import circleSchedule from './src/circleSchedule/circleSchedule';
@@ -113,6 +114,7 @@ export default {
   buttonDropdown,
   selectDropdown,
   'imageUpload/imageUpload': imageUpload,
+  'ngFileUpload/ngFileUpload': ngFileUpload,
   numberSelect,
   'circleSchedule/circleSchedule': circleSchedule,
   cascadeSelect,
