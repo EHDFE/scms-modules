@@ -33,7 +33,8 @@ export default (app, elem, attrs, scope) => {
           dNum: "@",
           clearData: "&",
           fileTypes: "=",
-          readonly: "@"//只读，在查看时用到
+          readonly: "@",//只读，在查看时用到
+          attachmenType: "@"
         },
         controller: function($scope, $element, $attrs, $timeout) {
           //image数组,包含字段：
@@ -72,7 +73,7 @@ export default (app, elem, attrs, scope) => {
           const saveImg = function(file) {
             let data = new FormData();
             data.append("file", file);
-            data.append("attachmenType", "VOUCHER");
+            data.append("attachmenType", $scope.attachmenType || "VOUCHER");
             const xhr = new XMLHttpRequest();
             xhr.timeout = 30000;
             xhr.onloadstart = function(evt) {
@@ -281,9 +282,11 @@ export default (app, elem, attrs, scope) => {
                   }
                 );
               } else {
-                pushFile({
-                  imgData: fileData.currentTarget.result
-                });
+                if(isValidFileType === "IMG") {
+                  pushFile({
+                    imgData: fileData.currentTarget.result
+                  });
+                }
                 saveImg(file.files[0]);
               }
             });
