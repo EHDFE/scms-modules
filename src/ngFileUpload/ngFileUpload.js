@@ -26,7 +26,7 @@ export default (app, elem, attrs, scope) => {
         restrict: "EA",
         replace: true,
         scope: {
-          imageUrls: "=",//必传,返回文件的url:['http://****.png', ...]
+          imageUrls: "=",//必传,父级传过来的文件url、或组件中上传的文件的url:['http://****.png', ...]
           fileData: "=", //非必传，返回：[{url: '', name: ''}]
           dWidth: "@",//非必传，限宽
           dHeight: "@",//非必传，限高
@@ -46,11 +46,13 @@ export default (app, elem, attrs, scope) => {
           //loadingTempo: 上传进度
           //name: 文件原始名称
           $scope.imageArray = [{}];
+          $scope.fileData = [];
 
           if ($attrs.clearData) {
             $scope.clearData = function() {
               $scope.imageArray = [{}];
               $scope.imageUrls = [];
+              $scope.fileData = [];
             };
           }
 
