@@ -26,15 +26,16 @@ export default (app, elem, attrs, scope) => {
         restrict: "EA",
         replace: true,
         scope: {
-          imageUrls: "=",
-          dWidth: "@",
-          dHeight: "@",
-          dSize: "@",
-          dNum: "@",
-          clearData: "&",
-          fileTypes: "=",
-          readonly: "@",//只读，在查看时用到
-          attachmenType: "@"
+          imageUrls: "=",//必传
+          fileData: "=", //非必传，返回：[{url: '', name: ''}]
+          dWidth: "@",//非必传，
+          dHeight: "@",//非必传，
+          dSize: "@",//非必传，
+          dNum: "@",//非必传，
+          clearData: "=", //可选，清空上传操作的数据
+          fileTypes: "=",//必传，
+          readonly: "@", //非必传：只读，在查看时用到
+          attachmenType: "@"//非必传, 默认为VOUCHER
         },
         controller: function($scope, $element, $attrs, $timeout) {
           //image数组,包含字段：
@@ -43,7 +44,15 @@ export default (app, elem, attrs, scope) => {
           //imgData: base64 data
           //url: 服务器上传成功后返回的url
           //loadingTempo: 上传进度
+          //name: 文件原始名称
           $scope.imageArray = [{}];
+
+          if ($attrs.clearData) {
+            $scope.clearData = function() {
+              $scope.imageArray = [{}];
+              $scope.imageUrls = [];
+            };
+          }
 
           //
           $scope.imageUrls = $scope.imageUrls || [];
@@ -58,7 +67,10 @@ export default (app, elem, attrs, scope) => {
                     type: getIsImage(item)
                   };
                 });
-                if($scope.imageArray.length < $scope.dNum && !$scope.readonly) {
+                if (
+                  $scope.imageArray.length < $scope.dNum &&
+                  !$scope.readonly
+                ) {
                   $scope.imageArray.push({});
                 }
               }
@@ -165,12 +177,12 @@ export default (app, elem, attrs, scope) => {
           //获取是否为图片
           const getIsImage = name => {
             const images = "bmp|jpg|jpeg|png|gif|svg|webp";
-              const patternB = new RegExp(".(" + images + ")$");
-              if (patternB.test(name)) {
-                return "IMG";
-              }
-            return 'file';
-          }
+            const patternB = new RegExp(".(" + images + ")$");
+            if (patternB.test(name)) {
+              return "IMG";
+            }
+            return "file";
+          };
 
           //验证图片格式
           const validFileType = (fileTypes, file) => {
@@ -187,7 +199,7 @@ export default (app, elem, attrs, scope) => {
 
           //验证文件大小
           const validSize = (file, dSize) => {
-            if (dSize && file.size / 1024 >= parseInt(dSize, 10) *1024) {
+            if (dSize && file.size / 1024 >= parseInt(dSize, 10) * 1024) {
               G.alert(`文件必须小于${dSize}M`, {
                 type: "error"
               });
@@ -223,8 +235,17 @@ export default (app, elem, attrs, scope) => {
             }
 
             $scope.imageUrls = [];
+            if ($attrs.fileData) {
+              $scope.fileData = [];
+            }
             $scope.imageArray.map(item => {
               if (item.url) {
+                if ($attrs.fileData) {
+                  $scope.fileData.push({
+                    url: item.url,
+                    name: item.name
+                  });
+                }
                 $scope.imageUrls.push(item.url);
               }
             });
@@ -232,8 +253,8 @@ export default (app, elem, attrs, scope) => {
           };
 
           const setClearInput = target => {
-            target.value = '';
-          }
+            target.value = "";
+          };
 
           //绑定file change事件
           $element.on("change", "input", event => {
@@ -241,7 +262,7 @@ export default (app, elem, attrs, scope) => {
             if (!file.files || (file.files && !file.files.length)) {
               return;
             }
-            
+
             const isValidFileType = validFileType(
               $scope.fileTypes,
               file.files[0]
@@ -259,7 +280,8 @@ export default (app, elem, attrs, scope) => {
             pushFile({
               type: isValidFileType || "",
               status: "loading",
-              loadingTempo: 10
+              loadingTempo: 10,
+              name: file.files[0].name
             });
 
             getFileData(file.files[0]).then(fileData => {
@@ -282,7 +304,7 @@ export default (app, elem, attrs, scope) => {
                   }
                 );
               } else {
-                if(isValidFileType === "IMG") {
+                if (isValidFileType === "IMG") {
                   pushFile({
                     imgData: fileData.currentTarget.result
                   });
