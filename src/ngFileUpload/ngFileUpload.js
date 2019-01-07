@@ -26,12 +26,12 @@ export default (app, elem, attrs, scope) => {
         restrict: "EA",
         replace: true,
         scope: {
-          imageUrls: "=",//必传
+          imageUrls: "=",//必传,返回文件的url:['http://****.png', ...]
           fileData: "=", //非必传，返回：[{url: '', name: ''}]
-          dWidth: "@",//非必传，
-          dHeight: "@",//非必传，
-          dSize: "@",//非必传，
-          dNum: "@",//非必传，
+          dWidth: "@",//非必传，限宽
+          dHeight: "@",//非必传，限高
+          dSize: "@",//非必传，限文件大小,单位M
+          dNum: "@",//非必传，限上传个数
           clearData: "=", //可选，清空上传操作的数据
           fileTypes: "=",//必传，
           readonly: "@", //非必传：只读，在查看时用到
