@@ -46,13 +46,17 @@ export default (app, elem, attrs, scope) => {
           //loadingTempo: 上传进度
           //name: 文件原始名称
           $scope.imageArray = [{}];
-          $scope.fileData = [];
+          if($attrs.fileData) {
+            $scope.fileData = [];
+          }
 
           if ($attrs.clearData) {
             $scope.clearData = function() {
               $scope.imageArray = [{}];
               $scope.imageUrls = [];
-              $scope.fileData = [];
+              if($attrs.fileData) {
+                $scope.fileData = [];
+              }
             };
           }
 
