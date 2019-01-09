@@ -216,6 +216,7 @@ export default (app, elem, attrs, scope) => {
 
           const pushFile = (options, eventName, eventIndex) => {
             if (eventName === "remove") {
+              
               $scope.imageArray.splice(eventIndex, 1);
               let isAdd = false;
               $scope.imageArray.map(item => {
@@ -240,22 +241,23 @@ export default (app, elem, attrs, scope) => {
               $scope.$apply();
             }
 
-            $scope.imageUrls = [];
-            if ($attrs.fileData) {
-              $scope.fileData = [];
-            }
+            const fileData = [], imageUrls = [];
             $scope.imageArray.map(item => {
               if (item.url) {
-                if ($attrs.fileData) {
-                  $scope.fileData.push({
-                    url: item.url,
-                    name: item.name
-                  });
-                }
-                $scope.imageUrls.push(item.url);
+                fileData.push({
+                  url: item.url,
+                  name: item.name
+                })
+                imageUrls.push(item.url)
               }
             });
-            $scope.$apply();
+            $timeout(function() {
+              if ($attrs.fileData) {
+                $scope.fileData = fileData;
+              }
+              $scope.imageUrls = imageUrls;
+            }, 0)
+            
           };
 
           const setClearInput = target => {
