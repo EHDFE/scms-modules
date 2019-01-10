@@ -155,13 +155,25 @@ export default (app, elem, attrs, scope) => {
           const validImage = (baseData, dWidth, dHeight) => {
             return new Promise(function(resolve, reject) {
               const image = new Image();
+              dWidth = parseInt(dWidth, 10);
+              dHeight = parseInt(dHeight, 10);
               image.src = baseData;
               image.onload = function() {
+                let msg = '';
+                if(dWidth) {
+                  msg += '宽度等于'+dWidth+'px';
+                }
+                if(dHeight) {
+                  if(dWidth) {
+                    msg += ', ';
+                  }
+                  msg += '高度等于'+dHeight+'px';
+                }
                 if (dWidth && this.width !== dWidth) {
-                  return reject(`图片宽度不等于${dWidth}px`);
+                  return reject(`请上传${msg}的图片`);
                 }
                 if (dHeight && this.height !== dHeight) {
-                  return reject(`图片高度不等于${dHeight}px`);
+                  return reject(`请上传图片${msg}的图片`);
                 }
                 return resolve(true);
               };
@@ -306,9 +318,14 @@ export default (app, elem, attrs, scope) => {
                     pushFile({
                       imgData: fileData.currentTarget.result
                     });
+                    saveImg(file.files[0]);
                   },
                   errorMsg => {
                     G.alert(errorMsg, { type: "error" });
+                    pushFile({
+                      status: "",
+                      loadingTempo: ""
+                    });
                   }
                 );
               } else {
