@@ -52,6 +52,8 @@ export default (app, elem, attrs, scope) => {
             e.stopPropagation();
             tip.addClass(tipActiveClassName);
             $scope.text = $attrs.tooltip;
+            $scope.$apply();
+            
             const targetRect = e.target.getBoundingClientRect();
             const tipRect = tip[0].getBoundingClientRect();
             const offset = {};
