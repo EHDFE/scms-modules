@@ -36,10 +36,10 @@
           </div>
           <div  class="images-box-img" ng-show="item.type !== 'IMG'">
                 <img
-                  class="img fileTypeImg"
+                  class="img typeImg{{item.type}}"
                 />
               </div>
-          <div class="barrier">
+          <div class="barrier" title="{{item.name || ''}}">
             <a
               href="javascript:;"
               ng-show="item.type === 'IMG'"
