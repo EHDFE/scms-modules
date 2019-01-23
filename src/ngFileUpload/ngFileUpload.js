@@ -35,7 +35,8 @@ export default (app, elem, attrs, scope) => {
           clearData: "=", //可选，清空上传操作的数据
           fileTypes: "=",//必传，
           readonly: "@", //非必传：只读，在查看时用到
-          attachmenType: "@"//非必传, 默认为VOUCHER
+          attachmenType: "@",//非必传, 默认为VOUCHER,
+          isLoading: '=',//非必传, 是否正在上传图
         },
         controller: function($scope, $element, $attrs, $timeout) {
           //image数组,包含字段：
@@ -269,7 +270,12 @@ export default (app, elem, attrs, scope) => {
               }
               $scope.$apply();
             }
-
+            if(options && options.status === 'loading' && $attrs.isLoading) {
+              $scope.isLoading = true;
+            }
+            else if($attrs.isLoading){
+              $scope.isLoading = false;
+            }
             const fileData = [], imageUrls = [];
             $scope.imageArray.map(item => {
               if (item.url) {
