@@ -270,13 +270,9 @@ export default (app, elem, attrs, scope) => {
               }
               $scope.$apply();
             }
-            if(options && options.status === 'loading' && $attrs.isLoading) {
-              $scope.isLoading = true;
-            }
-            else if($attrs.isLoading){
-              $scope.isLoading = false;
-            }
+
             const fileData = [], imageUrls = [];
+            let isLoading = false;
             $scope.imageArray.map(item => {
               if (item.url) {
                 fileData.push({
@@ -285,7 +281,15 @@ export default (app, elem, attrs, scope) => {
                 })
                 imageUrls.push(item.url)
               }
+              if(item.name && !item.url) {
+                isLoading = true;
+              }
             });
+
+            if($attrs.isLoading) {
+              $scope.isLoading = isLoading;
+            }
+
             $timeout(function() {
               if ($attrs.fileData) {
                 $scope.fileData = fileData;
