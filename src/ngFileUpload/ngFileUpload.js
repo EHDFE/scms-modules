@@ -268,8 +268,6 @@ export default (app, elem, attrs, scope) => {
                   imageArray.push({});
                 }
               }
-              console.log(3333333)
-              //$scope.$apply();
             }
 
             const fileData = [], imageUrls = [];
