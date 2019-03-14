@@ -12,6 +12,7 @@ import paginationDirective from '../pagination/paginationDirective';
 import errorNoDataDirective from '../errorNoData/errorNoDataDirective';
 import ngTableFixed from './ngTableFixed';
 import html from './index.html';
+import loading from '../../scmsUi/js/loading'
 
 export default (app, elem, attrs, scope) => {
   paginationDirective(app);
@@ -83,7 +84,7 @@ export default (app, elem, attrs, scope) => {
             if (!$scope.apiUrl) {
               return;
             }
-            $.loading(true, {
+            loading(true, {
               $container: $element,
             });
             $element.css({
@@ -158,7 +159,7 @@ export default (app, elem, attrs, scope) => {
                   $scope.ngTableFixed = (+new Date()) + '';
                 }
                 
-                $.loading(false, {
+                loading(false, {
                   $container: $element,
                 });
                 $element.css({
@@ -168,7 +169,7 @@ export default (app, elem, attrs, scope) => {
               () => {
                 $scope.totalCount = 0;
                 $scope.items = [];
-                $.loading(false, {
+                loading(false, {
                   $container: $element,
                 });
                 $element.css({

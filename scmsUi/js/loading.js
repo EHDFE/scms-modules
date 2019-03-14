@@ -1,6 +1,6 @@
 /*loading*/
 var loadingTimeoutValue = {};
-$.loading = function (isShow, options) {
+export default $.loading = function (isShow, options) {
 	options = options || {};
 	var $container = options.$container || $('.elayout-loading-container');
 	if ($container && $container.length) {

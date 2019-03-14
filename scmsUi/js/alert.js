@@ -172,7 +172,7 @@ Confirm.prototype = {
 var alertClass = new Alert();
 var confirmClass = new Confirm();
 
-$.alert = function (msg, options) {
+export default $.alert = function (msg, options) {
 	options = options || {};
 	if(options.type === 'confirm') {
 		return confirmClass.show(msg, options);
