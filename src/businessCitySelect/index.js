@@ -12,7 +12,7 @@ import './index.less';
 
 const devTool = new DevTool('citySelect');
 
-const SOURCE_API = '/ehuodiBedrockApi/ehdrbacorganizationcs/selectCascadeRbacOrganizationByCode';
+const SOURCE_API = '/ehuodiGateway/ehuodiBedrockApi/ehdrbacorganizationcs/selectCascadeRbacOrganizationByCode';
 
 export default (app, elem, attrs, scope) => {
   // cascadeSelect(app, elem, attrs, scope);
