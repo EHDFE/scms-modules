@@ -103,4 +103,7 @@
 .fixed-table-container .fixed-header-box table{
     border-radius: 3px 3px 0 0;
 }
+.fixed-table-container .tablebox-content .table{
+    margin-top: -34px;
+}
 
