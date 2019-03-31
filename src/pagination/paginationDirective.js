@@ -26,7 +26,7 @@ export default (app, elem, attrs, scope) => {
         },
         link: function postLink($scope, $element, $attrs) {},
 
-        controller($scope, $element, $attrs, $cookies, $timeout) {
+        controller($scope, $element, $attrs, $cookies) {
           $scope.pages = [];
           $scope.hidePageSizeChange = $scope.hidePageSize || false;
           $scope.$watch('hidePageSize', (newValue) => {
@@ -41,6 +41,7 @@ export default (app, elem, attrs, scope) => {
             $scope.currentPage = +page || 1;
             if ($scope.onchanged) {
               $scope.onchanged({
+                currPage: $scope.currentPage,
                 pageSize: $scope.pageSize,
                 currentPage: $scope.currentPage,
               });
@@ -54,10 +55,6 @@ export default (app, elem, attrs, scope) => {
               isHadInitFetch = true;
             }
           })
- 
-          //$timeout(() => {
-            
-          //});
 
           const changePageSize = function () {
             $scope.maxPage =
