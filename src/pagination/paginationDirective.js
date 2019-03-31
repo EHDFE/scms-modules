@@ -40,18 +40,24 @@ export default (app, elem, attrs, scope) => {
           const onchanged = function (page) {
             $scope.currentPage = +page || 1;
             if ($scope.onchanged) {
-              $timeout(() => {
-                $scope.onchanged({
-                  pageSize: $scope.pageSize,
-                  currentPage: $scope.currentPage,
-                });
+              $scope.onchanged({
+                pageSize: $scope.pageSize,
+                currentPage: $scope.currentPage,
               });
             }
           };
 
-          $timeout(() => {
-            onchanged($scope.currentPage);
-          });
+          const isHadInitFetch = false;
+          $scope.$watch('onchanged', function(newValue, oldValue) {
+            if(newValue && !isHadInitFetch) {
+              onchanged($scope.currentPage);
+              isHadInitFetch = true;
+            }
+          })
+ 
+          //$timeout(() => {
+            
+          //});
 
           const changePageSize = function () {
             $scope.maxPage =
