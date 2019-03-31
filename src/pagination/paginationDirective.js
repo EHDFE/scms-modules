@@ -47,7 +47,7 @@ export default (app, elem, attrs, scope) => {
             }
           };
 
-          const isHadInitFetch = false;
+          let isHadInitFetch = false;
           $scope.$watch('onchanged', function(newValue, oldValue) {
             if(newValue && !isHadInitFetch) {
               onchanged($scope.currentPage);
