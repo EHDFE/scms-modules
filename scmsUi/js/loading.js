@@ -50,6 +50,10 @@ $.loading = function (isShow, options) {
 	else {
 		$el.css('display', 'none');
 		$over.css('display', 'none');
+		if (loadingTimeoutValue[name]) {
+			clearTimeout(loadingTimeoutValue[name]);
+			loadingTimeoutValue[name] = null;
+		}
 	}
 
 	if (options.isClear) {

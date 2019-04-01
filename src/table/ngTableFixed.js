@@ -317,7 +317,10 @@ export default (app, elem, attrs, scope) => {
           var _this = this;
           this.$scope = this.$scope || $scope;
           $scope = this.$scope;
-          $timeout(function() {
+          if(this.thwidthTimeout) {
+            $timeout.cancel(this.thwidthTimeout);
+          }
+          this.thwidthTimeout = $timeout(function() {
             var $table = _this.$tableBox.find('> table'), 
               width, 
               headerColWidth, 
