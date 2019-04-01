@@ -14,18 +14,18 @@ import './datePanel.less';
 import DatePicker from './DatePickerClass';
 import Defaults from './defaults';
 
-let $directiveEl;
+let directiveEls = [];
 export default (app, elem, attrs, scope) => {
   app.directive('datePanel', [
     '$rootScope',
     '$timeout',
     function ($rootScope, $timeout) {
       $rootScope.$on("$changeComponent", function() {
-        if($directiveEl) {
-          $directiveEl.unbind();
-          $directiveEl.remove();
-        }
-        console.log(7777777777)
+        directiveEls.map($el => {
+          $el.unbind();
+          $el.remove();
+        })
+        directiveEls = [];
       });
       return {
         // require: '?ngModel',
@@ -58,7 +58,7 @@ export default (app, elem, attrs, scope) => {
           function ($scope, $element, $attrs, $timeout) {},
         ],
         link($scope, $element, $attrs, ngModel) {
-          $directiveEl = $element;
+          directiveEl.push($element);
           const formatDate = $scope.formatDate || Defaults.format;
           // @attrs initDate 初始日期字段,它的值为距今天的天数;当值为"null"时,input显示空值, {type:"string", defaultValue: 0}
           $scope.dateRange = $attrs.dateRange;
@@ -434,7 +434,6 @@ export default (app, elem, attrs, scope) => {
             }
           };
 
-          console.log(3344444, )
           $element.delegate('.time-area', 'mouseleave', (e) => {
             $(e.currentTarget)
               .find('.time-wrap')
