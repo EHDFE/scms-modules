@@ -14,11 +14,19 @@ import './datePanel.less';
 import DatePicker from './DatePickerClass';
 import Defaults from './defaults';
 
+let $directiveEl;
 export default (app, elem, attrs, scope) => {
   app.directive('datePanel', [
     '$rootScope',
     '$timeout',
     function ($rootScope, $timeout) {
+      $rootScope.$on("$changeComponent", function() {
+        if($directiveEl) {
+          $directiveEl.unbind();
+          $directiveEl.remove();
+        }
+        console.log(7777777777)
+      });
       return {
         // require: '?ngModel',
         template: html,
@@ -50,6 +58,7 @@ export default (app, elem, attrs, scope) => {
           function ($scope, $element, $attrs, $timeout) {},
         ],
         link($scope, $element, $attrs, ngModel) {
+          $directiveEl = $element;
           const formatDate = $scope.formatDate || Defaults.format;
           // @attrs initDate 初始日期字段,它的值为距今天的天数;当值为"null"时,input显示空值, {type:"string", defaultValue: 0}
           $scope.dateRange = $attrs.dateRange;
@@ -369,7 +378,7 @@ export default (app, elem, attrs, scope) => {
             }
           });
           $scope.$on('init', () => {
-            $timeout(() => {
+            //$timeout(() => {
               let newDate;
               if ($scope.date) {
                 newDate = $scope.date;
@@ -382,7 +391,7 @@ export default (app, elem, attrs, scope) => {
               $timeout(() => {
                 locateTime();
               });
-            });
+            //});
           });
           $scope.$on('selectTime', () => {
             $timeout(() => {
@@ -425,7 +434,8 @@ export default (app, elem, attrs, scope) => {
             }
           };
 
-          $element.find('.time-area').bind('mouseleave', (e) => {
+          console.log(3344444, )
+          $element.delegate('.time-area', 'mouseleave', (e) => {
             $(e.currentTarget)
               .find('.time-wrap')
               .scrollTop(Math.round($(e.currentTarget)
@@ -433,7 +443,7 @@ export default (app, elem, attrs, scope) => {
                 .scrollTop() / timepickItemHeight) * timepickItemHeight);
           });
 
-          $element.find('.time-wrap').bind('scroll', (e) => {
+          $element.delegate('.time-wrap', 'scroll', (e) => {
             $(e.currentTarget)
               .parents('.time-area')
               .find('.scroll-bar-thumb')
@@ -442,7 +452,7 @@ export default (app, elem, attrs, scope) => {
                 `translateY(${e.currentTarget.scrollTop / timepickTotalHeight * 100}%)`,
               );
           });
-          $element.find('.time-wrap').bind('scroll', throttle((e) => {
+          $element.delegate('.time-wrap', 'scroll', throttle((e) => {
             const index = Math.floor((e.currentTarget.scrollTop + 15) / timepickItemHeight);
             if ($(e.currentTarget).find('.time-zone li').eq(index).data('disabled')) {
               let scrollTop = $(e.currentTarget).scrollTop(),
