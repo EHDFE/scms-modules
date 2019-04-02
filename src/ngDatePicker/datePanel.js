@@ -58,7 +58,7 @@ export default (app, elem, attrs, scope) => {
           function ($scope, $element, $attrs, $timeout) {},
         ],
         link($scope, $element, $attrs, ngModel) {
-          directiveEl.push($element);
+          directiveEls.push($element);
           const formatDate = $scope.formatDate || Defaults.format;
           // @attrs initDate 初始日期字段,它的值为距今天的天数;当值为"null"时,input显示空值, {type:"string", defaultValue: 0}
           $scope.dateRange = $attrs.dateRange;
