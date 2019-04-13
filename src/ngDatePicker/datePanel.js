@@ -100,7 +100,7 @@ export default (app, elem, attrs, scope) => {
           try{
             $timeout(function() {
               $scope.onPickEvent('init', null, datePicker, $attrs);
-            })            
+            })
           }catch(e) {}
 
           if ($attrs.dateRange) {
@@ -378,7 +378,7 @@ export default (app, elem, attrs, scope) => {
             }
           });
           $scope.$on('init', () => {
-            //$timeout(() => {
+            $timeout(() => {
               let newDate;
               if ($scope.date) {
                 newDate = $scope.date;
@@ -391,7 +391,7 @@ export default (app, elem, attrs, scope) => {
               $timeout(() => {
                 locateTime();
               });
-            //});
+            });
           });
           $scope.$on('selectTime', () => {
             $timeout(() => {
