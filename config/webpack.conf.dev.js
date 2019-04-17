@@ -5,7 +5,7 @@ const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const baseConfig = require('./webpack.conf.base');
 
 const BROWSER_SUPPORTS = ['last 2 versions'];
-
+console.log(__dirname)
 const config = {
   output: {
     pathinfo: true,

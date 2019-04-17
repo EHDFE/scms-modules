@@ -42,11 +42,13 @@ export default (app, elem, attrs, scope) => {
           ngTableFixed: "=", //ngTableFixed指令在监听他的变化，重置计算：th宽度、是否显示固定元素、设置父容器高度
           miniPage: "=", //@scope miniPage 分页是否使用缩小样式 {type: "boolean", "exampleValue": false, defaultValue: false}
           sendJson: "=", //@scope contentType 请求类型
-          getCountFromOtherApi: "=" //@scope getCountFromOtherApi 是否从其他接口获取总count {type: "function"}
+          getCountFromOtherApi: "=", //@scope getCountFromOtherApi 是否从其他接口获取总count {type: "function"}
+          disabledInitFetch: '@',
         },
         restrict: "EA",
         transclude: true,
-        link: function postLink($scope, $element, $attrs) {
+        link: function ($scope, $element, $attrs) {
+          
           const crumbs = window.CRUMBS;
           // @attrs method http类型 {type: "string", defaultValue: "post"}
           $element.css({
@@ -57,13 +59,19 @@ export default (app, elem, attrs, scope) => {
           $scope.hasPagination = $attrs.hasPagination !== "false";
           $scope.hidePageSize = $attrs.hidePageSize || false;
           $scope.currPage = $scope.currPage || 1;
-          $scope.fetchParam = $scope.fetchParam || {};
+          //$scope.fetchParam = $scope.fetchParam || {};
           $scope.items = [];
           $scope.pageSize =
             $scope.pageSize || parseInt($cookies.pageSize, 10) || 15;
 
           let preFetchTime = 0,
             preFetchContent;
+
+          $scope.$watch('pageSize', function(newValue, oldValue) {
+            if(newValue && oldValue && newValue !== oldValue) {
+              $scope.fetch();
+            }
+          })
 
           let fetchParam, cacheFetchParamsName;
           $scope.fetch = async function(options) {
@@ -92,7 +100,7 @@ export default (app, elem, attrs, scope) => {
               useCacheParams[$state.current.name] = false;
             } else {
               currPage = options.currPage || $scope.currPage;
-              $scope.params = Object.assign({}, $scope.fetchParam);
+              $scope.params = Object.assign({}, $scope.fetchParam || {});
               if ($scope.formatParam) {
                 $scope.formatParam($scope.params);
               }
@@ -113,7 +121,8 @@ export default (app, elem, attrs, scope) => {
                   }
                 : {};
                 fetchParam = Object.assign({}, $scope.params, pageParams);
-            }
+              }
+            
 
             //
             const fetchConfig = {
@@ -134,8 +143,8 @@ export default (app, elem, attrs, scope) => {
             const currFetchContent = JSON.stringify(fetchConfig);
             const currFetchTime = +new Date();
             if (
-              (preFetchContent === currFetchContent &&
-              currFetchTime - preFetchTime < 2000) || (currFetchTime - preFetchTime < 500)
+              ((preFetchContent === currFetchContent &&
+              currFetchTime - preFetchTime < 2000) || (currFetchTime - preFetchTime < 500))
             ) {
               return;
             }
@@ -198,6 +207,10 @@ export default (app, elem, attrs, scope) => {
               }
             );
           };
+
+          if(!$scope.disabledInitFetch) {
+            $scope.fetch();
+          }
 
           if(!isBindRootScope) {
             $rootScope.$on(
