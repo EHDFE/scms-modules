@@ -86,6 +86,9 @@ export default (app, elem, attrs, scope) => {
             }
             cacheFetchParamsName =
               "fetchParams." + $state.current.name + $scope.apiUrl;
+              //console.log(7777777, localStorage[cacheFetchParamsName],
+              //  !$scope.disableStorage,
+              //  useCacheParams[$state.current.name]);
             if (
               localStorage[cacheFetchParamsName] &&
               !$scope.disableStorage &&
@@ -122,7 +125,6 @@ export default (app, elem, attrs, scope) => {
                 : {};
                 fetchParam = Object.assign({}, $scope.params, pageParams);
               }
-            
 
             //
             const fetchConfig = {
