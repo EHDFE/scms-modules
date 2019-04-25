@@ -12,7 +12,10 @@ $.loading = function (isShow, options) {
 	$container = $container && $container.length ? $container : $('body');
 	var $el = $container.children('.elayout-loading');
 	var $over = $container.children('.elayout-loading-over');
+
 	$container = $container.length ? $container : $('body');
+	$container.data('loadName',$container.data('loadName') || (+new Date()));
+	//$container.loadName = $container.loadName || (+new Date())
 	if (!$el.length) {
 		$over = $('<div class="elayout-loading-over" style="display:none;"></div>');
 		var $el = $('<div class="elayout-loading" style="display:none;">\
@@ -25,7 +28,7 @@ $.loading = function (isShow, options) {
 		$container.append($el);
 	}
 
-	var name = $container.attr('id') + '_' + $container.attr('class');
+	var name = $container.data('loadName'); //$container.attr('id') + '_' + $container.attr('class');
 
 	if (loadingTimeoutValue[name]) {
 		clearTimeout(loadingTimeoutValue[name]);
@@ -45,15 +48,17 @@ $.loading = function (isShow, options) {
 				'display': '',
 				'height': ($container[0].scrollHeight || $container.height()) + 'px'
 			});
+
 		}, 200);
 	}
 	else {
-		$el.css('display', 'none');
-		$over.css('display', 'none');
 		if (loadingTimeoutValue[name]) {
 			clearTimeout(loadingTimeoutValue[name]);
 			loadingTimeoutValue[name] = null;
 		}
+		$el.css('display', 'none');
+		$over.css('display', 'none');
+
 	}
 
 	if (options.isClear) {

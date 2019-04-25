@@ -188,7 +188,6 @@ export default (app, elem, attrs, scope) => {
                 if ($attrs.ngTableFixed) {
                   $scope.ngTableFixed = +new Date() + "";
                 }
-
                 $.loading(false, {
                   $container: $element
                 });
