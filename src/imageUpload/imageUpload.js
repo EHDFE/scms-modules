@@ -136,6 +136,7 @@ export default (app, elem, attrs, scope) => {
                 verify(item);
               }
             });
+            $(event.currentTarget).val('');
           });
           // 验证
           function verify(file) {

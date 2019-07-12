@@ -903,9 +903,9 @@ class DatePicker {
         typeof this.dateData.month === 'number' ? this.dateData.month - 1 : moment().month(),
       )
       .set('date', this.dateData.date || moment().date())
-      .set('hour', this.dateData.hour || moment().hour())
-      .set('minute', this.dateData.minute || moment().minute())
-      .set('second', this.dateData.second || moment().second())
+      .set('hour', this.dateData.hour || this.dateData.hour === 0 ? this.dateData.hour : moment().hour())
+      .set('minute', this.dateData.minute || this.dateData.minute === 0 ? this.dateData.minute : moment().minute())
+      .set('second', this.dateData.second || this.dateData.second === 0 ? this.dateData.second : moment().second())
       .format(formatDate);
   }
 
