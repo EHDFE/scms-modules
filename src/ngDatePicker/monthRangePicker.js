@@ -49,9 +49,10 @@ export default (app, elem, attrs, scope) => {
           function ($scope, $element, $attrs, $timeout) {
             
             $scope.isHideClose = $attrs.isHideClose;
-            const panel = $compile(html)($scope);
+            // const panel = $compile(html)($scope);
+            const panel = $element.find(".date-picker-range");
             panel.css('display', 'none');
-            $document.find('#container').append(panel);
+            // $document.find('#container').append(panel);
             $scope.minViewMode = 'months';
             $scope.formatDate = 'YYYY-MM';
             $scope.startPlaceholder = $attrs.startPlaceholder || Defautls.lang.start;
