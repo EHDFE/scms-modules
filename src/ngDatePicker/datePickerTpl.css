@@ -20,6 +20,7 @@
   height: 12px;
   width: 12px;
   cursor: pointer;
+  z-index: 10;
 }
 .date-picker-hasdata:hover .clear-date {
   display: inline-block;
