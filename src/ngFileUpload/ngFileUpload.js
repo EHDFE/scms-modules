@@ -203,6 +203,11 @@ export default (app, elem, attrs, scope) => {
             const patternWord = new RegExp(".(" + word + ")$");
             const patternExcel = new RegExp(".(" + excel + ")$");
             const patternPdf = new RegExp(".(" + pdf + ")$");
+            
+            if(name.indexOf('?')>-1){
+              name = name.split('?')[0];
+            }
+
             if (patternB.test(name)) {
               return "IMG";
             }
