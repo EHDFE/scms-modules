@@ -12,6 +12,9 @@ demoData.push(fontAwesome);
 import fontIcon from "./fontIcon/index.js";
 demoData.push(fontIcon);
 
+import fontFamily from "./fontFamily/index.js";
+demoData.push(fontFamily);
+
 import title from "./title/index.js";
 demoData.push(title);
 
