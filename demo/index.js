@@ -100,4 +100,7 @@ demoData.push(filter);
 import carTypeSelect from "./carTypeSelect/index.js";
 demoData.push(carTypeSelect);
 
+import transfer from "./transfer/";
+demoData.push(transfer);
+
 export default demoData;

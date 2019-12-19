@@ -1,0 +1,34 @@
+<div class="transferBox">
+    <div class="transfer-left">
+        <div>
+            已选中{{leftNum}}项
+        </div>
+        <ul>
+            <li ng-repeat="item in dataSource">
+                <label class="checkbox-inline" title="{{item[showName]}}" ng-click="item.check = !item.check; selectLeft();" ng-class="{'checkbox-inline-checked':item.check}">
+                    {{item[showName]}}
+                </label>
+            </li>
+        </ul>
+    </div>
+    <div class="transfer-centered">
+        <button class="btn btn-success" ng-disabled="!leftSelectType" ng-click="transferRight()">
+            <i class="fa fa-angle-right"></i>
+        </button>
+        <button class="btn btn-success" ng-disabled="!rightSelectType" ng-click="transferLeft()">
+            <i class="fa fa-angle-left"></i>
+        </button>
+    </div>
+    <div class="transfer-right">
+        <div>
+            已选中{{rightNum}}项
+        </div>
+        <ul>
+            <li ng-repeat="item in targetData">
+                <label class="checkbox-inline" title="{{item[showName]}}" ng-click="item.check = !item.check; selectRight();" ng-class="{'checkbox-inline-checked':item.check}">
+                    {{item[showName]}}
+                </label>
+            </li>
+        </ul>
+    </div>
+</div>
