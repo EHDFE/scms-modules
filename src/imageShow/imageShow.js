@@ -35,13 +35,28 @@ export default (app, elem, attrs, scope) => {
             rotateH;
           if ($scope.miniImg) {
             if ($scope.imgUrl.substr(-4, 4) == '.png') {
-              $scope.miniImgUrl = $scope.imgUrl.replace('.png', '_100x100.png');
+              $scope.miniImgUrl = $scope.imgUrl.replace('.png', '_240x320.png');
             } else if ($scope.imgUrl.substr(-4, 4) == '.jpg') {
-              $scope.miniImgUrl = $scope.imgUrl.replace('.jpg', '_100x100.jpg');
+              $scope.miniImgUrl = $scope.imgUrl.replace('.jpg', '_240x320.jpg');
             } else if ($scope.imgUrl.substr(-4, 4) == '.gif') {
-              $scope.miniImgUrl = $scope.imgUrl.replace('.gif', '_100x100.gif');
+              $scope.miniImgUrl = $scope.imgUrl.replace('.gif', '_240x320.gif');
             }
           }
+          $scope.$watch('imgUrl', (newVal, oldVal)=>{
+            if(newVal !== oldVal){
+              if ($scope.miniImg && $scope.imgUrl) {
+                if ($scope.imgUrl.substr(-4, 4) == '.png') {
+                  $scope.miniImgUrl = $scope.imgUrl.replace('.png', '_240x320.png');
+                } else if ($scope.imgUrl.substr(-4, 4) == '.jpg') {
+                  $scope.miniImgUrl = $scope.imgUrl.replace('.jpg', '_240x320.jpg');
+                } else if ($scope.imgUrl.substr(-4, 4) == '.gif') {
+                  $scope.miniImgUrl = $scope.imgUrl.replace('.gif', '_240x320.gif');
+                }else if($scope.imgUrl.indexOf('data:') > -1){
+                  $scope.miniImgUrl = $scope.imgUrl;
+                }
+              }
+            }
+          });
           // $scope.customCss = $scope.customCss || false;
           const html = $compile(`
                             <a href="javascript:;" class="imgShowClosBtn"></a>
