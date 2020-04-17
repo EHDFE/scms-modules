@@ -33,7 +33,7 @@ export default (app, elem, attrs, scope) => {
           let current = 0;
           let rotateW,
             rotateH;
-          if ($scope.miniImg) {
+          if ($scope.miniImg && $scope.imgUrl) {
             if ($scope.imgUrl.substr(-4, 4) == '.png') {
               $scope.miniImgUrl = $scope.imgUrl.replace('.png', '_240x320.png');
             } else if ($scope.imgUrl.substr(-4, 4) == '.jpg') {
