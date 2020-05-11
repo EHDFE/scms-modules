@@ -224,7 +224,7 @@ export default (app, elem, attrs, scope) => {
                 if (
                   currentObjLength >= 2 &&
                   currentObj[currentObjLength - 2] &&
-                  currentObj[currentObjLength - 2].resourceUrl === nextUrl
+                  currentObj[currentObjLength - 2].redirectUrl === nextUrl
                 ) {
                   useCacheParams[next.name] = true;
                 }
