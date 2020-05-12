@@ -38,6 +38,8 @@ export default (app, elem, attrs, scope) => {
               $scope.miniImgUrl = $scope.imgUrl.replace('.png', '_240x320.png');
             } else if ($scope.imgUrl.substr(-4, 4) == '.jpg') {
               $scope.miniImgUrl = $scope.imgUrl.replace('.jpg', '_240x320.jpg');
+            } else if ($scope.imgUrl.substr(-4, 4) == '.jpeg') {
+              $scope.miniImgUrl = $scope.imgUrl.replace('.jpeg', '_240x320.jpeg');
             } else if ($scope.imgUrl.substr(-4, 4) == '.gif') {
               $scope.miniImgUrl = $scope.imgUrl.replace('.gif', '_240x320.gif');
             }
@@ -49,7 +51,9 @@ export default (app, elem, attrs, scope) => {
                   $scope.miniImgUrl = $scope.imgUrl.replace('.png', '_240x320.png');
                 } else if ($scope.imgUrl.substr(-4, 4) == '.jpg') {
                   $scope.miniImgUrl = $scope.imgUrl.replace('.jpg', '_240x320.jpg');
-                } else if ($scope.imgUrl.substr(-4, 4) == '.gif') {
+                } else if ($scope.imgUrl.substr(-4, 4) == '.jpeg') {
+                  $scope.miniImgUrl = $scope.imgUrl.replace('.jpeg', '_240x320.jpeg');
+                }else if ($scope.imgUrl.substr(-4, 4) == '.gif') {
                   $scope.miniImgUrl = $scope.imgUrl.replace('.gif', '_240x320.gif');
                 }else if($scope.imgUrl.indexOf('data:') > -1){
                   $scope.miniImgUrl = $scope.imgUrl;
