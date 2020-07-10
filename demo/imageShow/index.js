@@ -10,8 +10,8 @@ export default {
 	"scope":[
 		{
 			"type":"string",
-			"exampleValue":'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',
-            "defaultValue":'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',
+			"exampleValue":'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/04/61/Ck1AZF76q1KATDusAAHCodGW_ak042.jpg',//'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',
+            "defaultValue":'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/04/61/Ck1AZF76q1KATDusAAHCodGW_ak042.jpg',//'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',
 			"key":"imgUrl",
 			"description":"图片地址"
 		},

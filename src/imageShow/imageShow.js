@@ -34,26 +34,26 @@ export default (app, elem, attrs, scope) => {
           let rotateW,
             rotateH;
           if ($scope.miniImg && $scope.imgUrl) {
-            if ($scope.imgUrl.substr(-4, 4) == '.png') {
+            if ($scope.imgUrl.substr(-4, 4) === '.png') {
               $scope.miniImgUrl = $scope.imgUrl.replace('.png', '_240x320.png');
-            } else if ($scope.imgUrl.substr(-4, 4) == '.jpg') {
+            } else if ($scope.imgUrl.substr(-4, 4) === '.jpg') {
               $scope.miniImgUrl = $scope.imgUrl.replace('.jpg', '_240x320.jpg');
-            } else if ($scope.imgUrl.substr(-4, 4) == '.jpeg') {
+            } else if ($scope.imgUrl.substr(-4, 4) === 'jpeg') {
               $scope.miniImgUrl = $scope.imgUrl.replace('.jpeg', '_240x320.jpeg');
-            } else if ($scope.imgUrl.substr(-4, 4) == '.gif') {
+            } else if ($scope.imgUrl.substr(-4, 4) === '.gif') {
               $scope.miniImgUrl = $scope.imgUrl.replace('.gif', '_240x320.gif');
             }
           }
           $scope.$watch('imgUrl', (newVal, oldVal)=>{
             if(newVal !== oldVal){
               if ($scope.miniImg && $scope.imgUrl) {
-                if ($scope.imgUrl.substr(-4, 4) == '.png') {
+                if ($scope.imgUrl.substr(-4, 4) === '.png') {
                   $scope.miniImgUrl = $scope.imgUrl.replace('.png', '_240x320.png');
-                } else if ($scope.imgUrl.substr(-4, 4) == '.jpg') {
+                } else if ($scope.imgUrl.substr(-4, 4) === '.jpg') {
                   $scope.miniImgUrl = $scope.imgUrl.replace('.jpg', '_240x320.jpg');
-                } else if ($scope.imgUrl.substr(-4, 4) == '.jpeg') {
+                } else if ($scope.imgUrl.substr(-4, 4) === 'jpeg') {
                   $scope.miniImgUrl = $scope.imgUrl.replace('.jpeg', '_240x320.jpeg');
-                }else if ($scope.imgUrl.substr(-4, 4) == '.gif') {
+                }else if ($scope.imgUrl.substr(-4, 4) === '.gif') {
                   $scope.miniImgUrl = $scope.imgUrl.replace('.gif', '_240x320.gif');
                 }else if($scope.imgUrl.indexOf('data:') > -1){
                   $scope.miniImgUrl = $scope.imgUrl;
@@ -61,12 +61,14 @@ export default (app, elem, attrs, scope) => {
               }
             }
           });
+          
           // $scope.customCss = $scope.customCss || false;
           const html = $compile(`
                             <a href="javascript:;" class="imgShowClosBtn"></a>
                             <div class="imgUrlBox">
                                 <img>
                             </div>
+                            <div class="mirror"></div>
                             <div class="imgUrlControl">
                                     <span class="mr50 anticlockwise">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -114,12 +116,26 @@ export default (app, elem, attrs, scope) => {
               var y = $event.pageY || $event.clientY + $(window).scrollTop();
             }
 
+            $scope.rotate = 0;
+
             $('.imgUrlBox').css({
-              position: 'absolute', top: y, left: x, width: '1px', height: '1px', overflow: 'hidden',
+              position: 'absolute', top: y, left: x, width: '1px', height: '1px', overflow: 'hidden',transform: `rotate(0deg)`
             });
             $('.imgUrlBox img').remove();
             $('.imgUrlBox').append(`<img src=${url}>`);// 添加大图
             $('.imgUrlBox').show();
+
+            $('.mirror').css({
+              position: 'absolute',
+              zIndex: 99999,
+              overflow: 'hidden',
+              pointerEvents:'none',
+              height: '200px',
+              width: '200px',
+              borderRadius: '50%',
+              border: '3px solid #636363',
+              background:`url(${url})`
+            });
 
             const img = new Image();
             img.src = $('.imgUrlBox img').attr('src');
@@ -129,7 +145,7 @@ export default (app, elem, attrs, scope) => {
                 height: img.height,
               });
 
-              $('.imgUrlBox img').css({ width: '100%' });
+              $('.imgUrlBox img').css({ width: '100%', cursor: 'crosshair' });
               if (data.imgHeight === 'auto') {
                 $('.imgUrlBox').css({
                   left: data.w, top: data.h, width: data.imgWidth, height: '100%', transition: 0.2,
@@ -156,7 +172,71 @@ export default (app, elem, attrs, scope) => {
                 }, 150);
               }
             };
+
+            // 放大
+            $(document).off().on('mousemove', (e) => {
+              var e = e?e:window.event;
+              moving(e,{
+                width: img.width,
+                height: img.height,
+                url: url
+              });
+              return false;
+            })
           };
+          
+          function moving(e,data){
+            let rotate = 0;
+            if($scope.rotate > 0){
+              rotate = $scope.rotate;
+            }else{
+              rotate = -$scope.rotate;
+            }
+            
+            // 上下翻转
+            let imgh=$(".imgUrlBox img").height();
+            let imgw=$(".imgUrlBox img").width();
+            // 左右翻转
+            if((rotate/90)%2 === 1){
+              imgh= $(".imgUrlBox img").width();
+              imgw= $(".imgUrlBox img").height();
+            }
+
+            let x = e.clientX;
+            let y = e.clientY;
+            let beginX= $(".imgUrlBox").offset().left;
+            let endX=beginX+imgw;
+            let beginY= $(".imgUrlBox").offset().top;
+            let endY=beginY+imgh;
+
+            if(x > beginX && x < endX && y > beginY && y < endY){
+              if($(".imgUrlBox").css('transform').split('(')[1].split(')')[0].split(',')[0]*1 === 1){
+                // 正定位
+                var mx=100-(x-beginX)/imgw*data.width;
+                var my=100-(y-beginY)/imgh*data.height;
+              }else if($(".imgUrlBox").css('transform').split('(')[1].split(')')[0].split(',')[1]*1 === -1){
+                // 左转90度定位
+                var my=100-(x-beginX)/imgw*data.height;
+                var mx=-(100-(y-beginY)/imgh*data.width+data.width-imgw/3);
+              }else if($(".imgUrlBox").css('transform').split('(')[1].split(')')[0].split(',')[0]*1 === -1){
+                // 倒180度定位
+                var mx=-(100-(x-beginX)/imgw*data.width+data.width-imgw/3);
+                var my=-(100-(y-beginY)/imgh*data.height+data.height-imgh/3);
+              }else if($(".imgUrlBox").css('transform').split('(')[1].split(')')[0].split(',')[1]*1 === 1){
+                // 右转90度定位
+                var my=-(100-(x-beginX)/imgw*data.height+data.height-imgh/3);
+                var mx=100-(y-beginY)/imgh*data.width;
+              }
+              
+              var bg="url("+ data.url +") "+mx+"px "+my+"px no-repeat #fff"
+              $(".mirror").css("left",x-103+"px").css("top",y-103+"px").css('background',bg).css('transform', `rotate(${$scope.rotate}deg)`).css("visibility","visible");
+            }else{
+              $(".mirror").css("visibility","hidden")
+            }
+          }
+
+          // 旋转度数
+          $scope.rotate = 0;
           
           function imgData(type, obj) {
             const data = {};
@@ -273,6 +353,7 @@ export default (app, elem, attrs, scope) => {
             } else {
               current += 90;
             }
+            $scope.rotate = current;
             const data = imgData();
             $('.imgUrlBox').css({
               left: data.w, top: data.h, height: data.imgHeight, width: data.imgWidth, transform: `rotate(${current}deg)`,
