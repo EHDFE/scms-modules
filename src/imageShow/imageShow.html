@@ -1,5 +1,5 @@
 <div>
-    <img ng-src="{{ imgUrl }}" style="display: none;">
+    <img class="imageShowHideImg" ng-src="{{ imgUrl }}" style="display: none;">
     <img ng-if="!customCss" ng-src="{{ imgUrl }}" class="minImg" ng-click="imgClick($event,imgUrl)" alt="{{altText}}" ng-show="!textOnly">
     <div ng-if="customCss && miniImg" class="minImgDiv" style="background: url({{miniImgUrl}}) no-repeat center center;background-size:contain;" ng-click="imgClick($event,imgUrl)">
         <div>

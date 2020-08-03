@@ -79,3 +79,15 @@
 .imgUrlControl span{
     cursor:pointer;
 }
+.viewer-download {
+    color: #fff;
+    font-family: FontAwesome, serif;
+    font-size: 12px;
+    line-height: 24px;
+    text-align: center;
+    padding-left: 1px;
+}
+
+.viewer-download::before {
+    content: "\f019";
+}
