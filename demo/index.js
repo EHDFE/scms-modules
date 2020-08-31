@@ -103,4 +103,9 @@ demoData.push(carTypeSelect);
 import transfer from "./transfer/";
 demoData.push(transfer);
 
+import cityCascadeSelect from "./cityCascadeSelect/";
+demoData.push(cityCascadeSelect);
+
+
+
 export default demoData;

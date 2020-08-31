@@ -22,8 +22,12 @@ export default {
 		},
 		{
 			"type":"object",
-			"exampleValue":[{imgName:'图片1.jpg',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/04/61/Ck1AZF76q1KATDusAAHCodGW_ak042.jpg',data:[],uploadType:{succeed:true,error:false,loading:false}},{imgName:'图片2.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',data:[],uploadType:{succeed:false,error:true,loading:false}},{imgName:'图片3.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',data:[],uploadType:{succeed:false,error:false,loading:true}},{imgName:'图片3.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',data:[],uploadType:{succeed:true,error:false,loading:false}}],
-			"defaultValue":"[{imgName:'图片1.jpg',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/04/61/Ck1AZF76q1KATDusAAHCodGW_ak042.jpg',data:[],uploadType:{succeed:true,error:false,loading:false}},{imgName:'图片2.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',data:[],uploadType:{succeed:false,error:true,loading:false}},{imgName:'图片3.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',data:[],uploadType:{succeed:false,error:false,loading:true}},{imgName:'图片3.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',data:[],uploadType:{succeed:true,error:false,loading:false}}]",
+			// "exampleValue":[{imgName:'图片1.jpg',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/04/61/Ck1AZF76q1KATDusAAHCodGW_ak042.jpg',data:[],uploadType:{succeed:true,error:false,loading:false}},{imgName:'图片2.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',data:[],uploadType:{succeed:false,error:true,loading:false}},{imgName:'图片3.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',data:[],uploadType:{succeed:false,error:false,loading:true}},{imgName:'xxx.pdf',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/05/34/Ck1AZF8ySs-AFK9dACAcLbc8Su4554.pdf',data:[],uploadType:{succeed:true,error:false,loading:false}}],
+			// "defaultValue":"[{imgName:'图片1.jpg',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/04/61/Ck1AZF76q1KATDusAAHCodGW_ak042.jpg',data:[],uploadType:{succeed:true,error:false,loading:false}},{imgName:'图片2.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',data:[],uploadType:{succeed:false,error:true,loading:false}},{imgName:'图片3.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',data:[],uploadType:{succeed:false,error:false,loading:true}},{imgName:'xxx.pdf',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/05/34/Ck1AZF8ySs-AFK9dACAcLbc8Su4554.pdf',data:[],uploadType:{succeed:true,error:false,loading:false}}]",
+			// "exampleValue":[{imgName:'图片1.jpg',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/04/61/Ck1AZF76q1KATDusAAHCodGW_ak042.jpg'},{imgName:'图片2.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg'},{imgName:'图片3.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg'},{imgName:'xxx.pdf',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/05/34/Ck1AZF8ySs-AFK9dACAcLbc8Su4554.pdf'}],
+			// "defaultValue":"[{imgName:'图片1.jpg',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/04/61/Ck1AZF76q1KATDusAAHCodGW_ak042.jpg'},{imgName:'图片2.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg'},{imgName:'图片3.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg'},{imgName:'xxx.pdf',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/05/34/Ck1AZF8ySs-AFK9dACAcLbc8Su4554.pdf'}]",
+			"exampleValue":[{imgName:'图片1.jpg',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/04/61/Ck1AZF76q1KATDusAAHCodGW_ak042.jpg',status: 'success'},{imgName:'图片2.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',status: 'error'},{imgName:'图片3.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',status: 'loading'},{imgName:'xxx.pdf',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/05/34/Ck1AZF8ySs-AFK9dACAcLbc8Su4554.pdf',status: 'success'}],
+			"defaultValue":"[{imgName:'图片1.jpg',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/04/61/Ck1AZF76q1KATDusAAHCodGW_ak042.jpg',status: 'success'},{imgName:'图片2.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',status: 'error'},{imgName:'图片3.jpg',dataImg:'https://gss0.baidu.com/-fo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/2934349b033b5bb5c7cf574830d3d539b600bc6f.jpg',status: 'loading'},{imgName:'xxx.pdf',dataImg:'http://sitetest.tf56.com/fastdfsWeb/dfs/group1/M00/05/34/Ck1AZF8ySs-AFK9dACAcLbc8Su4554.pdf',status: 'success'}]",
 			"key":"imageUrls",
 			"description":"数据"
 		},
@@ -73,7 +77,7 @@ export default {
 			"type":"object",
 			"exampleValue":['pnd','docx','xlsx'],
             "defaultValue":"['pnd','docx','xlsx']",
-			"key":"fileType",
+			"key":"fileTypes",
 			"description":"与file搭配，file为true后，此选项必填"
 		},
 		{
@@ -95,11 +99,18 @@ export default {
 			"defaultValue":"{a:1,b:2}",
 			"key":"params",
 			"description":"接口参数配置"
+		},
+		{
+			"type":"boolean",
+			"exampleValue":false,
+			"defaultValue":false,
+			"key":"readonly",
+			"description":"是否只读"
 		}],
 	"attrs":[],
 	"deps":["scmsModules/imageUpload/imageUpload"],
 	"html":`
-	<h3>moduleType</h3>
+	<h3>noThumb</h3>
 	<div image-upload module-type=\"moduleType\" clear-data=\"clearData\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\"></div>
 	<hr>
 	<h3>thumb</h3>

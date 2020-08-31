@@ -1,0 +1,41 @@
+<div class="form-control city-cascade-select">
+    <div class="cityDataText" ng-click="openType=!openType">{{cityText}}<i class="fa fa-angle-down"></i></div>
+    <div class="leve-Box" ng-show="openType">
+        <ul class="leve1">
+            <li ng-repeat="obj in cityDataJson">
+                <div ng-click="qeury({
+                    leve1: obj.label
+                },1);">
+                    <a href="javascript:;" ng-click="obj.check = !obj.check" ng-show="obj.children && obj.children.length > 0 && lever > 1">
+                        <i class="fa fa-plus-square" ng-show="!obj.check"></i>
+                        <i class="fa fa-minus-square" ng-show="obj.check"></i>
+                    </a>
+                    {{obj.label}}
+                </div>
+                <ul class="leve2" ng-if="obj.check">
+                    <li ng-repeat="sItem in obj.children">
+                        <div ng-click="qeury({
+                            leve1: obj.label,
+                            leve2: sItem.label
+                        },2);">
+                            <a href="javascript:;" ng-click="sItem.check = !sItem.check" ng-show="sItem.children && sItem.children.length > 0 && lever > 2">
+                                <i class="fa fa-plus-square" ng-show="!sItem.check"></i>
+                                <i class="fa fa-minus-square" ng-show="sItem.check"></i>
+                            </a>
+                            {{sItem.label}}
+                        </div>
+                        <ul class="leve3" ng-if="sItem.check && lever == 3">
+                            <li ng-repeat="item in sItem.children">
+                                <div ng-click="qeury({
+                                    leve1: obj.label,
+                                    leve2: sItem.label,
+                                    leve3: item.label
+                                },3);">{{item.label}}</div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>

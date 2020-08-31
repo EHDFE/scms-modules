@@ -103,7 +103,7 @@
                             display: block;
                             width: 50%;
                             height: 100%;
-                            &.succeed{
+                            &.success{
                                 background: #6AC10A;
                             }
                             &.error{
@@ -122,21 +122,22 @@
     .noThumb{
         label{
             cursor: pointer;
-            border: 1px solid #DADDE4;
+            // border: 1px solid #DADDE4;
             border-radius: 3px;
             font-size: 13px;
-            color: #4B5564;
+            color: #fff;
+            background-color: #10C2B0;
             line-height: 30px;
             width: 105px;
             text-align: center;
             font-weight: 100;
             &:hover{
-                border-color: #74B5FF;
-                color: #74B5FF;
+                border-color: #11BCB0;
+                color: #fff;
             }
             &:active{
-                border-color: #2C87EF;
-                color: #2C87EF;
+                border-color: #11BCB0;
+                color: #fff;
             }
         }
         ul{
@@ -156,16 +157,16 @@
                 &>div{
                     margin-left: 10px;
                     width: 89%;
-                    a.succeed{
-                        color: #51A1FD;
+                    a.success{
+                        color: #333333;
                         &:hover{
                             text-decoration: underline;
                         }
                     }
-                    .succeed{
+                    .success{
                         float: left;
                         a{
-                            color: #51A1FD;
+                            color: #333333;
                             &:hover{
                                 text-decoration: underline;
                             }
@@ -195,19 +196,50 @@
                         }
                     }
                 }
-                .remove{
+                .download{
                     float: right;
-                    color: #9BA0AA;
-                    font-size: 13px;
+                    color: #fff;
+                    background-color: #10C2B0;
+                    font-size: 12px;
                     margin-right: 5px;
-                    display: none;
+                    margin-top: 6px;
+                    padding: 0 10px;
+                    border-radius: 10px;
+                    line-height: 18px;
                 }
-                &:hover{
-                    background: #F6F8FC;
-                    .remove{
-                        display: block;
-                    }
+                .preview{
+                    float: right;
+                    color: #fff;
+                    background-color: #F89327;
+                    font-size: 12px;
+                    margin-right: 5px;
+                    margin-top: 6px;
+                    padding: 0 10px;
+                    border-radius: 10px;
+                    line-height: 18px;
                 }
+                .remove{
+                    // float: right;
+                    // color: #9BA0AA;
+                    // font-size: 12px;
+                    // margin-right: 5px;
+                    // display: none;
+                    float: right;
+                    color: #fff;
+                    background-color: #F94545;
+                    font-size: 12px;
+                    margin-right: 5px;
+                    margin-top: 6px;
+                    padding: 0 10px;
+                    border-radius: 10px;
+                    line-height: 18px;
+                }
+                // &:hover{
+                //     background: #F6F8FC;
+                //     .remove{
+                //         display: block;
+                //     }
+                // }
             }
         }
     }
@@ -260,7 +292,7 @@
                 display: block;
                 width: 50%;
                 height: 100%;
-                &.succeed{
+                &.success{
                     background: #6AC10A;
                 }
                 &.error{

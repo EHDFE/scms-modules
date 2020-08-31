@@ -2,7 +2,7 @@
     <div class="thumb" ng-if="moduleType === 'thumb'">
         <ul>
             <li ng-repeat="item in imageArray">
-                <div class="upload-box" ng-show="!item.uploadType.loading && !item.uploadType.succeed && !item.uploadType.error">
+                <div class="upload-box" ng-show="!item.status">
                     <label>
                         <span>
                             <i class="fa fa-plus"></i>
@@ -11,30 +11,30 @@
                         上传
                     </label>
                 </div>
-                <div class="loading-box" ng-show="item.uploadType.loading || item.uploadType.error">
+                <div class="loading-box" ng-show="item.status === 'loading' || item.status === 'error'">
                     <p>
-                        <span ng-show="item.uploadType.loading">上传中</span>
-                        <span ng-show="item.uploadType.succeed">上传成功</span>
-                        <span ng-show="item.uploadType.error">上传失败</span>
+                        <span ng-show="item.status === 'loading'">上传中</span>
+                        <span ng-show="item.status === 'success'">上传成功</span>
+                        <span ng-show="item.status === 'error'">上传失败</span>
                         ···
                     </p>
                     <div>
-                        <span class="succeed" ng-show="item.uploadType.succeed" style="width: {{ item.loadingTempo }}%;"></span>
-                        <span class="error" ng-show="item.uploadType.error" style="width: {{ item.loadingTempo }}%;"></span>
-                        <span class="loading" ng-show="item.uploadType.loading" style="width: {{ item.loadingTempo }}%;"></span>
+                        <span class="success" ng-show="item.status === 'success'" style="width: {{ item.loadingTempo }}%;"></span>
+                        <span class="error" ng-show="item.status === 'error'" style="width: {{ item.loadingTempo }}%;"></span>
+                        <span class="loading" ng-show="item.status === 'loading'" style="width: {{ item.loadingTempo }}%;"></span>
                     </div>
                 </div>
-                <div class="images-box" ng-show="item.uploadType.succeed || item.uploadType.error" ng-class="{error: item.uploadType.error}">
+                <div class="images-box" ng-show="item.status === 'success' || item.status === 'error'" ng-class="{error: item.status === 'error'}">
                     <!--<div class="img" style="background: url({{ item.dataImg }}) no-repeat center center;background-size: contain;"></div>-->
-                    <img class="img" image-show img-url="item.dataImg" custom-css="true" show-click="showClick" bg-click="false" mini-img="true" ng-show="item.uploadType.succeed">
+                    <img class="img" image-show img-url="item.dataImg" custom-css="true" show-click="showClick" bg-click="false" mini-img="true" ng-show="item.status === 'success'">
                     <div class="barrier">
-                        <a href="javascript:;" ng-show="item.uploadType.succeed" ng-click="showClick($event,item.dataImg)">
+                        <a href="javascript:;" ng-show="item.status === 'success'" ng-click="showClick()">
                             <i class="fa fa-eye"></i>
                         </a>
                         <a href="javascript:;" ng-click="remove(item,$index)">
                             <i class="glyphicon glyphicon-trash"></i>
                         </a>
-                        <a href="javascript:;" ng-show="item.uploadType.succeed" ng-click="download($event,item.dataImg)">
+                        <a href="javascript:;" ng-show="item.status === 'success'" ng-click="download($event,item.dataImg)">
                             <i class="fa fa-download"></i>
                         </a>
                         <a style="display: none;"></a>
@@ -44,34 +44,51 @@
         </ul>
     </div>
     <div class="noThumb" ng-if="moduleType === 'noThumb'">
-        <label ng-if="!dNum">
+        <label ng-if="!dNum && !readonly">
             <i class="fa fa-upload mr5"></i>
             <input type="file" ng-model="file" style="display: none;">
             上传文件
         </label>
-        <label ng-if="dNum && imageArray.length < dNum">
+        <label ng-if="dNum && imageArray.length < dNum && !readonly">
             <i class="fa fa-upload mr5"></i>
             <input type="file" ng-model="file" style="display: none;">
             上传文件
         </label>
-        <label ng-click="fileFn();" ng-if="dNum && imageArray.length >= dNum">
+        <label ng-click="fileFn();" ng-if="dNum && imageArray.length >= dNum && !readonly">
             <i class="fa fa-upload mr5"></i>
             上传文件
         </label>
         <ul>
             <li ng-repeat="item in imageArray">
-                <span>
-                    <i class="fa fa-chain-broken"></i>
+                <span style="color:#10C2B0;">
+                    <i class="fa fa-file-text-o"></i>
                 </span>
                 <div>
-                    <a href="javascript:;" image-show img-url="item.dataImg" text-only="true" alt-text="item.imgName" show-click="showClick" class="succeed" ng-show="item.uploadType.succeed && (item.imgName.indexOf('.jpg')>-1 || item.imgName.indexOf('.jpeg')>-1 || item.imgName.indexOf('.png')>-1)"></a>
-                    <a href="javascript:;" class="succeed" ng-show="item.uploadType.succeed && item.imgName.indexOf('.jpg')<=-1 && item.imgName.indexOf('.jpeg')<=-1 && item.imgName.indexOf('.png')<=-1" ng-click="noThumbDownload($event,item)">{{ item.imgName }}</a>
-                    <a href="javascript:;" class="error" ng-show="item.uploadType.error">{{ item.imgName }}</a>
-                    <a href="javascript:;" class="loading" ng-show="item.uploadType.loading">{{ item.imgName }}</a>
-                    <a href="javascript:;" class="remove" ng-click="remove(item,$index)">
-                        <i class="icon-close"></i>
+                    <a href="javascript:;" image-show img-url="item.imgData || item.dataImg" text-only="true" alt-text="item.imgName" show-click="showClick" class="success" ng-show="item.status === 'success' && item.imgName.indexOf('.jpg')>-1 || item.imgName.indexOf('.jpeg')>-1 || item.imgName.indexOf('.png')>-1"></a>
+                    <!-- <a href="javascript:;" class="success" ng-show="item.status === 'success' && item.imgName.indexOf('.jpg')<=-1 && item.imgName.indexOf('.jpeg')<=-1 && item.imgName.indexOf('.png')<=-1" ng-click="noThumbDownload($event,item)">{{ item.imgName }}</a>
+                     -->
+                    <a href="javascript:;" class="error" ng-show="item.status === 'error'">{{ item.imgName }}（失败）</a>
+                    <a href="javascript:;" class="loading" ng-show="item.status === 'loading'">{{ item.imgName }}（上传中）</a>
+                    <a class="success" ng-show="item.status === 'success' && (item.imgName.indexOf('.pdf')>-1 || item.imgName.indexOf('.doc')>-1 || item.imgName.indexOf('.docx')>-1)">{{ item.imgName }}</a>
+                    
+                    <a href="javascript:;" class="download" ng-show="readonly" ng-click="noThumbDownload($event,item)">
+                        <i class="fa fa fa-download"></i>
+                        下载
                     </a>
-                    <div class="schedule" ng-show="item.uploadType.loading">
+                    <a href="javascript:;" class="preview" ng-show="item.status === 'success' && (item.imgName.indexOf('.jpg')>-1 || item.imgName.indexOf('.jpeg')>-1 || item.imgName.indexOf('.png')>-1)" ng-click="showClick()">
+                        <i class="fa fa-eye"></i>
+                        预览
+                    </a>
+                    <a href="javascript:;" class="preview" ng-show="item.status === 'success' && (item.imgName.indexOf('.pdf')>-1)" ng-click="showPdf($event,item.dataImg)">
+                        <i class="fa fa-eye"></i>
+                        预览
+                    </a>
+                    <a href="javascript:;" class="remove" ng-show="!readonly && item.status !== 'loading'" ng-click="remove(item,$index)">
+                        <i class="fa fa-trash-o"></i>
+                        删除
+                    </a>
+                    <br class="clearfix">
+                    <div class="schedule" ng-show="item.status === 'loading'">
                         <span style="width: {{ item.loadingTempo }}%;"></span>
                     </div>
                 </div>
@@ -80,15 +97,15 @@
     </div>
     <div class="example" ng-if="moduleType === 'example'">
         <div class="bgImg">
-            <div ng-show="imageArray[0] && imageArray[0].uploadType.succeed" style="background: url({{ imageArray[0].dataImg }}) no-repeat center center;background-size: cover;"></div>
-            <div ng-show="!imageArray[0] || !imageArray[0].uploadType.succeed" style="background: url({{ defaultImg }}) no-repeat center center;background-size: cover;"></div>
+            <div ng-show="imageArray[0] && imageArray[0].status === 'success'" style="background: url({{ imageArray[0].dataImg }}) no-repeat center center;background-size: cover;"></div>
+            <div ng-show="!imageArray[0] || !imageArray[0].status === 'success'" style="background: url({{ defaultImg }}) no-repeat center center;background-size: cover;"></div>
         </div>
-        <div class="type" ng-show="item.uploadType.loading || item.uploadType.error">
-            <span class="succeed" ng-show="imageArray[0].uploadType.succeed" style="width: {{ imageArray[0].loadingTempo }}%;"></span>
-            <span class="error" ng-show="imageArray[0].uploadType.error" style="width: {{ imageArray[0].loadingTempo }}%;"></span>
-            <span class="loading" ng-show="imageArray[0].uploadType.loading" style="width: {{ imageArray[0].loadingTempo }}%;"></span>
+        <div class="type" ng-show="item.status === 'loading' || item.status === 'error'">
+            <span class="success" ng-show="imageArray[0].status === 'success'" style="width: {{ imageArray[0].loadingTempo }}%;"></span>
+            <span class="error" ng-show="imageArray[0].status === 'error'" style="width: {{ imageArray[0].loadingTempo }}%;"></span>
+            <span class="loading" ng-show="imageArray[0].status === 'loading'" style="width: {{ imageArray[0].loadingTempo }}%;"></span>
         </div>
-        <span class="errorText" ng-show="imageArray[0].uploadType.error">上传失败</span>
+        <span class="errorText" ng-show="imageArray[0].status === 'error'">上传失败</span>
         <div class="clearfix operation">
             <div class="fl">
                 <label>

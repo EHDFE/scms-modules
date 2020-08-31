@@ -69,6 +69,8 @@ import ngTableFixed from './src/table/ngTableFixed';
 import datePickerRangeFixPanel from './src/ngDatePicker/datePickerRangeFixPanel';
 import carTypeSelect from './src/carTypeSelect';
 import transfer from './src/transfer/transfer';
+import cityCascadeSelect from './src/cityCascadeSelect';
+
 
 
 
@@ -126,5 +128,6 @@ export default {
   ngTableFixed,
   'ngDatePicker/datePickerRangeFixPanel': datePickerRangeFixPanel,
   carTypeSelect,
-  transfer
+  transfer,
+  cityCascadeSelect
 };
