@@ -32,9 +32,9 @@ export default (app, elem, attrs, scope) => {
 
         },
         controller($scope, $element, $attrs, $transclude, $log, $http, G) {
-          let current = 0;
-          let rotateW,
-            rotateH;
+          // let current = 0;
+          // let rotateW,
+          //   rotateH;
           if ($scope.miniImg && $scope.imgUrl) {
             if ($scope.imgUrl.substr(-4, 4) === '.png') {
               $scope.miniImgUrl = $scope.imgUrl.replace('.png', '_240x320.png');
@@ -46,6 +46,8 @@ export default (app, elem, attrs, scope) => {
               $scope.miniImgUrl = $scope.imgUrl.replace('.gif', '_240x320.gif');
             }
           }
+          
+          let viewer = '';
           $scope.$watch('imgUrl', (newVal, oldVal)=>{
             if(newVal !== oldVal){
               if ($scope.miniImg && $scope.imgUrl) {
@@ -61,11 +63,23 @@ export default (app, elem, attrs, scope) => {
                   $scope.miniImgUrl = $scope.imgUrl;
                 }
               }
+              if(viewer){
+                viewer.destroy();
+                $timeout(()=>{
+                  setViewer();
+                },100)
+              }
             }
           });
           
-          let viewer = '';
           $timeout(()=>{
+            setViewer();
+          },100)
+          $scope.imgClick = ($event, url) => {
+            viewer['view']();
+          };
+
+          function setViewer(){
             viewer = new Viewer($($element).find('.imageShowHideImg')[0], {
               navbar:false,
               toolbar: {
@@ -89,11 +103,14 @@ export default (app, elem, attrs, scope) => {
                   document.body.removeChild(a);
                 },
               },
+              show(event){
+                event.stopPropagation();
+              },
+              hide(event){
+                event.stopPropagation();
+              }
             });
-          },100)
-          $scope.imgClick = ($event, url) => {
-            viewer['view']();
-          };
+          }
           
           $scope.clickFun = $scope.clickFun;
           if ($scope.clickFun) {

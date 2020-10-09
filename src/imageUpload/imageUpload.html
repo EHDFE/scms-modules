@@ -46,12 +46,12 @@
     <div class="noThumb" ng-if="moduleType === 'noThumb'">
         <label ng-if="!dNum && !readonly">
             <i class="fa fa-upload mr5"></i>
-            <input type="file" ng-model="file" style="display: none;">
+            <input type="file" ng-model="file" style="display: none;" multiple accept="{{accept}}">
             上传文件
         </label>
         <label ng-if="dNum && imageArray.length < dNum && !readonly">
             <i class="fa fa-upload mr5"></i>
-            <input type="file" ng-model="file" style="display: none;">
+            <input type="file" ng-model="file" style="display: none;" multiple accept="{{accept}}">
             上传文件
         </label>
         <label ng-click="fileFn();" ng-if="dNum && imageArray.length >= dNum && !readonly">
@@ -69,16 +69,18 @@
                      -->
                     <a href="javascript:;" class="error" ng-show="item.status === 'error'">{{ item.imgName }}（失败）</a>
                     <a href="javascript:;" class="loading" ng-show="item.status === 'loading'">{{ item.imgName }}（上传中）</a>
-                    <a class="success" ng-show="item.status === 'success' && (item.imgName.indexOf('.pdf')>-1 || item.imgName.indexOf('.doc')>-1 || item.imgName.indexOf('.docx')>-1)">{{ item.imgName }}</a>
+                    <a class="success" ng-show="item.status === 'success' && (item.imgName.indexOf('.pdf')>-1 || item.imgName.indexOf('.doc')>-1 || item.imgName.indexOf('.docx')>-1 || item.imgName.indexOf('.xlsx')>-1 || item.imgName.indexOf('.xls')>-1 || item.imgName.indexOf('.rar')>-1 || item.imgName.indexOf('.zip')>-1 || item.imgName.indexOf('.ppt')>-1 || item.imgName.indexOf('.pptx')>-1) ">{{ item.imgName }}</a>
                     
                     <a href="javascript:;" class="download" ng-show="readonly" ng-click="noThumbDownload($event,item)">
                         <i class="fa fa fa-download"></i>
                         下载
                     </a>
+                    <!-- 图片预览按钮 -->
                     <a href="javascript:;" class="preview" ng-show="item.status === 'success' && (item.imgName.indexOf('.jpg')>-1 || item.imgName.indexOf('.jpeg')>-1 || item.imgName.indexOf('.png')>-1)" ng-click="showClick()">
                         <i class="fa fa-eye"></i>
                         预览
                     </a>
+                    <!-- PDF预览按钮 -->
                     <a href="javascript:;" class="preview" ng-show="item.status === 'success' && (item.imgName.indexOf('.pdf')>-1)" ng-click="showPdf($event,item.dataImg)">
                         <i class="fa fa-eye"></i>
                         预览

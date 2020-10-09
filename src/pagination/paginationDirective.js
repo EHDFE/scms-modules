@@ -152,7 +152,7 @@ export default (app, elem, attrs, scope) => {
 
           $scope.number = $scope.currentPage;
 
-          $scope.pageSizeList = [10, 15, 20, 30, 40, 50, 100, 500];
+          $scope.pageSizeList = [10, 15, 20, 30, 40, 50, 100, 500, 1000];
           $scope.pageSizeListName = {
             10: '10条/页',
             15: '15条/页',
@@ -161,7 +161,8 @@ export default (app, elem, attrs, scope) => {
             40: '40条/页',
             50: '50条/页',
             100 : '100条/页',
-            500 : '500条/页'
+            500 : '500条/页',
+            1000 : '1000条/页'
           };
         },
       };

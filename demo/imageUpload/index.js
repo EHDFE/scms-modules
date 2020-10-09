@@ -75,8 +75,8 @@ export default {
 		},
         {
 			"type":"object",
-			"exampleValue":['pnd','docx','xlsx'],
-            "defaultValue":"['pnd','docx','xlsx']",
+			"exampleValue":['png','docx','xlsx'],
+            "defaultValue":"['png','docx','xlsx']",
 			"key":"fileTypes",
 			"description":"与file搭配，file为true后，此选项必填"
 		},
@@ -111,7 +111,7 @@ export default {
 	"deps":["scmsModules/imageUpload/imageUpload"],
 	"html":`
 	<h3>noThumb</h3>
-	<div image-upload module-type=\"moduleType\" clear-data=\"clearData\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\"></div>
+	<div image-upload module-type=\"moduleType\" clear-data=\"clearData\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\" file-types=\"fileTypes\"></div>
 	<hr>
 	<h3>thumb</h3>
 	<div image-upload module-type=\"'thumb'\" api-url=\"apiUrl\" image-urls=\"imageUrls\" d-width=\"dWidth\" d-height=\"dHeight\" d-size=\"dSize\" d-num=\"dNum\"></div>

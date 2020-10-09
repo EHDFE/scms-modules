@@ -64,6 +64,11 @@ export default (app, elem, attrs, scope) => {
               }
             };
           }
+          if($attrs.fileTypes){
+            $scope.accept = $scope.fileTypes.map(item=>{
+              return '.'+item
+            }).join();
+          }
 
           $scope.exampleText = $scope.exampleText || '上传图片清晰可见，不可超过3M，支持jpg、jpeg、png';
           $scope.showClick = ()=>{};
@@ -82,18 +87,19 @@ export default (app, elem, attrs, scope) => {
             "imageUrls",
             function(newValue, oldValue) {
               if (($scope.imageArray.length === 0 ? true : !$scope.imageArray[0].dataImg) && newValue && newValue.length) {
-
                 if ($scope.moduleType === 'noThumb') {
                   if ($scope.imageUrls && $scope.imageUrls.length > 0) {
                     // $scope.imageArray = arr;
-                    newValue.map((item, index) => {
-                      $scope.imageArray[index] = {
-                        imgName: item.imgName,
-                        dataImg: item.dataImg,
-                        status: item.status || "success",
-                        type: getIsImage(item.dataImg)
-                      };
-                    });
+                    if($scope.imageArray.length === 0){
+                      newValue.map((item, index) => {
+                        $scope.imageArray[index] = {
+                          imgName: item.imgName,
+                          dataImg: item.dataImg,
+                          status: item.status || "success",
+                          type: getIsImage(item.dataImg)
+                        };
+                      });
+                    }
                   } else {
                     newValue.map((item, index) => {
                       $scope.imageUrls[index] = {
@@ -127,77 +133,13 @@ export default (app, elem, attrs, scope) => {
             true
           );
 
-          // $scope.type = 1;
-          // $scope.init = ()=>{
-          //   $scope.imageArray = [];
-          //   $scope.imageUrls = $scope.imageUrls || [];
-          //   var arr = $scope.imageUrls.map(item=>{
-          //     return item;
-          //   });
-          //   if ($scope.moduleType === 'noThumb') {
-          //     if ($scope.imageUrls && $scope.imageUrls.length > 0) {
-          //       $scope.imageArray = arr;
-          //     } else {
-          //       arr = $scope.imageArray;
-          //       $scope.imageUrls = arr;
-          //     }
-          //   } else if ($scope.imageUrls && $scope.imageUrls.length) {
-          //     $scope.imageArray = arr;
-          //     if($scope.dNum){
-          //       if($scope.imageArray.length < $scope.dNum){
-          //         $scope.imageArray.push({
-          //           uploadType: {
-          //             succeed: false,
-          //             error: false,
-          //             loading: false,
-          //           },
-          //         });
-          //       }
-          //     }else{
-          //       $scope.imageArray.push({
-          //         uploadType: {
-          //           succeed: false,
-          //           error: false,
-          //           loading: false,
-          //         },
-          //       });
-          //     }
-          //   } else {
-          //     $scope.imageArray.push({
-          //       uploadType: {
-          //         succeed: false,
-          //         error: false,
-          //         loading: false,
-          //       },
-          //     });
-          //     $scope.imageUrls = [];
-          //   }
-          // }
-          // $scope.init();
           
           $scope.remove = (item, index) => {
             pushFile(null, "remove", index);
-            // $scope.imageArray.splice(index, 1);
-            // $scope.selectImg();
-            // if ($scope.moduleType === 'thumb' && $scope.imageArray.length < $scope.dNum) {
-            //   let num = 0;
-            //   for (let i = 0; i < $scope.imageArray.length; i++) {
-            //     if ($scope.imageArray[i].uploadType.succeed || $scope.imageArray[i].uploadType.error || $scope.imageArray[i].uploadType.loading) {
-            //       num++;
-            //     } else {
-            //       break;
-            //     }
-            //   };
-            //   if (num === $scope.dNum - 1) {
-            //     $scope.imageArray.push({
-            //       uploadType: {
-            //         succeed: false,
-            //         error: false,
-            //         loading: false,
-            //       },
-            //     });
-            //   }
-            // }
+          };
+
+          const setClearInput = target => {
+            target.value = "";
           };
 
           //绑定file change事件
@@ -207,71 +149,86 @@ export default (app, elem, attrs, scope) => {
               return;
             }
 
-            const isValidFileType = validFileType(
-              $scope.fileTypes,
-              file.files[0]
-            );
+            let isValidFileType, isValidSize;
+            for(var i = 0; i< file.files.length; i++){
+              // 判断文件格式是否符合规格
+              isValidFileType = validFileType(
+                $scope.fileTypes,
+                file.files[i]
+              );
 
-            if (!isValidFileType) {
+              // 判断文件大小是否符合规格
+              isValidSize = validSize(file.files[i], $scope.dSize);
+              if(!isValidFileType || !isValidSize){
+                break;
+              }
+            }
+            // 文件不符合规格，跳出
+            if (!isValidFileType || !isValidSize) {
               setClearInput(file);
               return;
             }
-            const isValidSize = validSize(file.files[0], $scope.dSize);
-            if (!isValidSize) {
+
+            operation(file, 0);
+          });
+
+          function operation(file,i){
+            if(i < file.files.length){
+              var isValidFileType = validFileType($scope.fileTypes, file.files[i]);
+            }else{
               setClearInput(file);
-              return;
+              return
             }
+            
             pushFile({
               type: isValidFileType || "",
               status: "loading",
               loadingTempo: 10,
-              imgName: file.files[0].name
-            },'add');
-
-            getFileData(file.files[0]).then(fileData => {
-              if (
-                isValidFileType === "IMG" &&
-                ($scope.dWidth || $scope.dHeight)
-              ) {
-                validImage(
-                  fileData.currentTarget.result,
-                  $scope.dWidth,
-                  $scope.dHeight
-                ).then(
-                  isValid => {
+              imgName: file.files[i].name
+            }, 'add', i, function (index, key) {
+              getFileData(file.files[index]).then(function (fileData) {
+                if (isValidFileType === "IMG" && ($scope.dWidth || $scope.dHeight)) {
+                  validImage(fileData.fileData.currentTarget.result, $scope.dWidth, $scope.dHeight).then(function (isValid) {
                     pushFile({
-                      imgData: fileData.currentTarget.result
-                    });
-                    saveImg(file.files[0]);
-                  },
-                  errorMsg => {
+                      imgData: fileData.fileData.currentTarget.result
+                    }, 'edit', key);
+                    saveImg(fileData.file, key);
+                  }, function (errorMsg) {
                     G.alert(errorMsg, { type: "error" });
                     pushFile({
                       status: "",
                       loadingTempo: ""
-                    });
-                  }
-                );
-              } else {
-                if (isValidFileType === "IMG") {
-                  pushFile({
-                    imgData: fileData.currentTarget.result
+                    }, 'edit', key);
                   });
+                } else {
+                  if (isValidFileType === "IMG") {
+                    pushFile({
+                      imgData: fileData.fileData.currentTarget.result
+                    }, 'edit', key);
+                  }
+                  saveImg(fileData.file, key);
                 }
-                saveImg(file.files[0]);
-              }
-              event.target.value="";
+              });
             });
-          });
+            if(i < file.files.length){
+              setTimeout(()=>{
+                var index = i+1;
+                operation(file, index)
+              },0);
+            }else{
+              setClearInput(file);
+              return
+            }
+          }
 
           // 获取文件数据
           const getFileData = file => {
             return new Promise(function(resolve, reject) {
-              const data = new FormData();
+              // const data = new FormData();
               const reader = new FileReader();
               reader.readAsDataURL(file);
               reader.onload = function(fileData) {
-                return resolve(fileData);
+                return resolve({fileData, file});
               };
             });
           };
@@ -282,10 +239,16 @@ export default (app, elem, attrs, scope) => {
             const word = 'doc|docx';
             const excel = 'xls|xlsx';
             const pdf = 'pdf';
+            const ppt = 'ppt|pptx';
+            const rar = 'rar';
+            const zip = 'zip';
             const patternB = new RegExp(".(" + images + ")$");
             const patternWord = new RegExp(".(" + word + ")$");
             const patternExcel = new RegExp(".(" + excel + ")$");
             const patternPdf = new RegExp(".(" + pdf + ")$");
+            const patternPpt = new RegExp(".(" + ppt + ")$");
+            const patternRar = new RegExp(".(" + rar + ")$");
+            const patternZip = new RegExp(".(" + zip + ")$");
             
             if(name.indexOf('?')>-1){
               name = name.split('?')[0];
@@ -302,6 +265,15 @@ export default (app, elem, attrs, scope) => {
             }
             else if(patternPdf.test(name)) {
               return "PDF";
+            }
+            else if(patternPpt.test(name)) {
+              return "PPT";
+            }
+            else if(patternRar.test(name)) {
+              return "RAR";
+            }
+            else if(patternZip.test(name)) {
+              return "ZIP";
             }
             else {
               return "FILE";
@@ -361,33 +333,8 @@ export default (app, elem, attrs, scope) => {
             });
           };
 
-          // const $file = $element.find('input');
-          // $element.on('change', 'input', (event) => {
-          //   const file = event.currentTarget;
-          //   if (!file.files || (file.files && !file.files.length)) {
-          //     return;
-          //   }
-          //   if($scope.file){
-          //     var text = $scope.fileType.join('|');
-          //     var alertText = $scope.fileType.join('/');
-          //   }else{
-          //     var text = 'jpg|jpeg|png|bmp';
-          //     var alertText = 'JPG/JPEG/PNG/BMP';
-          //   }
-          //   var pattern = new RegExp('.('+text+')$');
-          //   angular.forEach(file.files, (item, index) => {
-          //     if (!pattern.test(item.name)) {
-          //       G.alert('请上传格式为'+alertText+'格式的文件', { type: 'error' });
-          //     } else {
-          //       verify(item);
-          //     }
-          //   });
-          //   $(event.currentTarget).val('');
-          // });
-
-
           //发送请求，保存文件到服务器
-          const saveImg = function(file) {
+          const saveImg = function(file, index) {
             let data = new FormData();
             data.append("file", file);
             data.append("attachmenType", $scope.params || "VOUCHER");
@@ -396,13 +343,13 @@ export default (app, elem, attrs, scope) => {
             xhr.onloadstart = function(evt) {
               pushFile({
                 loadingTempo: 1
-              });
+              }, 'edit', index);
             };
             xhr.upload.onprogress = function(evt) {
               if (evt.lengthComputable) {
                 pushFile({
                   loadingTempo: (evt.loaded / evt.total) * 100
-                });
+                }, 'edit', index);
               } else {
                 console.log("无法计算进度信息，总大小是未知的", evt);
               }
@@ -412,7 +359,7 @@ export default (app, elem, attrs, scope) => {
               pushFile({
                 status: "",
                 imgData: ""
-              });
+              }, 'edit', index);
               G.alert("上传超时, 请重试", {
                 type: "error"
               });
@@ -426,21 +373,21 @@ export default (app, elem, attrs, scope) => {
                     pushFile({
                       status: "success",
                       dataImg: d.data[0].attachmenturl
-                    });
+                    }, 'edit', index);
                   } else {
                     pushFile({
-                      status: "",
+                      status: "error",
                       imgData: ""
-                    });
+                    }, 'edit', index);
                     G.alert(d.msg || "上传失败", {
                       type: "error"
                     });
                   }
                 } else {
                   pushFile({
-                    status: "",
+                    status: "error",
                     imgData: ""
-                  });
+                  }, 'edit', index);
                   G.alert("上传失败", {
                     type: "error"
                   });
@@ -450,234 +397,8 @@ export default (app, elem, attrs, scope) => {
             xhr.send(data);
           };
 
-          // 验证
-          // function verify(file) {
-          //   const data = new FormData();
-          //   const reader = new FileReader();
-          //   reader.readAsDataURL(file);
-          //   reader.onload = function (theFile) {
-          //     if(!$scope.file){
-          //       const image = new Image();
-          //       image.src = theFile.target.result;
-          //       image.onload = function () {
-          //         if ($scope.dWidth && this.width !== $scope.dWidth) {
-          //           G.alert(`图片宽度不等于${$scope.dWidth}px`, {
-          //             type: 'error',
-          //           });
-          //           return;
-          //         }
-          //         if ($scope.dHeight && this.height !== $scope.dHeight) {
-          //           G.alert(`图片高度不等于${$scope.dHeight}px`, {
-          //             type: 'error',
-          //           });
-          //           return;
-          //         }
-          //         if ($scope.dSize && file.size / 1024 > parseInt($scope.dSize, 10)) {
-          //           G.alert(`图片大于${$scope.dSize}KB`, {
-          //             type: 'error',
-          //           });
-          //           return;
-          //         }
-          //         if ($scope.moduleType === 'noThumb') {
-          //           $scope.imageArray.push({
-          //             imgName: file.name,
-          //             uploadType: {
-          //               succeed: false,
-          //               error: false,
-          //               loading: true,
-          //             },
-          //           });
-          //           const index = $scope.imageArray.length - 1;
-          //           $scope.$apply();
-          //           data.append('file', file);
-          //           if($scope.params){
-          //             for(var key in $scope.params) {
-          //               data.append(key, $scope.params[key]);
-          //             }
-          //           }
-          //           uploadImage(data, $scope.imageArray[index]);
-          //         } else {
-          //           const reader = new FileReader();
-          //           reader.onload = function (e) {
-          //             // console.log('成功读取文件路径');
-          //             const index = $scope.imageArray.length - 1;
-          //             if ($scope.moduleType === 'thumb') {
-          //               $scope.imageArray[index].dataImg = e.target.result;
-          //             }
-          //             $scope.$apply();
-          //             data.append('file', file);
-          //             if($scope.params){
-          //               for(var key in $scope.params) {
-          //                 data.append(key, $scope.params[key]);
-          //               }
-          //             }
-          //             uploadImage(data, $scope.imageArray[index]);
-          //             if ($scope.moduleType === 'thumb' && $scope.imageArray.length < $scope.dNum) {
-          //               $scope.imageArray.push({
-          //                 uploadType: {
-          //                   succeed: false,
-          //                   error: false,
-          //                   loading: false,
-          //                 },
-          //               });
-          //             }
-          //           };
-          //           reader.readAsDataURL(file);
-          //         }
-          //       };
-          //     }else{
-          //         if ($scope.dSize && file.size / 1024 > parseInt($scope.dSize, 10)) {
-          //           G.alert(`文件大于${$scope.dSize}KB`, {
-          //             type: 'error',
-          //           });
-          //           return;
-          //         }
-          //         $scope.imageArray.push({
-          //           imgName: file.name,
-          //           uploadType: {
-          //             succeed: false,
-          //             error: false,
-          //             loading: true,
-          //           },
-          //         });
-          //         const index = $scope.imageArray.length - 1;
-          //         $scope.$apply();
-          //         data.append('file', file);
-          //         if($scope.params){
-          //           for(var key in $scope.params) {
-          //             data.append(key, $scope.params[key]);
-          //           }
-          //         }
-          //         uploadImage(data, $scope.imageArray[index]);
-          //     }
-          //   };
-          // }
-          // // 请求
-          // function uploadImage(data, item) {
-          //   const xhr = new XMLHttpRequest();
-          //   xhr.timeout = 30000;
-          //   xhr.onloadstart = function (evt) {
-          //     // console.log('开始')
-          //     if ($scope.moduleType === 'thumb') {
-          //       pushFile({
-          //         uploadType: {
-          //           succeed: false,
-          //           error: false,
-          //           loading: true,
-          //         }
-          //       });
-          //       // item.uploadType = {
-          //       //   succeed: false,
-          //       //   error: false,
-          //       //   loading: true,
-          //       // };
-          //     }
-          //     pushFile({
-          //       loadingTempo: 1
-          //     });
-          //     // item.loadingTempo = 1;
-          //     // $scope.$apply();
-          //   };
-          //   xhr.upload.onprogress = function (evt) {
-          //     if (evt.lengthComputable) {
-          //       // item.loadingTempo = (evt.loaded / evt.total) * 100;
-          //       // $scope.$apply();
-          //       pushFile({
-          //         loadingTempo: (evt.loaded / evt.total) * 100
-          //       });
-          //     } else {
-          //       console.log('无法计算进度信息，总大小是未知的', evt);
-          //     }
-          //   };
-          //   xhr.ontimeout = function (event) {
-          //     // 请求超时！
-          //     // item.uploadType = {
-          //     //   succeed: false,
-          //     //   error: true,
-          //     //   loading: false,
-          //     // };
-          //     pushFile({
-          //       uploadType: {
-          //         succeed: false,
-          //         error: true,
-          //         loading: false,
-          //       }
-          //     });
-          //   };
-          //   // xhr.onload = function(evt) {
-          //   //     console.log("传输完成.");
-          //   // }
-          //   // xhr.onerror = function(evt) {
-          //   //     console.log("在传输文件时发生了错误.");
-          //   // }
-            
-          //   xhr.open('post', $scope.apiUrl || '/ehuodiGateway/huilianApi/uploader/attachment');
-          //   xhr.onreadystatechange = function () {
-          //     if (xhr.readyState == 4) {
-          //       if (xhr.status === 200) {
-          //         // item.uploadType = {
-          //         //   succeed: true,
-          //         //   error: false,
-          //         //   loading: false,
-          //         // };
-          //         const d = JSON.parse(xhr.responseText);
-          //         if (d && d.result === 'success') {
-          //           pushFile({
-          //             uploadType: {
-          //               succeed: true,
-          //               error: false,
-          //               loading: false,
-          //             },
-          //             url: d.data[0].attachmenturl
-          //           });
-          //           // item.data = d.data;
-          //           // const imgs = [];
-          //           // angular.forEach(d.data, function(item) {
-          //           //   imgs.push(item.attachmenturl);
-          //           // });
-          //           // item.imageUrl = imgs[0];
-          //           console.log(7766, item)
-          //         }else{
-          //           pushFile({
-          //             uploadType: {
-          //               succeed: true,
-          //               error: true,
-          //               loading: false,
-          //             },
-          //           });
-          //           // item.uploadType = {
-          //           //   succeed: false,
-          //           //   error: true,
-          //           //   loading: false,
-          //           // };
-          //           G.alert(d.msg , {
-          //             type: 'error',
-          //           });
-          //         }
-          //         $scope.selectImg();
-          //         // $scope.$apply();
-          //       } else {
-          //         pushFile({
-          //           uploadType: {
-          //             succeed: true,
-          //             error: true,
-          //             loading: false,
-          //           },
-          //         });
-          //         // item.uploadType = {
-          //         //   succeed: false,
-          //         //   error: true,
-          //         //   loading: false,
-          //         // };
-          //         // $scope.$apply();
-          //       }
-          //     }
-          //   };
-          //   xhr.send(data);
-          // }
 
-
-          const pushFile = (options, eventName, eventIndex) => {
+          const pushFile = (options, eventName, eventIndex, callback) => {
             if (eventName === "remove") {
               $scope.imageArray.splice(eventIndex, 1);
               if ($scope.moduleType === 'thumb' && $scope.imageArray.length < $scope.dNum) {
@@ -694,12 +415,16 @@ export default (app, elem, attrs, scope) => {
             } else {
               if($scope.moduleType === 'noThumb'){
                 var imageArray = $scope.imageArray;
-                if(eventName === 'add'){
+                if (eventName === 'add') {
                   imageArray.push({});
-                }          
-                var index = imageArray.length - 1;
-                Object.assign(imageArray[index], options);
-                $scope.imageArray = imageArray;
+                  var index = imageArray.length - 1;
+                  Object.assign(imageArray[index], options);
+                  $scope.imageArray = imageArray;
+                }else if(eventName === 'edit'){
+                  // var index = imageArray.length - 1;
+                  Object.assign(imageArray[eventIndex], options);
+                  $scope.imageArray = imageArray;
+                }
               }else{
                 var imageArray = $scope.imageArray;
                 var index = imageArray.length - 1;
@@ -746,22 +471,13 @@ export default (app, elem, attrs, scope) => {
               }
               $scope.imageUrls = imageUrls;
             }, 0)
+
+            if(eventName === 'add'){
+              callback(eventIndex, $scope.imageArray.length-1 > 0 ? $scope.imageArray.length-1 : 0);
+            }
             
           };
 
-
-          // 筛选可用图片
-          // $scope.selectImg = function () {
-          //   $scope.imageUrls = [];
-          //   var arr = G.clone($scope.imageArray);
-          //   if (arr.length > 0) {
-          //     for (let i = 0; i < arr.length; i++) {
-          //       if (arr[i].uploadType.succeed) {
-          //         $scope.imageUrls.push(arr[i]);
-          //       }
-          //     }
-          //   }
-          // };
 
           // 下载图片
           $scope.download = ($event,dataImg)=>{
@@ -799,20 +515,7 @@ export default (app, elem, attrs, scope) => {
                 .attr("download", name + "." + nameEnd);
             }
           }
-          // $scope.initType = true;
-          // $scope.$watch('imageUrls',function(newValue,oldValue){
-          //   if((newValue.length > oldValue.length) && $scope.initType){
-          //     $scope.initType = false;
-          //     // $scope.init();
-          //     $scope.selectImg();
-          //   }
-          // },true);
           
-          // $scope.clearData = function () {
-          //   $scope.init();
-          // }
-          
-          // console.log($scope.imageArray)
           $scope.fileFn = ()=>{
             G.alert(`上传数量已满`,{type:'error'});
           }
