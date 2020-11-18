@@ -40,6 +40,7 @@ export default (app, elem, attrs, scope) => {
           defaultImg:'@',
           params:"@",//非必传, 默认为VOUCHER,
           readonly: "@", //非必传：只读，在查看时用到
+          userNameText: "@", // 非必传：水印文字
         },
         controller: function ($scope, $element, $attrs, $timeout) {
           if($scope.moduleType === 'noThumb'){
@@ -75,11 +76,16 @@ export default (app, elem, attrs, scope) => {
           
           // 预览pdf
           $scope.showPdf = ($event,url)=>{
-            if(window.location.href.indexOf('hl.tf56.com')>-1){
-              window.open('https://hl.tf56.com/web/contractPreview.html?url='+url.replace('http://','https://'));
+            if($scope.userNameText){
+              window.open(`https://www.hellogil.cn:8012/onlinePreview?watermarkTxt=${$scope.userNameText}&url=`+url.replace('http://','https://'));
             }else{
-              window.open('https://hltest.ehuodi.com/web/contractPreview.html?url='+url.replace('http://','https://'));
+              window.open(`https://www.hellogil.cn:8012/onlinePreview?url=`+url.replace('http://','https://'));
             }
+            // if(window.location.href.indexOf('hl.tf56.com')>-1){
+            //   window.open('https://hl.tf56.com/web/contractPreview.html?url='+url.replace('http://','https://'));
+            // }else{
+            //   window.open('https://hltest.ehuodi.com/web/contractPreview.html?url='+url.replace('http://','https://'));
+            // }
           }
 
           $scope.imageUrls = $scope.imageUrls || [];
@@ -240,15 +246,13 @@ export default (app, elem, attrs, scope) => {
             const excel = 'xls|xlsx';
             const pdf = 'pdf';
             const ppt = 'ppt|pptx';
-            const rar = 'rar';
-            const zip = 'zip';
+            const rar = 'rar|zip';
             const patternB = new RegExp(".(" + images + ")$");
             const patternWord = new RegExp(".(" + word + ")$");
             const patternExcel = new RegExp(".(" + excel + ")$");
             const patternPdf = new RegExp(".(" + pdf + ")$");
             const patternPpt = new RegExp(".(" + ppt + ")$");
             const patternRar = new RegExp(".(" + rar + ")$");
-            const patternZip = new RegExp(".(" + zip + ")$");
             
             if(name.indexOf('?')>-1){
               name = name.split('?')[0];
@@ -271,9 +275,6 @@ export default (app, elem, attrs, scope) => {
             }
             else if(patternRar.test(name)) {
               return "RAR";
-            }
-            else if(patternZip.test(name)) {
-              return "ZIP";
             }
             else {
               return "FILE";
@@ -339,7 +340,7 @@ export default (app, elem, attrs, scope) => {
             data.append("file", file);
             data.append("attachmenType", $scope.params || "VOUCHER");
             const xhr = new XMLHttpRequest();
-            xhr.timeout = 30000;
+            xhr.timeout = 300000;
             xhr.onloadstart = function(evt) {
               pushFile({
                 loadingTempo: 1

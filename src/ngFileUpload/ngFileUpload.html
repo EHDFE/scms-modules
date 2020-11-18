@@ -47,6 +47,13 @@
             >
               <i class="fa fa-eye"></i>
             </a>
+            <a
+              href="javascript:;"
+              ng-show="item.type === 'WORD' || item.type === 'EXCEL' || item.type === 'PDF'"
+              ng-click="showPdf($event,item.url)"
+            >
+              <i class="fa fa-eye"></i>
+            </a>
             <a href="javascript:;" class="button-trash" ng-click="remove(item,$index)" ng-if="!readonly">
               <i class="glyphicon glyphicon-trash"></i>
             </a>

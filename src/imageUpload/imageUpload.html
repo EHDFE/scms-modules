@@ -43,6 +43,8 @@
             </li>
         </ul>
     </div>
+
+    <!-- noThumb模式 -->
     <div class="noThumb" ng-if="moduleType === 'noThumb'">
         <label ng-if="!dNum && !readonly">
             <i class="fa fa-upload mr5"></i>
@@ -64,24 +66,33 @@
                     <i class="fa fa-file-text-o"></i>
                 </span>
                 <div>
-                    <a href="javascript:;" image-show img-url="item.imgData || item.dataImg" text-only="true" alt-text="item.imgName" show-click="showClick" class="success" ng-show="item.status === 'success' && item.imgName.indexOf('.jpg')>-1 || item.imgName.indexOf('.jpeg')>-1 || item.imgName.indexOf('.png')>-1"></a>
-                    <!-- <a href="javascript:;" class="success" ng-show="item.status === 'success' && item.imgName.indexOf('.jpg')<=-1 && item.imgName.indexOf('.jpeg')<=-1 && item.imgName.indexOf('.png')<=-1" ng-click="noThumbDownload($event,item)">{{ item.imgName }}</a>
-                     -->
+                    <!-- <a href="javascript:;" image-show img-url="item.imgData || item.dataImg" text-only="true" alt-text="item.imgName" show-click="showClick" class="success" ng-show="item.status === 'success' && item.imgName.indexOf('.jpg')>-1 || item.imgName.indexOf('.jpeg')>-1 || item.imgName.indexOf('.png')>-1"></a> -->
+                    <a href="javascript:;" image-show img-url="item.imgData || item.dataImg" text-only="true" alt-text="item.imgName" show-click="showClick" class="success" ng-show="item.status === 'success' && item.type === 'IMG'"></a>
+
                     <a href="javascript:;" class="error" ng-show="item.status === 'error'">{{ item.imgName }}（失败）</a>
                     <a href="javascript:;" class="loading" ng-show="item.status === 'loading'">{{ item.imgName }}（上传中）</a>
-                    <a class="success" ng-show="item.status === 'success' && (item.imgName.indexOf('.pdf')>-1 || item.imgName.indexOf('.doc')>-1 || item.imgName.indexOf('.docx')>-1 || item.imgName.indexOf('.xlsx')>-1 || item.imgName.indexOf('.xls')>-1 || item.imgName.indexOf('.rar')>-1 || item.imgName.indexOf('.zip')>-1 || item.imgName.indexOf('.ppt')>-1 || item.imgName.indexOf('.pptx')>-1) ">{{ item.imgName }}</a>
+                    <!-- <a class="success" ng-show="item.status === 'success' && (item.imgName.indexOf('.pdf')>-1 || item.imgName.indexOf('.doc')>-1 || item.imgName.indexOf('.docx')>-1 || item.imgName.indexOf('.xlsx')>-1 || item.imgName.indexOf('.xls')>-1 || item.imgName.indexOf('.rar')>-1 || item.imgName.indexOf('.zip')>-1 || item.imgName.indexOf('.ppt')>-1 || item.imgName.indexOf('.pptx')>-1) ">{{ item.imgName }}</a> -->
+                    <a class="success" ng-show="item.status === 'success' && item.type !== 'IMG' ">{{ item.imgName }}</a>
                     
                     <a href="javascript:;" class="download" ng-show="readonly" ng-click="noThumbDownload($event,item)">
                         <i class="fa fa fa-download"></i>
                         下载
                     </a>
                     <!-- 图片预览按钮 -->
-                    <a href="javascript:;" class="preview" ng-show="item.status === 'success' && (item.imgName.indexOf('.jpg')>-1 || item.imgName.indexOf('.jpeg')>-1 || item.imgName.indexOf('.png')>-1)" ng-click="showClick()">
+                    <!-- <a href="javascript:;" class="preview" ng-show="item.status === 'success' && (item.imgName.indexOf('.jpg')>-1 || item.imgName.indexOf('.jpeg')>-1 || item.imgName.indexOf('.png')>-1)" ng-click="showClick()">
+                        <i class="fa fa-eye"></i>
+                        预览
+                    </a> -->
+                    <a href="javascript:;" class="preview" ng-show="item.status === 'success' && item.type === 'IMG'" ng-click="showClick()">
                         <i class="fa fa-eye"></i>
                         预览
                     </a>
                     <!-- PDF预览按钮 -->
-                    <a href="javascript:;" class="preview" ng-show="item.status === 'success' && (item.imgName.indexOf('.pdf')>-1)" ng-click="showPdf($event,item.dataImg)">
+                    <!-- <a href="javascript:;" class="preview" ng-show="item.status === 'success' && (item.imgName.indexOf('.pdf')>-1)" ng-click="showPdf($event,item.dataImg)">
+                        <i class="fa fa-eye"></i>
+                        预览
+                    </a> -->
+                    <a href="javascript:;" class="preview" ng-show="item.status === 'success' && item.type !== 'IMG' && item.type !== 'RAR'" ng-click="showPdf($event,item.dataImg)">
                         <i class="fa fa-eye"></i>
                         预览
                     </a>
@@ -97,6 +108,8 @@
             </li>
         </ul>
     </div>
+
+    <!-- example模式 -->
     <div class="example" ng-if="moduleType === 'example'">
         <div class="bgImg">
             <div ng-show="imageArray[0] && imageArray[0].status === 'success'" style="background: url({{ imageArray[0].dataImg }}) no-repeat center center;background-size: cover;"></div>

@@ -37,6 +37,7 @@ export default (app, elem, attrs, scope) => {
           readonly: "@", //非必传：只读，在查看时用到
           attachmenType: "@",//非必传, 默认为VOUCHER,
           isLoading: '=',//非必传, 是否正在上传图
+          userNameText: "@", // 非必传：水印文字
         },
         controller: function($scope, $element, $attrs, $timeout) {
           //image数组,包含字段：
@@ -88,13 +89,22 @@ export default (app, elem, attrs, scope) => {
           //
           $scope.showClick = () => {};
 
+          // 预览pdf
+          $scope.showPdf = ($event,url)=>{
+            if($scope.userNameText){
+              window.open(`https://www.hellogil.cn:8012/onlinePreview?watermarkTxt=${$scope.userNameText}&url=`+url.replace('http://','https://'));
+            }else{
+              window.open(`https://www.hellogil.cn:8012/onlinePreview?url=`+url.replace('http://','https://'));
+            }
+          }
+
           //发送请求，保存文件到服务器
           const saveImg = function(file) {
             let data = new FormData();
             data.append("file", file);
             data.append("attachmenType", $scope.attachmenType || "VOUCHER");
             const xhr = new XMLHttpRequest();
-            xhr.timeout = 30000;
+            xhr.timeout = 300000;
             xhr.onloadstart = function(evt) {
               pushFile({
                 loadingTempo: 1
