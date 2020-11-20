@@ -498,22 +498,37 @@ export default (app, elem, attrs, scope) => {
           $scope.noThumbDownload = ($event,item) => {
             var name = item.imgName;
             var $ele = $($event.target);
-            if(item.dataImg.indexOf('.png')>-1 || item.dataImg.indexOf('.jpg')>-1 || item.dataImg.indexOf('.jpeg')>-1){
-              var canvas = document.createElement("canvas");
-              const img = new Image();
-              img.crossOrigin = 'anonymous';
+            if(item.type === "IMG"){
+              var img = new Image();
+              img.crossOrigin = "anonymous";
+              img.onload = ()=>{
+                var canvas = document.createElement("canvas");
+                canvas.width = img.width;
+                canvas.height = img.height;
+                canvas.getContext("2d").drawImage(img, 0, 0);
+                var url = canvas.toDataURL();
+                // $ele.attr("href", url).attr("download", name);
+                var a = document.createElement('a');
+                var event = new MouseEvent('click');
+                a.download = name;
+                a.href = url;
+                a.dispatchEvent(event);
+              }
               img.src = item.dataImg;
-              canvas.width = img.width;
-              canvas.height = img.height;
-              canvas.getContext("2d").drawImage(img, 0, 0);
-              var url = canvas.toDataURL();
-              $ele.attr("href", url).attr("download", name);
             }else{
               var url = item.dataImg;
-              $ele
-                .attr("href", url)
-                .attr("target", "_blank")
-                .attr("download", name + "." + nameEnd);
+              let nameEnd = item.dataImg.split(".");
+              nameEnd = nameEnd[nameEnd.length - 1];
+              // $ele
+              //   .attr("href", url)
+              //   .attr("target", "_blank")
+              //   .attr("download", name + "." + nameEnd);
+              var a = document.createElement('a');
+              var event = new MouseEvent('click');
+              a.download = name + "." + nameEnd;
+              a.target = '_blank';
+              a.href = url;
+              a.dispatchEvent(event);
             }
           }
           
