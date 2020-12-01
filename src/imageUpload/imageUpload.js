@@ -514,9 +514,9 @@ export default (app, elem, attrs, scope) => {
                 a.href = url;
                 a.dispatchEvent(event);
               }
-              img.src = item.dataImg;
+              img.src = item.dataImg.replace('http://', 'https://');
             }else{
-              var url = item.dataImg;
+              var url = item.dataImg.replace('http://', 'https://');
               let nameEnd = item.dataImg.split(".");
               nameEnd = nameEnd[nameEnd.length - 1];
               // $ele
