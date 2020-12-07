@@ -241,12 +241,12 @@ export default (app, elem, attrs, scope) => {
 
           //获取是否为图片
           const getIsImage = name => {
-            const images = "bmp|jpg|jpeg|png|gif|svg|webp";
-            const word = 'doc|docx';
-            const excel = 'xls|xlsx';
-            const pdf = 'pdf';
-            const ppt = 'ppt|pptx';
-            const rar = 'rar|zip';
+            const images = "bmp|jpg|jpeg|png|gif|svg|webp|JPG|JPEG|PNG|GIF|SVG";
+            const word = 'doc|docx|DOC|DOCX';
+            const excel = 'xls|xlsx|XLS|XLSX';
+            const pdf = 'pdf|PDF';
+            const ppt = 'ppt|pptx|PPT|PPTX';
+            const rar = 'rar|zip|RAR|ZIP';
             const patternB = new RegExp(".(" + images + ")$");
             const patternWord = new RegExp(".(" + word + ")$");
             const patternExcel = new RegExp(".(" + excel + ")$");
@@ -283,7 +283,28 @@ export default (app, elem, attrs, scope) => {
 
           //验证图片格式
           const validFileType = (fileTypes, file) => {
-            const fileTypesString = fileTypes.join("|");
+            const ft = {
+              doc: ['doc', 'DOC'],
+              docx: ['docx', 'DOCX'],
+              jpg: ['jpg', 'JPG'],
+              jpeg: ['jpeg', 'JPEG'],
+              png: ['png', 'PNG'],
+              gif: ['gif', 'GIF'],
+              svg: ['svg', 'SVG'],
+              xls: ['xls', 'XLS'],
+              xlsx: ['xlsx', 'XLSX'],
+              pdf: ['pdf', 'PDF'],
+              ppt: ['ppt', 'PPT'],
+              pptx: ['pptx', 'PPTX'],
+              rar: ['rar', 'RAR'],
+              zip: ['zip', 'ZIP'],
+            };
+            var types = [];
+            for(var i = 0; i < fileTypes.length; i++){
+              types = types.concat(ft[fileTypes[i]]);
+            }
+            // const fileTypesString = fileTypes.join("|");
+            const fileTypesString = types.join("|");
             const pattern = new RegExp(".(" + fileTypesString + ")$");
             if (!pattern.test(file.name)) {
               G.alert("请上传格式为" + fileTypes.join("、") + "的文件", {

@@ -106,6 +106,9 @@ demoData.push(transfer);
 import cityCascadeSelect from "./cityCascadeSelect/";
 demoData.push(cityCascadeSelect);
 
+import cardList from "./cardList/index.js";
+demoData.push(cardList);
+
 
 
 export default demoData;

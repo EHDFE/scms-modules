@@ -1,0 +1,7 @@
+<div class="cardListBox">
+  <div ng-transclude></div>
+  <div error-no-data-directive show-by="isNoData"></div>
+</div>
+<div ng-show="hasPagination">
+  <div pagination-directive current-page="currPage" total-count="totalCount" page-size="pageSize" onchanged="fetch" hide-page-size="hidePageSize" mini-page="miniPage"></div>
+</div>

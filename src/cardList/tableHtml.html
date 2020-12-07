@@ -1,0 +1,13 @@
+<div card-list api-url="apiUrl" items="items" page-size="pageSize" curr-page="currPage" fetch="fetch" fetch-param="fetchParam"
+  format-data="formatData" method="get">
+  <div class="cardChild"  ng-repeat="item in items">
+    <img src="{{item.img}}">
+    <div class="cardChild-text">
+        <h2>{{item.title}}</h2>
+        <div class="clearfix">
+          <span class="fl">{{item.time}}</span>
+          <span class="fr">阅读量{{item.num}}</span>
+        </div>
+    </div>
+  </div>
+</div>

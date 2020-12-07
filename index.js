@@ -71,6 +71,7 @@ import carTypeSelect from './src/carTypeSelect';
 import transfer from './src/transfer/transfer';
 import cityCascadeSelect from './src/cityCascadeSelect';
 
+import cardList from './src/cardList/cardList';
 
 
 
@@ -129,5 +130,6 @@ export default {
   'ngDatePicker/datePickerRangeFixPanel': datePickerRangeFixPanel,
   carTypeSelect,
   transfer,
-  cityCascadeSelect
+  cityCascadeSelect,
+  cardList
 };
