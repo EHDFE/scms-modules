@@ -56,7 +56,7 @@
     "file-loader": "^1.1.11",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^3.1.0",
-    "less": "^2.7.3",
+    "less": "^3.13.0",
     "mini-css-extract-plugin": "^0.4.0",
     "less-loader": "^4.1.0",
     "postcss-copy": "^7.1.0",
