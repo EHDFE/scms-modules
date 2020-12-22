@@ -12,6 +12,7 @@
 
 import angular from 'angular';
 import imageShow from '../imageShow/imageShow';
+import downloadjs from 'downloadjs';
 import html from './imageUpload.html';
 
 export default (app, elem, attrs, scope) => {
@@ -501,56 +502,27 @@ export default (app, elem, attrs, scope) => {
           };
 
 
-          // 下载图片
-          $scope.download = ($event,dataImg)=>{
-              var $ele = $($event.target).parent();
-              var canvas = document.createElement("canvas");
-              var name = new Date().getTime();
-              const img = new Image();
-              img.crossOrigin = 'anonymous';
-              img.src = dataImg;
-
-              canvas.width = img.width;
-              canvas.height = img.height;
-              canvas.getContext("2d").drawImage(img, 0, 0);
-              var url = canvas.toDataURL();
-              $ele.attr("href", url).attr("download", name+".png");
-          }
-          $scope.noThumbDownload = ($event,item) => {
-            var name = item.imgName;
-            var $ele = $($event.target);
-            if(item.type === "IMG"){
-              var img = new Image();
-              img.crossOrigin = "anonymous";
-              img.onload = ()=>{
-                var canvas = document.createElement("canvas");
-                canvas.width = img.width;
-                canvas.height = img.height;
-                canvas.getContext("2d").drawImage(img, 0, 0);
-                var url = canvas.toDataURL();
-                // $ele.attr("href", url).attr("download", name);
-                var a = document.createElement('a');
-                var event = new MouseEvent('click');
-                a.download = name;
-                a.href = url;
-                a.dispatchEvent(event);
-              }
-              img.src = item.dataImg.replace('http://', 'https://');
+          // 下载文件
+          $scope.download = ($event,item)=>{
+            var name;
+            if(item.imgName){
+              name = item.imgName;
             }else{
-              var url = item.dataImg.replace('http://', 'https://');
-              let nameEnd = item.dataImg.split(".");
-              nameEnd = nameEnd[nameEnd.length - 1];
-              // $ele
-              //   .attr("href", url)
-              //   .attr("target", "_blank")
-              //   .attr("download", name + "." + nameEnd);
-              var a = document.createElement('a');
-              var event = new MouseEvent('click');
-              a.download = name + "." + nameEnd;
-              a.target = '_blank';
-              a.href = url;
-              a.dispatchEvent(event);
+              var a = item.dataImg.split('/');
+              name = a[a.length-1];
             }
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/ehuodiGateway/huilianApi/uploader/downloadZipFiles', true);
+            xhr.responseType = "blob";
+            xhr.onload = function() {
+                if (this.status == 200) {
+                    var blob = this.response;
+                    downloadjs(blob, name);
+                }
+            }
+            xhr.setRequestHeader('content-type','application/x-www-form-urlencoded'); 
+            xhr.send('fileUrls=' + JSON.stringify([item]));
           }
           
           $scope.fileFn = ()=>{

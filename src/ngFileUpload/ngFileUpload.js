@@ -12,6 +12,7 @@
 
 import angular from "angular";
 import imageShow from "../imageShow/imageShow";
+import downloadjs from 'downloadjs';
 import html from "./ngFileUpload.html";
 import css from "./ngFileUpload.less";
 
@@ -386,28 +387,26 @@ export default (app, elem, attrs, scope) => {
           };
 
           // 下载图片
-          $scope.download = ($event, item) => {
-            var name = new Date().getTime();
-            var $ele = $($event.currentTarget);
-            if (item.type === "IMG" && item.imgData) {
-              var canvas = document.createElement("canvas");
-              const img = new Image();
-              img.crossOrigin = "anonymous";
-              img.src = item.imgData || item.url;
-              canvas.width = img.width;
-              canvas.height = img.height;
-              canvas.getContext("2d").drawImage(img, 0, 0);
-              var url = canvas.toDataURL();
-              $ele.attr("href", url).attr("download", name + ".png");
-            } else if (item.url) {
-              var url = item.url;
-              let nameEnd = item.url.split(".");
-              nameEnd = nameEnd[nameEnd.length - 1];
-              $ele
-                .attr("href", url)
-                .attr("target", "_blank")
-                .attr("download", name + "." + nameEnd);
+          $scope.download = function ($event, item) {
+            var name;
+            if(item.name){
+              name = item.name;
+            }else{
+              var a = item.url.split('/');
+              name = a[a.length-1];
             }
+            
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/ehuodiGateway/huilianApi/uploader/downloadZipFiles', true);
+            xhr.responseType = "blob";
+            xhr.onload = function () {
+              if (this.status == 200) {
+                var blob = this.response;
+                downloadjs(blob, name);
+              }
+            };
+            xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+            xhr.send('fileUrls=' + JSON.stringify([{imgName: name, dataImg: item.url}]));
           };
         }
       };

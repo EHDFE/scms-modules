@@ -1,6 +1,6 @@
 {
   "name": "scmsmodules",
-  "version": "1.4.5",
+  "version": "1.4.8",
   "description": "scmsmodules",
   "repository": "https://github.com/EHDFE/scms-modules.git",
   "scripts": {
@@ -29,6 +29,7 @@
     "angular-file-upload": "^2.5.0",
     "bootstrap": "^3.3.7",
     "bootstrap-colorpicker": "^2.5.2",
+    "downloadjs": "^1.4.7",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.5",
     "mime-match": "^1.0.2",
