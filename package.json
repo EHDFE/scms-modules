@@ -27,7 +27,7 @@
   "license": "MIT",
   "dependencies": {
     "angular-file-upload": "^2.5.0",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^4.1.2",
     "bootstrap-colorpicker": "^2.5.2",
     "downloadjs": "^1.4.7",
     "font-awesome": "^4.7.0",
