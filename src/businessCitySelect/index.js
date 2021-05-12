@@ -9,10 +9,11 @@ import DataSource from './dataSource';
 
 import DevTool from '../../utils/DevTool';
 import './index.less';
+import { API_FORWARD, ORIGIN_TEST, ORIGIN } from '../../utils/Config';
 
 const devTool = new DevTool('citySelect');
 
-const SOURCE_API = '/ehuodiGateway/ehuodiBedrockApi/ehdrbacorganizationcs/selectCascadeRbacOrganizationByCode';
+const SOURCE_API = API_FORWARD + '/ehuodiBedrockApi/ehdrbacorganizationcs/selectCascadeRbacOrganizationByCode';
 
 export default (app, elem, attrs, scope) => {
   // cascadeSelect(app, elem, attrs, scope);

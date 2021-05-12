@@ -15,6 +15,7 @@ import imageShow from "../imageShow/imageShow";
 import downloadjs from 'downloadjs';
 import html from "./ngFileUpload.html";
 import css from "./ngFileUpload.less";
+import { API_FORWARD, ORIGIN_TEST, ORIGIN } from '../../utils/Config';
 
 export default (app, elem, attrs, scope) => {
   imageShow(app, elem, attrs, scope);
@@ -92,10 +93,18 @@ export default (app, elem, attrs, scope) => {
 
           // 预览pdf
           $scope.showPdf = ($event,url)=>{
-            if($scope.userNameText){
-              window.open(`https://www.hellogil.cn:8012/onlinePreview?watermarkTxt=${$scope.userNameText}&url=`+url.replace('http://','https://'));
+            if(url.indexOf('.pdf')>-1){
+              if(window.location.href.indexOf(ORIGIN)>-1){
+                window.open(ORIGIN +'/web/contractPreview.html?url='+url.replace('http://','https://'));
+              }else{
+                window.open(ORIGIN_TEST + '/web/contractPreview.html?url='+url.replace('http://','https://'));
+              }
             }else{
-              window.open(`https://www.hellogil.cn:8012/onlinePreview?url=`+url.replace('http://','https://'));
+              if($scope.userNameText){
+                window.open(`https://www.hellogil.cn:8012/onlinePreview?watermarkTxt=${$scope.userNameText}&url=`+url.replace('http://','https://'));
+              }else{
+                window.open(`https://www.hellogil.cn:8012/onlinePreview?url=`+url.replace('http://','https://'));
+              }
             }
           }
 
@@ -130,7 +139,7 @@ export default (app, elem, attrs, scope) => {
                 type: "error"
               });
             };
-            xhr.open("post", "/ehuodiGateway/huilianApi/uploader/attachment");
+            xhr.open("post", API_FORWARD + "/huilianApi/uploader/attachment");
             xhr.onreadystatechange = function() {
               if (xhr.readyState == 4) {
                 if (xhr.status === 200) {
@@ -397,7 +406,7 @@ export default (app, elem, attrs, scope) => {
             }
             
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', '/ehuodiGateway/huilianApi/uploader/downloadZipFiles', true);
+            xhr.open('POST', API_FORWARD + '/huilianApi/uploader/downloadZipFiles', true);
             xhr.responseType = "blob";
             xhr.onload = function () {
               if (this.status == 200) {
@@ -406,7 +415,10 @@ export default (app, elem, attrs, scope) => {
               }
             };
             xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
-            xhr.send('fileUrls=' + JSON.stringify([{imgName: name, dataImg: item.url}]));
+            xhr.send('fileUrls=' + JSON.stringify([{
+              imgName: name.replace(/\&/g,'-').replace(/\?/g,'-').replace(/\%/g,'-'),
+              dataImg: item.url
+            }]));
           };
         }
       };
