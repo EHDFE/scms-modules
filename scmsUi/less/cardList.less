@@ -1,6 +1,6 @@
 .cardListBox{
     width: 100%;
-    & > div{
+    & > div:not(.error-no-data){
         display: grid;
         grid-template-columns:repeat(4,1fr);
         width: 100%;
@@ -24,10 +24,12 @@
                     color: #333333;
                     font-size: 14px;
                     margin-bottom: 15px;
-                    display: -webkit-box;
+                    // display: -webkit-box;
                     -webkit-box-orient: vertical;
                     -webkit-line-clamp: 2;
+                    white-space: nowrap;
                     overflow: hidden;
+                    text-overflow: ellipsis;
                 }
                 span{
                     font-size: 12px;

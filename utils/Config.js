@@ -9,7 +9,7 @@ const ORIGIN = 'https://www.hellogil.com';
 // const ORIGIN_FILE = "https://image.tf56.com";
 
 // 接口转发
-const API_FORWARD = '/ehuodiGateway';
+const API_FORWARD = '/gateway';
 
 //接口包
 const API_PACKAGE = '/huilianApi/huilian';
