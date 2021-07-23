@@ -215,10 +215,10 @@ export default (app, elem, attrs, scope) => {
 
           //获取是否为图片
           const getIsImage = name => {
-            const images = "bmp|jpg|jpeg|png|gif|svg|webp";
-            const word = 'doc|docx';
-            const excel = 'xls|xlsx';
-            const pdf = 'pdf';
+            const images = "bmp|jpg|jpeg|png|gif|svg|webp|JPG|JPEG|PNG|GIF|SVG";
+            const word = 'doc|docx|DOC|DOCX';
+            const excel = 'xls|xlsx|XLS|XLSX';
+            const pdf = 'pdf|PDF';
             const patternB = new RegExp(".(" + images + ")$");
             const patternWord = new RegExp(".(" + word + ")$");
             const patternExcel = new RegExp(".(" + excel + ")$");
