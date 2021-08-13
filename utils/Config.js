@@ -1,5 +1,5 @@
 // 测试域名
-const ORIGIN_TEST = 'https://hltest.ehuodi.com';
+const ORIGIN_TEST = 'https://test.lvsehuilian.cn';
 
 // 生产域名
 const ORIGIN = 'https://www.hellogil.com';
