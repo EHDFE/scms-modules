@@ -78,7 +78,7 @@ export default (app, elem, attrs, scope) => {
           
           // 预览pdf
           $scope.showPdf = ($event,url)=>{
-            if(url.indexOf('.pdf')>-1){
+            if(url.indexOf('.pdf')>-1 || url.indexOf('.PDF')>-1){
               if(window.location.href.indexOf(ORIGIN)>-1){
                 window.open(ORIGIN + '/web/contractPreview.html?url='+url.replace('http://','https://'));
               }else{
