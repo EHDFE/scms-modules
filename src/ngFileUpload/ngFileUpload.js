@@ -40,6 +40,7 @@ export default (app, elem, attrs, scope) => {
           attachmenType: "@",//非必传, 默认为VOUCHER,
           isLoading: '=',//非必传, 是否正在上传图
           userNameText: "@", // 非必传：水印文字
+          miniImg: "=", // 非必传：是否展示缩略图
         },
         controller: function($scope, $element, $attrs, $timeout) {
           //image数组,包含字段：
@@ -62,6 +63,11 @@ export default (app, elem, attrs, scope) => {
                 $scope.fileData = [];
               }
             };
+          }
+
+          $scope.showMiniImg = true;
+          if($attrs.miniImg){
+            $scope.showMiniImg = $scope.miniImg;
           }
 
           //
