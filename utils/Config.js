@@ -4,10 +4,6 @@ const ORIGIN_TEST = 'https://test.lvsehuilian.cn';
 // 生产域名
 const ORIGIN = 'https://www.hellogil.com';
 
-// 文件地址服务器
-// const ORIGIN_FILE_TEST = "https://sitetest.tf56.com";
-// const ORIGIN_FILE = "https://image.tf56.com";
-
 // 接口转发
 const API_FORWARD = '/gateway';
 
